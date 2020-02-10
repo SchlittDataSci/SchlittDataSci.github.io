@@ -1,4 +1,6 @@
-%s Cleaned line list:
+### 2019-nCoV Imported Case Cluster Viz (last updated 2020-02-10 15:46:54.248185)
+
+Cleaned line list:
 [line list](cleaned_line_list.csv)
 
 Moritz Krämer's public line list:
