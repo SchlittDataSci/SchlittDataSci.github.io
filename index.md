@@ -1,3 +1,13 @@
+%s Cleaned line list:
+[line list](cleaned_line_list.csv)
+
+Moritz Krämer's public line list:
+[google sheet](https://docs.google.com/spreadsheets/d/1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/edit#gid=0)
+
+Imported case origin curation sheet:
+[google sheet](https://docs.google.com/spreadsheets/d/1s2j-RmkO8C69HtrELpNMipkG5ftPJqCPEzGRAxIukFY/edit#gid=0)
+
+
 All imported cases
 ![All cases](figs/All_imported_cases.png)
 
