@@ -35,7 +35,7 @@ The figures are rendered with the following conventions:
 * For events with multiple dates, the first date is taken.
 * For cases with no date data, the **date_missing** date is assigned to one day prior to the first event in the data set.
 * **date_death** and **date_discharge** are calculated from the **date_death_or_discharge** and **outcome** fields of the original data.
-* Dates which are misformatted, occur in the future, are more than 30 days apart from their expected preceding event, or are before December 15th are set to NaT
+* Dates which are misformatted, occur in the future, are more than 30 days apart from their expected preceding event, or are before December 15th are set to NaT.
 
 
 
