@@ -1,10 +1,10 @@
-### 2019-nCoV Imported Case Cluster Viz (last updated 2020-02-11 16:54:04.108361)
+## 2019-nCoV Imported Case Cluster Viz (last updated 2020-02-11 16:55:37.782967)
 
 
-#### README: [https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/README.md]
+### README: [https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/README.md]
 
 
-**Resources:**
+### Resources
 
 [Prepped line list](cleaned_line_list.csv)
 
@@ -14,6 +14,8 @@
 
 [Imported cases dashboard](https://datastudio.google.com/reporting/f6ad0988-f203-45f8-8d18-5d726c1d2d8b)
 
+
+### Figures
 
 All imported cases
 
