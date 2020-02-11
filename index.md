@@ -1,7 +1,8 @@
-### 2019-nCoV Imported Case Cluster Viz (last updated 2020-02-11 15:12:29.578069)
+### 2019-nCoV Imported Case Cluster Viz (last updated 2020-02-11 16:48:31.803034)
 
 
 **Resources:**
+
 [Prepped line list](cleaned_line_list.csv)
 
 [Moritz Krämer's public line list](https://docs.google.com/spreadsheets/d/1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/edit#gid=0)
