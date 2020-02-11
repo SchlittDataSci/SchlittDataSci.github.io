@@ -3,7 +3,7 @@
 
 ### Reference
 
-* Readme: https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/README.md
+* [Readme](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/README.md)
 
 
 ### Resources
