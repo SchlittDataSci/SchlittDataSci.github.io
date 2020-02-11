@@ -1,6 +1,7 @@
-### 2019-nCoV Imported Case Cluster Viz (last updated 2020-02-11 16:52:14.017513)
+### 2019-nCoV Imported Case Cluster Viz (last updated 2020-02-11 16:54:04.108361)
 
-#### README: https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/README.md
+
+#### README: [https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/README.md]
 
 
 **Resources:**
