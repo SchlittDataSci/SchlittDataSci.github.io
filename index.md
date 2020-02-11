@@ -1,4 +1,4 @@
-### 2019-nCoV Imported Case Cluster Viz (last updated 2020-02-10 18:46:44.254559)
+### 2019-nCoV Imported Case Cluster Viz (last updated 2020-02-10 19:03:25.269031)
 
 Cleaned line list:
 [line list](cleaned_line_list.csv)
@@ -14,6 +14,7 @@ Imported cases dashboard:
 
 
 All imported cases
+
 ![All cases](figs/All_imported_cases.png)
 
 Australia imported cases
@@ -80,7 +81,7 @@ Thailand imported cases
 ![Thailand cases](figs/Thailand_imported_cases.png)
 
 UAE imported cases
-![UAE cases](figs/UAE_imported_cases.png)
+![UAE cases](figs/Uae_imported_cases.png)
 
 United Kingdom imported cases
 ![United Kingdom cases](figs/United_Kingdom_imported_cases.png)
