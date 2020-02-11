@@ -1,16 +1,14 @@
-### 2019-nCoV Imported Case Cluster Viz (last updated 2020-02-11 14:41:26.606300)
+### 2019-nCoV Imported Case Cluster Viz (last updated 2020-02-11 15:04:28.508399)
 
-Cleaned line list:
-[line list](cleaned_line_list.csv)
 
-Moritz Krämer's public line list:
-[google sheet](https://docs.google.com/spreadsheets/d/1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/edit#gid=0)
+**Resources:**
+[Prepped line list](cleaned_line_list.csv)
 
-Imported case origin curation sheet:
-[google sheet](https://docs.google.com/spreadsheets/d/1s2j-RmkO8C69HtrELpNMipkG5ftPJqCPEzGRAxIukFY/edit#gid=0)
+[Moritz Krämer's public line list](https://docs.google.com/spreadsheets/d/1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/edit#gid=0)
 
-Imported cases dashboard:
-[dashboard](https://datastudio.google.com/reporting/f6ad0988-f203-45f8-8d18-5d726c1d2d8b)
+[Imported case origin curation sheet](https://docs.google.com/spreadsheets/d/1s2j-RmkO8C69HtrELpNMipkG5ftPJqCPEzGRAxIukFY/edit#gid=0)
+
+[Imported cases dashboard](https://datastudio.google.com/reporting/f6ad0988-f203-45f8-8d18-5d726c1d2d8b)
 
 
 All imported cases
