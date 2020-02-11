@@ -1,4 +1,4 @@
-### 2019-nCoV Imported Case Cluster Viz (last updated 2020-02-10 19:03:25.269031)
+### 2019-nCoV Imported Case Cluster Viz (last updated 2020-02-11 14:33:51.504424)
 
 Cleaned line list:
 [line list](cleaned_line_list.csv)
