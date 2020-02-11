@@ -1,4 +1,4 @@
-## 2019-nCoV Imported Case Cluster Viz (last updated 02/11/20 Feb:02)
+## 2019-nCoV Imported Case Cluster Viz (last updated 02/11/20 16:02)
 
 
 ### Reference
