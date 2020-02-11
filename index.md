@@ -1,18 +1,20 @@
-## 2019-nCoV Imported Case Cluster Viz (last updated 2020-02-11 16:55:37.782967)
+## 2019-nCoV Imported Case Cluster Viz (last updated 2020-02-11 16:56:42.255294)
 
 
-### README: [https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/README.md]
+### Reference
+
+* Readme: https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/README.md
 
 
 ### Resources
 
-[Prepped line list](cleaned_line_list.csv)
+* [Prepped line list](cleaned_line_list.csv)
 
-[Moritz Krämer's public line list](https://docs.google.com/spreadsheets/d/1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/edit#gid=0)
+* [Moritz Krämer's public line list](https://docs.google.com/spreadsheets/d/1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/edit#gid=0)
 
-[Imported case origin curation sheet](https://docs.google.com/spreadsheets/d/1s2j-RmkO8C69HtrELpNMipkG5ftPJqCPEzGRAxIukFY/edit#gid=0)
+* [Imported case origin curation sheet](https://docs.google.com/spreadsheets/d/1s2j-RmkO8C69HtrELpNMipkG5ftPJqCPEzGRAxIukFY/edit#gid=0)
 
-[Imported cases dashboard](https://datastudio.google.com/reporting/f6ad0988-f203-45f8-8d18-5d726c1d2d8b)
+* [Imported cases dashboard](https://datastudio.google.com/reporting/f6ad0988-f203-45f8-8d18-5d726c1d2d8b)
 
 
 ### Figures
