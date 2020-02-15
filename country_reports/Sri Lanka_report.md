@@ -26,7 +26,7 @@ Data sources: BOP, JHU, Tencent
 
 ### Geographic dispersal:
 #### Fig 2:
-![Sri Lanka mapped](../case_locs/Sri Lanka_case_locs.png)
+![Sri Lanka mapped](../case_locs/Sri_Lanka_case_locs.png)
 
 #### Table 2: Confirmed cases by location
 |    | source   | loc_name   |   confirmed |
@@ -40,7 +40,7 @@ Data sources: BOP, JHU, Tencent
 
 ### Observed case clusters:
 #### Fig 3:
-![Sri Lanka cases](../cluster_analysis/Sri%20Lanka_imported_cases.png)
+![Sri Lanka cases](../cluster_analysis/Sri_Lanka_imported_cases.png)
 
 
 

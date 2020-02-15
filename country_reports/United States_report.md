@@ -26,7 +26,7 @@ Data sources: BOP, JHU, Tencent
 
 ### Geographic dispersal:
 #### Fig 2:
-![United States mapped](../case_locs/United States_case_locs.png)
+![United States mapped](../case_locs/United_States_case_locs.png)
 
 #### Table 2: Confirmed cases by location
 |    | source   | loc_name                        |   confirmed |
@@ -55,7 +55,7 @@ Data sources: BOP, JHU, Tencent
 
 ### Observed case clusters:
 #### Fig 3:
-![United States cases](../cluster_analysis/United%20States_imported_cases.png)
+![United States cases](../cluster_analysis/United_States_imported_cases.png)
 
 
 
