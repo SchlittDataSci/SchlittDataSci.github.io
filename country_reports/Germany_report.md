@@ -21,7 +21,7 @@
 | Total hospitalized        | 0                |                             |                               |
 | Total recovered           | 1                | 1                           | 1                             |
 | Total deaths              | 0                | 0                           | 0                             |
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Geographic dispersal:
@@ -36,7 +36,7 @@ Data sources: [1], [2], [3]
 |  1 | BOP      | Bavaria, Germany              |           9 |
 |  2 | BOP      | Rhineland-Palatinate, Germany |           2 |
 
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Observed case clusters:

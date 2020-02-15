@@ -21,7 +21,7 @@
 | Total hospitalized        | 2                |                             |                               |
 | Total recovered           | 0                | 3                           | 3                             |
 | Total deaths              | 0                | 0                           | 0                             |
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Geographic dispersal:
@@ -47,10 +47,10 @@ Data sources: [1], [2], [3]
 | 12 | BOP      | Illinois, United States         |           2 |
 | 13 | BOP      | Washington State, United States |           1 |
 | 14 | BOP      | Arizona, United States          |           1 |
-| 15 | BOP      | Massachusetts, United States    |           1 |
-| 16 | BOP      | Wisconsin, United States        |           1 |
+| 15 | BOP      | Wisconsin, United States        |           1 |
+| 16 | BOP      | Massachusetts, United States    |           1 |
 
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Observed case clusters:

@@ -1,4 +1,4 @@
-# Singapore
+# Belgium
 ## NSSAC COVID-19 Summary
 ## 02/14/2020
 
@@ -6,7 +6,7 @@
 
  ### Situation Report:
 #### Fig 1:
-![Singapore cases](../merged_histories/Singapore_merged_histories.png)
+![Belgium cases](../merged_histories/Belgium_merged_histories.png)
 
 #### Table 1: Situation summary
 |                           | BOP              | JHU                         | Tencent                       |
@@ -14,33 +14,33 @@
 | First update logged       | 01/12/20         | 01/21/20                    | 02/04/20                      |
 | Last update logged        | 02/06/20         | 02/14/20                    | 02/14/20                      |
 | Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
-| First known case          | 01/23/20         | 01/21/20                    | 02/04/20                      |
-| Total confirmed cases     | 28               | 67                          | 67                            |
-| New cases since yesterday |                  | 9                           | 9                             |
+| First known case          | 02/04/20         | 01/21/20                    | 02/04/20                      |
+| Total confirmed cases     | 1                | 1                           | 1                             |
+| New cases since yesterday |                  | 0                           | 0                             |
 | Total suspected           |                  |                             | 0                             |
-| Total hospitalized        | 17               |                             |                               |
-| Total recovered           | 0                | 17                          | 17                            |
+| Total hospitalized        | 0                |                             |                               |
+| Total recovered           | 0                | 0                           | 0                             |
 | Total deaths              | 0                | 0                           | 0                             |
-Data sources: BOP, JHU, Tencent
+Data sources: [1], [2], [3]
 
 
 ### Geographic dispersal:
 #### Fig 2:
-![Singapore mapped](../case_locs/Singapore_case_locs.png)
+![Belgium mapped](../case_locs/Belgium_case_locs.png)
 
 #### Table 2: Confirmed cases by location
 |    | source   | loc_name   |   confirmed |
 |----|----------|------------|-------------|
-|  2 | Tencent  | Singapore  |          67 |
-|  0 | JHU      | Singapore  |          67 |
-|  1 | BOP      | Singapore  |          28 |
+|  2 | Tencent  | Belgium    |           1 |
+|  0 | JHU      | Belgium    |           1 |
+|  1 | BOP      | Belgium    |           1 |
 
-Data sources: BOP, JHU, Tencent
+Data sources: [1], [2], [3]
 
 
 ### Observed case clusters:
 #### Fig 3:
-![Singapore cases](../cluster_analysis/Singapore_imported_cases.png)
+![Belgium cases](../cluster_analysis/Belgium_imported_cases.png)
 
 
 ### Data sources:

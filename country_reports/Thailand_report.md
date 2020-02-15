@@ -21,7 +21,7 @@
 | Total hospitalized        | 3                |                             |                               |
 | Total recovered           | 0                | 12                          | 10                            |
 | Total deaths              | 0                | 0                           | 0                             |
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Geographic dispersal:
@@ -36,7 +36,7 @@ Data sources: [1], [2], [3]
 |  1 | BOP      | Nonthaburi, Thailand    |           1 |
 |  2 | BOP      | Nakhon Pathom, Thailand |           1 |
 
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Observed case clusters:

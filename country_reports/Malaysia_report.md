@@ -21,7 +21,7 @@
 | Total hospitalized        | 1                |                             |                               |
 | Total recovered           | 0                | 3                           | 3                             |
 | Total deaths              | 0                | 0                           | 0                             |
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Geographic dispersal:
@@ -35,7 +35,7 @@ Data sources: [1], [2], [3]
 |  0 | JHU      | Malaysia        |          19 |
 |  1 | BOP      | Johor, Malaysia |           1 |
 
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Observed case clusters:

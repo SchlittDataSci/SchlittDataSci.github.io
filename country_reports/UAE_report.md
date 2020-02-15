@@ -21,7 +21,7 @@
 | Total hospitalized        | 4                |                             |                               |
 | Total recovered           | 0                | 1                           | 1                             |
 | Total deaths              | 0                | 0                           | 0                             |
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Geographic dispersal:
@@ -35,7 +35,7 @@ Data sources: [1], [2], [3]
 |  0 | JHU      | United Arab Emirates |           8 |
 |  1 | BOP      | UAE                  |           5 |
 
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Observed case clusters:

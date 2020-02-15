@@ -21,7 +21,7 @@
 | Total hospitalized        | 5                |                             |                               |
 | Total recovered           | 0                | 7                           | 3                             |
 | Total deaths              | 0                | 0                           | 0                             |
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Geographic dispersal:
@@ -35,7 +35,7 @@ Data sources: [1], [2], [3]
 |  0 | JHU      | South Korea           |          28 |
 |  1 | BOP      | Gyeonggi, South Korea |           1 |
 
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Observed case clusters:

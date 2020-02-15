@@ -21,7 +21,7 @@
 | Total hospitalized        | 16               |                             |                               |
 | Total recovered           | 1                | 9                           | 1                             |
 | Total deaths              | 0                | 1                           | 1                             |
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Geographic dispersal:
@@ -35,16 +35,16 @@ Data sources: [1], [2], [3]
 |  0 | JHU      | Japan                   |          29 |
 |  1 | BOP      | Kanagawa, Japan         |          21 |
 |  2 | BOP      | Tokyo, Japan            |           8 |
-|  3 | BOP      | Kyoto, Japan            |           2 |
-|  4 | BOP      | Chiba, Japan            |           2 |
-|  5 | BOP      | Osaka, Japan            |           1 |
-|  6 | BOP      | Kyoto Prefecture, Japan |           1 |
-|  7 | BOP      | Chiba Prefecture, Japan |           1 |
-|  8 | BOP      | Nara Prefecture, Japan  |           1 |
-|  9 | BOP      | Hokkaido, Japan         |           1 |
-| 10 | BOP      | Mie, Japan              |           1 |
+|  3 | BOP      | Chiba, Japan            |           2 |
+|  4 | BOP      | Kyoto, Japan            |           2 |
+|  5 | BOP      | Hokkaido, Japan         |           1 |
+|  6 | BOP      | Chiba Prefecture, Japan |           1 |
+|  7 | BOP      | Nara Prefecture, Japan  |           1 |
+|  8 | BOP      | Kyoto Prefecture, Japan |           1 |
+|  9 | BOP      | Mie, Japan              |           1 |
+| 10 | BOP      | Osaka, Japan            |           1 |
 
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Observed case clusters:

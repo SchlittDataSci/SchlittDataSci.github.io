@@ -15,13 +15,13 @@
 | Last update logged        | 02/06/20         | 02/14/20                    | 02/14/20                      |
 | Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
 | First known case          | 01/25/20         | 01/21/20                    | 02/04/20                      |
-| Total confirmed cases     | 5                | 7                           | 7                             |
-| New cases since yesterday |                  | 0                           | 0                             |
+| Total confirmed cases     | 5                | 7                           | 8                             |
+| New cases since yesterday |                  | 0                           | 1                             |
 | Total suspected           |                  |                             | 0                             |
 | Total hospitalized        | 3                |                             |                               |
-| Total recovered           | 1                | 1                           | 0                             |
+| Total recovered           | 1                | 1                           | 1                             |
 | Total deaths              | 0                | 0                           | 0                             |
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Geographic dispersal:
@@ -31,14 +31,14 @@ Data sources: [1], [2], [3]
 #### Table 2: Confirmed cases by location
 |    | source   | loc_name                 |   confirmed |
 |----|----------|--------------------------|-------------|
-|  5 | Tencent  | Canada                   |           7 |
+|  5 | Tencent  | Canada                   |           8 |
 |  1 | JHU      | British Columbia, Canada |           4 |
 |  0 | JHU      | Toronto, ON, Canada      |           2 |
 |  2 | JHU      | London, ON, Canada       |           1 |
 |  3 | BOP      | Ontario, Canada          |           3 |
 |  4 | BOP      | British Columbia, Canada |           2 |
 
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Observed case clusters:

@@ -21,7 +21,7 @@
 | Total hospitalized        | 1                |                             |                               |
 | Total recovered           | 0                | 1                           | 1                             |
 | Total deaths              | 0                | 0                           | 0                             |
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Geographic dispersal:
@@ -35,7 +35,7 @@ Data sources: [1], [2], [3]
 |  0 | JHU      | Sri Lanka  |           1 |
 |  1 | BOP      | Sri Lanka  |           1 |
 
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Observed case clusters:

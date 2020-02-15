@@ -21,7 +21,7 @@
 | Total hospitalized        | 8                |                             |                               |
 | Total recovered           | 0                | 7                           | 7                             |
 | Total deaths              | 0                | 0                           | 0                             |
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Geographic dispersal:
@@ -35,13 +35,13 @@ Data sources: [1], [2], [3]
 |  0 | JHU      | Vietnam                      |          16 |
 |  1 | BOP      | Khanh Hoa province, Vietnam  |           2 |
 |  2 | BOP      | Vinh Phuc, Vietnam           |           2 |
-|  3 | BOP      | Thanh Hoa, Vietnam           |           1 |
-|  4 | BOP      | Viinh Phuc Province, Vietnam |           1 |
-|  5 | BOP      | Nha Trang, Vietnam           |           1 |
-|  6 | BOP      | Vinh Phuc Province, Vietnam  |           1 |
+|  3 | BOP      | Nha Trang, Vietnam           |           1 |
+|  4 | BOP      | Vinh Phuc Province, Vietnam  |           1 |
+|  5 | BOP      | Viinh Phuc Province, Vietnam |           1 |
+|  6 | BOP      | Thanh Hoa, Vietnam           |           1 |
 |  7 | BOP      | Vinh Phuc province, Vietnam  |           1 |
 
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Observed case clusters:

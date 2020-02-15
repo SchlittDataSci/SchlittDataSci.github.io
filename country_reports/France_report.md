@@ -21,7 +21,7 @@
 | Total hospitalized        | 0                |                             |                               |
 | Total recovered           | 0                | 2                           | 0                             |
 | Total deaths              | 0                | 0                           | 0                             |
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Geographic dispersal:
@@ -35,7 +35,7 @@ Data sources: [1], [2], [3]
 |  0 | JHU      | France     |          11 |
 |  1 | BOP      | France     |           6 |
 
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Observed case clusters:

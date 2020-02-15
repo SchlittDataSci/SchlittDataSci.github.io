@@ -21,7 +21,7 @@
 | Total hospitalized        | 5                |                             |                               |
 | Total recovered           | 0                | 8                           | 5                             |
 | Total deaths              | 0                | 0                           | 0                             |
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Geographic dispersal:
@@ -41,7 +41,7 @@ Data sources: [1], [2], [3]
 |  6 | BOP      | NSW, Australia             |           4 |
 |  7 | BOP      | South Australia, Australia |           2 |
 
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Observed case clusters:
