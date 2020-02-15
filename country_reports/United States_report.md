@@ -6,7 +6,7 @@
 
  ### Situation Report:
 #### Fig 1:
-![United States cases](../merged_histories/United States_merged_histories.png)
+![United States cases](../merged_histories/United%20States_merged_histories.png)
 
 #### Table 1: Situation summary
 |                           | BOP              | JHU                         | Tencent                       |
@@ -55,7 +55,11 @@ Data sources: BOP, JHU, Tencent
 
 ### Observed case clusters:
 #### Fig 3:
-![United States cases](../cluster_analysis/United States_imported_cases.png)
+![United States cases](../cluster_analysis/United%20States_imported_cases.png)
+
+
+
+Data source: BOP
 
 
 ### Data sources:
