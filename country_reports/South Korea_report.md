@@ -26,7 +26,7 @@ Data sources: BOP, JHU, Tencent
 
 ### Geographic dispersal:
 #### Fig 2:
-![South Korea mapped](../case_locs/South Korea_case_locs.png)
+![South Korea mapped](../case_locs/South_Korea_case_locs.png)
 
 #### Table 2: Confirmed cases by location
 |    | source   | loc_name              |   confirmed |
@@ -40,7 +40,7 @@ Data sources: BOP, JHU, Tencent
 
 ### Observed case clusters:
 #### Fig 3:
-![South Korea cases](../cluster_analysis/South%20Korea_imported_cases.png)
+![South Korea cases](../cluster_analysis/South_Korea_imported_cases.png)
 
 
 
