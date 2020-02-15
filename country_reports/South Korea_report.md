@@ -6,7 +6,7 @@
 
  ### Situation Report:
 #### Fig 1:
-![South Korea cases](../merged_histories/South Korea_merged_histories.png)
+![South Korea cases](../merged_histories/South%20Korea_merged_histories.png)
 
 #### Table 1: Situation summary
 |                           | BOP              | JHU                         | Tencent                       |
@@ -40,7 +40,11 @@ Data sources: BOP, JHU, Tencent
 
 ### Observed case clusters:
 #### Fig 3:
-![South Korea cases](../cluster_analysis/South Korea_imported_cases.png)
+![South Korea cases](../cluster_analysis/South%20Korea_imported_cases.png)
+
+
+
+Data source: BOP
 
 
 ### Data sources:
