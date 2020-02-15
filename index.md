@@ -19,7 +19,7 @@
 
 ### All imported cases clusters
 
-![All cases](figs/All_imported_cases.png)
+![All cases](figs/cluster_analysis/All_imported_cases.png)
 
 ### Country reports
 [Australia report](country_reports/Australia_report.md)
