@@ -1,4 +1,4 @@
-## 2019-nCoV Imported Case Cluster Viz (last updated 02/13/20 19:02)
+## 2019-nCoV Imported Case Cluster Viz (last updated 02/14/20 18:02)
 
 
 ### Reference
@@ -10,7 +10,7 @@
 
 * [Prepped line list](cleaned_line_list.csv)
 
-* [Moritz Krämer's public line list](https://docs.google.com/spreadsheets/d/1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/edit#gid=0)
+* [BeOutbreakPrepared's public line list](https://github.com/beoutbreakprepared/nCoV2019)
 
 * [Imported case origin curation sheet](https://docs.google.com/spreadsheets/d/1s2j-RmkO8C69HtrELpNMipkG5ftPJqCPEzGRAxIukFY/edit#gid=0)
 
