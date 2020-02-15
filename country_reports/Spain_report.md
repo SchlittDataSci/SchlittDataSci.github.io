@@ -21,7 +21,7 @@
 | Total hospitalized        | 0                |                             |                               |
 | Total recovered           | 0                | 0                           | 0                             |
 | Total deaths              | 0                | 0                           | 0                             |
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Geographic dispersal:
@@ -35,7 +35,7 @@ Data sources: [1], [2], [3]
 |  0 | JHU      | Spain                 |           2 |
 |  1 | BOP      | Canary Islands, Spain |           1 |
 
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Observed case clusters:

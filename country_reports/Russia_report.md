@@ -21,7 +21,7 @@
 | Total hospitalized        | 0                |                             |                               |
 | Total recovered           | 0                | 2                           | 0                             |
 | Total deaths              | 0                | 0                           | 0                             |
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Geographic dispersal:
@@ -36,7 +36,7 @@ Data sources: [1], [2], [3]
 |  1 | BOP      | Transbaikalia, Russia |           1 |
 |  2 | BOP      | Tyumen, Russia        |           1 |
 
-Data sources: [1], [2], [3]
+Data sources: BOP, JHU, Tencent
 
 
 ### Observed case clusters:
