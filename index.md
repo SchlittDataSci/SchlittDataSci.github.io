@@ -52,11 +52,11 @@
 
 [Singapore report](country_reports/Singapore_report.md)
 
-[South Korea report](country_reports/South&#32Korea_report.md)
+[South Korea report](country_reports/South%20Korea_report.md)
 
 [Spain report](country_reports/Spain_report.md)
 
-[Sri Lanka report](country_reports/Sri&#32Lanka_report.md)
+[Sri Lanka report](country_reports/Sri%20Lanka_report.md)
 
 [Sweden report](country_reports/Sweden_report.md)
 
@@ -66,9 +66,9 @@
 
 [UAE report](country_reports/UAE_report.md)
 
-[United Kingdom report](country_reports/United&#32Kingdom_report.md)
+[United Kingdom report](country_reports/United%20Kingdom_report.md)
 
-[United States report](country_reports/United&#32States_report.md)
+[United States report](country_reports/United%20States_report.md)
 
 [Vietnam report](country_reports/Vietnam_report.md)
 
