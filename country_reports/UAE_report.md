@@ -11,12 +11,12 @@
 #### Table 1: Situation summary
 |                           | BOP              | JHU                         | Tencent                       |
 |---------------------------|------------------|-----------------------------|-------------------------------|
-| First update logged       | 01/12/20         | 01/21/20                    | 02/04/20                      |
+| First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
 | Last update logged        | 02/06/20         | 02/14/20                    | 02/15/20                      |
 | Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
-| First known case          | 01/29/20         | 01/21/20                    | 02/04/20                      |
+| First known case          | 01/29/20         | 01/22/20                    | 02/06/20                      |
 | Total confirmed cases     | 5                | 8                           | 8                             |
-| New cases since yesterday |                  |                             | 0                             |
+| New cases since yesterday |                  |                             | 1                             |
 | Total suspected           |                  |                             | 0                             |
 | Total hospitalized        | 4                |                             |                               |
 | Total recovered           | 0                | 1                           | 1                             |
