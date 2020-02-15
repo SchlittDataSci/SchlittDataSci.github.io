@@ -6,7 +6,7 @@
 
  ### Situation Report:
 #### Fig 1:
-![United States cases](../merged_histories/United%20States_merged_histories.png)
+![United States cases](../merged_histories/United_States_merged_histories.png)
 
 #### Table 1: Situation summary
 |                           | BOP              | JHU                         | Tencent                       |
@@ -46,9 +46,9 @@ Data sources: BOP, JHU, Tencent
 | 11 | BOP      | California, United States       |           6 |
 | 12 | BOP      | Illinois, United States         |           2 |
 | 13 | BOP      | Washington State, United States |           1 |
-| 14 | BOP      | Arizona, United States          |           1 |
+| 14 | BOP      | Massachusetts, United States    |           1 |
 | 15 | BOP      | Wisconsin, United States        |           1 |
-| 16 | BOP      | Massachusetts, United States    |           1 |
+| 16 | BOP      | Arizona, United States          |           1 |
 
 Data sources: BOP, JHU, Tencent
 

@@ -6,7 +6,7 @@
 
  ### Situation Report:
 #### Fig 1:
-![South Korea cases](../merged_histories/South%20Korea_merged_histories.png)
+![South Korea cases](../merged_histories/South_Korea_merged_histories.png)
 
 #### Table 1: Situation summary
 |                           | BOP              | JHU                         | Tencent                       |

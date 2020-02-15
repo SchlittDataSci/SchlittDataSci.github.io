@@ -6,7 +6,7 @@
 
  ### Situation Report:
 #### Fig 1:
-![Sri Lanka cases](../merged_histories/Sri%20Lanka_merged_histories.png)
+![Sri Lanka cases](../merged_histories/Sri_Lanka_merged_histories.png)
 
 #### Table 1: Situation summary
 |                           | BOP              | JHU                         | Tencent                       |

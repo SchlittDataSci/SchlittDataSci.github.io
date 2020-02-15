@@ -33,8 +33,8 @@ Data sources: BOP, JHU, Tencent
 |----|----------|-------------------------|-------------|
 |  3 | Tencent  | Thailand                |          33 |
 |  0 | JHU      | Thailand                |          33 |
-|  1 | BOP      | Nonthaburi, Thailand    |           1 |
-|  2 | BOP      | Nakhon Pathom, Thailand |           1 |
+|  1 | BOP      | Nakhon Pathom, Thailand |           1 |
+|  2 | BOP      | Nonthaburi, Thailand    |           1 |
 
 Data sources: BOP, JHU, Tencent
 
