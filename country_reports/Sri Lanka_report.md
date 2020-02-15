@@ -6,7 +6,7 @@
 
  ### Situation Report:
 #### Fig 1:
-![Sri Lanka cases](../merged_histories/Sri Lanka_merged_histories.png)
+![Sri Lanka cases](../merged_histories/Sri%20Lanka_merged_histories.png)
 
 #### Table 1: Situation summary
 |                           | BOP              | JHU                         | Tencent                       |
@@ -40,7 +40,11 @@ Data sources: BOP, JHU, Tencent
 
 ### Observed case clusters:
 #### Fig 3:
-![Sri Lanka cases](../cluster_analysis/Sri Lanka_imported_cases.png)
+![Sri Lanka cases](../cluster_analysis/Sri%20Lanka_imported_cases.png)
+
+
+
+Data source: BOP
 
 
 ### Data sources:
