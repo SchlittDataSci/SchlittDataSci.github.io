@@ -17,11 +17,61 @@
 * [Imported cases dashboard](https://datastudio.google.com/reporting/f6ad0988-f203-45f8-8d18-5d726c1d2d8b)
 
 
-### Reports
-
-All imported cases
+### All imported cases clusters
 
 ![All cases](figs/All_imported_cases.png)
-[AustraliaC report](country_reports/AustraliaC_report.md)[BelgiumC report](country_reports/BelgiumC_report.md)[CambodiaC report](country_reports/CambodiaC_report.md)[CanadaC report](country_reports/CanadaC_report.md)[FinlandC report](country_reports/FinlandC_report.md)[FranceC report](country_reports/FranceC_report.md)[GermanyC report](country_reports/GermanyC_report.md)[IndiaC report](country_reports/IndiaC_report.md)[ItalyC report](country_reports/ItalyC_report.md)[JapanC report](country_reports/JapanC_report.md)[MalaysiaC report](country_reports/MalaysiaC_report.md)[NepalC report](country_reports/NepalC_report.md)[PhilippinesC report](country_reports/PhilippinesC_report.md)[RussiaC report](country_reports/RussiaC_report.md)[SingaporeC report](country_reports/SingaporeC_report.md)[South KoreaC report](country_reports/South KoreaC_report.md)[SpainC report](country_reports/SpainC_report.md)[Sri LankaC report](country_reports/Sri LankaC_report.md)[SwedenC report](country_reports/SwedenC_report.md)[TaiwanC report](country_reports/TaiwanC_report.md)[ThailandC report](country_reports/ThailandC_report.md)[UAEC report](country_reports/UAEC_report.md)[United KingdomC report](country_reports/United KingdomC_report.md)[United StatesC report](country_reports/United StatesC_report.md)[VietnamC report](country_reports/VietnamC_report.md)
+
+### Country reports
+[Australia report](country_reports/Australia_report.md)
+
+[Belgium report](country_reports/Belgium_report.md)
+
+[Cambodia report](country_reports/Cambodia_report.md)
+
+[Canada report](country_reports/Canada_report.md)
+
+[Finland report](country_reports/Finland_report.md)
+
+[France report](country_reports/France_report.md)
+
+[Germany report](country_reports/Germany_report.md)
+
+[India report](country_reports/India_report.md)
+
+[Italy report](country_reports/Italy_report.md)
+
+[Japan report](country_reports/Japan_report.md)
+
+[Malaysia report](country_reports/Malaysia_report.md)
+
+[Nepal report](country_reports/Nepal_report.md)
+
+[Philippines report](country_reports/Philippines_report.md)
+
+[Russia report](country_reports/Russia_report.md)
+
+[Singapore report](country_reports/Singapore_report.md)
+
+[South Korea report](country_reports/South Korea_report.md)
+
+[Spain report](country_reports/Spain_report.md)
+
+[Sri Lanka report](country_reports/Sri Lanka_report.md)
+
+[Sweden report](country_reports/Sweden_report.md)
+
+[Taiwan report](country_reports/Taiwan_report.md)
+
+[Thailand report](country_reports/Thailand_report.md)
+
+[UAE report](country_reports/UAE_report.md)
+
+[United Kingdom report](country_reports/United Kingdom_report.md)
+
+[United States report](country_reports/United States_report.md)
+
+[Vietnam report](country_reports/Vietnam_report.md)
+
+
 
 James Schlitt 2020 UVA NSSAC
