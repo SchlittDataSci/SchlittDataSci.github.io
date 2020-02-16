@@ -23,6 +23,7 @@
 | Total hospitalized        | 16               |                             |                               |
 | Total recovered           | 1                | 12                          | 1                             |
 | Total deaths              | 0                | 1                           | 1                             |
+
 Data sources: BOP, JHU, Tencent
 
 
