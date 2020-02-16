@@ -1,25 +1,26 @@
 # Germany
 ## NSSAC COVID-19 Summary
-## 02/15/2020
+## 02/16/2020
 
 
 
- ### Situation Report:
+### Situation Report:
 #### Fig 1:
 ![Germany cases](../merged_histories/Germany_merged_histories.png)
 
 #### Table 1: Situation summary
+
 |                           | BOP              | JHU                         | Tencent                       |
 |---------------------------|------------------|-----------------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/14/20                    | 02/15/20                      |
+| Last update logged        | 02/06/20         | 02/15/20                    | 02/16/20                      |
 | Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
-| First known case          | 01/27/20         | 01/22/20                    | 02/07/20                      |
-| Total confirmed cases     | 13               | 16                          | 16                            |
-| New cases since yesterday |                  |                             | 2                             |
+| First known case          | 01/27/20         | 01/22/20                    | 02/16/20                      |
+| Total confirmed cases     | 13               | 16                          | 0                             |
+| New cases since yesterday |                  |                             | -16                           |
 | Total suspected           |                  |                             | 0                             |
 | Total hospitalized        | 0                |                             |                               |
-| Total recovered           | 1                | 1                           | 1                             |
+| Total recovered           | 1                | 1                           | 0                             |
 | Total deaths              | 0                | 0                           | 0                             |
 Data sources: BOP, JHU, Tencent
 
@@ -29,6 +30,7 @@ Data sources: BOP, JHU, Tencent
 ![Germany mapped](../case_locs/Germany_case_locs.png)
 
 #### Table 2: Confirmed cases by location
+
 |    | source   | loc_name                      |   confirmed |
 |----|----------|-------------------------------|-------------|
 |  3 | Tencent  | Germany                       |          16 |

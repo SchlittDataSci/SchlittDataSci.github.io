@@ -1,25 +1,26 @@
 # South Korea
 ## NSSAC COVID-19 Summary
-## 02/15/2020
+## 02/16/2020
 
 
 
- ### Situation Report:
+### Situation Report:
 #### Fig 1:
 ![South Korea cases](../merged_histories/South_Korea_merged_histories.png)
 
 #### Table 1: Situation summary
+
 |                           | BOP              | JHU                         | Tencent                       |
 |---------------------------|------------------|-----------------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/14/20                    | 02/15/20                      |
+| Last update logged        | 02/06/20         | 02/15/20                    | 02/16/20                      |
 | Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
-| First known case          | 01/20/20         | 01/22/20                    | 02/07/20                      |
-| Total confirmed cases     | 21               | 28                          | 28                            |
-| New cases since yesterday |                  |                             | 0                             |
+| First known case          | 01/20/20         | 01/22/20                    | 02/16/20                      |
+| Total confirmed cases     | 21               | 28                          | 0                             |
+| New cases since yesterday |                  |                             | -28                           |
 | Total suspected           |                  |                             | 0                             |
 | Total hospitalized        | 5                |                             |                               |
-| Total recovered           | 0                | 7                           | 3                             |
+| Total recovered           | 0                | 9                           | 0                             |
 | Total deaths              | 0                | 0                           | 0                             |
 Data sources: BOP, JHU, Tencent
 
@@ -29,9 +30,10 @@ Data sources: BOP, JHU, Tencent
 ![South Korea mapped](../case_locs/South_Korea_case_locs.png)
 
 #### Table 2: Confirmed cases by location
+
 |    | source   | loc_name              |   confirmed |
 |----|----------|-----------------------|-------------|
-|  2 | Tencent  | Korea                 |          28 |
+|  2 | Tencent  | Korea                 |          29 |
 |  0 | JHU      | South Korea           |          28 |
 |  1 | BOP      | Gyeonggi, South Korea |           1 |
 

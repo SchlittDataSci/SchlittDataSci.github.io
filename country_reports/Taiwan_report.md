@@ -1,26 +1,27 @@
 # Taiwan
 ## NSSAC COVID-19 Summary
-## 02/15/2020
+## 02/16/2020
 
 
 
- ### Situation Report:
+### Situation Report:
 #### Fig 1:
 ![Taiwan cases](../merged_histories/Taiwan_merged_histories.png)
 
 #### Table 1: Situation summary
+
 |                           | BOP              | JHU                         | Tencent                       |
 |---------------------------|------------------|-----------------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/14/20                    | 02/15/20                      |
+| Last update logged        | 02/06/20         | 02/15/20                    | 02/16/20                      |
 | Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
 | First known case          | 02/06/20         | 01/22/20                    | 02/04/20                      |
-| Total confirmed cases     | 3                | 18                          | 18                            |
-| New cases since yesterday |                  |                             | 0                             |
+| Total confirmed cases     | 3                | 18                          | 20                            |
+| New cases since yesterday |                  |                             | 2                             |
 | Total suspected           |                  |                             | 0                             |
 | Total hospitalized        | 3                |                             |                               |
-| Total recovered           | 0                | 2                           | 1                             |
-| Total deaths              | 0                | 0                           | 0                             |
+| Total recovered           | 0                | 2                           | 2                             |
+| Total deaths              | 0                | 0                           | 1                             |
 Data sources: BOP, JHU, Tencent
 
 
@@ -29,6 +30,7 @@ Data sources: BOP, JHU, Tencent
 ![Taiwan mapped](../case_locs/Taiwan_case_locs.png)
 
 #### Table 2: Confirmed cases by location
+
 |    | source   | loc_name       |   confirmed |
 |----|----------|----------------|-------------|
 |  0 | JHU      | Taiwan, Taiwan |          18 |

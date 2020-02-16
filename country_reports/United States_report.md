@@ -1,25 +1,26 @@
 # United States
 ## NSSAC COVID-19 Summary
-## 02/15/2020
+## 02/16/2020
 
 
 
- ### Situation Report:
+### Situation Report:
 #### Fig 1:
 ![United States cases](../merged_histories/United_States_merged_histories.png)
 
 #### Table 1: Situation summary
+
 |                           | BOP              | JHU                         | Tencent                       |
 |---------------------------|------------------|-----------------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/14/20                    | 02/15/20                      |
+| Last update logged        | 02/06/20         | 02/15/20                    | 02/16/20                      |
 | Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
 | First known case          | 01/20/20         | 01/22/20                    | 02/07/20                      |
-| Total confirmed cases     | 12               | 15                          | 15                            |
-| New cases since yesterday |                  |                             | 2                             |
+| Total confirmed cases     | 12               | 15                          | 0                             |
+| New cases since yesterday |                  |                             | -15                           |
 | Total suspected           |                  |                             | 0                             |
 | Total hospitalized        | 2                |                             |                               |
-| Total recovered           | 0                | 3                           | 3                             |
+| Total recovered           | 0                | 3                           | 0                             |
 | Total deaths              | 0                | 0                           | 0                             |
 Data sources: BOP, JHU, Tencent
 
@@ -29,6 +30,7 @@ Data sources: BOP, JHU, Tencent
 ![United States mapped](../case_locs/United_States_case_locs.png)
 
 #### Table 2: Confirmed cases by location
+
 |    | source   | loc_name                        |   confirmed |
 |----|----------|---------------------------------|-------------|
 | 17 | Tencent  | United States                   |          15 |
@@ -45,9 +47,9 @@ Data sources: BOP, JHU, Tencent
 |  0 | JHU      | Seattle, WA, US                 |           1 |
 | 11 | BOP      | California, United States       |           6 |
 | 12 | BOP      | Illinois, United States         |           2 |
-| 13 | BOP      | Arizona, United States          |           1 |
-| 14 | BOP      | Wisconsin, United States        |           1 |
-| 15 | BOP      | Massachusetts, United States    |           1 |
+| 13 | BOP      | Massachusetts, United States    |           1 |
+| 14 | BOP      | Arizona, United States          |           1 |
+| 15 | BOP      | Wisconsin, United States        |           1 |
 | 16 | BOP      | Washington State, United States |           1 |
 
 Data sources: BOP, JHU, Tencent

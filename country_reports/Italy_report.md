@@ -1,18 +1,19 @@
 # Italy
 ## NSSAC COVID-19 Summary
-## 02/15/2020
+## 02/16/2020
 
 
 
- ### Situation Report:
+### Situation Report:
 #### Fig 1:
 ![Italy cases](../merged_histories/Italy_merged_histories.png)
 
 #### Table 1: Situation summary
+
 |                           | BOP              | JHU                         | Tencent                       |
 |---------------------------|------------------|-----------------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/14/20                    | 02/15/20                      |
+| Last update logged        | 02/06/20         | 02/15/20                    | 02/16/20                      |
 | Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
 | First known case          | 01/31/20         | 01/22/20                    | 02/06/20                      |
 | Total confirmed cases     | 2                | 3                           | 0                             |
@@ -29,6 +30,7 @@ Data sources: BOP, JHU, Tencent
 ![Italy mapped](../case_locs/Italy_case_locs.png)
 
 #### Table 2: Confirmed cases by location
+
 |    | source   | loc_name   |   confirmed |
 |----|----------|------------|-------------|
 |  2 | Tencent  | Italy      |           3 |

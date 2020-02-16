@@ -1,25 +1,26 @@
 # Japan
 ## NSSAC COVID-19 Summary
-## 02/15/2020
+## 02/16/2020
 
 
 
- ### Situation Report:
+### Situation Report:
 #### Fig 1:
 ![Japan cases](../merged_histories/Japan_merged_histories.png)
 
 #### Table 1: Situation summary
+
 |                           | BOP              | JHU                         | Tencent                       |
 |---------------------------|------------------|-----------------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/14/20                    | 02/15/20                      |
+| Last update logged        | 02/06/20         | 02/15/20                    | 02/16/20                      |
 | Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
 | First known case          | 01/15/20         | 01/22/20                    | 02/04/20                      |
-| Total confirmed cases     | 44               | 29                          | 334                           |
-| New cases since yesterday |                  |                             | 81                            |
+| Total confirmed cases     | 44               | 43                          | 411                           |
+| New cases since yesterday |                  |                             | 77                            |
 | Total suspected           |                  |                             | 0                             |
 | Total hospitalized        | 16               |                             |                               |
-| Total recovered           | 1                | 9                           | 1                             |
+| Total recovered           | 1                | 12                          | 1                             |
 | Total deaths              | 0                | 1                           | 1                             |
 Data sources: BOP, JHU, Tencent
 
@@ -29,19 +30,20 @@ Data sources: BOP, JHU, Tencent
 ![Japan mapped](../case_locs/Japan_case_locs.png)
 
 #### Table 2: Confirmed cases by location
+
 |    | source   | loc_name                |   confirmed |
 |----|----------|-------------------------|-------------|
-| 11 | Tencent  | Japan                   |         334 |
-|  0 | JHU      | Japan                   |          29 |
+| 11 | Tencent  | Japan                   |         411 |
+|  0 | JHU      | Japan                   |          43 |
 |  1 | BOP      | Kanagawa, Japan         |          21 |
 |  2 | BOP      | Tokyo, Japan            |           8 |
 |  3 | BOP      | Kyoto, Japan            |           2 |
 |  4 | BOP      | Chiba, Japan            |           2 |
 |  5 | BOP      | Mie, Japan              |           1 |
-|  6 | BOP      | Chiba Prefecture, Japan |           1 |
-|  7 | BOP      | Nara Prefecture, Japan  |           1 |
+|  6 | BOP      | Nara Prefecture, Japan  |           1 |
+|  7 | BOP      | Osaka, Japan            |           1 |
 |  8 | BOP      | Kyoto Prefecture, Japan |           1 |
-|  9 | BOP      | Osaka, Japan            |           1 |
+|  9 | BOP      | Chiba Prefecture, Japan |           1 |
 | 10 | BOP      | Hokkaido, Japan         |           1 |
 
 Data sources: BOP, JHU, Tencent
