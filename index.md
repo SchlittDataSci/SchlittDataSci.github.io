@@ -1,4 +1,4 @@
-## 2019-nCoV Imported Case Cluster Viz (last updated 02/16/20 11:02)
+## 2019-nCoV Imported Case Cluster Viz (last updated 02/16/20 13:02)
 
 
 ### Reference
@@ -28,9 +28,9 @@
 
 [Malaysia](country_reports/Malaysia_report.md)      -      [Nepal](country_reports/Nepal_report.md)      -      [Philippines](country_reports/Philippines_report.md)      -      [Russia](country_reports/Russia_report.md)      -      [Singapore](country_reports/Singapore_report.md)
 
-[South Korea](country_reports/South%20Korea_report.md)      -      [Spain](country_reports/Spain_report.md)      -      [Sri Lanka](country_reports/Sri%20Lanka_report.md)      -      [Sweden](country_reports/Sweden_report.md)      -      [Taiwan](country_reports/Taiwan_report.md)
+[South Korea](country_reports/South_Korea_report.md)      -      [Spain](country_reports/Spain_report.md)      -      [Sri Lanka](country_reports/Sri_Lanka_report.md)      -      [Sweden](country_reports/Sweden_report.md)      -      [Taiwan](country_reports/Taiwan_report.md)
 
-[Thailand](country_reports/Thailand_report.md)      -      [UAE](country_reports/UAE_report.md)      -      [United Kingdom](country_reports/United%20Kingdom_report.md)      -      [United States](country_reports/United%20States_report.md)      -      [Vietnam](country_reports/Vietnam_report.md)
+[Thailand](country_reports/Thailand_report.md)      -      [UAE](country_reports/UAE_report.md)      -      [United Kingdom](country_reports/United_Kingdom_report.md)      -      [United States](country_reports/United_States_report.md)      -      [Vietnam](country_reports/Vietnam_report.md)
 
 
 
