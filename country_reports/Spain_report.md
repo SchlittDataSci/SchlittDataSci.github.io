@@ -10,6 +10,7 @@
 
 #### Table 1: Situation summary
 
+
 |                           | BOP              | JHU                         | Tencent                       |
 |---------------------------|------------------|-----------------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
@@ -30,6 +31,7 @@ Data sources: BOP, JHU, Tencent
 ![Spain mapped](../case_locs/Spain_case_locs.png)
 
 #### Table 2: Confirmed cases by location
+
 
 |    | source   | loc_name              |   confirmed |
 |----|----------|-----------------------|-------------|

@@ -10,6 +10,7 @@
 
 #### Table 1: Situation summary
 
+
 |                           | BOP              | JHU                         | Tencent                       |
 |---------------------------|------------------|-----------------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
@@ -31,12 +32,13 @@ Data sources: BOP, JHU, Tencent
 
 #### Table 2: Confirmed cases by location
 
+
 |    | source   | loc_name                |   confirmed |
 |----|----------|-------------------------|-------------|
 |  3 | Tencent  | Thailand                |          34 |
 |  0 | JHU      | Thailand                |          33 |
-|  1 | BOP      | Nakhon Pathom, Thailand |           1 |
-|  2 | BOP      | Nonthaburi, Thailand    |           1 |
+|  1 | BOP      | Nonthaburi, Thailand    |           1 |
+|  2 | BOP      | Nakhon Pathom, Thailand |           1 |
 
 Data sources: BOP, JHU, Tencent
 

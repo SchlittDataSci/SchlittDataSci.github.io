@@ -10,6 +10,7 @@
 
 #### Table 1: Situation summary
 
+
 |                           | BOP              | JHU                         | Tencent                       |
 |---------------------------|------------------|-----------------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
@@ -31,20 +32,21 @@ Data sources: BOP, JHU, Tencent
 
 #### Table 2: Confirmed cases by location
 
+
 |    | source   | loc_name                |   confirmed |
 |----|----------|-------------------------|-------------|
 | 11 | Tencent  | Japan                   |         411 |
 |  0 | JHU      | Japan                   |          43 |
 |  1 | BOP      | Kanagawa, Japan         |          21 |
 |  2 | BOP      | Tokyo, Japan            |           8 |
-|  3 | BOP      | Kyoto, Japan            |           2 |
-|  4 | BOP      | Chiba, Japan            |           2 |
+|  3 | BOP      | Chiba, Japan            |           2 |
+|  4 | BOP      | Kyoto, Japan            |           2 |
 |  5 | BOP      | Mie, Japan              |           1 |
-|  6 | BOP      | Nara Prefecture, Japan  |           1 |
-|  7 | BOP      | Osaka, Japan            |           1 |
-|  8 | BOP      | Kyoto Prefecture, Japan |           1 |
-|  9 | BOP      | Chiba Prefecture, Japan |           1 |
-| 10 | BOP      | Hokkaido, Japan         |           1 |
+|  6 | BOP      | Osaka, Japan            |           1 |
+|  7 | BOP      | Kyoto Prefecture, Japan |           1 |
+|  8 | BOP      | Nara Prefecture, Japan  |           1 |
+|  9 | BOP      | Hokkaido, Japan         |           1 |
+| 10 | BOP      | Chiba Prefecture, Japan |           1 |
 
 Data sources: BOP, JHU, Tencent
 

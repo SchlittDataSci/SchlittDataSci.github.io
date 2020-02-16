@@ -10,6 +10,7 @@
 
 #### Table 1: Situation summary
 
+
 |                           | BOP              | JHU                         | Tencent                       |
 |---------------------------|------------------|-----------------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
@@ -31,6 +32,7 @@ Data sources: BOP, JHU, Tencent
 
 #### Table 2: Confirmed cases by location
 
+
 |    | source   | loc_name                        |   confirmed |
 |----|----------|---------------------------------|-------------|
 | 17 | Tencent  | United States                   |          15 |
@@ -47,9 +49,9 @@ Data sources: BOP, JHU, Tencent
 |  0 | JHU      | Seattle, WA, US                 |           1 |
 | 11 | BOP      | California, United States       |           6 |
 | 12 | BOP      | Illinois, United States         |           2 |
-| 13 | BOP      | Massachusetts, United States    |           1 |
+| 13 | BOP      | Wisconsin, United States        |           1 |
 | 14 | BOP      | Arizona, United States          |           1 |
-| 15 | BOP      | Wisconsin, United States        |           1 |
+| 15 | BOP      | Massachusetts, United States    |           1 |
 | 16 | BOP      | Washington State, United States |           1 |
 
 Data sources: BOP, JHU, Tencent
