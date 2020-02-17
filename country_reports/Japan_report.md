@@ -1,6 +1,6 @@
 # Japan
 ## NSSAC COVID-19 Summary
-## 02/16/2020
+## 02/17/2020
 
 
 
@@ -14,11 +14,11 @@
 |                           | BOP              | JHU                         | Tencent                       |
 |---------------------------|------------------|-----------------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/15/20                    | 02/16/20                      |
+| Last update logged        | 02/06/20         | 02/16/20                    | 02/17/20                      |
 | Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
 | First known case          | 01/15/20         | 01/22/20                    | 02/04/20                      |
-| Total confirmed cases     | 44               | 43                          | 411                           |
-| New cases since yesterday |                  |                             | 77                            |
+| Total confirmed cases     | 44               | 59                          | 519                           |
+| New cases since yesterday |                  |                             | 108                           |
 | Total suspected           |                  |                             | 0                             |
 | Total hospitalized        | 16               |                             |                               |
 | Total recovered           | 1                | 12                          | 1                             |
@@ -36,8 +36,8 @@ Data sources: BOP, JHU, Tencent
 
 |    | source   | loc_name                |   confirmed |
 |----|----------|-------------------------|-------------|
-| 11 | Tencent  | Japan                   |         411 |
-|  0 | JHU      | Japan                   |          43 |
+| 11 | Tencent  | Japan                   |         519 |
+|  0 | JHU      | Japan                   |          59 |
 |  1 | BOP      | Kanagawa, Japan         |          21 |
 |  2 | BOP      | Tokyo, Japan            |           8 |
 |  3 | BOP      | Chiba, Japan            |           2 |

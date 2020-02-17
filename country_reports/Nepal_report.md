@@ -1,6 +1,6 @@
 # Nepal
 ## NSSAC COVID-19 Summary
-## 02/16/2020
+## 02/17/2020
 
 
 
@@ -14,7 +14,7 @@
 |                           | BOP              | JHU                         | Tencent                       |
 |---------------------------|------------------|-----------------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/15/20                    | 02/16/20                      |
+| Last update logged        | 02/06/20         | 02/16/20                    | 02/17/20                      |
 | Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
 | First known case          | 01/24/20         | 01/22/20                    | 02/04/20                      |
 | Total confirmed cases     | 1                | 1                           | 0                             |
