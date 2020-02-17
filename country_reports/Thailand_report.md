@@ -1,6 +1,6 @@
 # Thailand
 ## NSSAC COVID-19 Summary
-## 02/16/2020
+## 02/17/2020
 
 
 
@@ -14,14 +14,14 @@
 |                           | BOP              | JHU                         | Tencent                       |
 |---------------------------|------------------|-----------------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/15/20                    | 02/16/20                      |
+| Last update logged        | 02/06/20         | 02/16/20                    | 02/17/20                      |
 | Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
 | First known case          | 01/12/20         | 01/22/20                    | 02/04/20                      |
-| Total confirmed cases     | 25               | 33                          | 34                            |
-| New cases since yesterday |                  |                             | 0                             |
+| Total confirmed cases     | 25               | 34                          | 35                            |
+| New cases since yesterday |                  |                             | 1                             |
 | Total suspected           |                  |                             | 0                             |
 | Total hospitalized        | 3                |                             |                               |
-| Total recovered           | 0                | 12                          | 14                            |
+| Total recovered           | 0                | 14                          | 14                            |
 | Total deaths              | 0                | 0                           | 0                             |
 
 Data sources: BOP, JHU, Tencent
@@ -36,8 +36,8 @@ Data sources: BOP, JHU, Tencent
 
 |    | source   | loc_name                |   confirmed |
 |----|----------|-------------------------|-------------|
-|  3 | Tencent  | Thailand                |          34 |
-|  0 | JHU      | Thailand                |          33 |
+|  3 | Tencent  | Thailand                |          35 |
+|  0 | JHU      | Thailand                |          34 |
 |  1 | BOP      | Nonthaburi, Thailand    |           1 |
 |  2 | BOP      | Nakhon Pathom, Thailand |           1 |
 

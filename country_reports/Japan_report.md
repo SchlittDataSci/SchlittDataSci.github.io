@@ -40,14 +40,14 @@ Data sources: BOP, JHU, Tencent
 |  0 | JHU      | Japan                   |          59 |
 |  1 | BOP      | Kanagawa, Japan         |          21 |
 |  2 | BOP      | Tokyo, Japan            |           8 |
-|  3 | BOP      | Chiba, Japan            |           2 |
-|  4 | BOP      | Kyoto, Japan            |           2 |
+|  3 | BOP      | Kyoto, Japan            |           2 |
+|  4 | BOP      | Chiba, Japan            |           2 |
 |  5 | BOP      | Mie, Japan              |           1 |
-|  6 | BOP      | Osaka, Japan            |           1 |
-|  7 | BOP      | Kyoto Prefecture, Japan |           1 |
-|  8 | BOP      | Nara Prefecture, Japan  |           1 |
-|  9 | BOP      | Hokkaido, Japan         |           1 |
-| 10 | BOP      | Chiba Prefecture, Japan |           1 |
+|  6 | BOP      | Chiba Prefecture, Japan |           1 |
+|  7 | BOP      | Hokkaido, Japan         |           1 |
+|  8 | BOP      | Kyoto Prefecture, Japan |           1 |
+|  9 | BOP      | Nara Prefecture, Japan  |           1 |
+| 10 | BOP      | Osaka, Japan            |           1 |
 
 Data sources: BOP, JHU, Tencent
 

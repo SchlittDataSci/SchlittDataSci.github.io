@@ -1,6 +1,6 @@
 # Singapore
 ## NSSAC COVID-19 Summary
-## 02/16/2020
+## 02/17/2020
 
 
 
@@ -14,14 +14,14 @@
 |                           | BOP              | JHU                         | Tencent                       |
 |---------------------------|------------------|-----------------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/15/20                    | 02/16/20                      |
+| Last update logged        | 02/06/20         | 02/16/20                    | 02/17/20                      |
 | Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
 | First known case          | 01/23/20         | 01/22/20                    | 02/04/20                      |
-| Total confirmed cases     | 28               | 72                          | 72                            |
-| New cases since yesterday |                  |                             | 5                             |
+| Total confirmed cases     | 28               | 75                          | 75                            |
+| New cases since yesterday |                  |                             | 3                             |
 | Total suspected           |                  |                             | 0                             |
 | Total hospitalized        | 17               |                             |                               |
-| Total recovered           | 0                | 18                          | 18                            |
+| Total recovered           | 0                | 18                          | 19                            |
 | Total deaths              | 0                | 0                           | 0                             |
 
 Data sources: BOP, JHU, Tencent
@@ -36,8 +36,8 @@ Data sources: BOP, JHU, Tencent
 
 |    | source   | loc_name   |   confirmed |
 |----|----------|------------|-------------|
-|  2 | Tencent  | Singapore  |          72 |
-|  0 | JHU      | Singapore  |          72 |
+|  2 | Tencent  | Singapore  |          75 |
+|  0 | JHU      | Singapore  |          75 |
 |  1 | BOP      | Singapore  |          28 |
 
 Data sources: BOP, JHU, Tencent
