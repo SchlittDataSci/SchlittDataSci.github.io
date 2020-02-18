@@ -24,7 +24,7 @@
 | Total recovered           | 8                           |                  | 0                             |
 | Total deaths              | 0                           | 0                | 0                             |
 
-Data sources: BOP, JHU, NIH-Fogarty,Tencent
+Data sources: JHU, NIH-Fogarty, Tencent
 
 
 ### Geographic dispersal:
@@ -40,7 +40,7 @@ Data sources: BOP, JHU, NIH-Fogarty,Tencent
 |  2 | NIH      | York, UK   |           2 |
 |  0 | JHU      | UK         |           9 |
 
-Data sources: BOP, JHU, NIH-Fogarty, Tencent
+Data sources: JHU, NIH-Fogarty, Tencent
 
 
 ### Observed case clusters:
@@ -48,12 +48,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 ![UK cases](../cluster_analysis/UK_imported_cases_NIHFogarty.png)
 
 
-#### Fig 4:
-![UK cases](../cluster_analysis/UK_imported_cases_BOP.png)
 
-
-
-Data source: BOP
+Data source: NIH-Fogarty
 
 
 ### Data sources:
