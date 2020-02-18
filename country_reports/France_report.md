@@ -24,7 +24,7 @@
 | Total recovered           | 0                | 4                           |                  | 4                             |
 | Total deaths              | 0                | 1                           | 0                | 1                             |
 
-Data sources: BOP, JHU, NIH-Fogarty,Tencent
+Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 
 ### Geographic dispersal:
@@ -49,6 +49,10 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 ### Observed case clusters:
 #### Fig 3:
 ![France cases](../cluster_analysis/France_imported_cases_NIHFogarty.png)
+
+
+
+Data source: NIH-Fogarty
 
 
 #### Fig 4:

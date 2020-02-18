@@ -24,7 +24,7 @@
 | Total recovered           | 2                           |                  | 2                             |
 | Total deaths              | 1                           | 0                | 1                             |
 
-Data sources: BOP, JHU, NIH-Fogarty,Tencent
+Data sources: JHU, NIH-Fogarty, Tencent
 
 
 ### Geographic dispersal:
@@ -48,7 +48,7 @@ Data sources: BOP, JHU, NIH-Fogarty,Tencent
 | 10 | NIH      | Yau Ma Tei, Hong Kong   |           1 |
 |  0 | JHU      | Hong Kong, Hong Kong    |          60 |
 
-Data sources: BOP, JHU, NIH-Fogarty, Tencent
+Data sources: JHU, NIH-Fogarty, Tencent
 
 
 ### Observed case clusters:
@@ -56,12 +56,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 ![Hong Kong cases](../cluster_analysis/Hong_Kong_imported_cases_NIHFogarty.png)
 
 
-#### Fig 4:
-![Hong Kong cases](../cluster_analysis/Hong_Kong_imported_cases_BOP.png)
 
-
-
-Data source: BOP
+Data source: NIH-Fogarty
 
 
 ### Data sources:

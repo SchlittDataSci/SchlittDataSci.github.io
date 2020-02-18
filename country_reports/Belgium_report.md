@@ -24,7 +24,7 @@
 | Total recovered           | 0                | 1                           | 0                             |
 | Total deaths              | 0                | 0                           | 0                             |
 
-Data sources: BOP, JHU, NIH-Fogarty,Tencent
+Data sources: BOP, JHU, Tencent
 
 
 ### Geographic dispersal:
@@ -40,15 +40,11 @@ Data sources: BOP, JHU, NIH-Fogarty,Tencent
 |  0 | JHU      | Belgium    |           1 |
 |  1 | BOP      | Belgium    |           1 |
 
-Data sources: BOP, JHU, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Tencent
 
 
 ### Observed case clusters:
 #### Fig 3:
-![Belgium cases](../cluster_analysis/Belgium_imported_cases_NIHFogarty.png)
-
-
-#### Fig 4:
 ![Belgium cases](../cluster_analysis/Belgium_imported_cases_BOP.png)
 
 
