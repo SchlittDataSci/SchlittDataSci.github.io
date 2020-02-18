@@ -14,17 +14,17 @@
 |                           | BOP              | JHU                         | Tencent                       |
 |---------------------------|------------------|-----------------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/16/20                    | 02/17/20                      |
+| Last update logged        | 02/06/20         | 02/17/20                    | 02/17/20                      |
 | Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
 | First known case          | 02/04/20         | 01/22/20                    | 02/06/20                      |
 | Total confirmed cases     | 1                | 1                           | 0                             |
-| New cases since yesterday |                  |                             | 0                             |
+| New cases since yesterday |                  | 0                           | 0                             |
 | Total suspected           |                  |                             | 0                             |
 | Total hospitalized        | 0                |                             |                               |
-| Total recovered           | 0                | 0                           | 0                             |
+| Total recovered           | 0                | 1                           | 0                             |
 | Total deaths              | 0                | 0                           | 0                             |
 
-Data sources: BOP, JHU, Tencent
+Data sources: BOP, JHU, NIH-Fogarty,Tencent
 
 
 ### Geographic dispersal:
@@ -40,7 +40,7 @@ Data sources: BOP, JHU, Tencent
 |  0 | JHU      | Belgium    |           1 |
 |  1 | BOP      | Belgium    |           1 |
 
-Data sources: BOP, JHU, Tencent
+Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 
 ### Observed case clusters:
@@ -59,4 +59,5 @@ Data source: BOP
 ### Data sources:
 * **BOP:** https://github.com/beoutbreakprepared/nCoV2019
 * **JHU:** https://github.com/CSSEGISandData/COVID-19/issues
+* **NIH-Fogarty:** https://docs.google.com/spreadsheets/d/1jS24DjSPVWa4iuxuD4OAXrE3QeI8c9BC1hSlqr-NMiU/edit#gid=1187587451
 * **Tencent:** https://news.qq.com/zt2020/page/feiyan.htm
