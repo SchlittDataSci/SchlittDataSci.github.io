@@ -1,4 +1,4 @@
-## 2019-nCoV Imported Case Cluster Viz (last updated 02/17/20 22:02)
+## 2019-nCoV Imported Case Cluster Viz (last updated 02/18/20 14:02)
 
 
 ### Reference
@@ -24,15 +24,15 @@
 ### Country reports
 [Australia](country_reports/Australia_report.md)      -      [Belgium](country_reports/Belgium_report.md)      -      [Cambodia](country_reports/Cambodia_report.md)      -      [Canada](country_reports/Canada_report.md)      -      [Finland](country_reports/Finland_report.md)
 
-[France](country_reports/France_report.md)      -      [Germany](country_reports/Germany_report.md)      -      [Hong Kong](country_reports/Hong_Kong_report.md)      -      [India](country_reports/India_report.md)      -      [Italy](country_reports/Italy_report.md)
+[France](country_reports/France_report.md)      -      [Germany](country_reports/Germany_report.md)      -      [India](country_reports/India_report.md)      -      [Italy](country_reports/Italy_report.md)      -      [Japan](country_reports/Japan_report.md)
 
-[Japan](country_reports/Japan_report.md)      -      [Malaysia](country_reports/Malaysia_report.md)      -      [Nepal](country_reports/Nepal_report.md)      -      [Philippines](country_reports/Philippines_report.md)      -      [Russia](country_reports/Russia_report.md)
+[Malaysia](country_reports/Malaysia_report.md)      -      [Nepal](country_reports/Nepal_report.md)      -      [Philippines](country_reports/Philippines_report.md)      -      [Russia](country_reports/Russia_report.md)      -      [Singapore](country_reports/Singapore_report.md)
 
-[Singapore](country_reports/Singapore_report.md)      -      [South Korea](country_reports/South_Korea_report.md)      -      [Spain](country_reports/Spain_report.md)      -      [Sri Lanka](country_reports/Sri_Lanka_report.md)      -      [Sweden](country_reports/Sweden_report.md)
+[South Korea](country_reports/South_Korea_report.md)      -      [Spain](country_reports/Spain_report.md)      -      [Sri Lanka](country_reports/Sri_Lanka_report.md)      -      [Sweden](country_reports/Sweden_report.md)      -      [Taiwan](country_reports/Taiwan_report.md)
 
-[Taiwan](country_reports/Taiwan_report.md)      -      [Thailand](country_reports/Thailand_report.md)      -      [UAE](country_reports/UAE_report.md)      -      [UK](country_reports/UK_report.md)      -      [United Kingdom](country_reports/United_Kingdom_report.md)
+[Thailand](country_reports/Thailand_report.md)      -      [UAE](country_reports/UAE_report.md)      -      [United Kingdom](country_reports/United_Kingdom_report.md)      -      [United States](country_reports/United_States_report.md)      -      [Vietnam](country_reports/Vietnam_report.md)
 
-[United States](country_reports/United_States_report.md)      -      [Vietnam](country_reports/Vietnam_report.md)      -      
+
 
 
 
