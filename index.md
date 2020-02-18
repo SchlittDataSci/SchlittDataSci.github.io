@@ -30,9 +30,9 @@
 
 [Singapore](country_reports/Singapore_report.md)      -      [South Korea](country_reports/South_Korea_report.md)      -      [Spain](country_reports/Spain_report.md)      -      [Sri Lanka](country_reports/Sri_Lanka_report.md)      -      [Sweden](country_reports/Sweden_report.md)
 
-[Taiwan](country_reports/Taiwan_report.md)      -      [Thailand](country_reports/Thailand_report.md)      -      [UAE](country_reports/UAE_report.md)      -      [UK](country_reports/UK_report.md)      -      [United Kingdom](country_reports/United_Kingdom_report.md)
+[Taiwan](country_reports/Taiwan_report.md)      -      [Thailand](country_reports/Thailand_report.md)      -      [UAE](country_reports/UAE_report.md)      -      [United Kingdom](country_reports/United_Kingdom_report.md)      -      [United States](country_reports/United_States_report.md)
 
-[United States](country_reports/United_States_report.md)      -      [Vietnam](country_reports/Vietnam_report.md)      -      
+[Vietnam](country_reports/Vietnam_report.md)
 
 
 

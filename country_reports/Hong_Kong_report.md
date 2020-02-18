@@ -38,14 +38,14 @@ Data sources: JHU, NIH-Fogarty, Tencent
 |----|----------|-------------------------|-------------|
 |  0 | NIH      | Hong Kong, Hong Kong    |          43 |
 |  1 | NIH      | Kowloon, Hong Kong      |           4 |
-|  2 | NIH      | Kwun Tong, Hong Kong    |           2 |
-|  3 | NIH      | Kwai Chung, Hong Kong   |           2 |
-|  4 | NIH      | Wan Chai, Hong Kong     |           1 |
-|  5 | NIH      | Zhuhai, Hong Kong       |           1 |
-|  6 | NIH      | Fo Tan, Hong Kong       |           1 |
-|  7 | NIH      | Tsing Yi, Hong Kong     |           1 |
-|  8 | NIH      | Ngau Chi Wan, Hong Kong |           1 |
-|  9 | NIH      | Yau Ma Tei, Hong Kong   |           1 |
+|  2 | NIH      | Kwai Chung, Hong Kong   |           2 |
+|  3 | NIH      | Kwun Tong, Hong Kong    |           2 |
+|  4 | NIH      | Tsing Yi, Hong Kong     |           1 |
+|  5 | NIH      | Fo Tan, Hong Kong       |           1 |
+|  6 | NIH      | Zhuhai, Hong Kong       |           1 |
+|  7 | NIH      | Wan Chai, Hong Kong     |           1 |
+|  8 | NIH      | Yau Ma Tei, Hong Kong   |           1 |
+|  9 | NIH      | Ngau Chi Wan, Hong Kong |           1 |
 | 10 | JHU      | Hong Kong, Hong Kong    |          60 |
 
 Data sources: JHU, NIH-Fogarty, Tencent

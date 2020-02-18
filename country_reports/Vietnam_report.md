@@ -47,9 +47,9 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |  8 | BOP      | Khanh Hoa province, Vietnam  |           2 |
 |  9 | BOP      | Vinh Phuc Province, Vietnam  |           1 |
 | 10 | BOP      | Vinh Phuc province, Vietnam  |           1 |
-| 11 | BOP      | Viinh Phuc Province, Vietnam |           1 |
+| 11 | BOP      | Thanh Hoa, Vietnam           |           1 |
 | 12 | BOP      | Nha Trang, Vietnam           |           1 |
-| 13 | BOP      | Thanh Hoa, Vietnam           |           1 |
+| 13 | BOP      | Viinh Phuc Province, Vietnam |           1 |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 

@@ -41,26 +41,26 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |  2 | NIH      | Tokyo, Japan               |           5 |
 |  3 | NIH      | Chiba Prefecture, Japan    |           4 |
 |  4 | NIH      | Kanagawa, Japan            |           2 |
-|  5 | NIH      | Kyoto, Japan               |           2 |
-|  6 | NIH      | Aichi Prefecture, Japan    |           2 |
-|  7 | NIH      | Nara Prefecture, Japan     |           1 |
-|  8 | NIH      | Haneda, Japan              |           1 |
-|  9 | NIH      | Wakayama Prefecture, Japan |           1 |
+|  5 | NIH      | Aichi Prefecture, Japan    |           2 |
+|  6 | NIH      | Kyoto, Japan               |           2 |
+|  7 | NIH      | Osaka Prefecture, Japan    |           1 |
+|  8 | NIH      | Okinawa Prefecture, Japan  |           1 |
+|  9 | NIH      | Haneda, Japan              |           1 |
 | 10 | NIH      | Hokkaido, Japan            |           1 |
-| 11 | NIH      | Osaka Prefecture, Japan    |           1 |
-| 12 | NIH      | Okinawa Prefecture, Japan  |           1 |
-| 13 | NIH      | Mie, Japan                 |           1 |
+| 11 | NIH      | Mie, Japan                 |           1 |
+| 12 | NIH      | Wakayama Prefecture, Japan |           1 |
+| 13 | NIH      | Nara Prefecture, Japan     |           1 |
 | 14 | JHU      | Japan                      |          66 |
 | 15 | BOP      | Kanagawa, Japan            |          21 |
 | 16 | BOP      | Tokyo, Japan               |           8 |
-| 17 | BOP      | Chiba, Japan               |           2 |
-| 18 | BOP      | Kyoto, Japan               |           2 |
-| 19 | BOP      | Hokkaido, Japan            |           1 |
+| 17 | BOP      | Kyoto, Japan               |           2 |
+| 18 | BOP      | Chiba, Japan               |           2 |
+| 19 | BOP      | Chiba Prefecture, Japan    |           1 |
 | 20 | BOP      | Mie, Japan                 |           1 |
-| 21 | BOP      | Chiba Prefecture, Japan    |           1 |
-| 22 | BOP      | Kyoto Prefecture, Japan    |           1 |
-| 23 | BOP      | Osaka, Japan               |           1 |
-| 24 | BOP      | Nara Prefecture, Japan     |           1 |
+| 21 | BOP      | Nara Prefecture, Japan     |           1 |
+| 22 | BOP      | Hokkaido, Japan            |           1 |
+| 23 | BOP      | Kyoto Prefecture, Japan    |           1 |
+| 24 | BOP      | Osaka, Japan               |           1 |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
