@@ -45,7 +45,11 @@ Data sources: BOP, JHU, Tencent
 
 ### Observed case clusters:
 #### Fig 3:
-![Belgium cases](../cluster_analysis/Belgium_imported_cases.png)
+![Belgium cases](../cluster_analysis/Belgium_imported_cases_NIHFogarty.png)
+
+
+#### Fig 4:
+![Belgium cases](../cluster_analysis/Belgium_imported_cases_BOP.png)
 
 
 
