@@ -24,7 +24,7 @@
 | Total recovered           | 0                | 1                           | 0                             |
 | Total deaths              | 1                | 1                           | 0                             |
 
-Data sources: BOP, JHU, NIH-Fogarty,Tencent
+Data sources: BOP, JHU, Tencent
 
 
 ### Geographic dispersal:
@@ -40,15 +40,11 @@ Data sources: BOP, JHU, NIH-Fogarty,Tencent
 |  0 | JHU      | Philippines         |           3 |
 |  1 | BOP      | Manila, Philippines |           1 |
 
-Data sources: BOP, JHU, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Tencent
 
 
 ### Observed case clusters:
 #### Fig 3:
-![Philippines cases](../cluster_analysis/Philippines_imported_cases_NIHFogarty.png)
-
-
-#### Fig 4:
 ![Philippines cases](../cluster_analysis/Philippines_imported_cases_BOP.png)
 
 

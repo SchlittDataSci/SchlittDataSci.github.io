@@ -24,7 +24,7 @@
 | Total recovered           | 0                | 7                           |                  | 0                             |
 | Total deaths              | 0                | 0                           | 0                | 0                             |
 
-Data sources: BOP, JHU, NIH-Fogarty,Tencent
+Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 
 ### Geographic dispersal:
@@ -49,6 +49,10 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 ### Observed case clusters:
 #### Fig 3:
 ![Malaysia cases](../cluster_analysis/Malaysia_imported_cases_NIHFogarty.png)
+
+
+
+Data source: NIH-Fogarty
 
 
 #### Fig 4:
