@@ -38,16 +38,16 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----|----------|----------------------------|-------------|
 |  0 | Tencent  | Australia                  |          15 |
 |  1 | NIH      | Queensland, Australia      |           5 |
-|  2 | NIH      | NSW, Australia             |           4 |
-|  3 | NIH      | Victoria, Australia        |           4 |
+|  2 | NIH      | Victoria, Australia        |           4 |
+|  3 | NIH      | NSW, Australia             |           4 |
 |  4 | NIH      | South Australia, Australia |           2 |
 |  5 | JHU      | Queensland, Australia      |           5 |
 |  6 | JHU      | New South Wales, Australia |           4 |
 |  7 | JHU      | Victoria, Australia        |           4 |
 |  8 | JHU      | South Australia, Australia |           2 |
 |  9 | BOP      | Queensland, Australia      |           5 |
-| 10 | BOP      | NSW, Australia             |           4 |
-| 11 | BOP      | Victoria, Australia        |           4 |
+| 10 | BOP      | Victoria, Australia        |           4 |
+| 11 | BOP      | NSW, Australia             |           4 |
 | 12 | BOP      | South Australia, Australia |           2 |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent

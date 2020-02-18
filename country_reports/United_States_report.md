@@ -38,12 +38,12 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----|----------|---------------------------------|-------------|
 |  0 | Tencent  | United States                   |          15 |
 |  1 | NIH      | California, United States       |           7 |
-|  2 | NIH      | Boston, United States           |           1 |
+|  2 | NIH      | Washington, United States       |           1 |
 |  3 | NIH      | Arizona, United States          |           1 |
-|  4 | NIH      | Washington, United States       |           1 |
-|  5 | NIH      | Illinois, United States         |           1 |
-|  6 | NIH      | Wisconsin, United States        |           1 |
-|  7 | NIH      | Chicago, United States          |           1 |
+|  4 | NIH      | Boston, United States           |           1 |
+|  5 | NIH      | Chicago, United States          |           1 |
+|  6 | NIH      | Illinois, United States         |           1 |
+|  7 | NIH      | Wisconsin, United States        |           1 |
 |  8 | JHU      | San Benito, CA, US              |           2 |
 |  9 | JHU      | Chicago, IL, US                 |           2 |
 | 10 | JHU      | San Diego County, CA, US        |           2 |
@@ -58,8 +58,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | 19 | BOP      | California, United States       |           6 |
 | 20 | BOP      | Illinois, United States         |           2 |
 | 21 | BOP      | Massachusetts, United States    |           1 |
-| 22 | BOP      | Arizona, United States          |           1 |
-| 23 | BOP      | Washington State, United States |           1 |
+| 22 | BOP      | Washington State, United States |           1 |
+| 23 | BOP      | Arizona, United States          |           1 |
 | 24 | BOP      | Wisconsin, United States        |           1 |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
