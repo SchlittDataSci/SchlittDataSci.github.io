@@ -11,20 +11,20 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         | Tencent                       |
-|---------------------------|------------------|-----------------------------|-------------------------------|
-| First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/17/20                    | 02/18/20                      |
-| Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
-| First known case          | 01/20/20         | 01/22/20                    | 02/06/20                      |
-| Total confirmed cases     | 12               | 15                          | 15                            |
-| New cases since yesterday |                  |                             | 15                            |
-| Total suspected           |                  |                             | 0                             |
-| Total hospitalized        | 2                |                             |                               |
-| Total recovered           | 0                | 3                           | 3                             |
-| Total deaths              | 0                | 0                           | 0                             |
+|                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
+|---------------------------|------------------|-----------------------------|------------------|-------------------------------|
+| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/04/20                      |
+| Last update logged        | 02/06/20         | 02/17/20                    | 02/18/20         | 02/18/20                      |
+| Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
+| First known case          | 01/20/20         | 01/22/20                    | 01/21/20         | 02/06/20                      |
+| Total confirmed cases     | 12               | 15                          | 13               | 15                            |
+| New cases since yesterday |                  |                             |                  | 15                            |
+| Total suspected           |                  |                             |                  | 0                             |
+| Total hospitalized        | 2                |                             | 4                |                               |
+| Total recovered           | 0                | 3                           |                  | 3                             |
+| Total deaths              | 0                | 0                           | 0                | 0                             |
 
-Data sources: BOP, JHU, Tencent
+Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 
 ### Geographic dispersal:
@@ -37,29 +37,44 @@ Data sources: BOP, JHU, Tencent
 |    | source   | loc_name                        |   confirmed |
 |----|----------|---------------------------------|-------------|
 |  0 | Tencent  | United States                   |          15 |
-|  1 | JHU      | San Benito, CA, US              |           2 |
-|  2 | JHU      | Chicago, IL, US                 |           2 |
-|  3 | JHU      | San Diego County, CA, US        |           2 |
-|  4 | JHU      | Santa Clara, CA, US             |           2 |
-|  5 | JHU      | Boston, MA, US                  |           1 |
-|  6 | JHU      | Madison, WI, US                 |           1 |
-|  7 | JHU      | Los Angeles, CA, US             |           1 |
-|  8 | JHU      | San Antonio, TX, US             |           1 |
-|  9 | JHU      | Orange, CA, US                  |           1 |
-| 10 | JHU      | Tempe, AZ, US                   |           1 |
-| 11 | JHU      | Seattle, WA, US                 |           1 |
-| 12 | BOP      | California, United States       |           6 |
-| 13 | BOP      | Illinois, United States         |           2 |
-| 14 | BOP      | Wisconsin, United States        |           1 |
-| 15 | BOP      | Washington State, United States |           1 |
-| 16 | BOP      | Arizona, United States          |           1 |
-| 17 | BOP      | Massachusetts, United States    |           1 |
+|  1 | NIH      | California, United States       |           7 |
+|  2 | NIH      | Boston, United States           |           1 |
+|  3 | NIH      | Arizona, United States          |           1 |
+|  4 | NIH      | Washington, United States       |           1 |
+|  5 | NIH      | Illinois, United States         |           1 |
+|  6 | NIH      | Wisconsin, United States        |           1 |
+|  7 | NIH      | Chicago, United States          |           1 |
+|  8 | JHU      | San Benito, CA, US              |           2 |
+|  9 | JHU      | Chicago, IL, US                 |           2 |
+| 10 | JHU      | San Diego County, CA, US        |           2 |
+| 11 | JHU      | Santa Clara, CA, US             |           2 |
+| 12 | JHU      | Boston, MA, US                  |           1 |
+| 13 | JHU      | Tempe, AZ, US                   |           1 |
+| 14 | JHU      | Madison, WI, US                 |           1 |
+| 15 | JHU      | Orange, CA, US                  |           1 |
+| 16 | JHU      | Los Angeles, CA, US             |           1 |
+| 17 | JHU      | San Antonio, TX, US             |           1 |
+| 18 | JHU      | Seattle, WA, US                 |           1 |
+| 19 | BOP      | California, United States       |           6 |
+| 20 | BOP      | Illinois, United States         |           2 |
+| 21 | BOP      | Massachusetts, United States    |           1 |
+| 22 | BOP      | Arizona, United States          |           1 |
+| 23 | BOP      | Washington State, United States |           1 |
+| 24 | BOP      | Wisconsin, United States        |           1 |
 
-Data sources: BOP, JHU, Tencent
+Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 
 ### Observed case clusters:
 #### Fig 3:
+![United States cases](../cluster_analysis/United_States_imported_cases_NIHFogarty.png)
+
+
+
+Data source: NIH-Fogarty
+
+
+#### Fig 4:
 ![United States cases](../cluster_analysis/United_States_imported_cases_BOP.png)
 
 
