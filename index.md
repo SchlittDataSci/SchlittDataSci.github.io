@@ -19,7 +19,7 @@
 
 ### All imported cases clusters
 
-![All cases](cluster_analysis/All_imported_cases.png)
+![All cases](cluster_analysis/All_imported_cases_NIHFogarty.png)
 
 ### Country reports
 [Australia](country_reports/Australia_report.md)      -      [Cambodia](country_reports/Cambodia_report.md)      -      [Canada](country_reports/Canada_report.md)      -      [Finland](country_reports/Finland_report.md)      -      [France](country_reports/France_report.md)
