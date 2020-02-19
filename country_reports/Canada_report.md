@@ -1,6 +1,6 @@
 # Canada
 ## NSSAC COVID-19 Summary
-## 02/18/2020
+## 02/19/2020
 
 
 
@@ -14,11 +14,11 @@
 |                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
 |---------------------------|------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/17/20                    | 02/18/20         | 02/18/20                      |
+| Last update logged        | 02/06/20         | 02/18/20                    | 02/18/20         | 02/19/20                      |
 | Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/25/20         | 01/22/20                    | 01/26/20         | 02/06/20                      |
 | Total confirmed cases     | 5                | 8                           | 4                | 7                             |
-| New cases since yesterday |                  |                             |                  | 7                             |
+| New cases since yesterday |                  |                             |                  | 0                             |
 | Total suspected           |                  |                             |                  | 0                             |
 | Total hospitalized        | 3                |                             | 2                |                               |
 | Total recovered           | 1                | 1                           |                  | 0                             |
