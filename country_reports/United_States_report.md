@@ -1,6 +1,6 @@
 # United States
 ## NSSAC COVID-19 Summary
-## 02/18/2020
+## 02/19/2020
 
 
 
@@ -14,11 +14,11 @@
 |                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
 |---------------------------|------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/17/20                    | 02/18/20         | 02/18/20                      |
+| Last update logged        | 02/06/20         | 02/18/20                    | 02/18/20         | 02/19/20                      |
 | Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/20/20         | 01/22/20                    | 01/21/20         | 02/06/20                      |
-| Total confirmed cases     | 12               | 15                          | 13               | 15                            |
-| New cases since yesterday |                  |                             |                  | 15                            |
+| Total confirmed cases     | 12               | 29                          | 13               | 15                            |
+| New cases since yesterday |                  |                             |                  | 0                             |
 | Total suspected           |                  |                             |                  | 0                             |
 | Total hospitalized        | 2                |                             | 4                |                               |
 | Total recovered           | 0                | 3                           |                  | 3                             |
@@ -44,23 +44,24 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |  5 | NIH      | Chicago, United States          |           1 |
 |  6 | NIH      | Illinois, United States         |           1 |
 |  7 | NIH      | Wisconsin, United States        |           1 |
-|  8 | JHU      | San Benito, CA, US              |           2 |
-|  9 | JHU      | Chicago, IL, US                 |           2 |
-| 10 | JHU      | San Diego County, CA, US        |           2 |
-| 11 | JHU      | Santa Clara, CA, US             |           2 |
-| 12 | JHU      | Boston, MA, US                  |           1 |
-| 13 | JHU      | Tempe, AZ, US                   |           1 |
-| 14 | JHU      | Madison, WI, US                 |           1 |
-| 15 | JHU      | Orange, CA, US                  |           1 |
-| 16 | JHU      | Los Angeles, CA, US             |           1 |
-| 17 | JHU      | San Antonio, TX, US             |           1 |
-| 18 | JHU      | Seattle, WA, US                 |           1 |
-| 19 | BOP      | California, United States       |           6 |
-| 20 | BOP      | Illinois, United States         |           2 |
-| 21 | BOP      | Massachusetts, United States    |           1 |
-| 22 | BOP      | Washington State, United States |           1 |
-| 23 | BOP      | Arizona, United States          |           1 |
-| 24 | BOP      | Wisconsin, United States        |           1 |
+|  8 | JHU      | Omaha, NE, US                   |          14 |
+|  9 | JHU      | San Benito, CA, US              |           2 |
+| 10 | JHU      | Chicago, IL, US                 |           2 |
+| 11 | JHU      | San Diego County, CA, US        |           2 |
+| 12 | JHU      | Santa Clara, CA, US             |           2 |
+| 13 | JHU      | Madison, WI, US                 |           1 |
+| 14 | JHU      | Tempe, AZ, US                   |           1 |
+| 15 | JHU      | Boston, MA, US                  |           1 |
+| 16 | JHU      | Orange, CA, US                  |           1 |
+| 17 | JHU      | Los Angeles, CA, US             |           1 |
+| 18 | JHU      | San Antonio, TX, US             |           1 |
+| 19 | JHU      | Seattle, WA, US                 |           1 |
+| 20 | BOP      | California, United States       |           6 |
+| 21 | BOP      | Illinois, United States         |           2 |
+| 22 | BOP      | Massachusetts, United States    |           1 |
+| 23 | BOP      | Washington State, United States |           1 |
+| 24 | BOP      | Arizona, United States          |           1 |
+| 25 | BOP      | Wisconsin, United States        |           1 |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 

@@ -1,6 +1,6 @@
 # South Korea
 ## NSSAC COVID-19 Summary
-## 02/18/2020
+## 02/19/2020
 
 
 
@@ -14,14 +14,14 @@
 |                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
 |---------------------------|------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/17/20                    | 02/18/20         | 02/18/20                      |
+| Last update logged        | 02/06/20         | 02/18/20                    | 02/18/20         | 02/19/20                      |
 | Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/20/20         | 01/22/20                    | 01/20/20         | 02/07/20                      |
-| Total confirmed cases     | 21               | 30                          | 28               | 28                            |
-| New cases since yesterday |                  |                             |                  | 28                            |
+| Total confirmed cases     | 21               | 31                          | 28               | 28                            |
+| New cases since yesterday |                  |                             |                  | -23                           |
 | Total suspected           |                  |                             |                  | 0                             |
 | Total hospitalized        | 5                |                             | 6                |                               |
-| Total recovered           | 0                | 10                          |                  | 3                             |
+| Total recovered           | 0                | 12                          |                  | 3                             |
 | Total deaths              | 0                | 0                           | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
@@ -36,10 +36,10 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 |    | source   | loc_name                 |   confirmed |
 |----|----------|--------------------------|-------------|
-|  0 | Tencent  | Korea                    |          31 |
+|  0 | Tencent  | Korea                    |          51 |
 |  1 | NIH      | South Korea, South Korea |          27 |
 |  2 | NIH      | Seoul, South Korea       |           1 |
-|  3 | JHU      | South Korea              |          30 |
+|  3 | JHU      | South Korea              |          31 |
 |  4 | BOP      | Gyeonggi, South Korea    |           1 |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
