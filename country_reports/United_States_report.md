@@ -11,18 +11,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
-|---------------------------|------------------|-----------------------------|------------------|-------------------------------|
-| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/18/20                    | 02/18/20         | 02/19/20                      |
-| Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
-| First known case          | 01/20/20         | 01/22/20                    | 01/21/20         | 02/06/20                      |
-| Total confirmed cases     | 12               | 29                          | 13               | 15                            |
-| New cases since yesterday |                  |                             |                  | 0                             |
-| Total suspected           |                  |                             |                  | 0                             |
-| Total hospitalized        | 2                |                             | 4                |                               |
-| Total recovered           | 0                | 3                           |                  | 3                             |
-| Total deaths              | 0                | 0                           | 0                | 0                             |
+|                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
+|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
+| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/19/20                      | 02/06/20         | 02/18/20                    | 02/18/20         |
+| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
+| First known case          | 02/06/20                      | 01/20/20         | 01/22/20                    | 01/21/20         |
+| Total confirmed cases     | 15                            | 12               | 29                          | 13               |
+| New cases since yesterday | 0                             |                  |                             |                  |
+| Total suspected           | 0                             |                  |                             |                  |
+| Total hospitalized        |                               | 2                |                             | 4                |
+| Total recovered           | 3                             | 0                | 3                           |                  |
+| Total deaths              | 0                             | 0                | 0                           | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -34,34 +34,34 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-|    | source   | loc_name                        |   confirmed |
-|----|----------|---------------------------------|-------------|
-|  0 | Tencent  | United States                   |          15 |
-|  1 | NIH      | California, United States       |           7 |
-|  2 | NIH      | Washington, United States       |           1 |
-|  3 | NIH      | Arizona, United States          |           1 |
-|  4 | NIH      | Boston, United States           |           1 |
-|  5 | NIH      | Chicago, United States          |           1 |
-|  6 | NIH      | Illinois, United States         |           1 |
-|  7 | NIH      | Wisconsin, United States        |           1 |
-|  8 | JHU      | Omaha, NE, US                   |          14 |
-|  9 | JHU      | San Benito, CA, US              |           2 |
-| 10 | JHU      | Chicago, IL, US                 |           2 |
-| 11 | JHU      | San Diego County, CA, US        |           2 |
-| 12 | JHU      | Santa Clara, CA, US             |           2 |
-| 13 | JHU      | Madison, WI, US                 |           1 |
-| 14 | JHU      | Tempe, AZ, US                   |           1 |
-| 15 | JHU      | Boston, MA, US                  |           1 |
-| 16 | JHU      | Orange, CA, US                  |           1 |
-| 17 | JHU      | Los Angeles, CA, US             |           1 |
-| 18 | JHU      | San Antonio, TX, US             |           1 |
-| 19 | JHU      | Seattle, WA, US                 |           1 |
-| 20 | BOP      | California, United States       |           6 |
-| 21 | BOP      | Illinois, United States         |           2 |
-| 22 | BOP      | Massachusetts, United States    |           1 |
-| 23 | BOP      | Washington State, United States |           1 |
-| 24 | BOP      | Arizona, United States          |           1 |
-| 25 | BOP      | Wisconsin, United States        |           1 |
+| source   | loc_name                        |   confirmed |
+|----------|---------------------------------|-------------|
+| Tencent  | United States                   |          15 |
+| NIH      | California, United States       |           7 |
+| NIH      | Washington, United States       |           1 |
+| NIH      | Arizona, United States          |           1 |
+| NIH      | Boston, United States           |           1 |
+| NIH      | Chicago, United States          |           1 |
+| NIH      | Illinois, United States         |           1 |
+| NIH      | Wisconsin, United States        |           1 |
+| JHU      | Omaha, NE, US                   |          14 |
+| JHU      | San Benito, CA, US              |           2 |
+| JHU      | Chicago, IL, US                 |           2 |
+| JHU      | San Diego County, CA, US        |           2 |
+| JHU      | Santa Clara, CA, US             |           2 |
+| JHU      | Madison, WI, US                 |           1 |
+| JHU      | Tempe, AZ, US                   |           1 |
+| JHU      | Boston, MA, US                  |           1 |
+| JHU      | Orange, CA, US                  |           1 |
+| JHU      | Los Angeles, CA, US             |           1 |
+| JHU      | San Antonio, TX, US             |           1 |
+| JHU      | Seattle, WA, US                 |           1 |
+| BOP      | California, United States       |           6 |
+| BOP      | Illinois, United States         |           2 |
+| BOP      | Massachusetts, United States    |           1 |
+| BOP      | Washington State, United States |           1 |
+| BOP      | Arizona, United States          |           1 |
+| BOP      | Wisconsin, United States        |           1 |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 

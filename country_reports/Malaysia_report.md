@@ -11,18 +11,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
-|---------------------------|------------------|-----------------------------|------------------|-------------------------------|
-| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/18/20                    | 02/18/20         | 02/19/20                      |
-| Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
-| First known case          | 01/25/20         | 01/22/20                    | 01/24/20         | 02/06/20                      |
-| Total confirmed cases     | 12               | 22                          | 18               | 21                            |
-| New cases since yesterday |                  |                             |                  | 2                             |
-| Total suspected           |                  |                             |                  | 0                             |
-| Total hospitalized        | 1                |                             | 4                |                               |
-| Total recovered           | 0                | 13                          |                  | 3                             |
-| Total deaths              | 0                | 0                           | 0                | 0                             |
+|                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
+|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
+| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/19/20                      | 02/06/20         | 02/18/20                    | 02/18/20         |
+| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
+| First known case          | 02/06/20                      | 01/25/20         | 01/22/20                    | 01/24/20         |
+| Total confirmed cases     | 21                            | 12               | 22                          | 18               |
+| New cases since yesterday | 2                             |                  |                             |                  |
+| Total suspected           | 0                             |                  |                             |                  |
+| Total hospitalized        |                               | 1                |                             | 4                |
+| Total recovered           | 3                             | 0                | 13                          |                  |
+| Total deaths              | 0                             | 0                | 0                           | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -34,14 +34,14 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-|    | source   | loc_name           |   confirmed |
-|----|----------|--------------------|-------------|
-|  0 | Tencent  | Malaysia           |          22 |
-|  1 | NIH      | Malaysia, Malaysia |           9 |
-|  2 | NIH      | Johor, Malaysia    |           8 |
-|  3 | NIH      | Langkawi, Malaysia |           1 |
-|  4 | JHU      | Malaysia           |          22 |
-|  5 | BOP      | Johor, Malaysia    |           1 |
+| source   | loc_name           |   confirmed |
+|----------|--------------------|-------------|
+| Tencent  | Malaysia           |          22 |
+| NIH      | Malaysia, Malaysia |           9 |
+| NIH      | Johor, Malaysia    |           8 |
+| NIH      | Langkawi, Malaysia |           1 |
+| JHU      | Malaysia           |          22 |
+| BOP      | Johor, Malaysia    |           1 |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 

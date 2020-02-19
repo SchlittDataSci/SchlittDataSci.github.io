@@ -11,18 +11,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
-|---------------------------|------------------|-----------------------------|------------------|-------------------------------|
-| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/18/20                    | 02/18/20         | 02/19/20                      |
-| Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
-| First known case          | 01/31/20         | 01/22/20                    | 01/31/20         | 02/06/20                      |
-| Total confirmed cases     | 2                | 2                           | 2                | 2                             |
-| New cases since yesterday |                  |                             |                  | 0                             |
-| Total suspected           |                  |                             |                  | 0                             |
-| Total hospitalized        | 0                |                             | 0                |                               |
-| Total recovered           | 0                | 2                           |                  | 0                             |
-| Total deaths              | 0                | 0                           | 0                | 0                             |
+|                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
+|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
+| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/19/20                      | 02/06/20         | 02/18/20                    | 02/18/20         |
+| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
+| First known case          | 02/06/20                      | 01/31/20         | 01/22/20                    | 01/31/20         |
+| Total confirmed cases     | 2                             | 2                | 2                           | 2                |
+| New cases since yesterday | 0                             |                  |                             |                  |
+| Total suspected           | 0                             |                  |                             |                  |
+| Total hospitalized        |                               | 0                |                             | 0                |
+| Total recovered           | 0                             | 0                | 2                           |                  |
+| Total deaths              | 0                             | 0                | 0                           | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -34,14 +34,14 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-|    | source   | loc_name              |   confirmed |
-|----|----------|-----------------------|-------------|
-|  0 | Tencent  | Russia                |           2 |
-|  1 | NIH      | Zabaikalsky, Russia   |           1 |
-|  2 | NIH      | Tyumen, Russia        |           1 |
-|  3 | JHU      | Russia                |           2 |
-|  4 | BOP      | Transbaikalia, Russia |           1 |
-|  5 | BOP      | Tyumen, Russia        |           1 |
+| source   | loc_name              |   confirmed |
+|----------|-----------------------|-------------|
+| Tencent  | Russia                |           2 |
+| NIH      | Zabaikalsky, Russia   |           1 |
+| NIH      | Tyumen, Russia        |           1 |
+| JHU      | Russia                |           2 |
+| BOP      | Transbaikalia, Russia |           1 |
+| BOP      | Tyumen, Russia        |           1 |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 

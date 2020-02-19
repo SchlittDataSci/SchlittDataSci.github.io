@@ -11,18 +11,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         | Tencent                       |
-|---------------------------|------------------|-----------------------------|-------------------------------|
-| First update logged       | 01/12/20         | 01/22/20                    | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/18/20                    | 02/19/20                      |
-| Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
-| First known case          | 02/04/20         | 01/22/20                    | 02/06/20                      |
-| Total confirmed cases     | 1                | 1                           | 0                             |
-| New cases since yesterday |                  |                             | 0                             |
-| Total suspected           |                  |                             | 0                             |
-| Total hospitalized        | 0                |                             |                               |
-| Total recovered           | 0                | 1                           | 0                             |
-| Total deaths              | 0                | 0                           | 0                             |
+|                           | Tencent                       | BOP              | JHU                         |
+|---------------------------|-------------------------------|------------------|-----------------------------|
+| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    |
+| Last update logged        | 02/19/20                      | 02/06/20         | 02/18/20                    |
+| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list |
+| First known case          | 02/06/20                      | 02/04/20         | 01/22/20                    |
+| Total confirmed cases     | 0                             | 1                | 1                           |
+| New cases since yesterday | 0                             |                  |                             |
+| Total suspected           | 0                             |                  |                             |
+| Total hospitalized        |                               | 0                |                             |
+| Total recovered           | 0                             | 0                | 1                           |
+| Total deaths              | 0                             | 0                | 0                           |
 
 Data sources: BOP, JHU, Tencent
 
@@ -34,11 +34,11 @@ Data sources: BOP, JHU, Tencent
 #### Table 2: Confirmed cases by location
 
 
-|    | source   | loc_name   |   confirmed |
-|----|----------|------------|-------------|
-|  0 | Tencent  | Belgium    |           1 |
-|  1 | JHU      | Belgium    |           1 |
-|  2 | BOP      | Belgium    |           1 |
+| source   | loc_name   |   confirmed |
+|----------|------------|-------------|
+| Tencent  | Belgium    |           1 |
+| JHU      | Belgium    |           1 |
+| BOP      | Belgium    |           1 |
 
 Data sources: BOP, JHU, Tencent
 

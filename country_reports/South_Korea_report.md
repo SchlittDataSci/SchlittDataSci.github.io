@@ -11,18 +11,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
-|---------------------------|------------------|-----------------------------|------------------|-------------------------------|
-| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/18/20                    | 02/18/20         | 02/19/20                      |
-| Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
-| First known case          | 01/20/20         | 01/22/20                    | 01/20/20         | 02/07/20                      |
-| Total confirmed cases     | 21               | 31                          | 28               | 28                            |
-| New cases since yesterday |                  |                             |                  | -23                           |
-| Total suspected           |                  |                             |                  | 0                             |
-| Total hospitalized        | 5                |                             | 6                |                               |
-| Total recovered           | 0                | 12                          |                  | 3                             |
-| Total deaths              | 0                | 0                           | 0                | 0                             |
+|                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
+|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
+| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/19/20                      | 02/06/20         | 02/18/20                    | 02/18/20         |
+| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
+| First known case          | 02/07/20                      | 01/20/20         | 01/22/20                    | 01/20/20         |
+| Total confirmed cases     | 28                            | 21               | 31                          | 28               |
+| New cases since yesterday | -23                           |                  |                             |                  |
+| Total suspected           | 0                             |                  |                             |                  |
+| Total hospitalized        |                               | 5                |                             | 6                |
+| Total recovered           | 3                             | 0                | 12                          |                  |
+| Total deaths              | 0                             | 0                | 0                           | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -34,13 +34,13 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-|    | source   | loc_name                 |   confirmed |
-|----|----------|--------------------------|-------------|
-|  0 | Tencent  | Korea                    |          51 |
-|  1 | NIH      | South Korea, South Korea |          27 |
-|  2 | NIH      | Seoul, South Korea       |           1 |
-|  3 | JHU      | South Korea              |          31 |
-|  4 | BOP      | Gyeonggi, South Korea    |           1 |
+| source   | loc_name                 |   confirmed |
+|----------|--------------------------|-------------|
+| Tencent  | Korea                    |          51 |
+| NIH      | South Korea, South Korea |          27 |
+| NIH      | Seoul, South Korea       |           1 |
+| JHU      | South Korea              |          31 |
+| BOP      | Gyeonggi, South Korea    |           1 |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 

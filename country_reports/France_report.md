@@ -11,18 +11,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
-|---------------------------|------------------|-----------------------------|------------------|-------------------------------|
-| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 02/06/20         | 02/18/20                    | 02/18/20         | 02/19/20                      |
-| Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
-| First known case          | 01/24/20         | 01/22/20                    | 01/25/20         | 02/04/20                      |
-| Total confirmed cases     | 6                | 12                          | 11               | 12                            |
-| New cases since yesterday |                  |                             |                  | 0                             |
-| Total suspected           |                  |                             |                  | 0                             |
-| Total hospitalized        | 0                |                             | 4                |                               |
-| Total recovered           | 0                | 4                           |                  | 4                             |
-| Total deaths              | 0                | 1                           | 0                | 1                             |
+|                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
+|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
+| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/19/20                      | 02/06/20         | 02/18/20                    | 02/18/20         |
+| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
+| First known case          | 02/04/20                      | 01/24/20         | 01/22/20                    | 01/25/20         |
+| Total confirmed cases     | 12                            | 6                | 12                          | 11               |
+| New cases since yesterday | 0                             |                  |                             |                  |
+| Total suspected           | 0                             |                  |                             |                  |
+| Total hospitalized        |                               | 0                |                             | 4                |
+| Total recovered           | 4                             | 0                | 4                           |                  |
+| Total deaths              | 1                             | 0                | 1                           | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -34,14 +34,14 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-|    | source   | loc_name         |   confirmed |
-|----|----------|------------------|-------------|
-|  0 | Tencent  | France           |          12 |
-|  1 | NIH      | France, France   |           5 |
-|  2 | NIH      | Paris, France    |           5 |
-|  3 | NIH      | Bordeaux, France |           1 |
-|  4 | JHU      | France           |          12 |
-|  5 | BOP      | France           |           6 |
+| source   | loc_name         |   confirmed |
+|----------|------------------|-------------|
+| Tencent  | France           |          12 |
+| NIH      | France, France   |           5 |
+| NIH      | Paris, France    |           5 |
+| NIH      | Bordeaux, France |           1 |
+| JHU      | France           |          12 |
+| BOP      | France           |           6 |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
