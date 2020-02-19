@@ -1,6 +1,6 @@
 # Hong Kong
 ## NSSAC COVID-19 Summary
-## 02/18/2020
+## 02/19/2020
 
 
 
@@ -14,15 +14,15 @@
 |                           | JHU                         | NIHFogarty       | Tencent                       |
 |---------------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 02/17/20                    | 02/18/20         | 02/18/20                      |
+| Last update logged        | 02/18/20                    | 02/18/20         | 02/19/20                      |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/22/20         | 02/04/20                      |
-| Total confirmed cases     | 60                          | 57               | 62                            |
-| New cases since yesterday |                             |                  | 2                             |
+| Total confirmed cases     | 62                          | 57               | 65                            |
+| New cases since yesterday |                             |                  | 3                             |
 | Total suspected           |                             |                  | 0                             |
 | Total hospitalized        |                             | 47               |                               |
-| Total recovered           | 2                           |                  | 2                             |
-| Total deaths              | 1                           | 0                | 1                             |
+| Total recovered           | 2                           |                  | 6                             |
+| Total deaths              | 1                           | 0                | 2                             |
 
 Data sources: JHU, NIH-Fogarty, Tencent
 
@@ -46,7 +46,7 @@ Data sources: JHU, NIH-Fogarty, Tencent
 |  7 | NIH      | Wan Chai, Hong Kong     |           1 |
 |  8 | NIH      | Yau Ma Tei, Hong Kong   |           1 |
 |  9 | NIH      | Ngau Chi Wan, Hong Kong |           1 |
-| 10 | JHU      | Hong Kong, Hong Kong    |          60 |
+| 10 | JHU      | Hong Kong, Hong Kong    |          62 |
 
 Data sources: JHU, NIH-Fogarty, Tencent
 
