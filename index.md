@@ -1,4 +1,4 @@
-## 2019-nCoV Imported Case Cluster Viz (last updated 02/20/20 13:02)
+## 2019-nCoV Imported Case Cluster Viz (last updated 02/20/20 14:02)
 
 
 ### Reference
@@ -45,3 +45,13 @@ THE CONTENTS OF THIS WEBSITE, INCLUDING DATA, MAPS, PLOTS, COPYRIGHT 2020, UVA, 
 
 
 James Schlitt 2020 UVA NSSAC
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158816269-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-158816269-1');
+</script>
