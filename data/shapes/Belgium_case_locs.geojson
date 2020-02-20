@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "Tencent", "loc_name": "Belgium", "confirmed": 1, "color": "mediumorchid", "size": 5000.0, "label": "Tencent : Belgium: 1" }, "geometry": { "type": "Point", "coordinates": [ 519496.281817586335819, 6557908.560595654882491 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Belgium, Belgium", "confirmed": 1, "color": "blue", "size": 5000.0, "label": "NIH : Belgium, Belgium: 1" }, "geometry": { "type": "Point", "coordinates": [ 519496.281817586335819, 6557908.560595654882491 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Belgium", "confirmed": 1, "color": "red", "size": 5000.0, "label": "JHU : Belgium: 1" }, "geometry": { "type": "Point", "coordinates": [ 519496.281817586335819, 6557908.560595654882491 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Belgium", "confirmed": 1, "color": "darkorange", "size": 5000.0, "label": "BOP : Belgium: 1" }, "geometry": { "type": "Point", "coordinates": [ 519496.281817586335819, 6557908.560595654882491 ] } }
+]
+}

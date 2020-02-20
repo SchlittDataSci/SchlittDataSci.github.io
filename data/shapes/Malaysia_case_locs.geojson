@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "Tencent", "loc_name": "Malaysia", "confirmed": 22, "color": "mediumorchid", "size": 5000.0, "label": "Tencent : Malaysia: 22" }, "geometry": { "type": "Point", "coordinates": [ 11384163.67926268838346, 509200.595901656954084 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Malaysia, Malaysia", "confirmed": 13, "color": "blue", "size": 3843.530573929037, "label": "NIH : Malaysia, Malaysia: 13" }, "geometry": { "type": "Point", "coordinates": [ 11384163.67926268838346, 509200.595901656954084 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Johor, Malaysia", "confirmed": 8, "color": "blue", "size": 3015.1134457776366, "label": "NIH : Johor, Malaysia: 8" }, "geometry": { "type": "Point", "coordinates": [ 11515623.726851379498839, 224012.13984989002347 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Langkawi, Malaysia", "confirmed": 1, "color": "blue", "size": 1066.0035817780522, "label": "NIH : Langkawi, Malaysia: 1" }, "geometry": { "type": "Point", "coordinates": [ 11108890.738490706309676, 710574.817812222405337 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Malaysia", "confirmed": 22, "color": "red", "size": 5000.0, "label": "JHU : Malaysia: 22" }, "geometry": { "type": "Point", "coordinates": [ 11384163.67926268838346, 509200.595901656954084 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Johor, Malaysia", "confirmed": 1, "color": "darkorange", "size": 1066.0035817780522, "label": "BOP : Johor, Malaysia: 1" }, "geometry": { "type": "Point", "coordinates": [ 11515623.726851379498839, 224012.13984989002347 ] } }
+]
+}

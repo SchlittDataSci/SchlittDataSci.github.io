@@ -1,4 +1,4 @@
-## 2019-nCoV Imported Case Cluster Viz (last updated 02/20/20 14:02)
+## 2019-nCoV Imported Case Cluster Viz (last updated 02/20/20 16:02)
 
 
 ### Reference
@@ -12,9 +12,11 @@
 
 * [BeOutbreakPrepared's public line list](https://github.com/beoutbreakprepared/nCoV2019)
 
-* [Imported case origin curation sheet](https://docs.google.com/spreadsheets/d/1s2j-RmkO8C69HtrELpNMipkG5ftPJqCPEzGRAxIukFY/edit#gid=0)
+* [BOP Imported case origin curation sheet](https://docs.google.com/spreadsheets/d/1s2j-RmkO8C69HtrELpNMipkG5ftPJqCPEzGRAxIukFY/edit#gid=0)
 
 * [Imported cases dashboard](https://datastudio.google.com/reporting/f6ad0988-f203-45f8-8d18-5d726c1d2d8b)
+
+* [NSSAC prepared data][https://github.com/SchlittDataSci/SchlittDataSci.github.io/tree/master/data]
 
 
 ### All imported case clusters

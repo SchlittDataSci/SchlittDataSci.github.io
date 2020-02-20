@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "Tencent", "loc_name": "Germany", "confirmed": 16, "color": "mediumorchid", "size": 5000.0, "label": "Tencent : Germany: 16" }, "geometry": { "type": "Point", "coordinates": [ 1160332.80121872597374, 6636062.970478903502226 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Bavaria, Germany", "confirmed": 14, "color": "blue", "size": 4677.0717334674264, "label": "NIH : Bavaria, Germany: 14" }, "geometry": { "type": "Point", "coordinates": [ 1269473.190715823089704, 6265831.859332929365337 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Frankfurt, Germany", "confirmed": 2, "color": "blue", "size": 1767.766952966369, "label": "NIH : Frankfurt, Germany: 2" }, "geometry": { "type": "Point", "coordinates": [ 966486.027064507012255, 6465459.597224544733763 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Germany", "confirmed": 16, "color": "red", "size": 5000.0, "label": "JHU : Germany: 16" }, "geometry": { "type": "Point", "coordinates": [ 1160332.80121872597374, 6636062.970478903502226 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Bavaria, Germany", "confirmed": 9, "color": "darkorange", "size": 3750.0, "label": "BOP : Bavaria, Germany: 9" }, "geometry": { "type": "Point", "coordinates": [ 1269473.190715823089704, 6265831.859332929365337 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Rhineland-Palatinate, Germany", "confirmed": 2, "color": "darkorange", "size": 1767.766952966369, "label": "BOP : Rhineland-Palatinate, Germany: 2" }, "geometry": { "type": "Point", "coordinates": [ 813817.390089882304892, 6438167.908956658095121 ] } }
+]
+}

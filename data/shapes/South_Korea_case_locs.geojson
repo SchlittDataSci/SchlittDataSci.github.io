@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "Tencent", "loc_name": "Korea", "confirmed": 104, "color": "mediumorchid", "size": 5000.0, "label": "Tencent : Korea: 104" }, "geometry": { "type": "Point", "coordinates": [ 14242310.986103335395455, 4377701.987519976682961 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "South Korea, South Korea", "confirmed": 103, "color": "blue", "size": 4975.9034742060048, "label": "NIH : South Korea, South Korea: 103" }, "geometry": { "type": "Point", "coordinates": [ 14242310.986103335395455, 4377701.987519976682961 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Seoul, South Korea", "confirmed": 1, "color": "blue", "size": 490.2903378454601, "label": "NIH : Seoul, South Korea: 1" }, "geometry": { "type": "Point", "coordinates": [ 14130808.308355022221804, 4518153.400993193499744 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "South Korea", "confirmed": 31, "color": "red", "size": 2729.8210704958442, "label": "JHU : South Korea: 31" }, "geometry": { "type": "Point", "coordinates": [ 14242310.986103335395455, 4377701.987519976682961 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Gyeonggi, South Korea", "confirmed": 1, "color": "darkorange", "size": 490.2903378454601, "label": "BOP : Gyeonggi, South Korea: 1" }, "geometry": { "type": "Point", "coordinates": [ 14138632.865908278152347, 4477535.853821907192469 ] } }
+]
+}
