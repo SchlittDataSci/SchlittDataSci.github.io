@@ -54,7 +54,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | BOP      | Victoria, Australia        |           4 |
 | BOP      | South Australia, Australia |           2 |
 
-Data sources: BOP, JHU, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Australia_case_locs.geojson)
@@ -82,7 +82,8 @@ Data source: BOP
 * **[BOP](https://github.com/beoutbreakprepared/nCoV2019)**
 * **[JHU](https://github.com/CSSEGISandData/COVID-19)** 
 * **[NIH-Fogarty](https://docs.google.com/spreadsheets/d/1jS24DjSPVWa4iuxuD4OAXrE3QeI8c9BC1hSlqr-NMiU/edit#gid=1187587451)** 
-* **[Tencent](https://news.qq.com/zt2020/page/feiyan.htm)** 
+* **[Tencent](https://news.qq.com/zt2020/page/feiyan.htm)**
+* **[Natural Earth](https://www.naturalearthdata.com/forums/forum/natural-earth-map-data/cultural-vectors/admin-1-states-provinces-and-their-boundaries/)
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158816269-1"></script>
