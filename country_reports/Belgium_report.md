@@ -1,6 +1,6 @@
 # Belgium
 ## NSSAC COVID-19 Summary
-## 02/19/2020
+## 02/20/2020
 
 
 
@@ -11,20 +11,20 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | BOP              | JHU                         |
-|---------------------------|-------------------------------|------------------|-----------------------------|
-| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    |
-| Last update logged        | 02/19/20                      | 02/06/20         | 02/18/20                    |
-| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list |
-| First known case          | 02/06/20                      | 02/04/20         | 01/22/20                    |
-| Total confirmed cases     | 0                             | 1                | 1                           |
-| New cases since yesterday | 0                             |                  |                             |
-| Total suspected           | 0                             |                  |                             |
-| Total hospitalized        |                               | 0                |                             |
-| Total recovered           | 0                             | 0                | 1                           |
-| Total deaths              | 0                             | 0                | 0                           |
+|                           | NIHFogarty       | JHU                         | BOP              | Tencent                       |
+|---------------------------|------------------|-----------------------------|------------------|-------------------------------|
+| First update logged       | 01/13/20         | 01/22/20                    | 01/12/20         | 02/04/20                      |
+| Last update logged        | 02/20/20         | 02/19/20                    | 02/06/20         | 02/20/20                      |
+| Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
+| First known case          | 02/04/20         | 01/22/20                    | 02/04/20         | 02/06/20                      |
+| Total confirmed cases     | 1                | 1                           | 1                | 0                             |
+| New cases since yesterday |                  |                             |                  | 0                             |
+| Total suspected           |                  |                             |                  | 0                             |
+| Total hospitalized        | 0                |                             | 0                |                               |
+| Total recovered           |                  | 1                           | 0                | 0                             |
+| Total deaths              | 0                | 0                           | 0                | 0                             |
 
-Data sources: BOP, JHU, Tencent
+Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 
 ### Geographic dispersal:
@@ -34,17 +34,26 @@ Data sources: BOP, JHU, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name   |   confirmed |
-|----------|------------|-------------|
-| Tencent  | Belgium    |           1 |
-| JHU      | Belgium    |           1 |
-| BOP      | Belgium    |           1 |
+| source   | loc_name         |   confirmed |
+|----------|------------------|-------------|
+| Tencent  | Belgium          |           1 |
+| NIH      | Belgium, Belgium |           1 |
+| JHU      | Belgium          |           1 |
+| BOP      | Belgium          |           1 |
 
-Data sources: BOP, JHU, Tencent
+Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 
 ### Observed case clusters:
 #### Fig 3:
+![Belgium cases](../cluster_analysis/Belgium_imported_cases_NIHFogarty.png)
+
+
+
+Data source: NIH-Fogarty
+
+
+#### Fig 4:
 ![Belgium cases](../cluster_analysis/Belgium_imported_cases_BOP.png)
 
 

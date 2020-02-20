@@ -1,6 +1,6 @@
 # South Korea
 ## NSSAC COVID-19 Summary
-## 02/19/2020
+## 02/20/2020
 
 
 
@@ -11,18 +11,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
-|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
-| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/19/20                      | 02/06/20         | 02/18/20                    | 02/18/20         |
-| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
-| First known case          | 02/07/20                      | 01/20/20         | 01/22/20                    | 01/20/20         |
-| Total confirmed cases     | 28                            | 21               | 31                          | 28               |
-| New cases since yesterday | -23                           |                  |                             |                  |
-| Total suspected           | 0                             |                  |                             |                  |
-| Total hospitalized        |                               | 5                |                             | 6                |
-| Total recovered           | 3                             | 0                | 12                          |                  |
-| Total deaths              | 0                             | 0                | 0                           | 0                |
+|                           | NIHFogarty       | JHU                         | Tencent                       | BOP              |
+|---------------------------|------------------|-----------------------------|-------------------------------|------------------|
+| First update logged       | 01/13/20         | 01/22/20                    | 02/04/20                      | 01/12/20         |
+| Last update logged        | 02/20/20         | 02/19/20                    | 02/20/20                      | 02/06/20         |
+| Method                    | Public line list | Cases by day & country list | Daily cases in country scrape | Public line list |
+| First known case          | 01/20/20         | 01/22/20                    | 02/07/20                      | 01/20/20         |
+| Total confirmed cases     | 104              | 31                          | 28                            | 21               |
+| New cases since yesterday | 53               |                             | 0                             |                  |
+| Total suspected           |                  |                             | 0                             |                  |
+| Total hospitalized        | 8                |                             |                               | 5                |
+| Total recovered           |                  | 12                          | 3                             | 0                |
+| Total deaths              | 0                | 0                           | 0                             | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -36,8 +36,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name                 |   confirmed |
 |----------|--------------------------|-------------|
-| Tencent  | Korea                    |          51 |
-| NIH      | South Korea, South Korea |          27 |
+| Tencent  | Korea                    |         104 |
+| NIH      | South Korea, South Korea |         103 |
 | NIH      | Seoul, South Korea       |           1 |
 | JHU      | South Korea              |          31 |
 | BOP      | Gyeonggi, South Korea    |           1 |

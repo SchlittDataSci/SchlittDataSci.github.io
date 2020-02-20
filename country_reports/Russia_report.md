@@ -1,6 +1,6 @@
 # Russia
 ## NSSAC COVID-19 Summary
-## 02/19/2020
+## 02/20/2020
 
 
 
@@ -11,18 +11,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
-|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
-| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/19/20                      | 02/06/20         | 02/18/20                    | 02/18/20         |
-| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
-| First known case          | 02/06/20                      | 01/31/20         | 01/22/20                    | 01/31/20         |
-| Total confirmed cases     | 2                             | 2                | 2                           | 2                |
-| New cases since yesterday | 0                             |                  |                             |                  |
-| Total suspected           | 0                             |                  |                             |                  |
-| Total hospitalized        |                               | 0                |                             | 0                |
-| Total recovered           | 0                             | 0                | 2                           |                  |
-| Total deaths              | 0                             | 0                | 0                           | 0                |
+|                           | NIHFogarty       | JHU                         | BOP              | Tencent                       |
+|---------------------------|------------------|-----------------------------|------------------|-------------------------------|
+| First update logged       | 01/13/20         | 01/22/20                    | 01/12/20         | 02/04/20                      |
+| Last update logged        | 02/20/20         | 02/19/20                    | 02/06/20         | 02/20/20                      |
+| Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
+| First known case          | 01/31/20         | 01/22/20                    | 01/31/20         | 02/06/20                      |
+| Total confirmed cases     | 2                | 2                           | 2                | 0                             |
+| New cases since yesterday |                  |                             |                  | -2                            |
+| Total suspected           |                  |                             |                  | 0                             |
+| Total hospitalized        | 0                |                             | 0                |                               |
+| Total recovered           |                  | 2                           | 0                | 0                             |
+| Total deaths              | 0                | 0                           | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -37,8 +37,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name              |   confirmed |
 |----------|-----------------------|-------------|
 | Tencent  | Russia                |           2 |
-| NIH      | Zabaikalsky, Russia   |           1 |
 | NIH      | Tyumen, Russia        |           1 |
+| NIH      | Zabaikalsky, Russia   |           1 |
 | JHU      | Russia                |           2 |
 | BOP      | Transbaikalia, Russia |           1 |
 | BOP      | Tyumen, Russia        |           1 |
