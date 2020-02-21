@@ -1,4 +1,4 @@
-## 2019-nCoV Imported Case Cluster Viz (last updated 02/20/20 16:02)
+## 2019-nCoV Imported Case Cluster Viz (last updated 02/20/20 21:02)
 
 
 ### Reference
@@ -16,7 +16,7 @@
 
 * [Imported cases dashboard](https://datastudio.google.com/reporting/f6ad0988-f203-45f8-8d18-5d726c1d2d8b)
 
-* [NSSAC prepared data][https://github.com/SchlittDataSci/SchlittDataSci.github.io/tree/master/data]
+* [NSSAC prepared data](https://github.com/SchlittDataSci/SchlittDataSci.github.io/tree/master/data)
 
 
 ### All imported case clusters
