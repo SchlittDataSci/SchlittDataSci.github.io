@@ -3,7 +3,7 @@
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
 { "type": "Feature", "properties": { "source": "Tencent", "loc_name": "Singapore", "confirmed": 85, "color": "mediumorchid", "size": 5000.0, "label": "Tencent : Singapore: 85" }, "geometry": { "type": "Point", "coordinates": [ 11557133.785356672480702, 151086.588100891443901 ] } },
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Singapore, Singapore", "confirmed": 85, "color": "blue", "size": 5000.0, "label": "NIH : Singapore, Singapore: 85" }, "geometry": { "type": "Point", "coordinates": [ 11557133.785356672480702, 151086.588100891443901 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Singapore", "confirmed": 85, "color": "blue", "size": 5000.0, "label": "NIH : Singapore: 85" }, "geometry": { "type": "Point", "coordinates": [ 11557133.785356672480702, 151086.588100891443901 ] } },
 { "type": "Feature", "properties": { "source": "JHU", "loc_name": "Singapore", "confirmed": 84, "color": "red", "size": 4970.5012174770836, "label": "JHU : Singapore: 84" }, "geometry": { "type": "Point", "coordinates": [ 11557133.785356672480702, 151086.588100891443901 ] } },
 { "type": "Feature", "properties": { "source": "BOP", "loc_name": "Singapore", "confirmed": 28, "color": "darkorange", "size": 2869.7202159177573, "label": "BOP : Singapore: 28" }, "geometry": { "type": "Point", "coordinates": [ 11557133.785356672480702, 151086.588100891443901 ] } }
 ]
