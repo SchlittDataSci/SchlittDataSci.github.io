@@ -1,6 +1,6 @@
 # Philippines
 ## NSSAC COVID-19 Summary
-## 02/20/2020
+## 02/21/2020
 
 
 
@@ -16,7 +16,7 @@
 |                           | Tencent                       | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-------------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 02/04/20                      | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 02/20/20                      | 02/19/20                    | 02/06/20         | 02/20/20         |
+| Last update logged        | 02/21/20                      | 02/20/20                    | 02/06/20         | 02/20/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/17/20                      | 01/22/20                    | 01/30/20         | 02/02/20         |
 | Total confirmed cases     | 3                             | 3                           | 3                | 2                |

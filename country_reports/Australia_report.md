@@ -1,6 +1,6 @@
 # Australia
 ## NSSAC COVID-19 Summary
-## 02/20/2020
+## 02/21/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | NIHFogarty       | Tencent                       | JHU                         | BOP              |
-|---------------------------|------------------|-------------------------------|-----------------------------|------------------|
-| First update logged       | 01/13/20         | 02/04/20                      | 01/22/20                    | 01/12/20         |
-| Last update logged        | 02/20/20         | 02/20/20                      | 02/19/20                    | 02/06/20         |
-| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
-| First known case          | 01/25/20         | 02/07/20                      | 01/22/20                    | 01/25/20         |
-| Total confirmed cases     | 15               | 15                            | 15                          | 15               |
-| New cases since yesterday |                  | 0                             |                             |                  |
-| Total suspected           |                  | 0                             |                             |                  |
-| Total hospitalized        | 5                |                               |                             | 5                |
-| Total recovered           |                  | 5                             | 10                          | 0                |
-| Total deaths              | 0                | 0                             | 0                           | 0                |
+|                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
+|---------------------------|-------------------------------|-----------------------------|------------------|------------------|
+| First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
+| Last update logged        | 02/21/20                      | 02/20/20                    | 02/20/20         | 02/06/20         |
+| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
+| First known case          | 02/07/20                      | 01/22/20                    | 01/25/20         | 01/25/20         |
+| Total confirmed cases     | 17                            | 15                          | 15               | 15               |
+| New cases since yesterday | 2                             |                             |                  |                  |
+| Total suspected           | 0                             |                             |                  |                  |
+| Total hospitalized        |                               |                             | 5                | 5                |
+| Total recovered           | 5                             | 10                          |                  | 0                |
+| Total deaths              | 0                             | 0                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -40,7 +40,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name                   |   confirmed |
 |----------|----------------------------|-------------|
-| Tencent  | Australia                  |          15 |
+| Tencent  | Australia                  |          17 |
 | NIH      | Queensland, Australia      |           5 |
 | NIH      | NSW, Australia             |           4 |
 | NIH      | Victoria, Australia        |           4 |

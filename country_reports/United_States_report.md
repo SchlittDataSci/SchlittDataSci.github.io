@@ -1,6 +1,6 @@
 # United States
 ## NSSAC COVID-19 Summary
-## 02/20/2020
+## 02/21/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | NIHFogarty       | JHU                         | Tencent                       | BOP              |
-|---------------------------|------------------|-----------------------------|-------------------------------|------------------|
-| First update logged       | 01/13/20         | 01/22/20                    | 02/04/20                      | 01/12/20         |
-| Last update logged        | 02/20/20         | 02/19/20                    | 02/20/20                      | 02/06/20         |
-| Method                    | Public line list | Cases by day & country list | Daily cases in country scrape | Public line list |
-| First known case          | 01/21/20         | 01/22/20                    | 02/06/20                      | 01/20/20         |
-| Total confirmed cases     | 15               | 15                          | 12                            | 12               |
-| New cases since yesterday |                  |                             | -3                            |                  |
-| Total suspected           |                  |                             | 0                             |                  |
-| Total hospitalized        | 4                |                             |                               | 2                |
-| Total recovered           |                  | 3                           | 1                             | 0                |
-| Total deaths              | 0                | 0                           | 0                             | 0                |
+|                           | JHU                         | NIHFogarty       | Tencent                       | BOP              |
+|---------------------------|-----------------------------|------------------|-------------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      | 01/12/20         |
+| Last update logged        | 02/20/20                    | 02/20/20         | 02/21/20                      | 02/06/20         |
+| Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
+| First known case          | 01/22/20                    | 01/21/20         | 02/06/20                      | 01/20/20         |
+| Total confirmed cases     | 15                          | 15               | 13                            | 12               |
+| New cases since yesterday |                             |                  | 1                             |                  |
+| Total suspected           |                             |                  | 0                             |                  |
+| Total hospitalized        |                             | 4                |                               | 2                |
+| Total recovered           | 3                           |                  | 1                             | 0                |
+| Total deaths              | 0                           | 0                | 0                             | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -42,24 +42,23 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----------|---------------------------------|-------------|
 | Tencent  | United States                   |          15 |
 | NIH      | California, United States       |           8 |
+| NIH      | Illinois, United States         |           2 |
+| NIH      | Massachusetts, United States    |           1 |
 | NIH      | Wisconsin, United States        |           1 |
-| NIH      | Boston, United States           |           1 |
 | NIH      | Washington, United States       |           1 |
 | NIH      | Texas, United States            |           1 |
-| NIH      | Chicago, United States          |           1 |
-| NIH      | Illinois, United States         |           1 |
 | NIH      | Arizona, United States          |           1 |
-| JHU      | Santa Clara, CA, US             |           2 |
 | JHU      | San Benito, CA, US              |           2 |
-| JHU      | San Diego County, CA, US        |           2 |
 | JHU      | Chicago, IL, US                 |           2 |
-| JHU      | Seattle, WA, US                 |           1 |
-| JHU      | San Antonio, TX, US             |           1 |
+| JHU      | San Diego County, CA, US        |           2 |
+| JHU      | Santa Clara, CA, US             |           2 |
 | JHU      | Madison, WI, US                 |           1 |
-| JHU      | Boston, MA, US                  |           1 |
-| JHU      | Los Angeles, CA, US             |           1 |
 | JHU      | Orange, CA, US                  |           1 |
 | JHU      | Tempe, AZ, US                   |           1 |
+| JHU      | Boston, MA, US                  |           1 |
+| JHU      | Los Angeles, CA, US             |           1 |
+| JHU      | San Antonio, TX, US             |           1 |
+| JHU      | Seattle, WA, US                 |           1 |
 | BOP      | California, United States       |           6 |
 | BOP      | Illinois, United States         |           2 |
 | BOP      | Washington State, United States |           1 |

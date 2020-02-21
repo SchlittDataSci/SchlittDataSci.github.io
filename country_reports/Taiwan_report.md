@@ -1,6 +1,6 @@
 # Taiwan
 ## NSSAC COVID-19 Summary
-## 02/20/2020
+## 02/21/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | NIHFogarty       | JHU                         | BOP              |
-|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
-| First update logged       | 02/04/20                      | 01/13/20         | 01/22/20                    | 01/12/20         |
-| Last update logged        | 02/20/20                      | 02/20/20         | 02/19/20                    | 02/06/20         |
-| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
-| First known case          | 02/04/20                      | 01/21/20         | 01/22/20                    | 02/06/20         |
-| Total confirmed cases     | 24                            | 23               | 23                          | 3                |
-| New cases since yesterday | 1                             |                  |                             |                  |
-| Total suspected           | 0                             |                  |                             |                  |
-| Total hospitalized        |                               | 14               |                             | 3                |
-| Total recovered           | 2                             |                  | 2                           | 0                |
-| Total deaths              | 1                             | 0                | 1                           | 0                |
+|                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
+|---------------------------|-------------------------------|-----------------------------|------------------|------------------|
+| First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
+| Last update logged        | 02/21/20                      | 02/20/20                    | 02/20/20         | 02/06/20         |
+| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
+| First known case          | 02/04/20                      | 01/22/20                    | 01/21/20         | 02/06/20         |
+| Total confirmed cases     | 26                            | 24                          | 23               | 3                |
+| New cases since yesterday | 2                             |                             |                  |                  |
+| Total suspected           | 0                             |                             |                  |                  |
+| Total hospitalized        |                               |                             | 14               | 3                |
+| Total recovered           | 2                             | 2                           |                  | 0                |
+| Total deaths              | 1                             | 1                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name       |   confirmed |
 |----------|----------------|-------------|
 | NIH      | Taiwan, Taiwan |          23 |
-| JHU      | Taiwan, Taiwan |          23 |
+| JHU      | Taiwan, Taiwan |          24 |
 | BOP      | Taiwan         |           3 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

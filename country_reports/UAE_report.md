@@ -1,6 +1,6 @@
 # UAE
 ## NSSAC COVID-19 Summary
-## 02/20/2020
+## 02/21/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | NIHFogarty       | JHU                         | Tencent                       | BOP              |
-|---------------------------|------------------|-----------------------------|-------------------------------|------------------|
-| First update logged       | 01/13/20         | 01/22/20                    | 02/04/20                      | 01/12/20         |
-| Last update logged        | 02/20/20         | 02/19/20                    | 02/20/20                      | 02/06/20         |
-| Method                    | Public line list | Cases by day & country list | Daily cases in country scrape | Public line list |
-| First known case          | 01/29/20         | 01/22/20                    | 02/06/20                      | 01/29/20         |
-| Total confirmed cases     | 9                | 9                           | 5                             | 5                |
-| New cases since yesterday |                  |                             | -3                            |                  |
-| Total suspected           |                  |                             | 0                             |                  |
-| Total hospitalized        | 0                |                             |                               | 4                |
-| Total recovered           |                  | 4                           | 0                             | 0                |
-| Total deaths              | 0                | 0                           | 0                             | 0                |
+|                           | JHU                         | NIHFogarty       | Tencent                       | BOP              |
+|---------------------------|-----------------------------|------------------|-------------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      | 01/12/20         |
+| Last update logged        | 02/20/20                    | 02/20/20         | 02/21/20                      | 02/06/20         |
+| Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
+| First known case          | 01/22/20                    | 01/29/20         | 02/06/20                      | 01/29/20         |
+| Total confirmed cases     | 9                           | 9                | 5                             | 5                |
+| New cases since yesterday |                             |                  | 5                             |                  |
+| Total suspected           |                             |                  | 0                             |                  |
+| Total hospitalized        |                             | 0                |                               | 4                |
+| Total recovered           | 4                           |                  | 0                             | 0                |
+| Total deaths              | 0                           | 0                | 0                             | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 

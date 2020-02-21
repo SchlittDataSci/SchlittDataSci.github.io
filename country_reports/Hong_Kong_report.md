@@ -1,6 +1,6 @@
 # Hong Kong
 ## NSSAC COVID-19 Summary
-## 02/20/2020
+## 02/21/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | NIHFogarty       | JHU                         |
-|---------------------------|-------------------------------|------------------|-----------------------------|
-| First update logged       | 02/04/20                      | 01/13/20         | 01/22/20                    |
-| Last update logged        | 02/20/20                      | 02/20/20         | 02/19/20                    |
-| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list |
-| First known case          | 02/04/20                      | 01/22/20         | 01/22/20                    |
-| Total confirmed cases     | 68                            | 63               | 63                          |
-| New cases since yesterday | 3                             |                  |                             |
-| Total suspected           | 0                             |                  |                             |
-| Total hospitalized        |                               | 50               |                             |
-| Total recovered           | 5                             |                  | 5                           |
-| Total deaths              | 2                             | 0                | 2                           |
+|                           | Tencent                       | JHU                         | NIHFogarty       |
+|---------------------------|-------------------------------|-----------------------------|------------------|
+| First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/21/20                      | 02/20/20                    | 02/20/20         |
+| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list |
+| First known case          | 02/04/20                      | 01/22/20                    | 01/22/20         |
+| Total confirmed cases     | 68                            | 68                          | 63               |
+| New cases since yesterday | 0                             |                             |                  |
+| Total suspected           | 0                             |                             |                  |
+| Total hospitalized        |                               |                             | 50               |
+| Total recovered           | 5                             | 6                           |                  |
+| Total deaths              | 2                             | 2                           | 0                |
 
 Data sources: JHU, NIH-Fogarty, Tencent
 
@@ -50,7 +50,7 @@ Data sources: JHU, NIH-Fogarty, Tencent
 | NIH      | Yau Ma Tei, Hong Kong   |           1 |
 | NIH      | Wan Chai, Hong Kong     |           1 |
 | NIH      | Ngau Chi Wan, Hong Kong |           1 |
-| JHU      | Hong Kong, Hong Kong    |          63 |
+| JHU      | Hong Kong, Hong Kong    |          68 |
 
 Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 
