@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | NIHFogarty       |
-|---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/20/20                    | 02/20/20         |
-| Method                    | Cases by day & country list | Public line list |
-| First known case          | 01/22/20                    | 02/14/20         |
-| Total confirmed cases     | 1                           | 1                |
-| New cases since yesterday | 0                           |                  |
-| Total suspected           |                             |                  |
-| Total hospitalized        |                             | 0                |
-| Total recovered           | 0                           |                  |
-| Total deaths              | 0                           | 0                |
+|                           | NIHFogarty       | JHU                         |
+|---------------------------|------------------|-----------------------------|
+| First update logged       | 01/13/20         | 01/22/20                    |
+| Last update logged        | 02/21/20         | 02/20/20                    |
+| Method                    | Public line list | Cases by day & country list |
+| First known case          | 02/14/20         | 01/22/20                    |
+| Total confirmed cases     | 1                | 1                           |
+| New cases since yesterday |                  | 0                           |
+| Total suspected           |                  |                             |
+| Total hospitalized        | 0                |                             |
+| Total recovered           |                  | 0                           |
+| Total deaths              | 0                | 0                           |
 
 Data sources: JHU, NIH-Fogarty, 
 

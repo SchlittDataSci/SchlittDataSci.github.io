@@ -2,7 +2,7 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Hong Kong, Hong Kong", "confirmed": 49, "color": "blue", "size": 4244.3734381358272, "label": "NIH : Hong Kong, Hong Kong: 49" }, "geometry": { "type": "Point", "coordinates": [ 12708546.221819661557674, 2545095.077194766607136 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Hong Kong, Hong Kong", "confirmed": 56, "color": "blue", "size": 4537.4260648651507, "label": "NIH : Hong Kong, Hong Kong: 56" }, "geometry": { "type": "Point", "coordinates": [ 12708546.221819661557674, 2545095.077194766607136 ] } },
 { "type": "Feature", "properties": { "source": "NIH", "loc_name": "Kowloon, Hong Kong", "confirmed": 4, "color": "blue", "size": 1212.6781251816649, "label": "NIH : Kowloon, Hong Kong: 4" }, "geometry": { "type": "Point", "coordinates": [ 12710101.956231294199824, 2548983.320355726871639 ] } },
 { "type": "Feature", "properties": { "source": "NIH", "loc_name": "Kwun Tong, Hong Kong", "confirmed": 2, "color": "blue", "size": 857.49292571254421, "label": "NIH : Kwun Tong, Hong Kong: 2" }, "geometry": { "type": "Point", "coordinates": [ 12715536.740751057863235, 2549138.760978198610246 ] } },
 { "type": "Feature", "properties": { "source": "NIH", "loc_name": "Kwai Chung, Hong Kong", "confirmed": 2, "color": "blue", "size": 857.49292571254421, "label": "NIH : Kwai Chung, Hong Kong: 2" }, "geometry": { "type": "Point", "coordinates": [ 12704783.22228068113327, 2554917.738093571737409 ] } },

@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | JHU                         | NIHFogarty       |
-|---------------------------|-------------------------------|-----------------------------|------------------|
-| First update logged       | 02/20/20                      | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/21/20                      | 02/20/20                    | 02/20/20         |
-| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list |
-| First known case          | 02/20/20                      | 01/22/20                    | 02/19/20         |
-| Total confirmed cases     | 18                            | 5                           | 2                |
-| New cases since yesterday | 13                            |                             |                  |
-| Total suspected           | 0                             |                             |                  |
-| Total hospitalized        |                               |                             | 0                |
-| Total recovered           | 0                             | 0                           |                  |
-| Total deaths              | 4                             | 2                           | 0                |
+|                           | NIHFogarty       | Tencent                       | JHU                         |
+|---------------------------|------------------|-------------------------------|-----------------------------|
+| First update logged       | 01/13/20         | 02/20/20                      | 01/22/20                    |
+| Last update logged        | 02/21/20         | 02/21/20                      | 02/20/20                    |
+| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list |
+| First known case          | 02/19/20         | 02/20/20                      | 01/22/20                    |
+| Total confirmed cases     | 18               | 18                            | 5                           |
+| New cases since yesterday | 13               | 13                            |                             |
+| Total suspected           |                  | 0                             |                             |
+| Total hospitalized        | 0                |                               |                             |
+| Total recovered           |                  | 0                             | 0                           |
+| Total deaths              | 0                | 4                             | 2                           |
 
 Data sources: JHU, NIH-Fogarty, Tencent
 
@@ -38,16 +38,21 @@ Data sources: JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name   |   confirmed |
-|----------|------------|-------------|
-| Tencent  | Iran       |          18 |
-| NIH      | Iran, Iran |           2 |
-| JHU      | Iran       |           5 |
+| source   | loc_name     |   confirmed |
+|----------|--------------|-------------|
+| Tencent  | Iran         |          18 |
+| NIH      | Qom, Iran    |          11 |
+| NIH      | Tehran, Iran |           4 |
+| NIH      | Guilan, Iran |           2 |
+| NIH      | Araq, Iran   |           1 |
+| JHU      | Iran         |           5 |
 
 Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Iran_case_locs.geojson)
+
+[Case admin1 locs geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Iran_admin1_locs.geojson)
 
 ### Observed case clusters:
 #### Fig 3:

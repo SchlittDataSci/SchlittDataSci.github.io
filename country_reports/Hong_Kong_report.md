@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | JHU                         | NIHFogarty       |
-|---------------------------|-------------------------------|-----------------------------|------------------|
-| First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/21/20                      | 02/20/20                    | 02/20/20         |
-| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list |
-| First known case          | 02/04/20                      | 01/22/20                    | 01/22/20         |
-| Total confirmed cases     | 68                            | 68                          | 63               |
-| New cases since yesterday | 0                             |                             |                  |
-| Total suspected           | 0                             |                             |                  |
-| Total hospitalized        |                               |                             | 50               |
-| Total recovered           | 5                             | 6                           |                  |
-| Total deaths              | 2                             | 2                           | 0                |
+|                           | NIHFogarty       | Tencent                       | JHU                         |
+|---------------------------|------------------|-------------------------------|-----------------------------|
+| First update logged       | 01/13/20         | 02/04/20                      | 01/22/20                    |
+| Last update logged        | 02/21/20         | 02/21/20                      | 02/20/20                    |
+| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list |
+| First known case          | 01/22/20         | 02/04/20                      | 01/22/20                    |
+| Total confirmed cases     | 70               | 68                            | 68                          |
+| New cases since yesterday |                  | 0                             |                             |
+| Total suspected           |                  | 0                             |                             |
+| Total hospitalized        | 56               |                               |                             |
+| Total recovered           |                  | 5                             | 6                           |
+| Total deaths              | 0                | 2                             | 2                           |
 
 Data sources: JHU, NIH-Fogarty, Tencent
 
@@ -40,7 +40,7 @@ Data sources: JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name                |   confirmed |
 |----------|-------------------------|-------------|
-| NIH      | Hong Kong, Hong Kong    |          49 |
+| NIH      | Hong Kong, Hong Kong    |          56 |
 | NIH      | Kowloon, Hong Kong      |           4 |
 | NIH      | Kwun Tong, Hong Kong    |           2 |
 | NIH      | Kwai Chung, Hong Kong   |           2 |
