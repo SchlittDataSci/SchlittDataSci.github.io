@@ -69,6 +69,14 @@ Data source: NIH-Fogarty
 Data source: BOP
 
 
+#### Fig 5:
+![Italy network](../autochthonous_networks/Italy_network.png)
+
+
+
+Data source: NIH-Fogarty
+
+
 ### Data sources:
 * **[BOP](https://github.com/beoutbreakprepared/nCoV2019)**
 * **[JHU](https://github.com/CSSEGISandData/COVID-19)** 

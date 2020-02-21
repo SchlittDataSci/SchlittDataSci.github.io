@@ -58,6 +58,14 @@ Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 Data source: NIH-Fogarty
 
 
+#### Fig 4:
+![Iran network](../autochthonous_networks/Iran_network.png)
+
+
+
+Data source: NIH-Fogarty
+
+
 ### Data sources:
 * **[BOP](https://github.com/beoutbreakprepared/nCoV2019)**
 * **[JHU](https://github.com/CSSEGISandData/COVID-19)** 

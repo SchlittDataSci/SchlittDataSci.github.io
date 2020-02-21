@@ -57,6 +57,14 @@ Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 Data source: NIH-Fogarty
 
 
+#### Fig 4:
+![Egypt network](../autochthonous_networks/Egypt_network.png)
+
+
+
+Data source: NIH-Fogarty
+
+
 ### Data sources:
 * **[BOP](https://github.com/beoutbreakprepared/nCoV2019)**
 * **[JHU](https://github.com/CSSEGISandData/COVID-19)** 
