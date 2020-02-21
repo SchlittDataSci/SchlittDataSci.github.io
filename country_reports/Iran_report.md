@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | NIHFogarty       | Tencent                       |
-|---------------------------|-----------------------------|------------------|-------------------------------|
-| First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 02/20/20                    | 02/20/20         | 02/21/20                      |
-| Method                    | Cases by day & country list | Public line list | Daily cases in country scrape |
-| First known case          | 01/22/20                    | 02/19/20         | 02/06/20                      |
-| Total confirmed cases     | 5                           | 2                | 0                             |
-| New cases since yesterday |                             |                  | 0                             |
-| Total suspected           |                             |                  | 0                             |
-| Total hospitalized        |                             | 0                |                               |
-| Total recovered           | 0                           |                  | 0                             |
-| Total deaths              | 2                           | 0                | 0                             |
+|                           | Tencent                       | JHU                         | NIHFogarty       |
+|---------------------------|-------------------------------|-----------------------------|------------------|
+| First update logged       | 02/20/20                      | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/21/20                      | 02/20/20                    | 02/20/20         |
+| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list |
+| First known case          | 02/20/20                      | 01/22/20                    | 02/19/20         |
+| Total confirmed cases     | 18                            | 5                           | 2                |
+| New cases since yesterday | 13                            |                             |                  |
+| Total suspected           | 0                             |                             |                  |
+| Total hospitalized        |                               |                             | 0                |
+| Total recovered           | 0                             | 0                           |                  |
+| Total deaths              | 4                             | 2                           | 0                |
 
 Data sources: JHU, NIH-Fogarty, Tencent
 

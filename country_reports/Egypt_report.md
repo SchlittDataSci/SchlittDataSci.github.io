@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | NIHFogarty       | Tencent                       |
-|---------------------------|-----------------------------|------------------|-------------------------------|
-| First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 02/20/20                    | 02/20/20         | 02/21/20                      |
-| Method                    | Cases by day & country list | Public line list | Daily cases in country scrape |
-| First known case          | 01/22/20                    | 02/14/20         | 02/04/20                      |
-| Total confirmed cases     | 1                           | 1                | 0                             |
-| New cases since yesterday |                             |                  | 0                             |
-| Total suspected           |                             |                  | 0                             |
-| Total hospitalized        |                             | 0                |                               |
-| Total recovered           | 0                           |                  | 0                             |
-| Total deaths              | 0                           | 0                | 0                             |
+|                           | JHU                         | NIHFogarty       |
+|---------------------------|-----------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/20/20                    | 02/20/20         |
+| Method                    | Cases by day & country list | Public line list |
+| First known case          | 01/22/20                    | 02/14/20         |
+| Total confirmed cases     | 1                           | 1                |
+| New cases since yesterday | 0                           |                  |
+| Total suspected           |                             |                  |
+| Total hospitalized        |                             | 0                |
+| Total recovered           | 0                           |                  |
+| Total deaths              | 0                           | 0                |
 
-Data sources: JHU, NIH-Fogarty, Tencent
+Data sources: JHU, NIH-Fogarty, 
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Egypt_sitrep.csv)
