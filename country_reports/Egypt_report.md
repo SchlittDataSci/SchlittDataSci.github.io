@@ -1,6 +1,6 @@
 # Egypt
 ## NSSAC COVID-19 Summary
-## 02/21/2020
+## 02/22/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | NIHFogarty       | JHU                         |
-|---------------------------|------------------|-----------------------------|
-| First update logged       | 01/13/20         | 01/22/20                    |
-| Last update logged        | 02/21/20         | 02/20/20                    |
-| Method                    | Public line list | Cases by day & country list |
-| First known case          | 02/14/20         | 01/22/20                    |
-| Total confirmed cases     | 1                | 1                           |
-| New cases since yesterday |                  | 0                           |
-| Total suspected           |                  |                             |
-| Total hospitalized        | 0                |                             |
-| Total recovered           |                  | 0                           |
-| Total deaths              | 0                | 0                           |
+|                           | JHU                         | NIHFogarty       |
+|---------------------------|-----------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/21/20                    | 02/21/20         |
+| Method                    | Cases by day & country list | Public line list |
+| First known case          | 01/22/20                    | 02/14/20         |
+| Total confirmed cases     | 1                           | 1                |
+| New cases since yesterday | 0                           |                  |
+| Total suspected           |                             |                  |
+| Total hospitalized        |                             | 0                |
+| Total recovered           | 0                           |                  |
+| Total deaths              | 0                           | 0                |
 
 Data sources: JHU, NIH-Fogarty, 
 
@@ -38,10 +38,10 @@ Data sources: JHU, NIH-Fogarty,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name     |   confirmed |
-|----------|--------------|-------------|
-| NIH      | Egypt, Egypt |           1 |
-| JHU      | Egypt        |           1 |
+| source   | loc_name   |   confirmed |
+|----------|------------|-------------|
+| NIH      | Egypt      |           1 |
+| JHU      | Egypt      |           1 |
 
 Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 

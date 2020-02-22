@@ -1,6 +1,6 @@
 # Australia
 ## NSSAC COVID-19 Summary
-## 02/21/2020
+## 02/22/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | NIHFogarty       | JHU                         | BOP              |
-|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
-| First update logged       | 02/04/20                      | 01/13/20         | 01/22/20                    | 01/12/20         |
-| Last update logged        | 02/21/20                      | 02/21/20         | 02/20/20                    | 02/06/20         |
-| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
-| First known case          | 02/04/20                      | 01/25/20         | 01/22/20                    | 01/25/20         |
-| Total confirmed cases     | 17                            | 15               | 15                          | 15               |
-| New cases since yesterday |                               |                  |                             |                  |
-| Total suspected           | 0                             |                  |                             |                  |
-| Total hospitalized        |                               | 5                |                             | 5                |
-| Total recovered           | 5                             |                  | 10                          | 0                |
-| Total deaths              | 0                             | 0                | 0                           | 0                |
+|                           | JHU                         | Tencent                       | NIHFogarty       | BOP              |
+|---------------------------|-----------------------------|-------------------------------|------------------|------------------|
+| First update logged       | 01/22/20                    | 02/04/20                      | 01/13/20         | 01/12/20         |
+| Last update logged        | 02/21/20                    | 02/22/20                      | 02/21/20         | 02/06/20         |
+| Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
+| First known case          | 01/22/20                    | 02/04/20                      | 01/25/20         | 01/25/20         |
+| Total confirmed cases     | 19                          | 17                            | 15               | 15               |
+| New cases since yesterday |                             | 0                             |                  |                  |
+| Total suspected           |                             | 0                             |                  |                  |
+| Total hospitalized        |                             |                               | 5                | 5                |
+| Total recovered           | 11                          | 5                             |                  | 0                |
+| Total deaths              | 0                           | 0                             | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -38,21 +38,22 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name                   |   confirmed |
-|----------|----------------------------|-------------|
-| Tencent  | Australia                  |          17 |
-| NIH      | Queensland, Australia      |           5 |
-| NIH      | NSW, Australia             |           4 |
-| NIH      | Victoria, Australia        |           4 |
-| NIH      | South Australia, Australia |           2 |
-| JHU      | Queensland, Australia      |           5 |
-| JHU      | New South Wales, Australia |           4 |
-| JHU      | Victoria, Australia        |           4 |
-| JHU      | South Australia, Australia |           2 |
-| BOP      | Queensland, Australia      |           5 |
-| BOP      | NSW, Australia             |           4 |
-| BOP      | Victoria, Australia        |           4 |
-| BOP      | South Australia, Australia |           2 |
+| source   | loc_name                         |   confirmed |
+|----------|----------------------------------|-------------|
+| Tencent  | Australia                        |          17 |
+| NIH      | Queensland, Australia            |           5 |
+| NIH      | Victoria, Australia              |           4 |
+| NIH      | NSW, Australia                   |           4 |
+| NIH      | South Australia, Australia       |           2 |
+| JHU      | Queensland, Australia            |           5 |
+| JHU      | New South Wales, Australia       |           4 |
+| JHU      | Victoria, Australia              |           4 |
+| JHU      | From Diamond Princess, Australia |           4 |
+| JHU      | South Australia, Australia       |           2 |
+| BOP      | Queensland, Australia            |           5 |
+| BOP      | Victoria, Australia              |           4 |
+| BOP      | NSW, Australia                   |           4 |
+| BOP      | South Australia, Australia       |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

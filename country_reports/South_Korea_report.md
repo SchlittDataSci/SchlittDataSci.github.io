@@ -1,6 +1,6 @@
 # South Korea
 ## NSSAC COVID-19 Summary
-## 02/21/2020
+## 02/22/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | NIHFogarty       | JHU                         | BOP              |
-|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
-| First update logged       | 02/04/20                      | 01/13/20         | 01/22/20                    | 01/12/20         |
-| Last update logged        | 02/21/20                      | 02/21/20         | 02/20/20                    | 02/06/20         |
-| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
-| First known case          | 02/04/20                      | 01/20/20         | 01/22/20                    | 01/20/20         |
-| Total confirmed cases     | 208                           | 104              | 104                         | 21               |
-| New cases since yesterday | 104                           |                  |                             |                  |
-| Total suspected           | 0                             |                  |                             |                  |
-| Total hospitalized        |                               | 8                |                             | 5                |
-| Total recovered           | 12                            |                  | 16                          | 0                |
-| Total deaths              | 2                             | 0                | 1                           | 0                |
+|                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
+|---------------------------|-------------------------------|-----------------------------|------------------|------------------|
+| First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
+| Last update logged        | 02/22/20                      | 02/21/20                    | 02/21/20         | 02/06/20         |
+| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
+| First known case          | 02/04/20                      | 01/22/20                    | 01/20/20         | 01/20/20         |
+| Total confirmed cases     | 433                           | 204                         | 104              | 21               |
+| New cases since yesterday | 225                           |                             |                  |                  |
+| Total suspected           | 0                             |                             |                  |                  |
+| Total hospitalized        |                               |                             | 8                | 5                |
+| Total recovered           | 12                            | 16                          |                  | 0                |
+| Total deaths              | 2                             | 2                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -38,13 +38,12 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name                 |   confirmed |
-|----------|--------------------------|-------------|
-| Tencent  | Korea                    |         208 |
-| NIH      | South Korea, South Korea |         103 |
-| NIH      | Seoul, South Korea       |           1 |
-| JHU      | South Korea              |         104 |
-| BOP      | Gyeonggi, South Korea    |           1 |
+| source   | loc_name              |   confirmed |
+|----------|-----------------------|-------------|
+| Tencent  | Korea                 |         433 |
+| NIH      | Seoul, South Korea    |           1 |
+| JHU      | South Korea           |         204 |
+| BOP      | Gyeonggi, South Korea |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

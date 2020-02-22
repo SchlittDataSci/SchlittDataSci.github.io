@@ -1,6 +1,6 @@
 # United States
 ## NSSAC COVID-19 Summary
-## 02/21/2020
+## 02/22/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | NIHFogarty       | Tencent                       | JHU                         | BOP              |
-|---------------------------|------------------|-------------------------------|-----------------------------|------------------|
-| First update logged       | 01/13/20         | 02/04/20                      | 01/22/20                    | 01/12/20         |
-| Last update logged        | 02/21/20         | 02/21/20                      | 02/20/20                    | 02/06/20         |
-| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
-| First known case          | 01/21/20         | 02/04/20                      | 01/22/20                    | 01/20/20         |
-| Total confirmed cases     | 15               | 15                            | 15                          | 12               |
-| New cases since yesterday |                  |                               |                             |                  |
-| Total suspected           |                  | 0                             |                             |                  |
-| Total hospitalized        | 4                |                               |                             | 2                |
-| Total recovered           |                  | 3                             | 3                           | 0                |
-| Total deaths              | 0                | 0                             | 0                           | 0                |
+|                           | JHU                         | Tencent                       | NIHFogarty       | BOP              |
+|---------------------------|-----------------------------|-------------------------------|------------------|------------------|
+| First update logged       | 01/22/20                    | 02/04/20                      | 01/13/20         | 01/12/20         |
+| Last update logged        | 02/21/20                    | 02/22/20                      | 02/21/20         | 02/06/20         |
+| Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
+| First known case          | 01/22/20                    | 02/04/20                      | 01/21/20         | 01/20/20         |
+| Total confirmed cases     | 35                          | 34                            | 15               | 12               |
+| New cases since yesterday |                             | 19                            |                  |                  |
+| Total suspected           |                             | 0                             |                  |                  |
+| Total hospitalized        |                             |                               | 4                | 2                |
+| Total recovered           | 5                           | 3                             |                  | 0                |
+| Total deaths              | 0                           | 0                             | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -40,31 +40,36 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name                        |   confirmed |
 |----------|---------------------------------|-------------|
-| Tencent  | United States                   |          15 |
+| Tencent  | United States                   |          34 |
 | NIH      | California, United States       |           8 |
 | NIH      | Illinois, United States         |           2 |
-| NIH      | Massachusetts, United States    |           1 |
 | NIH      | Wisconsin, United States        |           1 |
-| NIH      | Washington, United States       |           1 |
-| NIH      | Texas, United States            |           1 |
 | NIH      | Arizona, United States          |           1 |
-| JHU      | San Benito, CA, US              |           2 |
+| NIH      | Washington, United States       |           1 |
+| NIH      | Massachusetts, United States    |           1 |
+| NIH      | Texas, United States            |           1 |
+| JHU      | Ashland, NE, US                 |          11 |
+| JHU      | Travis, CA, US                  |           5 |
 | JHU      | Chicago, IL, US                 |           2 |
+| JHU      | Lackland, TX, US                |           2 |
 | JHU      | San Diego County, CA, US        |           2 |
+| JHU      | San Benito, CA, US              |           2 |
 | JHU      | Santa Clara, CA, US             |           2 |
+| JHU      | Seattle, WA, US                 |           1 |
+| JHU      | Humboldt County, CA, US         |           1 |
+| JHU      | San Antonio, TX, US             |           1 |
 | JHU      | Madison, WI, US                 |           1 |
-| JHU      | Orange, CA, US                  |           1 |
-| JHU      | Tempe, AZ, US                   |           1 |
 | JHU      | Boston, MA, US                  |           1 |
 | JHU      | Los Angeles, CA, US             |           1 |
-| JHU      | San Antonio, TX, US             |           1 |
-| JHU      | Seattle, WA, US                 |           1 |
+| JHU      | Orange, CA, US                  |           1 |
+| JHU      | Tempe, AZ, US                   |           1 |
+| JHU      | Sacramento County, CA, US       |           1 |
 | BOP      | California, United States       |           6 |
 | BOP      | Illinois, United States         |           2 |
-| BOP      | Washington State, United States |           1 |
-| BOP      | Arizona, United States          |           1 |
-| BOP      | Massachusetts, United States    |           1 |
 | BOP      | Wisconsin, United States        |           1 |
+| BOP      | Massachusetts, United States    |           1 |
+| BOP      | Arizona, United States          |           1 |
+| BOP      | Washington State, United States |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

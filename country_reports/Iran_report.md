@@ -1,6 +1,6 @@
 # Iran
 ## NSSAC COVID-19 Summary
-## 02/21/2020
+## 02/22/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | NIHFogarty       | Tencent                       | JHU                         |
-|---------------------------|------------------|-------------------------------|-----------------------------|
-| First update logged       | 01/13/20         | 02/20/20                      | 01/22/20                    |
-| Last update logged        | 02/21/20         | 02/21/20                      | 02/20/20                    |
-| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list |
-| First known case          | 02/19/20         | 02/20/20                      | 01/22/20                    |
-| Total confirmed cases     | 18               | 18                            | 5                           |
-| New cases since yesterday | 13               | 13                            |                             |
-| Total suspected           |                  | 0                             |                             |
-| Total hospitalized        | 0                |                               |                             |
-| Total recovered           |                  | 0                             | 0                           |
-| Total deaths              | 0                | 4                             | 2                           |
+|                           | Tencent                       | JHU                         | NIHFogarty       |
+|---------------------------|-------------------------------|-----------------------------|------------------|
+| First update logged       | 02/20/20                      | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/22/20                      | 02/21/20                    | 02/21/20         |
+| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list |
+| First known case          | 02/20/20                      | 01/22/20                    | 02/19/20         |
+| Total confirmed cases     | 28                            | 18                          | 18               |
+| New cases since yesterday | 10                            |                             |                  |
+| Total suspected           | 0                             |                             |                  |
+| Total hospitalized        |                               |                             | 0                |
+| Total recovered           | 0                             | 0                           |                  |
+| Total deaths              | 4                             | 4                           | 0                |
 
 Data sources: JHU, NIH-Fogarty, Tencent
 
@@ -40,12 +40,12 @@ Data sources: JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name     |   confirmed |
 |----------|--------------|-------------|
-| Tencent  | Iran         |          18 |
+| Tencent  | Iran         |          28 |
 | NIH      | Qom, Iran    |          11 |
 | NIH      | Tehran, Iran |           4 |
 | NIH      | Guilan, Iran |           2 |
 | NIH      | Araq, Iran   |           1 |
-| JHU      | Iran         |           5 |
+| JHU      | Iran         |          18 |
 
 Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 

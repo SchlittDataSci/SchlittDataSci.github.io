@@ -1,6 +1,6 @@
 # Canada
 ## NSSAC COVID-19 Summary
-## 02/21/2020
+## 02/22/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | NIHFogarty       | JHU                         | Tencent                       | BOP              |
-|---------------------------|------------------|-----------------------------|-------------------------------|------------------|
-| First update logged       | 01/13/20         | 01/22/20                    | 02/04/20                      | 01/12/20         |
-| Last update logged        | 02/21/20         | 02/20/20                    | 02/13/20                      | 02/06/20         |
-| Method                    | Public line list | Cases by day & country list | Daily cases in country scrape | Public line list |
-| First known case          | 01/26/20         | 01/22/20                    | 02/04/20                      | 01/25/20         |
-| Total confirmed cases     | 9                | 8                           | 7                             | 5                |
-| New cases since yesterday |                  |                             |                               |                  |
-| Total suspected           |                  |                             | 0                             |                  |
-| Total hospitalized        | 3                |                             |                               | 3                |
-| Total recovered           |                  | 1                           | 0                             | 1                |
-| Total deaths              | 0                | 0                           | 0                             | 0                |
+|                           | JHU                         | NIHFogarty       | Tencent                       | BOP              |
+|---------------------------|-----------------------------|------------------|-------------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      | 01/12/20         |
+| Last update logged        | 02/21/20                    | 02/21/20         | 02/13/20                      | 02/06/20         |
+| Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
+| First known case          | 01/22/20                    | 01/26/20         | 02/04/20                      | 01/25/20         |
+| Total confirmed cases     | 9                           | 9                | 7                             | 5                |
+| New cases since yesterday | 1                           |                  |                               |                  |
+| Total suspected           |                             |                  | 0                             |                  |
+| Total hospitalized        |                             | 3                |                               | 3                |
+| Total recovered           | 3                           |                  | 0                             | 1                |
+| Total deaths              | 0                           | 0                | 0                             | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -43,7 +43,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | Tencent  | Canada                   |           8 |
 | NIH      | Vancouver, Canada        |           6 |
 | NIH      | Toronto, Canada          |           3 |
-| JHU      | British Columbia, Canada |           5 |
+| JHU      | British Columbia, Canada |           6 |
 | JHU      | Toronto, ON, Canada      |           2 |
 | JHU      | London, ON, Canada       |           1 |
 | BOP      | Ontario, Canada          |           3 |
