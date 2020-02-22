@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
-|---------------------------|-------------------------------|-----------------------------|------------------|------------------|
-| First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 02/22/20                      | 02/21/20                    | 02/21/20         | 02/06/20         |
-| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
-| First known case          | 02/04/20                      | 01/22/20                    | 01/23/20         | 01/23/20         |
-| Total confirmed cases     | 16                            | 16                          | 16               | 12               |
-| New cases since yesterday | 0                             |                             |                  |                  |
-| Total suspected           | 0                             |                             |                  |                  |
-| Total hospitalized        |                               |                             | 1                | 8                |
-| Total recovered           | 15                            | 14                          |                  | 0                |
-| Total deaths              | 0                             | 0                           | 0                | 0                |
+|                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
+|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
+| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/22/20                      | 02/21/20         | 02/21/20                    | 02/21/20         |
+| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
+| First known case          | 02/04/20                      | 01/23/20         | 01/22/20                    | 01/23/20         |
+| Total confirmed cases     | 16                            | 16               | 16                          | 16               |
+| New cases since yesterday | 0                             |                  |                             |                  |
+| Total suspected           | 0                             |                  |                             |                  |
+| Total hospitalized        |                               | 9                |                             | 1                |
+| Total recovered           | 15                            | 0                | 14                          |                  |
+| Total deaths              | 0                             | 0                | 0                           | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -38,21 +38,20 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name                     |   confirmed |
-|----------|------------------------------|-------------|
-| Tencent  | Vietnam                      |          16 |
-| NIH      | Vinh Phuc, Vietnam           |           8 |
-| NIH      | Ho Chi Minh City, Vietnam    |           2 |
-| NIH      | Hanoi, Vietnam               |           2 |
-| NIH      | Thanh Hoa, Vietnam           |           1 |
-| JHU      | Vietnam                      |          16 |
-| BOP      | Vinh Phuc, Vietnam           |           2 |
-| BOP      | Khanh Hoa province, Vietnam  |           2 |
-| BOP      | Thanh Hoa, Vietnam           |           1 |
-| BOP      | Nha Trang, Vietnam           |           1 |
-| BOP      | Vinh Phuc province, Vietnam  |           1 |
-| BOP      | Viinh Phuc Province, Vietnam |           1 |
-| BOP      | Vinh Phuc Province, Vietnam  |           1 |
+| source   | loc_name                    |   confirmed |
+|----------|-----------------------------|-------------|
+| Tencent  | Vietnam                     |          16 |
+| NIH      | Vinh Phuc, Vietnam          |           8 |
+| NIH      | Ho Chi Minh City, Vietnam   |           2 |
+| NIH      | Hanoi, Vietnam              |           2 |
+| NIH      | Thanh Hoa, Vietnam          |           1 |
+| JHU      | Vietnam                     |          16 |
+| BOP      | Vinh Phuc Province, Vietnam |           4 |
+| BOP      | Vinh Phuc, Vietnam          |           3 |
+| BOP      | Khanh Hoa province, Vietnam |           2 |
+| BOP      | Vinh Phuc province, Vietnam |           2 |
+| BOP      | Thanh Hoa, Vietnam          |           1 |
+| BOP      | Nha Trang, Vietnam          |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

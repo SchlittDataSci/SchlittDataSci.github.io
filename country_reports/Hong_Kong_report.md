@@ -43,11 +43,11 @@ Data sources: JHU, NIH-Fogarty, Tencent
 | NIH      | Kowloon, Hong Kong      |           4 |
 | NIH      | Kwun Tong, Hong Kong    |           2 |
 | NIH      | Kwai Chung, Hong Kong   |           2 |
+| NIH      | Tsing Yi, Hong Kong     |           1 |
+| NIH      | Fo Tan, Hong Kong       |           1 |
+| NIH      | Wan Chai, Hong Kong     |           1 |
 | NIH      | Zhuhai, Hong Kong       |           1 |
 | NIH      | Yau Ma Tei, Hong Kong   |           1 |
-| NIH      | Fo Tan, Hong Kong       |           1 |
-| NIH      | Tsing Yi, Hong Kong     |           1 |
-| NIH      | Wan Chai, Hong Kong     |           1 |
 | NIH      | Ngau Chi Wan, Hong Kong |           1 |
 | JHU      | Hong Kong, Hong Kong    |          68 |
 

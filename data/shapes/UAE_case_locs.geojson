@@ -2,9 +2,9 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "Tencent", "loc_name": "United Arab Emirates", "confirmed": 9, "color": "mediumorchid", "size": 5000.0, "label": "Tencent : United Arab Emirates: 9" }, "geometry": { "type": "Point", "coordinates": [ 6011194.939528083428741, 2753438.426757344976068 ] } },
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "UAE", "confirmed": 9, "color": "blue", "size": 5000.0, "label": "NIH : UAE: 9" }, "geometry": { "type": "Point", "coordinates": [ 3481164.425544747151434, 6357936.478724492713809 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "United Arab Emirates", "confirmed": 9, "color": "red", "size": 5000.0, "label": "JHU : United Arab Emirates: 9" }, "geometry": { "type": "Point", "coordinates": [ 6011194.939528083428741, 2753438.426757344976068 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "UAE", "confirmed": 5, "color": "darkorange", "size": 3726.7799624996496, "label": "BOP : UAE: 5" }, "geometry": { "type": "Point", "coordinates": [ 3481164.425544747151434, 6357936.478724492713809 ] } }
+{ "type": "Feature", "properties": { "source": "Tencent", "loc_name": "United Arab Emirates", "confirmed": 13, "color": "mediumorchid", "size": 5000.0, "label": "Tencent : United Arab Emirates: 13" }, "geometry": { "type": "Point", "coordinates": [ 6011194.939528083428741, 2753438.426757344976068 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "UAE", "confirmed": 9, "color": "blue", "size": 4160.2514716892183, "label": "NIH : UAE: 9" }, "geometry": { "type": "Point", "coordinates": [ 3481164.425544747151434, 6357936.478724492713809 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "United Arab Emirates", "confirmed": 9, "color": "red", "size": 4160.2514716892183, "label": "JHU : United Arab Emirates: 9" }, "geometry": { "type": "Point", "coordinates": [ 6011194.939528083428741, 2753438.426757344976068 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "UAE", "confirmed": 12, "color": "darkorange", "size": 4803.8446141526138, "label": "BOP : UAE: 12" }, "geometry": { "type": "Point", "coordinates": [ 3481164.425544747151434, 6357936.478724492713809 ] } }
 ]
 }

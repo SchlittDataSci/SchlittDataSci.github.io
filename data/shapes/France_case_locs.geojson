@@ -6,6 +6,6 @@
 { "type": "Feature", "properties": { "source": "NIH", "loc_name": "Paris, France", "confirmed": 5, "color": "blue", "size": 3227.486121839514, "label": "NIH : Paris, France: 5" }, "geometry": { "type": "Point", "coordinates": [ 261763.507931936357636, 6250580.744310139678419 ] } },
 { "type": "Feature", "properties": { "source": "NIH", "loc_name": "Bordeaux, France", "confirmed": 1, "color": "blue", "size": 1443.3756729740644, "label": "NIH : Bordeaux, France: 1" }, "geometry": { "type": "Point", "coordinates": [ -64569.356689563544933, 5596560.149872140958905 ] } },
 { "type": "Feature", "properties": { "source": "JHU", "loc_name": "France", "confirmed": 12, "color": "red", "size": 5000.0, "label": "JHU : France: 12" }, "geometry": { "type": "Point", "coordinates": [ 210208.323667880060384, 5877569.972086924128234 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "France", "confirmed": 6, "color": "darkorange", "size": 3535.5339059327371, "label": "BOP : France: 6" }, "geometry": { "type": "Point", "coordinates": [ 210208.323667880060384, 5877569.972086924128234 ] } }
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "France", "confirmed": 12, "color": "darkorange", "size": 5000.0, "label": "BOP : France: 12" }, "geometry": { "type": "Point", "coordinates": [ 210208.323667880060384, 5877569.972086924128234 ] } }
 ]
 }

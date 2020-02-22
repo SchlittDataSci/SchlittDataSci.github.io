@@ -16,14 +16,14 @@
 |                           | JHU                         | NIHFogarty       | Tencent                       | BOP              |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      | 01/12/20         |
-| Last update logged        | 02/21/20                    | 02/21/20         | 02/20/20                      | 02/06/20         |
+| Last update logged        | 02/21/20                    | 02/21/20         | 02/20/20                      | 02/21/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 01/13/20         | 02/04/20                      | 01/12/20         |
-| Total confirmed cases     | 35                          | 35               | 35                            | 25               |
+| Total confirmed cases     | 35                          | 35               | 35                            | 34               |
 | New cases since yesterday | 0                           |                  |                               |                  |
 | Total suspected           |                             |                  | 0                             |                  |
-| Total hospitalized        |                             | 8                |                               | 3                |
-| Total recovered           | 17                          |                  | 15                            | 0                |
+| Total hospitalized        |                             | 8                |                               | 4                |
+| Total recovered           | 17                          |                  | 15                            | 1                |
 | Total deaths              | 0                           | 0                | 0                             | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
@@ -43,7 +43,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | Tencent  | Thailand                |          35 |
 | NIH      | Thailand                |          35 |
 | JHU      | Thailand                |          35 |
-| BOP      | Nonthaburi, Thailand    |           1 |
+| BOP      | Nonthaburi, Thailand    |           8 |
 | BOP      | Nakhon Pathom, Thailand |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | NIHFogarty       |
-|---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/21/20                    | 02/21/20         |
-| Method                    | Cases by day & country list | Public line list |
-| First known case          | 01/22/20                    | 02/14/20         |
-| Total confirmed cases     | 1                           | 1                |
-| New cases since yesterday | 0                           |                  |
-| Total suspected           |                             |                  |
-| Total hospitalized        |                             | 0                |
-| Total recovered           | 0                           |                  |
-| Total deaths              | 0                           | 0                |
+|                           | BOP              | JHU                         | NIHFogarty       |
+|---------------------------|------------------|-----------------------------|------------------|
+| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/21/20         | 02/21/20                    | 02/21/20         |
+| Method                    | Public line list | Cases by day & country list | Public line list |
+| First known case          | 02/14/20         | 01/22/20                    | 02/14/20         |
+| Total confirmed cases     | 1                | 1                           | 1                |
+| New cases since yesterday |                  | 0                           |                  |
+| Total suspected           |                  |                             |                  |
+| Total hospitalized        | 0                |                             | 0                |
+| Total recovered           | 0                | 0                           |                  |
+| Total deaths              | 0                | 0                           | 0                |
 
-Data sources: JHU, NIH-Fogarty, 
+Data sources: BOP, JHU, NIH-Fogarty, 
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Egypt_sitrep.csv)
@@ -42,8 +42,9 @@ Data sources: JHU, NIH-Fogarty,
 |----------|------------|-------------|
 | NIH      | Egypt      |           1 |
 | JHU      | Egypt      |           1 |
+| BOP      | Egypt      |           1 |
 
-Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Egypt_case_locs.geojson)
@@ -58,6 +59,14 @@ Data source: NIH-Fogarty
 
 
 #### Fig 4:
+![Egypt cases](../cluster_analysis/Egypt_imported_cases_BOP.png)
+
+
+
+Data source: BOP
+
+
+#### Fig 5:
 ![Egypt network](../autochthonous_networks/Egypt_network.png)
 
 

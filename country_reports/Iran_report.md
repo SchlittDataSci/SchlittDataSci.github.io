@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | JHU                         | NIHFogarty       |
-|---------------------------|-------------------------------|-----------------------------|------------------|
-| First update logged       | 02/20/20                      | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/22/20                      | 02/21/20                    | 02/21/20         |
-| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list |
-| First known case          | 02/20/20                      | 01/22/20                    | 02/19/20         |
-| Total confirmed cases     | 28                            | 18                          | 18               |
-| New cases since yesterday | 10                            |                             |                  |
-| Total suspected           | 0                             |                             |                  |
-| Total hospitalized        |                               |                             | 0                |
-| Total recovered           | 0                             | 0                           |                  |
-| Total deaths              | 4                             | 4                           | 0                |
+|                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
+|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
+| First update logged       | 02/20/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/22/20                      | 02/21/20         | 02/21/20                    | 02/21/20         |
+| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
+| First known case          | 02/20/20                      | 02/19/20         | 01/22/20                    | 02/19/20         |
+| Total confirmed cases     | 28                            | 18               | 18                          | 18               |
+| New cases since yesterday | 10                            |                  |                             |                  |
+| Total suspected           | 0                             |                  |                             |                  |
+| Total hospitalized        |                               | 0                |                             | 0                |
+| Total recovered           | 0                             | 0                | 0                           |                  |
+| Total deaths              | 4                             | 0                | 4                           | 0                |
 
-Data sources: JHU, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Iran_sitrep.csv)
@@ -46,8 +46,9 @@ Data sources: JHU, NIH-Fogarty, Tencent
 | NIH      | Guilan, Iran |           2 |
 | NIH      | Araq, Iran   |           1 |
 | JHU      | Iran         |          18 |
+| BOP      | Iran         |          18 |
 
-Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Iran_case_locs.geojson)
@@ -64,6 +65,14 @@ Data source: NIH-Fogarty
 
 
 #### Fig 4:
+![Iran cases](../cluster_analysis/Iran_imported_cases_BOP.png)
+
+
+
+Data source: BOP
+
+
+#### Fig 5:
 ![Iran network](../autochthonous_networks/Iran_network.png)
 
 

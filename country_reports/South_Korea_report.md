@@ -16,13 +16,13 @@
 |                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
 |---------------------------|-------------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 02/22/20                      | 02/21/20                    | 02/21/20         | 02/06/20         |
+| Last update logged        | 02/22/20                      | 02/21/20                    | 02/21/20         | 02/21/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/04/20                      | 01/22/20                    | 01/20/20         | 01/20/20         |
-| Total confirmed cases     | 433                           | 204                         | 104              | 21               |
+| Total confirmed cases     | 433                           | 204                         | 104              | 28               |
 | New cases since yesterday | 225                           |                             |                  |                  |
 | Total suspected           | 0                             |                             |                  |                  |
-| Total hospitalized        |                               |                             | 8                | 5                |
+| Total hospitalized        |                               |                             | 8                | 21               |
 | Total recovered           | 12                            | 16                          |                  | 0                |
 | Total deaths              | 2                             | 2                           | 0                | 0                |
 
@@ -43,7 +43,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | Tencent  | Korea                 |         433 |
 | NIH      | Seoul, South Korea    |           1 |
 | JHU      | South Korea           |         204 |
-| BOP      | Gyeonggi, South Korea |           1 |
+| BOP      | Gyeonggi, South Korea |           3 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

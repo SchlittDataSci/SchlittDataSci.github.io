@@ -13,17 +13,17 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | Tencent                       | NIHFogarty       | BOP              |
+|                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
-| First update logged       | 01/22/20                    | 02/04/20                      | 01/13/20         | 01/12/20         |
-| Last update logged        | 02/21/20                    | 02/22/20                      | 02/21/20         | 02/06/20         |
+| First update logged       | 01/22/20                    | 02/04/20                      | 01/12/20         | 01/13/20         |
+| Last update logged        | 02/21/20                    | 02/22/20                      | 02/21/20         | 02/21/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/04/20                      | 01/25/20         | 01/25/20         |
 | Total confirmed cases     | 19                          | 17                            | 15               | 15               |
 | New cases since yesterday |                             | 0                             |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
 | Total hospitalized        |                             |                               | 5                | 5                |
-| Total recovered           | 11                          | 5                             |                  | 0                |
+| Total recovered           | 11                          | 5                             | 0                |                  |
 | Total deaths              | 0                           | 0                             | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent

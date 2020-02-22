@@ -2,9 +2,11 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "Tencent", "loc_name": "Italy", "confirmed": 6, "color": "mediumorchid", "size": 5000.0, "label": "Tencent : Italy: 6" }, "geometry": { "type": "Point", "coordinates": [ 1410896.288202714640647, 5257097.552514765411615 ] } },
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Rome, Italy", "confirmed": 3, "color": "blue", "size": 3535.5339059327375, "label": "NIH : Rome, Italy: 3" }, "geometry": { "type": "Point", "coordinates": [ 1389593.644979008939117, 5145012.713298514485359 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Italy", "confirmed": 3, "color": "red", "size": 3535.5339059327375, "label": "JHU : Italy: 3" }, "geometry": { "type": "Point", "coordinates": [ 1410896.288202714640647, 5257097.552514765411615 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Italy", "confirmed": 2, "color": "darkorange", "size": 2886.7513459481293, "label": "BOP : Italy: 2" }, "geometry": { "type": "Point", "coordinates": [ 1410896.288202714640647, 5257097.552514765411615 ] } }
+{ "type": "Feature", "properties": { "source": "Tencent", "loc_name": "Italy", "confirmed": 20, "color": "mediumorchid", "size": 5000.0, "label": "Tencent : Italy: 20" }, "geometry": { "type": "Point", "coordinates": [ 1410896.288202714640647, 5257097.552514765411615 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Rome, Italy", "confirmed": 3, "color": "blue", "size": 1936.4916731037083, "label": "NIH : Rome, Italy: 3" }, "geometry": { "type": "Point", "coordinates": [ 1389593.644979008939117, 5145012.713298514485359 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Italy", "confirmed": 20, "color": "red", "size": 5000.0, "label": "JHU : Italy: 20" }, "geometry": { "type": "Point", "coordinates": [ 1410896.288202714640647, 5257097.552514765411615 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Lombardia, Italy", "confirmed": 15, "color": "darkorange", "size": 4330.1270189221932, "label": "BOP : Lombardia, Italy: 15" }, "geometry": { "type": "Point", "coordinates": [ 1087468.194373974809423, 5719804.916086555458605 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Veneto, Italy", "confirmed": 2, "color": "darkorange", "size": 1581.1388300841897, "label": "BOP : Veneto, Italy: 2" }, "geometry": { "type": "Point", "coordinates": [ 1320975.565013447077945, 5724066.155804229900241 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Reggio Emilia, Italy", "confirmed": 1, "color": "darkorange", "size": 1118.0339887498949, "label": "BOP : Reggio Emilia, Italy: 1" }, "geometry": { "type": "Point", "coordinates": [ 1179407.389497681986541, 5560122.608058262616396 ] } }
 ]
 }
