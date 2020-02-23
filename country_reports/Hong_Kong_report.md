@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | NIHFogarty       | Tencent                       | JHU                         |
-|---------------------------|------------------|-------------------------------|-----------------------------|
-| First update logged       | 01/13/20         | 02/04/20                      | 01/22/20                    |
-| Last update logged        | 02/21/20         | 02/22/20                      | 02/21/20                    |
-| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list |
-| First known case          | 01/22/20         | 02/04/20                      | 01/22/20                    |
-| Total confirmed cases     | 70               | 69                            | 68                          |
-| New cases since yesterday |                  | 1                             |                             |
-| Total suspected           |                  | 0                             |                             |
-| Total hospitalized        | 56               |                               |                             |
-| Total recovered           |                  | 11                            | 5                           |
-| Total deaths              | 0                | 2                             | 2                           |
+|                           | NIHFogarty       | JHU                         | Tencent                       | BOP              |
+|---------------------------|------------------|-----------------------------|-------------------------------|------------------|
+| First update logged       | 01/13/20         | 01/22/20                    | 02/04/20                      | 01/12/20         |
+| Last update logged        | 02/21/20         | 02/22/20                    | 02/22/20                      | 02/22/20         |
+| Method                    | Public line list | Cases by day & country list | Daily cases in country scrape | Public line list |
+| First known case          | 01/22/20         | 01/22/20                    | 02/04/20                      | 02/22/20         |
+| Total confirmed cases     | 70               | 69                          | 69                            | 1                |
+| New cases since yesterday |                  | 1                           | 1                             |                  |
+| Total suspected           |                  |                             | 0                             |                  |
+| Total hospitalized        | 56               |                             |                               | 1                |
+| Total recovered           |                  | 6                           | 11                            | 0                |
+| Total deaths              | 0                | 2                           | 2                             | 0                |
 
-Data sources: JHU, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Hong_Kong_sitrep.csv)
@@ -49,9 +49,10 @@ Data sources: JHU, NIH-Fogarty, Tencent
 | NIH      | Zhuhai, Hong Kong       |           1 |
 | NIH      | Yau Ma Tei, Hong Kong   |           1 |
 | NIH      | Ngau Chi Wan, Hong Kong |           1 |
-| JHU      | Hong Kong, Hong Kong    |          68 |
+| JHU      | Hong Kong, Hong Kong    |          69 |
+| BOP      | Hong Kong, Hong Kong    |           1 |
 
-Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Hong_Kong_case_locs.geojson)
@@ -68,6 +69,14 @@ Data source: NIH-Fogarty
 
 
 #### Fig 4:
+![Hong Kong cases](../cluster_analysis/Hong_Kong_imported_cases_BOP.png)
+
+
+
+Data source: BOP
+
+
+#### Fig 5:
 ![Hong Kong network](../autochthonous_networks/Hong_Kong_network.png)
 
 
