@@ -1,6 +1,6 @@
 # Vietnam
 ## NSSAC COVID-19 Summary
-## 02/22/2020
+## 02/23/2020
 
 
 
@@ -48,10 +48,10 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | JHU      | Vietnam                     |          16 |
 | BOP      | Vinh Phuc Province, Vietnam |           4 |
 | BOP      | Vinh Phuc, Vietnam          |           3 |
-| BOP      | Khanh Hoa province, Vietnam |           2 |
 | BOP      | Vinh Phuc province, Vietnam |           2 |
-| BOP      | Thanh Hoa, Vietnam          |           1 |
+| BOP      | Khanh Hoa province, Vietnam |           2 |
 | BOP      | Nha Trang, Vietnam          |           1 |
+| BOP      | Thanh Hoa, Vietnam          |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

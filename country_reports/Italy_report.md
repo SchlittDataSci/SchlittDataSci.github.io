@@ -1,6 +1,6 @@
 # Italy
 ## NSSAC COVID-19 Summary
-## 02/22/2020
+## 02/23/2020
 
 
 
@@ -45,8 +45,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | JHU      | Italy                 |          62 |
 | BOP      | Lombardia, Italy      |          47 |
 | BOP      | Veneto, Italy         |          11 |
-| BOP      | Emilia-Romagna, Italy |           1 |
 | BOP      | Piemonte, Italy       |           1 |
+| BOP      | Emilia-Romagna, Italy |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

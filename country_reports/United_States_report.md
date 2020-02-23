@@ -1,6 +1,6 @@
 # United States
 ## NSSAC COVID-19 Summary
-## 02/22/2020
+## 02/23/2020
 
 
 
@@ -43,11 +43,11 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | Tencent  | United States                            |          34 |
 | NIH      | California, United States                |           8 |
 | NIH      | Illinois, United States                  |           2 |
-| NIH      | Texas, United States                     |           1 |
 | NIH      | Washington, United States                |           1 |
 | NIH      | Arizona, United States                   |           1 |
-| NIH      | Wisconsin, United States                 |           1 |
 | NIH      | Massachusetts, United States             |           1 |
+| NIH      | Texas, United States                     |           1 |
+| NIH      | Wisconsin, United States                 |           1 |
 | JHU      | Omaha, NE (From Diamond Princess), US    |          11 |
 | JHU      | Travis, CA (From Diamond Princess), US   |           5 |
 | JHU      | San Diego County, CA, US                 |           2 |
@@ -66,11 +66,11 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | JHU      | Sacramento County, CA, US                |           1 |
 | BOP      | California, United States                |          10 |
 | BOP      | Illinois, United States                  |           2 |
-| BOP      | Wisconsin, United States                 |           1 |
 | BOP      | Massachusetts, United States             |           1 |
+| BOP      | Wisconsin, United States                 |           1 |
+| BOP      | Texas, United States                     |           1 |
 | BOP      | Washington State, United States          |           1 |
 | BOP      | Arizona, United States                   |           1 |
-| BOP      | Texas, United States                     |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

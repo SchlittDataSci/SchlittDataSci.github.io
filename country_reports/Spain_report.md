@@ -1,6 +1,6 @@
 # Spain
 ## NSSAC COVID-19 Summary
-## 02/22/2020
+## 02/23/2020
 
 
 
@@ -41,11 +41,11 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name              |   confirmed |
 |----------|-----------------------|-------------|
 | Tencent  | Spain                 |           2 |
-| NIH      | Mallorca, Spain       |           1 |
 | NIH      | Canary Islands, Spain |           1 |
+| NIH      | Mallorca, Spain       |           1 |
 | JHU      | Spain                 |           2 |
-| BOP      | Mallorca, Spain       |           1 |
 | BOP      | Canary Islands, Spain |           1 |
+| BOP      | Mallorca, Spain       |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

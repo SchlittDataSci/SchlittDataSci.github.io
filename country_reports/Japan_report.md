@@ -1,6 +1,6 @@
 # Japan
 ## NSSAC COVID-19 Summary
-## 02/22/2020
+## 02/23/2020
 
 
 
@@ -52,12 +52,12 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Nara Prefecture, Japan     |           2 |
 | NIH      | Kyoto, Japan               |           2 |
 | NIH      | Fukuoka Prefecture, Japan  |           2 |
-| NIH      | Osaka Prefecture, Japan    |           1 |
 | NIH      | Haneda, Japan              |           1 |
-| NIH      | Ishikawa, Japan            |           1 |
 | NIH      | Mie, Japan                 |           1 |
 | NIH      | Saitama Prefecture, Japan  |           1 |
+| NIH      | Osaka Prefecture, Japan    |           1 |
 | NIH      | Sapporo, Japan             |           1 |
+| NIH      | Ishikawa, Japan            |           1 |
 | JHU      | Japan                      |         122 |
 | BOP      | Kanagawa, Japan            |         463 |
 | BOP      | Kanagawa Prefecture, Japan |          90 |
@@ -67,13 +67,13 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | BOP      | Chiba, Japan               |          10 |
 | BOP      | Wakayama Prefecture, Japan |           5 |
 | BOP      | Wakayama, Japan            |           4 |
-| BOP      | Ishikawa, Japan            |           2 |
 | BOP      | Saitama, Japan             |           2 |
 | BOP      | Kumamoto, Japan            |           2 |
+| BOP      | Ishikawa, Japan            |           2 |
 | BOP      | Kyoto Prefecture, Japan    |           2 |
+| BOP      | Osaka, Japan               |           1 |
 | BOP      | Mie, Japan                 |           1 |
 | BOP      | Okinawa, Japan             |           1 |
-| BOP      | Osaka, Japan               |           1 |
 | BOP      | Nara Prefecture, Japan     |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

@@ -1,6 +1,6 @@
 # South Korea
 ## NSSAC COVID-19 Summary
-## 02/22/2020
+## 02/23/2020
 
 
 
@@ -49,11 +49,11 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | BOP      | Honam, South Korea     |           3 |
 | BOP      | Gyeonggi, South Korea  |           3 |
 | BOP      | Chungbuk, South Korea  |           2 |
+| BOP      | Hoseo, South Korea     |           1 |
+| BOP      | Jeju, South Korea      |           1 |
+| BOP      | Ulsan, South Korea     |           1 |
 | BOP      | Jeonbuk, South Korea   |           1 |
 | BOP      | Jeonnam, South Korea   |           1 |
-| BOP      | Hoseo, South Korea     |           1 |
-| BOP      | Ulsan, South Korea     |           1 |
-| BOP      | Jeju, South Korea      |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
