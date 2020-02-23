@@ -16,11 +16,11 @@
 |                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 02/04/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 02/21/20                    | 02/22/20                      | 02/21/20         | 02/21/20         |
+| Last update logged        | 02/22/20                    | 02/22/20                      | 02/22/20         | 02/21/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/04/20                      | 01/25/20         | 01/25/20         |
-| Total confirmed cases     | 19                          | 17                            | 15               | 15               |
-| New cases since yesterday |                             | 0                             |                  |                  |
+| Total confirmed cases     | 22                          | 17                            | 15               | 15               |
+| New cases since yesterday | 3                           | 0                             |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
 | Total hospitalized        |                             |                               | 5                | 5                |
 | Total recovered           | 11                          | 5                             | 0                |                  |
@@ -45,10 +45,10 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Victoria, Australia              |           4 |
 | NIH      | NSW, Australia                   |           4 |
 | NIH      | South Australia, Australia       |           2 |
+| JHU      | From Diamond Princess, Australia |           7 |
 | JHU      | Queensland, Australia            |           5 |
 | JHU      | New South Wales, Australia       |           4 |
 | JHU      | Victoria, Australia              |           4 |
-| JHU      | From Diamond Princess, Australia |           4 |
 | JHU      | South Australia, Australia       |           2 |
 | BOP      | Queensland, Australia            |           5 |
 | BOP      | Victoria, Australia              |           4 |
