@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | NIHFogarty       |
-|---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/21/20                    | 02/21/20         |
-| Method                    | Cases by day & country list | Public line list |
-| First known case          | 01/22/20                    | 02/21/20         |
-| Total confirmed cases     | 1                           | 1                |
-| New cases since yesterday | 1                           |                  |
-| Total suspected           |                             |                  |
-| Total hospitalized        |                             | 0                |
-| Total recovered           | 0                           |                  |
-| Total deaths              | 0                           | 0                |
+|                           | BOP              | JHU                         | NIHFogarty       |
+|---------------------------|------------------|-----------------------------|------------------|
+| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/22/20         | 02/22/20                    | 02/21/20         |
+| Method                    | Public line list | Cases by day & country list | Public line list |
+| First known case          | 02/21/20         | 01/22/20                    | 02/21/20         |
+| Total confirmed cases     | 1                | 1                           | 1                |
+| New cases since yesterday |                  | 0                           |                  |
+| Total suspected           |                  |                             |                  |
+| Total hospitalized        | 0                |                             | 0                |
+| Total recovered           | 0                | 0                           |                  |
+| Total deaths              | 0                | 0                           | 0                |
 
-Data sources: JHU, NIH-Fogarty, 
+Data sources: BOP, JHU, NIH-Fogarty, 
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Lebanon_sitrep.csv)
@@ -38,13 +38,14 @@ Data sources: JHU, NIH-Fogarty,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name      |   confirmed |
-|----------|---------------|-------------|
-| Tencent  | Lebanon       |           1 |
-| NIH      | Lebanon       |           1 |
-| JHU      | None, Lebanon |           1 |
+| source   | loc_name        |   confirmed |
+|----------|-----------------|-------------|
+| Tencent  | Lebanon         |           1 |
+| NIH      | Lebanon         |           1 |
+| JHU      | Lebanon         |           1 |
+| BOP      | Beirut, Lebanon |           1 |
 
-Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Lebanon_case_locs.geojson)
@@ -61,6 +62,14 @@ Data source: NIH-Fogarty
 
 
 #### Fig 4:
+![Lebanon cases](../cluster_analysis/Lebanon_imported_cases_BOP.png)
+
+
+
+Data source: BOP
+
+
+#### Fig 5:
 ![Lebanon network](../autochthonous_networks/Lebanon_network.png)
 
 

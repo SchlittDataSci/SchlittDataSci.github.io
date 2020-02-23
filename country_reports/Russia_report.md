@@ -16,7 +16,7 @@
 |                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
 |---------------------------|------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/06/20                      |
-| Last update logged        | 02/21/20         | 02/21/20                    | 02/21/20         | 02/13/20                      |
+| Last update logged        | 02/22/20         | 02/22/20                    | 02/21/20         | 02/13/20                      |
 | Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/31/20         | 01/22/20                    | 01/31/20         | 02/06/20                      |
 | Total confirmed cases     | 2                | 2                           | 2                | 2                             |

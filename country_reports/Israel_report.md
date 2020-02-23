@@ -16,11 +16,11 @@
 |                           | JHU                         | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/21/20                    | 02/21/20         |
+| Last update logged        | 02/22/20                    | 02/21/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/21/20         |
 | Total confirmed cases     | 1                           | 1                |
-| New cases since yesterday | 1                           |                  |
+| New cases since yesterday | 0                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 0                           |                  |

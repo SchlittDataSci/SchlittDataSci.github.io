@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
+|                           | Tencent                       | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-------------------------------|-----------------------------|------------------|------------------|
-| First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 02/22/20                      | 02/21/20                    | 02/21/20         | 02/21/20         |
+| First update logged       | 02/04/20                      | 01/22/20                    | 01/12/20         | 01/13/20         |
+| Last update logged        | 02/22/20                      | 02/22/20                    | 02/22/20         | 02/21/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/04/20                      | 01/22/20                    | 01/20/20         | 01/20/20         |
-| Total confirmed cases     | 433                           | 204                         | 104              | 28               |
-| New cases since yesterday | 225                           |                             |                  |                  |
+| Total confirmed cases     | 556                           | 433                         | 257              | 104              |
+| New cases since yesterday | 348                           | 229                         |                  |                  |
 | Total suspected           | 0                             |                             |                  |                  |
-| Total hospitalized        |                               |                             | 8                | 21               |
-| Total recovered           | 12                            | 16                          |                  | 0                |
-| Total deaths              | 2                             | 2                           | 0                | 0                |
+| Total hospitalized        |                               |                             | 21               | 8                |
+| Total recovered           | 12                            | 16                          | 0                |                  |
+| Total deaths              | 4                             | 2                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -38,12 +38,22 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name              |   confirmed |
-|----------|-----------------------|-------------|
-| Tencent  | Korea                 |         433 |
-| NIH      | Seoul, South Korea    |           1 |
-| JHU      | South Korea           |         204 |
-| BOP      | Gyeonggi, South Korea |           3 |
+| source   | loc_name               |   confirmed |
+|----------|------------------------|-------------|
+| Tencent  | Korea                  |         556 |
+| NIH      | Seoul, South Korea     |           1 |
+| JHU      | South Korea            |         433 |
+| BOP      | Gyeongbuk, South Korea |         117 |
+| BOP      | Yeongnam, South Korea  |          94 |
+| BOP      | Gangwon, South Korea   |           5 |
+| BOP      | Honam, South Korea     |           3 |
+| BOP      | Gyeonggi, South Korea  |           3 |
+| BOP      | Chungbuk, South Korea  |           2 |
+| BOP      | Jeonbuk, South Korea   |           1 |
+| BOP      | Jeonnam, South Korea   |           1 |
+| BOP      | Hoseo, South Korea     |           1 |
+| BOP      | Ulsan, South Korea     |           1 |
+| BOP      | Jeju, South Korea      |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

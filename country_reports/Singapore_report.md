@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
-|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
-| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/22/20                      | 02/21/20         | 02/21/20                    | 02/21/20         |
-| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
-| First known case          | 02/04/20                      | 01/23/20         | 01/22/20                    | 01/24/20         |
-| Total confirmed cases     | 89                            | 87               | 85                          | 85               |
-| New cases since yesterday | 4                             |                  |                             |                  |
-| Total suspected           | 0                             |                  |                             |                  |
-| Total hospitalized        |                               | 66               |                             | 70               |
-| Total recovered           | 49                            | 2                | 37                          |                  |
-| Total deaths              | 0                             | 0                | 0                           | 0                |
+|                           | BOP              | Tencent                       | JHU                         | NIHFogarty       |
+|---------------------------|------------------|-------------------------------|-----------------------------|------------------|
+| First update logged       | 01/12/20         | 02/04/20                      | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/22/20         | 02/22/20                      | 02/22/20                    | 02/21/20         |
+| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
+| First known case          | 01/23/20         | 02/04/20                      | 01/22/20                    | 01/24/20         |
+| Total confirmed cases     | 90               | 89                            | 85                          | 85               |
+| New cases since yesterday | 1                | 4                             | 0                           |                  |
+| Total suspected           |                  | 0                             |                             |                  |
+| Total hospitalized        | 67               |                               |                             | 70               |
+| Total recovered           | 2                | 49                            | 37                          |                  |
+| Total deaths              | 0                | 0                             | 0                           | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -43,7 +43,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | Tencent  | Singapore  |          89 |
 | NIH      | Singapore  |          85 |
 | JHU      | Singapore  |          85 |
-| BOP      | Singapore  |          87 |
+| BOP      | Singapore  |          90 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
