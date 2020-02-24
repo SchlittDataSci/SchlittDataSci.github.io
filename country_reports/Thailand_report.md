@@ -1,6 +1,6 @@
 # Thailand
 ## NSSAC COVID-19 Summary
-## 02/23/2020
+## 02/24/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | JHU                         | NIHFogarty       | Tencent                       | BOP              |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      | 01/12/20         |
-| Last update logged        | 02/22/20                    | 02/21/20         | 02/20/20                      | 02/22/20         |
+| Last update logged        | 02/23/20                    | 02/21/20         | 02/20/20                      | 02/22/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 01/13/20         | 02/04/20                      | 01/12/20         |
 | Total confirmed cases     | 35                          | 35               | 35                            | 34               |
 | New cases since yesterday | 0                           |                  |                               |                  |
 | Total suspected           |                             |                  | 0                             |                  |
 | Total hospitalized        |                             | 8                |                               | 4                |
-| Total recovered           | 17                          |                  | 15                            | 1                |
+| Total recovered           | 21                          |                  | 15                            | 1                |
 | Total deaths              | 0                           | 0                | 0                             | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
@@ -40,7 +40,6 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name                |   confirmed |
 |----------|-------------------------|-------------|
-| Tencent  | Thailand                |          35 |
 | NIH      | Thailand                |          35 |
 | JHU      | Thailand                |          35 |
 | BOP      | Nonthaburi, Thailand    |           8 |

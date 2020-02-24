@@ -1,6 +1,6 @@
 # Nepal
 ## NSSAC COVID-19 Summary
-## 02/23/2020
+## 02/24/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         | NIHFogarty       |
-|---------------------------|------------------|-----------------------------|------------------|
-| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/22/20         | 02/22/20                    | 02/21/20         |
-| Method                    | Public line list | Cases by day & country list | Public line list |
-| First known case          | 01/24/20         | 01/22/20                    | 01/25/20         |
-| Total confirmed cases     | 1                | 1                           | 1                |
-| New cases since yesterday |                  | 0                           |                  |
-| Total suspected           |                  |                             |                  |
-| Total hospitalized        | 1                |                             | 1                |
-| Total recovered           | 1                | 1                           |                  |
-| Total deaths              | 0                | 0                           | 0                |
+|                           | JHU                         | BOP              | NIHFogarty       |
+|---------------------------|-----------------------------|------------------|------------------|
+| First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         |
+| Last update logged        | 02/23/20                    | 02/22/20         | 02/21/20         |
+| Method                    | Cases by day & country list | Public line list | Public line list |
+| First known case          | 01/22/20                    | 01/24/20         | 01/25/20         |
+| Total confirmed cases     | 1                           | 1                | 1                |
+| New cases since yesterday | 0                           |                  |                  |
+| Total suspected           |                             |                  |                  |
+| Total hospitalized        |                             | 1                | 1                |
+| Total recovered           | 1                           | 1                |                  |
+| Total deaths              | 0                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, 
 
@@ -40,7 +40,6 @@ Data sources: BOP, JHU, NIH-Fogarty,
 
 | source   | loc_name         |   confirmed |
 |----------|------------------|-------------|
-| Tencent  | Nepal            |           1 |
 | NIH      | Kathmandu, Nepal |           1 |
 | JHU      | Nepal            |           1 |
 | BOP      | Nepal            |           1 |

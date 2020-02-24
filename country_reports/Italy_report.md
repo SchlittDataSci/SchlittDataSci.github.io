@@ -1,6 +1,6 @@
 # Italy
 ## NSSAC COVID-19 Summary
-## 02/23/2020
+## 02/24/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
-|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
-| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/22/20                      | 02/22/20         | 02/22/20                    | 02/21/20         |
-| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
-| First known case          | 02/04/20                      | 01/31/20         | 01/22/20                    | 01/31/20         |
-| Total confirmed cases     | 79                            | 64               | 62                          | 3                |
-| New cases since yesterday | 73                            | 44               | 42                          |                  |
-| Total suspected           | 0                             |                  |                             |                  |
-| Total hospitalized        |                               | 2                |                             | 0                |
-| Total recovered           | 0                             | 0                | 1                           |                  |
-| Total deaths              | 2                             | 0                | 2                           | 0                |
+|                           | Tencent                       | JHU                         | BOP              | NIHFogarty       |
+|---------------------------|-------------------------------|-----------------------------|------------------|------------------|
+| First update logged       | 02/04/20                      | 01/22/20                    | 01/12/20         | 01/13/20         |
+| Last update logged        | 02/24/20                      | 02/23/20                    | 02/22/20         | 02/21/20         |
+| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
+| First known case          | 02/04/20                      | 01/22/20                    | 01/31/20         | 01/31/20         |
+| Total confirmed cases     | 230                           | 155                         | 64               | 3                |
+| New cases since yesterday | 73                            |                             |                  |                  |
+| Total suspected           | 0                             |                             |                  |                  |
+| Total hospitalized        |                               |                             | 2                | 0                |
+| Total recovered           | 2                             | 2                           | 0                |                  |
+| Total deaths              | 6                             | 3                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -40,13 +40,12 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name              |   confirmed |
 |----------|-----------------------|-------------|
-| Tencent  | Italy                 |          79 |
 | NIH      | Rome, Italy           |           3 |
-| JHU      | Italy                 |          62 |
+| JHU      | Italy                 |         155 |
 | BOP      | Lombardia, Italy      |          47 |
 | BOP      | Veneto, Italy         |          11 |
-| BOP      | Piemonte, Italy       |           1 |
 | BOP      | Emilia-Romagna, Italy |           1 |
+| BOP      | Piemonte, Italy       |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

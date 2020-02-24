@@ -1,6 +1,6 @@
 # Japan
 ## NSSAC COVID-19 Summary
-## 02/23/2020
+## 02/24/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
 |---------------------------|-------------------------------|------------------|-----------------------------|------------------|
 | First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/20/20                      | 02/22/20         | 02/22/20                    | 02/21/20         |
+| Last update logged        | 02/20/20                      | 02/22/20         | 02/23/20                    | 02/21/20         |
 | Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
 | First known case          | 02/04/20                      | 01/15/20         | 01/22/20                    | 01/15/20         |
-| Total confirmed cases     | 729                           | 650              | 122                         | 91               |
-| New cases since yesterday |                               | 23               | 17                          |                  |
+| Total confirmed cases     | 729                           | 650              | 147                         | 91               |
+| New cases since yesterday |                               |                  | 25                          |                  |
 | Total suspected           | 0                             |                  |                             |                  |
 | Total hospitalized        |                               | 51               |                             | 61               |
 | Total recovered           | 1                             | 1                | 22                          |                  |
@@ -45,20 +45,20 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Aichi Prefecture, Japan    |           7 |
 | NIH      | Hokkaido, Japan            |           7 |
 | NIH      | Chiba Prefecture, Japan    |           6 |
-| NIH      | Sagamihara, Japan          |           4 |
 | NIH      | Nagoya City, Japan         |           4 |
 | NIH      | Kanagawa, Japan            |           4 |
+| NIH      | Sagamihara, Japan          |           4 |
 | NIH      | Okinawa Prefecture, Japan  |           3 |
 | NIH      | Nara Prefecture, Japan     |           2 |
 | NIH      | Kyoto, Japan               |           2 |
 | NIH      | Fukuoka Prefecture, Japan  |           2 |
-| NIH      | Haneda, Japan              |           1 |
-| NIH      | Mie, Japan                 |           1 |
-| NIH      | Saitama Prefecture, Japan  |           1 |
-| NIH      | Osaka Prefecture, Japan    |           1 |
 | NIH      | Sapporo, Japan             |           1 |
 | NIH      | Ishikawa, Japan            |           1 |
-| JHU      | Japan                      |         122 |
+| NIH      | Osaka Prefecture, Japan    |           1 |
+| NIH      | Saitama Prefecture, Japan  |           1 |
+| NIH      | Haneda, Japan              |           1 |
+| NIH      | Mie, Japan                 |           1 |
+| JHU      | Japan                      |         147 |
 | BOP      | Kanagawa, Japan            |         463 |
 | BOP      | Kanagawa Prefecture, Japan |          90 |
 | BOP      | Tokyo, Japan               |          28 |
@@ -67,14 +67,14 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | BOP      | Chiba, Japan               |          10 |
 | BOP      | Wakayama Prefecture, Japan |           5 |
 | BOP      | Wakayama, Japan            |           4 |
-| BOP      | Saitama, Japan             |           2 |
 | BOP      | Kumamoto, Japan            |           2 |
-| BOP      | Ishikawa, Japan            |           2 |
 | BOP      | Kyoto Prefecture, Japan    |           2 |
-| BOP      | Osaka, Japan               |           1 |
-| BOP      | Mie, Japan                 |           1 |
+| BOP      | Saitama, Japan             |           2 |
+| BOP      | Ishikawa, Japan            |           2 |
 | BOP      | Okinawa, Japan             |           1 |
+| BOP      | Mie, Japan                 |           1 |
 | BOP      | Nara Prefecture, Japan     |           1 |
+| BOP      | Osaka, Japan               |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
