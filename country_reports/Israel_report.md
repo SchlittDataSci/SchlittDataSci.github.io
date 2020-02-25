@@ -16,7 +16,7 @@
 |                           | JHU                         | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/23/20                    | 02/21/20         |
+| Last update logged        | 02/24/20                    | 02/24/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/21/20         |
 | Total confirmed cases     | 1                           | 1                |

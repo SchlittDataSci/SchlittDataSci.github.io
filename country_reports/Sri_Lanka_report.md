@@ -13,17 +13,17 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | BOP              | NIHFogarty       | Tencent                       |
+|                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
-| First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         | 02/04/20                      |
-| Last update logged        | 02/23/20                    | 02/22/20         | 02/21/20         | 02/11/20                      |
+| First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/04/20                      |
+| Last update logged        | 02/24/20                    | 02/24/20         | 02/22/20         | 02/11/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
-| First known case          | 01/22/20                    | 01/27/20         | 01/28/20         | 02/04/20                      |
+| First known case          | 01/22/20                    | 01/28/20         | 01/27/20         | 02/04/20                      |
 | Total confirmed cases     | 1                           | 1                | 1                | 1                             |
 | New cases since yesterday | 0                           |                  |                  |                               |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 1                | 1                |                               |
-| Total recovered           | 1                           | 0                |                  | 1                             |
+| Total recovered           | 1                           |                  | 0                | 1                             |
 | Total deaths              | 0                           | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent

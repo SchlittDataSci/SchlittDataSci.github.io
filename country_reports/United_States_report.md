@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | JHU                         | BOP              | NIHFogarty       |
-|---------------------------|-------------------------------|-----------------------------|------------------|------------------|
-| First update logged       | 02/04/20                      | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 02/24/20                      | 02/23/20                    | 02/22/20         | 02/21/20         |
-| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
-| First known case          | 02/04/20                      | 01/22/20                    | 01/20/20         | 01/21/20         |
-| Total confirmed cases     | 35                            | 35                          | 17               | 15               |
-| New cases since yesterday | 0                             |                             |                  |                  |
-| Total suspected           | 0                             |                             |                  |                  |
-| Total hospitalized        |                               |                             | 2                | 4                |
-| Total recovered           | 3                             | 5                           | 0                |                  |
-| Total deaths              | 0                             | 0                           | 0                | 0                |
+|                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
+|---------------------------|-----------------------------|-------------------------------|------------------|------------------|
+| First update logged       | 01/22/20                    | 02/04/20                      | 01/12/20         | 01/13/20         |
+| Last update logged        | 02/24/20                    | 02/24/20                      | 02/22/20         | 02/24/20         |
+| Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
+| First known case          | 01/22/20                    | 02/04/20                      | 01/20/20         | 01/21/20         |
+| Total confirmed cases     | 53                          | 53                            | 17               | 15               |
+| New cases since yesterday | 18                          | 18                            |                  |                  |
+| Total suspected           |                             | 0                             |                  |                  |
+| Total hospitalized        |                             |                               | 2                | 4                |
+| Total recovered           | 5                           | 3                             | 0                |                  |
+| Total deaths              | 0                           | 0                             | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -38,38 +38,39 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name                                 |   confirmed |
-|----------|------------------------------------------|-------------|
-| NIH      | California, United States                |           8 |
-| NIH      | Illinois, United States                  |           2 |
-| NIH      | Arizona, United States                   |           1 |
-| NIH      | Washington, United States                |           1 |
-| NIH      | Wisconsin, United States                 |           1 |
-| NIH      | Massachusetts, United States             |           1 |
-| NIH      | Texas, United States                     |           1 |
-| JHU      | Omaha, NE (From Diamond Princess), US    |          11 |
-| JHU      | Travis, CA (From Diamond Princess), US   |           5 |
-| JHU      | San Diego County, CA, US                 |           2 |
-| JHU      | Chicago, IL, US                          |           2 |
-| JHU      | Santa Clara, CA, US                      |           2 |
-| JHU      | San Benito, CA, US                       |           2 |
-| JHU      | Lackland, TX (From Diamond Princess), US |           2 |
-| JHU      | Seattle, WA, US                          |           1 |
-| JHU      | Sacramento County, CA, US                |           1 |
-| JHU      | Humboldt County, CA, US                  |           1 |
-| JHU      | San Antonio, TX, US                      |           1 |
-| JHU      | Madison, WI, US                          |           1 |
-| JHU      | Boston, MA, US                           |           1 |
-| JHU      | Los Angeles, CA, US                      |           1 |
-| JHU      | Orange, CA, US                           |           1 |
-| JHU      | Tempe, AZ, US                            |           1 |
-| BOP      | California, United States                |          10 |
-| BOP      | Illinois, United States                  |           2 |
-| BOP      | Texas, United States                     |           1 |
-| BOP      | Wisconsin, United States                 |           1 |
-| BOP      | Massachusetts, United States             |           1 |
-| BOP      | Arizona, United States                   |           1 |
-| BOP      | Washington State, United States          |           1 |
+| source   | loc_name                                        |   confirmed |
+|----------|-------------------------------------------------|-------------|
+| NIH      | California, United States                       |           8 |
+| NIH      | Illinois, United States                         |           2 |
+| NIH      | Arizona, United States                          |           1 |
+| NIH      | Washington, United States                       |           1 |
+| NIH      | Wisconsin, United States                        |           1 |
+| NIH      | Massachusetts, United States                    |           1 |
+| NIH      | Texas, United States                            |           1 |
+| JHU      | Unassigned Location (From Diamond Princess), US |          36 |
+| JHU      | San Diego County, CA, US                        |           2 |
+| JHU      | San Benito, CA, US                              |           2 |
+| JHU      | Chicago, IL, US                                 |           2 |
+| JHU      | Santa Clara, CA, US                             |           2 |
+| JHU      | Seattle, WA, US                                 |           1 |
+| JHU      | Sacramento County, CA, US                       |           1 |
+| JHU      | Humboldt County, CA, US                         |           1 |
+| JHU      | San Antonio, TX, US                             |           1 |
+| JHU      | Madison, WI, US                                 |           1 |
+| JHU      | Boston, MA, US                                  |           1 |
+| JHU      | Los Angeles, CA, US                             |           1 |
+| JHU      | Orange, CA, US                                  |           1 |
+| JHU      | Tempe, AZ, US                                   |           1 |
+| JHU      | Lackland, TX (From Diamond Princess), US        |           0 |
+| JHU      | Travis, CA (From Diamond Princess), US          |           0 |
+| JHU      | Omaha, NE (From Diamond Princess), US           |           0 |
+| BOP      | California, United States                       |          10 |
+| BOP      | Illinois, United States                         |           2 |
+| BOP      | Washington State, United States                 |           1 |
+| BOP      | Texas, United States                            |           1 |
+| BOP      | Massachusetts, United States                    |           1 |
+| BOP      | Wisconsin, United States                        |           1 |
+| BOP      | Arizona, United States                          |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

@@ -2,9 +2,9 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "London, United Kingdom", "confirmed": 7, "color": "blue", "size": 4409.5855184409847, "label": "NIH : London, United Kingdom: 7" }, "geometry": { "type": "Point", "coordinates": [ -14209.643569085306808, 6711528.507310883142054 ] } },
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "York, United Kingdom", "confirmed": 2, "color": "blue", "size": 2357.0226039551585, "label": "NIH : York, United Kingdom: 2" }, "geometry": { "type": "Point", "coordinates": [ -120396.047926542989444, 7162405.7062165485695 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "UK", "confirmed": 9, "color": "red", "size": 5000.0, "label": "JHU : UK: 9" }, "geometry": { "type": "Point", "coordinates": [ -364746.693941817618906, 7304312.167817082256079 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "United Kingdom", "confirmed": 9, "color": "darkorange", "size": 5000.0, "label": "BOP : United Kingdom: 9" }, "geometry": { "type": "Point", "coordinates": [ -364746.693941817618906, 7304312.167817082256079 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "London, United Kingdom", "confirmed": 7, "color": "blue", "size": 3668.9969285267143, "label": "NIH : London, United Kingdom: 7" }, "geometry": { "type": "Point", "coordinates": [ -14209.643569085306808, 6711528.507310883142054 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "York, United Kingdom", "confirmed": 2, "color": "blue", "size": 1961.1613513818404, "label": "NIH : York, United Kingdom: 2" }, "geometry": { "type": "Point", "coordinates": [ -120396.047926542989444, 7162405.7062165485695 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "UK", "confirmed": 13, "color": "red", "size": 5000.0, "label": "JHU : UK: 13" }, "geometry": { "type": "Point", "coordinates": [ -364746.693941817618906, 7304312.167817082256079 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "United Kingdom", "confirmed": 9, "color": "darkorange", "size": 4160.2514716892183, "label": "BOP : United Kingdom: 9" }, "geometry": { "type": "Point", "coordinates": [ -364746.693941817618906, 7304312.167817082256079 ] } }
 ]
 }

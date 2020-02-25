@@ -13,17 +13,17 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | BOP              | NIHFogarty       | Tencent                       |
+|                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
-| First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         | 02/07/20                      |
-| Last update logged        | 02/23/20                    | 02/22/20         | 02/21/20         | 02/14/20                      |
+| First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/07/20                      |
+| Last update logged        | 02/24/20                    | 02/24/20         | 02/22/20         | 02/14/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/31/20         | 01/31/20         | 02/07/20                      |
-| Total confirmed cases     | 9                           | 9                | 9                | 9                             |
-| New cases since yesterday | 0                           |                  |                  |                               |
+| Total confirmed cases     | 13                          | 9                | 9                | 9                             |
+| New cases since yesterday | 4                           |                  |                  |                               |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 0                | 0                |                               |
-| Total recovered           | 8                           | 0                |                  | 0                             |
+| Total recovered           | 8                           |                  | 0                | 0                             |
 | Total deaths              | 0                           | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
@@ -42,7 +42,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----------|------------------------|-------------|
 | NIH      | London, United Kingdom |           7 |
 | NIH      | York, United Kingdom   |           2 |
-| JHU      | UK                     |           9 |
+| JHU      | UK                     |          13 |
 | BOP      | United Kingdom         |           9 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
