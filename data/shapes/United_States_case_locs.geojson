@@ -2,7 +2,7 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "California, United States", "confirmed": 8, "color": "blue", "size": 2357.0226039551585, "label": "NIH : California, United States: 8" }, "geometry": { "type": "Point", "coordinates": [ -13219857.159215319901705, 4397575.88495201151818 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "California, United States", "confirmed": 10, "color": "blue", "size": 2635.2313834736497, "label": "NIH : California, United States: 10" }, "geometry": { "type": "Point", "coordinates": [ -13219857.159215319901705, 4397575.88495201151818 ] } },
 { "type": "Feature", "properties": { "source": "NIH", "loc_name": "Illinois, United States", "confirmed": 2, "color": "blue", "size": 1178.5113019775793, "label": "NIH : Illinois, United States: 2" }, "geometry": { "type": "Point", "coordinates": [ -9955717.149759724736214, 4877525.102300480008125 ] } },
 { "type": "Feature", "properties": { "source": "NIH", "loc_name": "Arizona, United States", "confirmed": 1, "color": "blue", "size": 833.33333333333337, "label": "NIH : Arizona, United States: 1" }, "geometry": { "type": "Point", "coordinates": [ -12441430.918048348277807, 4082011.137493987567723 ] } },
 { "type": "Feature", "properties": { "source": "NIH", "loc_name": "Washington, United States", "confirmed": 1, "color": "blue", "size": 833.33333333333337, "label": "NIH : Washington, United States: 1" }, "geometry": { "type": "Point", "coordinates": [ -8575669.841297082602978, 4706627.088546228595078 ] } },

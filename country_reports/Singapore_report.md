@@ -1,6 +1,6 @@
 # Singapore
 ## NSSAC COVID-19 Summary
-## 02/24/2020
+## 02/25/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | NIHFogarty       | Tencent                       | BOP              | JHU                         |
 |---------------------------|------------------|-------------------------------|------------------|-----------------------------|
 | First update logged       | 01/13/20         | 02/04/20                      | 01/12/20         | 01/22/20                    |
-| Last update logged        | 02/24/20         | 02/24/20                      | 02/22/20         | 02/24/20                    |
+| Last update logged        | 02/25/20         | 02/25/20                      | 02/22/20         | 02/24/20                    |
 | Method                    | Public line list | Daily cases in country scrape | Public line list | Cases by day & country list |
 | First known case          | 01/24/20         | 02/04/20                      | 01/23/20         | 01/22/20                    |
 | Total confirmed cases     | 90               | 90                            | 90               | 89                          |
-| New cases since yesterday |                  | 1                             |                  | 0                           |
+| New cases since yesterday |                  | 0                             |                  |                             |
 | Total suspected           |                  | 0                             |                  |                             |
 | Total hospitalized        | 75               |                               | 67               |                             |
 | Total recovered           |                  | 53                            | 2                | 51                          |

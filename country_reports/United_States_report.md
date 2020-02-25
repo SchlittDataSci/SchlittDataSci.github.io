@@ -1,6 +1,6 @@
 # United States
 ## NSSAC COVID-19 Summary
-## 02/24/2020
+## 02/25/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
-|---------------------------|-----------------------------|-------------------------------|------------------|------------------|
-| First update logged       | 01/22/20                    | 02/04/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 02/24/20                    | 02/24/20                      | 02/22/20         | 02/24/20         |
-| Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
-| First known case          | 01/22/20                    | 02/04/20                      | 01/20/20         | 01/21/20         |
-| Total confirmed cases     | 53                          | 53                            | 17               | 15               |
-| New cases since yesterday | 18                          | 18                            |                  |                  |
-| Total suspected           |                             | 0                             |                  |                  |
-| Total hospitalized        |                             |                               | 2                | 4                |
-| Total recovered           | 5                           | 3                             | 0                |                  |
-| Total deaths              | 0                           | 0                             | 0                | 0                |
+|                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
+|---------------------------|-------------------------------|-----------------------------|------------------|------------------|
+| First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
+| Last update logged        | 02/25/20                      | 02/24/20                    | 02/25/20         | 02/22/20         |
+| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
+| First known case          | 02/04/20                      | 01/22/20                    | 01/21/20         | 01/20/20         |
+| Total confirmed cases     | 53                            | 53                          | 17               | 17               |
+| New cases since yesterday | 0                             |                             |                  |                  |
+| Total suspected           | 0                             |                             |                  |                  |
+| Total hospitalized        |                               |                             | 4                | 2                |
+| Total recovered           | 3                             | 5                           |                  | 0                |
+| Total deaths              | 0                             | 0                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -40,7 +40,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name                                        |   confirmed |
 |----------|-------------------------------------------------|-------------|
-| NIH      | California, United States                       |           8 |
+| NIH      | California, United States                       |          10 |
 | NIH      | Illinois, United States                         |           2 |
 | NIH      | Arizona, United States                          |           1 |
 | NIH      | Washington, United States                       |           1 |
