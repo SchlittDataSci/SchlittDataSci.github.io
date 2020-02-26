@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Lebanon", "confirmed": 1, "color": "blue", "size": 5000.0, "label": "NIH : Lebanon: 1" }, "geometry": { "type": "Point", "coordinates": [ 3990070.03817503945902, 4012038.337881492916495 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Lebanon", "confirmed": 1, "color": "red", "size": 5000.0, "label": "JHU : Lebanon: 1" }, "geometry": { "type": "Point", "coordinates": [ 3990070.03817503945902, 4012038.337881492916495 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Beirut, Lebanon", "confirmed": 1, "color": "darkorange", "size": 5000.0, "label": "BOP : Beirut, Lebanon: 1" }, "geometry": { "type": "Point", "coordinates": [ 3949440.761744800955057, 4014835.212433828506619 ] } }
+]
+}

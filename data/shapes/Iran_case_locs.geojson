@@ -2,11 +2,11 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Qom, Iran", "confirmed": 11, "color": "blue", "size": 2123.2514503260031, "label": "NIH : Qom, Iran: 11" }, "geometry": { "type": "Point", "coordinates": [ 5663946.47842041682452, 4115378.350781609769911 ] } },
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Tehran, Iran", "confirmed": 4, "color": "blue", "size": 1280.3687993289598, "label": "NIH : Tehran, Iran: 4" }, "geometry": { "type": "Point", "coordinates": [ 5721975.28069232031703, 4259504.639492818154395 ] } },
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Guilan, Iran", "confirmed": 2, "color": "blue", "size": 905.35746042518542, "label": "NIH : Guilan, Iran: 2" }, "geometry": { "type": "Point", "coordinates": [ 5521237.852321895770729, 4480802.280460050329566 ] } },
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Araq, Iran", "confirmed": 1, "color": "blue", "size": 640.18439966447988, "label": "NIH : Araq, Iran: 1" }, "geometry": { "type": "Point", "coordinates": [ 6392598.569252385757864, 4465003.116212268359959 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Iran", "confirmed": 61, "color": "red", "size": 5000.0, "label": "JHU : Iran: 61" }, "geometry": { "type": "Point", "coordinates": [ 6074075.835577141493559, 3848612.561469307634979 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Iran", "confirmed": 28, "color": "darkorange", "size": 3387.5374294707913, "label": "BOP : Iran: 28" }, "geometry": { "type": "Point", "coordinates": [ 6074075.835577141493559, 3848612.561469307634979 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Qom, Iran", "confirmed": 11, "color": "blue", "size": 1701.3926184468016, "label": "NIH : Qom, Iran: 11" }, "geometry": { "type": "Point", "coordinates": [ 5663946.47842041682452, 4115378.350781609769911 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Tehran, Iran", "confirmed": 4, "color": "blue", "size": 1025.9783520851543, "label": "NIH : Tehran, Iran: 4" }, "geometry": { "type": "Point", "coordinates": [ 5721975.28069232031703, 4259504.639492818154395 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Guilan, Iran", "confirmed": 2, "color": "blue", "size": 725.47625011001185, "label": "NIH : Guilan, Iran: 2" }, "geometry": { "type": "Point", "coordinates": [ 5521237.852321895770729, 4480802.280460050329566 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Araq, Iran", "confirmed": 1, "color": "blue", "size": 512.98917604257713, "label": "NIH : Araq, Iran: 1" }, "geometry": { "type": "Point", "coordinates": [ 6392598.569252385757864, 4465003.116212268359959 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Iran", "confirmed": 95, "color": "red", "size": 5000.0, "label": "JHU : Iran: 95" }, "geometry": { "type": "Point", "coordinates": [ 6074075.835577141493559, 3848612.561469307634979 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Iran", "confirmed": 28, "color": "darkorange", "size": 2714.4835701531852, "label": "BOP : Iran: 28" }, "geometry": { "type": "Point", "coordinates": [ 6074075.835577141493559, 3848612.561469307634979 ] } }
 ]
 }

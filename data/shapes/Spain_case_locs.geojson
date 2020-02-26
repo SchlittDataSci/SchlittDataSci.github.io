@@ -2,10 +2,10 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Canary Islands, Spain", "confirmed": 1, "color": "blue", "size": 3535.5339059327375, "label": "NIH : Canary Islands, Spain: 1" }, "geometry": { "type": "Point", "coordinates": [ -1850291.029773086542264, 3286037.996523562818766 ] } },
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Mallorca, Spain", "confirmed": 1, "color": "blue", "size": 3535.5339059327375, "label": "NIH : Mallorca, Spain: 1" }, "geometry": { "type": "Point", "coordinates": [ 320648.060158891021274, 4809920.898489272221923 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Spain", "confirmed": 2, "color": "red", "size": 5000.0, "label": "JHU : Spain: 2" }, "geometry": { "type": "Point", "coordinates": [ -538570.921092809992842, 4768510.183828863315284 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Canary Islands, Spain", "confirmed": 1, "color": "darkorange", "size": 3535.5339059327375, "label": "BOP : Canary Islands, Spain: 1" }, "geometry": { "type": "Point", "coordinates": [ -1850291.029773086542264, 3286037.996523562818766 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Mallorca, Spain", "confirmed": 1, "color": "darkorange", "size": 3535.5339059327375, "label": "BOP : Mallorca, Spain: 1" }, "geometry": { "type": "Point", "coordinates": [ 320648.060158891021274, 4809920.898489272221923 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Canary Islands, Spain", "confirmed": 1, "color": "blue", "size": 2041.2414523193152, "label": "NIH : Canary Islands, Spain: 1" }, "geometry": { "type": "Point", "coordinates": [ -1850291.029773086542264, 3286037.996523562818766 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Mallorca, Spain", "confirmed": 1, "color": "blue", "size": 2041.2414523193152, "label": "NIH : Mallorca, Spain: 1" }, "geometry": { "type": "Point", "coordinates": [ 320648.060158891021274, 4809920.898489272221923 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Spain", "confirmed": 6, "color": "red", "size": 5000.0, "label": "JHU : Spain: 6" }, "geometry": { "type": "Point", "coordinates": [ -538570.921092809992842, 4768510.183828863315284 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Canary Islands, Spain", "confirmed": 1, "color": "darkorange", "size": 2041.2414523193152, "label": "BOP : Canary Islands, Spain: 1" }, "geometry": { "type": "Point", "coordinates": [ -1850291.029773086542264, 3286037.996523562818766 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Mallorca, Spain", "confirmed": 1, "color": "darkorange", "size": 2041.2414523193152, "label": "BOP : Mallorca, Spain: 1" }, "geometry": { "type": "Point", "coordinates": [ 320648.060158891021274, 4809920.898489272221923 ] } }
 ]
 }

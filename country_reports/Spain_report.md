@@ -1,6 +1,6 @@
 # Spain
 ## NSSAC COVID-19 Summary
-## 02/25/2020
+## 02/26/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | NIHFogarty       | JHU                         | BOP              | Tencent                       |
-|---------------------------|------------------|-----------------------------|------------------|-------------------------------|
-| First update logged       | 01/13/20         | 01/22/20                    | 01/12/20         | 02/11/20                      |
-| Last update logged        | 02/25/20         | 02/24/20                    | 02/22/20         | 02/14/20                      |
-| Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
-| First known case          | 01/31/20         | 01/22/20                    | 02/01/20         | 02/11/20                      |
-| Total confirmed cases     | 2                | 2                           | 2                | 2                             |
-| New cases since yesterday |                  | 0                           |                  |                               |
-| Total suspected           |                  |                             |                  | 0                             |
-| Total hospitalized        | 1                |                             | 0                |                               |
-| Total recovered           |                  | 2                           | 0                | 0                             |
-| Total deaths              | 0                | 0                           | 0                | 0                             |
+|                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
+|---------------------------|-----------------------------|------------------|------------------|-------------------------------|
+| First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/11/20                      |
+| Last update logged        | 02/25/20                    | 02/25/20         | 02/22/20         | 02/14/20                      |
+| Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
+| First known case          | 01/22/20                    | 01/31/20         | 02/01/20         | 02/11/20                      |
+| Total confirmed cases     | 6                           | 2                | 2                | 2                             |
+| New cases since yesterday | 4                           |                  |                  |                               |
+| Total suspected           |                             |                  |                  | 0                             |
+| Total hospitalized        |                             | 1                | 0                |                               |
+| Total recovered           | 2                           |                  | 0                | 0                             |
+| Total deaths              | 0                           | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -42,7 +42,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----------|-----------------------|-------------|
 | NIH      | Canary Islands, Spain |           1 |
 | NIH      | Mallorca, Spain       |           1 |
-| JHU      | Spain                 |           2 |
+| JHU      | Spain                 |           6 |
 | BOP      | Canary Islands, Spain |           1 |
 | BOP      | Mallorca, Spain       |           1 |
 

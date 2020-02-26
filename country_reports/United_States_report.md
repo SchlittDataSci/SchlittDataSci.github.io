@@ -1,6 +1,6 @@
 # United States
 ## NSSAC COVID-19 Summary
-## 02/25/2020
+## 02/26/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
 |---------------------------|-------------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 02/25/20                      | 02/24/20                    | 02/25/20         | 02/22/20         |
+| Last update logged        | 02/26/20                      | 02/25/20                    | 02/25/20         | 02/22/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/04/20                      | 01/22/20                    | 01/21/20         | 01/20/20         |
-| Total confirmed cases     | 53                            | 53                          | 17               | 17               |
-| New cases since yesterday | 0                             |                             |                  |                  |
+| Total confirmed cases     | 57                            | 53                          | 17               | 17               |
+| New cases since yesterday | 4                             |                             |                  |                  |
 | Total suspected           | 0                             |                             |                  |                  |
 | Total hospitalized        |                               |                             | 4                | 2                |
-| Total recovered           | 3                             | 5                           |                  | 0                |
+| Total recovered           | 3                             | 6                           |                  | 0                |
 | Total deaths              | 0                             | 0                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent

@@ -1,6 +1,6 @@
 # Australia
 ## NSSAC COVID-19 Summary
-## 02/25/2020
+## 02/26/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | Tencent                       | NIHFogarty       | BOP              |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 02/04/20                      | 01/13/20         | 01/12/20         |
-| Last update logged        | 02/24/20                    | 02/24/20                      | 02/25/20         | 02/22/20         |
+| Last update logged        | 02/25/20                    | 02/24/20                      | 02/25/20         | 02/22/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/04/20                      | 01/25/20         | 01/25/20         |
 | Total confirmed cases     | 22                          | 22                            | 15               | 15               |
-| New cases since yesterday | 0                           | 5                             |                  |                  |
+| New cases since yesterday | 0                           |                               |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
 | Total hospitalized        |                             |                               | 5                | 5                |
 | Total recovered           | 11                          | 10                            |                  | 0                |

@@ -1,6 +1,6 @@
 # Israel
 ## NSSAC COVID-19 Summary
-## 02/25/2020
+## 02/26/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | NIHFogarty       | JHU                         |
-|---------------------------|-------------------------------|------------------|-----------------------------|
-| First update logged       | 02/25/20                      | 01/13/20         | 01/22/20                    |
-| Last update logged        | 02/25/20                      | 02/25/20         | 02/24/20                    |
-| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list |
-| First known case          | 02/25/20                      | 02/21/20         | 01/22/20                    |
-| Total confirmed cases     | 6                             | 1                | 1                           |
-| New cases since yesterday |                               |                  |                             |
-| Total suspected           | 0                             |                  |                             |
-| Total hospitalized        |                               | 0                |                             |
-| Total recovered           | 0                             |                  | 0                           |
-| Total deaths              | 0                             | 0                | 0                           |
+|                           | Tencent                       | JHU                         | NIHFogarty       |
+|---------------------------|-------------------------------|-----------------------------|------------------|
+| First update logged       | 02/25/20                      | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/26/20                      | 02/25/20                    | 02/25/20         |
+| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list |
+| First known case          | 02/25/20                      | 01/22/20                    | 02/21/20         |
+| Total confirmed cases     | 6                             | 1                           | 1                |
+| New cases since yesterday | 0                             |                             |                  |
+| Total suspected           | 0                             |                             |                  |
+| Total hospitalized        |                               |                             | 0                |
+| Total recovered           | 0                             | 0                           |                  |
+| Total deaths              | 0                             | 0                           | 0                |
 
 Data sources: JHU, NIH-Fogarty, Tencent
 
