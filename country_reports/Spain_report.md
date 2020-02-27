@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
-|---------------------------|-------------------------------|-----------------------------|------------------|------------------|
-| First update logged       | 02/11/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 02/27/20                      | 02/26/20                    | 02/27/20         | 02/26/20         |
-| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
-| First known case          | 02/11/20                      | 01/22/20                    | 01/31/20         | 01/31/20         |
-| Total confirmed cases     | 13                            | 13                          | 12               | 10               |
-| New cases since yesterday |                               |                             |                  |                  |
-| Total suspected           | 0                             |                             |                  |                  |
-| Total hospitalized        |                               |                             | 2                | 0                |
-| Total recovered           | 2                             | 2                           |                  | 0                |
-| Total deaths              | 0                             | 0                           | 0                | 0                |
+|                           | NIHFogarty       | Tencent                       | JHU                         | BOP              |
+|---------------------------|------------------|-------------------------------|-----------------------------|------------------|
+| First update logged       | 01/13/20         | 02/11/20                      | 01/22/20                    | 01/12/20         |
+| Last update logged        | 02/27/20         | 02/27/20                      | 02/26/20                    | 02/26/20         |
+| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
+| First known case          | 01/31/20         | 02/11/20                      | 01/22/20                    | 01/31/20         |
+| Total confirmed cases     | 25               | 13                            | 13                          | 10               |
+| New cases since yesterday | 12               |                               |                             |                  |
+| Total suspected           |                  | 0                             |                             |                  |
+| Total hospitalized        | 3                |                               |                             | 0                |
+| Total recovered           |                  | 2                             | 2                           | 0                |
+| Total deaths              | 0                | 0                             | 0                           | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -38,20 +38,22 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name              |   confirmed |
-|----------|-----------------------|-------------|
-| NIH      | Tenerife, Spain       |           4 |
-| NIH      | Barcelona, Spain      |           2 |
-| NIH      | Madrid, Spain         |           2 |
-| NIH      | Seville, Spain        |           1 |
-| NIH      | Mallorca, Spain       |           1 |
-| NIH      | Canary Islands, Spain |           1 |
-| NIH      | Castellon, Spain      |           1 |
-| JHU      | Spain                 |          13 |
-| BOP      | Canary Islands, Spain |           1 |
-| BOP      | Castellon, Spain      |           1 |
-| BOP      | Andalusia, Spain      |           1 |
-| BOP      | Catalonia, Spain      |           1 |
+| source   | loc_name                |   confirmed |
+|----------|-------------------------|-------------|
+| NIH      | Valencia, Spain         |           7 |
+| NIH      | Tenerife, Spain         |           5 |
+| NIH      | Madrid, Spain           |           4 |
+| NIH      | Barcelona, Spain        |           3 |
+| NIH      | Castile and Leon, Spain |           2 |
+| NIH      | Seville, Spain          |           1 |
+| NIH      | Mallorca, Spain         |           1 |
+| NIH      | Canary Islands, Spain   |           1 |
+| NIH      | Castellon, Spain        |           1 |
+| JHU      | Spain                   |          13 |
+| BOP      | Canary Islands, Spain   |           1 |
+| BOP      | Castellon, Spain        |           1 |
+| BOP      | Andalusia, Spain        |           1 |
+| BOP      | Catalonia, Spain        |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

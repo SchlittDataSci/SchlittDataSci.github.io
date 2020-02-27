@@ -19,12 +19,12 @@
 | Last update logged        | 02/27/20                      | 02/26/20                    | 02/26/20         | 02/27/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/04/20                      | 01/22/20                    | 01/31/20         | 01/31/20         |
-| Total confirmed cases     | 528                           | 453                         | 64               | 3                |
-| New cases since yesterday | 154                           |                             |                  |                  |
+| Total confirmed cases     | 650                           | 453                         | 64               | 3                |
+| New cases since yesterday | 276                           |                             |                  |                  |
 | Total suspected           | 0                             |                             |                  |                  |
 | Total hospitalized        |                               |                             | 2                | 0                |
-| Total recovered           | 42                            | 3                           | 0                |                  |
-| Total deaths              | 14                            | 12                          | 0                | 0                |
+| Total recovered           | 45                            | 3                           | 0                |                  |
+| Total deaths              | 17                            | 12                          | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 

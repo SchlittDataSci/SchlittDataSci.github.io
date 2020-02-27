@@ -19,7 +19,7 @@
 | Last update logged        | 02/27/20                      | 02/27/20         | 02/26/20         | 02/26/20                    |
 | Method                    | Daily cases in country scrape | Public line list | Public line list | Cases by day & country list |
 | First known case          | 02/27/20                      | 02/25/20         | 02/25/20         | 01/22/20                    |
-| Total confirmed cases     | 4                             | 1                | 1                | 1                           |
+| Total confirmed cases     | 6                             | 1                | 1                | 1                           |
 | New cases since yesterday |                               |                  |                  |                             |
 | Total suspected           | 0                             |                  |                  |                             |
 | Total hospitalized        |                               | 0                | 0                |                             |
