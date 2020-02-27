@@ -1,6 +1,6 @@
 # Israel
 ## NSSAC COVID-19 Summary
-## 02/26/2020
+## 02/27/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | Tencent                       | JHU                         | NIHFogarty       |
 |---------------------------|-------------------------------|-----------------------------|------------------|
 | First update logged       | 02/25/20                      | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/26/20                      | 02/25/20                    | 02/25/20         |
+| Last update logged        | 02/27/20                      | 02/26/20                    | 02/27/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list |
 | First known case          | 02/25/20                      | 01/22/20                    | 02/21/20         |
-| Total confirmed cases     | 6                             | 1                           | 1                |
+| Total confirmed cases     | 6                             | 2                           | 1                |
 | New cases since yesterday | 0                             |                             |                  |
 | Total suspected           | 0                             |                             |                  |
 | Total hospitalized        |                               |                             | 0                |
-| Total recovered           | 0                             | 0                           |                  |
+| Total recovered           | 1                             | 0                           |                  |
 | Total deaths              | 0                             | 0                           | 0                |
 
 Data sources: JHU, NIH-Fogarty, Tencent
@@ -38,10 +38,10 @@ Data sources: JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name                      |   confirmed |
-|----------|-------------------------------|-------------|
-| NIH      | Israel                        |           1 |
-| JHU      | From Diamond Princess, Israel |           1 |
+| source   | loc_name   |   confirmed |
+|----------|------------|-------------|
+| NIH      | Israel     |           1 |
+| JHU      | Israel     |           2 |
 
 Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 

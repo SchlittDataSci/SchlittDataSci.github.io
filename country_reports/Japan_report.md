@@ -1,6 +1,6 @@
 # Japan
 ## NSSAC COVID-19 Summary
-## 02/26/2020
+## 02/27/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
 |---------------------------|-------------------------------|------------------|-----------------------------|------------------|
 | First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/20/20                      | 02/22/20         | 02/25/20                    | 02/25/20         |
+| Last update logged        | 02/20/20                      | 02/26/20         | 02/26/20                    | 02/27/20         |
 | Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
 | First known case          | 02/04/20                      | 01/15/20         | 01/22/20                    | 01/15/20         |
-| Total confirmed cases     | 729                           | 650              | 170                         | 139              |
-| New cases since yesterday |                               |                  | 11                          |                  |
+| Total confirmed cases     | 729                           | 667              | 189                         | 167              |
+| New cases since yesterday |                               |                  | 19                          | 20               |
 | Total suspected           | 0                             |                  |                             |                  |
-| Total hospitalized        |                               | 52               |                             | 93               |
+| Total hospitalized        |                               | 53               |                             | 115              |
 | Total recovered           | 1                             | 1                | 22                          |                  |
-| Total deaths              | 3                             | 0                | 1                           | 0                |
+| Total deaths              | 3                             | 0                | 2                           | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -40,43 +40,44 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name                   |   confirmed |
 |----------|----------------------------|-------------|
-| NIH      | Hokkaido, Japan            |          26 |
-| NIH      | Tokyo, Japan               |          21 |
+| NIH      | Hokkaido, Japan            |          33 |
+| NIH      | Tokyo, Japan               |          24 |
+| NIH      | Nagoya City, Japan         |          18 |
 | NIH      | Wakayama Prefecture, Japan |          12 |
-| NIH      | Nagoya City, Japan         |          10 |
+| NIH      | Chiba Prefecture, Japan    |          11 |
 | NIH      | Sagamihara, Japan          |           9 |
-| NIH      | Chiba Prefecture, Japan    |           8 |
 | NIH      | Aichi Prefecture, Japan    |           7 |
-| NIH      | Kanagawa, Japan            |           5 |
-| NIH      | Sapporo, Japan             |           4 |
-| NIH      | Ishikawa, Japan            |           3 |
+| NIH      | Kanagawa, Japan            |           6 |
+| NIH      | Sapporo, Japan             |           5 |
+| NIH      | Ishikawa, Japan            |           4 |
+| NIH      | Kumamoto City, Japan       |           4 |
 | NIH      | Okinawa Prefecture, Japan  |           3 |
 | NIH      | Nara Prefecture, Japan     |           2 |
-| NIH      | Kumamoto City, Japan       |           2 |
+| NIH      | Osaka Prefecture, Japan    |           2 |
 | NIH      | Kyoto, Japan               |           2 |
 | NIH      | Fukuoka Prefecture, Japan  |           2 |
-| NIH      | Osaka Prefecture, Japan    |           1 |
+| NIH      | Nagano Prefecture, Japan   |           1 |
 | NIH      | Saitama Prefecture, Japan  |           1 |
 | NIH      | Haneda, Japan              |           1 |
 | NIH      | Kumamoto Prefecture, Japan |           1 |
 | NIH      | Mie, Japan                 |           1 |
-| JHU      | Japan                      |         170 |
-| BOP      | Kanagawa, Japan            |         463 |
-| BOP      | Kanagawa Prefecture, Japan |          90 |
-| BOP      | Tokyo, Japan               |          28 |
-| BOP      | Hokkaido, Japan            |          15 |
-| BOP      | Aichi, Japan               |          11 |
-| BOP      | Chiba, Japan               |          10 |
-| BOP      | Wakayama Prefecture, Japan |           5 |
-| BOP      | Wakayama, Japan            |           4 |
-| BOP      | Kumamoto, Japan            |           2 |
+| JHU      | Japan                      |         189 |
+| BOP      | Kanagawa Prefecture, Japan |         555 |
+| BOP      | Tokyo, Japan               |          30 |
+| BOP      | Hokkaido, Japan            |          24 |
+| BOP      | Aichi Prefecture, Japan    |          14 |
+| BOP      | Chiba Prefecture, Japan    |          12 |
+| BOP      | Wakayama Prefecture, Japan |           8 |
 | BOP      | Saitama, Japan             |           2 |
-| BOP      | Ishikawa, Japan            |           2 |
 | BOP      | Kyoto Prefecture, Japan    |           2 |
-| BOP      | Osaka, Japan               |           1 |
+| BOP      | Kumamoto, Japan            |           2 |
+| BOP      | Ishikawa, Japan            |           2 |
 | BOP      | Okinawa, Japan             |           1 |
-| BOP      | Mie, Japan                 |           1 |
+| BOP      | Kumamoto Prefecture, Japan |           1 |
+| BOP      | Wakayama, Japan            |           1 |
 | BOP      | Nara Prefecture, Japan     |           1 |
+| BOP      | Mie, Japan                 |           1 |
+| BOP      | Osaka, Japan               |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

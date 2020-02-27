@@ -1,11 +1,11 @@
-,Tencent,NIHFogarty,JHU,BOP
-First update logged,02/04/20,01/13/20,01/22/20,01/12/20
-Last update logged,02/26/20,02/25/20,02/25/20,02/22/20
-Method,Daily cases in country scrape,Public line list,Cases by day & country list,Public line list
-First known case,02/04/20,01/22/20,01/22/20,02/22/20
-Total confirmed cases,90,85,84,1
-New cases since yesterday,6,,,
-Total suspected,0,,,
-Total hospitalized,,64,,1
-Total recovered,18,,19,0
-Total deaths,2,0,2,0
+,NIHFogarty,Tencent,JHU,BOP
+First update logged,01/13/20,02/04/20,01/22/20,01/12/20
+Last update logged,02/27/20,02/27/20,02/26/20,02/26/20
+Method,Public line list,Daily cases in country scrape,Cases by day & country list,Public line list
+First known case,01/22/20,02/04/20,01/22/20,02/22/20
+Total confirmed cases,92,92,91,1
+New cases since yesterday,,2,,
+Total suspected,,0,,
+Total hospitalized,71,,,1
+Total recovered,,24,24,0
+Total deaths,0,2,2,0

@@ -1,6 +1,6 @@
 # Thailand
 ## NSSAC COVID-19 Summary
-## 02/26/2020
+## 02/27/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
-|---------------------------|-------------------------------|-----------------------------|------------------|------------------|
-| First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 02/26/20                      | 02/25/20                    | 02/25/20         | 02/22/20         |
-| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
-| First known case          | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Total confirmed cases     | 40                            | 37                          | 37               | 34               |
-| New cases since yesterday | 3                             |                             |                  |                  |
-| Total suspected           | 0                             |                             |                  |                  |
-| Total hospitalized        |                               |                             | 8                | 4                |
-| Total recovered           | 22                            | 22                          |                  | 1                |
-| Total deaths              | 0                             | 0                           | 0                | 0                |
+|                           | NIHFogarty       | Tencent                       | JHU                         | BOP              |
+|---------------------------|------------------|-------------------------------|-----------------------------|------------------|
+| First update logged       | 01/13/20         | 02/04/20                      | 01/22/20                    | 01/12/20         |
+| Last update logged        | 02/27/20         | 02/27/20                      | 02/26/20                    | 02/26/20         |
+| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
+| First known case          | 01/13/20         | 02/04/20                      | 01/22/20                    | 01/12/20         |
+| Total confirmed cases     | 40               | 40                            | 40                          | 34               |
+| New cases since yesterday |                  | 0                             |                             |                  |
+| Total suspected           |                  | 0                             |                             |                  |
+| Total hospitalized        | 9                |                               |                             | 4                |
+| Total recovered           |                  | 22                            | 22                          | 1                |
+| Total deaths              | 0                | 0                             | 0                           | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -38,12 +38,13 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name                |   confirmed |
-|----------|-------------------------|-------------|
-| NIH      | Thailand                |          37 |
-| JHU      | Thailand                |          37 |
-| BOP      | Nonthaburi, Thailand    |           8 |
-| BOP      | Nakhon Pathom, Thailand |           1 |
+| source   | loc_name                         |   confirmed |
+|----------|----------------------------------|-------------|
+| NIH      | Thailand                         |          40 |
+| JHU      | Thailand                         |          40 |
+| BOP      | Nonthaburi, Thailand             |           8 |
+| BOP      | Krung Thep Maha Nakhon, Thailand |           4 |
+| BOP      | Nakhon Pathom, Thailand          |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

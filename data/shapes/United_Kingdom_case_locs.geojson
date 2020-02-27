@@ -6,6 +6,7 @@
 { "type": "Feature", "properties": { "source": "NIH", "loc_name": "UK, United Kingdom", "confirmed": 4, "color": "blue", "size": 2773.5009811261457, "label": "NIH : UK, United Kingdom: 4" }, "geometry": { "type": "Point", "coordinates": [ -364746.693941817618906, 7304312.167817082256079 ] } },
 { "type": "Feature", "properties": { "source": "NIH", "loc_name": "York, United Kingdom", "confirmed": 2, "color": "blue", "size": 1961.1613513818404, "label": "NIH : York, United Kingdom: 2" }, "geometry": { "type": "Point", "coordinates": [ -120396.047926542989444, 7162405.7062165485695 ] } },
 { "type": "Feature", "properties": { "source": "JHU", "loc_name": "UK", "confirmed": 13, "color": "red", "size": 5000.0, "label": "JHU : UK: 13" }, "geometry": { "type": "Point", "coordinates": [ -364746.693941817618906, 7304312.167817082256079 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "United Kingdom", "confirmed": 9, "color": "darkorange", "size": 4160.2514716892183, "label": "BOP : United Kingdom: 9" }, "geometry": { "type": "Point", "coordinates": [ -364746.693941817618906, 7304312.167817082256079 ] } }
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "London, United Kingdom", "confirmed": 5, "color": "darkorange", "size": 3100.8683647302119, "label": "BOP : London, United Kingdom: 5" }, "geometry": { "type": "Point", "coordinates": [ -14209.643569085306808, 6711528.507310883142054 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "North East, United Kingdom", "confirmed": 2, "color": "darkorange", "size": 1961.1613513818404, "label": "BOP : North East, United Kingdom: 2" }, "geometry": { "type": "Point", "coordinates": [ -219313.100292065559188, 6875696.582719442434609 ] } }
 ]
 }

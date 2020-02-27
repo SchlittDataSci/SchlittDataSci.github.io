@@ -1,6 +1,6 @@
 # South Korea
 ## NSSAC COVID-19 Summary
-## 02/26/2020
+## 02/27/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | Tencent                       | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-------------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 02/04/20                      | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 02/26/20                      | 02/25/20                    | 02/22/20         | 02/25/20         |
+| Last update logged        | 02/27/20                      | 02/26/20                    | 02/26/20         | 02/27/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/04/20                      | 01/22/20                    | 01/20/20         | 01/20/20         |
-| Total confirmed cases     | 1261                          | 977                         | 257              | 111              |
-| New cases since yesterday | 284                           |                             |                  |                  |
+| Total confirmed cases     | 1766                          | 1261                        | 682              | 114              |
+| New cases since yesterday | 505                           |                             |                  |                  |
 | Total suspected           | 0                             |                             |                  |                  |
-| Total hospitalized        |                               |                             | 21               | 9                |
+| Total hospitalized        |                               |                             | 24               | 9                |
 | Total recovered           | 24                            | 22                          | 0                |                  |
-| Total deaths              | 12                            | 10                          | 0                | 0                |
+| Total deaths              | 13                            | 12                          | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -38,21 +38,25 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name               |   confirmed |
-|----------|------------------------|-------------|
-| NIH      | Seoul, South Korea     |           2 |
-| JHU      | South Korea            |         977 |
-| BOP      | Gyeongbuk, South Korea |         117 |
-| BOP      | Yeongnam, South Korea  |          94 |
-| BOP      | Gangwon, South Korea   |           5 |
-| BOP      | Gyeonggi, South Korea  |           3 |
-| BOP      | Honam, South Korea     |           3 |
-| BOP      | Chungbuk, South Korea  |           2 |
-| BOP      | Jeonbuk, South Korea   |           1 |
-| BOP      | Hoseo, South Korea     |           1 |
-| BOP      | Jeonnam, South Korea   |           1 |
-| BOP      | Jeju, South Korea      |           1 |
-| BOP      | Ulsan, South Korea     |           1 |
+| source   | loc_name                       |   confirmed |
+|----------|--------------------------------|-------------|
+| NIH      | Seoul, South Korea             |           2 |
+| JHU      | South Korea                    |        1261 |
+| BOP      | Gyeongsangbuk-do, South Korea  |         117 |
+| BOP      | Daegu, South Korea             |          85 |
+| BOP      | Seoul, South Korea             |          27 |
+| BOP      | Busan, South Korea             |          12 |
+| BOP      | Gyeonggi, South Korea          |          10 |
+| BOP      | Gyeongnam, South Korea         |           7 |
+| BOP      | Gangwon-do, South Korea        |           5 |
+| BOP      | Honam, South Korea             |           4 |
+| BOP      | Gyeonggi-do, South Korea       |           2 |
+| BOP      | Chungcheongbuk-do, South Korea |           2 |
+| BOP      | Jeollabuk-do, South Korea      |           1 |
+| BOP      | Jeju-do, South Korea           |           1 |
+| BOP      | Hoseo, South Korea             |           1 |
+| BOP      | Jeonnam, South Korea           |           1 |
+| BOP      | Ulsan, South Korea             |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

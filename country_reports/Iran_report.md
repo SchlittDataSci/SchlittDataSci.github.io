@@ -1,6 +1,6 @@
 # Iran
 ## NSSAC COVID-19 Summary
-## 02/26/2020
+## 02/27/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | Tencent                       | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-------------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 02/20/20                      | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 02/26/20                      | 02/25/20                    | 02/22/20         | 02/25/20         |
+| Last update logged        | 02/27/20                      | 02/26/20                    | 02/26/20         | 02/27/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/20/20                      | 01/22/20                    | 02/19/20         | 02/19/20         |
-| Total confirmed cases     | 139                           | 95                          | 28               | 18               |
-| New cases since yesterday | 44                            |                             |                  |                  |
+| Total confirmed cases     | 245                           | 139                         | 28               | 18               |
+| New cases since yesterday | 106                           |                             |                  |                  |
 | Total suspected           | 0                             |                             |                  |                  |
 | Total hospitalized        |                               |                             | 0                | 0                |
-| Total recovered           | 0                             | 0                           | 0                |                  |
-| Total deaths              | 19                            | 16                          | 0                | 0                |
+| Total recovered           | 49                            | 49                          | 0                |                  |
+| Total deaths              | 26                            | 19                          | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -38,14 +38,17 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name     |   confirmed |
-|----------|--------------|-------------|
-| NIH      | Qom, Iran    |          11 |
-| NIH      | Tehran, Iran |           4 |
-| NIH      | Guilan, Iran |           2 |
-| NIH      | Araq, Iran   |           1 |
-| JHU      | Iran         |          95 |
-| BOP      | Iran         |          28 |
+| source   | loc_name      |   confirmed |
+|----------|---------------|-------------|
+| NIH      | Qom, Iran     |          11 |
+| NIH      | Tehran, Iran  |           4 |
+| NIH      | Guilan, Iran  |           2 |
+| NIH      | Araq, Iran    |           1 |
+| JHU      | Iran          |         139 |
+| BOP      | Qom, Iran     |          11 |
+| BOP      | Tehran, Iran  |           4 |
+| BOP      | Gilan, Iran   |           2 |
+| BOP      | Markazi, Iran |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

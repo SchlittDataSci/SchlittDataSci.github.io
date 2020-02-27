@@ -2,7 +2,7 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Israel", "confirmed": 1, "color": "blue", "size": 5000.0, "label": "NIH : Israel: 1" }, "geometry": { "type": "Point", "coordinates": [ 3881350.569936529267579, 3701943.974123275373131 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "From Diamond Princess, Israel", "confirmed": 1, "color": "red", "size": 5000.0, "label": "JHU : From Diamond Princess, Israel: 1" }, "geometry": { "type": "Point", "coordinates": [ 12155689.866769282147288, 1373964.845982835628092 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Israel", "confirmed": 1, "color": "blue", "size": 3535.5339059327375, "label": "NIH : Israel: 1" }, "geometry": { "type": "Point", "coordinates": [ 3881350.569936529267579, 3701943.974123275373131 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Israel", "confirmed": 2, "color": "red", "size": 5000.0, "label": "JHU : Israel: 2" }, "geometry": { "type": "Point", "coordinates": [ 3881350.569936529267579, 3701943.974123275373131 ] } }
 ]
 }

@@ -1,6 +1,6 @@
 # India
 ## NSSAC COVID-19 Summary
-## 02/26/2020
+## 02/27/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
-|---------------------------|-----------------------------|------------------|------------------|-------------------------------|
-| First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/04/20                      |
-| Last update logged        | 02/25/20                    | 02/25/20         | 02/22/20         | 02/14/20                      |
-| Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
-| First known case          | 01/22/20                    | 01/30/20         | 01/30/20         | 02/04/20                      |
-| Total confirmed cases     | 3                           | 3                | 3                | 3                             |
-| New cases since yesterday | 0                           |                  |                  |                               |
-| Total suspected           |                             |                  |                  | 0                             |
-| Total hospitalized        |                             | 0                | 0                |                               |
-| Total recovered           | 3                           |                  | 0                | 0                             |
-| Total deaths              | 0                           | 0                | 0                | 0                             |
+|                           | NIHFogarty       | BOP              | JHU                         | Tencent                       |
+|---------------------------|------------------|------------------|-----------------------------|-------------------------------|
+| First update logged       | 01/13/20         | 01/12/20         | 01/22/20                    | 02/04/20                      |
+| Last update logged        | 02/27/20         | 02/26/20         | 02/26/20                    | 02/14/20                      |
+| Method                    | Public line list | Public line list | Cases by day & country list | Daily cases in country scrape |
+| First known case          | 01/30/20         | 01/30/20         | 01/22/20                    | 02/04/20                      |
+| Total confirmed cases     | 3                | 3                | 3                           | 3                             |
+| New cases since yesterday |                  |                  | 0                           |                               |
+| Total suspected           |                  |                  |                             | 0                             |
+| Total hospitalized        | 0                | 0                |                             |                               |
+| Total recovered           |                  | 0                | 3                           | 0                             |
+| Total deaths              | 0                | 0                | 0                           | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -43,7 +43,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Kerala, India    |           2 |
 | NIH      | Alappuzha, India |           1 |
 | JHU      | India            |           3 |
-| BOP      | Kerala, India    |           1 |
+| BOP      | Kerala, India    |           3 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

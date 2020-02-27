@@ -1,6 +1,6 @@
 # Cambodia
 ## NSSAC COVID-19 Summary
-## 02/26/2020
+## 02/27/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | NIHFogarty       | BOP              |
-|---------------------------|-----------------------------|------------------|------------------|
-| First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 02/25/20                    | 02/25/20         | 02/22/20         |
-| Method                    | Cases by day & country list | Public line list | Public line list |
-| First known case          | 01/22/20                    | 01/27/20         | 01/27/20         |
-| Total confirmed cases     | 1                           | 1                | 1                |
-| New cases since yesterday | 0                           |                  |                  |
-| Total suspected           |                             |                  |                  |
-| Total hospitalized        |                             | 0                | 1                |
-| Total recovered           | 1                           |                  | 0                |
-| Total deaths              | 0                           | 0                | 0                |
+|                           | NIHFogarty       | BOP              | JHU                         |
+|---------------------------|------------------|------------------|-----------------------------|
+| First update logged       | 01/13/20         | 01/12/20         | 01/22/20                    |
+| Last update logged        | 02/27/20         | 02/26/20         | 02/26/20                    |
+| Method                    | Public line list | Public line list | Cases by day & country list |
+| First known case          | 01/27/20         | 01/27/20         | 01/22/20                    |
+| Total confirmed cases     | 1                | 1                | 1                           |
+| New cases since yesterday |                  |                  | 0                           |
+| Total suspected           |                  |                  |                             |
+| Total hospitalized        | 0                | 1                |                             |
+| Total recovered           |                  | 0                | 1                           |
+| Total deaths              | 0                | 0                | 0                           |
 
 Data sources: BOP, JHU, NIH-Fogarty, 
 
@@ -42,7 +42,7 @@ Data sources: BOP, JHU, NIH-Fogarty,
 |----------|-----------------------------------|-------------|
 | NIH      | Preah Sihanouk Province, Cambodia |           1 |
 | JHU      | Cambodia                          |           1 |
-| BOP      | Sihanoukville Province, Cambodia  |           1 |
+| BOP      | Sihanoukville, Cambodia           |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

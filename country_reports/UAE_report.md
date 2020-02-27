@@ -1,6 +1,6 @@
 # UAE
 ## NSSAC COVID-19 Summary
-## 02/26/2020
+## 02/27/2020
 
 
 
@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | Tencent                       | JHU                         | NIHFogarty       |
-|---------------------------|------------------|-------------------------------|-----------------------------|------------------|
-| First update logged       | 01/12/20         | 02/04/20                      | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/22/20         | 02/26/20                      | 02/25/20                    | 02/25/20         |
-| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
-| First known case          | 01/29/20         | 02/04/20                      | 01/22/20                    | 01/29/20         |
-| Total confirmed cases     | 14               | 13                            | 13                          | 13               |
-| New cases since yesterday |                  | 0                             |                             |                  |
-| Total suspected           |                  | 0                             |                             |                  |
-| Total hospitalized        | 4                |                               |                             | 0                |
-| Total recovered           | 0                | 4                             | 4                           |                  |
-| Total deaths              | 0                | 0                             | 0                           | 0                |
+|                           | NIHFogarty       | Tencent                       | JHU                         |
+|---------------------------|------------------|-------------------------------|-----------------------------|
+| First update logged       | 01/13/20         | 02/04/20                      | 01/22/20                    |
+| Last update logged        | 02/27/20         | 02/27/20                      | 02/26/20                    |
+| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list |
+| First known case          | 01/29/20         | 02/04/20                      | 01/22/20                    |
+| Total confirmed cases     | 13               | 13                            | 13                          |
+| New cases since yesterday |                  | 0                             |                             |
+| Total suspected           |                  | 0                             |                             |
+| Total hospitalized        | 0                |                               |                             |
+| Total recovered           |                  | 4                             | 4                           |
+| Total deaths              | 0                | 0                             | 0                           |
 
-Data sources: BOP, JHU, NIH-Fogarty, Tencent
+Data sources: JHU, NIH-Fogarty, Tencent
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/UAE_sitrep.csv)
@@ -42,9 +42,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----------|----------------------|-------------|
 | NIH      | UAE                  |          13 |
 | JHU      | United Arab Emirates |          13 |
-| BOP      | UAE                  |          14 |
 
-Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/UAE_case_locs.geojson)
@@ -61,14 +60,6 @@ Data source: NIH-Fogarty
 
 
 #### Fig 4:
-![UAE cases](../cluster_analysis/UAE_imported_cases_BOP.png)
-
-
-
-Data source: BOP
-
-
-#### Fig 5:
 ![UAE network](../autochthonous_networks/UAE_network.png)
 
 

@@ -1,6 +1,6 @@
 # United States
 ## NSSAC COVID-19 Summary
-## 02/26/2020
+## 02/27/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
 |---------------------------|-------------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 02/26/20                      | 02/25/20                    | 02/25/20         | 02/22/20         |
+| Last update logged        | 02/27/20                      | 02/26/20                    | 02/27/20         | 02/26/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/04/20                      | 01/22/20                    | 01/21/20         | 01/20/20         |
-| Total confirmed cases     | 57                            | 53                          | 17               | 17               |
-| New cases since yesterday | 4                             |                             |                  |                  |
+| Total confirmed cases     | 60                            | 59                          | 18               | 17               |
+| New cases since yesterday | 3                             |                             |                  |                  |
 | Total suspected           | 0                             |                             |                  |                  |
 | Total hospitalized        |                               |                             | 4                | 2                |
 | Total recovered           | 3                             | 6                           |                  | 0                |
@@ -40,14 +40,14 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name                                        |   confirmed |
 |----------|-------------------------------------------------|-------------|
-| NIH      | California, United States                       |          10 |
+| NIH      | California, United States                       |          11 |
 | NIH      | Illinois, United States                         |           2 |
 | NIH      | Arizona, United States                          |           1 |
 | NIH      | Washington, United States                       |           1 |
 | NIH      | Wisconsin, United States                        |           1 |
 | NIH      | Massachusetts, United States                    |           1 |
 | NIH      | Texas, United States                            |           1 |
-| JHU      | Unassigned Location (From Diamond Princess), US |          36 |
+| JHU      | Unassigned Location (From Diamond Princess), US |          42 |
 | JHU      | San Diego County, CA, US                        |           2 |
 | JHU      | San Benito, CA, US                              |           2 |
 | JHU      | Chicago, IL, US                                 |           2 |
@@ -66,11 +66,11 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | JHU      | Omaha, NE (From Diamond Princess), US           |           0 |
 | BOP      | California, United States                       |          10 |
 | BOP      | Illinois, United States                         |           2 |
-| BOP      | Washington State, United States                 |           1 |
+| BOP      | Arizona, United States                          |           1 |
 | BOP      | Texas, United States                            |           1 |
 | BOP      | Massachusetts, United States                    |           1 |
 | BOP      | Wisconsin, United States                        |           1 |
-| BOP      | Arizona, United States                          |           1 |
+| BOP      | Washington, United States                       |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

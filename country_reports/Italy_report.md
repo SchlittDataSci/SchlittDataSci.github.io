@@ -1,6 +1,6 @@
 # Italy
 ## NSSAC COVID-19 Summary
-## 02/26/2020
+## 02/27/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | Tencent                       | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-------------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 02/04/20                      | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 02/26/20                      | 02/25/20                    | 02/22/20         | 02/25/20         |
+| Last update logged        | 02/27/20                      | 02/26/20                    | 02/26/20         | 02/27/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/04/20                      | 01/22/20                    | 01/31/20         | 01/31/20         |
-| Total confirmed cases     | 374                           | 322                         | 64               | 3                |
-| New cases since yesterday | 52                            |                             |                  |                  |
+| Total confirmed cases     | 528                           | 453                         | 64               | 3                |
+| New cases since yesterday | 154                           |                             |                  |                  |
 | Total suspected           | 0                             |                             |                  |                  |
 | Total hospitalized        |                               |                             | 2                | 0                |
-| Total recovered           | 1                             | 1                           | 0                |                  |
-| Total deaths              | 12                            | 10                          | 0                | 0                |
+| Total recovered           | 42                            | 3                           | 0                |                  |
+| Total deaths              | 14                            | 12                          | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -41,9 +41,10 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name              |   confirmed |
 |----------|-----------------------|-------------|
 | NIH      | Rome, Italy           |           3 |
-| JHU      | Italy                 |         322 |
-| BOP      | Lombardia, Italy      |          47 |
+| JHU      | Italy                 |         453 |
+| BOP      | Lombardia, Italy      |          49 |
 | BOP      | Veneto, Italy         |          11 |
+| BOP      | Lazio, Italy          |           2 |
 | BOP      | Emilia-Romagna, Italy |           1 |
 | BOP      | Piemonte, Italy       |           1 |
 
