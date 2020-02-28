@@ -1,6 +1,6 @@
 # United Arab Emirates
 ## NSSAC COVID-19 Summary
-## 02/27/2020
+## 02/28/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | Tencent                       | BOP              | JHU                         |
 |---------------------------|-------------------------------|------------------|-----------------------------|
 | First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    |
-| Last update logged        | 02/27/20                      | 02/26/20         | 02/26/20                    |
+| Last update logged        | 02/28/20                      | 02/26/20         | 02/27/20                    |
 | Method                    | Daily cases in country scrape | Public line list | Cases by day & country list |
 | First known case          | 02/04/20                      | 01/29/20         | 01/22/20                    |
 | Total confirmed cases     | 19                            | 14               | 13                          |
-| New cases since yesterday | 6                             |                  |                             |
+| New cases since yesterday | 0                             |                  |                             |
 | Total suspected           | 0                             |                  |                             |
 | Total hospitalized        |                               | 4                |                             |
 | Total recovered           | 5                             | 0                | 4                           |

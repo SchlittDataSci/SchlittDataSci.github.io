@@ -1,6 +1,6 @@
 # Germany
 ## NSSAC COVID-19 Summary
-## 02/27/2020
+## 02/28/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
 |---------------------------|-------------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 02/27/20                      | 02/26/20                    | 02/27/20         | 02/26/20         |
+| Last update logged        | 02/28/20                      | 02/27/20                    | 02/27/20         | 02/26/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/04/20                      | 01/22/20                    | 01/28/20         | 01/27/20         |
-| Total confirmed cases     | 45                            | 27                          | 26               | 19               |
-| New cases since yesterday | 26                            |                             | 1                |                  |
+| Total confirmed cases     | 48                            | 46                          | 26               | 19               |
+| New cases since yesterday | 3                             |                             |                  |                  |
 | Total suspected           | 0                             |                             |                  |                  |
 | Total hospitalized        |                               |                             | 3                | 0                |
-| Total recovered           | 14                            | 15                          |                  | 1                |
+| Total recovered           | 14                            | 16                          |                  | 1                |
 | Total deaths              | 0                             | 0                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
@@ -45,7 +45,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Tubingen, Germany               |           2 |
 | NIH      | Frankfurt, Germany              |           2 |
 | NIH      | Baden-Wuerttemberg, Germany     |           2 |
-| JHU      | Germany                         |          27 |
+| JHU      | Germany                         |          46 |
 | BOP      | Bavaria, Germany                |          13 |
 | BOP      | Rhineland-Palatinate, Germany   |           2 |
 | BOP      | North Rhine-Westphalia, Germany |           2 |

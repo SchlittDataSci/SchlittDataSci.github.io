@@ -1,6 +1,6 @@
 # Switzerland
 ## NSSAC COVID-19 Summary
-## 02/27/2020
+## 02/28/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | NIHFogarty       | BOP              | JHU                         |
-|---------------------------|-------------------------------|------------------|------------------|-----------------------------|
-| First update logged       | 02/27/20                      | 01/13/20         | 01/12/20         | 01/22/20                    |
-| Last update logged        | 02/27/20                      | 02/27/20         | 02/26/20         | 02/26/20                    |
-| Method                    | Daily cases in country scrape | Public line list | Public line list | Cases by day & country list |
-| First known case          | 02/27/20                      | 02/25/20         | 02/25/20         | 01/22/20                    |
-| Total confirmed cases     | 6                             | 1                | 1                | 1                           |
-| New cases since yesterday |                               |                  |                  |                             |
-| Total suspected           | 0                             |                  |                  |                             |
-| Total hospitalized        |                               | 0                | 0                |                             |
-| Total recovered           | 0                             |                  | 0                | 0                           |
-| Total deaths              | 0                             | 0                | 0                | 0                           |
+|                           | JHU                         | Tencent                       | NIHFogarty       | BOP              |
+|---------------------------|-----------------------------|-------------------------------|------------------|------------------|
+| First update logged       | 01/22/20                    | 02/27/20                      | 01/13/20         | 01/12/20         |
+| Last update logged        | 02/27/20                    | 02/28/20                      | 02/27/20         | 02/26/20         |
+| Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
+| First known case          | 01/22/20                    | 02/27/20                      | 02/25/20         | 02/25/20         |
+| Total confirmed cases     | 8                           | 6                             | 1                | 1                |
+| New cases since yesterday |                             | 0                             |                  |                  |
+| Total suspected           |                             | 0                             |                  |                  |
+| Total hospitalized        |                             |                               | 0                | 0                |
+| Total recovered           | 0                           | 0                             |                  | 0                |
+| Total deaths              | 0                           | 0                             | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name            |   confirmed |
 |----------|---------------------|-------------|
 | NIH      | Bern, Switzerland   |           1 |
-| JHU      | Switzerland         |           1 |
+| JHU      | Switzerland         |           8 |
 | BOP      | Ticino, Switzerland |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

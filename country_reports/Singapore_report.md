@@ -1,6 +1,6 @@
 # Singapore
 ## NSSAC COVID-19 Summary
-## 02/27/2020
+## 02/28/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | NIHFogarty       | Tencent                       | JHU                         | BOP              |
-|---------------------------|------------------|-------------------------------|-----------------------------|------------------|
-| First update logged       | 01/13/20         | 02/04/20                      | 01/22/20                    | 01/12/20         |
-| Last update logged        | 02/27/20         | 02/27/20                      | 02/26/20                    | 02/26/20         |
-| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
-| First known case          | 01/24/20         | 02/04/20                      | 01/22/20                    | 01/23/20         |
-| Total confirmed cases     | 93               | 93                            | 93                          | 88               |
-| New cases since yesterday |                  | 0                             |                             |                  |
-| Total suspected           |                  | 0                             |                             |                  |
-| Total hospitalized        | 76               |                               |                             | 65               |
-| Total recovered           |                  | 62                            | 62                          | 3                |
-| Total deaths              | 0                | 0                             | 0                           | 0                |
+|                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
+|---------------------------|-------------------------------|-----------------------------|------------------|------------------|
+| First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
+| Last update logged        | 02/28/20                      | 02/27/20                    | 02/27/20         | 02/26/20         |
+| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
+| First known case          | 02/04/20                      | 01/22/20                    | 01/24/20         | 01/23/20         |
+| Total confirmed cases     | 96                            | 93                          | 93               | 88               |
+| New cases since yesterday | 3                             |                             |                  |                  |
+| Total suspected           | 0                             |                             |                  |                  |
+| Total hospitalized        |                               |                             | 76               | 65               |
+| Total recovered           | 66                            | 62                          |                  | 3                |
+| Total deaths              | 0                             | 0                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 

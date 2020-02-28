@@ -1,6 +1,6 @@
 # Bahrain
 ## NSSAC COVID-19 Summary
-## 02/27/2020
+## 02/28/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | Tencent                       | JHU                         | NIHFogarty       |
 |---------------------------|-------------------------------|-----------------------------|------------------|
 | First update logged       | 02/25/20                      | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/27/20                      | 02/26/20                    | 02/27/20         |
+| Last update logged        | 02/28/20                      | 02/27/20                    | 02/27/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list |
 | First known case          | 02/25/20                      | 01/22/20                    | 02/24/20         |
 | Total confirmed cases     | 33                            | 33                          | 17               |
-| New cases since yesterday |                               |                             |                  |
+| New cases since yesterday | 0                             |                             |                  |
 | Total suspected           | 0                             |                             |                  |
 | Total hospitalized        |                               |                             | 0                |
 | Total recovered           | 0                             | 0                           |                  |

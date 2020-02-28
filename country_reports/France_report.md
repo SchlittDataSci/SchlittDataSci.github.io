@@ -1,6 +1,6 @@
 # France
 ## NSSAC COVID-19 Summary
-## 02/27/2020
+## 02/28/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
-|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
-| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/27/20                      | 02/26/20         | 02/26/20                    | 02/27/20         |
-| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
-| First known case          | 02/04/20                      | 01/24/20         | 01/22/20                    | 01/25/20         |
-| Total confirmed cases     | 38                            | 18               | 18                          | 17               |
-| New cases since yesterday | 21                            |                  |                             |                  |
-| Total suspected           | 0                             |                  |                             |                  |
-| Total hospitalized        |                               | 3                |                             | 4                |
-| Total recovered           | 12                            | 0                | 11                          |                  |
-| Total deaths              | 2                             | 0                | 2                           | 0                |
+|                           | Tencent                       | JHU                         | BOP              | NIHFogarty       |
+|---------------------------|-------------------------------|-----------------------------|------------------|------------------|
+| First update logged       | 02/04/20                      | 01/22/20                    | 01/12/20         | 01/13/20         |
+| Last update logged        | 02/28/20                      | 02/27/20                    | 02/26/20         | 02/27/20         |
+| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
+| First known case          | 02/04/20                      | 01/22/20                    | 01/24/20         | 01/25/20         |
+| Total confirmed cases     | 38                            | 38                          | 18               | 17               |
+| New cases since yesterday | 0                             |                             |                  |                  |
+| Total suspected           | 0                             |                             |                  |                  |
+| Total hospitalized        |                               |                             | 3                | 4                |
+| Total recovered           | 12                            | 11                          | 0                |                  |
+| Total deaths              | 2                             | 2                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -45,7 +45,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Bordeaux, France             |           1 |
 | NIH      | Amiens, France               |           1 |
 | NIH      | Annecy, France               |           1 |
-| JHU      | France                       |          18 |
+| JHU      | France                       |          38 |
 | BOP      | Ile-de-France, France        |           6 |
 | BOP      | Auvergne-Rhone-Alpes, France |           6 |
 | BOP      | Nouvelle-Aquitaine, France   |           1 |

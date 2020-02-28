@@ -1,6 +1,6 @@
 # United States
 ## NSSAC COVID-19 Summary
-## 02/27/2020
+## 02/28/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
 |---------------------------|-------------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 02/27/20                      | 02/26/20                    | 02/27/20         | 02/26/20         |
+| Last update logged        | 02/28/20                      | 02/27/20                    | 02/27/20         | 02/26/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/04/20                      | 01/22/20                    | 01/21/20         | 01/20/20         |
-| Total confirmed cases     | 60                            | 59                          | 18               | 17               |
-| New cases since yesterday | 3                             |                             |                  |                  |
+| Total confirmed cases     | 60                            | 60                          | 18               | 17               |
+| New cases since yesterday | 0                             |                             |                  |                  |
 | Total suspected           | 0                             |                             |                  |                  |
 | Total hospitalized        |                               |                             | 4                | 2                |
 | Total recovered           | 3                             | 6                           |                  | 0                |
@@ -48,12 +48,12 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Massachusetts, United States                    |           1 |
 | NIH      | Texas, United States                            |           1 |
 | JHU      | Unassigned Location (From Diamond Princess), US |          42 |
-| JHU      | San Diego County, CA, US                        |           2 |
+| JHU      | Sacramento County, CA, US                       |           2 |
 | JHU      | San Benito, CA, US                              |           2 |
 | JHU      | Chicago, IL, US                                 |           2 |
+| JHU      | San Diego County, CA, US                        |           2 |
 | JHU      | Santa Clara, CA, US                             |           2 |
 | JHU      | Seattle, WA, US                                 |           1 |
-| JHU      | Sacramento County, CA, US                       |           1 |
 | JHU      | Humboldt County, CA, US                         |           1 |
 | JHU      | San Antonio, TX, US                             |           1 |
 | JHU      | Madison, WI, US                                 |           1 |
