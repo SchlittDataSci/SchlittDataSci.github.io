@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
-|---------------------------|-------------------------------|-----------------------------|------------------|------------------|
-| First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 02/28/20                      | 02/27/20                    | 02/27/20         | 02/26/20         |
-| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
-| First known case          | 02/04/20                      | 01/22/20                    | 01/28/20         | 01/27/20         |
-| Total confirmed cases     | 48                            | 46                          | 26               | 19               |
-| New cases since yesterday | 3                             |                             |                  |                  |
-| Total suspected           | 0                             |                             |                  |                  |
-| Total hospitalized        |                               |                             | 3                | 0                |
-| Total recovered           | 14                            | 16                          |                  | 1                |
-| Total deaths              | 0                             | 0                           | 0                | 0                |
+|                           | NIHFogarty       | Tencent                       | JHU                         | BOP              |
+|---------------------------|------------------|-------------------------------|-----------------------------|------------------|
+| First update logged       | 01/13/20         | 02/04/20                      | 01/22/20                    | 01/12/20         |
+| Last update logged        | 02/28/20         | 02/28/20                      | 02/27/20                    | 02/26/20         |
+| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
+| First known case          | 01/28/20         | 02/04/20                      | 01/22/20                    | 01/27/20         |
+| Total confirmed cases     | 54               | 48                            | 46                          | 19               |
+| New cases since yesterday | 6                | 3                             |                             |                  |
+| Total suspected           |                  | 0                             |                             |                  |
+| Total hospitalized        | 4                |                               |                             | 0                |
+| Total recovered           |                  | 14                            | 16                          | 1                |
+| Total deaths              | 0                | 0                             | 0                           | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -40,11 +40,14 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name                        |   confirmed |
 |----------|---------------------------------|-------------|
-| NIH      | Bavaria, Germany                |          14 |
-| NIH      | North Rhine-Westphalia, Germany |           6 |
-| NIH      | Tubingen, Germany               |           2 |
+| NIH      | North Rhine-Westphalia, Germany |          21 |
+| NIH      | Bavaria, Germany                |          15 |
+| NIH      | Baden-Wuerttemberg, Germany     |          11 |
 | NIH      | Frankfurt, Germany              |           2 |
-| NIH      | Baden-Wuerttemberg, Germany     |           2 |
+| NIH      | Tubingen, Germany               |           2 |
+| NIH      | Rhineland-Palatinate, Germany   |           1 |
+| NIH      | Hesse, Germany                  |           1 |
+| NIH      | Hamburg, Germany                |           1 |
 | JHU      | Germany                         |          46 |
 | BOP      | Bavaria, Germany                |          13 |
 | BOP      | Rhineland-Palatinate, Germany   |           2 |

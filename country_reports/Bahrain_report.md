@@ -16,7 +16,7 @@
 |                           | Tencent                       | JHU                         | NIHFogarty       |
 |---------------------------|-------------------------------|-----------------------------|------------------|
 | First update logged       | 02/25/20                      | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/28/20                      | 02/27/20                    | 02/27/20         |
+| Last update logged        | 02/28/20                      | 02/27/20                    | 02/28/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list |
 | First known case          | 02/25/20                      | 01/22/20                    | 02/24/20         |
 | Total confirmed cases     | 33                            | 33                          | 17               |

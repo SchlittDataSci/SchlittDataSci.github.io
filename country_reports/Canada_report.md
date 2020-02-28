@@ -16,10 +16,10 @@
 |                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
 |---------------------------|-------------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 02/28/20                      | 02/27/20                    | 02/27/20         | 02/26/20         |
+| Last update logged        | 02/28/20                      | 02/27/20                    | 02/28/20         | 02/26/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/04/20                      | 01/22/20                    | 01/26/20         | 01/25/20         |
-| Total confirmed cases     | 13                            | 13                          | 11               | 10               |
+| Total confirmed cases     | 13                            | 13                          | 12               | 10               |
 | New cases since yesterday | 0                             |                             |                  |                  |
 | Total suspected           | 0                             |                             |                  |                  |
 | Total hospitalized        |                               |                             | 3                | 3                |
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name                 |   confirmed |
 |----------|--------------------------|-------------|
 | NIH      | Vancouver, Canada        |           7 |
-| NIH      | Toronto, Canada          |           4 |
+| NIH      | Toronto, Canada          |           5 |
 | JHU      | British Columbia, Canada |           7 |
 | JHU      | Toronto, ON, Canada      |           5 |
 | JHU      | London, ON, Canada       |           1 |
