@@ -1,6 +1,6 @@
 # Croatia
 ## NSSAC COVID-19 Summary
-## 02/28/2020
+## 02/29/2020
 
 
 
@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | NIHFogarty       |
-|---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/27/20                    | 02/28/20         |
-| Method                    | Cases by day & country list | Public line list |
-| First known case          | 01/22/20                    | 02/25/20         |
-| Total confirmed cases     | 3                           | 1                |
-| New cases since yesterday | 0                           |                  |
-| Total suspected           |                             |                  |
-| Total hospitalized        |                             | 0                |
-| Total recovered           | 0                           |                  |
-| Total deaths              | 0                           | 0                |
+|                           | JHU                         | BOP              | NIHFogarty       |
+|---------------------------|-----------------------------|------------------|------------------|
+| First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         |
+| Last update logged        | 02/28/20                    | 02/29/20         | 02/28/20         |
+| Method                    | Cases by day & country list | Public line list | Public line list |
+| First known case          | 01/22/20                    | 02/25/20         | 02/25/20         |
+| Total confirmed cases     | 5                           | 3                | 1                |
+| New cases since yesterday | 2                           |                  |                  |
+| Total suspected           |                             |                  |                  |
+| Total hospitalized        |                             | 0                | 0                |
+| Total recovered           | 0                           | 0                |                  |
+| Total deaths              | 0                           | 0                | 0                |
 
-Data sources: JHU, NIH-Fogarty, 
+Data sources: BOP, JHU, NIH-Fogarty, 
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Croatia_sitrep.csv)
@@ -41,9 +41,10 @@ Data sources: JHU, NIH-Fogarty,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Croatia    |           1 |
-| JHU      | Croatia    |           3 |
+| JHU      | Croatia    |           5 |
+| BOP      | Croatia    |           3 |
 
-Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Croatia_case_locs.geojson)
@@ -55,6 +56,14 @@ Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 Data source: NIH-Fogarty
+
+
+#### Fig 4:
+![Croatia cases](../cluster_analysis/Croatia_imported_cases_BOP.png)
+
+
+
+Data source: BOP
 
 
 ### Data sources:

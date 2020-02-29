@@ -1,6 +1,6 @@
 # North Macedonia
 ## NSSAC COVID-19 Summary
-## 02/28/2020
+## 02/29/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | BOP              |
-|---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 02/27/20                    | 02/26/20         |
-| Method                    | Cases by day & country list | Public line list |
-| First known case          | 01/22/20                    | 02/26/20         |
-| Total confirmed cases     | 1                           | 1                |
-| New cases since yesterday | 0                           |                  |
-| Total suspected           |                             |                  |
-| Total hospitalized        |                             | 1                |
-| Total recovered           | 0                           | 0                |
-| Total deaths              | 0                           | 0                |
+|                           | BOP              | JHU                         |
+|---------------------------|------------------|-----------------------------|
+| First update logged       | 01/12/20         | 01/22/20                    |
+| Last update logged        | 02/29/20         | 02/28/20                    |
+| Method                    | Public line list | Cases by day & country list |
+| First known case          | 02/26/20         | 01/22/20                    |
+| Total confirmed cases     | 1                | 1                           |
+| New cases since yesterday |                  | 0                           |
+| Total suspected           |                  |                             |
+| Total hospitalized        | 1                |                             |
+| Total recovered           | 0                | 0                           |
+| Total deaths              | 0                | 0                           |
 
 Data sources: BOP, JHU, 
 

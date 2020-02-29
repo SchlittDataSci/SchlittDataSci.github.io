@@ -1,6 +1,6 @@
 # Algeria
 ## NSSAC COVID-19 Summary
-## 02/28/2020
+## 02/29/2020
 
 
 
@@ -13,17 +13,17 @@
 #### Table 1: Situation summary
 
 
-|                           | NIHFogarty       | JHU                         | BOP              |
+|                           | BOP              | JHU                         | NIHFogarty       |
 |---------------------------|------------------|-----------------------------|------------------|
-| First update logged       | 01/13/20         | 01/22/20                    | 01/12/20         |
-| Last update logged        | 02/28/20         | 02/27/20                    | 02/26/20         |
+| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/29/20         | 02/28/20                    | 02/28/20         |
 | Method                    | Public line list | Cases by day & country list | Public line list |
-| First known case          | 02/26/20         | 01/22/20                    | 02/25/20         |
+| First known case          | 02/25/20         | 01/22/20                    | 02/26/20         |
 | Total confirmed cases     | 1                | 1                           | 1                |
 | New cases since yesterday |                  | 0                           |                  |
 | Total suspected           |                  |                             |                  |
 | Total hospitalized        | 0                |                             | 0                |
-| Total recovered           |                  | 0                           | 0                |
+| Total recovered           | 0                | 0                           |                  |
 | Total deaths              | 0                | 0                           | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, 

@@ -1,6 +1,6 @@
 # Hong Kong
 ## NSSAC COVID-19 Summary
-## 02/28/2020
+## 02/29/2020
 
 
 
@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | NIHFogarty       | Tencent                       | JHU                         | BOP              |
-|---------------------------|------------------|-------------------------------|-----------------------------|------------------|
-| First update logged       | 01/13/20         | 02/04/20                      | 01/22/20                    | 01/12/20         |
-| Last update logged        | 02/28/20         | 02/28/20                      | 02/27/20                    | 02/26/20         |
-| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
-| First known case          | 01/22/20         | 02/04/20                      | 01/22/20                    | 02/22/20         |
-| Total confirmed cases     | 94               | 94                            | 92                          | 1                |
-| New cases since yesterday |                  | 2                             |                             |                  |
-| Total suspected           |                  | 0                             |                             |                  |
-| Total hospitalized        | 73               |                               |                             | 1                |
-| Total recovered           |                  | 26                            | 24                          | 0                |
-| Total deaths              | 0                | 2                             | 2                           | 0                |
+|                           | Tencent                       | JHU                         | NIHFogarty       |
+|---------------------------|-------------------------------|-----------------------------|------------------|
+| First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/29/20                      | 02/28/20                    | 02/28/20         |
+| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list |
+| First known case          | 02/04/20                      | 01/22/20                    | 01/22/20         |
+| Total confirmed cases     | 94                            | 94                          | 94               |
+| New cases since yesterday | 0                             |                             |                  |
+| Total suspected           | 0                             |                             |                  |
+| Total hospitalized        |                               |                             | 73               |
+| Total recovered           | 30                            | 30                          |                  |
+| Total deaths              | 2                             | 2                           | 0                |
 
-Data sources: BOP, JHU, NIH-Fogarty, Tencent
+Data sources: JHU, NIH-Fogarty, Tencent
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Hong_Kong_sitrep.csv)
@@ -49,10 +49,9 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Yau Ma Tei, Hong Kong   |           1 |
 | NIH      | Fo Tan, Hong Kong       |           1 |
 | NIH      | Tsing Yi, Hong Kong     |           1 |
-| JHU      | Hong Kong, Hong Kong    |          92 |
-| BOP      | Hong Kong, Hong Kong    |           1 |
+| JHU      | Hong Kong, Hong Kong    |          94 |
 
-Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Hong_Kong_case_locs.geojson)
@@ -69,14 +68,6 @@ Data source: NIH-Fogarty
 
 
 #### Fig 4:
-![Hong Kong cases](../cluster_analysis/Hong_Kong_imported_cases_BOP.png)
-
-
-
-Data source: BOP
-
-
-#### Fig 5:
 ![Hong Kong network](../autochthonous_networks/Hong_Kong_network.png)
 
 

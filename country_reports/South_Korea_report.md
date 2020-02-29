@@ -1,6 +1,6 @@
 # South Korea
 ## NSSAC COVID-19 Summary
-## 02/28/2020
+## 02/29/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | Tencent                       | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-------------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 02/04/20                      | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 02/28/20                      | 02/27/20                    | 02/26/20         | 02/27/20         |
+| Last update logged        | 02/29/20                      | 02/28/20                    | 02/29/20         | 02/28/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/04/20                      | 01/22/20                    | 01/20/20         | 01/20/20         |
-| Total confirmed cases     | 1766                          | 1766                        | 682              | 114              |
-| New cases since yesterday | 0                             |                             |                  |                  |
+| Total confirmed cases     | 3150                          | 2337                        | 938              | 114              |
+| New cases since yesterday | 1384                          |                             |                  |                  |
 | Total suspected           | 0                             |                             |                  |                  |
 | Total hospitalized        |                               |                             | 24               | 9                |
 | Total recovered           | 24                            | 22                          | 0                |                  |
@@ -41,22 +41,24 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name                       |   confirmed |
 |----------|--------------------------------|-------------|
 | NIH      | Seoul, South Korea             |           2 |
-| JHU      | South Korea                    |        1766 |
-| BOP      | Gyeongsangbuk-do, South Korea  |         117 |
-| BOP      | Daegu, South Korea             |          85 |
-| BOP      | Seoul, South Korea             |          27 |
-| BOP      | Busan, South Korea             |          12 |
-| BOP      | Gyeonggi, South Korea          |          10 |
-| BOP      | Gyeongnam, South Korea         |           7 |
-| BOP      | Gangwon-do, South Korea        |           5 |
-| BOP      | Honam, South Korea             |           4 |
-| BOP      | Gyeonggi-do, South Korea       |           2 |
-| BOP      | Chungcheongbuk-do, South Korea |           2 |
-| BOP      | Jeollabuk-do, South Korea      |           1 |
-| BOP      | Jeju-do, South Korea           |           1 |
-| BOP      | Hoseo, South Korea             |           1 |
-| BOP      | Jeonnam, South Korea           |           1 |
-| BOP      | Ulsan, South Korea             |           1 |
+| JHU      | South Korea                    |        2337 |
+| BOP      | Daegu, South Korea             |         552 |
+| BOP      | North Gyeongsang, South Korea  |         250 |
+| BOP      | Busan, South Korea             |          40 |
+| BOP      | Seoul, South Korea             |          33 |
+| BOP      | Gyeonggi, South Korea          |          16 |
+| BOP      | South Gyeongsang, South Korea  |          10 |
+| BOP      | Gangwon, South Korea           |           5 |
+| BOP      | Daejeon, South Korea           |           4 |
+| BOP      | Gwangju, South Korea           |           4 |
+| BOP      | South Chungcheong, South Korea |           4 |
+| BOP      | North Chungcheong, South Korea |           3 |
+| BOP      | Incheon, South Korea           |           2 |
+| BOP      | Jeju, South Korea              |           2 |
+| BOP      | Ulsan, South Korea             |           2 |
+| BOP      | Sejong, South Korea            |           1 |
+| BOP      | South Jeolla, South Korea      |           1 |
+| BOP      | North Jeolla, South Korea      |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

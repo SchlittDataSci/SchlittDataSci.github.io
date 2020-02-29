@@ -1,6 +1,6 @@
 # Greece
 ## NSSAC COVID-19 Summary
-## 02/28/2020
+## 02/29/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 02/27/20                    | 02/26/20         |
+| Last update logged        | 02/28/20                    | 02/29/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/26/20         |
-| Total confirmed cases     | 3                           | 1                |
-| New cases since yesterday | 2                           |                  |
+| Total confirmed cases     | 4                           | 1                |
+| New cases since yesterday | 1                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 0                           | 0                |
@@ -38,15 +38,17 @@ Data sources: BOP, JHU,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name   |   confirmed |
-|----------|------------|-------------|
-| JHU      | Greece     |           3 |
-| BOP      | Greece     |           1 |
+| source   | loc_name          |   confirmed |
+|----------|-------------------|-------------|
+| JHU      | Greece            |           4 |
+| BOP      | Macedonia, Greece |           1 |
 
 Data sources: BOP, JHU, Natural Earth, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Greece_case_locs.geojson)
+
+[Case admin1 locs geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Greece_admin1_locs.geojson)
 
 ### Observed case clusters:
 #### Fig 3:

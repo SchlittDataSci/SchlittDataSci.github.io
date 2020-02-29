@@ -1,6 +1,6 @@
 # Kuwait
 ## NSSAC COVID-19 Summary
-## 02/28/2020
+## 02/29/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | JHU                         | BOP              | NIHFogarty       |
-|---------------------------|-------------------------------|-----------------------------|------------------|------------------|
-| First update logged       | 02/27/20                      | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 02/28/20                      | 02/27/20                    | 02/26/20         | 02/28/20         |
-| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
-| First known case          | 02/27/20                      | 01/22/20                    | 02/24/20         | 02/24/20         |
-| Total confirmed cases     | 43                            | 43                          | 26               | 9                |
-| New cases since yesterday | 0                             |                             |                  |                  |
-| Total suspected           | 0                             |                             |                  |                  |
-| Total hospitalized        |                               |                             | 0                | 0                |
-| Total recovered           | 0                             | 0                           | 0                |                  |
-| Total deaths              | 0                             | 0                           | 0                | 0                |
+|                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
+|---------------------------|-----------------------------|-------------------------------|------------------|------------------|
+| First update logged       | 01/22/20                    | 02/27/20                      | 01/12/20         | 01/13/20         |
+| Last update logged        | 02/28/20                    | 02/29/20                      | 02/29/20         | 02/28/20         |
+| Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
+| First known case          | 01/22/20                    | 02/27/20                      | 02/24/20         | 02/24/20         |
+| Total confirmed cases     | 45                          | 43                            | 26               | 9                |
+| New cases since yesterday |                             | 0                             |                  |                  |
+| Total suspected           |                             | 0                             |                  |                  |
+| Total hospitalized        |                             |                               | 0                | 0                |
+| Total recovered           | 0                           | 0                             | 0                |                  |
+| Total deaths              | 0                           | 0                             | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Kuwait     |           9 |
-| JHU      | Kuwait     |          43 |
+| JHU      | Kuwait     |          45 |
 | BOP      | Kuwait     |          26 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

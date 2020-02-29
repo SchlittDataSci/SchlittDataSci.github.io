@@ -1,6 +1,6 @@
 # United Arab Emirates
 ## NSSAC COVID-19 Summary
-## 02/28/2020
+## 02/29/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | BOP              | JHU                         |
-|---------------------------|-------------------------------|------------------|-----------------------------|
-| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    |
-| Last update logged        | 02/28/20                      | 02/26/20         | 02/27/20                    |
-| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list |
-| First known case          | 02/04/20                      | 01/29/20         | 01/22/20                    |
-| Total confirmed cases     | 19                            | 14               | 13                          |
-| New cases since yesterday | 0                             |                  |                             |
-| Total suspected           | 0                             |                  |                             |
-| Total hospitalized        |                               | 4                |                             |
-| Total recovered           | 5                             | 0                | 4                           |
-| Total deaths              | 0                             | 0                | 0                           |
+|                           | BOP              | Tencent                       | JHU                         |
+|---------------------------|------------------|-------------------------------|-----------------------------|
+| First update logged       | 01/12/20         | 02/04/20                      | 01/22/20                    |
+| Last update logged        | 02/29/20         | 02/29/20                      | 02/28/20                    |
+| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list |
+| First known case          | 01/29/20         | 02/04/20                      | 01/22/20                    |
+| Total confirmed cases     | 20               | 19                            | 19                          |
+| New cases since yesterday |                  | 0                             |                             |
+| Total suspected           |                  | 0                             |                             |
+| Total hospitalized        | 4                |                               |                             |
+| Total recovered           | 0                | 5                             | 5                           |
+| Total deaths              | 0                | 0                             | 0                           |
 
 Data sources: BOP, JHU, Tencent
 
@@ -40,7 +40,7 @@ Data sources: BOP, JHU, Tencent
 
 | source   | loc_name                        |   confirmed |
 |----------|---------------------------------|-------------|
-| JHU      | United Arab Emirates            |          13 |
+| JHU      | United Arab Emirates            |          19 |
 | BOP      | Abu Dhabi, United Arab Emirates |           1 |
 
 Data sources: BOP, JHU, Natural Earth, Tencent

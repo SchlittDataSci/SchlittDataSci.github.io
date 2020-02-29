@@ -1,6 +1,6 @@
 # France
 ## NSSAC COVID-19 Summary
-## 02/28/2020
+## 02/29/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | NIHFogarty       | Tencent                       | JHU                         | BOP              |
-|---------------------------|------------------|-------------------------------|-----------------------------|------------------|
-| First update logged       | 01/13/20         | 02/04/20                      | 01/22/20                    | 01/12/20         |
-| Last update logged        | 02/28/20         | 02/28/20                      | 02/27/20                    | 02/26/20         |
-| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
-| First known case          | 01/25/20         | 02/04/20                      | 01/22/20                    | 01/24/20         |
-| Total confirmed cases     | 39               | 38                            | 38                          | 18               |
-| New cases since yesterday | 1                | 0                             |                             |                  |
-| Total suspected           |                  | 0                             |                             |                  |
-| Total hospitalized        | 6                |                               |                             | 3                |
-| Total recovered           |                  | 12                            | 11                          | 0                |
-| Total deaths              | 0                | 2                             | 2                           | 0                |
+|                           | JHU                         | NIHFogarty       | Tencent                       | BOP              |
+|---------------------------|-----------------------------|------------------|-------------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      | 01/12/20         |
+| Last update logged        | 02/28/20                    | 02/28/20         | 02/29/20                      | 02/29/20         |
+| Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
+| First known case          | 01/22/20                    | 01/25/20         | 02/04/20                      | 01/24/20         |
+| Total confirmed cases     | 57                          | 39               | 38                            | 19               |
+| New cases since yesterday |                             |                  | 0                             |                  |
+| Total suspected           |                             |                  | 0                             |                  |
+| Total hospitalized        |                             | 6                |                               | 3                |
+| Total recovered           | 11                          |                  | 12                            | 0                |
+| Total deaths              | 2                           | 0                | 2                             | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -44,20 +44,22 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Saint-Mande, France          |           5 |
 | NIH      | Dijon, France                |           4 |
 | NIH      | Annecy, France               |           4 |
-| NIH      | Nice, France                 |           1 |
+| NIH      | Bois-Guillaume, France       |           1 |
 | NIH      | Amiens, France               |           1 |
 | NIH      | Montpellier, France          |           1 |
 | NIH      | Brest, France                |           1 |
 | NIH      | Lile, France                 |           1 |
-| NIH      | Strasbourg, France           |           1 |
-| NIH      | Bois-Guillaume, France       |           1 |
-| NIH      | Lyon, France                 |           1 |
+| NIH      | Nice, France                 |           1 |
 | NIH      | Nantes, France               |           1 |
+| NIH      | Lyon, France                 |           1 |
+| NIH      | Strasbourg, France           |           1 |
 | NIH      | Bordeaux, France             |           1 |
-| JHU      | France                       |          38 |
-| BOP      | Auvergne-Rhone-Alpes, France |           6 |
+| JHU      | France                       |          57 |
+| BOP      | Auvergne-Rhone-Alpes, France |           9 |
 | BOP      | Ile-de-France, France        |           6 |
 | BOP      | Nouvelle-Aquitaine, France   |           1 |
+| BOP      | Hauts-de-France, France      |           1 |
+| BOP      | Grand Est, France            |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

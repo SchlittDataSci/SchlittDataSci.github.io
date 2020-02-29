@@ -1,6 +1,6 @@
 # Taiwan
 ## NSSAC COVID-19 Summary
-## 02/28/2020
+## 02/29/2020
 
 
 
@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
-|---------------------------|-------------------------------|-----------------------------|------------------|------------------|
-| First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 02/28/20                      | 02/27/20                    | 02/27/20         | 02/26/20         |
-| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
-| First known case          | 02/04/20                      | 01/22/20                    | 01/21/20         | 01/21/20         |
-| Total confirmed cases     | 34                            | 32                          | 32               | 25               |
-| New cases since yesterday | 2                             |                             |                  |                  |
-| Total suspected           | 0                             |                             |                  |                  |
-| Total hospitalized        |                               |                             | 18               | 15               |
-| Total recovered           | 6                             | 5                           |                  | 0                |
-| Total deaths              | 1                             | 1                           | 0                | 0                |
+|                           | Tencent                       | JHU                         | NIHFogarty       |
+|---------------------------|-------------------------------|-----------------------------|------------------|
+| First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         |
+| Last update logged        | 02/29/20                      | 02/28/20                    | 02/28/20         |
+| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list |
+| First known case          | 02/04/20                      | 01/22/20                    | 01/21/20         |
+| Total confirmed cases     | 39                            | 34                          | 34               |
+| New cases since yesterday | 5                             |                             |                  |
+| Total suspected           | 0                             |                             |                  |
+| Total hospitalized        |                               |                             | 18               |
+| Total recovered           | 9                             | 6                           |                  |
+| Total deaths              | 1                             | 1                           | 0                |
 
-Data sources: BOP, JHU, NIH-Fogarty, Tencent
+Data sources: JHU, NIH-Fogarty, Tencent
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Taiwan_sitrep.csv)
@@ -40,11 +40,10 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name       |   confirmed |
 |----------|----------------|-------------|
-| NIH      | Taiwan         |          32 |
-| JHU      | Taiwan, Taiwan |          32 |
-| BOP      | Taiwan         |          25 |
+| NIH      | Taiwan         |          34 |
+| JHU      | Taiwan, Taiwan |          34 |
 
-Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Taiwan_case_locs.geojson)
@@ -59,14 +58,6 @@ Data source: NIH-Fogarty
 
 
 #### Fig 4:
-![Taiwan cases](../cluster_analysis/Taiwan_imported_cases_BOP.png)
-
-
-
-Data source: BOP
-
-
-#### Fig 5:
 ![Taiwan network](../autochthonous_networks/Taiwan_network.png)
 
 
