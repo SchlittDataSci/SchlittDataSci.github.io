@@ -2,8 +2,9 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Lapland, Finland", "confirmed": 1, "color": "blue", "size": 3535.5339059327375, "label": "NIH : Lapland, Finland: 1" }, "geometry": { "type": "Point", "coordinates": [ 2975370.112443195655942, 10356341.00020414032042 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Finland", "confirmed": 2, "color": "red", "size": 5000.0, "label": "JHU : Finland: 2" }, "geometry": { "type": "Point", "coordinates": [ 2885503.214543013833463, 9161018.744482854381204 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Lapland, Finland", "confirmed": 1, "color": "darkorange", "size": 3535.5339059327375, "label": "BOP : Lapland, Finland: 1" }, "geometry": { "type": "Point", "coordinates": [ 2975370.112443195655942, 10356341.00020414032042 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Lapland, Finland", "confirmed": 1, "color": "blue", "size": 2886.7513459481288, "label": "NIH : Lapland, Finland: 1" }, "geometry": { "type": "Point", "coordinates": [ 2975370.112443195655942, 10356341.00020414032042 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Finland", "confirmed": 3, "color": "red", "size": 5000.0, "label": "JHU : Finland: 3" }, "geometry": { "type": "Point", "coordinates": [ 2885503.214543013833463, 9161018.744482854381204 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Lapland, Finland", "confirmed": 1, "color": "darkorange", "size": 2886.7513459481288, "label": "BOP : Lapland, Finland: 1" }, "geometry": { "type": "Point", "coordinates": [ 2975370.112443195655942, 10356341.00020414032042 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Southern Finland, Finland", "confirmed": 1, "color": "darkorange", "size": 2886.7513459481288, "label": "BOP : Southern Finland, Finland: 1" }, "geometry": { "type": "Point", "coordinates": [ 2728221.506810837425292, 8550373.08390206284821 ] } }
 ]
 }
