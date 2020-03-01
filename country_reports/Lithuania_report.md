@@ -1,6 +1,6 @@
 # Lithuania
 ## NSSAC COVID-19 Summary
-## 02/29/2020
+## 03/01/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | BOP              | JHU                         |
 |---------------------------|------------------|-----------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    |
-| Last update logged        | 02/29/20         | 02/28/20                    |
+| Last update logged        | 02/29/20         | 02/29/20                    |
 | Method                    | Public line list | Cases by day & country list |
 | First known case          | 02/28/20         | 01/22/20                    |
 | Total confirmed cases     | 1                | 1                           |
-| New cases since yesterday |                  | 1                           |
+| New cases since yesterday |                  | 0                           |
 | Total suspected           |                  |                             |
 | Total hospitalized        | 1                |                             |
 | Total recovered           | 0                | 0                           |
@@ -40,10 +40,11 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
+| NIH      | Lithuania  |           1 |
 | JHU      | Lithuania  |           1 |
 | BOP      | Lithuania  |           1 |
 
-Data sources: BOP, JHU, Natural Earth, Tencent
+Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Lithuania_case_locs.geojson)

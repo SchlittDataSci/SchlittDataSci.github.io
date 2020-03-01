@@ -1,6 +1,6 @@
 # Russia
 ## NSSAC COVID-19 Summary
-## 02/29/2020
+## 03/01/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
 |---------------------------|-------------------------------|------------------|-----------------------------|------------------|
 | First update logged       | 02/06/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/29/20                      | 02/29/20         | 02/28/20                    | 02/28/20         |
+| Last update logged        | 03/01/20                      | 02/29/20         | 02/29/20                    | 02/28/20         |
 | Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
 | First known case          | 02/06/20                      | 01/31/20         | 01/22/20                    | 01/31/20         |
 | Total confirmed cases     | 5                             | 2                | 2                           | 2                |
-| New cases since yesterday |                               |                  |                             |                  |
+| New cases since yesterday | 0                             |                  |                             |                  |
 | Total suspected           | 0                             |                  |                             |                  |
 | Total hospitalized        |                               | 0                |                             | 0                |
 | Total recovered           | 2                             | 0                | 2                           |                  |
@@ -68,14 +68,6 @@ Data source: NIH-Fogarty
 
 
 Data source: BOP
-
-
-#### Fig 5:
-![Russia network](../autochthonous_networks/Russia_network.png)
-
-
-
-Data source: NIH-Fogarty
 
 
 ### Data sources:

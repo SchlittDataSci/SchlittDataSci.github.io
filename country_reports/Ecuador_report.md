@@ -1,6 +1,6 @@
 # Ecuador
 ## NSSAC COVID-19 Summary
-## 02/29/2020
+## 03/01/2020
 
 
 

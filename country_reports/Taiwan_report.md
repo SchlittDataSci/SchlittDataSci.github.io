@@ -1,6 +1,6 @@
 # Taiwan
 ## NSSAC COVID-19 Summary
-## 02/29/2020
+## 03/01/2020
 
 
 
@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | JHU                         | NIHFogarty       |
-|---------------------------|-------------------------------|-----------------------------|------------------|
-| First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/29/20                      | 02/28/20                    | 02/28/20         |
-| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list |
-| First known case          | 02/04/20                      | 01/22/20                    | 01/21/20         |
-| Total confirmed cases     | 39                            | 34                          | 34               |
-| New cases since yesterday | 5                             |                             |                  |
-| Total suspected           | 0                             |                             |                  |
-| Total hospitalized        |                               |                             | 18               |
-| Total recovered           | 9                             | 6                           |                  |
-| Total deaths              | 1                             | 1                           | 0                |
+|                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
+|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
+| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
+| Last update logged        | 03/01/20                      | 02/29/20         | 02/29/20                    | 02/28/20         |
+| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
+| First known case          | 02/04/20                      | 01/21/20         | 01/22/20                    | 01/21/20         |
+| Total confirmed cases     | 40                            | 39               | 39                          | 39               |
+| New cases since yesterday | 1                             |                  |                             |                  |
+| Total suspected           | 0                             |                  |                             |                  |
+| Total hospitalized        |                               | 15               |                             | 18               |
+| Total recovered           | 9                             | 0                | 9                           |                  |
+| Total deaths              | 1                             | 0                | 1                           | 0                |
 
-Data sources: JHU, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Taiwan_sitrep.csv)
@@ -40,10 +40,11 @@ Data sources: JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name       |   confirmed |
 |----------|----------------|-------------|
-| NIH      | Taiwan         |          34 |
-| JHU      | Taiwan, Taiwan |          34 |
+| NIH      | Taiwan         |          39 |
+| JHU      | Taiwan, Taiwan |          39 |
+| BOP      | Taiwan, Taiwan |          25 |
 
-Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Taiwan_case_locs.geojson)
@@ -58,11 +59,11 @@ Data source: NIH-Fogarty
 
 
 #### Fig 4:
-![Taiwan network](../autochthonous_networks/Taiwan_network.png)
+![Taiwan cases](../cluster_analysis/Taiwan_imported_cases_BOP.png)
 
 
 
-Data source: NIH-Fogarty
+Data source: BOP
 
 
 ### Data sources:

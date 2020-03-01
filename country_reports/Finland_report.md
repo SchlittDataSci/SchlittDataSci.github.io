@@ -1,6 +1,6 @@
 # Finland
 ## NSSAC COVID-19 Summary
-## 02/29/2020
+## 03/01/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
 |---------------------------|------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/05/20                      |
-| Last update logged        | 02/29/20         | 02/28/20                    | 02/28/20         | 02/07/20                      |
+| Last update logged        | 02/29/20         | 02/29/20                    | 02/28/20         | 02/07/20                      |
 | Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/29/20         | 01/22/20                    | 01/29/20         | 02/05/20                      |
-| Total confirmed cases     | 2                | 2                           | 1                | 1                             |
-| New cases since yesterday |                  | 0                           |                  |                               |
+| Total confirmed cases     | 3                | 3                           | 3                | 1                             |
+| New cases since yesterday |                  | 1                           |                  |                               |
 | Total suspected           |                  |                             |                  | 0                             |
 | Total hospitalized        | 0                |                             | 1                |                               |
 | Total recovered           | 0                | 1                           |                  | 1                             |
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name                  |   confirmed |
 |----------|---------------------------|-------------|
 | NIH      | Lapland, Finland          |           1 |
-| JHU      | Finland                   |           2 |
+| JHU      | Finland                   |           3 |
 | BOP      | Lapland, Finland          |           1 |
 | BOP      | Southern Finland, Finland |           1 |
 
@@ -67,14 +67,6 @@ Data source: NIH-Fogarty
 
 
 Data source: BOP
-
-
-#### Fig 5:
-![Finland network](../autochthonous_networks/Finland_network.png)
-
-
-
-Data source: NIH-Fogarty
 
 
 ### Data sources:

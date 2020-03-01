@@ -1,6 +1,6 @@
 # Germany
 ## NSSAC COVID-19 Summary
-## 02/29/2020
+## 03/01/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | NIHFogarty       | JHU                         | BOP              |
-|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
-| First update logged       | 02/04/20                      | 01/13/20         | 01/22/20                    | 01/12/20         |
-| Last update logged        | 02/29/20                      | 02/28/20         | 02/28/20                    | 02/29/20         |
-| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
-| First known case          | 02/04/20                      | 01/28/20         | 01/22/20                    | 01/27/20         |
-| Total confirmed cases     | 66                            | 54               | 48                          | 20               |
-| New cases since yesterday | 18                            |                  |                             |                  |
-| Total suspected           | 0                             |                  |                             |                  |
-| Total hospitalized        |                               | 4                |                             | 0                |
-| Total recovered           | 16                            |                  | 16                          | 1                |
-| Total deaths              | 0                             | 0                | 0                           | 0                |
+|                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
+|---------------------------|------------------|-----------------------------|------------------|-------------------------------|
+| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/04/20                      |
+| Last update logged        | 02/29/20         | 02/29/20                    | 02/28/20         | 03/01/20                      |
+| Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
+| First known case          | 01/27/20         | 01/22/20                    | 01/28/20         | 02/04/20                      |
+| Total confirmed cases     | 79               | 79                          | 79               | 66                            |
+| New cases since yesterday |                  |                             |                  | 0                             |
+| Total suspected           |                  |                             |                  | 0                             |
+| Total hospitalized        | 0                |                             | 4                |                               |
+| Total recovered           | 1                | 16                          |                  | 16                            |
+| Total deaths              | 0                | 0                           | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -43,15 +43,15 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | North Rhine-Westphalia, Germany |          21 |
 | NIH      | Bavaria, Germany                |          15 |
 | NIH      | Baden-Wuerttemberg, Germany     |          11 |
-| NIH      | Frankfurt, Germany              |           2 |
 | NIH      | Tubingen, Germany               |           2 |
-| NIH      | Rhineland-Palatinate, Germany   |           1 |
+| NIH      | Frankfurt, Germany              |           2 |
 | NIH      | Hesse, Germany                  |           1 |
+| NIH      | Rhineland-Palatinate, Germany   |           1 |
 | NIH      | Hamburg, Germany                |           1 |
-| JHU      | Germany                         |          48 |
+| JHU      | Germany                         |          79 |
 | BOP      | Bavaria, Germany                |          15 |
-| BOP      | Rhineland-Palatinate, Germany   |           2 |
 | BOP      | North Rhine-Westphalia, Germany |           2 |
+| BOP      | Rhineland-Palatinate, Germany   |           2 |
 | BOP      | Baden-Wuerttemberg, Germany     |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
@@ -76,14 +76,6 @@ Data source: NIH-Fogarty
 
 
 Data source: BOP
-
-
-#### Fig 5:
-![Germany network](../autochthonous_networks/Germany_network.png)
-
-
-
-Data source: NIH-Fogarty
 
 
 ### Data sources:

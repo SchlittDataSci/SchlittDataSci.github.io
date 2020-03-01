@@ -1,6 +1,6 @@
 # Vietnam
 ## NSSAC COVID-19 Summary
-## 02/29/2020
+## 03/01/2020
 
 
 
@@ -16,7 +16,7 @@
 |                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
 |---------------------------|------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 02/29/20         | 02/28/20                    | 02/28/20         | 02/24/20                      |
+| Last update logged        | 02/29/20         | 02/29/20                    | 02/28/20         | 02/24/20                      |
 | Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/23/20         | 01/22/20                    | 01/23/20         | 02/04/20                      |
 | Total confirmed cases     | 16               | 16                          | 16               | 16                            |
@@ -41,8 +41,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name                  |   confirmed |
 |----------|---------------------------|-------------|
 | NIH      | Vinh Phuc, Vietnam        |           8 |
-| NIH      | Hanoi, Vietnam            |           2 |
 | NIH      | Ho Chi Minh City, Vietnam |           2 |
+| NIH      | Hanoi, Vietnam            |           2 |
 | NIH      | Thanh Hoa, Vietnam        |           1 |
 | JHU      | Vietnam                   |          16 |
 | BOP      | Vinh Phuc, Vietnam        |          11 |
@@ -71,14 +71,6 @@ Data source: NIH-Fogarty
 
 
 Data source: BOP
-
-
-#### Fig 5:
-![Vietnam network](../autochthonous_networks/Vietnam_network.png)
-
-
-
-Data source: NIH-Fogarty
 
 
 ### Data sources:

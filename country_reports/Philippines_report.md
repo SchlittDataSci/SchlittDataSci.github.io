@@ -1,6 +1,6 @@
 # Philippines
 ## NSSAC COVID-19 Summary
-## 02/29/2020
+## 03/01/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | Tencent                       | JHU                         | NIHFogarty       |
-|---------------------------|------------------|-------------------------------|-----------------------------|------------------|
-| First update logged       | 01/12/20         | 02/04/20                      | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/29/20         | 02/29/20                      | 02/28/20                    | 02/28/20         |
-| Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
-| First known case          | 01/30/20         | 02/04/20                      | 01/22/20                    | 02/02/20         |
-| Total confirmed cases     | 3                | 3                             | 3                           | 3                |
-| New cases since yesterday |                  | 0                             |                             |                  |
-| Total suspected           |                  | 0                             |                             |                  |
-| Total hospitalized        | 0                |                               |                             | 1                |
-| Total recovered           | 2                | 1                             | 1                           |                  |
-| Total deaths              | 1                | 1                             | 1                           | 0                |
+|                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
+|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
+| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
+| Last update logged        | 03/01/20                      | 02/29/20         | 02/29/20                    | 02/28/20         |
+| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
+| First known case          | 02/04/20                      | 01/30/20         | 01/22/20                    | 02/02/20         |
+| Total confirmed cases     | 3                             | 3                | 3                           | 3                |
+| New cases since yesterday | 0                             |                  |                             |                  |
+| Total suspected           | 0                             |                  |                             |                  |
+| Total hospitalized        |                               | 0                |                             | 1                |
+| Total recovered           | 1                             | 2                | 1                           |                  |
+| Total deaths              | 1                             | 1                | 1                           | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -68,14 +68,6 @@ Data source: NIH-Fogarty
 
 
 Data source: BOP
-
-
-#### Fig 5:
-![Philippines network](../autochthonous_networks/Philippines_network.png)
-
-
-
-Data source: NIH-Fogarty
 
 
 ### Data sources:

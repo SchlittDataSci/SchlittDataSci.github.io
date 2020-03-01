@@ -1,6 +1,6 @@
 # Sweden
 ## NSSAC COVID-19 Summary
-## 02/29/2020
+## 03/01/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | BOP              | JHU                         | NIHFogarty       |
 |---------------------------|------------------|-----------------------------|------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         |
-| Last update logged        | 02/29/20         | 02/28/20                    | 02/28/20         |
+| Last update logged        | 02/29/20         | 02/29/20                    | 02/28/20         |
 | Method                    | Public line list | Cases by day & country list | Public line list |
 | First known case          | 01/31/20         | 01/22/20                    | 01/31/20         |
-| Total confirmed cases     | 9                | 7                           | 1                |
-| New cases since yesterday | 2                | 0                           |                  |
+| Total confirmed cases     | 12               | 12                          | 12               |
+| New cases since yesterday |                  | 5                           |                  |
 | Total suspected           |                  |                             |                  |
 | Total hospitalized        | 0                |                             | 0                |
 | Total recovered           | 0                | 0                           |                  |
@@ -41,8 +41,8 @@ Data sources: BOP, JHU, NIH-Fogarty,
 | source   | loc_name          |   confirmed |
 |----------|-------------------|-------------|
 | NIH      | Jonkoping, Sweden |           1 |
-| JHU      | Sweden            |           7 |
-| BOP      | Sweden            |           9 |
+| JHU      | Sweden            |          12 |
+| BOP      | Sweden            |          12 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
@@ -66,14 +66,6 @@ Data source: NIH-Fogarty
 
 
 Data source: BOP
-
-
-#### Fig 5:
-![Sweden network](../autochthonous_networks/Sweden_network.png)
-
-
-
-Data source: NIH-Fogarty
 
 
 ### Data sources:

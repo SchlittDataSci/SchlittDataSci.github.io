@@ -1,6 +1,6 @@
 # South Korea
 ## NSSAC COVID-19 Summary
-## 02/29/2020
+## 03/01/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | JHU                         | BOP              | NIHFogarty       |
-|---------------------------|-------------------------------|-----------------------------|------------------|------------------|
-| First update logged       | 02/04/20                      | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 02/29/20                      | 02/28/20                    | 02/29/20         | 02/28/20         |
-| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
-| First known case          | 02/04/20                      | 01/22/20                    | 01/20/20         | 01/20/20         |
-| Total confirmed cases     | 3150                          | 2337                        | 938              | 114              |
-| New cases since yesterday | 1384                          |                             |                  |                  |
-| Total suspected           | 0                             |                             |                  |                  |
-| Total hospitalized        |                               |                             | 24               | 9                |
-| Total recovered           | 24                            | 22                          | 0                |                  |
-| Total deaths              | 13                            | 13                          | 0                | 0                |
+|                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
+|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
+| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
+| Last update logged        | 03/01/20                      | 02/29/20         | 02/29/20                    | 02/28/20         |
+| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
+| First known case          | 02/04/20                      | 01/20/20         | 01/22/20                    | 01/20/20         |
+| Total confirmed cases     | 3150                          | 3150             | 3150                        | 3150             |
+| New cases since yesterday | 0                             |                  |                             |                  |
+| Total suspected           | 0                             |                  |                             |                  |
+| Total hospitalized        |                               | 24               |                             | 9                |
+| Total recovered           | 24                            | 0                | 27                          |                  |
+| Total deaths              | 13                            | 0                | 16                          | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name                       |   confirmed |
 |----------|--------------------------------|-------------|
 | NIH      | Seoul, South Korea             |           2 |
-| JHU      | South Korea                    |        2337 |
+| JHU      | South Korea                    |        3150 |
 | BOP      | Daegu, South Korea             |         552 |
 | BOP      | North Gyeongsang, South Korea  |         250 |
 | BOP      | Busan, South Korea             |          40 |
@@ -49,13 +49,13 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | BOP      | Gyeonggi, South Korea          |          16 |
 | BOP      | South Gyeongsang, South Korea  |          10 |
 | BOP      | Gangwon, South Korea           |           5 |
-| BOP      | Daejeon, South Korea           |           4 |
-| BOP      | Gwangju, South Korea           |           4 |
 | BOP      | South Chungcheong, South Korea |           4 |
+| BOP      | Gwangju, South Korea           |           4 |
+| BOP      | Daejeon, South Korea           |           4 |
 | BOP      | North Chungcheong, South Korea |           3 |
 | BOP      | Incheon, South Korea           |           2 |
-| BOP      | Jeju, South Korea              |           2 |
 | BOP      | Ulsan, South Korea             |           2 |
+| BOP      | Jeju, South Korea              |           2 |
 | BOP      | Sejong, South Korea            |           1 |
 | BOP      | South Jeolla, South Korea      |           1 |
 | BOP      | North Jeolla, South Korea      |           1 |
@@ -82,14 +82,6 @@ Data source: NIH-Fogarty
 
 
 Data source: BOP
-
-
-#### Fig 5:
-![South Korea network](../autochthonous_networks/South_Korea_network.png)
-
-
-
-Data source: NIH-Fogarty
 
 
 ### Data sources:
