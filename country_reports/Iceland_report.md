@@ -1,6 +1,6 @@
 # Iceland
 ## NSSAC COVID-19 Summary
-## 03/01/2020
+## 03/02/2020
 
 
 
@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         |
-|---------------------------|-----------------------------|
-| First update logged       | 01/22/20                    |
-| Last update logged        | 02/29/20                    |
-| Method                    | Cases by day & country list |
-| First known case          | 01/22/20                    |
-| Total confirmed cases     | 1                           |
-| New cases since yesterday | 0                           |
-| Total suspected           |                             |
-| Total hospitalized        |                             |
-| Total recovered           | 0                           |
-| Total deaths              | 0                           |
+|                           | JHU                         | BOP              |
+|---------------------------|-----------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/12/20         |
+| Last update logged        | 03/01/20                    | 03/01/20         |
+| Method                    | Cases by day & country list | Public line list |
+| First known case          | 01/22/20                    | 02/28/20         |
+| Total confirmed cases     | 3                           | 2                |
+| New cases since yesterday | 2                           |                  |
+| Total suspected           |                             |                  |
+| Total hospitalized        |                             | 0                |
+| Total recovered           | 0                           | 0                |
+| Total deaths              | 0                           | 0                |
 
-Data sources: JHU, 
+Data sources: BOP, JHU, 
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Iceland_sitrep.csv)
@@ -40,9 +40,9 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Iceland    |           1 |
-| JHU      | Iceland    |           1 |
-| BOP      | Iceland    |           1 |
+| NIH      | Iceland    |           3 |
+| JHU      | Iceland    |           3 |
+| BOP      | Iceland    |           3 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
@@ -50,6 +50,14 @@ Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Iceland_case_locs.geojson)
 
 ### Observed case clusters:
+#### Fig 3:
+![Iceland cases](../cluster_analysis/Iceland_imported_cases_BOP.png)
+
+
+
+Data source: BOP
+
+
 ### Data sources:
 * **[BOP](https://github.com/beoutbreakprepared/nCoV2019)**
 * **[JHU](https://github.com/CSSEGISandData/COVID-19)** 

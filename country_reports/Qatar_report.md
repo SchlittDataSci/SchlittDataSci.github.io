@@ -1,6 +1,6 @@
 # Qatar
 ## NSSAC COVID-19 Summary
-## 03/01/2020
+## 03/02/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 02/29/20                    |
+| Last update logged        | 03/01/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 1                           |
-| New cases since yesterday | 1                           |
+| Total confirmed cases     | 3                           |
+| New cases since yesterday | 2                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
 | Total recovered           | 0                           |
@@ -40,9 +40,9 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Qatar      |           1 |
-| JHU      | Qatar      |           1 |
-| BOP      | Qatar      |           1 |
+| NIH      | Qatar      |           3 |
+| JHU      | Qatar      |           3 |
+| BOP      | Qatar      |           3 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

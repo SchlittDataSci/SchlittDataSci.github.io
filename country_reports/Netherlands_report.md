@@ -1,6 +1,6 @@
 # Netherlands
 ## NSSAC COVID-19 Summary
-## 03/01/2020
+## 03/02/2020
 
 
 
@@ -16,13 +16,13 @@
 |                           | BOP              | JHU                         |
 |---------------------------|------------------|-----------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    |
-| Last update logged        | 02/29/20         | 02/29/20                    |
+| Last update logged        | 03/01/20         | 03/01/20                    |
 | Method                    | Public line list | Cases by day & country list |
 | First known case          | 02/27/20         | 01/22/20                    |
-| Total confirmed cases     | 6                | 6                           |
-| New cases since yesterday |                  | 5                           |
+| Total confirmed cases     | 10               | 10                          |
+| New cases since yesterday | 3                | 4                           |
 | Total suspected           |                  |                             |
-| Total hospitalized        | 0                |                             |
+| Total hospitalized        | 1                |                             |
 | Total recovered           | 0                | 0                           |
 | Total deaths              | 0                | 0                           |
 
@@ -38,16 +38,18 @@ Data sources: BOP, JHU,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name    |   confirmed |
-|----------|-------------|-------------|
-| NIH      | Netherlands |           6 |
-| JHU      | Netherlands |           6 |
-| BOP      | Netherlands |           6 |
+| source   | loc_name             |   confirmed |
+|----------|----------------------|-------------|
+| NIH      | Netherlands          |          10 |
+| JHU      | Netherlands          |          10 |
+| BOP      | Drenthe, Netherlands |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Netherlands_case_locs.geojson)
+
+[Case admin1 locs geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Netherlands_admin1_locs.geojson)
 
 ### Observed case clusters:
 #### Fig 3:

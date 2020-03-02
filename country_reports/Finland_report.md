@@ -1,6 +1,6 @@
 # Finland
 ## NSSAC COVID-19 Summary
-## 03/01/2020
+## 03/02/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
 |---------------------------|------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/05/20                      |
-| Last update logged        | 02/29/20         | 02/29/20                    | 02/28/20         | 02/07/20                      |
+| Last update logged        | 03/01/20         | 03/01/20                    | 02/28/20         | 02/07/20                      |
 | Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/29/20         | 01/22/20                    | 01/29/20         | 02/05/20                      |
-| Total confirmed cases     | 3                | 3                           | 3                | 1                             |
-| New cases since yesterday |                  | 1                           |                  |                               |
+| Total confirmed cases     | 6                | 6                           | 1                | 1                             |
+| New cases since yesterday |                  | 3                           |                  |                               |
 | Total suspected           |                  |                             |                  | 0                             |
 | Total hospitalized        | 0                |                             | 1                |                               |
 | Total recovered           | 0                | 1                           |                  | 1                             |
@@ -38,12 +38,11 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name                  |   confirmed |
-|----------|---------------------------|-------------|
-| NIH      | Lapland, Finland          |           1 |
-| JHU      | Finland                   |           3 |
-| BOP      | Lapland, Finland          |           1 |
-| BOP      | Southern Finland, Finland |           1 |
+| source   | loc_name         |   confirmed |
+|----------|------------------|-------------|
+| NIH      | Lapland, Finland |           1 |
+| JHU      | Finland          |           6 |
+| BOP      | Lapland, Finland |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

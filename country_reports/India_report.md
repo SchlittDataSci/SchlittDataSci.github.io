@@ -1,6 +1,6 @@
 # India
 ## NSSAC COVID-19 Summary
-## 03/01/2020
+## 03/02/2020
 
 
 
@@ -16,7 +16,7 @@
 |                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
 |---------------------------|------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 02/29/20         | 02/29/20                    | 02/28/20         | 02/14/20                      |
+| Last update logged        | 03/01/20         | 03/01/20                    | 02/28/20         | 02/14/20                      |
 | Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/30/20         | 01/22/20                    | 01/30/20         | 02/04/20                      |
 | Total confirmed cases     | 3                | 3                           | 3                | 3                             |

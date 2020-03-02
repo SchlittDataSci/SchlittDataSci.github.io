@@ -1,6 +1,6 @@
 # Germany
 ## NSSAC COVID-19 Summary
-## 03/01/2020
+## 03/02/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
-|---------------------------|------------------|-----------------------------|------------------|-------------------------------|
-| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 02/29/20         | 02/29/20                    | 02/28/20         | 03/01/20                      |
-| Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
-| First known case          | 01/27/20         | 01/22/20                    | 01/28/20         | 02/04/20                      |
-| Total confirmed cases     | 79               | 79                          | 79               | 66                            |
-| New cases since yesterday |                  |                             |                  | 0                             |
-| Total suspected           |                  |                             |                  | 0                             |
-| Total hospitalized        | 0                |                             | 4                |                               |
-| Total recovered           | 1                | 16                          |                  | 16                            |
-| Total deaths              | 0                | 0                           | 0                | 0                             |
+|                           | JHU                         | Tencent                       | NIHFogarty       | BOP              |
+|---------------------------|-----------------------------|-------------------------------|------------------|------------------|
+| First update logged       | 01/22/20                    | 02/04/20                      | 01/13/20         | 01/12/20         |
+| Last update logged        | 03/01/20                    | 03/02/20                      | 02/28/20         | 03/01/20         |
+| Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
+| First known case          | 01/22/20                    | 02/04/20                      | 01/28/20         | 01/27/20         |
+| Total confirmed cases     | 130                         | 66                            | 54               | 20               |
+| New cases since yesterday |                             | 0                             |                  |                  |
+| Total suspected           |                             | 0                             |                  |                  |
+| Total hospitalized        |                             |                               | 4                | 0                |
+| Total recovered           | 16                          | 16                            |                  | 1                |
+| Total deaths              | 0                           | 0                             | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -48,10 +48,10 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Hesse, Germany                  |           1 |
 | NIH      | Rhineland-Palatinate, Germany   |           1 |
 | NIH      | Hamburg, Germany                |           1 |
-| JHU      | Germany                         |          79 |
+| JHU      | Germany                         |         130 |
 | BOP      | Bavaria, Germany                |          15 |
-| BOP      | North Rhine-Westphalia, Germany |           2 |
 | BOP      | Rhineland-Palatinate, Germany   |           2 |
+| BOP      | North Rhine-Westphalia, Germany |           2 |
 | BOP      | Baden-Wuerttemberg, Germany     |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

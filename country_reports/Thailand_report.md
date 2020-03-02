@@ -1,6 +1,6 @@
 # Thailand
 ## NSSAC COVID-19 Summary
-## 03/01/2020
+## 03/02/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
-|---------------------------|-------------------------------|------------------|-----------------------------|------------------|
-| First update logged       | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
-| Last update logged        | 03/01/20                      | 02/29/20         | 02/29/20                    | 02/28/20         |
-| Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
-| First known case          | 02/04/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
-| Total confirmed cases     | 42                            | 42               | 42                          | 42               |
-| New cases since yesterday | 0                             |                  |                             |                  |
-| Total suspected           | 0                             |                  |                             |                  |
-| Total hospitalized        |                               | 7                |                             | 10               |
-| Total recovered           | 28                            | 1                | 28                          |                  |
-| Total deaths              | 0                             | 0                | 0                           | 0                |
+|                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
+|---------------------------|-------------------------------|-----------------------------|------------------|------------------|
+| First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
+| Last update logged        | 03/02/20                      | 03/01/20                    | 02/28/20         | 03/01/20         |
+| Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
+| First known case          | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
+| Total confirmed cases     | 42                            | 42                          | 41               | 40               |
+| New cases since yesterday | 0                             |                             |                  |                  |
+| Total suspected           | 0                             |                             |                  |                  |
+| Total hospitalized        |                               |                             | 10               | 7                |
+| Total recovered           | 28                            | 28                          |                  | 1                |
+| Total deaths              | 0                             | 1                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -69,6 +69,14 @@ Data source: NIH-Fogarty
 
 
 Data source: BOP
+
+
+#### Fig 5:
+![Thailand network](../autochthonous_networks/Thailand_network.png)
+
+
+
+Data source: NIH-Fogarty
 
 
 ### Data sources:

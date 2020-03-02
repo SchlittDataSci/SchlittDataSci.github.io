@@ -1,6 +1,6 @@
 # Bahrain
 ## NSSAC COVID-19 Summary
-## 03/01/2020
+## 03/02/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
-|---------------------------|------------------|-----------------------------|------------------|-------------------------------|
-| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/25/20                      |
-| Last update logged        | 02/29/20         | 02/29/20                    | 02/28/20         | 03/01/20                      |
-| Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
-| First known case          | 02/24/20         | 01/22/20                    | 02/24/20         | 02/25/20                      |
-| Total confirmed cases     | 41               | 41                          | 41               | 33                            |
-| New cases since yesterday |                  |                             |                  | 0                             |
-| Total suspected           |                  |                             |                  | 0                             |
-| Total hospitalized        | 1                |                             | 0                |                               |
-| Total recovered           | 0                | 0                           |                  | 0                             |
-| Total deaths              | 0                | 0                           | 0                | 0                             |
+|                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
+|---------------------------|-----------------------------|-------------------------------|------------------|------------------|
+| First update logged       | 01/22/20                    | 02/25/20                      | 01/12/20         | 01/13/20         |
+| Last update logged        | 03/01/20                    | 03/02/20                      | 03/01/20         | 02/28/20         |
+| Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
+| First known case          | 01/22/20                    | 02/25/20                      | 02/24/20         | 02/24/20         |
+| Total confirmed cases     | 47                          | 33                            | 20               | 17               |
+| New cases since yesterday |                             | 0                             |                  |                  |
+| Total suspected           |                             | 0                             |                  |                  |
+| Total hospitalized        |                             |                               | 1                | 0                |
+| Total recovered           | 0                           | 0                             | 0                |                  |
+| Total deaths              | 0                           | 0                             | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -40,9 +40,9 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Bahrain    |          41 |
-| JHU      | Bahrain    |          41 |
-| BOP      | Bahrain    |          41 |
+| NIH      | Bahrain    |          47 |
+| JHU      | Bahrain    |          47 |
+| BOP      | Bahrain    |          47 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

@@ -1,6 +1,6 @@
 # Spain
 ## NSSAC COVID-19 Summary
-## 03/01/2020
+## 03/02/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
-|---------------------------|------------------|-----------------------------|------------------|-------------------------------|
-| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/11/20                      |
-| Last update logged        | 02/29/20         | 02/29/20                    | 02/28/20         | 03/01/20                      |
-| Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
-| First known case          | 01/31/20         | 01/22/20                    | 01/31/20         | 02/11/20                      |
-| Total confirmed cases     | 45               | 45                          | 45               | 13                            |
-| New cases since yesterday |                  |                             |                  | 0                             |
-| Total suspected           |                  |                             |                  | 0                             |
-| Total hospitalized        | 1                |                             | 4                |                               |
-| Total recovered           | 0                | 2                           |                  | 2                             |
-| Total deaths              | 0                | 0                           | 0                | 0                             |
+|                           | JHU                         | NIHFogarty       | Tencent                       | BOP              |
+|---------------------------|-----------------------------|------------------|-------------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/13/20         | 02/11/20                      | 01/12/20         |
+| Last update logged        | 03/01/20                    | 02/28/20         | 03/02/20                      | 03/01/20         |
+| Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
+| First known case          | 01/22/20                    | 01/31/20         | 02/11/20                      | 01/31/20         |
+| Total confirmed cases     | 84                          | 34               | 13                            | 13               |
+| New cases since yesterday |                             |                  | 0                             |                  |
+| Total suspected           |                             |                  | 0                             |                  |
+| Total hospitalized        |                             | 4                |                               | 1                |
+| Total recovered           | 2                           |                  | 2                             | 0                |
+| Total deaths              | 0                           | 0                | 0                             | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -50,12 +50,12 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Canary Islands, Spain      |           1 |
 | NIH      | Zaragoza, Spain            |           1 |
 | NIH      | Mallorca, Spain            |           1 |
-| JHU      | Spain                      |          45 |
+| JHU      | Spain                      |          84 |
 | BOP      | Canary Islands, Spain      |           4 |
 | BOP      | Castilla y Leon, Spain     |           2 |
 | BOP      | Catalonia, Spain           |           1 |
-| BOP      | Baleares, Spain            |           1 |
 | BOP      | Valencian Community, Spain |           1 |
+| BOP      | Baleares, Spain            |           1 |
 | BOP      | Andalusia, Spain           |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

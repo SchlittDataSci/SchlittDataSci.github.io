@@ -1,6 +1,6 @@
 # Iran
 ## NSSAC COVID-19 Summary
-## 03/01/2020
+## 03/02/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
-|---------------------------|------------------|-----------------------------|------------------|-------------------------------|
-| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/20/20                      |
-| Last update logged        | 02/29/20         | 02/29/20                    | 02/28/20         | 03/01/20                      |
-| Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
-| First known case          | 02/19/20         | 01/22/20                    | 02/19/20         | 02/20/20                      |
-| Total confirmed cases     | 593              | 593                         | 593              | 270                           |
-| New cases since yesterday |                  |                             |                  | 0                             |
-| Total suspected           |                  |                             |                  | 0                             |
-| Total hospitalized        | 0                |                             | 0                |                               |
-| Total recovered           | 0                | 123                         |                  | 49                            |
-| Total deaths              | 0                | 43                          | 0                | 26                            |
+|                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
+|---------------------------|-----------------------------|-------------------------------|------------------|------------------|
+| First update logged       | 01/22/20                    | 02/20/20                      | 01/12/20         | 01/13/20         |
+| Last update logged        | 03/01/20                    | 03/02/20                      | 03/01/20         | 02/28/20         |
+| Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
+| First known case          | 01/22/20                    | 02/20/20                      | 02/19/20         | 02/19/20         |
+| Total confirmed cases     | 978                         | 270                           | 28               | 18               |
+| New cases since yesterday |                             | 0                             |                  |                  |
+| Total suspected           |                             | 0                             |                  |                  |
+| Total hospitalized        |                             |                               | 0                | 0                |
+| Total recovered           | 175                         | 49                            | 0                |                  |
+| Total deaths              | 54                          | 26                            | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -44,7 +44,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Tehran, Iran  |           4 |
 | NIH      | Guilan, Iran  |           2 |
 | NIH      | Araq, Iran    |           1 |
-| JHU      | Iran          |         593 |
+| JHU      | Iran          |         978 |
 | BOP      | Qom, Iran     |          11 |
 | BOP      | Tehran, Iran  |           4 |
 | BOP      | Gilan, Iran   |           2 |
