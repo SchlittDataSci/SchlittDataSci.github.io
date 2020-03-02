@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Bern, Switzerland", "confirmed": 1, "color": "blue", "size": 1178.5113019775793, "label": "NIH : Bern, Switzerland: 1" }, "geometry": { "type": "Point", "coordinates": [ 829491.753254927345552, 5933634.71555092278868 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Switzerland", "confirmed": 18, "color": "red", "size": 5000.0, "label": "JHU : Switzerland: 18" }, "geometry": { "type": "Point", "coordinates": [ 916379.109375671017915, 5909256.087563406676054 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Graubuenden, Switzerland", "confirmed": 2, "color": "darkorange", "size": 1666.6666666666667, "label": "BOP : Graubuenden, Switzerland: 2" }, "geometry": { "type": "Point", "coordinates": [ 1068971.581554695032537, 5892603.917131002061069 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Basel, Switzerland", "confirmed": 2, "color": "darkorange", "size": 1666.6666666666667, "label": "BOP : Basel, Switzerland: 2" }, "geometry": { "type": "Point", "coordinates": [ 844672.937679910915904, 6033652.043487096205354 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Ticino, Switzerland", "confirmed": 1, "color": "darkorange", "size": 1178.5113019775793, "label": "BOP : Ticino, Switzerland: 1" }, "geometry": { "type": "Point", "coordinates": [ 974458.094474023440853, 5834301.586234566755593 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Aargau, Switzerland", "confirmed": 1, "color": "darkorange", "size": 1178.5113019775793, "label": "BOP : Aargau, Switzerland: 1" }, "geometry": { "type": "Point", "coordinates": [ 912244.536508372635581, 6009649.309014296159148 ] } }
+]
+}

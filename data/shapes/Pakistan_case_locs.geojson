@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Pakistan", "confirmed": 4, "color": "blue", "size": 5000.0, "label": "NIH : Pakistan: 4" }, "geometry": { "type": "Point", "coordinates": [ 7931235.308974267914891, 3546147.535352985840291 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Pakistan", "confirmed": 4, "color": "red", "size": 5000.0, "label": "JHU : Pakistan: 4" }, "geometry": { "type": "Point", "coordinates": [ 7931235.308974267914891, 3546147.535352985840291 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Islamabad Capital Territory, Pakistan", "confirmed": 1, "color": "darkorange", "size": 2500.0, "label": "BOP : Islamabad Capital Territory, Pakistan: 1" }, "geometry": { "type": "Point", "coordinates": [ 8133575.415185591205955, 3987762.157706857658923 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Sindh, Pakistan", "confirmed": 1, "color": "darkorange", "size": 2500.0, "label": "BOP : Sindh, Pakistan: 1" }, "geometry": { "type": "Point", "coordinates": [ 7681044.864735875278711, 2937284.437423841562122 ] } }
+]
+}

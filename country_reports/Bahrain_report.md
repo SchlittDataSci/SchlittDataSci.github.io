@@ -66,6 +66,14 @@ Data source: NIH-Fogarty
 Data source: BOP
 
 
+#### Fig 5:
+![Bahrain network](../autochthonous_networks/Bahrain_network.png)
+
+
+
+Data source: NIH-Fogarty
+
+
 ### Data sources:
 * **[BOP](https://github.com/beoutbreakprepared/nCoV2019)**
 * **[JHU](https://github.com/CSSEGISandData/COVID-19)** 

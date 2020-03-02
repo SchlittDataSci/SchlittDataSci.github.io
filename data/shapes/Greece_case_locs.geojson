@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Greece", "confirmed": 4, "color": "blue", "size": 5000.0, "label": "NIH : Greece: 4" }, "geometry": { "type": "Point", "coordinates": [ 2447661.037132539786398, 4721008.143010363914073 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Greece", "confirmed": 4, "color": "red", "size": 5000.0, "label": "JHU : Greece: 4" }, "geometry": { "type": "Point", "coordinates": [ 2447661.037132539786398, 4721008.143010363914073 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Macedonia, Greece", "confirmed": 1, "color": "darkorange", "size": 2500.0, "label": "BOP : Macedonia, Greece: 1" }, "geometry": { "type": "Point", "coordinates": [ 2646058.429618947673589, 4575392.423370922915637 ] } }
+]
+}

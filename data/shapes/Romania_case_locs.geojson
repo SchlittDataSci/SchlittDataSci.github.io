@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Romania", "confirmed": 3, "color": "blue", "size": 5000.0, "label": "NIH : Romania: 3" }, "geometry": { "type": "Point", "coordinates": [ 2748024.322462215088308, 5777979.893681054934859 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Romania", "confirmed": 3, "color": "red", "size": 5000.0, "label": "JHU : Romania: 3" }, "geometry": { "type": "Point", "coordinates": [ 2748024.322462215088308, 5777979.893681054934859 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Gorj, Romania", "confirmed": 1, "color": "darkorange", "size": 2886.7513459481288, "label": "BOP : Gorj, Romania: 1" }, "geometry": { "type": "Point", "coordinates": [ 2596602.80913016712293, 5615410.166245440021157 ] } }
+]
+}
