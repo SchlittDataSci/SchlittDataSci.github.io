@@ -1,6 +1,6 @@
 # United Kingdom
 ## NSSAC COVID-19 Summary
-## 03/02/2020
+## 03/03/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | NIHFogarty       | Tencent                       | BOP              |
-|---------------------------|-----------------------------|------------------|-------------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/13/20         | 02/07/20                      | 01/12/20         |
-| Last update logged        | 03/01/20                    | 02/28/20         | 03/02/20                      | 03/01/20         |
-| Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
-| First known case          | 01/22/20                    | 01/31/20         | 02/07/20                      | 01/31/20         |
-| Total confirmed cases     | 36                          | 20               | 16                            | 12               |
-| New cases since yesterday |                             |                  | 0                             |                  |
-| Total suspected           |                             |                  | 0                             |                  |
-| Total hospitalized        |                             | 0                |                               | 0                |
-| Total recovered           | 8                           |                  | 8                             | 0                |
-| Total deaths              | 0                           | 0                | 0                             | 0                |
+|                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
+|---------------------------|-----------------------------|------------------|------------------|-------------------------------|
+| First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/07/20                      |
+| Last update logged        | 03/02/20                    | 03/02/20         | 03/02/20         | 03/03/20                      |
+| Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
+| First known case          | 01/22/20                    | 01/31/20         | 01/31/20         | 02/07/20                      |
+| Total confirmed cases     | 40                          | 20               | 17               | 16                            |
+| New cases since yesterday |                             |                  |                  | 0                             |
+| Total suspected           |                             |                  |                  | 0                             |
+| Total hospitalized        |                             | 0                | 1                |                               |
+| Total recovered           | 8                           |                  | 0                | 8                             |
+| Total deaths              | 0                           | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -45,8 +45,9 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | York, United Kingdom             |           2 |
 | NIH      | Nortern Ireland, United Kingdom  |           1 |
 | NIH      | Wales, United Kingdom            |           1 |
-| JHU      | UK                               |          36 |
-| BOP      | England, United Kingdom          |           7 |
+| JHU      | UK                               |          40 |
+| BOP      | England, United Kingdom          |          11 |
+| BOP      | Scotland, United Kingdom         |           1 |
 | BOP      | Northern Ireland, United Kingdom |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

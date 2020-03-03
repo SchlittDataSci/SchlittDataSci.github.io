@@ -1,6 +1,6 @@
 # Kuwait
 ## NSSAC COVID-19 Summary
-## 03/02/2020
+## 03/03/2020
 
 
 
@@ -16,10 +16,10 @@
 |                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 02/27/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/01/20                    | 03/02/20                      | 03/01/20         | 02/28/20         |
+| Last update logged        | 03/02/20                    | 03/03/20                      | 03/02/20         | 03/02/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/27/20                      | 02/24/20         | 02/24/20         |
-| Total confirmed cases     | 45                          | 43                            | 26               | 9                |
+| Total confirmed cases     | 56                          | 43                            | 37               | 9                |
 | New cases since yesterday |                             | 0                             |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
 | Total hospitalized        |                             |                               | 0                | 0                |
@@ -40,9 +40,9 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Kuwait     |          45 |
-| JHU      | Kuwait     |          45 |
-| BOP      | Kuwait     |          45 |
+| NIH      | Kuwait     |          56 |
+| JHU      | Kuwait     |          56 |
+| BOP      | Kuwait     |          56 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

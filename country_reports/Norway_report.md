@@ -1,6 +1,6 @@
 # Norway
 ## NSSAC COVID-19 Summary
-## 03/02/2020
+## 03/03/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | Tencent                       | BOP              |
-|---------------------------|-----------------------------|-------------------------------|------------------|
-| First update logged       | 01/22/20                    | 03/01/20                      | 01/12/20         |
-| Last update logged        | 03/01/20                    | 03/01/20                      | 03/01/20         |
-| Method                    | Cases by day & country list | Daily cases in country scrape | Public line list |
-| First known case          | 01/22/20                    | 03/01/20                      | 02/26/20         |
-| Total confirmed cases     | 19                          | 6                             | 4                |
-| New cases since yesterday | 4                           |                               |                  |
-| Total suspected           |                             | 0                             |                  |
-| Total hospitalized        |                             |                               | 0                |
-| Total recovered           | 0                           | 0                             | 0                |
-| Total deaths              | 0                           | 0                             | 0                |
+|                           | JHU                         | BOP              | Tencent                       |
+|---------------------------|-----------------------------|------------------|-------------------------------|
+| First update logged       | 01/22/20                    | 01/12/20         | 03/01/20                      |
+| Last update logged        | 03/02/20                    | 03/02/20         | 03/03/20                      |
+| Method                    | Cases by day & country list | Public line list | Daily cases in country scrape |
+| First known case          | 01/22/20                    | 02/26/20         | 03/01/20                      |
+| Total confirmed cases     | 25                          | 8                | 6                             |
+| New cases since yesterday |                             |                  |                               |
+| Total suspected           |                             |                  | 0                             |
+| Total hospitalized        |                             | 0                |                               |
+| Total recovered           | 0                           | 0                | 0                             |
+| Total deaths              | 0                           | 0                | 0                             |
 
 Data sources: BOP, JHU, Tencent
 
@@ -40,9 +40,9 @@ Data sources: BOP, JHU, Tencent
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Norway     |          19 |
-| JHU      | Norway     |          19 |
-| BOP      | Norway     |          19 |
+| NIH      | Norway     |          25 |
+| JHU      | Norway     |          25 |
+| BOP      | Norway     |          25 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

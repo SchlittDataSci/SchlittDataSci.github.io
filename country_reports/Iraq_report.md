@@ -1,6 +1,6 @@
 # Iraq
 ## NSSAC COVID-19 Summary
-## 03/02/2020
+## 03/03/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 02/29/20                      |
-| Last update logged        | 03/01/20                    | 03/01/20         | 02/29/20                      |
+| Last update logged        | 03/02/20                    | 03/02/20         | 02/29/20                      |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape |
-| First known case          | 01/22/20                    | 02/24/20         | 02/29/20                      |
-| Total confirmed cases     | 19                          | 6                | 6                             |
-| New cases since yesterday | 6                           |                  |                               |
+| First known case          | 01/22/20                    | 02/02/20         | 02/29/20                      |
+| Total confirmed cases     | 26                          | 11               | 6                             |
+| New cases since yesterday | 7                           |                  |                               |
 | Total suspected           |                             |                  | 0                             |
 | Total hospitalized        |                             | 1                |                               |
 | Total recovered           | 0                           | 0                | 0                             |
@@ -38,12 +38,14 @@ Data sources: BOP, JHU, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name     |   confirmed |
-|----------|--------------|-------------|
-| NIH      | Iraq         |          19 |
-| JHU      | Iraq         |          19 |
-| BOP      | Kirkuk, Iraq |           4 |
-| BOP      | Najaf, Iraq  |           1 |
+| source   | loc_name      |   confirmed |
+|----------|---------------|-------------|
+| NIH      | Iraq          |          26 |
+| JHU      | Iraq          |          26 |
+| BOP      | Kirkuk, Iraq  |           4 |
+| BOP      | Baghdad, Iraq |           3 |
+| BOP      | Najaf, Iraq   |           2 |
+| BOP      | Maysan, Iraq  |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

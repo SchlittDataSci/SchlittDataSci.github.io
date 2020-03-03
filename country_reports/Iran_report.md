@@ -1,6 +1,6 @@
 # Iran
 ## NSSAC COVID-19 Summary
-## 03/02/2020
+## 03/03/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 02/20/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/01/20                    | 03/02/20                      | 03/01/20         | 02/28/20         |
+| Last update logged        | 03/02/20                    | 03/03/20                      | 03/02/20         | 03/02/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/20/20                      | 02/19/20         | 02/19/20         |
-| Total confirmed cases     | 978                         | 270                           | 28               | 18               |
+| Total confirmed cases     | 1501                        | 270                           | 28               | 18               |
 | New cases since yesterday |                             | 0                             |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
 | Total hospitalized        |                             |                               | 0                | 0                |
-| Total recovered           | 175                         | 49                            | 0                |                  |
-| Total deaths              | 54                          | 26                            | 0                | 0                |
+| Total recovered           | 291                         | 49                            | 0                |                  |
+| Total deaths              | 66                          | 26                            | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -44,7 +44,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Tehran, Iran  |           4 |
 | NIH      | Guilan, Iran  |           2 |
 | NIH      | Araq, Iran    |           1 |
-| JHU      | Iran          |         978 |
+| JHU      | Iran          |        1501 |
 | BOP      | Qom, Iran     |          11 |
 | BOP      | Tehran, Iran  |           4 |
 | BOP      | Gilan, Iran   |           2 |

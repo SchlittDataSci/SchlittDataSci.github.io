@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Jonkoping, Sweden", "confirmed": 1, "color": "blue", "size": 1336.3062095621219, "label": "NIH : Jonkoping, Sweden: 1" }, "geometry": { "type": "Point", "coordinates": [ 1576920.625800600508228, 7921778.929630122147501 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Sweden", "confirmed": 14, "color": "red", "size": 5000.0, "label": "JHU : Sweden: 14" }, "geometry": { "type": "Point", "coordinates": [ 1616454.562969229184091, 8327726.624551773071289 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Sweden", "confirmed": 14, "color": "darkorange", "size": 5000.0, "label": "BOP : Sweden: 14" }, "geometry": { "type": "Point", "coordinates": [ 1616454.562969229184091, 8327726.624551773071289 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Jonkoping, Sweden", "confirmed": 1, "color": "blue", "size": 1290.9944487358057, "label": "NIH : Jonkoping, Sweden: 1" }, "geometry": { "type": "Point", "coordinates": [ 1576920.625800600508228, 7921778.929630122147501 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Sweden", "confirmed": 15, "color": "red", "size": 5000.0, "label": "JHU : Sweden: 15" }, "geometry": { "type": "Point", "coordinates": [ 1616454.562969229184091, 8327726.624551773071289 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Sweden", "confirmed": 15, "color": "darkorange", "size": 5000.0, "label": "BOP : Sweden: 15" }, "geometry": { "type": "Point", "coordinates": [ 1616454.562969229184091, 8327726.624551773071289 ] } }
 ]
 }

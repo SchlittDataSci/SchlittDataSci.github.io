@@ -1,6 +1,6 @@
 # Switzerland
 ## NSSAC COVID-19 Summary
-## 03/02/2020
+## 03/03/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              | Tencent                       | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 02/27/20                      | 01/13/20         |
-| Last update logged        | 03/01/20                    | 03/01/20         | 02/28/20                      | 02/28/20         |
+| Last update logged        | 03/02/20                    | 03/02/20         | 02/28/20                      | 03/02/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 02/25/20         | 02/27/20                      | 02/25/20         |
-| Total confirmed cases     | 27                          | 10               | 6                             | 1                |
-| New cases since yesterday | 9                           |                  |                               |                  |
+| Total confirmed cases     | 42                          | 10               | 6                             | 1                |
+| New cases since yesterday | 15                          |                  |                               |                  |
 | Total suspected           |                             |                  | 0                             |                  |
 | Total hospitalized        |                             | 0                |                               | 0                |
 | Total recovered           | 0                           | 0                | 0                             |                  |
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name                 |   confirmed |
 |----------|--------------------------|-------------|
 | NIH      | Bern, Switzerland        |           1 |
-| JHU      | Switzerland              |          27 |
+| JHU      | Switzerland              |          42 |
 | BOP      | Graubuenden, Switzerland |           2 |
 | BOP      | Basel, Switzerland       |           2 |
 | BOP      | Ticino, Switzerland      |           1 |

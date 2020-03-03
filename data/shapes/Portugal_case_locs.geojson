@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Portugal", "confirmed": 2, "color": "blue", "size": 5000.0, "label": "NIH : Portugal: 2" }, "geometry": { "type": "Point", "coordinates": [ -878269.182265218929388, 4870777.131465265527368 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Portugal", "confirmed": 2, "color": "red", "size": 5000.0, "label": "JHU : Portugal: 2" }, "geometry": { "type": "Point", "coordinates": [ -878269.182265218929388, 4870777.131465265527368 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Portugal", "confirmed": 2, "color": "darkorange", "size": 5000.0, "label": "BOP : Portugal: 2" }, "geometry": { "type": "Point", "coordinates": [ -878269.182265218929388, 4870777.131465265527368 ] } }
+]
+}

@@ -1,6 +1,6 @@
 # Netherlands
 ## NSSAC COVID-19 Summary
-## 03/02/2020
+## 03/03/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         |
-|---------------------------|------------------|-----------------------------|
-| First update logged       | 01/12/20         | 01/22/20                    |
-| Last update logged        | 03/01/20         | 03/01/20                    |
-| Method                    | Public line list | Cases by day & country list |
-| First known case          | 02/27/20         | 01/22/20                    |
-| Total confirmed cases     | 10               | 10                          |
-| New cases since yesterday | 3                | 4                           |
-| Total suspected           |                  |                             |
-| Total hospitalized        | 1                |                             |
-| Total recovered           | 0                | 0                           |
-| Total deaths              | 0                | 0                           |
+|                           | JHU                         | BOP              |
+|---------------------------|-----------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/12/20         |
+| Last update logged        | 03/02/20                    | 03/02/20         |
+| Method                    | Cases by day & country list | Public line list |
+| First known case          | 01/22/20                    | 02/27/20         |
+| Total confirmed cases     | 18                          | 10               |
+| New cases since yesterday | 8                           |                  |
+| Total suspected           |                             |                  |
+| Total hospitalized        |                             | 1                |
+| Total recovered           | 0                           | 0                |
+| Total deaths              | 0                           | 0                |
 
 Data sources: BOP, JHU, 
 
@@ -40,8 +40,8 @@ Data sources: BOP, JHU,
 
 | source   | loc_name             |   confirmed |
 |----------|----------------------|-------------|
-| NIH      | Netherlands          |          10 |
-| JHU      | Netherlands          |          10 |
+| NIH      | Netherlands          |          18 |
+| JHU      | Netherlands          |          18 |
 | BOP      | Drenthe, Netherlands |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
