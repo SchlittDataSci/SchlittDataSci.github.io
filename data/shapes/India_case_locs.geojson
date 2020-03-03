@@ -2,9 +2,9 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Kerala, India", "confirmed": 2, "color": "blue", "size": 4082.4829046386303, "label": "NIH : Kerala, India: 2" }, "geometry": { "type": "Point", "coordinates": [ 8517281.287826782092452, 1158799.685033886926249 ] } },
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Alappuzha, India", "confirmed": 1, "color": "blue", "size": 2886.7513459481288, "label": "NIH : Alappuzha, India: 1" }, "geometry": { "type": "Point", "coordinates": [ 8506207.726899759843946, 1061138.99276842805557 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "India", "confirmed": 3, "color": "red", "size": 5000.0, "label": "JHU : India: 3" }, "geometry": { "type": "Point", "coordinates": [ 8757253.070352213457227, 2553733.296077007427812 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Kerala, India", "confirmed": 3, "color": "darkorange", "size": 5000.0, "label": "BOP : Kerala, India: 3" }, "geometry": { "type": "Point", "coordinates": [ 8517281.287826782092452, 1158799.685033886926249 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Kerala, India", "confirmed": 2, "color": "blue", "size": 3162.2776601683795, "label": "NIH : Kerala, India: 2" }, "geometry": { "type": "Point", "coordinates": [ 8517281.287826782092452, 1158799.685033886926249 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Alappuzha, India", "confirmed": 1, "color": "blue", "size": 2236.0679774997898, "label": "NIH : Alappuzha, India: 1" }, "geometry": { "type": "Point", "coordinates": [ 8506207.726899759843946, 1061138.99276842805557 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "India", "confirmed": 5, "color": "red", "size": 5000.0, "label": "JHU : India: 5" }, "geometry": { "type": "Point", "coordinates": [ 8757253.070352213457227, 2553733.296077007427812 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Kerala, India", "confirmed": 3, "color": "darkorange", "size": 3872.9833462074166, "label": "BOP : Kerala, India: 3" }, "geometry": { "type": "Point", "coordinates": [ 8517281.287826782092452, 1158799.685033886926249 ] } }
 ]
 }

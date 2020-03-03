@@ -1,6 +1,6 @@
 # Algeria
 ## NSSAC COVID-19 Summary
-## 03/02/2020
+## 03/03/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | BOP              | JHU                         | NIHFogarty       |
 |---------------------------|------------------|-----------------------------|------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         |
-| Last update logged        | 03/01/20         | 03/01/20                    | 02/28/20         |
+| Last update logged        | 03/02/20         | 03/02/20                    | 03/02/20         |
 | Method                    | Public line list | Cases by day & country list | Public line list |
 | First known case          | 02/25/20         | 01/22/20                    | 02/26/20         |
-| Total confirmed cases     | 1                | 1                           | 1                |
-| New cases since yesterday |                  | 0                           |                  |
+| Total confirmed cases     | 3                | 3                           | 1                |
+| New cases since yesterday |                  | 2                           |                  |
 | Total suspected           |                  |                             |                  |
 | Total hospitalized        | 0                |                             | 0                |
 | Total recovered           | 0                | 0                           |                  |
@@ -38,16 +38,18 @@ Data sources: BOP, JHU, NIH-Fogarty,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name   |   confirmed |
-|----------|------------|-------------|
-| NIH      | Algeria    |           1 |
-| JHU      | Algeria    |           1 |
-| BOP      | Algeria    |           1 |
+| source   | loc_name       |   confirmed |
+|----------|----------------|-------------|
+| NIH      | Algeria        |           3 |
+| JHU      | Algeria        |           3 |
+| BOP      | Blida, Algeria |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Algeria_case_locs.geojson)
+
+[Case admin1 locs geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Algeria_admin1_locs.geojson)
 
 ### Observed case clusters:
 #### Fig 3:

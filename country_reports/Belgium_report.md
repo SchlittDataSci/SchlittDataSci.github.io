@@ -1,6 +1,6 @@
 # Belgium
 ## NSSAC COVID-19 Summary
-## 03/02/2020
+## 03/03/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              | NIHFogarty       | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         | 02/13/20                      |
-| Last update logged        | 03/01/20                    | 03/01/20         | 02/28/20         | 02/14/20                      |
+| Last update logged        | 03/02/20                    | 03/02/20         | 03/02/20         | 02/14/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 02/04/20         | 02/04/20         | 02/13/20                      |
-| Total confirmed cases     | 2                           | 1                | 1                | 1                             |
-| New cases since yesterday | 1                           |                  |                  |                               |
+| Total confirmed cases     | 8                           | 7                | 1                | 1                             |
+| New cases since yesterday | 6                           |                  |                  |                               |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 0                | 0                |                               |
 | Total recovered           | 1                           | 0                |                  | 0                             |
@@ -38,16 +38,19 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name   |   confirmed |
-|----------|------------|-------------|
-| NIH      | Belgium    |           2 |
-| JHU      | Belgium    |           2 |
-| BOP      | Belgium    |           2 |
+| source   | loc_name          |   confirmed |
+|----------|-------------------|-------------|
+| NIH      | Belgium           |           8 |
+| JHU      | Belgium           |           8 |
+| BOP      | Brussels, Belgium |           5 |
+| BOP      | Flanders, Belgium |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Belgium_case_locs.geojson)
+
+[Case admin1 locs geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Belgium_admin1_locs.geojson)
 
 ### Observed case clusters:
 #### Fig 3:

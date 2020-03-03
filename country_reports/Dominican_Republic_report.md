@@ -1,6 +1,6 @@
 # Dominican Republic
 ## NSSAC COVID-19 Summary
-## 03/02/2020
+## 03/03/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/01/20                    |
+| Last update logged        | 03/02/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
 | Total confirmed cases     | 1                           |
-| New cases since yesterday | 1                           |
+| New cases since yesterday | 0                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
 | Total recovered           | 0                           |

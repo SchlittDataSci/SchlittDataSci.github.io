@@ -1,6 +1,6 @@
 # Iceland
 ## NSSAC COVID-19 Summary
-## 03/02/2020
+## 03/03/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/01/20                    | 03/01/20         |
+| Last update logged        | 03/02/20                    | 03/02/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/28/20         |
-| Total confirmed cases     | 3                           | 2                |
-| New cases since yesterday | 2                           |                  |
+| Total confirmed cases     | 6                           | 3                |
+| New cases since yesterday | 3                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 0                           | 0                |
@@ -40,9 +40,9 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Iceland    |           3 |
-| JHU      | Iceland    |           3 |
-| BOP      | Iceland    |           3 |
+| NIH      | Iceland    |           6 |
+| JHU      | Iceland    |           6 |
+| BOP      | Iceland    |           6 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

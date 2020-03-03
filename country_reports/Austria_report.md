@@ -1,6 +1,6 @@
 # Austria
 ## NSSAC COVID-19 Summary
-## 03/02/2020
+## 03/03/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | BOP              | NIHFogarty       |
-|---------------------------|-----------------------------|------------------|------------------|
-| First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/01/20                    | 03/01/20         | 02/28/20         |
-| Method                    | Cases by day & country list | Public line list | Public line list |
-| First known case          | 01/22/20                    | 02/25/20         | 02/25/20         |
-| Total confirmed cases     | 14                          | 2                | 2                |
-| New cases since yesterday | 5                           |                  |                  |
-| Total suspected           |                             |                  |                  |
-| Total hospitalized        |                             | 0                | 0                |
-| Total recovered           | 0                           | 0                |                  |
-| Total deaths              | 0                           | 0                | 0                |
+|                           | BOP              | JHU                         | NIHFogarty       |
+|---------------------------|------------------|-----------------------------|------------------|
+| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         |
+| Last update logged        | 03/02/20         | 03/02/20                    | 03/02/20         |
+| Method                    | Public line list | Cases by day & country list | Public line list |
+| First known case          | 02/25/20         | 01/22/20                    | 02/25/20         |
+| Total confirmed cases     | 18               | 18                          | 2                |
+| New cases since yesterday |                  | 4                           |                  |
+| Total suspected           |                  |                             |                  |
+| Total hospitalized        | 0                |                             | 0                |
+| Total recovered           | 0                | 0                           |                  |
+| Total deaths              | 0                | 0                           | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, 
 
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty,
 | source   | loc_name           |   confirmed |
 |----------|--------------------|-------------|
 | NIH      | Innsbruck, Austria |           2 |
-| JHU      | Austria            |          14 |
+| JHU      | Austria            |          18 |
 | BOP      | Tyrol, Austria     |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
