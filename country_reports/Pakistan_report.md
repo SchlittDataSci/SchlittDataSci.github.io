@@ -1,6 +1,6 @@
 # Pakistan
 ## NSSAC COVID-19 Summary
-## 03/03/2020
+## 03/04/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | BOP              |
-|---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/02/20                    | 03/02/20         |
-| Method                    | Cases by day & country list | Public line list |
-| First known case          | 01/22/20                    | 02/26/20         |
-| Total confirmed cases     | 4                           | 2                |
-| New cases since yesterday | 0                           |                  |
-| Total suspected           |                             |                  |
-| Total hospitalized        |                             | 0                |
-| Total recovered           | 0                           | 0                |
-| Total deaths              | 0                           | 0                |
+|                           | BOP              | JHU                         |
+|---------------------------|------------------|-----------------------------|
+| First update logged       | 01/12/20         | 01/22/20                    |
+| Last update logged        | 03/04/20         | 03/03/20                    |
+| Method                    | Public line list | Cases by day & country list |
+| First known case          | 02/26/20         | 01/22/20                    |
+| Total confirmed cases     | 5                | 5                           |
+| New cases since yesterday |                  | 1                           |
+| Total suspected           |                  |                             |
+| Total hospitalized        | 1                |                             |
+| Total recovered           | 0                | 0                           |
+| Total deaths              | 0                | 0                           |
 
 Data sources: BOP, JHU, 
 
@@ -40,10 +40,10 @@ Data sources: BOP, JHU,
 
 | source   | loc_name                              |   confirmed |
 |----------|---------------------------------------|-------------|
-| NIH      | Pakistan                              |           4 |
-| JHU      | Pakistan                              |           4 |
+| NIH      | Pakistan                              |           5 |
+| JHU      | Pakistan                              |           5 |
+| BOP      | Sindh, Pakistan                       |           2 |
 | BOP      | Islamabad Capital Territory, Pakistan |           1 |
-| BOP      | Sindh, Pakistan                       |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

@@ -2,8 +2,9 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Netherlands", "confirmed": 18, "color": "blue", "size": 5000.0, "label": "NIH : Netherlands: 18" }, "geometry": { "type": "Point", "coordinates": [ 639873.572409930638969, 6891072.77396331820637 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Netherlands", "confirmed": 18, "color": "red", "size": 5000.0, "label": "JHU : Netherlands: 18" }, "geometry": { "type": "Point", "coordinates": [ 639873.572409930638969, 6891072.77396331820637 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Drenthe, Netherlands", "confirmed": 1, "color": "darkorange", "size": 1178.5113019775793, "label": "BOP : Drenthe, Netherlands: 1" }, "geometry": { "type": "Point", "coordinates": [ 738809.905311258509755, 6965775.575760907493532 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Netherlands", "confirmed": 24, "color": "blue", "size": 5000.0, "label": "NIH : Netherlands: 24" }, "geometry": { "type": "Point", "coordinates": [ 639873.572409930638969, 6891072.77396331820637 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Netherlands", "confirmed": 24, "color": "red", "size": 5000.0, "label": "JHU : Netherlands: 24" }, "geometry": { "type": "Point", "coordinates": [ 639873.572409930638969, 6891072.77396331820637 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "South Holland, Netherlands", "confirmed": 8, "color": "darkorange", "size": 2886.7513459481293, "label": "BOP : South Holland, Netherlands: 8" }, "geometry": { "type": "Point", "coordinates": [ 507587.901553873962257, 6799525.033437190577388 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Drenthe, Netherlands", "confirmed": 1, "color": "darkorange", "size": 1020.6207261596576, "label": "BOP : Drenthe, Netherlands: 1" }, "geometry": { "type": "Point", "coordinates": [ 738809.905311258509755, 6965775.575760907493532 ] } }
 ]
 }

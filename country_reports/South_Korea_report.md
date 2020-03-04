@@ -1,6 +1,6 @@
 # South Korea
 ## NSSAC COVID-19 Summary
-## 03/03/2020
+## 03/04/2020
 
 
 
@@ -16,10 +16,10 @@
 |                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 02/04/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/02/20                    | 03/03/20                      | 03/02/20         | 03/02/20         |
+| Last update logged        | 03/03/20                    | 03/04/20                      | 03/04/20         | 03/04/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/04/20                      | 01/20/20         | 01/20/20         |
-| Total confirmed cases     | 4335                        | 3150                          | 938              | 114              |
+| Total confirmed cases     | 5186                        | 3150                          | 938              | 114              |
 | New cases since yesterday |                             | 0                             |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
 | Total hospitalized        |                             |                               | 24               | 9                |
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name                       |   confirmed |
 |----------|--------------------------------|-------------|
 | NIH      | Seoul, South Korea             |           2 |
-| JHU      | South Korea                    |        4335 |
+| JHU      | South Korea                    |        5186 |
 | BOP      | Daegu, South Korea             |         552 |
 | BOP      | North Gyeongsang, South Korea  |         250 |
 | BOP      | Busan, South Korea             |          40 |
@@ -54,11 +54,11 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | BOP      | Daejeon, South Korea           |           4 |
 | BOP      | North Chungcheong, South Korea |           3 |
 | BOP      | Incheon, South Korea           |           2 |
-| BOP      | Ulsan, South Korea             |           2 |
 | BOP      | Jeju, South Korea              |           2 |
-| BOP      | Sejong, South Korea            |           1 |
-| BOP      | South Jeolla, South Korea      |           1 |
+| BOP      | Ulsan, South Korea             |           2 |
 | BOP      | North Jeolla, South Korea      |           1 |
+| BOP      | South Jeolla, South Korea      |           1 |
+| BOP      | Sejong, South Korea            |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

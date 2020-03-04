@@ -1,6 +1,6 @@
 # United Kingdom
 ## NSSAC COVID-19 Summary
-## 03/03/2020
+## 03/04/2020
 
 
 
@@ -16,10 +16,10 @@
 |                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/07/20                      |
-| Last update logged        | 03/02/20                    | 03/02/20         | 03/02/20         | 03/03/20                      |
+| Last update logged        | 03/03/20                    | 03/04/20         | 03/04/20         | 03/04/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/31/20         | 01/31/20         | 02/07/20                      |
-| Total confirmed cases     | 40                          | 20               | 17               | 16                            |
+| Total confirmed cases     | 51                          | 20               | 17               | 16                            |
 | New cases since yesterday |                             |                  |                  | 0                             |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 0                | 1                |                               |
@@ -45,7 +45,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | York, United Kingdom             |           2 |
 | NIH      | Nortern Ireland, United Kingdom  |           1 |
 | NIH      | Wales, United Kingdom            |           1 |
-| JHU      | UK                               |          40 |
+| JHU      | UK                               |          51 |
 | BOP      | England, United Kingdom          |          11 |
 | BOP      | Scotland, United Kingdom         |           1 |
 | BOP      | Northern Ireland, United Kingdom |           1 |

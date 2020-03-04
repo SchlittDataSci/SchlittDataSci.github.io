@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Taiwan", "confirmed": 41, "color": "blue", "size": 5000.0, "label": "NIH : Taiwan: 41" }, "geometry": { "type": "Point", "coordinates": [ 13467656.627770707011223, 2750232.58954159123823 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Taiwan, Taiwan", "confirmed": 41, "color": "red", "size": 5000.0, "label": "JHU : Taiwan, Taiwan: 41" }, "geometry": { "type": "Point", "coordinates": [ 13467656.627770707011223, 2750232.58954159123823 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Taiwan, Taiwan", "confirmed": 26, "color": "darkorange", "size": 3981.6652969059774, "label": "BOP : Taiwan, Taiwan: 26" }, "geometry": { "type": "Point", "coordinates": [ 13467656.627770707011223, 2750232.58954159123823 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Taiwan", "confirmed": 42, "color": "blue", "size": 5000.0, "label": "NIH : Taiwan: 42" }, "geometry": { "type": "Point", "coordinates": [ 13467656.627770707011223, 2750232.58954159123823 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Taiwan, Taiwan", "confirmed": 42, "color": "red", "size": 5000.0, "label": "JHU : Taiwan, Taiwan: 42" }, "geometry": { "type": "Point", "coordinates": [ 13467656.627770707011223, 2750232.58954159123823 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Taiwan, Taiwan", "confirmed": 26, "color": "darkorange", "size": 3933.9789623472152, "label": "BOP : Taiwan, Taiwan: 26" }, "geometry": { "type": "Point", "coordinates": [ 13467656.627770707011223, 2750232.58954159123823 ] } }
 ]
 }

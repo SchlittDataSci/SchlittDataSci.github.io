@@ -1,6 +1,6 @@
 # Thailand
 ## NSSAC COVID-19 Summary
-## 03/03/2020
+## 03/04/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 02/04/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/02/20                    | 03/02/20                      | 03/02/20         | 03/02/20         |
+| Last update logged        | 03/03/20                    | 03/02/20                      | 03/04/20         | 03/04/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/04/20                      | 01/12/20         | 01/13/20         |
 | Total confirmed cases     | 43                          | 42                            | 41               | 41               |
-| New cases since yesterday | 1                           | 0                             |                  |                  |
+| New cases since yesterday | 0                           |                               |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
 | Total hospitalized        |                             |                               | 7                | 10               |
 | Total recovered           | 31                          | 28                            | 1                |                  |

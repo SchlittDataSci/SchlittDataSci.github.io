@@ -1,6 +1,6 @@
 # UAE
 ## NSSAC COVID-19 Summary
-## 03/03/2020
+## 03/04/2020
 
 
 
@@ -16,10 +16,10 @@
 |                           | JHU                         | NIHFogarty       | Tencent                       |
 |---------------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 03/02/20                    | 03/02/20         | 03/03/20                      |
+| Last update logged        | 03/03/20                    | 03/04/20         | 03/04/20                      |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/29/20         | 02/04/20                      |
-| Total confirmed cases     | 21                          | 21               | 19                            |
+| Total confirmed cases     | 27                          | 21               | 19                            |
 | New cases since yesterday |                             |                  | 0                             |
 | Total suspected           |                             |                  | 0                             |
 | Total hospitalized        |                             | 0                |                               |
@@ -40,8 +40,8 @@ Data sources: JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name             |   confirmed |
 |----------|----------------------|-------------|
-| NIH      | UAE                  |          21 |
-| JHU      | United Arab Emirates |          21 |
+| NIH      | UAE                  |          27 |
+| JHU      | United Arab Emirates |          27 |
 
 Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 

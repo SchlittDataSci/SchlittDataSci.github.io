@@ -1,6 +1,6 @@
 # Oman
 ## NSSAC COVID-19 Summary
-## 03/03/2020
+## 03/04/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         | Tencent                       |
-|---------------------------|------------------|-----------------------------|-------------------------------|
-| First update logged       | 01/12/20         | 01/22/20                    | 03/02/20                      |
-| Last update logged        | 03/02/20         | 03/02/20                    | 03/02/20                      |
-| Method                    | Public line list | Cases by day & country list | Daily cases in country scrape |
-| First known case          | 02/24/20         | 01/22/20                    | 03/02/20                      |
-| Total confirmed cases     | 6                | 6                           | 6                             |
-| New cases since yesterday |                  | 0                           |                               |
-| Total suspected           |                  |                             | 0                             |
-| Total hospitalized        | 0                |                             |                               |
-| Total recovered           | 0                | 1                           | 0                             |
-| Total deaths              | 0                | 0                           | 0                             |
+|                           | JHU                         | BOP              | Tencent                       |
+|---------------------------|-----------------------------|------------------|-------------------------------|
+| First update logged       | 01/22/20                    | 01/12/20         | 03/02/20                      |
+| Last update logged        | 03/03/20                    | 03/04/20         | 03/02/20                      |
+| Method                    | Cases by day & country list | Public line list | Daily cases in country scrape |
+| First known case          | 01/22/20                    | 02/24/20         | 03/02/20                      |
+| Total confirmed cases     | 12                          | 6                | 6                             |
+| New cases since yesterday | 6                           |                  |                               |
+| Total suspected           |                             |                  | 0                             |
+| Total hospitalized        |                             | 0                |                               |
+| Total recovered           | 2                           | 0                | 0                             |
+| Total deaths              | 0                           | 0                | 0                             |
 
 Data sources: BOP, JHU, Tencent
 
@@ -40,9 +40,9 @@ Data sources: BOP, JHU, Tencent
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Oman       |           6 |
-| JHU      | Oman       |           6 |
-| BOP      | Oman       |           6 |
+| NIH      | Oman       |          12 |
+| JHU      | Oman       |          12 |
+| BOP      | Oman       |          12 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

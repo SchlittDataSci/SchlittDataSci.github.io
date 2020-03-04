@@ -1,6 +1,6 @@
 # Spain
 ## NSSAC COVID-19 Summary
-## 03/03/2020
+## 03/04/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | BOP              | NIHFogarty       | Tencent                       |
+|                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
-| First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         | 02/11/20                      |
-| Last update logged        | 03/02/20                    | 03/02/20         | 03/02/20         | 03/03/20                      |
+| First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/11/20                      |
+| Last update logged        | 03/03/20                    | 03/04/20         | 03/04/20         | 03/04/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/31/20         | 01/31/20         | 02/11/20                      |
-| Total confirmed cases     | 120                         | 54               | 34               | 13                            |
+| Total confirmed cases     | 165                         | 81               | 54               | 13                            |
 | New cases since yesterday |                             |                  |                  | 0                             |
 | Total suspected           |                             |                  |                  | 0                             |
-| Total hospitalized        |                             | 1                | 5                |                               |
-| Total recovered           | 2                           | 0                |                  | 2                             |
-| Total deaths              | 0                           | 0                | 0                | 0                             |
+| Total hospitalized        |                             | 8                | 1                |                               |
+| Total recovered           | 2                           |                  | 0                | 2                             |
+| Total deaths              | 1                           | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -40,28 +40,37 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name                   |   confirmed |
 |----------|----------------------------|-------------|
-| NIH      | Andalusia, Spain           |           8 |
+| NIH      | Andalusia, Spain           |          14 |
+| NIH      | Cantabria, Spain           |          10 |
+| NIH      | Castile and Leon, Spain    |           7 |
 | NIH      | Valencia, Spain            |           7 |
-| NIH      | Tenerife, Spain            |           5 |
+| NIH      | Catalonia, Spain           |           6 |
+| NIH      | Tenerife, Spain            |           6 |
+| NIH      | Extremadura, Spain         |           6 |
 | NIH      | Madrid, Spain              |           5 |
+| NIH      | Basque Country, Spain      |           4 |
+| NIH      | Castilla-La Mancha, Spain  |           3 |
 | NIH      | Barcelona, Spain           |           3 |
-| NIH      | Castile and Leon, Spain    |           2 |
+| NIH      | Navarra, Spain             |           2 |
+| NIH      | La Rioja, Spain            |           2 |
+| NIH      | Castille and Leon, Spain   |           1 |
+| NIH      | Mallorca, Spain            |           1 |
+| NIH      | Asturias, Spain            |           1 |
 | NIH      | Zaragoza, Spain            |           1 |
 | NIH      | Canary Islands, Spain      |           1 |
 | NIH      | Castellon, Spain           |           1 |
-| NIH      | Mallorca, Spain            |           1 |
-| JHU      | Spain                      |         120 |
+| JHU      | Spain                      |         165 |
 | BOP      | Cantabria, Spain           |           9 |
 | BOP      | Castilla y Leon, Spain     |           9 |
 | BOP      | Canary Islands, Spain      |           4 |
 | BOP      | Catalonia, Spain           |           3 |
-| BOP      | Extremadura, Spain         |           2 |
 | BOP      | Castilla-La Mancha, Spain  |           2 |
+| BOP      | Extremadura, Spain         |           2 |
+| BOP      | Navarra, Spain             |           1 |
+| BOP      | Basque Country, Spain      |           1 |
 | BOP      | Andalusia, Spain           |           1 |
 | BOP      | Baleares, Spain            |           1 |
 | BOP      | Valencian Community, Spain |           1 |
-| BOP      | Basque Country, Spain      |           1 |
-| BOP      | Navarra, Spain             |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

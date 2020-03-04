@@ -1,6 +1,6 @@
 # Romania
 ## NSSAC COVID-19 Summary
-## 03/03/2020
+## 03/04/2020
 
 
 
@@ -16,10 +16,10 @@
 |                           | BOP              | JHU                         |
 |---------------------------|------------------|-----------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    |
-| Last update logged        | 03/02/20         | 03/02/20                    |
+| Last update logged        | 03/04/20         | 03/03/20                    |
 | Method                    | Public line list | Cases by day & country list |
 | First known case          | 02/25/20         | 01/22/20                    |
-| Total confirmed cases     | 3                | 3                           |
+| Total confirmed cases     | 4                | 3                           |
 | New cases since yesterday |                  | 0                           |
 | Total suspected           |                  |                             |
 | Total hospitalized        | 1                |                             |
