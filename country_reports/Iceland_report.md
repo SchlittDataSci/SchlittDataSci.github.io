@@ -1,6 +1,6 @@
 # Iceland
 ## NSSAC COVID-19 Summary
-## 03/03/2020
+## 03/04/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/02/20                    | 03/02/20         |
+| Last update logged        | 03/03/20                    | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/28/20         |
-| Total confirmed cases     | 6                           | 3                |
-| New cases since yesterday | 3                           |                  |
+| Total confirmed cases     | 11                          | 9                |
+| New cases since yesterday | 5                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 0                           | 0                |
@@ -38,16 +38,18 @@ Data sources: BOP, JHU,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name   |   confirmed |
-|----------|------------|-------------|
-| NIH      | Iceland    |           6 |
-| JHU      | Iceland    |           6 |
-| BOP      | Iceland    |           6 |
+| source   | loc_name                |   confirmed |
+|----------|-------------------------|-------------|
+| NIH      | Iceland                 |          11 |
+| JHU      | Iceland                 |          11 |
+| BOP      | Capital Region, Iceland |           6 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Iceland_case_locs.geojson)
+
+[Case admin1 locs geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Iceland_admin1_locs.geojson)
 
 ### Observed case clusters:
 #### Fig 3:

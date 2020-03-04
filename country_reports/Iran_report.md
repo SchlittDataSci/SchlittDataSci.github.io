@@ -1,6 +1,6 @@
 # Iran
 ## NSSAC COVID-19 Summary
-## 03/03/2020
+## 03/04/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
-|---------------------------|-----------------------------|-------------------------------|------------------|------------------|
-| First update logged       | 01/22/20                    | 02/20/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/02/20                    | 03/03/20                      | 03/02/20         | 03/02/20         |
-| Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
-| First known case          | 01/22/20                    | 02/20/20                      | 02/19/20         | 02/19/20         |
-| Total confirmed cases     | 1501                        | 270                           | 28               | 18               |
-| New cases since yesterday |                             | 0                             |                  |                  |
-| Total suspected           |                             | 0                             |                  |                  |
-| Total hospitalized        |                             |                               | 0                | 0                |
-| Total recovered           | 291                         | 49                            | 0                |                  |
-| Total deaths              | 66                          | 26                            | 0                | 0                |
+|                           | JHU                         | BOP              | Tencent                       | NIHFogarty       |
+|---------------------------|-----------------------------|------------------|-------------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/12/20         | 02/20/20                      | 01/13/20         |
+| Last update logged        | 03/03/20                    | 03/04/20         | 03/04/20                      | 03/04/20         |
+| Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
+| First known case          | 01/22/20                    | 02/19/20         | 02/20/20                      | 02/19/20         |
+| Total confirmed cases     | 2336                        | 995              | 270                           | 18               |
+| New cases since yesterday |                             |                  | 0                             |                  |
+| Total suspected           |                             |                  | 0                             |                  |
+| Total hospitalized        |                             | 0                |                               | 0                |
+| Total recovered           | 291                         | 0                | 49                            |                  |
+| Total deaths              | 77                          | 0                | 26                            | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -38,17 +38,40 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name      |   confirmed |
-|----------|---------------|-------------|
-| NIH      | Qom, Iran     |          11 |
-| NIH      | Tehran, Iran  |           4 |
-| NIH      | Guilan, Iran  |           2 |
-| NIH      | Araq, Iran    |           1 |
-| JHU      | Iran          |        1501 |
-| BOP      | Qom, Iran     |          11 |
-| BOP      | Tehran, Iran  |           4 |
-| BOP      | Gilan, Iran   |           2 |
-| BOP      | Markazi, Iran |           1 |
+| source   | loc_name                         |   confirmed |
+|----------|----------------------------------|-------------|
+| NIH      | Qom, Iran                        |          11 |
+| NIH      | Tehran, Iran                     |           4 |
+| NIH      | Guilan, Iran                     |           2 |
+| NIH      | Araq, Iran                       |           1 |
+| JHU      | Iran                             |        2336 |
+| BOP      | Tehran, Iran                     |         354 |
+| BOP      | Qom, Iran                        |         139 |
+| BOP      | Gilan, Iran                      |         112 |
+| BOP      | Markazi, Iran                    |          68 |
+| BOP      | Alborz, Iran                     |          47 |
+| BOP      | Esfahan, Iran                    |          45 |
+| BOP      | Mazandaran, Iran                 |          43 |
+| BOP      | Golestan, Iran                   |          24 |
+| BOP      | Khuzestan, Iran                  |          19 |
+| BOP      | Razavi Khorasan, Iran            |          19 |
+| BOP      | Fars, Iran                       |          19 |
+| BOP      | Semnan, Iran                     |          13 |
+| BOP      | Lorestan, Iran                   |          12 |
+| BOP      | East Azarbaijan, Iran            |          12 |
+| BOP      | Ardebil, Iran                    |          10 |
+| BOP      | Qazvin, Iran                     |           8 |
+| BOP      | Kordestan, Iran                  |           8 |
+| BOP      | Kermanshah, Iran                 |           5 |
+| BOP      | Hamadan, Iran                    |           5 |
+| BOP      | Yazd, Iran                       |           5 |
+| BOP      | Sistan and Baluchestan, Iran     |           4 |
+| BOP      | Hormozgan, Iran                  |           4 |
+| BOP      | South Khorasan, Iran             |           3 |
+| BOP      | Kohgiluyeh and Buyer Ahmad, Iran |           2 |
+| BOP      | Ilam, Iran                       |           2 |
+| BOP      | Kerman, Iran                     |           2 |
+| BOP      | West Azarbaijan, Iran            |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

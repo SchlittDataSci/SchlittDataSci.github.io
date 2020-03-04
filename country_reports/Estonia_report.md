@@ -1,6 +1,6 @@
 # Estonia
 ## NSSAC COVID-19 Summary
-## 03/03/2020
+## 03/04/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         |
-|---------------------------|------------------|-----------------------------|
-| First update logged       | 01/12/20         | 01/22/20                    |
-| Last update logged        | 03/02/20         | 03/02/20                    |
-| Method                    | Public line list | Cases by day & country list |
-| First known case          | 02/26/20         | 01/22/20                    |
-| Total confirmed cases     | 1                | 1                           |
-| New cases since yesterday |                  | 0                           |
-| Total suspected           |                  |                             |
-| Total hospitalized        | 0                |                             |
-| Total recovered           | 0                | 0                           |
-| Total deaths              | 0                | 0                           |
+|                           | JHU                         | BOP              |
+|---------------------------|-----------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/12/20         |
+| Last update logged        | 03/03/20                    | 03/04/20         |
+| Method                    | Cases by day & country list | Public line list |
+| First known case          | 01/22/20                    | 02/26/20         |
+| Total confirmed cases     | 2                           | 1                |
+| New cases since yesterday | 1                           |                  |
+| Total suspected           |                             |                  |
+| Total hospitalized        |                             | 0                |
+| Total recovered           | 0                           | 0                |
+| Total deaths              | 0                           | 0                |
 
 Data sources: BOP, JHU, 
 
@@ -40,9 +40,9 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Estonia    |           1 |
-| JHU      | Estonia    |           1 |
-| BOP      | Estonia    |           1 |
+| NIH      | Estonia    |           2 |
+| JHU      | Estonia    |           2 |
+| BOP      | Estonia    |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

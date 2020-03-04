@@ -1,6 +1,6 @@
 # Algeria
 ## NSSAC COVID-19 Summary
-## 03/03/2020
+## 03/04/2020
 
 
 
@@ -16,10 +16,10 @@
 |                           | BOP              | JHU                         | NIHFogarty       |
 |---------------------------|------------------|-----------------------------|------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         |
-| Last update logged        | 03/02/20         | 03/02/20                    | 03/02/20         |
+| Last update logged        | 03/04/20         | 03/03/20                    | 03/04/20         |
 | Method                    | Public line list | Cases by day & country list | Public line list |
 | First known case          | 02/25/20         | 01/22/20                    | 02/26/20         |
-| Total confirmed cases     | 3                | 3                           | 1                |
+| Total confirmed cases     | 5                | 5                           | 1                |
 | New cases since yesterday |                  | 2                           |                  |
 | Total suspected           |                  |                             |                  |
 | Total hospitalized        | 0                |                             | 0                |
@@ -40,8 +40,8 @@ Data sources: BOP, JHU, NIH-Fogarty,
 
 | source   | loc_name       |   confirmed |
 |----------|----------------|-------------|
-| NIH      | Algeria        |           3 |
-| JHU      | Algeria        |           3 |
+| NIH      | Algeria        |           5 |
+| JHU      | Algeria        |           5 |
 | BOP      | Blida, Algeria |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

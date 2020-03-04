@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Innsbruck, Austria", "confirmed": 2, "color": "blue", "size": 1666.6666666666667, "label": "NIH : Innsbruck, Austria: 2" }, "geometry": { "type": "Point", "coordinates": [ 1268237.188145647291094, 5985507.068940524943173 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Austria", "confirmed": 18, "color": "red", "size": 5000.0, "label": "JHU : Austria: 18" }, "geometry": { "type": "Point", "coordinates": [ 1469412.714372088434175, 5974786.019931172020733 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Tyrol, Austria", "confirmed": 2, "color": "darkorange", "size": 1666.6666666666667, "label": "BOP : Tyrol, Austria: 2" }, "geometry": { "type": "Point", "coordinates": [ 1283079.894526924705133, 5978581.248271707445383 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Innsbruck, Austria", "confirmed": 2, "color": "blue", "size": 1543.0334996209194, "label": "NIH : Innsbruck, Austria: 2" }, "geometry": { "type": "Point", "coordinates": [ 1268237.188145647291094, 5985507.068940524943173 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Austria", "confirmed": 21, "color": "red", "size": 5000.0, "label": "JHU : Austria: 21" }, "geometry": { "type": "Point", "coordinates": [ 1469412.714372088434175, 5974786.019931172020733 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Tyrol, Austria", "confirmed": 2, "color": "darkorange", "size": 1543.0334996209194, "label": "BOP : Tyrol, Austria: 2" }, "geometry": { "type": "Point", "coordinates": [ 1283079.894526924705133, 5978581.248271707445383 ] } }
 ]
 }

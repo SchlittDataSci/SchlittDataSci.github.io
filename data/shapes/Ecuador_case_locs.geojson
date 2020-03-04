@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Ecuador", "confirmed": 6, "color": "blue", "size": 5000.0, "label": "NIH : Ecuador: 6" }, "geometry": { "type": "Point", "coordinates": [ -8835060.240324288606644, -149155.751157582126325 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Ecuador", "confirmed": 6, "color": "red", "size": 5000.0, "label": "JHU : Ecuador: 6" }, "geometry": { "type": "Point", "coordinates": [ -8835060.240324288606644, -149155.751157582126325 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Guayas, Ecuador", "confirmed": 1, "color": "darkorange", "size": 2041.2414523193152, "label": "BOP : Guayas, Ecuador: 1" }, "geometry": { "type": "Point", "coordinates": [ -8905559.263461885973811, -222684.208505544782383 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Ecuador", "confirmed": 7, "color": "blue", "size": 5000.0, "label": "NIH : Ecuador: 7" }, "geometry": { "type": "Point", "coordinates": [ -8835060.240324288606644, -149155.751157582126325 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Ecuador", "confirmed": 7, "color": "red", "size": 5000.0, "label": "JHU : Ecuador: 7" }, "geometry": { "type": "Point", "coordinates": [ -8835060.240324288606644, -149155.751157582126325 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Guayas, Ecuador", "confirmed": 1, "color": "darkorange", "size": 1889.8223650461362, "label": "BOP : Guayas, Ecuador: 1" }, "geometry": { "type": "Point", "coordinates": [ -8905559.263461885973811, -222684.208505544782383 ] } }
 ]
 }

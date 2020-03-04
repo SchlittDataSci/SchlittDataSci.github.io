@@ -1,6 +1,6 @@
 # Australia
 ## NSSAC COVID-19 Summary
-## 03/03/2020
+## 03/04/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 02/04/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/02/20                    | 02/24/20                      | 03/02/20         | 03/02/20         |
+| Last update logged        | 03/03/20                    | 03/04/20                      | 03/04/20         | 03/04/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/04/20                      | 01/25/20         | 01/25/20         |
-| Total confirmed cases     | 30                          | 22                            | 16               | 15               |
-| New cases since yesterday | 3                           |                               |                  |                  |
+| Total confirmed cases     | 39                          | 23                            | 17               | 15               |
+| New cases since yesterday |                             |                               |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
 | Total hospitalized        |                             |                               | 5                | 5                |
-| Total recovered           | 11                          | 10                            | 0                |                  |
+| Total recovered           | 11                          | 15                            | 0                |                  |
 | Total deaths              | 1                           | 0                             | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
@@ -44,14 +44,14 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | NSW, Australia                   |           4 |
 | NIH      | Victoria, Australia              |           4 |
 | NIH      | South Australia, Australia       |           2 |
+| JHU      | New South Wales, Australia       |          13 |
+| JHU      | Queensland, Australia            |          11 |
 | JHU      | Victoria, Australia              |           9 |
-| JHU      | Queensland, Australia            |           9 |
-| JHU      | New South Wales, Australia       |           6 |
 | JHU      | South Australia, Australia       |           3 |
 | JHU      | Western Australia, Australia     |           2 |
 | JHU      | Tasmania, Australia              |           1 |
 | JHU      | From Diamond Princess, Australia |           0 |
-| BOP      | Queensland, Australia            |           5 |
+| BOP      | Queensland, Australia            |           6 |
 | BOP      | New South Wales, Australia       |           4 |
 | BOP      | Victoria, Australia              |           4 |
 | BOP      | South Australia, Australia       |           2 |

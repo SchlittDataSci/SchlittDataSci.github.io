@@ -1,6 +1,6 @@
 # Iraq
 ## NSSAC COVID-19 Summary
-## 03/03/2020
+## 03/04/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 02/29/20                      |
-| Last update logged        | 03/02/20                    | 03/02/20         | 02/29/20                      |
+| Last update logged        | 03/03/20                    | 03/04/20         | 03/04/20                      |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 02/02/20         | 02/29/20                      |
-| Total confirmed cases     | 26                          | 11               | 6                             |
-| New cases since yesterday | 7                           |                  |                               |
+| Total confirmed cases     | 32                          | 18               | 6                             |
+| New cases since yesterday |                             |                  |                               |
 | Total suspected           |                             |                  | 0                             |
 | Total hospitalized        |                             | 1                |                               |
 | Total recovered           | 0                           | 0                | 0                             |
@@ -40,11 +40,12 @@ Data sources: BOP, JHU, Tencent
 
 | source   | loc_name      |   confirmed |
 |----------|---------------|-------------|
-| NIH      | Iraq          |          26 |
-| JHU      | Iraq          |          26 |
+| NIH      | Iraq          |          32 |
+| JHU      | Iraq          |          32 |
+| BOP      | Najaf, Iraq   |           4 |
 | BOP      | Kirkuk, Iraq  |           4 |
 | BOP      | Baghdad, Iraq |           3 |
-| BOP      | Najaf, Iraq   |           2 |
+| BOP      | Karbala, Iraq |           1 |
 | BOP      | Maysan, Iraq  |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

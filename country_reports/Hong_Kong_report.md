@@ -1,6 +1,6 @@
 # Hong Kong
 ## NSSAC COVID-19 Summary
-## 03/03/2020
+## 03/04/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | NIHFogarty       | Tencent                       | JHU                         | BOP              |
 |---------------------------|------------------|-------------------------------|-----------------------------|------------------|
 | First update logged       | 01/13/20         | 02/04/20                      | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/02/20         | 03/03/20                      | 03/02/20                    | 03/02/20         |
+| Last update logged        | 03/04/20         | 03/04/20                      | 03/03/20                    | 03/04/20         |
 | Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
 | First known case          | 01/22/20         | 02/04/20                      | 01/22/20                    | 01/22/20         |
-| Total confirmed cases     | 101              | 100                           | 100                         | 45               |
+| Total confirmed cases     | 102              | 102                           | 100                         | 45               |
 | New cases since yesterday |                  | 2                             |                             |                  |
 | Total suspected           |                  | 0                             |                             |                  |
 | Total hospitalized        | 75               |                               |                             | 29               |
-| Total recovered           |                  | 36                            | 36                          | 0                |
+| Total recovered           |                  | 37                            | 37                          | 0                |
 | Total deaths              | 0                | 2                             | 2                           | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
