@@ -19,7 +19,7 @@
 | Last update logged        | 03/02/20                    | 03/03/20                      | 03/02/20         | 03/02/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/04/20                      | 01/28/20         | 01/27/20         |
-| Total confirmed cases     | 159                         | 66                            | 54               | 21               |
+| Total confirmed cases     | 159                         | 66                            | 58               | 21               |
 | New cases since yesterday |                             | 0                             |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
 | Total hospitalized        |                             |                               | 4                | 1                |
@@ -43,9 +43,9 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | North Rhine-Westphalia, Germany |          21 |
 | NIH      | Bavaria, Germany                |          15 |
 | NIH      | Baden-Wuerttemberg, Germany     |          11 |
+| NIH      | Hesse, Germany                  |           5 |
 | NIH      | Tubingen, Germany               |           2 |
 | NIH      | Frankfurt, Germany              |           2 |
-| NIH      | Hesse, Germany                  |           1 |
 | NIH      | Rhineland-Palatinate, Germany   |           1 |
 | NIH      | Hamburg, Germany                |           1 |
 | JHU      | Germany                         |         159 |

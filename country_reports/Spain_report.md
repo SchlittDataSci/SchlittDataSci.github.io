@@ -22,7 +22,7 @@
 | Total confirmed cases     | 120                         | 54               | 34               | 13                            |
 | New cases since yesterday |                             |                  |                  | 0                             |
 | Total suspected           |                             |                  |                  | 0                             |
-| Total hospitalized        |                             | 1                | 4                |                               |
+| Total hospitalized        |                             | 1                | 5                |                               |
 | Total recovered           | 2                           | 0                |                  | 2                             |
 | Total deaths              | 0                           | 0                | 0                | 0                             |
 
