@@ -1,6 +1,6 @@
 # Lebanon
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/03/20                    | 03/04/20         | 03/04/20         |
+| Last update logged        | 03/04/20                    | 03/04/20         | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/21/20         | 02/21/20         |
 | Total confirmed cases     | 13                          | 6                | 1                |
 | New cases since yesterday | 0                           |                  |                  |
 | Total suspected           |                             |                  |                  |
 | Total hospitalized        |                             | 0                | 0                |
-| Total recovered           | 0                           | 0                |                  |
+| Total recovered           | 1                           | 0                |                  |
 | Total deaths              | 0                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, 
@@ -38,11 +38,11 @@ Data sources: BOP, JHU, NIH-Fogarty,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name        |   confirmed |
-|----------|-----------------|-------------|
-| NIH      | Lebanon         |          13 |
-| JHU      | Lebanon         |          13 |
-| BOP      | Beirut, Lebanon |           3 |
+| source   | loc_name   |   confirmed |
+|----------|------------|-------------|
+| NIH      | Lebanon    |          13 |
+| JHU      | Lebanon    |          13 |
+| BOP      | Beirut     |           3 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

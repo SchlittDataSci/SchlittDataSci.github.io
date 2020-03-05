@@ -1,6 +1,6 @@
 # Denmark
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/03/20                    |
+| Last update logged        | 03/04/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 6                           |
-| New cases since yesterday | 2                           |
+| Total confirmed cases     | 10                          |
+| New cases since yesterday | 4                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
 | Total recovered           | 0                           |
@@ -40,9 +40,9 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Denmark    |           6 |
-| JHU      | Denmark    |           6 |
-| BOP      | Denmark    |           6 |
+| NIH      | Denmark    |          10 |
+| JHU      | Denmark    |          10 |
+| BOP      | Denmark    |          10 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

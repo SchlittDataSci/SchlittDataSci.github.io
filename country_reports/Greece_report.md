@@ -1,6 +1,6 @@
 # Greece
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/03/20                    | 03/04/20         |
+| Last update logged        | 03/04/20                    | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/26/20         |
-| Total confirmed cases     | 7                           | 1                |
-| New cases since yesterday | 0                           |                  |
+| Total confirmed cases     | 9                           | 1                |
+| New cases since yesterday | 2                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 0                           | 0                |
@@ -38,11 +38,11 @@ Data sources: BOP, JHU,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name          |   confirmed |
-|----------|-------------------|-------------|
-| NIH      | Greece            |           7 |
-| JHU      | Greece            |           7 |
-| BOP      | Macedonia, Greece |           1 |
+| source   | loc_name   |   confirmed |
+|----------|------------|-------------|
+| NIH      | Greece     |           9 |
+| JHU      | Greece     |           9 |
+| BOP      | Macedonia  |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

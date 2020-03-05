@@ -1,6 +1,6 @@
 # Russia
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -16,7 +16,7 @@
 |                           | Tencent                       | BOP              | JHU                         | NIHFogarty       |
 |---------------------------|-------------------------------|------------------|-----------------------------|------------------|
 | First update logged       | 02/06/20                      | 01/12/20         | 01/22/20                    | 01/13/20         |
-| Last update logged        | 03/04/20                      | 03/04/20         | 03/03/20                    | 03/04/20         |
+| Last update logged        | 03/05/20                      | 03/04/20         | 03/04/20                    | 03/04/20         |
 | Method                    | Daily cases in country scrape | Public line list | Cases by day & country list | Public line list |
 | First known case          | 02/06/20                      | 01/31/20         | 01/22/20                    | 01/31/20         |
 | Total confirmed cases     | 5                             | 3                | 3                           | 2                |
@@ -38,14 +38,14 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name              |   confirmed |
-|----------|-----------------------|-------------|
-| NIH      | Zabaikalsky, Russia   |           1 |
-| NIH      | Tyumen, Russia        |           1 |
-| JHU      | Russia                |           3 |
-| BOP      | Transbaikalia, Russia |           1 |
-| BOP      | Moscow City, Russia   |           1 |
-| BOP      | Tyumen, Russia        |           1 |
+| source   | loc_name      |   confirmed |
+|----------|---------------|-------------|
+| NIH      | Zabaikalsky   |           1 |
+| NIH      | Tyumen        |           1 |
+| JHU      | Russia        |           3 |
+| BOP      | Transbaikalia |           1 |
+| BOP      | Moscow City   |           1 |
+| BOP      | Tyumen        |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

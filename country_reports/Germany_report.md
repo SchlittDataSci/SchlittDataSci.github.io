@@ -1,6 +1,6 @@
 # Germany
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -16,10 +16,10 @@
 |                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 02/04/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/03/20                    | 03/04/20                      | 03/04/20         | 03/04/20         |
+| Last update logged        | 03/04/20                    | 03/05/20                      | 03/04/20         | 03/04/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/04/20                      | 01/27/20         | 01/28/20         |
-| Total confirmed cases     | 196                         | 66                            | 59               | 58               |
+| Total confirmed cases     | 262                         | 66                            | 59               | 58               |
 | New cases since yesterday |                             | 0                             |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
 | Total hospitalized        |                             |                               | 5                | 4                |
@@ -38,25 +38,24 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name                        |   confirmed |
-|----------|---------------------------------|-------------|
-| NIH      | North Rhine-Westphalia, Germany |          21 |
-| NIH      | Bavaria, Germany                |          15 |
-| NIH      | Baden-Wuerttemberg, Germany     |          11 |
-| NIH      | Hesse, Germany                  |           5 |
-| NIH      | Tubingen, Germany               |           2 |
-| NIH      | Frankfurt, Germany              |           2 |
-| NIH      | Hamburg, Germany                |           1 |
-| NIH      | Rhineland-Palatinate, Germany   |           1 |
-| JHU      | Germany                         |         196 |
-| BOP      | Bavaria, Germany                |          29 |
-| BOP      | Baden-Wurttemberg, Germany      |          21 |
-| BOP      | Hamburg, Germany                |           2 |
-| BOP      | Rhineland-Palatinate, Germany   |           2 |
-| BOP      | North Rhine-Westphalia, Germany |           2 |
-| BOP      | Baden-Wuerttemberg, Germany     |           1 |
-| BOP      | Berlin, Germany                 |           1 |
-| BOP      | Brandenburg, Germany            |           1 |
+| source   | loc_name               |   confirmed |
+|----------|------------------------|-------------|
+| NIH      | North Rhine-Westphalia |          21 |
+| NIH      | Bavaria                |          15 |
+| NIH      | Baden-Wuerttemberg     |          13 |
+| NIH      | Hesse                  |           5 |
+| NIH      | Frankfurt              |           2 |
+| NIH      | Hamburg                |           1 |
+| NIH      | Rhineland-Palatinate   |           1 |
+| JHU      | Germany                |         262 |
+| BOP      | Bavaria                |          29 |
+| BOP      | Baden-Wurttemberg      |          21 |
+| BOP      | Hamburg                |           2 |
+| BOP      | Rhineland-Palatinate   |           2 |
+| BOP      | North Rhine-Westphalia |           2 |
+| BOP      | Brandenburg            |           1 |
+| BOP      | Berlin                 |           1 |
+| BOP      | Baden-Wuerttemberg     |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

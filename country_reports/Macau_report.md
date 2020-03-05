@@ -1,6 +1,6 @@
 # Macau
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -16,7 +16,7 @@
 |                           | BOP              | JHU                         |
 |---------------------------|------------------|-----------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    |
-| Last update logged        | 03/04/20         | 03/03/20                    |
+| Last update logged        | 03/04/20         | 03/04/20                    |
 | Method                    | Public line list | Cases by day & country list |
 | First known case          | 01/21/20         | 01/22/20                    |
 | Total confirmed cases     | 10               | 10                          |
@@ -38,11 +38,11 @@ Data sources: BOP, JHU,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name     |   confirmed |
-|----------|--------------|-------------|
-| NIH      | Macau        |          10 |
-| JHU      | Macau, Macau |          10 |
-| BOP      | Macau, Macau |          10 |
+| source   | loc_name   |   confirmed |
+|----------|------------|-------------|
+| NIH      | Macau      |          10 |
+| JHU      | Macau      |          10 |
+| BOP      | Macau      |          10 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

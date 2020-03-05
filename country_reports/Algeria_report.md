@@ -1,6 +1,6 @@
 # Algeria
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         | NIHFogarty       |
-|---------------------------|------------------|-----------------------------|------------------|
-| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         |
-| Last update logged        | 03/04/20         | 03/03/20                    | 03/04/20         |
-| Method                    | Public line list | Cases by day & country list | Public line list |
-| First known case          | 02/25/20         | 01/22/20                    | 02/26/20         |
-| Total confirmed cases     | 5                | 5                           | 1                |
-| New cases since yesterday |                  | 2                           |                  |
-| Total suspected           |                  |                             |                  |
-| Total hospitalized        | 0                |                             | 0                |
-| Total recovered           | 0                | 0                           |                  |
-| Total deaths              | 0                | 0                           | 0                |
+|                           | JHU                         | BOP              | NIHFogarty       |
+|---------------------------|-----------------------------|------------------|------------------|
+| First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         |
+| Last update logged        | 03/04/20                    | 03/04/20         | 03/04/20         |
+| Method                    | Cases by day & country list | Public line list | Public line list |
+| First known case          | 01/22/20                    | 02/25/20         | 02/26/20         |
+| Total confirmed cases     | 12                          | 5                | 1                |
+| New cases since yesterday | 7                           |                  |                  |
+| Total suspected           |                             |                  |                  |
+| Total hospitalized        |                             | 0                | 0                |
+| Total recovered           | 0                           | 0                |                  |
+| Total deaths              | 0                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, 
 
@@ -38,11 +38,11 @@ Data sources: BOP, JHU, NIH-Fogarty,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name       |   confirmed |
-|----------|----------------|-------------|
-| NIH      | Algeria        |           5 |
-| JHU      | Algeria        |           5 |
-| BOP      | Blida, Algeria |           2 |
+| source   | loc_name   |   confirmed |
+|----------|------------|-------------|
+| NIH      | Algeria    |          12 |
+| JHU      | Algeria    |          12 |
+| BOP      | Blida      |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

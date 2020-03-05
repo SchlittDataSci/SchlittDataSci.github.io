@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Algeria", "confirmed": 5, "color": "blue", "size": 5000.0, "label": "NIH : Algeria: 5" }, "geometry": { "type": "Point", "coordinates": [ 333956.524288731859997, 3248977.21894910838455 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Algeria", "confirmed": 5, "color": "red", "size": 5000.0, "label": "JHU : Algeria: 5" }, "geometry": { "type": "Point", "coordinates": [ 333956.524288731859997, 3248977.21894910838455 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Blida, Algeria", "confirmed": 2, "color": "darkorange", "size": 3162.2776601683795, "label": "BOP : Blida, Algeria: 2" }, "geometry": { "type": "Point", "coordinates": [ 314900.408576776098926, 4365509.634531038813293 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Algeria", "confirmed": 12, "color": "blue", "size": 5000.0, "label": "NIH : Algeria: 12" }, "geometry": { "type": "Point", "coordinates": [ 333956.524288731859997, 3248977.21894910838455 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Algeria", "confirmed": 12, "color": "red", "size": 5000.0, "label": "JHU : Algeria: 12" }, "geometry": { "type": "Point", "coordinates": [ 333956.524288731859997, 3248977.21894910838455 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Blida", "confirmed": 2, "color": "darkorange", "size": 2041.2414523193152, "label": "BOP : Blida: 2" }, "geometry": { "type": "Point", "coordinates": [ 314900.408576776098926, 4365509.634531038813293 ] } }
 ]
 }

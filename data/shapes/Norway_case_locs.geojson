@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Norway", "confirmed": 32, "color": "blue", "size": 5000.0, "label": "NIH : Norway: 32" }, "geometry": { "type": "Point", "coordinates": [ 1013004.193613301846199, 8511913.416954673826694 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Norway", "confirmed": 32, "color": "red", "size": 5000.0, "label": "JHU : Norway: 32" }, "geometry": { "type": "Point", "coordinates": [ 1013004.193613301846199, 8511913.416954673826694 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Norway", "confirmed": 32, "color": "darkorange", "size": 5000.0, "label": "BOP : Norway: 32" }, "geometry": { "type": "Point", "coordinates": [ 1013004.193613301846199, 8511913.416954673826694 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Norway", "confirmed": 56, "color": "blue", "size": 5000.0, "label": "NIH : Norway: 56" }, "geometry": { "type": "Point", "coordinates": [ 1013004.193613301846199, 8511913.416954673826694 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Norway", "confirmed": 56, "color": "red", "size": 5000.0, "label": "JHU : Norway: 56" }, "geometry": { "type": "Point", "coordinates": [ 1013004.193613301846199, 8511913.416954673826694 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Norway", "confirmed": 56, "color": "darkorange", "size": 5000.0, "label": "BOP : Norway: 56" }, "geometry": { "type": "Point", "coordinates": [ 1013004.193613301846199, 8511913.416954673826694 ] } }
 ]
 }

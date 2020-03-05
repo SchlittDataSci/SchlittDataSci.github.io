@@ -1,6 +1,6 @@
 # Ireland
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/03/20                    | 03/04/20         |
+| Last update logged        | 03/04/20                    | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 03/03/20         |
-| Total confirmed cases     | 2                           | 1                |
-| New cases since yesterday | 1                           |                  |
+| Total confirmed cases     | 6                           | 1                |
+| New cases since yesterday | 4                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 0                           | 0                |
@@ -40,9 +40,9 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Ireland    |           2 |
-| JHU      | Ireland    |           2 |
-| BOP      | Ireland    |           2 |
+| NIH      | Ireland    |           6 |
+| JHU      | Ireland    |           6 |
+| BOP      | Ireland    |           6 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

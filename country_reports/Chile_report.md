@@ -1,6 +1,6 @@
 # Chile
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | BOP              | JHU                         |
 |---------------------------|------------------|-----------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    |
-| Last update logged        | 03/04/20         | 03/03/20                    |
+| Last update logged        | 03/04/20         | 03/04/20                    |
 | Method                    | Public line list | Cases by day & country list |
 | First known case          | 03/03/20         | 01/22/20                    |
 | Total confirmed cases     | 1                | 1                           |
-| New cases since yesterday |                  | 1                           |
+| New cases since yesterday |                  | 0                           |
 | Total suspected           |                  |                             |
 | Total hospitalized        | 0                |                             |
 | Total recovered           | 0                | 0                           |
@@ -38,11 +38,11 @@ Data sources: BOP, JHU,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name     |   confirmed |
-|----------|--------------|-------------|
-| NIH      | Chile        |           1 |
-| JHU      | Chile        |           1 |
-| BOP      | Maule, Chile |           1 |
+| source   | loc_name   |   confirmed |
+|----------|------------|-------------|
+| NIH      | Chile      |           1 |
+| JHU      | Chile      |           1 |
+| BOP      | Maule      |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

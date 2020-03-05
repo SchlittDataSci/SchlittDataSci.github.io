@@ -1,6 +1,6 @@
 # France
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -16,10 +16,10 @@
 |                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/04/20                      |
-| Last update logged        | 03/03/20                    | 03/04/20         | 03/04/20         | 03/04/20                      |
+| Last update logged        | 03/04/20                    | 03/04/20         | 03/04/20         | 03/05/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/25/20         | 01/24/20         | 02/04/20                      |
-| Total confirmed cases     | 204                         | 56               | 40               | 38                            |
+| Total confirmed cases     | 285                         | 56               | 40               | 38                            |
 | New cases since yesterday |                             |                  |                  | 0                             |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 7                | 3                |                               |
@@ -38,33 +38,33 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name                     |   confirmed |
-|----------|------------------------------|-------------|
-| NIH      | Paris, France                |          14 |
-| NIH      | Saint-Mande, France          |           5 |
-| NIH      | Lyon, France                 |           4 |
-| NIH      | Pays de la Loire, France     |           4 |
-| NIH      | Dijon, France                |           4 |
-| NIH      | Annecy, France               |           4 |
-| NIH      | Guadeloupe, France           |           3 |
-| NIH      | Nice, France                 |           2 |
-| NIH      | Amiens, France               |           1 |
-| NIH      | Lile, France                 |           1 |
-| NIH      | Nantes, France               |           1 |
-| NIH      | Strasbourg, France           |           1 |
-| NIH      | Landes, France               |           1 |
-| NIH      | Bois-Guillaume, France       |           1 |
-| NIH      | Montpellier, France          |           1 |
-| NIH      | Pays, France                 |           1 |
-| NIH      | Bordeaux, France             |           1 |
-| NIH      | Brest, France                |           1 |
-| JHU      | France                       |         204 |
-| BOP      | Auvergne-Rhone-Alpes, France |           9 |
-| BOP      | Ile-de-France, France        |           6 |
-| BOP      | Nouvelle-Aquitaine, France   |           1 |
-| BOP      | Brittany, France             |           1 |
-| BOP      | Grand Est, France            |           1 |
-| BOP      | Hauts-de-France, France      |           1 |
+| source   | loc_name             |   confirmed |
+|----------|----------------------|-------------|
+| NIH      | Paris                |          14 |
+| NIH      | Saint-Mande          |           5 |
+| NIH      | Lyon                 |           4 |
+| NIH      | Pays de la Loire     |           4 |
+| NIH      | Dijon                |           4 |
+| NIH      | Annecy               |           4 |
+| NIH      | Guadeloupe           |           3 |
+| NIH      | Nice                 |           2 |
+| NIH      | Amiens               |           1 |
+| NIH      | Lile                 |           1 |
+| NIH      | Nantes               |           1 |
+| NIH      | Strasbourg           |           1 |
+| NIH      | Landes               |           1 |
+| NIH      | Bois-Guillaume       |           1 |
+| NIH      | Montpellier          |           1 |
+| NIH      | Pays                 |           1 |
+| NIH      | Bordeaux             |           1 |
+| NIH      | Brest                |           1 |
+| JHU      | France               |         285 |
+| BOP      | Auvergne-Rhone-Alpes |           9 |
+| BOP      | Ile-de-France        |           6 |
+| BOP      | Nouvelle-Aquitaine   |           1 |
+| BOP      | Brittany             |           1 |
+| BOP      | Grand Est            |           1 |
+| BOP      | Hauts-de-France      |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

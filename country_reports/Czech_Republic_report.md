@@ -1,6 +1,6 @@
 # Czech Republic
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/03/20                    | 03/04/20         |
+| Last update logged        | 03/04/20                    | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 03/02/20         |
-| Total confirmed cases     | 5                           | 1                |
-| New cases since yesterday | 2                           |                  |
+| Total confirmed cases     | 8                           | 1                |
+| New cases since yesterday | 3                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 0                           | 0                |
@@ -38,11 +38,11 @@ Data sources: BOP, JHU,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name                       |   confirmed |
-|----------|--------------------------------|-------------|
-| NIH      | Czech Republic                 |           5 |
-| JHU      | Czech Republic                 |           5 |
-| BOP      | Ústí nad Labem, Czech Republic |           1 |
+| source   | loc_name       |   confirmed |
+|----------|----------------|-------------|
+| NIH      | Czech Republic |           8 |
+| JHU      | Czech Republic |           8 |
+| BOP      | Ústí nad Labem |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

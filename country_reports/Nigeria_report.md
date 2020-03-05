@@ -1,6 +1,6 @@
 # Nigeria
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -16,7 +16,7 @@
 |                           | BOP              | JHU                         |
 |---------------------------|------------------|-----------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    |
-| Last update logged        | 03/04/20         | 03/03/20                    |
+| Last update logged        | 03/04/20         | 03/04/20                    |
 | Method                    | Public line list | Cases by day & country list |
 | First known case          | 02/27/20         | 01/22/20                    |
 | Total confirmed cases     | 1                | 1                           |
@@ -38,11 +38,11 @@ Data sources: BOP, JHU,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name       |   confirmed |
-|----------|----------------|-------------|
-| NIH      | Nigeria        |           1 |
-| JHU      | Nigeria        |           1 |
-| BOP      | Lagos, Nigeria |           1 |
+| source   | loc_name   |   confirmed |
+|----------|------------|-------------|
+| NIH      | Nigeria    |           1 |
+| JHU      | Nigeria    |           1 |
+| BOP      | Lagos      |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

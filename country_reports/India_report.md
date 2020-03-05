@@ -1,6 +1,6 @@
 # India
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
 |---------------------------|------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 03/04/20         | 03/03/20                    | 03/04/20         | 02/14/20                      |
+| Last update logged        | 03/04/20         | 03/04/20                    | 03/04/20         | 02/14/20                      |
 | Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/30/20         | 01/22/20                    | 01/30/20         | 02/04/20                      |
-| Total confirmed cases     | 29               | 5                           | 3                | 3                             |
-| New cases since yesterday |                  |                             |                  |                               |
+| Total confirmed cases     | 29               | 28                          | 3                | 3                             |
+| New cases since yesterday |                  | 23                          |                  |                               |
 | Total suspected           |                  |                             |                  | 0                             |
 | Total hospitalized        | 0                |                             | 0                |                               |
 | Total recovered           | 0                | 3                           |                  | 0                             |
@@ -38,15 +38,15 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name             |   confirmed |
-|----------|----------------------|-------------|
-| NIH      | Kerala, India        |           2 |
-| NIH      | Alappuzha, India     |           1 |
-| JHU      | India                |           5 |
-| BOP      | Rajasthan, India     |          16 |
-| BOP      | Uttar Pradesh, India |           6 |
-| BOP      | Kerala, India        |           3 |
-| BOP      | Telangana, India     |           2 |
+| source   | loc_name      |   confirmed |
+|----------|---------------|-------------|
+| NIH      | Kerala        |           2 |
+| NIH      | Alappuzha     |           1 |
+| JHU      | India         |          28 |
+| BOP      | Rajasthan     |          16 |
+| BOP      | Uttar Pradesh |           6 |
+| BOP      | Kerala        |           3 |
+| BOP      | Telangana     |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

@@ -1,6 +1,6 @@
 # Andorra
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -16,7 +16,7 @@
 |                           | BOP              | JHU                         |
 |---------------------------|------------------|-----------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    |
-| Last update logged        | 03/04/20         | 03/03/20                    |
+| Last update logged        | 03/04/20         | 03/04/20                    |
 | Method                    | Public line list | Cases by day & country list |
 | First known case          | 03/02/20         | 01/22/20                    |
 | Total confirmed cases     | 1                | 1                           |

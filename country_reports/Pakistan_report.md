@@ -1,6 +1,6 @@
 # Pakistan
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | BOP              | JHU                         |
 |---------------------------|------------------|-----------------------------|
 | First update logged       | 01/12/20         | 01/22/20                    |
-| Last update logged        | 03/04/20         | 03/03/20                    |
+| Last update logged        | 03/04/20         | 03/04/20                    |
 | Method                    | Public line list | Cases by day & country list |
 | First known case          | 02/26/20         | 01/22/20                    |
 | Total confirmed cases     | 5                | 5                           |
-| New cases since yesterday |                  | 1                           |
+| New cases since yesterday |                  | 0                           |
 | Total suspected           |                  |                             |
 | Total hospitalized        | 1                |                             |
 | Total recovered           | 0                | 0                           |
@@ -38,12 +38,12 @@ Data sources: BOP, JHU,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name                              |   confirmed |
-|----------|---------------------------------------|-------------|
-| NIH      | Pakistan                              |           5 |
-| JHU      | Pakistan                              |           5 |
-| BOP      | Sindh, Pakistan                       |           2 |
-| BOP      | Islamabad Capital Territory, Pakistan |           1 |
+| source   | loc_name                    |   confirmed |
+|----------|-----------------------------|-------------|
+| NIH      | Pakistan                    |           5 |
+| JHU      | Pakistan                    |           5 |
+| BOP      | Sindh                       |           2 |
+| BOP      | Islamabad Capital Territory |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
