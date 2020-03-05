@@ -1,6 +1,6 @@
 # Sweden
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/03/20                    | 03/04/20         | 03/04/20         |
+| Last update logged        | 03/04/20                    | 03/04/20         | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
 | First known case          | 01/22/20                    | 01/31/20         | 01/31/20         |
-| Total confirmed cases     | 21                          | 10               | 1                |
-| New cases since yesterday | 6                           |                  |                  |
+| Total confirmed cases     | 35                          | 10               | 1                |
+| New cases since yesterday | 14                          |                  |                  |
 | Total suspected           |                             |                  |                  |
 | Total hospitalized        |                             | 0                | 0                |
 | Total recovered           | 0                           | 0                |                  |
@@ -38,11 +38,11 @@ Data sources: BOP, JHU, NIH-Fogarty,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name          |   confirmed |
-|----------|-------------------|-------------|
-| NIH      | Jonkoping, Sweden |           1 |
-| JHU      | Sweden            |          21 |
-| BOP      | Sweden            |          21 |
+| source   | loc_name   |   confirmed |
+|----------|------------|-------------|
+| NIH      | Jonkoping  |           1 |
+| JHU      | Sweden     |          35 |
+| BOP      | Sweden     |          35 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

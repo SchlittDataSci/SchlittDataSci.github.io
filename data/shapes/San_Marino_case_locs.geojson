@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "San Marino", "confirmed": 10, "color": "blue", "size": 5000.0, "label": "NIH : San Marino: 10" }, "geometry": { "type": "Point", "coordinates": [ 1386852.280066784936935, 5457068.068265293724835 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "San Marino", "confirmed": 10, "color": "red", "size": 5000.0, "label": "JHU : San Marino: 10" }, "geometry": { "type": "Point", "coordinates": [ 1386852.280066784936935, 5457068.068265293724835 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "San Marino", "confirmed": 10, "color": "darkorange", "size": 5000.0, "label": "BOP : San Marino: 10" }, "geometry": { "type": "Point", "coordinates": [ 1386852.280066784936935, 5457068.068265293724835 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "San Marino", "confirmed": 16, "color": "blue", "size": 5000.0, "label": "NIH : San Marino: 16" }, "geometry": { "type": "Point", "coordinates": [ 1386852.280066784936935, 5457068.068265293724835 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "San Marino", "confirmed": 16, "color": "red", "size": 5000.0, "label": "JHU : San Marino: 16" }, "geometry": { "type": "Point", "coordinates": [ 1386852.280066784936935, 5457068.068265293724835 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "San Marino", "confirmed": 16, "color": "darkorange", "size": 5000.0, "label": "BOP : San Marino: 16" }, "geometry": { "type": "Point", "coordinates": [ 1386852.280066784936935, 5457068.068265293724835 ] } }
 ]
 }

@@ -1,6 +1,6 @@
 # United Kingdom
 ## NSSAC COVID-19 Summary
-## 03/04/2020
+## 03/05/2020
 
 
 
@@ -16,10 +16,10 @@
 |                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/07/20                      |
-| Last update logged        | 03/03/20                    | 03/04/20         | 03/04/20         | 03/04/20                      |
+| Last update logged        | 03/04/20                    | 03/04/20         | 03/04/20         | 03/05/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/31/20         | 01/31/20         | 02/07/20                      |
-| Total confirmed cases     | 51                          | 20               | 17               | 16                            |
+| Total confirmed cases     | 85                          | 20               | 17               | 16                            |
 | New cases since yesterday |                             |                  |                  | 0                             |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 0                | 1                |                               |
@@ -38,17 +38,17 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name                         |   confirmed |
-|----------|----------------------------------|-------------|
-| NIH      | London, United Kingdom           |           9 |
-| NIH      | UK, United Kingdom               |           7 |
-| NIH      | York, United Kingdom             |           2 |
-| NIH      | Nortern Ireland, United Kingdom  |           1 |
-| NIH      | Wales, United Kingdom            |           1 |
-| JHU      | UK                               |          51 |
-| BOP      | England, United Kingdom          |          11 |
-| BOP      | Scotland, United Kingdom         |           1 |
-| BOP      | Northern Ireland, United Kingdom |           1 |
+| source   | loc_name         |   confirmed |
+|----------|------------------|-------------|
+| NIH      | London           |           9 |
+| NIH      | UK               |           7 |
+| NIH      | York             |           2 |
+| NIH      | Nortern Ireland  |           1 |
+| NIH      | Wales            |           1 |
+| JHU      | UK               |          85 |
+| BOP      | England          |          11 |
+| BOP      | Scotland         |           1 |
+| BOP      | Northern Ireland |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
