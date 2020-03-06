@@ -1,6 +1,6 @@
 # Taiwan
 ## NSSAC COVID-19 Summary
-## 03/05/2020
+## 03/06/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
 |---------------------------|-------------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 03/05/20                      | 03/04/20                    | 03/04/20         | 03/04/20         |
+| Last update logged        | 03/06/20                      | 03/05/20                    | 03/05/20         | 03/04/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/04/20                      | 01/22/20                    | 01/21/20         | 01/21/20         |
-| Total confirmed cases     | 44                            | 42                          | 34               | 26               |
-| New cases since yesterday | 2                             |                             |                  |                  |
+| Total confirmed cases     | 45                            | 44                          | 34               | 26               |
+| New cases since yesterday | 1                             |                             |                  |                  |
 | Total suspected           | 0                             |                             |                  |                  |
 | Total hospitalized        |                               |                             | 18               | 15               |
 | Total recovered           | 12                            | 12                          |                  | 0                |
@@ -40,8 +40,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Taiwan     |          42 |
-| JHU      | Taiwan     |          42 |
+| NIH      | Taiwan     |          44 |
+| JHU      | Taiwan     |          44 |
 | BOP      | Taiwan     |          26 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

@@ -1,6 +1,6 @@
 # Spain
 ## NSSAC COVID-19 Summary
-## 03/05/2020
+## 03/06/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/11/20                      |
-| Last update logged        | 03/04/20                    | 03/04/20         | 03/04/20         | 03/05/20                      |
+| Last update logged        | 03/05/20                    | 03/05/20         | 03/04/20         | 03/06/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/31/20         | 01/31/20         | 02/11/20                      |
-| Total confirmed cases     | 222                         | 81               | 54               | 13                            |
+| Total confirmed cases     | 259                         | 81               | 54               | 13                            |
 | New cases since yesterday |                             |                  |                  | 0                             |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 8                | 1                |                               |
 | Total recovered           | 2                           |                  | 0                | 2                             |
-| Total deaths              | 2                           | 0                | 0                | 0                             |
+| Total deaths              | 3                           | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -59,7 +59,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Castille and Leon   |           1 |
 | NIH      | Castellon           |           1 |
 | NIH      | Asturias            |           1 |
-| JHU      | Spain               |         222 |
+| JHU      | Spain               |         259 |
 | BOP      | Cantabria           |           9 |
 | BOP      | Castilla y Leon     |           9 |
 | BOP      | Canary Islands      |           4 |

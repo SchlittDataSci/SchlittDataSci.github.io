@@ -1,6 +1,6 @@
 # Thailand
 ## NSSAC COVID-19 Summary
-## 03/05/2020
+## 03/06/2020
 
 
 
@@ -13,17 +13,17 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
+|                           | JHU                         | Tencent                       | NIHFogarty       | BOP              |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
-| First update logged       | 01/22/20                    | 02/04/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/04/20                    | 03/05/20                      | 03/04/20         | 03/04/20         |
+| First update logged       | 01/22/20                    | 02/04/20                      | 01/13/20         | 01/12/20         |
+| Last update logged        | 03/05/20                    | 03/06/20                      | 03/05/20         | 03/04/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
-| First known case          | 01/22/20                    | 02/04/20                      | 01/12/20         | 01/13/20         |
-| Total confirmed cases     | 43                          | 42                            | 41               | 41               |
-| New cases since yesterday |                             |                               |                  |                  |
+| First known case          | 01/22/20                    | 02/04/20                      | 01/13/20         | 01/12/20         |
+| Total confirmed cases     | 47                          | 42                            | 41               | 41               |
+| New cases since yesterday |                             | 0                             |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
-| Total hospitalized        |                             |                               | 7                | 10               |
-| Total recovered           | 31                          | 28                            | 1                |                  |
+| Total hospitalized        |                             |                               | 10               | 7                |
+| Total recovered           | 31                          | 28                            |                  | 1                |
 | Total deaths              | 1                           | 0                             | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
@@ -40,8 +40,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name            |   confirmed |
 |----------|---------------------|-------------|
-| NIH      | Thailand            |          43 |
-| JHU      | Thailand            |          43 |
+| NIH      | Thailand            |          47 |
+| JHU      | Thailand            |          47 |
 | BOP      | Nonthaburi          |          13 |
 | BOP      | Bangkok Metropolis  |           4 |
 | BOP      | Nakhon Pathom       |           1 |

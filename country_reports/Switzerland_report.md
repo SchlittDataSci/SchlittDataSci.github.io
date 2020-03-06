@@ -1,6 +1,6 @@
 # Switzerland
 ## NSSAC COVID-19 Summary
-## 03/05/2020
+## 03/06/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | BOP              | NIHFogarty       | Tencent                       |
+|                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
-| First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         | 02/27/20                      |
-| Last update logged        | 03/04/20                    | 03/04/20         | 03/04/20         | 02/28/20                      |
+| First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/27/20                      |
+| Last update logged        | 03/05/20                    | 03/05/20         | 03/04/20         | 02/28/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 02/25/20         | 02/25/20         | 02/27/20                      |
-| Total confirmed cases     | 90                          | 10               | 10               | 6                             |
-| New cases since yesterday | 34                          |                  |                  |                               |
+| Total confirmed cases     | 114                         | 10               | 10               | 6                             |
+| New cases since yesterday | 24                          |                  |                  |                               |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 0                | 0                |                               |
-| Total recovered           | 3                           | 0                |                  | 0                             |
-| Total deaths              | 0                           | 0                | 0                | 0                             |
+| Total recovered           | 3                           |                  | 0                | 0                             |
+| Total deaths              | 1                           | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -47,7 +47,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Aargau      |           1 |
 | NIH      | Vaud        |           1 |
 | NIH      | Ticino      |           1 |
-| JHU      | Switzerland |          90 |
+| JHU      | Switzerland |         114 |
 | BOP      | Graubuenden |           2 |
 | BOP      | Basel       |           2 |
 | BOP      | Aargau      |           1 |

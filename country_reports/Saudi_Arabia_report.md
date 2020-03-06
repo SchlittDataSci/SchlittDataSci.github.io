@@ -1,6 +1,6 @@
 # Saudi Arabia
 ## NSSAC COVID-19 Summary
-## 03/05/2020
+## 03/06/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         |
-|---------------------------|------------------|-----------------------------|
-| First update logged       | 01/12/20         | 01/22/20                    |
-| Last update logged        | 03/04/20         | 03/04/20                    |
-| Method                    | Public line list | Cases by day & country list |
-| First known case          | 03/02/20         | 01/22/20                    |
-| Total confirmed cases     | 1                | 1                           |
-| New cases since yesterday |                  | 0                           |
-| Total suspected           |                  |                             |
-| Total hospitalized        | 0                |                             |
-| Total recovered           | 0                | 0                           |
-| Total deaths              | 0                | 0                           |
+|                           | JHU                         | BOP              |
+|---------------------------|-----------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/12/20         |
+| Last update logged        | 03/05/20                    | 03/04/20         |
+| Method                    | Cases by day & country list | Public line list |
+| First known case          | 01/22/20                    | 03/02/20         |
+| Total confirmed cases     | 5                           | 1                |
+| New cases since yesterday | 4                           |                  |
+| Total suspected           |                             |                  |
+| Total hospitalized        |                             | 0                |
+| Total recovered           | 0                           | 0                |
+| Total deaths              | 0                           | 0                |
 
 Data sources: BOP, JHU, 
 
@@ -40,9 +40,9 @@ Data sources: BOP, JHU,
 
 | source   | loc_name     |   confirmed |
 |----------|--------------|-------------|
-| NIH      | Saudi Arabia |           1 |
-| JHU      | Saudi Arabia |           1 |
-| BOP      | Saudi Arabia |           1 |
+| NIH      | Saudi Arabia |           5 |
+| JHU      | Saudi Arabia |           5 |
+| BOP      | Saudi Arabia |           5 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

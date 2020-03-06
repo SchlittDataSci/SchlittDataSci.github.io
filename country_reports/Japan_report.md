@@ -1,6 +1,6 @@
 # Japan
 ## NSSAC COVID-19 Summary
-## 03/05/2020
+## 03/06/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | BOP              | Tencent                       | JHU                         | NIHFogarty       |
 |---------------------------|------------------|-------------------------------|-----------------------------|------------------|
 | First update logged       | 01/12/20         | 02/04/20                      | 01/22/20                    | 01/13/20         |
-| Last update logged        | 03/04/20         | 02/20/20                      | 03/04/20                    | 03/04/20         |
+| Last update logged        | 03/04/20         | 02/20/20                      | 03/05/20                    | 03/05/20         |
 | Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
 | First known case          | 01/15/20         | 02/04/20                      | 01/22/20                    | 01/15/20         |
-| Total confirmed cases     | 751              | 729                           | 331                         | 257              |
-| New cases since yesterday |                  |                               | 38                          |                  |
+| Total confirmed cases     | 751              | 729                           | 360                         | 257              |
+| New cases since yesterday |                  |                               | 29                          |                  |
 | Total suspected           |                  | 0                             |                             |                  |
 | Total hospitalized        | 62               |                               |                             | 193              |
 | Total recovered           | 1                | 1                             | 43                          |                  |
@@ -73,7 +73,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Nishimiya City      |           1 |
 | NIH      | Funabashi City      |           1 |
 | NIH      | Haneda              |           1 |
-| JHU      | Japan               |         331 |
+| JHU      | Japan               |         360 |
 | BOP      | Kanagawa Prefecture |         564 |
 | BOP      | Hokkaido            |          64 |
 | BOP      | Tokyo               |          34 |

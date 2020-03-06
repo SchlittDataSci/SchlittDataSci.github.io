@@ -1,6 +1,6 @@
 # Bahrain
 ## NSSAC COVID-19 Summary
-## 03/05/2020
+## 03/06/2020
 
 
 
@@ -16,10 +16,10 @@
 |                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 02/25/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/04/20                    | 03/05/20                      | 03/04/20         | 03/04/20         |
+| Last update logged        | 03/05/20                    | 03/06/20                      | 03/04/20         | 03/05/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/25/20                      | 02/24/20         | 02/24/20         |
-| Total confirmed cases     | 52                          | 33                            | 20               | 17               |
+| Total confirmed cases     | 55                          | 33                            | 20               | 17               |
 | New cases since yesterday |                             | 0                             |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
 | Total hospitalized        |                             |                               | 1                | 0                |
@@ -40,9 +40,9 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Bahrain    |          52 |
-| JHU      | Bahrain    |          52 |
-| BOP      | Bahrain    |          52 |
+| NIH      | Bahrain    |          55 |
+| JHU      | Bahrain    |          55 |
+| BOP      | Bahrain    |          55 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

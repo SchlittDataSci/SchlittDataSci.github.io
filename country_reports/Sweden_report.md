@@ -1,6 +1,6 @@
 # Sweden
 ## NSSAC COVID-19 Summary
-## 03/05/2020
+## 03/06/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/04/20                    | 03/04/20         | 03/04/20         |
+| Last update logged        | 03/05/20                    | 03/04/20         | 03/05/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
 | First known case          | 01/22/20                    | 01/31/20         | 01/31/20         |
-| Total confirmed cases     | 35                          | 10               | 1                |
-| New cases since yesterday | 14                          |                  |                  |
+| Total confirmed cases     | 94                          | 10               | 1                |
+| New cases since yesterday | 59                          |                  |                  |
 | Total suspected           |                             |                  |                  |
 | Total hospitalized        |                             | 0                | 0                |
 | Total recovered           | 0                           | 0                |                  |
@@ -41,8 +41,8 @@ Data sources: BOP, JHU, NIH-Fogarty,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Jonkoping  |           1 |
-| JHU      | Sweden     |          35 |
-| BOP      | Sweden     |          35 |
+| JHU      | Sweden     |          94 |
+| BOP      | Sweden     |          94 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

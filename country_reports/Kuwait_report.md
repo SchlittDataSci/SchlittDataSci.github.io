@@ -1,6 +1,6 @@
 # Kuwait
 ## NSSAC COVID-19 Summary
-## 03/05/2020
+## 03/06/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 02/27/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/04/20                    | 03/03/20                      | 03/04/20         | 03/04/20         |
+| Last update logged        | 03/05/20                    | 03/03/20                      | 03/04/20         | 03/05/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/27/20                      | 02/24/20         | 02/24/20         |
-| Total confirmed cases     | 56                          | 43                            | 37               | 9                |
-| New cases since yesterday | 0                           |                               |                  |                  |
+| Total confirmed cases     | 58                          | 43                            | 37               | 9                |
+| New cases since yesterday | 2                           |                               |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
 | Total hospitalized        |                             |                               | 0                | 0                |
 | Total recovered           | 0                           | 0                             | 0                |                  |
@@ -40,9 +40,9 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Kuwait     |          56 |
-| JHU      | Kuwait     |          56 |
-| BOP      | Kuwait     |          56 |
+| NIH      | Kuwait     |          58 |
+| JHU      | Kuwait     |          58 |
+| BOP      | Kuwait     |          58 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

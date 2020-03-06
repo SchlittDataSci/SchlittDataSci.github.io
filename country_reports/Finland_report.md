@@ -1,6 +1,6 @@
 # Finland
 ## NSSAC COVID-19 Summary
-## 03/05/2020
+## 03/06/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         | NIHFogarty       | Tencent                       |
-|---------------------------|------------------|-----------------------------|------------------|-------------------------------|
-| First update logged       | 01/12/20         | 01/22/20                    | 01/13/20         | 02/05/20                      |
-| Last update logged        | 03/04/20         | 03/04/20                    | 03/04/20         | 02/07/20                      |
-| Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
-| First known case          | 01/29/20         | 01/22/20                    | 01/29/20         | 02/05/20                      |
-| Total confirmed cases     | 7                | 6                           | 1                | 1                             |
-| New cases since yesterday |                  | 0                           |                  |                               |
-| Total suspected           |                  |                             |                  | 0                             |
-| Total hospitalized        | 0                |                             | 1                |                               |
-| Total recovered           | 0                | 1                           |                  | 1                             |
-| Total deaths              | 0                | 0                           | 0                | 0                             |
+|                           | JHU                         | BOP              | NIHFogarty       | Tencent                       |
+|---------------------------|-----------------------------|------------------|------------------|-------------------------------|
+| First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         | 02/05/20                      |
+| Last update logged        | 03/05/20                    | 03/04/20         | 03/05/20         | 02/07/20                      |
+| Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
+| First known case          | 01/22/20                    | 01/29/20         | 01/29/20         | 02/05/20                      |
+| Total confirmed cases     | 12                          | 7                | 1                | 1                             |
+| New cases since yesterday | 6                           |                  |                  |                               |
+| Total suspected           |                             |                  |                  | 0                             |
+| Total hospitalized        |                             | 0                | 1                |                               |
+| Total recovered           | 1                           | 0                |                  | 1                             |
+| Total deaths              | 0                           | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name         |   confirmed |
 |----------|------------------|-------------|
 | NIH      | Lapland          |           1 |
-| JHU      | Finland          |           6 |
+| JHU      | Finland          |          12 |
 | BOP      | Lapland          |           1 |
 | BOP      | Southern Finland |           1 |
 

@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Bosnia and Herzegovina", "confirmed": 2, "color": "blue", "size": 5000.0, "label": "NIH : Bosnia and Herzegovina: 2" }, "geometry": { "type": "Point", "coordinates": [ 1958794.090567741077393, 5512817.665183846838772 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Bosnia and Herzegovina", "confirmed": 2, "color": "red", "size": 5000.0, "label": "JHU : Bosnia and Herzegovina: 2" }, "geometry": { "type": "Point", "coordinates": [ 1958794.090567741077393, 5512817.665183846838772 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Bosnia and Herzegovina", "confirmed": 2, "color": "darkorange", "size": 5000.0, "label": "BOP : Bosnia and Herzegovina: 2" }, "geometry": { "type": "Point", "coordinates": [ 1958794.090567741077393, 5512817.665183846838772 ] } }
+]
+}

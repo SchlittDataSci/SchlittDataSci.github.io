@@ -1,11 +1,11 @@
-,BOP,JHU
-First update logged,01/12/20,01/22/20
-Last update logged,03/04/20,03/04/20
-Method,Public line list,Cases by day & country list
-First known case,01/21/20,01/22/20
+,JHU,BOP
+First update logged,01/22/20,01/12/20
+Last update logged,03/05/20,03/04/20
+Method,Cases by day & country list,Public line list
+First known case,01/22/20,01/21/20
 Total confirmed cases,10,10
-New cases since yesterday,,0
+New cases since yesterday,0,
 Total suspected,,
-Total hospitalized,2,
-Total recovered,0,9
+Total hospitalized,,2
+Total recovered,9,0
 Total deaths,0,0

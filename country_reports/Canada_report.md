@@ -1,6 +1,6 @@
 # Canada
 ## NSSAC COVID-19 Summary
-## 03/05/2020
+## 03/06/2020
 
 
 
@@ -16,10 +16,10 @@
 |                           | JHU                         | BOP              | Tencent                       | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 02/04/20                      | 01/13/20         |
-| Last update logged        | 03/04/20                    | 03/04/20         | 03/05/20                      | 03/04/20         |
+| Last update logged        | 03/05/20                    | 03/04/20         | 03/06/20                      | 03/05/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 01/25/20         | 02/04/20                      | 01/26/20         |
-| Total confirmed cases     | 33                          | 20               | 13                            | 12               |
+| Total confirmed cases     | 37                          | 20               | 13                            | 12               |
 | New cases since yesterday |                             |                  | 0                             |                  |
 | Total suspected           |                             |                  | 0                             |                  |
 | Total hospitalized        |                             | 8                |                               | 3                |
@@ -42,10 +42,10 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----------|------------------|-------------|
 | NIH      | Vancouver        |           7 |
 | NIH      | Toronto          |           5 |
-| JHU      | Toronto          |          19 |
-| JHU      | British Columbia |          12 |
+| JHU      | Toronto          |          21 |
+| JHU      | British Columbia |          13 |
+| JHU      | Montreal         |           2 |
 | JHU      | London           |           1 |
-| JHU      | Montreal         |           1 |
 | BOP      | Ontario          |          13 |
 | BOP      | British Columbia |           7 |
 
