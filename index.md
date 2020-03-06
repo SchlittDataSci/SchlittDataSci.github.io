@@ -8,13 +8,15 @@
 
 ### Resources
 
-* [Prepped line list](cleaned_line_list.csv)
+* [NIH-Fogarty public line list](https://docs.google.com/spreadsheets/d/1jS24DjSPVWa4iuxuD4OAXrE3QeI8c9BC1hSlqr-NMiU/edit#gid=1187587451)
 
-* [BeOutbreakPrepared's public line list](https://github.com/beoutbreakprepared/nCoV2019)
-
-* [BOP Imported case origin curation sheet](https://docs.google.com/spreadsheets/d/1s2j-RmkO8C69HtrELpNMipkG5ftPJqCPEzGRAxIukFY/edit#gid=0)
+* [BeOutbreakPrepared's public line list](https://docs.google.com/spreadsheets/d/1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/edit#gid=0)
 
 * [Imported cases dashboard](https://datastudio.google.com/reporting/f6ad0988-f203-45f8-8d18-5d726c1d2d8b)
+
+* [Affected counties dashboard](https://datastudio.google.com/u/0/reporting/f6ad0988-f203-45f8-8d18-5d726c1d2d8b/page/MdMHB)
+
+* [Global surveillance dashboard](http://nssac.bii.virginia.edu/covid-19/dashboard/)
 
 * [NSSAC prepared data](https://github.com/SchlittDataSci/SchlittDataSci.github.io/tree/master/data)
 
