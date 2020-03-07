@@ -16,11 +16,11 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/05/20                    |
+| Last update logged        | 03/06/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 4                           |
-| New cases since yesterday | 4                           |
+| Total confirmed cases     | 16                          |
+| New cases since yesterday | 12                          |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
 | Total recovered           | 0                           |
@@ -40,9 +40,9 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Palestine  |           4 |
-| JHU      | Palestine  |           4 |
-| BOP      | Palestine  |           4 |
+| NIH      | Palestine  |          16 |
+| JHU      | Palestine  |          16 |
+| BOP      | Palestine  |          16 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

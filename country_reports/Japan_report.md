@@ -16,14 +16,14 @@
 |                           | BOP              | Tencent                       | JHU                         | NIHFogarty       |
 |---------------------------|------------------|-------------------------------|-----------------------------|------------------|
 | First update logged       | 01/12/20         | 02/04/20                      | 01/22/20                    | 01/13/20         |
-| Last update logged        | 03/04/20         | 02/20/20                      | 03/05/20                    | 03/05/20         |
+| Last update logged        | 03/04/20         | 02/20/20                      | 03/06/20                    | 03/06/20         |
 | Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
 | First known case          | 01/15/20         | 02/04/20                      | 01/22/20                    | 01/15/20         |
-| Total confirmed cases     | 751              | 729                           | 360                         | 257              |
-| New cases since yesterday |                  |                               | 29                          |                  |
+| Total confirmed cases     | 751              | 729                           | 420                         | 257              |
+| New cases since yesterday |                  |                               | 60                          |                  |
 | Total suspected           |                  | 0                             |                             |                  |
 | Total hospitalized        | 62               |                               |                             | 193              |
-| Total recovered           | 1                | 1                             | 43                          |                  |
+| Total recovered           | 1                | 1                             | 46                          |                  |
 | Total deaths              | 0                | 3                             | 6                           | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
@@ -73,7 +73,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Nishimiya City      |           1 |
 | NIH      | Funabashi City      |           1 |
 | NIH      | Haneda              |           1 |
-| JHU      | Japan               |         360 |
+| JHU      | Japan               |         420 |
 | BOP      | Kanagawa Prefecture |         564 |
 | BOP      | Hokkaido            |          64 |
 | BOP      | Tokyo               |          34 |

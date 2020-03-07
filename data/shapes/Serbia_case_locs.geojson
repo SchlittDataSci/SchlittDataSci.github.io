@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Serbia", "confirmed": 1, "color": "blue", "size": 5000.0, "label": "NIH : Serbia: 1" }, "geometry": { "type": "Point", "coordinates": [ 2346233.52231584303081, 5469206.972227602265775 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Serbia", "confirmed": 1, "color": "red", "size": 5000.0, "label": "JHU : Serbia: 1" }, "geometry": { "type": "Point", "coordinates": [ 2346233.52231584303081, 5469206.972227602265775 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Serbia", "confirmed": 1, "color": "darkorange", "size": 5000.0, "label": "BOP : Serbia: 1" }, "geometry": { "type": "Point", "coordinates": [ 2346233.52231584303081, 5469206.972227602265775 ] } }
+]
+}

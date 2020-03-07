@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/05/20                    | 03/04/20         |
+| Last update logged        | 03/06/20                    | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/25/20         |
-| Total confirmed cases     | 6                           | 4                |
-| New cases since yesterday | 2                           |                  |
+| Total confirmed cases     | 9                           | 4                |
+| New cases since yesterday | 3                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 1                |
 | Total recovered           | 1                           | 0                |
@@ -40,8 +40,8 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Romania    |           6 |
-| JHU      | Romania    |           6 |
+| NIH      | Romania    |           9 |
+| JHU      | Romania    |           9 |
 | BOP      | Gorj       |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

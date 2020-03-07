@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/05/20                    | 03/04/20         | 03/05/20         |
+| Last update logged        | 03/06/20                    | 03/04/20         | 03/06/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/25/20         | 02/25/20         |
-| Total confirmed cases     | 10                          | 5                | 1                |
-| New cases since yesterday | 0                           |                  |                  |
+| Total confirmed cases     | 11                          | 5                | 1                |
+| New cases since yesterday | 1                           |                  |                  |
 | Total suspected           |                             |                  |                  |
 | Total hospitalized        |                             | 0                | 0                |
 | Total recovered           | 0                           | 0                |                  |
@@ -40,9 +40,9 @@ Data sources: BOP, JHU, NIH-Fogarty,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Croatia    |          10 |
-| JHU      | Croatia    |          10 |
-| BOP      | Croatia    |          10 |
+| NIH      | Croatia    |          11 |
+| JHU      | Croatia    |          11 |
+| BOP      | Croatia    |          11 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

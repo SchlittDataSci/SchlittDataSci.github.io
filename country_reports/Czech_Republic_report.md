@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/05/20                    | 03/04/20         |
+| Last update logged        | 03/06/20                    | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 03/02/20         |
-| Total confirmed cases     | 12                          | 1                |
-| New cases since yesterday | 4                           |                  |
+| Total confirmed cases     | 18                          | 1                |
+| New cases since yesterday | 6                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 0                           | 0                |
@@ -40,8 +40,8 @@ Data sources: BOP, JHU,
 
 | source   | loc_name       |   confirmed |
 |----------|----------------|-------------|
-| NIH      | Czech Republic |          12 |
-| JHU      | Czech Republic |          12 |
+| NIH      | Czech Republic |          18 |
+| JHU      | Czech Republic |          18 |
 | BOP      | Ústí nad Labem |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

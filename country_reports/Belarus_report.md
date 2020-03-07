@@ -16,7 +16,7 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/05/20                    |
+| Last update logged        | 03/06/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
 | Total confirmed cases     | 6                           |

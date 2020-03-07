@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/05/20                    | 03/04/20         | 03/05/20         |
+| Last update logged        | 03/06/20                    | 03/04/20         | 03/06/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/21/20         | 02/21/20         |
-| Total confirmed cases     | 16                          | 6                | 1                |
-| New cases since yesterday | 3                           |                  |                  |
+| Total confirmed cases     | 22                          | 6                | 1                |
+| New cases since yesterday | 6                           |                  |                  |
 | Total suspected           |                             |                  |                  |
 | Total hospitalized        |                             | 0                | 0                |
 | Total recovered           | 1                           | 0                |                  |
@@ -40,8 +40,8 @@ Data sources: BOP, JHU, NIH-Fogarty,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Lebanon    |          16 |
-| JHU      | Lebanon    |          16 |
+| NIH      | Lebanon    |          22 |
+| JHU      | Lebanon    |          22 |
 | BOP      | Beirut     |           3 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/05/20                    | 03/04/20         |
+| Last update logged        | 03/06/20                    | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/26/20         |
-| Total confirmed cases     | 5                           | 5                |
-| New cases since yesterday | 0                           |                  |
+| Total confirmed cases     | 6                           | 5                |
+| New cases since yesterday | 1                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 1                |
 | Total recovered           | 0                           | 0                |
@@ -40,8 +40,8 @@ Data sources: BOP, JHU,
 
 | source   | loc_name                    |   confirmed |
 |----------|-----------------------------|-------------|
-| NIH      | Pakistan                    |           5 |
-| JHU      | Pakistan                    |           5 |
+| NIH      | Pakistan                    |           6 |
+| JHU      | Pakistan                    |           6 |
 | BOP      | Sindh                       |           2 |
 | BOP      | Islamabad Capital Territory |           1 |
 

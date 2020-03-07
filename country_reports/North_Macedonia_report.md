@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/05/20                    | 03/04/20         |
+| Last update logged        | 03/06/20                    | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/26/20         |
-| Total confirmed cases     | 1                           | 1                |
-| New cases since yesterday | 0                           |                  |
+| Total confirmed cases     | 3                           | 1                |
+| New cases since yesterday | 2                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 1                |
 | Total recovered           | 0                           | 0                |
@@ -40,9 +40,9 @@ Data sources: BOP, JHU,
 
 | source   | loc_name        |   confirmed |
 |----------|-----------------|-------------|
-| NIH      | North Macedonia |           1 |
-| JHU      | North Macedonia |           1 |
-| BOP      | North Macedonia |           1 |
+| NIH      | North Macedonia |           3 |
+| JHU      | North Macedonia |           3 |
+| BOP      | North Macedonia |           3 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              | Tencent                       | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 02/04/20                      | 01/13/20         |
-| Last update logged        | 03/05/20                    | 03/04/20         | 03/06/20                      | 03/05/20         |
+| Last update logged        | 03/06/20                    | 03/04/20         | 03/06/20                      | 03/06/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 01/25/20         | 02/04/20                      | 01/26/20         |
-| Total confirmed cases     | 37                          | 20               | 13                            | 12               |
-| New cases since yesterday |                             |                  | 0                             |                  |
+| Total confirmed cases     | 49                          | 20               | 13                            | 12               |
+| New cases since yesterday | 12                          |                  | 0                             |                  |
 | Total suspected           |                             |                  | 0                             |                  |
 | Total hospitalized        |                             | 8                |                               | 3                |
 | Total recovered           | 6                           | 1                | 4                             |                  |
@@ -42,10 +42,11 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----------|------------------|-------------|
 | NIH      | Vancouver        |           7 |
 | NIH      | Toronto          |           5 |
-| JHU      | Toronto          |          21 |
-| JHU      | British Columbia |          13 |
+| JHU      | Toronto          |          24 |
+| JHU      | British Columbia |          21 |
 | JHU      | Montreal         |           2 |
 | JHU      | London           |           1 |
+| JHU      | Calgary          |           1 |
 | BOP      | Ontario          |          13 |
 | BOP      | British Columbia |           7 |
 

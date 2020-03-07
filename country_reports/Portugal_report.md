@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/05/20                    | 03/04/20         |
+| Last update logged        | 03/06/20                    | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 03/02/20         |
-| Total confirmed cases     | 8                           | 2                |
-| New cases since yesterday | 3                           |                  |
+| Total confirmed cases     | 13                          | 2                |
+| New cases since yesterday | 5                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 0                           | 0                |
@@ -40,9 +40,9 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Portugal   |           8 |
-| JHU      | Portugal   |           8 |
-| BOP      | Portugal   |           8 |
+| NIH      | Portugal   |          13 |
+| JHU      | Portugal   |          13 |
+| BOP      | Portugal   |          13 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

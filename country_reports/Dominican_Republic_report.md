@@ -16,11 +16,11 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/05/20                    |
+| Last update logged        | 03/06/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 1                           |
-| New cases since yesterday | 0                           |
+| Total confirmed cases     | 2                           |
+| New cases since yesterday | 1                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
 | Total recovered           | 0                           |
@@ -40,9 +40,9 @@ Data sources: JHU,
 
 | source   | loc_name           |   confirmed |
 |----------|--------------------|-------------|
-| NIH      | Dominican Republic |           1 |
-| JHU      | Dominican Republic |           1 |
-| BOP      | Dominican Republic |           1 |
+| NIH      | Dominican Republic |           2 |
+| JHU      | Dominican Republic |           2 |
+| BOP      | Dominican Republic |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

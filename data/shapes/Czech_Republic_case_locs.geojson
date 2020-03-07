@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Czech Republic", "confirmed": 12, "color": "blue", "size": 5000.0, "label": "NIH : Czech Republic: 12" }, "geometry": { "type": "Point", "coordinates": [ 1722664.043857128359377, 6414591.869401436299086 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Czech Republic", "confirmed": 12, "color": "red", "size": 5000.0, "label": "JHU : Czech Republic: 12" }, "geometry": { "type": "Point", "coordinates": [ 1722664.043857128359377, 6414591.869401436299086 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Ústí nad Labem", "confirmed": 1, "color": "darkorange", "size": 1443.3756729740644, "label": "BOP : Ústí nad Labem: 1" }, "geometry": { "type": "Point", "coordinates": [ 1562718.117810875177383, 6561429.024117978289723 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Czech Republic", "confirmed": 18, "color": "blue", "size": 5000.0, "label": "NIH : Czech Republic: 18" }, "geometry": { "type": "Point", "coordinates": [ 1722664.043857128359377, 6414591.869401436299086 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Czech Republic", "confirmed": 18, "color": "red", "size": 5000.0, "label": "JHU : Czech Republic: 18" }, "geometry": { "type": "Point", "coordinates": [ 1722664.043857128359377, 6414591.869401436299086 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Ústí nad Labem", "confirmed": 1, "color": "darkorange", "size": 1178.5113019775793, "label": "BOP : Ústí nad Labem: 1" }, "geometry": { "type": "Point", "coordinates": [ 1562718.117810875177383, 6561429.024117978289723 ] } }
 ]
 }
