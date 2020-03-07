@@ -16,15 +16,15 @@
 |                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/11/20                      |
-| Last update logged        | 03/05/20                    | 03/05/20         | 03/04/20         | 03/06/20                      |
+| Last update logged        | 03/06/20                    | 03/06/20         | 03/04/20         | 03/06/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/31/20         | 01/31/20         | 02/11/20                      |
-| Total confirmed cases     | 259                         | 81               | 54               | 13                            |
-| New cases since yesterday |                             |                  |                  | 0                             |
+| Total confirmed cases     | 400                         | 81               | 54               | 13                            |
+| New cases since yesterday | 141                         |                  |                  | 0                             |
 | Total suspected           |                             |                  |                  | 0                             |
-| Total hospitalized        |                             | 8                | 1                |                               |
+| Total hospitalized        |                             | 9                | 1                |                               |
 | Total recovered           | 2                           |                  | 0                | 2                             |
-| Total deaths              | 3                           | 0                | 0                | 0                             |
+| Total deaths              | 5                           | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -42,24 +42,24 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----------|---------------------|-------------|
 | NIH      | Andalusia           |          14 |
 | NIH      | Cantabria           |          10 |
-| NIH      | Valencia            |           7 |
 | NIH      | Castile and Leon    |           7 |
+| NIH      | Valencia            |           7 |
+| NIH      | Tenerife            |           6 |
 | NIH      | Catalonia           |           6 |
 | NIH      | Extremadura         |           6 |
-| NIH      | Tenerife            |           6 |
 | NIH      | Madrid              |           5 |
 | NIH      | Basque Country      |           4 |
 | NIH      | Castilla-La Mancha  |           3 |
 | NIH      | Barcelona           |           3 |
 | NIH      | La Rioja            |           2 |
 | NIH      | Navarra             |           2 |
-| NIH      | Zaragoza            |           1 |
 | NIH      | Mallorca            |           1 |
 | NIH      | Canary Islands      |           1 |
 | NIH      | Castille and Leon   |           1 |
-| NIH      | Castellon           |           1 |
 | NIH      | Asturias            |           1 |
-| JHU      | Spain               |         259 |
+| NIH      | Castellon           |           1 |
+| NIH      | Zaragoza            |           1 |
+| JHU      | Spain               |         400 |
 | BOP      | Cantabria           |           9 |
 | BOP      | Castilla y Leon     |           9 |
 | BOP      | Canary Islands      |           4 |
@@ -68,9 +68,9 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | BOP      | Castilla-La Mancha  |           2 |
 | BOP      | Basque Country      |           1 |
 | BOP      | Valencian Community |           1 |
+| BOP      | Navarra             |           1 |
 | BOP      | Baleares            |           1 |
 | BOP      | Andalusia           |           1 |
-| BOP      | Navarra             |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

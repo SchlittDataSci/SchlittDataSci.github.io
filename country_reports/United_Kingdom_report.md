@@ -16,15 +16,15 @@
 |                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/07/20                      |
-| Last update logged        | 03/05/20                    | 03/05/20         | 03/04/20         | 03/06/20                      |
+| Last update logged        | 03/06/20                    | 03/06/20         | 03/04/20         | 03/06/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/31/20         | 01/31/20         | 02/07/20                      |
-| Total confirmed cases     | 115                         | 20               | 17               | 16                            |
-| New cases since yesterday |                             |                  |                  | 0                             |
+| Total confirmed cases     | 163                         | 20               | 17               | 16                            |
+| New cases since yesterday | 48                          |                  |                  | 0                             |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 0                | 1                |                               |
 | Total recovered           | 8                           |                  | 0                | 8                             |
-| Total deaths              | 1                           | 0                | 0                | 0                             |
+| Total deaths              | 2                           | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -45,7 +45,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | York             |           2 |
 | NIH      | Wales            |           1 |
 | NIH      | Nortern Ireland  |           1 |
-| JHU      | UK               |         115 |
+| JHU      | UK               |         163 |
 | BOP      | England          |          11 |
 | BOP      | Northern Ireland |           1 |
 | BOP      | Scotland         |           1 |
