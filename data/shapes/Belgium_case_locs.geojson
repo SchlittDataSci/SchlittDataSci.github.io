@@ -2,9 +2,9 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Belgium", "confirmed": 109, "color": "blue", "size": 5000.0, "label": "NIH : Belgium: 109" }, "geometry": { "type": "Point", "coordinates": [ 519496.281817586335819, 6557908.560595654882491 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Belgium", "confirmed": 109, "color": "red", "size": 5000.0, "label": "JHU : Belgium: 109" }, "geometry": { "type": "Point", "coordinates": [ 519496.281817586335819, 6557908.560595654882491 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Brussels", "confirmed": 5, "color": "darkorange", "size": 1070.8823421952984, "label": "BOP : Brussels: 5" }, "geometry": { "type": "Point", "coordinates": [ 486180.828779805859085, 6593687.362603253684938 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Flanders", "confirmed": 1, "color": "darkorange", "size": 478.91314261057568, "label": "BOP : Flanders: 1" }, "geometry": { "type": "Point", "coordinates": [ 465298.917112048773561, 6638336.251781851053238 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Belgium", "confirmed": 169, "color": "blue", "size": 5000.0, "label": "NIH : Belgium: 169" }, "geometry": { "type": "Point", "coordinates": [ 519496.281817586335819, 6557908.560595654882491 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Belgium", "confirmed": 169, "color": "red", "size": 5000.0, "label": "JHU : Belgium: 169" }, "geometry": { "type": "Point", "coordinates": [ 519496.281817586335819, 6557908.560595654882491 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Brussels", "confirmed": 5, "color": "darkorange", "size": 860.02614519222686, "label": "BOP : Brussels: 5" }, "geometry": { "type": "Point", "coordinates": [ 486180.828779805859085, 6593687.362603253684938 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Flanders", "confirmed": 1, "color": "darkorange", "size": 384.61538461538464, "label": "BOP : Flanders: 1" }, "geometry": { "type": "Point", "coordinates": [ 465298.917112048773561, 6638336.251781851053238 ] } }
 ]
 }

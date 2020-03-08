@@ -16,11 +16,11 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/06/20                    |
+| Last update logged        | 03/07/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 6                           |
-| New cases since yesterday | 0                           |
+| Total confirmed cases     | 9                           |
+| New cases since yesterday | 3                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
 | Total recovered           | 0                           |
@@ -40,9 +40,9 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Azerbaijan |           6 |
-| JHU      | Azerbaijan |           6 |
-| BOP      | Azerbaijan |           6 |
+| NIH      | Azerbaijan |           9 |
+| JHU      | Azerbaijan |           9 |
+| BOP      | Azerbaijan |           9 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
