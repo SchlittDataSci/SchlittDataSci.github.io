@@ -16,14 +16,14 @@
 |                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
 |---------------------------|-------------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 03/07/20                      | 03/06/20                    | 03/06/20         | 03/04/20         |
+| Last update logged        | 03/07/20                      | 03/07/20                    | 03/06/20         | 03/04/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/04/20                      | 01/22/20                    | 01/22/20         | 01/22/20         |
-| Total confirmed cases     | 108                           | 107                         | 102              | 45               |
-| New cases since yesterday | 1                             |                             |                  |                  |
+| Total confirmed cases     | 109                           | 108                         | 102              | 45               |
+| New cases since yesterday | 2                             | 1                           |                  |                  |
 | Total suspected           | 0                             |                             |                  |                  |
 | Total hospitalized        |                               |                             | 75               | 29               |
-| Total recovered           | 51                            | 46                          |                  | 0                |
+| Total recovered           | 55                            | 51                          |                  | 0                |
 | Total deaths              | 2                             | 2                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
@@ -41,15 +41,15 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name     |   confirmed |
 |----------|--------------|-------------|
 | NIH      | Kowloon      |           4 |
-| NIH      | Kwun Tong    |           2 |
 | NIH      | Kwai Chung   |           2 |
-| NIH      | Tsing Yi     |           1 |
-| NIH      | Fo Tan       |           1 |
-| NIH      | Yau Ma Tei   |           1 |
-| NIH      | Zhuhai       |           1 |
+| NIH      | Kwun Tong    |           2 |
 | NIH      | Wan Chai     |           1 |
 | NIH      | Ngau Chi Wan |           1 |
-| JHU      | Hong Kong    |         107 |
+| NIH      | Fo Tan       |           1 |
+| NIH      | Zhuhai       |           1 |
+| NIH      | Yau Ma Tei   |           1 |
+| NIH      | Tsing Yi     |           1 |
+| JHU      | Hong Kong    |         108 |
 | BOP      | Hong Kong    |          45 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

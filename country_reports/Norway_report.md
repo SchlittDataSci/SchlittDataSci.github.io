@@ -1,6 +1,6 @@
 # Norway
 ## NSSAC COVID-19 Summary
-## 03/06/2020
+## 03/08/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 03/01/20                      |
-| Last update logged        | 03/06/20                    | 03/04/20         | 03/06/20                      |
+| Last update logged        | 03/07/20                    | 03/04/20         | 03/07/20                      |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 02/26/20         | 03/01/20                      |
-| Total confirmed cases     | 108                         | 16               | 6                             |
-| New cases since yesterday | 21                          |                  |                               |
+| Total confirmed cases     | 147                         | 16               | 6                             |
+| New cases since yesterday | 39                          |                  | 0                             |
 | Total suspected           |                             |                  | 0                             |
 | Total hospitalized        |                             | 0                |                               |
 | Total recovered           | 0                           | 0                | 0                             |
@@ -40,9 +40,9 @@ Data sources: BOP, JHU, Tencent
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Norway     |         108 |
-| JHU      | Norway     |         108 |
-| BOP      | Norway     |         108 |
+| NIH      | Norway     |         147 |
+| JHU      | Norway     |         147 |
+| BOP      | Norway     |         147 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

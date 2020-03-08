@@ -2,12 +2,12 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Iraq", "confirmed": 40, "color": "blue", "size": 5000.0, "label": "NIH : Iraq: 40" }, "geometry": { "type": "Point", "coordinates": [ 4917536.001104316674173, 3907997.399553036782891 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Iraq", "confirmed": 40, "color": "red", "size": 5000.0, "label": "JHU : Iraq: 40" }, "geometry": { "type": "Point", "coordinates": [ 4917536.001104316674173, 3907997.399553036782891 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Najaf", "confirmed": 4, "color": "darkorange", "size": 1581.1388300841895, "label": "BOP : Najaf: 4" }, "geometry": { "type": "Point", "coordinates": [ 4934792.203101584687829, 3763444.873160485178232 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Kirkuk", "confirmed": 4, "color": "darkorange", "size": 1581.1388300841895, "label": "BOP : Kirkuk: 4" }, "geometry": { "type": "Point", "coordinates": [ 4942194.058683412149549, 4227952.148025901988149 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Baghdad", "confirmed": 3, "color": "darkorange", "size": 1369.3063937629151, "label": "BOP : Baghdad: 3" }, "geometry": { "type": "Point", "coordinates": [ 4940225.328960937447846, 3935515.753268096596003 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Karbala", "confirmed": 1, "color": "darkorange", "size": 790.56941504209476, "label": "BOP : Karbala: 1" }, "geometry": { "type": "Point", "coordinates": [ 4901933.672781764529645, 3844397.331002823542804 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Maysan", "confirmed": 1, "color": "darkorange", "size": 790.56941504209476, "label": "BOP : Maysan: 1" }, "geometry": { "type": "Point", "coordinates": [ 5239763.425169259309769, 3765707.013139962684363 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Iraq", "confirmed": 54, "color": "blue", "size": 5000.0, "label": "NIH : Iraq: 54" }, "geometry": { "type": "Point", "coordinates": [ 4917536.001104316674173, 3907997.399553036782891 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Iraq", "confirmed": 54, "color": "red", "size": 5000.0, "label": "JHU : Iraq: 54" }, "geometry": { "type": "Point", "coordinates": [ 4917536.001104316674173, 3907997.399553036782891 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Najaf", "confirmed": 4, "color": "darkorange", "size": 1360.8276348795434, "label": "BOP : Najaf: 4" }, "geometry": { "type": "Point", "coordinates": [ 4934792.203101584687829, 3763444.873160485178232 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Kirkuk", "confirmed": 4, "color": "darkorange", "size": 1360.8276348795434, "label": "BOP : Kirkuk: 4" }, "geometry": { "type": "Point", "coordinates": [ 4942194.058683412149549, 4227952.148025901988149 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Baghdad", "confirmed": 3, "color": "darkorange", "size": 1178.5113019775793, "label": "BOP : Baghdad: 3" }, "geometry": { "type": "Point", "coordinates": [ 4940225.328960937447846, 3935515.753268096596003 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Maysan", "confirmed": 1, "color": "darkorange", "size": 680.41381743977172, "label": "BOP : Maysan: 1" }, "geometry": { "type": "Point", "coordinates": [ 5239763.425169259309769, 3765707.013139962684363 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Karbala", "confirmed": 1, "color": "darkorange", "size": 680.41381743977172, "label": "BOP : Karbala: 1" }, "geometry": { "type": "Point", "coordinates": [ 4901933.672781764529645, 3844397.331002823542804 ] } }
 ]
 }

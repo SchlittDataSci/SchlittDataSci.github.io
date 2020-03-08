@@ -16,15 +16,15 @@
 |                           | JHU                         | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 02/29/20                      |
-| Last update logged        | 03/06/20                    | 03/04/20         | 03/05/20                      |
+| Last update logged        | 03/07/20                    | 03/04/20         | 03/05/20                      |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 02/02/20         | 02/29/20                      |
-| Total confirmed cases     | 40                          | 18               | 6                             |
-| New cases since yesterday | 5                           |                  |                               |
+| Total confirmed cases     | 54                          | 18               | 6                             |
+| New cases since yesterday | 14                          |                  |                               |
 | Total suspected           |                             |                  | 0                             |
 | Total hospitalized        |                             | 1                |                               |
 | Total recovered           | 0                           | 0                | 0                             |
-| Total deaths              | 3                           | 0                | 0                             |
+| Total deaths              | 4                           | 0                | 0                             |
 
 Data sources: BOP, JHU, Tencent
 
@@ -40,13 +40,13 @@ Data sources: BOP, JHU, Tencent
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Iraq       |          40 |
-| JHU      | Iraq       |          40 |
+| NIH      | Iraq       |          54 |
+| JHU      | Iraq       |          54 |
 | BOP      | Najaf      |           4 |
 | BOP      | Kirkuk     |           4 |
 | BOP      | Baghdad    |           3 |
-| BOP      | Karbala    |           1 |
 | BOP      | Maysan     |           1 |
+| BOP      | Karbala    |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
