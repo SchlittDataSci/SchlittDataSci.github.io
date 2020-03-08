@@ -1,6 +1,6 @@
 # Vietnam
 ## NSSAC COVID-19 Summary
-## 03/06/2020
+## 03/08/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/04/20                      |
-| Last update logged        | 03/05/20                    | 03/05/20         | 03/04/20         | 02/24/20                      |
+| Last update logged        | 03/07/20                    | 03/06/20         | 03/04/20         | 02/24/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/23/20         | 01/23/20         | 02/04/20                      |
-| Total confirmed cases     | 16                          | 16               | 16               | 16                            |
-| New cases since yesterday | 0                           |                  |                  |                               |
+| Total confirmed cases     | 18                          | 16               | 16               | 16                            |
+| New cases since yesterday | 2                           |                  |                  |                               |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 1                | 9                |                               |
 | Total recovered           | 16                          |                  | 0                | 15                            |
@@ -44,7 +44,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Ho Chi Minh City |           2 |
 | NIH      | Hanoi            |           2 |
 | NIH      | Thanh Hoa        |           1 |
-| JHU      | Vietnam          |          16 |
+| JHU      | Vietnam          |          18 |
 | BOP      | Vinh Phuc        |          11 |
 | BOP      | Khanh Hoa        |           3 |
 | BOP      | Thanh Hoa        |           1 |
