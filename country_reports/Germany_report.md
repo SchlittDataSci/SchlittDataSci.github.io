@@ -1,6 +1,6 @@
 # Germany
 ## NSSAC COVID-19 Summary
-## 03/07/2020
+## 03/08/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | NIHFogarty       | Tencent                       | BOP              |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      | 01/12/20         |
-| Last update logged        | 03/07/20                    | 03/06/20         | 03/07/20                      | 03/04/20         |
+| Last update logged        | 03/07/20                    | 03/06/20         | 03/08/20                      | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 01/28/20         | 02/04/20                      | 01/27/20         |
 | Total confirmed cases     | 799                         | 157              | 66                            | 59               |
-| New cases since yesterday | 129                         |                  | 0                             |                  |
+| New cases since yesterday |                             |                  | 0                             |                  |
 | Total suspected           |                             |                  | 0                             |                  |
 | Total hospitalized        |                             | 5                |                               | 5                |
 | Total recovered           | 18                          |                  | 16                            | 1                |

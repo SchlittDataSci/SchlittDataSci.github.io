@@ -1,6 +1,6 @@
 # Colombia
 ## NSSAC COVID-19 Summary
-## 03/07/2020
+## 03/08/2020
 
 
 

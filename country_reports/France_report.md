@@ -1,6 +1,6 @@
 # France
 ## NSSAC COVID-19 Summary
-## 03/07/2020
+## 03/08/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/04/20                      |
-| Last update logged        | 03/07/20                    | 03/06/20         | 03/04/20         | 03/07/20                      |
+| Last update logged        | 03/07/20                    | 03/06/20         | 03/04/20         | 03/08/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/25/20         | 01/24/20         | 02/04/20                      |
 | Total confirmed cases     | 949                         | 56               | 40               | 38                            |
-| New cases since yesterday | 296                         |                  |                  | 0                             |
+| New cases since yesterday |                             |                  |                  | 0                             |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 7                | 3                |                               |
 | Total recovered           | 12                          |                  | 0                | 12                            |
