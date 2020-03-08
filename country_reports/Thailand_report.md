@@ -1,6 +1,6 @@
 # Thailand
 ## NSSAC COVID-19 Summary
-## 03/06/2020
+## 03/08/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | Tencent                       | NIHFogarty       | BOP              |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 02/04/20                      | 01/13/20         | 01/12/20         |
-| Last update logged        | 03/06/20                    | 03/06/20                      | 03/06/20         | 03/04/20         |
+| Last update logged        | 03/07/20                    | 03/07/20                      | 03/06/20         | 03/04/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/04/20                      | 01/13/20         | 01/12/20         |
-| Total confirmed cases     | 48                          | 42                            | 41               | 41               |
-| New cases since yesterday | 1                           | 0                             |                  |                  |
+| Total confirmed cases     | 50                          | 42                            | 41               | 41               |
+| New cases since yesterday | 2                           | 0                             |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
 | Total hospitalized        |                             |                               | 10               | 7                |
 | Total recovered           | 31                          | 28                            |                  | 1                |
@@ -40,8 +40,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name            |   confirmed |
 |----------|---------------------|-------------|
-| NIH      | Thailand            |          48 |
-| JHU      | Thailand            |          48 |
+| NIH      | Thailand            |          50 |
+| JHU      | Thailand            |          50 |
 | BOP      | Nonthaburi          |          13 |
 | BOP      | Bangkok Metropolis  |           4 |
 | BOP      | Nakhon Pathom       |           1 |

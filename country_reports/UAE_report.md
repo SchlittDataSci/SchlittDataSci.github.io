@@ -1,6 +1,6 @@
 # UAE
 ## NSSAC COVID-19 Summary
-## 03/06/2020
+## 03/08/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | JHU                         | NIHFogarty       | Tencent                       |
 |---------------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      |
-| Last update logged        | 03/06/20                    | 03/06/20         | 03/06/20                      |
+| Last update logged        | 03/07/20                    | 03/06/20         | 03/07/20                      |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/29/20         | 02/04/20                      |
-| Total confirmed cases     | 29                          | 21               | 19                            |
-| New cases since yesterday | 0                           |                  | 0                             |
+| Total confirmed cases     | 45                          | 21               | 19                            |
+| New cases since yesterday | 16                          |                  | 0                             |
 | Total suspected           |                             |                  | 0                             |
 | Total hospitalized        |                             | 0                |                               |
-| Total recovered           | 5                           |                  | 5                             |
+| Total recovered           | 7                           |                  | 5                             |
 | Total deaths              | 0                           | 0                | 0                             |
 
 Data sources: JHU, NIH-Fogarty, Tencent
@@ -40,8 +40,8 @@ Data sources: JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name             |   confirmed |
 |----------|----------------------|-------------|
-| NIH      | UAE                  |          29 |
-| JHU      | United Arab Emirates |          29 |
+| NIH      | UAE                  |          45 |
+| JHU      | United Arab Emirates |          45 |
 
 Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 
