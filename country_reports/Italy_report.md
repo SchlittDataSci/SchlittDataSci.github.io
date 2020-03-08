@@ -1,6 +1,6 @@
 # Italy
 ## NSSAC COVID-19 Summary
-## 03/06/2020
+## 03/07/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 02/04/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/06/20                    | 03/06/20                      | 03/04/20         | 03/06/20         |
+| Last update logged        | 03/06/20                    | 03/07/20                      | 03/04/20         | 03/06/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/04/20                      | 01/31/20         | 01/31/20         |
 | Total confirmed cases     | 4636                        | 653                           | 588              | 86               |
-| New cases since yesterday | 778                         | 0                             |                  |                  |
+| New cases since yesterday |                             | 0                             |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
 | Total hospitalized        |                             |                               | 3                | 1                |
 | Total recovered           | 523                         | 45                            | 0                |                  |
