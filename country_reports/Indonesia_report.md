@@ -1,6 +1,6 @@
 # Indonesia
 ## NSSAC COVID-19 Summary
-## 03/08/2020
+## 03/09/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/07/20                    |
+| Last update logged        | 03/08/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 4                           |
-| New cases since yesterday | 0                           |
+| Total confirmed cases     | 6                           |
+| New cases since yesterday | 2                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
 | Total recovered           | 0                           |
@@ -40,8 +40,8 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Indonesia  |           4 |
-| JHU      | Indonesia  |           4 |
+| NIH      | Indonesia  |           6 |
+| JHU      | Indonesia  |           6 |
 | BOP      | Indonesia  |           4 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

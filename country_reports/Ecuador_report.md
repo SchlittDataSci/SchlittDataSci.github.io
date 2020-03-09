@@ -1,6 +1,6 @@
 # Ecuador
 ## NSSAC COVID-19 Summary
-## 03/08/2020
+## 03/09/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/07/20                    | 03/04/20         |
+| Last update logged        | 03/08/20                    | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/29/20         |
-| Total confirmed cases     | 13                          | 6                |
-| New cases since yesterday | 0                           |                  |
+| Total confirmed cases     | 14                          | 6                |
+| New cases since yesterday | 1                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 0                           | 0                |
@@ -40,8 +40,8 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Ecuador    |          13 |
-| JHU      | Ecuador    |          13 |
+| NIH      | Ecuador    |          14 |
+| JHU      | Ecuador    |          14 |
 | BOP      | Guayas     |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

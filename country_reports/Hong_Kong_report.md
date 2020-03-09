@@ -1,6 +1,6 @@
 # Hong Kong
 ## NSSAC COVID-19 Summary
-## 03/08/2020
+## 03/09/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
 |---------------------------|-------------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 03/08/20                      | 03/07/20                    | 03/06/20         | 03/04/20         |
+| Last update logged        | 03/09/20                      | 03/08/20                    | 03/06/20         | 03/04/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/04/20                      | 01/22/20                    | 01/22/20         | 01/22/20         |
-| Total confirmed cases     | 114                           | 108                         | 102              | 45               |
-| New cases since yesterday | 5                             |                             |                  |                  |
+| Total confirmed cases     | 115                           | 114                         | 102              | 45               |
+| New cases since yesterday | 1                             |                             |                  |                  |
 | Total suspected           | 0                             |                             |                  |                  |
 | Total hospitalized        |                               |                             | 75               | 29               |
-| Total recovered           | 58                            | 51                          |                  | 0                |
-| Total deaths              | 3                             | 2                           | 0                | 0                |
+| Total recovered           | 59                            | 58                          |                  | 0                |
+| Total deaths              | 3                             | 3                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -49,7 +49,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Zhuhai       |           1 |
 | NIH      | Yau Ma Tei   |           1 |
 | NIH      | Tsing Yi     |           1 |
-| JHU      | Hong Kong    |         108 |
+| JHU      | Hong Kong    |         114 |
 | BOP      | Hong Kong    |          45 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

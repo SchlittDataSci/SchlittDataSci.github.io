@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Egypt", "confirmed": 15, "color": "blue", "size": 5000.0, "label": "NIH : Egypt: 15" }, "geometry": { "type": "Point", "coordinates": [ 3258048.41767625277862, 3030580.212774189654738 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Egypt", "confirmed": 15, "color": "red", "size": 5000.0, "label": "JHU : Egypt: 15" }, "geometry": { "type": "Point", "coordinates": [ 3258048.41767625277862, 3030580.212774189654738 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Egypt", "confirmed": 15, "color": "darkorange", "size": 5000.0, "label": "BOP : Egypt: 15" }, "geometry": { "type": "Point", "coordinates": [ 3258048.41767625277862, 3030580.212774189654738 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Egypt", "confirmed": 49, "color": "blue", "size": 5000.0, "label": "NIH : Egypt: 49" }, "geometry": { "type": "Point", "coordinates": [ 3258048.41767625277862, 3030580.212774189654738 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Egypt", "confirmed": 49, "color": "red", "size": 5000.0, "label": "JHU : Egypt: 49" }, "geometry": { "type": "Point", "coordinates": [ 3258048.41767625277862, 3030580.212774189654738 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Egypt", "confirmed": 15, "color": "darkorange", "size": 2766.416675862441, "label": "BOP : Egypt: 15" }, "geometry": { "type": "Point", "coordinates": [ 3258048.41767625277862, 3030580.212774189654738 ] } }
 ]
 }

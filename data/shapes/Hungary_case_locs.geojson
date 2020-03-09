@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Hungary", "confirmed": 4, "color": "blue", "size": 5000.0, "label": "NIH : Hungary: 4" }, "geometry": { "type": "Point", "coordinates": [ 2171408.418049881700426, 5971792.313022789545357 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Hungary", "confirmed": 4, "color": "red", "size": 5000.0, "label": "JHU : Hungary: 4" }, "geometry": { "type": "Point", "coordinates": [ 2171408.418049881700426, 5971792.313022789545357 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Hungary", "confirmed": 4, "color": "darkorange", "size": 5000.0, "label": "BOP : Hungary: 4" }, "geometry": { "type": "Point", "coordinates": [ 2171408.418049881700426, 5971792.313022789545357 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Hungary", "confirmed": 7, "color": "blue", "size": 5000.0, "label": "NIH : Hungary: 7" }, "geometry": { "type": "Point", "coordinates": [ 2171408.418049881700426, 5971792.313022789545357 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Hungary", "confirmed": 7, "color": "red", "size": 5000.0, "label": "JHU : Hungary: 7" }, "geometry": { "type": "Point", "coordinates": [ 2171408.418049881700426, 5971792.313022789545357 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Hungary", "confirmed": 4, "color": "darkorange", "size": 3779.6447300922723, "label": "BOP : Hungary: 4" }, "geometry": { "type": "Point", "coordinates": [ 2171408.418049881700426, 5971792.313022789545357 ] } }
 ]
 }

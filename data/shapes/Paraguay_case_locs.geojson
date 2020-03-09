@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Paraguay", "confirmed": 1, "color": "blue", "size": 5000.0, "label": "NIH : Paraguay: 1" }, "geometry": { "type": "Point", "coordinates": [ -6475381.80951850861311, -2670350.431875878479332 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Paraguay", "confirmed": 1, "color": "red", "size": 5000.0, "label": "JHU : Paraguay: 1" }, "geometry": { "type": "Point", "coordinates": [ -6475381.80951850861311, -2670350.431875878479332 ] } }
+]
+}

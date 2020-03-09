@@ -1,6 +1,6 @@
 # United Kingdom
 ## NSSAC COVID-19 Summary
-## 03/08/2020
+## 03/09/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/07/20                      |
-| Last update logged        | 03/07/20                    | 03/06/20         | 03/04/20         | 03/08/20                      |
+| Last update logged        | 03/08/20                    | 03/06/20         | 03/04/20         | 03/09/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/31/20         | 01/31/20         | 02/07/20                      |
-| Total confirmed cases     | 206                         | 20               | 17               | 16                            |
+| Total confirmed cases     | 273                         | 20               | 17               | 16                            |
 | New cases since yesterday |                             |                  |                  | 0                             |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 0                | 1                |                               |
 | Total recovered           | 18                          |                  | 0                | 8                             |
-| Total deaths              | 2                           | 0                | 0                | 0                             |
+| Total deaths              | 3                           | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -45,7 +45,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | York             |           2 |
 | NIH      | Nortern Ireland  |           1 |
 | NIH      | Wales            |           1 |
-| JHU      | UK               |         206 |
+| JHU      | UK               |         273 |
 | BOP      | England          |          11 |
 | BOP      | Scotland         |           1 |
 | BOP      | Northern Ireland |           1 |

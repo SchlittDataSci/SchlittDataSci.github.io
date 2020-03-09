@@ -1,6 +1,6 @@
 # Hungary
 ## NSSAC COVID-19 Summary
-## 03/08/2020
+## 03/09/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/07/20                    |
+| Last update logged        | 03/08/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 4                           |
-| New cases since yesterday | 2                           |
+| Total confirmed cases     | 7                           |
+| New cases since yesterday | 3                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
 | Total recovered           | 0                           |
@@ -40,8 +40,8 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Hungary    |           4 |
-| JHU      | Hungary    |           4 |
+| NIH      | Hungary    |           7 |
+| JHU      | Hungary    |           7 |
 | BOP      | Hungary    |           4 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

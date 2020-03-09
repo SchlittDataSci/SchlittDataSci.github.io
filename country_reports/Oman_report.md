@@ -1,6 +1,6 @@
 # Oman
 ## NSSAC COVID-19 Summary
-## 03/08/2020
+## 03/09/2020
 
 
 
@@ -16,7 +16,7 @@
 |                           | JHU                         | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 03/02/20                      |
-| Last update logged        | 03/07/20                    | 03/04/20         | 03/02/20                      |
+| Last update logged        | 03/08/20                    | 03/04/20         | 03/02/20                      |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 02/24/20         | 03/02/20                      |
 | Total confirmed cases     | 16                          | 6                | 6                             |

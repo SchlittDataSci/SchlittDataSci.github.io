@@ -1,6 +1,6 @@
 # United States
 ## NSSAC COVID-19 Summary
-## 03/08/2020
+## 03/09/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | JHU                         | NIHFogarty       | Tencent                       | BOP              |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      | 01/12/20         |
-| Last update logged        | 03/07/20                    | 03/06/20         | 03/08/20                      | 03/04/20         |
+| Last update logged        | 03/08/20                    | 03/06/20         | 03/09/20                      | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 01/21/20         | 02/04/20                      | 01/20/20         |
-| Total confirmed cases     | 417                         | 140              | 60                            | 40               |
+| Total confirmed cases     | 538                         | 140              | 60                            | 40               |
 | New cases since yesterday |                             |                  | 0                             |                  |
 | Total suspected           |                             |                  | 0                             |                  |
 | Total hospitalized        |                             | 4                |                               | 2                |
 | Total recovered           | 8                           |                  | 3                             | 0                |
-| Total deaths              | 17                          | 0                | 0                             | 2                |
+| Total deaths              | 21                          | 0                | 0                             | 2                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -47,106 +47,130 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Illinois                                    |           4 |
 | NIH      | Florida                                     |           3 |
 | NIH      | Oregon                                      |           3 |
+| NIH      | New Hampshire                               |           2 |
+| NIH      | Georgia                                     |           2 |
+| NIH      | Massachusetts                               |           2 |
 | NIH      | Texas                                       |           2 |
 | NIH      | Rhode Island                                |           2 |
-| NIH      | Massachusetts                               |           2 |
-| NIH      | Georgia                                     |           2 |
-| NIH      | New Hampshire                               |           2 |
 | NIH      | Arizona                                     |           2 |
 | NIH      | North Carolina                              |           1 |
 | NIH      | Wisconsin                                   |           1 |
-| JHU      | King County                                 |          71 |
-| JHU      | Westchester County                          |          57 |
+| JHU      | King County                                 |          83 |
+| JHU      | Westchester County                          |          83 |
 | JHU      | Unassigned Location (From Diamond Princess) |          45 |
-| JHU      | Santa Clara County                          |          32 |
-| JHU      | Snohomish County                            |          27 |
+| JHU      | Santa Clara County                          |          38 |
+| JHU      | Snohomish County                            |          31 |
 | JHU      | Grand Princess Cruise Ship                  |          21 |
 | JHU      | Los Angeles                                 |          14 |
-| JHU      | New York County                             |          11 |
+| JHU      | Contra Costa County                         |          12 |
+| JHU      | New York County                             |          12 |
 | JHU      | San Francisco County                        |           9 |
-| JHU      | Cook County                                 |           6 |
+| JHU      | Suffolk County                              |           8 |
+| JHU      | Washington County                           |           8 |
+| JHU      | Cook County                                 |           7 |
+| JHU      | Middlesex County                            |           7 |
+| JHU      | Norfolk County                              |           6 |
+| JHU      | Fort Bend County                            |           6 |
 | JHU      | Harris County                               |           5 |
-| JHU      | Unassigned Location                         |           5 |
 | JHU      | Placer County                               |           5 |
-| JHU      | Nassau County                               |           4 |
+| JHU      | Nassau County                               |           5 |
+| JHU      | Unassigned Location                         |           5 |
+| JHU      | Grafton County                              |           4 |
+| JHU      | Montgomery County                           |           4 |
+| JHU      | Montgomery County                           |           4 |
+| JHU      | Pierce County                               |           4 |
 | JHU      | Bergen County                               |           4 |
-| JHU      | Suffolk County                              |           3 |
-| JHU      | Montgomery County                           |           3 |
-| JHU      | San Diego County                            |           3 |
 | JHU      | Douglas County                              |           3 |
 | JHU      | Providence County                           |           3 |
-| JHU      | Fort Bend County                            |           3 |
-| JHU      | Contra Costa County                         |           3 |
 | JHU      | Fulton County                               |           3 |
 | JHU      | Maricopa County                             |           3 |
+| JHU      | San Diego County                            |           3 |
 | JHU      | Orange County                               |           3 |
-| JHU      | Washington County                           |           3 |
+| JHU      | San Benito                                  |           2 |
+| JHU      | Fairfax County                              |           2 |
+| JHU      | Rockland County                             |           2 |
 | JHU      | Pinal County                                |           2 |
 | JHU      | Lee County                                  |           2 |
-| JHU      | Alameda County                              |           2 |
 | JHU      | Broward County                              |           2 |
-| JHU      | Fairfield County                            |           2 |
-| JHU      | Denver County                               |           2 |
-| JHU      | Floyd County                                |           2 |
-| JHU      | Summit County                               |           2 |
-| JHU      | Sacramento County                           |           2 |
-| JHU      | San Benito                                  |           2 |
-| JHU      | Saratoga County                             |           2 |
-| JHU      | Grafton County                              |           2 |
-| JHU      | Hillsborough                                |           2 |
 | JHU      | San Mateo                                   |           2 |
-| JHU      | Norfolk County                              |           2 |
-| JHU      | Rockland County                             |           2 |
-| JHU      | Tulsa County                                |           1 |
-| JHU      | Santa Cruz County                           |           1 |
-| JHU      | Plymouth County                             |           1 |
-| JHU      | Pierce County                               |           1 |
-| JHU      | Madera County                               |           1 |
-| JHU      | Kershaw County                              |           1 |
-| JHU      | Klamath County                              |           1 |
-| JHU      | Wayne County                                |           1 |
-| JHU      | Jefferson County                            |           1 |
-| JHU      | Douglas County                              |           1 |
-| JHU      | Madison                                     |           1 |
-| JHU      | San Antonio                                 |           1 |
-| JHU      | Humboldt County                             |           1 |
-| JHU      | Sarasota                                    |           1 |
-| JHU      | Sonoma County                               |           1 |
-| JHU      | Umatilla                                    |           1 |
-| JHU      | Wake County                                 |           1 |
-| JHU      | Clark County                                |           1 |
-| JHU      | Grant County                                |           1 |
-| JHU      | Santa Rosa County                           |           1 |
-| JHU      | Williamson County                           |           1 |
-| JHU      | Chatham County                              |           1 |
-| JHU      | Jackson County                              |           1 |
-| JHU      | Delaware County                             |           1 |
-| JHU      | Fayette County                              |           1 |
+| JHU      | Polk County                                 |           2 |
+| JHU      | Alameda County                              |           2 |
+| JHU      | Jackson County                              |           2 |
+| JHU      | Saratoga County                             |           2 |
+| JHU      | Clark County                                |           2 |
+| JHU      | Sacramento County                           |           2 |
+| JHU      | Summit County                               |           2 |
+| JHU      | Denver County                               |           2 |
+| JHU      | Hillsborough                                |           2 |
+| JHU      | Washington                                  |           2 |
+| JHU      | Rockingham County                           |           2 |
+| JHU      | Washoe County                               |           2 |
 | JHU      | Marion County                               |           1 |
+| JHU      | Kittitas County                             |           1 |
+| JHU      | Spokane County                              |           1 |
+| JHU      | Okaloosa County                             |           1 |
+| JHU      | Riverside County                            |           1 |
+| JHU      | Shelby County                               |           1 |
+| JHU      | Manatee County                              |           1 |
+| JHU      | St. Louis County                            |           1 |
+| JHU      | Suffolk County                              |           1 |
+| JHU      | Ulster County                               |           1 |
+| JHU      | Unassigned Location                         |           1 |
+| JHU      | Unknown Location                            |           1 |
+| JHU      | Volusia County                              |           1 |
+| JHU      | Hudson County                               |           1 |
+| JHU      | Johnson County                              |           1 |
+| JHU      | Charleston County                           |           1 |
+| JHU      | Hendricks County                            |           1 |
+| JHU      | Santa Rosa County                           |           1 |
+| JHU      | Ramsey County                               |           1 |
+| JHU      | Marion County                               |           1 |
+| JHU      | Fayette County                              |           1 |
+| JHU      | Douglas County                              |           1 |
+| JHU      | Delaware County                             |           1 |
+| JHU      | Chatham County                              |           1 |
+| JHU      | Williamson County                           |           1 |
+| JHU      | Grant County                                |           1 |
+| JHU      | Yolo County                                 |           1 |
+| JHU      | Wake County                                 |           1 |
+| JHU      | Umatilla                                    |           1 |
+| JHU      | Sonoma County                               |           1 |
+| JHU      | Sarasota                                    |           1 |
+| JHU      | Humboldt County                             |           1 |
+| JHU      | San Antonio                                 |           1 |
+| JHU      | Madison                                     |           1 |
+| JHU      | Harford County                              |           1 |
+| JHU      | Wayne County                                |           1 |
+| JHU      | Fairfield County                            |           1 |
+| JHU      | Madera County                               |           1 |
+| JHU      | Fresno County                               |           1 |
+| JHU      | Douglas County                              |           1 |
+| JHU      | Davidson County                             |           1 |
+| JHU      | Berkshire County                            |           1 |
+| JHU      | Tulsa County                                |           1 |
+| JHU      | Clark County                                |           1 |
+| JHU      | Plymouth County                             |           1 |
+| JHU      | Klamath County                              |           1 |
+| JHU      | Kershaw County                              |           1 |
+| JHU      | Jefferson County                            |           1 |
 | JHU      | Honolulu County                             |           1 |
 | JHU      | El Paso County                              |           1 |
 | JHU      | Davis County                                |           1 |
 | JHU      | Cobb County                                 |           1 |
-| JHU      | Clark County                                |           1 |
-| JHU      | Charleston County                           |           1 |
-| JHU      | Yolo County                                 |           1 |
-| JHU      | Washoe County                               |           1 |
-| JHU      | Ramsey County                               |           1 |
-| JHU      | Middlesex County                            |           1 |
 | JHU      | Montgomery County                           |           0 |
 | JHU      | Lackland                                    |           0 |
 | JHU      | Travis                                      |           0 |
 | JHU      | Omaha                                       |           0 |
 | BOP      | Washington                                  |          15 |
 | BOP      | California                                  |          14 |
-| BOP      | Oregon                                      |           2 |
 | BOP      | Illinois                                    |           2 |
 | BOP      | Massachusetts                               |           2 |
+| BOP      | Oregon                                      |           2 |
+| BOP      | Wisconsin                                   |           1 |
 | BOP      | North Carolina                              |           1 |
 | BOP      | Arizona                                     |           1 |
 | BOP      | Texas                                       |           1 |
 | BOP      | New York                                    |           1 |
-| BOP      | Wisconsin                                   |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

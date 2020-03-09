@@ -2,9 +2,9 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Lapland", "confirmed": 1, "color": "blue", "size": 1290.9944487358057, "label": "NIH : Lapland: 1" }, "geometry": { "type": "Point", "coordinates": [ 2975370.112443195655942, 10356341.00020414032042 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Finland", "confirmed": 15, "color": "red", "size": 5000.0, "label": "JHU : Finland: 15" }, "geometry": { "type": "Point", "coordinates": [ 2885503.214543013833463, 9161018.744482854381204 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Lapland", "confirmed": 1, "color": "darkorange", "size": 1290.9944487358057, "label": "BOP : Lapland: 1" }, "geometry": { "type": "Point", "coordinates": [ 2975370.112443195655942, 10356341.00020414032042 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Southern Finland", "confirmed": 1, "color": "darkorange", "size": 1290.9944487358057, "label": "BOP : Southern Finland: 1" }, "geometry": { "type": "Point", "coordinates": [ 2728221.506810837425292, 8550373.08390206284821 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Lapland", "confirmed": 1, "color": "blue", "size": 1042.5720702853739, "label": "NIH : Lapland: 1" }, "geometry": { "type": "Point", "coordinates": [ 2975370.112443195655942, 10356341.00020414032042 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Finland", "confirmed": 23, "color": "red", "size": 5000.0, "label": "JHU : Finland: 23" }, "geometry": { "type": "Point", "coordinates": [ 2885503.214543013833463, 9161018.744482854381204 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Lapland", "confirmed": 1, "color": "darkorange", "size": 1042.5720702853739, "label": "BOP : Lapland: 1" }, "geometry": { "type": "Point", "coordinates": [ 2975370.112443195655942, 10356341.00020414032042 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Southern Finland", "confirmed": 1, "color": "darkorange", "size": 1042.5720702853739, "label": "BOP : Southern Finland: 1" }, "geometry": { "type": "Point", "coordinates": [ 2728221.506810837425292, 8550373.08390206284821 ] } }
 ]
 }

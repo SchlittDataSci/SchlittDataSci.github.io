@@ -1,6 +1,6 @@
 # Japan
 ## NSSAC COVID-19 Summary
-## 03/08/2020
+## 03/09/2020
 
 
 
@@ -16,10 +16,10 @@
 |                           | BOP              | Tencent                       | JHU                         | NIHFogarty       |
 |---------------------------|------------------|-------------------------------|-----------------------------|------------------|
 | First update logged       | 01/12/20         | 02/04/20                      | 01/22/20                    | 01/13/20         |
-| Last update logged        | 03/04/20         | 02/20/20                      | 03/07/20                    | 03/06/20         |
+| Last update logged        | 03/04/20         | 02/20/20                      | 03/08/20                    | 03/06/20         |
 | Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
 | First known case          | 01/15/20         | 02/04/20                      | 01/22/20                    | 01/15/20         |
-| Total confirmed cases     | 751              | 729                           | 461                         | 257              |
+| Total confirmed cases     | 751              | 729                           | 502                         | 257              |
 | New cases since yesterday |                  |                               | 41                          |                  |
 | Total suspected           |                  | 0                             |                             |                  |
 | Total hospitalized        | 62               |                               |                             | 193              |
@@ -73,7 +73,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Oita City           |           1 |
 | NIH      | Saitama Prefecture  |           1 |
 | NIH      | Kumamoto Prefecture |           1 |
-| JHU      | Japan               |         461 |
+| JHU      | Japan               |         502 |
 | BOP      | Kanagawa Prefecture |         564 |
 | BOP      | Hokkaido            |          64 |
 | BOP      | Tokyo               |          34 |

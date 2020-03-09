@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Latvia", "confirmed": 1, "color": "blue", "size": 5000.0, "label": "NIH : Latvia: 1" }, "geometry": { "type": "Point", "coordinates": [ 2755576.459356612060219, 7727618.29619806446135 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Latvia", "confirmed": 1, "color": "red", "size": 5000.0, "label": "JHU : Latvia: 1" }, "geometry": { "type": "Point", "coordinates": [ 2755576.459356612060219, 7727618.29619806446135 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Latvia", "confirmed": 1, "color": "darkorange", "size": 5000.0, "label": "BOP : Latvia: 1" }, "geometry": { "type": "Point", "coordinates": [ 2755576.459356612060219, 7727618.29619806446135 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Latvia", "confirmed": 2, "color": "blue", "size": 5000.0, "label": "NIH : Latvia: 2" }, "geometry": { "type": "Point", "coordinates": [ 2755576.459356612060219, 7727618.29619806446135 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Latvia", "confirmed": 2, "color": "red", "size": 5000.0, "label": "JHU : Latvia: 2" }, "geometry": { "type": "Point", "coordinates": [ 2755576.459356612060219, 7727618.29619806446135 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Latvia", "confirmed": 1, "color": "darkorange", "size": 3535.5339059327375, "label": "BOP : Latvia: 1" }, "geometry": { "type": "Point", "coordinates": [ 2755576.459356612060219, 7727618.29619806446135 ] } }
 ]
 }
