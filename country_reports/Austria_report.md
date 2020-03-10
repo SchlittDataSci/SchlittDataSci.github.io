@@ -1,6 +1,6 @@
 # Austria
 ## NSSAC COVID-19 Summary
-## 03/09/2020
+## 03/10/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/08/20                    | 03/04/20         | 03/06/20         |
+| Last update logged        | 03/09/20                    | 03/04/20         | 03/06/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/25/20         | 02/25/20         |
-| Total confirmed cases     | 104                         | 18               | 2                |
-| New cases since yesterday | 25                          |                  |                  |
+| Total confirmed cases     | 131                         | 18               | 2                |
+| New cases since yesterday | 27                          |                  |                  |
 | Total suspected           |                             |                  |                  |
 | Total hospitalized        |                             | 0                | 0                |
-| Total recovered           | 0                           | 0                |                  |
+| Total recovered           | 2                           | 0                |                  |
 | Total deaths              | 0                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, 
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Innsbruck  |           2 |
-| JHU      | Austria    |         104 |
+| JHU      | Austria    |         131 |
 | BOP      | Tyrol      |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
