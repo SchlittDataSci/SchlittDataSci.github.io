@@ -1,6 +1,6 @@
 # Belarus
 ## NSSAC COVID-19 Summary
-## 03/09/2020
+## 03/10/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/08/20                    |
+| Last update logged        | 03/09/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
 | Total confirmed cases     | 6                           |
 | New cases since yesterday | 0                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
-| Total recovered           | 0                           |
+| Total recovered           | 1                           |
 | Total deaths              | 0                           |
 
 Data sources: JHU, 

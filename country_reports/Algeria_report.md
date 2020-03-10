@@ -16,7 +16,7 @@
 |                           | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/09/20                    | 03/04/20         | 03/06/20         |
+| Last update logged        | 03/09/20                    | 03/04/20         | 03/10/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/25/20         | 02/26/20         |
 | Total confirmed cases     | 20                          | 5                | 1                |
@@ -40,7 +40,7 @@ Data sources: BOP, JHU, NIH-Fogarty,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Algeria    |          19 |
+| NIH      | Algeria    |          20 |
 | JHU      | Algeria    |          20 |
 | BOP      | Blida      |           2 |
 
