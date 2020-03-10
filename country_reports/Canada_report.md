@@ -1,6 +1,6 @@
 # Canada
 ## NSSAC COVID-19 Summary
-## 03/09/2020
+## 03/10/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | JHU                         | BOP              | Tencent                       | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 02/04/20                      | 01/13/20         |
-| Last update logged        | 03/08/20                    | 03/04/20         | 03/09/20                      | 03/06/20         |
+| Last update logged        | 03/09/20                    | 03/04/20         | 03/10/20                      | 03/10/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 01/25/20         | 02/04/20                      | 01/26/20         |
-| Total confirmed cases     | 64                          | 20               | 13                            | 12               |
+| Total confirmed cases     | 77                          | 20               | 13                            | 12               |
 | New cases since yesterday |                             |                  | 0                             |                  |
 | Total suspected           |                             |                  | 0                             |                  |
 | Total hospitalized        |                             | 8                |                               | 3                |
 | Total recovered           | 8                           | 1                | 4                             |                  |
-| Total deaths              | 0                           | 0                | 0                             | 0                |
+| Total deaths              | 1                           | 0                | 0                             | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -42,12 +42,10 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----------|------------------|-------------|
 | NIH      | Vancouver        |           7 |
 | NIH      | Toronto          |           5 |
-| JHU      | Toronto          |          28 |
-| JHU      | British Columbia |          27 |
-| JHU      | Montreal         |           4 |
-| JHU      | Edmonton         |           3 |
-| JHU      | London           |           1 |
-| JHU      | Calgary          |           1 |
+| JHU      | Ontario          |          34 |
+| JHU      | British Columbia |          32 |
+| JHU      | Alberta          |           7 |
+| JHU      | Quebec           |           4 |
 | BOP      | Ontario          |          13 |
 | BOP      | British Columbia |           7 |
 

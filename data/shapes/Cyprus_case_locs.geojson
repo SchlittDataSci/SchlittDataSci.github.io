@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Cyprus", "confirmed": 2, "color": "blue", "size": 5000.0, "label": "NIH : Cyprus: 2" }, "geometry": { "type": "Point", "coordinates": [ 3689698.82689761929214, 4161476.289401565678418 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Cyprus", "confirmed": 2, "color": "red", "size": 5000.0, "label": "JHU : Cyprus: 2" }, "geometry": { "type": "Point", "coordinates": [ 3689698.82689761929214, 4161476.289401565678418 ] } }
+]
+}
