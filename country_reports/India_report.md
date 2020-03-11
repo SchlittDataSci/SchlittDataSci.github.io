@@ -1,6 +1,6 @@
 # India
 ## NSSAC COVID-19 Summary
-## 03/09/2020
+## 03/10/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              | NIHFogarty       | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         | 02/04/20                      |
-| Last update logged        | 03/08/20                    | 03/04/20         | 03/06/20         | 02/14/20                      |
+| Last update logged        | 03/09/20                    | 03/04/20         | 03/10/20         | 02/14/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/30/20         | 01/30/20         | 02/04/20                      |
-| Total confirmed cases     | 39                          | 29               | 3                | 3                             |
-| New cases since yesterday | 5                           |                  |                  |                               |
+| Total confirmed cases     | 43                          | 29               | 3                | 3                             |
+| New cases since yesterday | 4                           |                  |                  |                               |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 0                | 0                |                               |
 | Total recovered           | 3                           | 0                |                  | 0                             |
@@ -42,7 +42,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----------|---------------|-------------|
 | NIH      | Kerala        |           2 |
 | NIH      | Alappuzha     |           1 |
-| JHU      | India         |          39 |
+| JHU      | India         |          43 |
 | BOP      | Rajasthan     |          16 |
 | BOP      | Uttar Pradesh |           6 |
 | BOP      | Kerala        |           3 |

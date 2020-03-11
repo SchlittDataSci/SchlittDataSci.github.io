@@ -1,6 +1,6 @@
 # Thailand
 ## NSSAC COVID-19 Summary
-## 03/09/2020
+## 03/10/2020
 
 
 
@@ -16,7 +16,7 @@
 |                           | JHU                         | Tencent                       | NIHFogarty       | BOP              |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 02/04/20                      | 01/13/20         | 01/12/20         |
-| Last update logged        | 03/08/20                    | 03/09/20                      | 03/06/20         | 03/04/20         |
+| Last update logged        | 03/09/20                    | 03/10/20                      | 03/10/20         | 03/04/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/04/20                      | 01/13/20         | 01/12/20         |
 | Total confirmed cases     | 50                          | 42                            | 41               | 41               |
@@ -44,8 +44,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | JHU      | Thailand            |          50 |
 | BOP      | Nonthaburi          |          13 |
 | BOP      | Bangkok Metropolis  |           4 |
-| BOP      | Nakhon Pathom       |           1 |
 | BOP      | Prachuap Khiri Khan |           1 |
+| BOP      | Nakhon Pathom       |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

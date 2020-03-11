@@ -1,6 +1,6 @@
 # Iran
 ## NSSAC COVID-19 Summary
-## 03/09/2020
+## 03/10/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | JHU                         | BOP              | Tencent                       | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 02/20/20                      | 01/13/20         |
-| Last update logged        | 03/08/20                    | 03/04/20         | 03/09/20                      | 03/06/20         |
+| Last update logged        | 03/09/20                    | 03/04/20         | 03/10/20                      | 03/10/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 02/19/20         | 02/20/20                      | 02/19/20         |
-| Total confirmed cases     | 6566                        | 995              | 270                           | 18               |
+| Total confirmed cases     | 7161                        | 995              | 270                           | 18               |
 | New cases since yesterday |                             |                  | 0                             |                  |
 | Total suspected           |                             |                  | 0                             |                  |
 | Total hospitalized        |                             | 0                |                               | 0                |
-| Total recovered           | 2134                        | 0                | 49                            |                  |
-| Total deaths              | 194                         | 0                | 26                            | 0                |
+| Total recovered           | 2394                        | 0                | 49                            |                  |
+| Total deaths              | 237                         | 0                | 26                            | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -44,7 +44,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Tehran                     |           4 |
 | NIH      | Guilan                     |           2 |
 | NIH      | Araq                       |           1 |
-| JHU      | Iran                       |        6566 |
+| JHU      | Iran                       |        7161 |
 | BOP      | Tehran                     |         354 |
 | BOP      | Qom                        |         139 |
 | BOP      | Gilan                      |         112 |
@@ -54,23 +54,23 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | BOP      | Mazandaran                 |          43 |
 | BOP      | Golestan                   |          24 |
 | BOP      | Fars                       |          19 |
-| BOP      | Khuzestan                  |          19 |
 | BOP      | Razavi Khorasan            |          19 |
+| BOP      | Khuzestan                  |          19 |
 | BOP      | Semnan                     |          13 |
-| BOP      | Lorestan                   |          12 |
 | BOP      | East Azarbaijan            |          12 |
+| BOP      | Lorestan                   |          12 |
 | BOP      | Ardebil                    |          10 |
 | BOP      | Qazvin                     |           8 |
 | BOP      | Kordestan                  |           8 |
-| BOP      | Hamadan                    |           5 |
 | BOP      | Kermanshah                 |           5 |
 | BOP      | Yazd                       |           5 |
-| BOP      | Sistan and Baluchestan     |           4 |
+| BOP      | Hamadan                    |           5 |
 | BOP      | Hormozgan                  |           4 |
+| BOP      | Sistan and Baluchestan     |           4 |
 | BOP      | South Khorasan             |           3 |
-| BOP      | Kohgiluyeh and Buyer Ahmad |           2 |
 | BOP      | Kerman                     |           2 |
 | BOP      | Ilam                       |           2 |
+| BOP      | Kohgiluyeh and Buyer Ahmad |           2 |
 | BOP      | West Azarbaijan            |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

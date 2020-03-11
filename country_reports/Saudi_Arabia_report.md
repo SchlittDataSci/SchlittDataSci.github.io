@@ -1,6 +1,6 @@
 # Saudi Arabia
 ## NSSAC COVID-19 Summary
-## 03/09/2020
+## 03/10/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/08/20                    | 03/04/20         |
+| Last update logged        | 03/09/20                    | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 03/02/20         |
-| Total confirmed cases     | 11                          | 1                |
-| New cases since yesterday | 6                           |                  |
+| Total confirmed cases     | 15                          | 1                |
+| New cases since yesterday | 4                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 0                           | 0                |
@@ -40,8 +40,8 @@ Data sources: BOP, JHU,
 
 | source   | loc_name     |   confirmed |
 |----------|--------------|-------------|
-| NIH      | Saudi Arabia |          11 |
-| JHU      | Saudi Arabia |          11 |
+| NIH      | Saudi Arabia |          15 |
+| JHU      | Saudi Arabia |          15 |
 | BOP      | Saudi Arabia |           5 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

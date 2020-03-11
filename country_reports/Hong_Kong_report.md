@@ -1,6 +1,6 @@
 # Hong Kong
 ## NSSAC COVID-19 Summary
-## 03/09/2020
+## 03/10/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | Tencent                       | JHU                         | NIHFogarty       | BOP              |
 |---------------------------|-------------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 02/04/20                      | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 03/09/20                      | 03/08/20                    | 03/06/20         | 03/04/20         |
+| Last update logged        | 03/10/20                      | 03/09/20                    | 03/10/20         | 03/04/20         |
 | Method                    | Daily cases in country scrape | Cases by day & country list | Public line list | Public line list |
 | First known case          | 02/04/20                      | 01/22/20                    | 01/22/20         | 01/22/20         |
-| Total confirmed cases     | 115                           | 114                         | 102              | 45               |
-| New cases since yesterday | 1                             |                             |                  |                  |
+| Total confirmed cases     | 119                           | 115                         | 102              | 45               |
+| New cases since yesterday | 4                             |                             |                  |                  |
 | Total suspected           | 0                             |                             |                  |                  |
 | Total hospitalized        |                               |                             | 75               | 29               |
-| Total recovered           | 59                            | 58                          |                  | 0                |
+| Total recovered           | 60                            | 59                          |                  | 0                |
 | Total deaths              | 3                             | 3                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
@@ -43,13 +43,13 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Kowloon      |           4 |
 | NIH      | Kwai Chung   |           2 |
 | NIH      | Kwun Tong    |           2 |
+| NIH      | Tsing Yi     |           1 |
+| NIH      | Fo Tan       |           1 |
+| NIH      | Yau Ma Tei   |           1 |
+| NIH      | Zhuhai       |           1 |
 | NIH      | Wan Chai     |           1 |
 | NIH      | Ngau Chi Wan |           1 |
-| NIH      | Fo Tan       |           1 |
-| NIH      | Zhuhai       |           1 |
-| NIH      | Yau Ma Tei   |           1 |
-| NIH      | Tsing Yi     |           1 |
-| JHU      | Hong Kong    |         114 |
+| JHU      | Hong Kong    |         115 |
 | BOP      | Hong Kong    |          45 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

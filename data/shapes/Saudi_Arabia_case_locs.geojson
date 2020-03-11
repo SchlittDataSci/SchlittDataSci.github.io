@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Saudi Arabia", "confirmed": 11, "color": "blue", "size": 5000.0, "label": "NIH : Saudi Arabia: 11" }, "geometry": { "type": "Point", "coordinates": [ 4714695.780948654748499, 2952618.091775274835527 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Saudi Arabia", "confirmed": 11, "color": "red", "size": 5000.0, "label": "JHU : Saudi Arabia: 11" }, "geometry": { "type": "Point", "coordinates": [ 4714695.780948654748499, 2952618.091775274835527 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Saudi Arabia", "confirmed": 5, "color": "darkorange", "size": 3370.9993123162103, "label": "BOP : Saudi Arabia: 5" }, "geometry": { "type": "Point", "coordinates": [ 4714695.780948654748499, 2952618.091775274835527 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Saudi Arabia", "confirmed": 15, "color": "blue", "size": 5000.0, "label": "NIH : Saudi Arabia: 15" }, "geometry": { "type": "Point", "coordinates": [ 4714695.780948654748499, 2952618.091775274835527 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Saudi Arabia", "confirmed": 15, "color": "red", "size": 5000.0, "label": "JHU : Saudi Arabia: 15" }, "geometry": { "type": "Point", "coordinates": [ 4714695.780948654748499, 2952618.091775274835527 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Saudi Arabia", "confirmed": 5, "color": "darkorange", "size": 2886.7513459481293, "label": "BOP : Saudi Arabia: 5" }, "geometry": { "type": "Point", "coordinates": [ 4714695.780948654748499, 2952618.091775274835527 ] } }
 ]
 }

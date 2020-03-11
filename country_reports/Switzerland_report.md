@@ -1,6 +1,6 @@
 # Switzerland
 ## NSSAC COVID-19 Summary
-## 03/09/2020
+## 03/10/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/27/20                      |
-| Last update logged        | 03/08/20                    | 03/06/20         | 03/04/20         | 02/28/20                      |
+| Last update logged        | 03/09/20                    | 03/10/20         | 03/04/20         | 02/28/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 02/25/20         | 02/25/20         | 02/27/20                      |
-| Total confirmed cases     | 337                         | 10               | 10               | 6                             |
-| New cases since yesterday | 69                          |                  |                  |                               |
+| Total confirmed cases     | 374                         | 10               | 10               | 6                             |
+| New cases since yesterday | 37                          |                  |                  |                               |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 0                | 0                |                               |
 | Total recovered           | 3                           |                  | 0                | 0                             |
@@ -41,17 +41,17 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name    |   confirmed |
 |----------|-------------|-------------|
 | NIH      | Basal-Stadt |           2 |
-| NIH      | Geneva      |           2 |
 | NIH      | Grisons     |           2 |
-| NIH      | Vaud        |           1 |
-| NIH      | Zurich      |           1 |
-| NIH      | Aargau      |           1 |
+| NIH      | Geneva      |           2 |
 | NIH      | Ticino      |           1 |
-| JHU      | Switzerland |         337 |
+| NIH      | Aargau      |           1 |
+| NIH      | Zurich      |           1 |
+| NIH      | Vaud        |           1 |
+| JHU      | Switzerland |         374 |
 | BOP      | Graubuenden |           2 |
 | BOP      | Basel       |           2 |
-| BOP      | Aargau      |           1 |
 | BOP      | Ticino      |           1 |
+| BOP      | Aargau      |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

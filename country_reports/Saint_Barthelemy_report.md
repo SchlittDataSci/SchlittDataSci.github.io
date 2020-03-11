@@ -1,6 +1,6 @@
 # Saint Barthelemy
 ## NSSAC COVID-19 Summary
-## 03/09/2020
+## 03/10/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/08/20                    |
+| Last update logged        | 03/09/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 3                           |
-| New cases since yesterday | 0                           |
+| Total confirmed cases     | 1                           |
+| New cases since yesterday | -2                          |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
 | Total recovered           | 0                           |
@@ -40,8 +40,8 @@ Data sources: JHU,
 
 | source   | loc_name         |   confirmed |
 |----------|------------------|-------------|
-| NIH      | Saint Barthelemy |           3 |
-| JHU      | Saint Barthelemy |           3 |
+| NIH      | Saint Barthelemy |           1 |
+| JHU      | Saint Barthelemy |           1 |
 | BOP      | Saint Barthelemy |           3 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

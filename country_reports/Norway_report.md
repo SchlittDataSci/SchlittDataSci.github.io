@@ -1,6 +1,6 @@
 # Norway
 ## NSSAC COVID-19 Summary
-## 03/09/2020
+## 03/10/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | JHU                         | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 03/01/20                      |
-| Last update logged        | 03/08/20                    | 03/04/20         | 03/08/20                      |
+| Last update logged        | 03/09/20                    | 03/04/20         | 03/08/20                      |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 02/26/20         | 03/01/20                      |
-| Total confirmed cases     | 176                         | 16               | 6                             |
-| New cases since yesterday | 29                          |                  | 0                             |
+| Total confirmed cases     | 205                         | 16               | 6                             |
+| New cases since yesterday | 29                          |                  |                               |
 | Total suspected           |                             |                  | 0                             |
 | Total hospitalized        |                             | 0                |                               |
-| Total recovered           | 0                           | 0                | 0                             |
+| Total recovered           | 1                           | 0                | 0                             |
 | Total deaths              | 0                           | 0                | 0                             |
 
 Data sources: BOP, JHU, Tencent
@@ -40,8 +40,8 @@ Data sources: BOP, JHU, Tencent
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Norway     |         176 |
-| JHU      | Norway     |         176 |
+| NIH      | Norway     |         205 |
+| JHU      | Norway     |         205 |
 | BOP      | Norway     |         147 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
