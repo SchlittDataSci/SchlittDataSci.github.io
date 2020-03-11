@@ -1,6 +1,5 @@
 FIPSIndex,last_case,two_week_total,loc_name,FIPS
 53033,2020-03-10,115,"King County, WA, US",53033
-53033,2020-03-10,267,"Washington, US",53033
 17031,2020-03-10,9,"Cook County, IL, US",17031
 06037,2020-03-10,19,"Los Angeles, CA, US",06037
 06073,2020-03-05,1,"San Diego County, CA, US",06073
@@ -16,7 +15,6 @@ FIPSIndex,last_case,two_week_total,loc_name,FIPS
 41067,2020-03-08,8,"Washington County, OR, US",41067
 25021,2020-03-10,10,"Norfolk County, MA, US",25021
 04013,2020-03-06,1,"Maricopa County, AZ, US",04013
-04013,2020-03-10,6,"Arizona, US",04013
 37183,2020-03-10,6,"Wake County, NC, US",37183
 36119,2020-03-09,98,"Wetchester County, NY, US",36119
 06059,2020-03-10,4,"Orange County, CA, US",06059
@@ -39,9 +37,7 @@ FIPSIndex,last_case,two_week_total,loc_name,FIPS
 31055,2020-03-09,3,"Douglas County, NE, US",31055
 21067,2020-03-10,2,"Fayette County, KY, US",21067
 18097,2020-03-06,1,"Marion County, IN, US",18097
-18097,2020-03-10,6,"Indiana, US",18097
 25017,2020-03-10,15,"Middlesex County, MA, US",25017
-25017,2020-03-10,92,"Massachusetts, US",25017
 36059,2020-03-10,19,"Nassau County, NY, US",36059
 27123,2020-03-06,1,"Ramsey County, MN, US",27123
 32031,2020-03-08,2,"Washoe County, NV, US",32031
@@ -74,7 +70,6 @@ FIPSIndex,last_case,two_week_total,loc_name,FIPS
 51059,2020-03-10,4,"Fairfax County, VA, US",51059
 33015,2020-03-08,1,"Rockingham County, NH, US",33015
 11001,2020-03-10,5,"Washington, D.C., US",11001
-11001,2020-03-10,5,"District of Columbia, US",11001
 25003,2020-03-10,5,"Berkshire County, MA, US",25003
 47037,2020-03-08,1,"Davidson County, TN, US",47037
 41019,2020-03-08,1,"Douglas County, OR, US",41019
@@ -105,37 +100,6 @@ FIPSIndex,last_case,two_week_total,loc_name,FIPS
 22051,2020-03-09,1,"Jefferson Parish, LA, US",22051
 06089,2020-03-09,1,"Shasta County, CA, US",06089
 45083,2020-03-09,1,"Spartanburg County, SC, US",45083
-36025,2020-03-10,173,"New York, US",36025
-06031,2020-03-10,144,"California, US",06031
-13169,2020-03-10,17,"Georgia, US",13169
-08119,2020-03-10,15,"Colorado, US",08119
-12105,2020-03-10,15,"Florida, US",12105
-34023,2020-03-10,15,"New Jersey, US",34023
-41043,2020-03-10,15,"Oregon, US",41043
-48027,2020-03-10,13,"Texas, US",48027
-17113,2020-03-10,12,"Illinois, US",17113
-42067,2020-03-10,12,"Pennsylvania, US",42067
-19127,2020-03-10,8,"Iowa, US",19127
-24003,2020-03-10,8,"Maryland, US",24003
-37151,2020-03-10,7,"North Carolina, US",37151
-45079,2020-03-10,7,"South Carolina, US",45079
-47149,2020-03-10,7,"Tennessee, US",47149
-51065,2020-03-10,7,"Virginia, US",51065
-21079,2020-03-10,6,"Kentucky, US",21079
-32023,2020-03-10,4,"Nevada, US",32023
-33001,2020-03-10,4,"New Hampshire, US",33001
-27009,2020-03-10,3,"Minnesota, US",27009
-31121,2020-03-10,3,"Nebraska, US",31121
-39117,2020-03-10,3,"Ohio, US",39117
-44003,2020-03-10,3,"Rhode Island, US",44003
-55097,2020-03-10,3,"Wisconsin, US",55097
-09003,2020-03-10,2,"Connecticut, US",09003
-40081,2020-03-10,2,"Oklahoma, US",40081
-49049,2020-03-10,2,"Utah, US",49049
-20127,2020-03-10,1,"Kansas, US",20127
-22009,2020-03-10,1,"Louisiana, US",22009
-29051,2020-03-10,1,"Missouri, US",29051
-50023,2020-03-10,1,"Vermont, US",50023
 53035,2020-03-10,1,"Kitsap, WA, US",53035
 06095,2020-03-10,3,"Solano, CA, US",06095
 06087,2020-03-10,2,"Santa Cruz, CA, US",06087
