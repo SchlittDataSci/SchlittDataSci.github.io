@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Hong Kong SAR", "confirmed": 120, "color": "blue", "size": 5000.0, "label": "NIH : Hong Kong SAR: 120" }, "geometry": { "type": "Point", "coordinates": [ 486954.146520061243791, 6593722.797989939339459 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Hong Kong", "confirmed": 120, "color": "red", "size": 5000.0, "label": "JHU : Hong Kong: 120" }, "geometry": { "type": "Point", "coordinates": [ 12705271.4599938262254, 2555360.925416380167007 ] } }
+]
+}

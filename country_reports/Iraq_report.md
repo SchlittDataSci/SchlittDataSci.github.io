@@ -1,6 +1,6 @@
 # Iraq
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/11/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | JHU                         | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 02/29/20                      |
-| Last update logged        | 03/09/20                    | 03/04/20         | 03/09/20                      |
+| Last update logged        | 03/10/20                    | 03/04/20         | 03/09/20                      |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 02/02/20         | 02/29/20                      |
-| Total confirmed cases     | 60                          | 18               | 6                             |
-| New cases since yesterday | 0                           |                  |                               |
+| Total confirmed cases     | 71                          | 18               | 6                             |
+| New cases since yesterday | 11                          |                  |                               |
 | Total suspected           |                             |                  | 0                             |
 | Total hospitalized        |                             | 1                |                               |
-| Total recovered           | 9                           | 0                | 0                             |
-| Total deaths              | 6                           | 0                | 0                             |
+| Total recovered           | 3                           | 0                | 0                             |
+| Total deaths              | 7                           | 0                | 0                             |
 
 Data sources: BOP, JHU, Tencent
 
@@ -40,8 +40,8 @@ Data sources: BOP, JHU, Tencent
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Iraq       |          60 |
-| JHU      | Iraq       |          60 |
+| NIH      | Iraq       |          71 |
+| JHU      | Iraq       |          71 |
 | BOP      | Najaf      |           4 |
 | BOP      | Kirkuk     |           4 |
 | BOP      | Baghdad    |           3 |

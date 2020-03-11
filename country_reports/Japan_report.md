@@ -1,6 +1,6 @@
 # Japan
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/11/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | BOP              | Tencent                       | JHU                         | NIHFogarty       |
 |---------------------------|------------------|-------------------------------|-----------------------------|------------------|
 | First update logged       | 01/12/20         | 02/04/20                      | 01/22/20                    | 01/13/20         |
-| Last update logged        | 03/04/20         | 02/20/20                      | 03/09/20                    | 03/10/20         |
+| Last update logged        | 03/04/20         | 02/20/20                      | 03/10/20                    | 03/10/20         |
 | Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
 | First known case          | 01/15/20         | 02/04/20                      | 01/22/20                    | 01/15/20         |
-| Total confirmed cases     | 751              | 729                           | 511                         | 257              |
-| New cases since yesterday |                  |                               | 9                           |                  |
+| Total confirmed cases     | 751              | 729                           | 581                         | 581              |
+| New cases since yesterday |                  |                               | 70                          |                  |
 | Total suspected           |                  | 0                             |                             |                  |
 | Total hospitalized        | 62               |                               |                             | 192              |
-| Total recovered           | 1                | 1                             | 76                          |                  |
-| Total deaths              | 0                | 3                             | 17                          | 0                |
+| Total recovered           | 1                | 1                             | 101                         |                  |
+| Total deaths              | 0                | 3                             | 10                          | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -73,7 +73,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Kobe City           |           1 |
 | NIH      | Kumamoto Prefecture |           1 |
 | NIH      | Kitakyushu City     |           1 |
-| JHU      | Japan               |         511 |
+| JHU      | Japan               |         581 |
 | BOP      | Kanagawa Prefecture |         564 |
 | BOP      | Hokkaido            |          64 |
 | BOP      | Tokyo               |          34 |

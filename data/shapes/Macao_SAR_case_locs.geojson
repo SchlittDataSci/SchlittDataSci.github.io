@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Macao SAR", "confirmed": 10, "color": "blue", "size": 5000.0, "label": "NIH : Macao SAR: 10" }, "geometry": { "type": "Point", "coordinates": [ 486361.356334074574988, 6590059.02298020105809 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Macau", "confirmed": 10, "color": "red", "size": 5000.0, "label": "JHU : Macau: 10" }, "geometry": { "type": "Point", "coordinates": [ 12641460.78303736820817, 2530893.892239632084966 ] } }
+]
+}

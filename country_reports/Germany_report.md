@@ -1,6 +1,6 @@
 # Germany
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/11/2020
 
 
 
@@ -16,10 +16,10 @@
 |                           | JHU                         | NIHFogarty       | Tencent                       | BOP              |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      | 01/12/20         |
-| Last update logged        | 03/09/20                    | 03/10/20         | 03/10/20                      | 03/04/20         |
+| Last update logged        | 03/10/20                    | 03/10/20         | 03/11/20                      | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 01/28/20         | 02/04/20                      | 01/27/20         |
-| Total confirmed cases     | 1176                        | 168              | 66                            | 59               |
+| Total confirmed cases     | 1457                        | 1457             | 66                            | 59               |
 | New cases since yesterday |                             |                  | 0                             |                  |
 | Total suspected           |                             |                  | 0                             |                  |
 | Total hospitalized        |                             | 5                |                               | 5                |
@@ -48,10 +48,10 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Saarland               |           5 |
 | NIH      | Frankfurt              |           2 |
 | NIH      | Brandenburg            |           2 |
-| NIH      | Rhineland-Palatinate   |           1 |
 | NIH      | Thuringia              |           1 |
+| NIH      | Rhineland-Palatinate   |           1 |
 | NIH      | Hamburg                |           1 |
-| JHU      | Germany                |        1176 |
+| JHU      | Germany                |        1457 |
 | BOP      | Bavaria                |          29 |
 | BOP      | Baden-Wurttemberg      |          21 |
 | BOP      | North Rhine-Westphalia |           2 |

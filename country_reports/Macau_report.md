@@ -1,6 +1,6 @@
 # Macau
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/11/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | BOP              |
-|---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/09/20                    | 03/04/20         |
-| Method                    | Cases by day & country list | Public line list |
-| First known case          | 01/22/20                    | 01/21/20         |
-| Total confirmed cases     | 10                          | 10               |
-| New cases since yesterday | 0                           |                  |
-| Total suspected           |                             |                  |
-| Total hospitalized        |                             | 2                |
-| Total recovered           | 10                          | 0                |
-| Total deaths              | 0                           | 0                |
+|                           | BOP              |
+|---------------------------|------------------|
+| First update logged       | 01/12/20         |
+| Last update logged        | 03/04/20         |
+| Method                    | Public line list |
+| First known case          | 01/21/20         |
+| Total confirmed cases     | 10               |
+| New cases since yesterday |                  |
+| Total suspected           |                  |
+| Total hospitalized        | 2                |
+| Total recovered           | 0                |
+| Total deaths              | 0                |
 
 Data sources: BOP, JHU, 
 
@@ -40,11 +40,9 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Macau      |          10 |
-| JHU      | Macau      |          10 |
 | BOP      | Macau      |          10 |
 
-Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Natural Earth, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Macau_case_locs.geojson)

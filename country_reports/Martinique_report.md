@@ -1,6 +1,6 @@
 # Martinique
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/11/2020
 
 
 
@@ -16,7 +16,7 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/09/20                    |
+| Last update logged        | 03/10/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
 | Total confirmed cases     | 2                           |

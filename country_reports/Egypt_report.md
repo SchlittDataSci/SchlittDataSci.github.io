@@ -1,6 +1,6 @@
 # Egypt
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/11/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | JHU                         | NIHFogarty       | BOP              |
 |---------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 03/09/20                    | 03/10/20         | 03/04/20         |
+| Last update logged        | 03/10/20                    | 03/10/20         | 03/04/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/14/20         | 02/14/20         |
-| Total confirmed cases     | 55                          | 1                | 1                |
-| New cases since yesterday | 6                           |                  |                  |
+| Total confirmed cases     | 59                          | 59               | 1                |
+| New cases since yesterday | 4                           |                  |                  |
 | Total suspected           |                             |                  |                  |
 | Total hospitalized        |                             | 0                | 0                |
-| Total recovered           | 12                          |                  | 0                |
+| Total recovered           | 1                           |                  | 0                |
 | Total deaths              | 1                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, 
@@ -40,8 +40,8 @@ Data sources: BOP, JHU, NIH-Fogarty,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Egypt      |          55 |
-| JHU      | Egypt      |          55 |
+| NIH      | Egypt      |          59 |
+| JHU      | Egypt      |          59 |
 | BOP      | Egypt      |          15 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

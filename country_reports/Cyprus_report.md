@@ -1,6 +1,6 @@
 # Cyprus
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/11/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/09/20                    |
+| Last update logged        | 03/10/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 2                           |
-| New cases since yesterday | 2                           |
+| Total confirmed cases     | 3                           |
+| New cases since yesterday | 1                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
 | Total recovered           | 0                           |
@@ -41,7 +41,7 @@ Data sources: JHU,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Cyprus     |           2 |
-| JHU      | Cyprus     |           2 |
+| JHU      | Cyprus     |           3 |
 
 Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 

@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "St. Martin", "confirmed": 2, "color": "blue", "size": 5000.0, "label": "NIH : St. Martin: 2" }, "geometry": { "type": "Point", "coordinates": [ 751851.707234380766749, 6201926.98941782489419 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "St. Martin", "confirmed": 2, "color": "red", "size": 5000.0, "label": "JHU : St. Martin: 2" }, "geometry": { "type": "Point", "coordinates": [ 751851.707234380766749, 6201926.98941782489419 ] } }
+]
+}
