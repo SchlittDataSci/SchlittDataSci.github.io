@@ -1,6 +1,6 @@
 # Israel
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
-|---------------------------|-----------------------------|------------------|------------------|-------------------------------|
-| First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/25/20                      |
-| Last update logged        | 03/10/20                    | 03/10/20         | 03/09/20         | 03/11/20                      |
-| Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
-| First known case          | 01/22/20                    | 02/21/20         | 02/21/20         | 02/25/20                      |
-| Total confirmed cases     | 58                          | 58               | 11               | 6                             |
-| New cases since yesterday |                             |                  |                  | 0                             |
-| Total suspected           |                             |                  |                  | 0                             |
-| Total hospitalized        |                             | 0                | 0                |                               |
-| Total recovered           | 4                           |                  | 0                | 1                             |
-| Total deaths              | 0                           | 0                | 0                | 0                             |
+|                           | JHU                         | BOP              | Tencent                       | NIHFogarty       |
+|---------------------------|-----------------------------|------------------|-------------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/12/20         | 02/25/20                      | 01/13/20         |
+| Last update logged        | 03/11/20                    | 03/09/20         | 03/12/20                      | 03/11/20         |
+| Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
+| First known case          | 01/22/20                    | 02/21/20         | 02/25/20                      | 02/21/20         |
+| Total confirmed cases     | 109                         | 11               | 6                             | 1                |
+| New cases since yesterday |                             |                  | 0                             |                  |
+| Total suspected           |                             |                  | 0                             |                  |
+| Total hospitalized        |                             | 0                |                               | 0                |
+| Total recovered           | 4                           | 0                | 1                             |                  |
+| Total deaths              | 0                           | 0                | 0                             | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -40,8 +40,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Israel     |          58 |
-| JHU      | Israel     |          58 |
+| NIH      | Israel     |         109 |
+| JHU      | Israel     |         109 |
 | BOP      | Israel     |          58 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

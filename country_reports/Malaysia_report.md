@@ -1,6 +1,6 @@
 # Malaysia
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | JHU                         | NIHFogarty       | Tencent                       | BOP              |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 02/05/20                      | 01/12/20         |
-| Last update logged        | 03/10/20                    | 03/10/20         | 03/11/20                      | 03/09/20         |
+| Last update logged        | 03/11/20                    | 03/11/20         | 03/11/20                      | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 01/24/20         | 02/05/20                      | 01/25/20         |
-| Total confirmed cases     | 129                         | 129              | 23                            | 17               |
-| New cases since yesterday |                             |                  |                               |                  |
+| Total confirmed cases     | 149                         | 23               | 23                            | 17               |
+| New cases since yesterday | 20                          |                  |                               |                  |
 | Total suspected           |                             |                  | 0                             |                  |
 | Total hospitalized        |                             | 5                |                               | 3                |
-| Total recovered           | 24                          |                  | 15                            | 3                |
+| Total recovered           | 26                          |                  | 15                            | 3                |
 | Total deaths              | 0                           | 0                | 0                             | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
@@ -42,7 +42,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----------|----------------------------------|-------------|
 | NIH      | Johor                            |           8 |
 | NIH      | Langkawi                         |           1 |
-| JHU      | Malaysia                         |         129 |
+| JHU      | Malaysia                         |         149 |
 | BOP      | Wilayah Persekutuan Kuala Lumpur |           6 |
 | BOP      | Selangor                         |           2 |
 | BOP      | Johor                            |           2 |
