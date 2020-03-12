@@ -1,6 +1,6 @@
 # Chile
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: BOP, JHU,
 
 | source   | loc_name                     |   confirmed |
 |----------|------------------------------|-------------|
-| NIH      | Chile                        |          13 |
+| NIH      | Chile                        |          23 |
 | JHU      | Chile                        |          13 |
 | BOP      | Maule                        |           1 |
 | BOP      | Santiago Metropolitan Region |           1 |

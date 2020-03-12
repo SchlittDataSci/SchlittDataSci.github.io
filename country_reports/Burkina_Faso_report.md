@@ -1,6 +1,6 @@
 # Burkina Faso
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: JHU,
 
 | source   | loc_name     |   confirmed |
 |----------|--------------|-------------|
-| NIH      | Burkina Faso |           1 |
+| NIH      | Burkina Faso |           2 |
 | JHU      | Burkina Faso |           1 |
 | BOP      | Burkina Faso |           1 |
 

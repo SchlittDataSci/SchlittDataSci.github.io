@@ -1,6 +1,6 @@
 # Bulgaria
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Bulgaria   |           4 |
+| NIH      | Bulgaria   |           7 |
 | JHU      | Bulgaria   |           4 |
 | BOP      | Bulgaria   |           4 |
 

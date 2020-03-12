@@ -1,6 +1,6 @@
 # Bosnia and Herzegovina
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: BOP, JHU,
 
 | source   | loc_name               |   confirmed |
 |----------|------------------------|-------------|
-| NIH      | Bosnia and Herzegovina |           5 |
+| NIH      | Bosnia and Herzegovina |           7 |
 | JHU      | Bosnia and Herzegovina |           5 |
 | BOP      | Republika Srpska       |           2 |
 

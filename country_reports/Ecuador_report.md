@@ -1,6 +1,6 @@
 # Ecuador
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Ecuador    |          15 |
+| NIH      | Ecuador    |          17 |
 | JHU      | Ecuador    |          15 |
 | BOP      | Guayas     |           1 |
 

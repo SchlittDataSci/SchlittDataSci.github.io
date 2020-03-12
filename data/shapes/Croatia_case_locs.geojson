@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Croatia", "confirmed": 14, "color": "blue", "size": 5000.0, "label": "NIH : Croatia: 14" }, "geometry": { "type": "Point", "coordinates": [ 1893755.533356433035806, 5710807.823362356051803 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Croatia", "confirmed": 14, "color": "red", "size": 5000.0, "label": "JHU : Croatia: 14" }, "geometry": { "type": "Point", "coordinates": [ 1893755.533356433035806, 5710807.823362356051803 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Croatia", "confirmed": 14, "color": "darkorange", "size": 5000.0, "label": "BOP : Croatia: 14" }, "geometry": { "type": "Point", "coordinates": [ 1893755.533356433035806, 5710807.823362356051803 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Croatia", "confirmed": 19, "color": "blue", "size": 5000.0, "label": "NIH : Croatia: 19" }, "geometry": { "type": "Point", "coordinates": [ 1893755.533356433035806, 5710807.823362356051803 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Croatia", "confirmed": 14, "color": "red", "size": 4291.9753763947601, "label": "JHU : Croatia: 14" }, "geometry": { "type": "Point", "coordinates": [ 1893755.533356433035806, 5710807.823362356051803 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Croatia", "confirmed": 14, "color": "darkorange", "size": 4291.9753763947601, "label": "BOP : Croatia: 14" }, "geometry": { "type": "Point", "coordinates": [ 1893755.533356433035806, 5710807.823362356051803 ] } }
 ]
 }

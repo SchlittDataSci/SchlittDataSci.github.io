@@ -1,6 +1,6 @@
 # Denmark
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Denmark    |         262 |
+| NIH      | Denmark    |         444 |
 | JHU      | Denmark    |         262 |
 | BOP      | Denmark    |         262 |
 

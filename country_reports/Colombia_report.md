@@ -1,6 +1,6 @@
 # Colombia
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Colombia   |           3 |
+| NIH      | Colombia   |           9 |
 | JHU      | Colombia   |           3 |
 | BOP      | Colombia   |           3 |
 

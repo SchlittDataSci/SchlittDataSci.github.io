@@ -1,6 +1,6 @@
 # Egypt
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -16,10 +16,10 @@
 |                           | JHU                         | NIHFogarty       | BOP              |
 |---------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 03/10/20                    | 03/10/20         | 03/09/20         |
+| Last update logged        | 03/10/20                    | 03/11/20         | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/14/20         | 02/14/20         |
-| Total confirmed cases     | 59                          | 59               | 1                |
+| Total confirmed cases     | 59                          | 1                | 1                |
 | New cases since yesterday | 4                           |                  |                  |
 | Total suspected           |                             |                  |                  |
 | Total hospitalized        |                             | 0                | 0                |
@@ -40,7 +40,7 @@ Data sources: BOP, JHU, NIH-Fogarty,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Egypt      |          59 |
+| NIH      | Egypt      |          60 |
 | JHU      | Egypt      |          59 |
 | BOP      | Egypt      |          59 |
 

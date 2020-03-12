@@ -1,6 +1,6 @@
 # Czech Republic
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,11 +40,10 @@ Data sources: BOP, JHU,
 
 | source   | loc_name       |   confirmed |
 |----------|----------------|-------------|
-| NIH      | Czech Republic |          41 |
 | JHU      | Czech Republic |          41 |
 | BOP      | Usti nad Labem |           1 |
 
-Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Natural Earth, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Czech_Republic_case_locs.geojson)

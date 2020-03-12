@@ -1,6 +1,6 @@
 # Albania
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Albania    |          10 |
+| NIH      | Albania    |          12 |
 | JHU      | Albania    |          10 |
 | BOP      | Albania    |          10 |
 

@@ -1,6 +1,6 @@
 # Costa Rica
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Costa Rica |           9 |
+| NIH      | Costa Rica |          13 |
 | JHU      | Costa Rica |           9 |
 | BOP      | Costa Rica |           9 |
 

@@ -1,6 +1,6 @@
 # Argentina
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: BOP, JHU,
 
 | source   | loc_name     |   confirmed |
 |----------|--------------|-------------|
-| NIH      | Argentina    |          17 |
+| NIH      | Argentina    |          19 |
 | JHU      | Argentina    |          17 |
 | BOP      | Buenos Aires |           1 |
 

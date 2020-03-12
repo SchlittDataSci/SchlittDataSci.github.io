@@ -1,6 +1,6 @@
 # Cambodia
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -16,10 +16,10 @@
 |                           | JHU                         | NIHFogarty       | BOP              |
 |---------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 03/10/20                    | 03/10/20         | 03/09/20         |
+| Last update logged        | 03/10/20                    | 03/11/20         | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
 | First known case          | 01/22/20                    | 01/27/20         | 01/27/20         |
-| Total confirmed cases     | 2                           | 2                | 1                |
+| Total confirmed cases     | 2                           | 1                | 1                |
 | New cases since yesterday | 0                           |                  |                  |
 | Total suspected           |                             |                  |                  |
 | Total hospitalized        |                             | 0                | 1                |

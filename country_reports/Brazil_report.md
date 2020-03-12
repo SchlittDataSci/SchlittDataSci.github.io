@@ -1,6 +1,6 @@
 # Brazil
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: BOP, JHU,
 
 | source   | loc_name       |   confirmed |
 |----------|----------------|-------------|
-| NIH      | Brazil         |          31 |
+| NIH      | Brazil         |          38 |
 | JHU      | Brazil         |          31 |
 | BOP      | Sao Paulo      |           3 |
 | BOP      | Rio de Janeiro |           2 |

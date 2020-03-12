@@ -1,6 +1,6 @@
 # Brunei
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Brunei     |           1 |
+| NIH      | Brunei     |          11 |
 | JHU      | Brunei     |           1 |
 | BOP      | Brunei     |           1 |
 

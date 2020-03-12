@@ -1,6 +1,6 @@
 # Cyprus
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Cyprus     |           3 |
+| NIH      | Cyprus     |           6 |
 | JHU      | Cyprus     |           3 |
 | BOP      | Cyprus     |           3 |
 

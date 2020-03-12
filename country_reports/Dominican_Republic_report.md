@@ -1,6 +1,6 @@
 # Dominican Republic
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
