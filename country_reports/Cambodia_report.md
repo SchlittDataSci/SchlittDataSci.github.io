@@ -16,11 +16,11 @@
 |                           | JHU                         | NIHFogarty       | BOP              |
 |---------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 03/10/20                    | 03/11/20         | 03/09/20         |
+| Last update logged        | 03/11/20                    | 03/11/20         | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
 | First known case          | 01/22/20                    | 01/27/20         | 01/27/20         |
-| Total confirmed cases     | 2                           | 1                | 1                |
-| New cases since yesterday | 0                           |                  |                  |
+| Total confirmed cases     | 3                           | 1                | 1                |
+| New cases since yesterday | 1                           |                  |                  |
 | Total suspected           |                             |                  |                  |
 | Total hospitalized        |                             | 0                | 1                |
 | Total recovered           | 1                           |                  | 0                |
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty,
 | source   | loc_name                |   confirmed |
 |----------|-------------------------|-------------|
 | NIH      | Preah Sihanouk Province |           1 |
-| JHU      | Cambodia                |           2 |
+| JHU      | Cambodia                |           3 |
 | BOP      | Sihanoukville           |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

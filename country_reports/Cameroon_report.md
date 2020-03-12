@@ -16,7 +16,7 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/10/20                    | 03/09/20         |
+| Last update logged        | 03/11/20                    | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 03/06/20         |
 | Total confirmed cases     | 2                           | 2                |

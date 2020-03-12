@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/10/20                    | 03/09/20         |
+| Last update logged        | 03/11/20                    | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/25/20         |
-| Total confirmed cases     | 31                          | 13               |
-| New cases since yesterday | 6                           |                  |
+| Total confirmed cases     | 38                          | 13               |
+| New cases since yesterday | 7                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 4                |
 | Total recovered           | 0                           | 0                |
@@ -41,7 +41,7 @@ Data sources: BOP, JHU,
 | source   | loc_name       |   confirmed |
 |----------|----------------|-------------|
 | NIH      | Brazil         |          38 |
-| JHU      | Brazil         |          31 |
+| JHU      | Brazil         |          38 |
 | BOP      | Sao Paulo      |           3 |
 | BOP      | Rio de Janeiro |           2 |
 | BOP      | Bahia          |           1 |

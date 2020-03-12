@@ -16,10 +16,10 @@
 |                           | JHU                         | BOP              | Tencent                       | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 02/04/20                      | 01/13/20         |
-| Last update logged        | 03/10/20                    | 03/09/20         | 03/11/20                      | 03/11/20         |
+| Last update logged        | 03/11/20                    | 03/09/20         | 03/12/20                      | 03/11/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 01/25/20         | 02/04/20                      | 01/26/20         |
-| Total confirmed cases     | 79                          | 64               | 13                            | 12               |
+| Total confirmed cases     | 108                         | 64               | 13                            | 12               |
 | New cases since yesterday |                             |                  | 0                             |                  |
 | Total suspected           |                             |                  | 0                             |                  |
 | Total hospitalized        |                             | 14               |                               | 3                |
@@ -42,10 +42,11 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----------|------------------|-------------|
 | NIH      | Vancouver        |           7 |
 | NIH      | Toronto          |           5 |
-| JHU      | Ontario          |          36 |
-| JHU      | British Columbia |          32 |
-| JHU      | Alberta          |           7 |
-| JHU      | Quebec           |           4 |
+| JHU      | Ontario          |          41 |
+| JHU      | British Columbia |          39 |
+| JHU      | Alberta          |          19 |
+| JHU      | Quebec           |           8 |
+| JHU      | New Brunswick    |           1 |
 | BOP      | Ontario          |          28 |
 | BOP      | British Columbia |          27 |
 | BOP      | Quebec           |           7 |

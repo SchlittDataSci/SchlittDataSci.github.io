@@ -13,18 +13,17 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         |
-|---------------------------|-----------------------------|
-| First update logged       | 01/22/20                    |
-| Last update logged        | 03/10/20                    |
-| Method                    | Cases by day & country list |
-| First known case          | 01/22/20                    |
-| Total confirmed cases     | 1                           |
-| New cases since yesterday | 1                           |
-| Total suspected           |                             |
-| Total hospitalized        |                             |
-| Total recovered           | 0                           |
-| Total deaths              | 0                           |
+|---------------------------|
+| First update logged       |
+| Last update logged        |
+| Method                    |
+| First known case          |
+| Total confirmed cases     |
+| New cases since yesterday |
+| Total suspected           |
+| Total hospitalized        |
+| Total recovered           |
+| Total deaths              |
 
 Data sources: JHU, 
 
@@ -40,7 +39,6 @@ Data sources: JHU,
 
 | source   | loc_name        |   confirmed |
 |----------|-----------------|-------------|
-| JHU      | Channel Islands |           1 |
 | BOP      | Channel Islands |           1 |
 
 Data sources: BOP, JHU, Natural Earth, Tencent

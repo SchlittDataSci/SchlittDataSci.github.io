@@ -3,7 +3,7 @@
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
 { "type": "Feature", "properties": { "source": "NIH", "loc_name": "Brazil", "confirmed": 38, "color": "blue", "size": 5000.0, "label": "NIH : Brazil: 38" }, "geometry": { "type": "Point", "coordinates": [ -5922196.91020215395838, -1156588.447657447773963 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Brazil", "confirmed": 31, "color": "red", "size": 4516.0532372975031, "label": "JHU : Brazil: 31" }, "geometry": { "type": "Point", "coordinates": [ -5922196.91020215395838, -1156588.447657447773963 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Brazil", "confirmed": 38, "color": "red", "size": 5000.0, "label": "JHU : Brazil: 38" }, "geometry": { "type": "Point", "coordinates": [ -5922196.91020215395838, -1156588.447657447773963 ] } },
 { "type": "Feature", "properties": { "source": "BOP", "loc_name": "Sao Paulo", "confirmed": 3, "color": "darkorange", "size": 1404.8787173725409, "label": "BOP : Sao Paulo: 3" }, "geometry": { "type": "Point", "coordinates": [ -5191204.382736006751657, -2698747.756258596666157 ] } },
 { "type": "Feature", "properties": { "source": "BOP", "loc_name": "Rio de Janeiro", "confirmed": 2, "color": "darkorange", "size": 1147.0786693528089, "label": "BOP : Rio de Janeiro: 2" }, "geometry": { "type": "Point", "coordinates": [ -4810045.366460776887834, -2621260.791251200716943 ] } },
 { "type": "Feature", "properties": { "source": "BOP", "loc_name": "Bahia", "confirmed": 1, "color": "darkorange", "size": 811.10710565381271, "label": "BOP : Bahia: 1" }, "geometry": { "type": "Point", "coordinates": [ -4667568.09565997030586, -1378189.130883611505851 ] } },

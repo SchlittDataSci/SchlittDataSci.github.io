@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/10/20                    | 03/09/20         | 03/11/20         |
+| Last update logged        | 03/11/20                    | 03/09/20         | 03/11/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/25/20         | 02/25/20         |
-| Total confirmed cases     | 182                         | 18               | 2                |
-| New cases since yesterday | 51                          |                  |                  |
+| Total confirmed cases     | 246                         | 18               | 2                |
+| New cases since yesterday | 64                          |                  |                  |
 | Total suspected           |                             |                  |                  |
 | Total hospitalized        |                             | 0                | 0                |
 | Total recovered           | 4                           | 0                |                  |
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Innsbruck  |           2 |
-| JHU      | Austria    |         182 |
+| JHU      | Austria    |         246 |
 | BOP      | Tyrol      |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

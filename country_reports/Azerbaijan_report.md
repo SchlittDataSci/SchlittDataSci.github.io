@@ -16,14 +16,14 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/10/20                    | 03/09/20         |
+| Last update logged        | 03/11/20                    | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 03/05/20         |
 | Total confirmed cases     | 11                          | 3                |
-| New cases since yesterday | 2                           |                  |
+| New cases since yesterday | 0                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
-| Total recovered           | 0                           | 0                |
+| Total recovered           | 3                           | 0                |
 | Total deaths              | 0                           | 0                |
 
 Data sources: BOP, JHU, 
