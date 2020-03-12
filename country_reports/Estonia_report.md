@@ -1,6 +1,6 @@
 # Estonia
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Estonia    |          12 |
+| NIH      | Estonia    |          16 |
 | JHU      | Estonia    |          12 |
 | BOP      | Estonia    |          12 |
 

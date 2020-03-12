@@ -1,6 +1,6 @@
 # Georgia
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Georgia    |          15 |
+| NIH      | Georgia    |          24 |
 | JHU      | Georgia    |          15 |
 | BOP      | Georgia    |          15 |
 
