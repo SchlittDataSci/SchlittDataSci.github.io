@@ -1,6 +1,6 @@
 # Hungary
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Hungary    |           9 |
+| NIH      | Hungary    |          13 |
 | JHU      | Hungary    |           9 |
 | BOP      | Hungary    |           9 |
 

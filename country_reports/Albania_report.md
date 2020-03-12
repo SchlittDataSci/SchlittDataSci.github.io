@@ -16,15 +16,15 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/10/20                    |
+| Last update logged        | 03/11/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 10                          |
-| New cases since yesterday | 8                           |
+| Total confirmed cases     | 12                          |
+| New cases since yesterday | 2                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
 | Total recovered           | 0                           |
-| Total deaths              | 0                           |
+| Total deaths              | 1                           |
 
 Data sources: JHU, 
 
@@ -41,7 +41,7 @@ Data sources: JHU,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Albania    |          12 |
-| JHU      | Albania    |          10 |
+| JHU      | Albania    |          12 |
 | BOP      | Albania    |          10 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
