@@ -42,7 +42,7 @@ Data sources: JHU,
 |----------|------------|-------------|
 | NIH      | Indonesia  |          27 |
 | JHU      | Indonesia  |          27 |
-| BOP      | Indonesia  |           4 |
+| BOP      | Indonesia  |          27 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

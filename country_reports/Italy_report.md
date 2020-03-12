@@ -16,7 +16,7 @@
 |                           | JHU                         | NIHFogarty       | Tencent                       | BOP              |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      | 01/12/20         |
-| Last update logged        | 03/10/20                    | 03/10/20         | 03/11/20                      | 03/04/20         |
+| Last update logged        | 03/10/20                    | 03/10/20         | 03/11/20                      | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 01/31/20         | 02/04/20                      | 01/31/20         |
 | Total confirmed cases     | 10149                       | 10149            | 653                           | 588              |
@@ -53,13 +53,12 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | BOP      | Liguria             |          19 |
 | BOP      | Sicily              |           4 |
 | BOP      | Campania            |           3 |
+| BOP      | Marche              |           3 |
 | BOP      | Lazio               |           2 |
 | BOP      | Toscana             |           2 |
-| BOP      | Marche              |           2 |
 | BOP      | Piemonte            |           1 |
 | BOP      | Abruzzo             |           1 |
 | BOP      | Puglia              |           1 |
-| BOP      | Pesaro Urbino       |           1 |
 | BOP      | Trentino-Alto Adige |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

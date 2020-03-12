@@ -16,10 +16,10 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/10/20                    | 03/04/20         |
+| Last update logged        | 03/10/20                    | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/26/20         |
-| Total confirmed cases     | 89                          | 1                |
+| Total confirmed cases     | 89                          | 29               |
 | New cases since yesterday | 16                          |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
@@ -38,11 +38,14 @@ Data sources: BOP, JHU,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name   |   confirmed |
-|----------|------------|-------------|
-| NIH      | Greece     |          89 |
-| JHU      | Greece     |          89 |
-| BOP      | Macedonia  |           1 |
+| source   | loc_name          |   confirmed |
+|----------|-------------------|-------------|
+| NIH      | Greece            |          89 |
+| JHU      | Greece            |          89 |
+| BOP      | Ilia Prefecture   |          13 |
+| BOP      | Attica Prefecture |           7 |
+| BOP      | Macedonia         |           2 |
+| BOP      | Euboea Prefecture |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

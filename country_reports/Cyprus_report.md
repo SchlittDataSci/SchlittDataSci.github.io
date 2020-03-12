@@ -40,10 +40,11 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Cyprus     |           2 |
+| NIH      | Cyprus     |           3 |
 | JHU      | Cyprus     |           3 |
+| BOP      | Cyprus     |           3 |
 
-Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Cyprus_case_locs.geojson)

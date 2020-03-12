@@ -16,10 +16,10 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/10/20                    | 03/04/20         |
+| Last update logged        | 03/10/20                    | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 03/03/20         |
-| Total confirmed cases     | 34                          | 1                |
+| Total confirmed cases     | 34                          | 11               |
 | New cases since yesterday | 13                          |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
@@ -42,7 +42,7 @@ Data sources: BOP, JHU,
 |----------|------------|-------------|
 | NIH      | Ireland    |          34 |
 | JHU      | Ireland    |          34 |
-| BOP      | Ireland    |          18 |
+| BOP      | Ireland    |          34 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

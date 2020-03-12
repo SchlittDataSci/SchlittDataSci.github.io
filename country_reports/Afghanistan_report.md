@@ -1,6 +1,6 @@
 # Afghanistan
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/11/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | NIHFogarty       | BOP              |
 |---------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 03/09/20                    | 03/10/20         | 03/04/20         |
+| Last update logged        | 03/10/20                    | 03/10/20         | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/24/20         | 02/24/20         |
-| Total confirmed cases     | 4                           | 1                | 1                |
-| New cases since yesterday | 0                           |                  |                  |
+| Total confirmed cases     | 5                           | 5                | 4                |
+| New cases since yesterday | 1                           |                  |                  |
 | Total suspected           |                             |                  |                  |
 | Total hospitalized        |                             | 0                | 0                |
 | Total recovered           | 0                           |                  | 0                |
@@ -40,9 +40,9 @@ Data sources: BOP, JHU, NIH-Fogarty,
 
 | source   | loc_name    |   confirmed |
 |----------|-------------|-------------|
-| NIH      | Afghanistan |           4 |
-| JHU      | Afghanistan |           4 |
-| BOP      | Herat       |           1 |
+| NIH      | Afghanistan |           5 |
+| JHU      | Afghanistan |           5 |
+| BOP      | Herat       |           4 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

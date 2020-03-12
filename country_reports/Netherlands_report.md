@@ -1,6 +1,6 @@
 # Netherlands
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/11/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/09/20                    | 03/04/20         |
+| Last update logged        | 03/10/20                    | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/27/20         |
-| Total confirmed cases     | 321                         | 18               |
-| New cases since yesterday | 56                          |                  |
+| Total confirmed cases     | 382                         | 36               |
+| New cases since yesterday | 61                          |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 1                |
 | Total recovered           | 0                           | 0                |
-| Total deaths              | 3                           | 0                |
+| Total deaths              | 4                           | 0                |
 
 Data sources: BOP, JHU, 
 
@@ -40,10 +40,12 @@ Data sources: BOP, JHU,
 
 | source   | loc_name      |   confirmed |
 |----------|---------------|-------------|
-| NIH      | Netherlands   |         321 |
-| JHU      | Netherlands   |         321 |
+| NIH      | Netherlands   |         382 |
+| JHU      | Netherlands   |         382 |
+| BOP      | Drenthe       |          10 |
+| BOP      | Limburg       |           8 |
 | BOP      | South Holland |           8 |
-| BOP      | Drenthe       |           1 |
+| BOP      | Overjissel    |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

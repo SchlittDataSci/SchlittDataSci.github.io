@@ -1,6 +1,6 @@
 # Brunei
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/11/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/09/20                    |
+| Last update logged        | 03/10/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
 | Total confirmed cases     | 1                           |
-| New cases since yesterday | 1                           |
+| New cases since yesterday | 0                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
 | Total recovered           | 0                           |
@@ -42,8 +42,9 @@ Data sources: JHU,
 |----------|------------|-------------|
 | NIH      | Brunei     |           1 |
 | JHU      | Brunei     |           1 |
+| BOP      | Brunei     |           1 |
 
-Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Brunei_case_locs.geojson)

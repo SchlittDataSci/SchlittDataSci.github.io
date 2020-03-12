@@ -1,6 +1,6 @@
 # Brazil
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/11/2020
 
 
 
@@ -16,13 +16,13 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/09/20                    | 03/04/20         |
+| Last update logged        | 03/10/20                    | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/25/20         |
-| Total confirmed cases     | 25                          | 1                |
-| New cases since yesterday | 5                           |                  |
+| Total confirmed cases     | 31                          | 13               |
+| New cases since yesterday | 6                           |                  |
 | Total suspected           |                             |                  |
-| Total hospitalized        |                             | 0                |
+| Total hospitalized        |                             | 4                |
 | Total recovered           | 0                           | 0                |
 | Total deaths              | 0                           | 0                |
 
@@ -38,16 +38,21 @@ Data sources: BOP, JHU,
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name   |   confirmed |
-|----------|------------|-------------|
-| NIH      | Brazil     |          25 |
-| JHU      | Brazil     |          25 |
-| BOP      | Brazil     |          13 |
+| source   | loc_name       |   confirmed |
+|----------|----------------|-------------|
+| NIH      | Brazil         |          31 |
+| JHU      | Brazil         |          31 |
+| BOP      | Sao Paulo      |           3 |
+| BOP      | Rio de Janeiro |           2 |
+| BOP      | Bahia          |           1 |
+| BOP      | Espirito Santo |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Brazil_case_locs.geojson)
+
+[Case admin1 locs geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Brazil_admin1_locs.geojson)
 
 ### Observed case clusters:
 #### Fig 3:

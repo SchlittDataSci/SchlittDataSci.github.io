@@ -42,7 +42,7 @@ Data sources: JHU,
 |----------|---------------|-------------|
 | NIH      | Faroe Islands |           2 |
 | JHU      | Faroe Islands |           2 |
-| BOP      | Faroe Islands |           1 |
+| BOP      | Faroe Islands |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

@@ -8,6 +8,8 @@
 { "type": "Feature", "properties": { "source": "BOP", "loc_name": "Rajasthan", "confirmed": 16, "color": "darkorange", "size": 2672.6124191242438, "label": "BOP : Rajasthan: 16" }, "geometry": { "type": "Point", "coordinates": [ 8211866.836074565537274, 3099825.80319039709866 ] } },
 { "type": "Feature", "properties": { "source": "BOP", "loc_name": "Uttar Pradesh", "confirmed": 6, "color": "darkorange", "size": 1636.6341767699428, "label": "BOP : Uttar Pradesh: 6" }, "geometry": { "type": "Point", "coordinates": [ 9001256.844834176823497, 3139764.768147065769881 ] } },
 { "type": "Feature", "properties": { "source": "BOP", "loc_name": "Kerala", "confirmed": 3, "color": "darkorange", "size": 1157.2751247156893, "label": "BOP : Kerala: 3" }, "geometry": { "type": "Point", "coordinates": [ 8517281.287826782092452, 1158799.685033886926249 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Telangana", "confirmed": 2, "color": "darkorange", "size": 944.91118252306808, "label": "BOP : Telangana: 2" }, "geometry": { "type": "Point", "coordinates": [ 8807060.026541158556938, 2019951.025102405343205 ] } }
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Telangana", "confirmed": 3, "color": "darkorange", "size": 1157.2751247156893, "label": "BOP : Telangana: 3" }, "geometry": { "type": "Point", "coordinates": [ 8807060.026541158556938, 2019951.025102405343205 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Delhi", "confirmed": 1, "color": "darkorange", "size": 668.15310478106096, "label": "BOP : Delhi: 1" }, "geometry": { "type": "Point", "coordinates": [ 8596306.905285336077213, 3331391.757403990719467 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Haryana", "confirmed": 1, "color": "darkorange", "size": 668.15310478106096, "label": "BOP : Haryana: 1" }, "geometry": { "type": "Point", "coordinates": [ 8460281.300288792699575, 3375646.034919309429824 ] } }
 ]
 }

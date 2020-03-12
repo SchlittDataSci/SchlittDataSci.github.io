@@ -2,9 +2,10 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Pakistan", "confirmed": 6, "color": "blue", "size": 5000.0, "label": "NIH : Pakistan: 6" }, "geometry": { "type": "Point", "coordinates": [ 7931235.308974267914891, 3546147.535352985840291 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Pakistan", "confirmed": 6, "color": "red", "size": 5000.0, "label": "JHU : Pakistan: 6" }, "geometry": { "type": "Point", "coordinates": [ 7931235.308974267914891, 3546147.535352985840291 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Sindh", "confirmed": 2, "color": "darkorange", "size": 2886.7513459481293, "label": "BOP : Sindh: 2" }, "geometry": { "type": "Point", "coordinates": [ 7681044.864735875278711, 2937284.437423841562122 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Islamabad Capital Territory", "confirmed": 1, "color": "darkorange", "size": 2041.2414523193152, "label": "BOP : Islamabad Capital Territory: 1" }, "geometry": { "type": "Point", "coordinates": [ 8133575.415185591205955, 3987762.157706857658923 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Pakistan", "confirmed": 16, "color": "blue", "size": 5000.0, "label": "NIH : Pakistan: 16" }, "geometry": { "type": "Point", "coordinates": [ 7931235.308974267914891, 3546147.535352985840291 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Pakistan", "confirmed": 16, "color": "red", "size": 5000.0, "label": "JHU : Pakistan: 16" }, "geometry": { "type": "Point", "coordinates": [ 7931235.308974267914891, 3546147.535352985840291 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Sindh", "confirmed": 3, "color": "darkorange", "size": 2165.0635094610966, "label": "BOP : Sindh: 3" }, "geometry": { "type": "Point", "coordinates": [ 7681044.864735875278711, 2937284.437423841562122 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Gilgit-Baltistan", "confirmed": 2, "color": "darkorange", "size": 1767.766952966369, "label": "BOP : Gilgit-Baltistan: 2" }, "geometry": { "type": "Point", "coordinates": [ 8348962.06553034670651, 4300620.986768596805632 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Federally Administered Tribal Area", "confirmed": 1, "color": "darkorange", "size": 1250.0, "label": "BOP : Federally Administered Tribal Area: 1" }, "geometry": { "type": "Point", "coordinates": [ 7944753.547186036594212, 4029129.716937391087413 ] } }
 ]
 }

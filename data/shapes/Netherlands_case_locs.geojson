@@ -2,9 +2,11 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Netherlands", "confirmed": 321, "color": "blue", "size": 5000.0, "label": "NIH : Netherlands: 321" }, "geometry": { "type": "Point", "coordinates": [ 639873.572409930638969, 6891072.77396331820637 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Netherlands", "confirmed": 321, "color": "red", "size": 5000.0, "label": "JHU : Netherlands: 321" }, "geometry": { "type": "Point", "coordinates": [ 639873.572409930638969, 6891072.77396331820637 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "South Holland", "confirmed": 8, "color": "darkorange", "size": 789.33703796385839, "label": "BOP : South Holland: 8" }, "geometry": { "type": "Point", "coordinates": [ 507587.901553873962257, 6799525.033437190577388 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Drenthe", "confirmed": 1, "color": "darkorange", "size": 279.07278609297379, "label": "BOP : Drenthe: 1" }, "geometry": { "type": "Point", "coordinates": [ 738809.905311258509755, 6965775.575760907493532 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Netherlands", "confirmed": 382, "color": "blue", "size": 5000.0, "label": "NIH : Netherlands: 382" }, "geometry": { "type": "Point", "coordinates": [ 639873.572409930638969, 6891072.77396331820637 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Netherlands", "confirmed": 382, "color": "red", "size": 5000.0, "label": "JHU : Netherlands: 382" }, "geometry": { "type": "Point", "coordinates": [ 639873.572409930638969, 6891072.77396331820637 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Drenthe", "confirmed": 10, "color": "darkorange", "size": 808.98100211321696, "label": "BOP : Drenthe: 10" }, "geometry": { "type": "Point", "coordinates": [ 738809.905311258509755, 6965775.575760907493532 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Limburg", "confirmed": 8, "color": "darkorange", "size": 723.57460529242167, "label": "BOP : Limburg: 8" }, "geometry": { "type": "Point", "coordinates": [ 657300.42718658503145, 6657017.918221964500844 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "South Holland", "confirmed": 8, "color": "darkorange", "size": 723.57460529242167, "label": "BOP : South Holland: 8" }, "geometry": { "type": "Point", "coordinates": [ 507587.901553873962257, 6799525.033437190577388 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Overjissel", "confirmed": 1, "color": "darkorange", "size": 255.82225504832542, "label": "BOP : Overjissel: 1" }, "geometry": { "type": "Point", "coordinates": [ 717348.39826488646213, 6880816.286268349736929 ] } }
 ]
 }

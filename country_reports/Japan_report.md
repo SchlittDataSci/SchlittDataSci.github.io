@@ -16,13 +16,13 @@
 |                           | BOP              | Tencent                       | JHU                         | NIHFogarty       |
 |---------------------------|------------------|-------------------------------|-----------------------------|------------------|
 | First update logged       | 01/12/20         | 02/04/20                      | 01/22/20                    | 01/13/20         |
-| Last update logged        | 03/04/20         | 02/20/20                      | 03/10/20                    | 03/10/20         |
+| Last update logged        | 03/09/20         | 02/20/20                      | 03/10/20                    | 03/10/20         |
 | Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
 | First known case          | 01/15/20         | 02/04/20                      | 01/22/20                    | 01/15/20         |
-| Total confirmed cases     | 751              | 729                           | 581                         | 581              |
+| Total confirmed cases     | 769              | 729                           | 581                         | 581              |
 | New cases since yesterday |                  |                               | 70                          |                  |
 | Total suspected           |                  | 0                             |                             |                  |
-| Total hospitalized        | 62               |                               |                             | 192              |
+| Total hospitalized        | 63               |                               |                             | 192              |
 | Total recovered           | 1                | 1                             | 101                         |                  |
 | Total deaths              | 0                | 3                             | 10                          | 0                |
 
@@ -45,8 +45,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Nagoya City         |          25 |
 | NIH      | Aichi Prefecture    |          12 |
 | NIH      | Wakayama Prefecture |          12 |
-| NIH      | Chiba Prefecture    |          11 |
 | NIH      | Sapporo             |          11 |
+| NIH      | Chiba Prefecture    |          11 |
 | NIH      | Sagamihara          |           9 |
 | NIH      | Kanagawa            |           9 |
 | NIH      | Osaka Prefecture    |           8 |
@@ -75,25 +75,26 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Kitakyushu City     |           1 |
 | JHU      | Japan               |         581 |
 | BOP      | Kanagawa Prefecture |         564 |
-| BOP      | Hokkaido            |          64 |
+| BOP      | Hokkaido            |          67 |
 | BOP      | Tokyo               |          34 |
-| BOP      | Aichi Prefecture    |          22 |
-| BOP      | Chiba Prefecture    |          15 |
+| BOP      | Aichi Prefecture    |          28 |
+| BOP      | Chiba Prefecture    |          16 |
 | BOP      | Wakayama Prefecture |           9 |
 | BOP      | Osaka               |           7 |
-| BOP      | Ishikawa            |           4 |
 | BOP      | Niigata             |           4 |
+| BOP      | Ishikawa            |           4 |
+| BOP      | Kyoto Prefecture    |           4 |
 | BOP      | Kumamoto            |           3 |
-| BOP      | Kyoto Prefecture    |           2 |
-| BOP      | Gifu                |           2 |
-| BOP      | Saitama             |           2 |
 | BOP      | Nagano              |           2 |
+| BOP      | Gifu                |           2 |
+| BOP      | Ehime               |           2 |
+| BOP      | Saitama             |           2 |
 | BOP      | Mie                 |           1 |
 | BOP      | Okinawa             |           1 |
+| BOP      | Miyazaki            |           1 |
 | BOP      | Shizuoka            |           1 |
 | BOP      | Kochi               |           1 |
 | BOP      | Nara Prefecture     |           1 |
-| BOP      | Ehime               |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

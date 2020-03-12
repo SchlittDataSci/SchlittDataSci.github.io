@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         |
-|---------------------------|-----------------------------|
-| First update logged       | 01/22/20                    |
-| Last update logged        | 03/10/20                    |
-| Method                    | Cases by day & country list |
-| First known case          | 01/22/20                    |
-| Total confirmed cases     | 6                           |
-| New cases since yesterday | 2                           |
-| Total suspected           |                             |
-| Total hospitalized        |                             |
-| Total recovered           | 0                           |
-| Total deaths              | 0                           |
+|                           | JHU                         | BOP              |
+|---------------------------|-----------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/12/20         |
+| Last update logged        | 03/10/20                    | 03/09/20         |
+| Method                    | Cases by day & country list | Public line list |
+| First known case          | 01/22/20                    | 03/07/20         |
+| Total confirmed cases     | 6                           | 2                |
+| New cases since yesterday | 2                           |                  |
+| Total suspected           |                             |                  |
+| Total hospitalized        |                             | 0                |
+| Total recovered           | 0                           | 0                |
+| Total deaths              | 0                           | 0                |
 
-Data sources: JHU, 
+Data sources: BOP, JHU, 
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Maldives_sitrep.csv)
@@ -42,8 +42,9 @@ Data sources: JHU,
 |----------|------------|-------------|
 | NIH      | Maldives   |           6 |
 | JHU      | Maldives   |           6 |
+| BOP      | Maldives   |           6 |
 
-Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Maldives_case_locs.geojson)
@@ -51,6 +52,14 @@ Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 [Case admin1 locs geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Maldives_admin1_locs.geojson)
 
 ### Observed case clusters:
+#### Fig 3:
+![Maldives cases](../cluster_analysis/Maldives_imported_cases_BOP.png)
+
+
+
+Data source: BOP
+
+
 ### Data sources:
 * **[BOP](https://github.com/beoutbreakprepared/nCoV2019)**
 * **[JHU](https://github.com/CSSEGISandData/COVID-19)** 

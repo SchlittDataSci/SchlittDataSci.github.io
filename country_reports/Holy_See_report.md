@@ -42,8 +42,9 @@ Data sources: JHU,
 |----------|------------|-------------|
 | NIH      | Holy See   |           1 |
 | JHU      | Holy See   |           1 |
+| BOP      | Holy See   |           1 |
 
-Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Holy_See_case_locs.geojson)

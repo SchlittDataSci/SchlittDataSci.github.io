@@ -1,6 +1,6 @@
 # Canada
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/11/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | BOP              | Tencent                       | NIHFogarty       |
-|---------------------------|-----------------------------|------------------|-------------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/12/20         | 02/04/20                      | 01/13/20         |
-| Last update logged        | 03/09/20                    | 03/04/20         | 03/10/20                      | 03/10/20         |
-| Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
-| First known case          | 01/22/20                    | 01/25/20         | 02/04/20                      | 01/26/20         |
-| Total confirmed cases     | 77                          | 20               | 13                            | 12               |
-| New cases since yesterday |                             |                  | 0                             |                  |
-| Total suspected           |                             |                  | 0                             |                  |
-| Total hospitalized        |                             | 8                |                               | 3                |
-| Total recovered           | 8                           | 1                | 4                             |                  |
-| Total deaths              | 1                           | 0                | 0                             | 0                |
+|                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
+|---------------------------|-----------------------------|------------------|------------------|-------------------------------|
+| First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/04/20                      |
+| Last update logged        | 03/10/20                    | 03/10/20         | 03/09/20         | 03/11/20                      |
+| Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
+| First known case          | 01/22/20                    | 01/26/20         | 01/25/20         | 02/04/20                      |
+| Total confirmed cases     | 79                          | 79               | 64               | 13                            |
+| New cases since yesterday |                             |                  |                  | 0                             |
+| Total suspected           |                             |                  |                  | 0                             |
+| Total hospitalized        |                             | 3                | 14               |                               |
+| Total recovered           | 8                           |                  | 1                | 4                             |
+| Total deaths              | 1                           | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -42,12 +42,14 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----------|------------------|-------------|
 | NIH      | Vancouver        |           7 |
 | NIH      | Toronto          |           5 |
-| JHU      | Ontario          |          34 |
+| JHU      | Ontario          |          36 |
 | JHU      | British Columbia |          32 |
 | JHU      | Alberta          |           7 |
 | JHU      | Quebec           |           4 |
-| BOP      | Ontario          |          13 |
-| BOP      | British Columbia |           7 |
+| BOP      | Ontario          |          28 |
+| BOP      | British Columbia |          27 |
+| BOP      | Quebec           |           7 |
+| BOP      | Alberta          |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

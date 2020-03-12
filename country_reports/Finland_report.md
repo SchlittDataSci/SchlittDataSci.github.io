@@ -16,7 +16,7 @@
 |                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/05/20                      |
-| Last update logged        | 03/10/20                    | 03/10/20         | 03/04/20         | 03/11/20                      |
+| Last update logged        | 03/10/20                    | 03/10/20         | 03/09/20         | 03/11/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/29/20         | 01/29/20         | 02/05/20                      |
 | Total confirmed cases     | 40                          | 40               | 7                | 2                             |
@@ -42,7 +42,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----------|------------------|-------------|
 | NIH      | Lapland          |           1 |
 | JHU      | Finland          |          40 |
-| BOP      | Southern Finland |           1 |
+| BOP      | Southern Finland |           2 |
 | BOP      | Lapland          |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

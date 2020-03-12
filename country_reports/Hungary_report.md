@@ -42,7 +42,7 @@ Data sources: JHU,
 |----------|------------|-------------|
 | NIH      | Hungary    |           9 |
 | JHU      | Hungary    |           9 |
-| BOP      | Hungary    |           4 |
+| BOP      | Hungary    |           9 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

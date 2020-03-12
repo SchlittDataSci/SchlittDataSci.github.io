@@ -16,7 +16,7 @@
 |                           | BOP              |
 |---------------------------|------------------|
 | First update logged       | 01/12/20         |
-| Last update logged        | 03/04/20         |
+| Last update logged        | 03/09/20         |
 | Method                    | Public line list |
 | First known case          | 01/21/20         |
 | Total confirmed cases     | 10               |

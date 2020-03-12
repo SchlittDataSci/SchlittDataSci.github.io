@@ -42,7 +42,7 @@ Data sources: JHU,
 |----------|--------------------|-------------|
 | NIH      | Dominican Republic |           5 |
 | JHU      | Dominican Republic |           5 |
-| BOP      | Dominican Republic |           2 |
+| BOP      | Dominican Republic |           5 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | Tencent                       | NIHFogarty       |
-|---------------------------|------------------|-------------------------------|------------------|
-| First update logged       | 01/12/20         | 02/20/20                      | 01/13/20         |
-| Last update logged        | 03/04/20         | 03/11/20                      | 03/10/20         |
-| Method                    | Public line list | Daily cases in country scrape | Public line list |
-| First known case          | 02/19/20         | 02/20/20                      | 02/19/20         |
-| Total confirmed cases     | 995              | 270                           | 18               |
-| New cases since yesterday |                  | 0                             |                  |
-| Total suspected           |                  | 0                             |                  |
-| Total hospitalized        | 0                |                               | 0                |
-| Total recovered           | 0                | 49                            |                  |
-| Total deaths              | 0                | 26                            | 0                |
+|                           | JHU                         | BOP              | Tencent                       | NIHFogarty       |
+|---------------------------|-----------------------------|------------------|-------------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/12/20         | 02/20/20                      | 01/13/20         |
+| Last update logged        | 03/10/20                    | 03/09/20         | 03/11/20                      | 03/10/20         |
+| Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
+| First known case          | 01/22/20                    | 02/19/20         | 02/20/20                      | 02/19/20         |
+| Total confirmed cases     | 8042                        | 3513             | 270                           | 18               |
+| New cases since yesterday |                             |                  | 0                             |                  |
+| Total suspected           |                             |                  | 0                             |                  |
+| Total hospitalized        |                             | 0                |                               | 0                |
+| Total recovered           | 2731                        | 0                | 49                            |                  |
+| Total deaths              | 291                         | 0                | 26                            | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -38,39 +38,43 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name                   |   confirmed |
-|----------|----------------------------|-------------|
-| NIH      | Qom                        |          11 |
-| NIH      | Tehran                     |           4 |
-| NIH      | Guilan                     |           2 |
-| NIH      | Araq                       |           1 |
-| BOP      | Tehran                     |         354 |
-| BOP      | Qom                        |         139 |
-| BOP      | Gilan                      |         112 |
-| BOP      | Markazi                    |          68 |
-| BOP      | Alborz                     |          47 |
-| BOP      | Esfahan                    |          45 |
-| BOP      | Mazandaran                 |          43 |
-| BOP      | Golestan                   |          24 |
-| BOP      | Fars                       |          19 |
-| BOP      | Razavi Khorasan            |          19 |
-| BOP      | Khuzestan                  |          19 |
-| BOP      | Semnan                     |          13 |
-| BOP      | East Azarbaijan            |          12 |
-| BOP      | Lorestan                   |          12 |
-| BOP      | Ardebil                    |          10 |
-| BOP      | Qazvin                     |           8 |
-| BOP      | Kordestan                  |           8 |
-| BOP      | Kermanshah                 |           5 |
-| BOP      | Yazd                       |           5 |
-| BOP      | Hamadan                    |           5 |
-| BOP      | Hormozgan                  |           4 |
-| BOP      | Sistan and Baluchestan     |           4 |
-| BOP      | South Khorasan             |           3 |
-| BOP      | Kerman                     |           2 |
-| BOP      | Ilam                       |           2 |
-| BOP      | Kohgiluyeh and Buyer Ahmad |           2 |
-| BOP      | West Azarbaijan            |           1 |
+| source   | loc_name                    |   confirmed |
+|----------|-----------------------------|-------------|
+| NIH      | Qom                         |          11 |
+| NIH      | Tehran                      |           4 |
+| NIH      | Guilan                      |           2 |
+| NIH      | Araq                        |           1 |
+| BOP      | Tehran                      |        1352 |
+| BOP      | Qom                         |         386 |
+| BOP      | Gilan                       |         333 |
+| BOP      | Esfahan                     |         238 |
+| BOP      | Markazi                     |         180 |
+| BOP      | Alborz                      |         173 |
+| BOP      | Mazandaran                  |         121 |
+| BOP      | Qazvin                      |         111 |
+| BOP      | Razavi Khorasan             |          89 |
+| BOP      | Fars                        |          68 |
+| BOP      | East Azarbaijan             |          65 |
+| BOP      | Khuzestan                   |          63 |
+| BOP      | Semnan                      |          60 |
+| BOP      | Golestan                    |          37 |
+| BOP      | Lorestan                    |          30 |
+| BOP      | Ardebil                     |          26 |
+| BOP      | Kermanshah                  |          22 |
+| BOP      | Sistan and Baluchestan      |          19 |
+| BOP      | Kerman                      |          18 |
+| BOP      | Kordestan                   |          18 |
+| BOP      | Hamadan                     |          16 |
+| BOP      | South Khorasan              |          15 |
+| BOP      | Zanjan                      |          15 |
+| BOP      | Hormozgan                   |          13 |
+| BOP      | Ilam                        |          11 |
+| BOP      | West Azarbaijan             |          10 |
+| BOP      | Chahar Mahall and Bakhtiari |           9 |
+| BOP      | Yazd                        |           7 |
+| BOP      | North Khorasan              |           3 |
+| BOP      | Bushehr                     |           3 |
+| BOP      | Kohgiluyeh and Buyer Ahmad  |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

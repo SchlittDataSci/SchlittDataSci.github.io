@@ -1,6 +1,6 @@
 # North Macedonia
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/11/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/09/20                    | 03/04/20         |
+| Last update logged        | 03/10/20                    | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/26/20         |
-| Total confirmed cases     | 3                           | 1                |
-| New cases since yesterday | 0                           |                  |
+| Total confirmed cases     | 7                           | 1                |
+| New cases since yesterday | 4                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 1                |
 | Total recovered           | 0                           | 0                |
@@ -40,9 +40,9 @@ Data sources: BOP, JHU,
 
 | source   | loc_name        |   confirmed |
 |----------|-----------------|-------------|
-| NIH      | North Macedonia |           3 |
-| JHU      | North Macedonia |           3 |
-| BOP      | North Macedonia |           3 |
+| NIH      | North Macedonia |           7 |
+| JHU      | North Macedonia |           7 |
+| BOP      | North Macedonia |           7 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

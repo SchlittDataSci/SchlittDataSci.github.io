@@ -40,9 +40,9 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Denmark    |          90 |
+| NIH      | Denmark    |         262 |
 | JHU      | Denmark    |         262 |
-| BOP      | Denmark    |          23 |
+| BOP      | Denmark    |         262 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
