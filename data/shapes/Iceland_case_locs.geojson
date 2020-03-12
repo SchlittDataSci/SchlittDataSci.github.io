@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Iceland", "confirmed": 69, "color": "blue", "size": 5000.0, "label": "NIH : Iceland: 69" }, "geometry": { "type": "Point", "coordinates": [ -2015539.713069269899279, 9604206.239017486572266 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Iceland", "confirmed": 69, "color": "red", "size": 5000.0, "label": "JHU : Iceland: 69" }, "geometry": { "type": "Point", "coordinates": [ -2015539.713069269899279, 9604206.239017486572266 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Capital Region", "confirmed": 6, "color": "darkorange", "size": 1474.4195615489712, "label": "BOP : Capital Region: 6" }, "geometry": { "type": "Point", "coordinates": [ -2400800.467787942383438, 9393759.077522803097963 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Iceland", "confirmed": 85, "color": "blue", "size": 5000.0, "label": "NIH : Iceland: 85" }, "geometry": { "type": "Point", "coordinates": [ -2015539.713069269899279, 9604206.239017486572266 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Iceland", "confirmed": 85, "color": "red", "size": 5000.0, "label": "JHU : Iceland: 85" }, "geometry": { "type": "Point", "coordinates": [ -2015539.713069269899279, 9604206.239017486572266 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Capital Region", "confirmed": 6, "color": "darkorange", "size": 1328.4223283101428, "label": "BOP : Capital Region: 6" }, "geometry": { "type": "Point", "coordinates": [ -2400800.467787942383438, 9393759.077522803097963 ] } }
 ]
 }

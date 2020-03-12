@@ -3,7 +3,7 @@
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
 { "type": "Feature", "properties": { "source": "NIH", "loc_name": "Georgia", "confirmed": 24, "color": "blue", "size": 5000.0, "label": "NIH : Georgia: 24" }, "geometry": { "type": "Point", "coordinates": [ -9252178.836238265037537, 3806625.071993377059698 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Georgia", "confirmed": 15, "color": "red", "size": 3952.8470752104745, "label": "JHU : Georgia: 15" }, "geometry": { "type": "Point", "coordinates": [ -9252178.836238265037537, 3806625.071993377059698 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Georgia", "confirmed": 24, "color": "red", "size": 5000.0, "label": "JHU : Georgia: 24" }, "geometry": { "type": "Point", "coordinates": [ -9252178.836238265037537, 3806625.071993377059698 ] } },
 { "type": "Feature", "properties": { "source": "BOP", "loc_name": "Georgia", "confirmed": 15, "color": "darkorange", "size": 3952.8470752104745, "label": "BOP : Georgia: 15" }, "geometry": { "type": "Point", "coordinates": [ -9252178.836238265037537, 3806625.071993377059698 ] } }
 ]
 }

@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Indonesia", "confirmed": 27, "color": "blue", "size": 5000.0, "label": "NIH : Indonesia: 27" }, "geometry": { "type": "Point", "coordinates": [ 13123486.529069744050503, -276535.484829606022686 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Indonesia", "confirmed": 27, "color": "red", "size": 5000.0, "label": "JHU : Indonesia: 27" }, "geometry": { "type": "Point", "coordinates": [ 13123486.529069744050503, -276535.484829606022686 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Indonesia", "confirmed": 27, "color": "darkorange", "size": 5000.0, "label": "BOP : Indonesia: 27" }, "geometry": { "type": "Point", "coordinates": [ 13123486.529069744050503, -276535.484829606022686 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Indonesia", "confirmed": 34, "color": "blue", "size": 5000.0, "label": "NIH : Indonesia: 34" }, "geometry": { "type": "Point", "coordinates": [ 13123486.529069744050503, -276535.484829606022686 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Indonesia", "confirmed": 34, "color": "red", "size": 5000.0, "label": "JHU : Indonesia: 34" }, "geometry": { "type": "Point", "coordinates": [ 13123486.529069744050503, -276535.484829606022686 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Indonesia", "confirmed": 27, "color": "darkorange", "size": 4455.663943395034, "label": "BOP : Indonesia: 27" }, "geometry": { "type": "Point", "coordinates": [ 13123486.529069744050503, -276535.484829606022686 ] } }
 ]
 }

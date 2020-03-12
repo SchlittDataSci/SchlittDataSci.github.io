@@ -16,15 +16,15 @@
 |                           | JHU                         | BOP              | NIHFogarty       | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         | 02/04/20                      |
-| Last update logged        | 03/10/20                    | 03/09/20         | 03/11/20         | 03/11/20                      |
+| Last update logged        | 03/11/20                    | 03/09/20         | 03/11/20         | 03/12/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/27/20         | 01/28/20         | 02/04/20                      |
-| Total confirmed cases     | 1457                        | 444              | 168              | 66                            |
+| Total confirmed cases     | 1908                        | 444              | 168              | 66                            |
 | New cases since yesterday |                             |                  |                  | 0                             |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 5                | 5                |                               |
-| Total recovered           | 18                          | 1                |                  | 16                            |
-| Total deaths              | 2                           | 0                | 0                | 0                             |
+| Total recovered           | 25                          | 1                |                  | 16                            |
+| Total deaths              | 3                           | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -51,7 +51,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Rhineland-Palatinate   |           1 |
 | NIH      | Thuringia              |           1 |
 | NIH      | Hamburg                |           1 |
-| JHU      | Germany                |        1457 |
+| JHU      | Germany                |        1908 |
 | BOP      | Baden-Wurttemberg      |         182 |
 | BOP      | Bavaria                |         140 |
 | BOP      | Berlin                 |          28 |

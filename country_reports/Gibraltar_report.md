@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | BOP              |
-|---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/10/20                    | 03/09/20         |
-| Method                    | Cases by day & country list | Public line list |
-| First known case          | 01/22/20                    | 03/03/20         |
-| Total confirmed cases     | 1                           | 1                |
-| New cases since yesterday | 0                           |                  |
-| Total suspected           |                             |                  |
-| Total hospitalized        |                             | 0                |
-| Total recovered           | 1                           | 0                |
-| Total deaths              | 0                           | 0                |
+|                           | BOP              |
+|---------------------------|------------------|
+| First update logged       | 01/12/20         |
+| Last update logged        | 03/09/20         |
+| Method                    | Public line list |
+| First known case          | 03/03/20         |
+| Total confirmed cases     | 1                |
+| New cases since yesterday |                  |
+| Total suspected           |                  |
+| Total hospitalized        | 0                |
+| Total recovered           | 0                |
+| Total deaths              | 0                |
 
 Data sources: BOP, JHU, 
 
@@ -40,7 +40,6 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| JHU      | Gibraltar  |           1 |
 | BOP      | Gibraltar  |           1 |
 
 Data sources: BOP, JHU, Natural Earth, Tencent

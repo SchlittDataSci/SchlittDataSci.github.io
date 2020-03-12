@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Honduras", "confirmed": 2, "color": "blue", "size": 5000.0, "label": "NIH : Honduras: 2" }, "geometry": { "type": "Point", "coordinates": [ -9581882.443909035995603, 1718864.443448054138571 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Honduras", "confirmed": 2, "color": "red", "size": 5000.0, "label": "JHU : Honduras: 2" }, "geometry": { "type": "Point", "coordinates": [ -9581882.443909035995603, 1718864.443448054138571 ] } }
+]
+}

@@ -16,11 +16,11 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/10/20                    |
+| Last update logged        | 03/11/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 9                           |
-| New cases since yesterday | 0                           |
+| Total confirmed cases     | 13                          |
+| New cases since yesterday | 4                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
 | Total recovered           | 0                           |
@@ -41,7 +41,7 @@ Data sources: JHU,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Hungary    |          13 |
-| JHU      | Hungary    |           9 |
+| JHU      | Hungary    |          13 |
 | BOP      | Hungary    |           9 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
