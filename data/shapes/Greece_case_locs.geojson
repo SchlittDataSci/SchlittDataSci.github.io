@@ -2,11 +2,11 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Greece", "confirmed": 89, "color": "blue", "size": 5000.0, "label": "NIH : Greece: 89" }, "geometry": { "type": "Point", "coordinates": [ 2447661.037132539786398, 4721008.143010363914073 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Greece", "confirmed": 89, "color": "red", "size": 5000.0, "label": "JHU : Greece: 89" }, "geometry": { "type": "Point", "coordinates": [ 2447661.037132539786398, 4721008.143010363914073 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Ilia Prefecture", "confirmed": 13, "color": "darkorange", "size": 1910.9383541230279, "label": "BOP : Ilia Prefecture: 13" }, "geometry": { "type": "Point", "coordinates": [ 2573335.933236149605364, 4700208.07850453723222 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Attica Prefecture", "confirmed": 7, "color": "darkorange", "size": 1402.2453903762569, "label": "BOP : Attica Prefecture: 7" }, "geometry": { "type": "Point", "coordinates": [ 2717218.712795755825937, 5003365.534368067979813 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Macedonia", "confirmed": 2, "color": "darkorange", "size": 749.53168899586149, "label": "BOP : Macedonia: 2" }, "geometry": { "type": "Point", "coordinates": [ 2646058.429618947673589, 4575392.423370922915637 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Euboea Prefecture", "confirmed": 1, "color": "darkorange", "size": 529.99894000318, "label": "BOP : Euboea Prefecture: 1" }, "geometry": { "type": "Point", "coordinates": [ 2671667.779038571752608, 4650301.836738965474069 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Greece", "confirmed": 99, "color": "blue", "size": 5000.0, "label": "NIH : Greece: 99" }, "geometry": { "type": "Point", "coordinates": [ 2447661.037132539786398, 4721008.143010363914073 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Greece", "confirmed": 89, "color": "red", "size": 4740.753893079398, "label": "JHU : Greece: 89" }, "geometry": { "type": "Point", "coordinates": [ 2447661.037132539786398, 4721008.143010363914073 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Ilia Prefecture", "confirmed": 13, "color": "darkorange", "size": 1811.8576883486965, "label": "BOP : Ilia Prefecture: 13" }, "geometry": { "type": "Point", "coordinates": [ 2573335.933236149605364, 4700208.07850453723222 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Attica Prefecture", "confirmed": 7, "color": "darkorange", "size": 1329.540058695776, "label": "BOP : Attica Prefecture: 7" }, "geometry": { "type": "Point", "coordinates": [ 2717218.712795755825937, 5003365.534368067979813 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Macedonia", "confirmed": 2, "color": "darkorange", "size": 710.6690545187015, "label": "BOP : Macedonia: 2" }, "geometry": { "type": "Point", "coordinates": [ 2646058.429618947673589, 4575392.423370922915637 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Euboea Prefecture", "confirmed": 1, "color": "darkorange", "size": 502.51890762960602, "label": "BOP : Euboea Prefecture: 1" }, "geometry": { "type": "Point", "coordinates": [ 2671667.779038571752608, 4650301.836738965474069 ] } }
 ]
 }

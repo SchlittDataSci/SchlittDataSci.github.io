@@ -1,6 +1,6 @@
 # Greece
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,7 +40,7 @@ Data sources: BOP, JHU,
 
 | source   | loc_name          |   confirmed |
 |----------|-------------------|-------------|
-| NIH      | Greece            |          89 |
+| NIH      | Greece            |          99 |
 | JHU      | Greece            |          89 |
 | BOP      | Ilia Prefecture   |          13 |
 | BOP      | Attica Prefecture |           7 |

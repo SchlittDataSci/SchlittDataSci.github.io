@@ -1,6 +1,6 @@
 # Gibraltar
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -40,11 +40,10 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Gibraltar  |           1 |
 | JHU      | Gibraltar  |           1 |
 | BOP      | Gibraltar  |           1 |
 
-Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Natural Earth, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Gibraltar_case_locs.geojson)
