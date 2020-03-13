@@ -1,6 +1,6 @@
 # Philippines
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/12/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | NIHFogarty       | Tencent                       | BOP              |
+|                           | JHU                         | BOP              | Tencent                       | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      | 01/12/20         |
-| Last update logged        | 03/09/20                    | 03/10/20         | 03/10/20                      | 03/04/20         |
+| First update logged       | 01/22/20                    | 01/12/20         | 02/04/20                      | 01/13/20         |
+| Last update logged        | 03/11/20                    | 03/09/20         | 03/12/20                      | 03/11/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
-| First known case          | 01/22/20                    | 02/02/20         | 02/04/20                      | 01/30/20         |
-| Total confirmed cases     | 20                          | 3                | 3                             | 3                |
+| First known case          | 01/22/20                    | 01/30/20         | 02/04/20                      | 02/02/20         |
+| Total confirmed cases     | 49                          | 6                | 3                             | 3                |
 | New cases since yesterday |                             |                  | 0                             |                  |
 | Total suspected           |                             |                  | 0                             |                  |
-| Total hospitalized        |                             | 1                |                               | 0                |
-| Total recovered           | 1                           |                  | 1                             | 2                |
-| Total deaths              | 1                           | 0                | 1                             | 1                |
+| Total hospitalized        |                             | 1                |                               | 1                |
+| Total recovered           | 2                           | 2                | 1                             |                  |
+| Total deaths              | 1                           | 1                | 1                             | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -42,7 +42,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----------|-------------------------------|-------------|
 | NIH      | Manila                        |           2 |
 | NIH      | Phillipines                   |           1 |
-| JHU      | Philippines                   |          20 |
+| JHU      | Philippines                   |          49 |
+| BOP      | Rizal Province                |           2 |
 | BOP      | National Capital Region (NCR) |           2 |
 | BOP      | Cebu                          |           1 |
 

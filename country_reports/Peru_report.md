@@ -1,6 +1,6 @@
 # Peru
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/12/2020
 
 
 
@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         |
-|---------------------------|-----------------------------|
-| First update logged       | 01/22/20                    |
-| Last update logged        | 03/09/20                    |
-| Method                    | Cases by day & country list |
-| First known case          | 01/22/20                    |
-| Total confirmed cases     | 7                           |
-| New cases since yesterday | 1                           |
-| Total suspected           |                             |
-| Total hospitalized        |                             |
-| Total recovered           | 0                           |
-| Total deaths              | 0                           |
+|                           | JHU                         | BOP              |
+|---------------------------|-----------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/12/20         |
+| Last update logged        | 03/11/20                    | 03/09/20         |
+| Method                    | Cases by day & country list | Public line list |
+| First known case          | 01/22/20                    | 03/07/20         |
+| Total confirmed cases     | 11                          | 5                |
+| New cases since yesterday | 0                           |                  |
+| Total suspected           |                             |                  |
+| Total hospitalized        |                             | 0                |
+| Total recovered           | 0                           | 0                |
+| Total deaths              | 0                           | 0                |
 
-Data sources: JHU, 
+Data sources: BOP, JHU, 
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Peru_sitrep.csv)
@@ -40,9 +40,9 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Peru       |           7 |
-| JHU      | Peru       |           7 |
-| BOP      | Peru       |           1 |
+| NIH      | Peru       |          11 |
+| JHU      | Peru       |          11 |
+| BOP      | Peru       |          11 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
@@ -50,6 +50,14 @@ Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Peru_case_locs.geojson)
 
 ### Observed case clusters:
+#### Fig 3:
+![Peru cases](../cluster_analysis/Peru_imported_cases_BOP.png)
+
+
+
+Data source: BOP
+
+
 ### Data sources:
 * **[BOP](https://github.com/beoutbreakprepared/nCoV2019)**
 * **[JHU](https://github.com/CSSEGISandData/COVID-19)** 

@@ -1,6 +1,6 @@
 # United States
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/13/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | NIHFogarty       | JHU                         | Tencent                       | BOP              |
-|---------------------------|------------------|-----------------------------|-------------------------------|------------------|
-| First update logged       | 01/13/20         | 01/22/20                    | 02/04/20                      | 01/12/20         |
-| Last update logged        | 03/10/20         | 03/09/20                    | 03/10/20                      | 03/04/20         |
-| Method                    | Public line list | Cases by day & country list | Daily cases in country scrape | Public line list |
-| First known case          | 01/21/20         | 01/22/20                    | 02/04/20                      | 01/20/20         |
-| Total confirmed cases     | 757              | 605                         | 60                            | 40               |
-| New cases since yesterday | 6                |                             | 0                             |                  |
-| Total suspected           |                  |                             | 0                             |                  |
-| Total hospitalized        | 23               |                             |                               | 2                |
-| Total recovered           |                  | 8                           | 3                             | 0                |
-| Total deaths              | 0                | 22                          | 0                             | 2                |
+|                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
+|---------------------------|-----------------------------|------------------|------------------|-------------------------------|
+| First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/04/20                      |
+| Last update logged        | 03/11/20                    | 03/11/20         | 03/09/20         | 03/12/20                      |
+| Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
+| First known case          | 01/22/20                    | 01/21/20         | 01/20/20         | 02/04/20                      |
+| Total confirmed cases     | 1281                        | 1097             | 572              | 60                            |
+| New cases since yesterday |                             |                  |                  | 0                             |
+| Total suspected           |                             |                  |                  | 0                             |
+| Total hospitalized        |                             | 25               | 9                |                               |
+| Total recovered           | 8                           |                  | 0                | 3                             |
+| Total deaths              | 36                          | 0                | 2                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -38,172 +38,329 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name                                    |   confirmed |
-|----------|---------------------------------------------|-------------|
-| NIH      | Washington                                  |         175 |
-| NIH      | New York                                    |         143 |
-| NIH      | California                                  |         137 |
-| NIH      | Massachusetts                               |          37 |
-| NIH      | Georgia                                     |          17 |
-| NIH      | Texas                                       |          16 |
-| NIH      | Florida                                     |          15 |
-| NIH      | New Jersey                                  |          15 |
-| NIH      | Oregon                                      |          14 |
-| NIH      | Colorado                                    |          12 |
-| NIH      | Illinois                                    |          11 |
-| NIH      | Pennsylvania                                |          10 |
-| NIH      | Iowa                                        |           8 |
-| NIH      | North Carolina                              |           7 |
-| NIH      | Virginia                                    |           6 |
-| NIH      | Arizona                                     |           6 |
-| NIH      | South Carolina                              |           6 |
-| NIH      | Maryland                                    |           6 |
-| NIH      | Kentucky                                    |           6 |
-| NIH      | district of columbia                        |           5 |
-| NIH      | Indiana                                     |           5 |
-| NIH      | New Hampshire                               |           4 |
-| NIH      | Tennessee                                   |           4 |
-| NIH      | Nevada                                      |           4 |
-| NIH      | Ohio                                        |           3 |
-| NIH      | Nebraska                                    |           3 |
-| NIH      | Rhode Island                                |           3 |
-| NIH      | Wisconsin                                   |           2 |
-| NIH      | Hawaii                                      |           2 |
-| NIH      | Connecticut                                 |           2 |
-| NIH      | Minnesota                                   |           2 |
-| NIH      | Oklahoma                                    |           1 |
-| NIH      | Vermont                                     |           1 |
-| NIH      | Louisiana                                   |           1 |
-| NIH      | Missouri                                    |           1 |
-| NIH      | Utah                                        |           1 |
-| NIH      | USA                                         |           1 |
-| NIH      | Kansas                                      |           1 |
-| JHU      | Westchester County                          |          98 |
-| JHU      | King County                                 |          83 |
-| JHU      | Unassigned Location (From Diamond Princess) |          45 |
-| JHU      | Santa Clara County                          |          38 |
-| JHU      | Snohomish County                            |          31 |
-| JHU      | Grand Princess Cruise Ship                  |          21 |
-| JHU      | New York County                             |          19 |
-| JHU      | Nassau County                               |          17 |
-| JHU      | Los Angeles                                 |          14 |
-| JHU      | Contra Costa County                         |          12 |
-| JHU      | San Francisco County                        |           9 |
-| JHU      | Suffolk County                              |           8 |
-| JHU      | Washington County                           |           8 |
-| JHU      | Cook County                                 |           7 |
-| JHU      | Placer County                               |           7 |
-| JHU      | Middlesex County                            |           7 |
-| JHU      | Norfolk County                              |           6 |
-| JHU      | Fort Bend County                            |           6 |
-| JHU      | Harris County                               |           6 |
-| JHU      | Unassigned Location                         |           5 |
-| JHU      | Montgomery County                           |           5 |
-| JHU      | Fulton County                               |           5 |
-| JHU      | Grafton County                              |           4 |
-| JHU      | Bergen County                               |           4 |
-| JHU      | Orange County                               |           4 |
-| JHU      | Kershaw County                              |           4 |
-| JHU      | Pierce County                               |           4 |
-| JHU      | Montgomery County                           |           4 |
-| JHU      | Rockland County                             |           4 |
-| JHU      | San Diego County                            |           3 |
-| JHU      | Maricopa County                             |           3 |
-| JHU      | Sonoma County                               |           3 |
-| JHU      | Cobb County                                 |           3 |
-| JHU      | Douglas County                              |           3 |
-| JHU      | Johnson County                              |           3 |
-| JHU      | Douglas County                              |           3 |
-| JHU      | Providence County                           |           3 |
-| JHU      | Broward County                              |           3 |
-| JHU      | San Benito                                  |           2 |
-| JHU      | Manatee County                              |           2 |
-| JHU      | Denver County                               |           2 |
-| JHU      | Hillsborough                                |           2 |
-| JHU      | San Mateo                                   |           2 |
-| JHU      | Washington                                  |           2 |
-| JHU      | Summit County                               |           2 |
-| JHU      | Fairfax County                              |           2 |
-| JHU      | Hendricks County                            |           2 |
-| JHU      | Sacramento County                           |           2 |
-| JHU      | Lee County                                  |           2 |
-| JHU      | Honolulu County                             |           2 |
-| JHU      | Pinal County                                |           2 |
-| JHU      | Saratoga County                             |           2 |
-| JHU      | Clark County                                |           2 |
-| JHU      | Alameda County                              |           2 |
-| JHU      | Jackson County                              |           2 |
-| JHU      | Harrison County                             |           2 |
-| JHU      | Washoe County                               |           2 |
-| JHU      | Shasta County                               |           1 |
-| JHU      | Jefferson Parish                            |           1 |
-| JHU      | Jefferson County                            |           1 |
-| JHU      | Spartanburg County                          |           1 |
-| JHU      | Cherokee County                             |           1 |
-| JHU      | Collin County                               |           1 |
-| JHU      | Rockingham County                           |           1 |
-| JHU      | Charlotte County                            |           1 |
-| JHU      | Fayette County                              |           1 |
-| JHU      | Jefferson County                            |           1 |
-| JHU      | El Paso County                              |           1 |
-| JHU      | Davis County                                |           1 |
-| JHU      | Clark County                                |           1 |
-| JHU      | Charleston County                           |           1 |
-| JHU      | Fairfield County                            |           1 |
-| JHU      | Yolo County                                 |           1 |
-| JHU      | Wayne County                                |           1 |
-| JHU      | Ramsey County                               |           1 |
-| JHU      | Marion County                               |           1 |
-| JHU      | Delaware County                             |           1 |
-| JHU      | Madera County                               |           1 |
-| JHU      | Chatham County                              |           1 |
-| JHU      | Williamson County                           |           1 |
-| JHU      | Santa Rosa County                           |           1 |
-| JHU      | Grant County                                |           1 |
-| JHU      | Wake County                                 |           1 |
-| JHU      | Umatilla                                    |           1 |
-| JHU      | Sarasota                                    |           1 |
-| JHU      | Humboldt County                             |           1 |
-| JHU      | San Antonio                                 |           1 |
-| JHU      | Madison                                     |           1 |
-| JHU      | Carver County                               |           1 |
-| JHU      | Klamath County                              |           1 |
-| JHU      | Plymouth County                             |           1 |
-| JHU      | Okaloosa County                             |           1 |
-| JHU      | Bennington County                           |           1 |
-| JHU      | Volusia County                              |           1 |
-| JHU      | Unknown Location                            |           1 |
-| JHU      | Ulster County                               |           1 |
-| JHU      | Suffolk County                              |           1 |
-| JHU      | St. Louis County                            |           1 |
-| JHU      | Spokane County                              |           1 |
-| JHU      | Shelby County                               |           1 |
-| JHU      | Riverside County                            |           1 |
-| JHU      | Tulsa County                                |           1 |
-| JHU      | Polk County                                 |           1 |
-| JHU      | Marion County                               |           1 |
-| JHU      | Kittitas County                             |           1 |
-| JHU      | Johnson County                              |           1 |
-| JHU      | Hudson County                               |           1 |
-| JHU      | Harford County                              |           1 |
-| JHU      | Fresno County                               |           1 |
-| JHU      | Douglas County                              |           1 |
-| JHU      | Davidson County                             |           1 |
-| JHU      | Berkshire County                            |           1 |
-| JHU      | Lackland                                    |           0 |
-| JHU      | Travis                                      |           0 |
-| JHU      | Omaha                                       |           0 |
-| JHU      | Montgomery County                           |           0 |
-| BOP      | Washington                                  |          15 |
-| BOP      | California                                  |          14 |
-| BOP      | Massachusetts                               |           2 |
-| BOP      | Illinois                                    |           2 |
-| BOP      | Oregon                                      |           2 |
-| BOP      | North Carolina                              |           1 |
-| BOP      | Wisconsin                                   |           1 |
-| BOP      | New York                                    |           1 |
-| BOP      | Texas                                       |           1 |
-| BOP      | Arizona                                     |           1 |
+| source   | loc_name             |   confirmed |
+|----------|----------------------|-------------|
+| NIH      | Washington           |         288 |
+| NIH      | New York             |         188 |
+| NIH      | California           |         160 |
+| NIH      | Massachusetts        |          90 |
+| NIH      | New Jersey           |          25 |
+| NIH      | Texas                |          24 |
+| NIH      | Florida              |          23 |
+| NIH      | Georgia              |          22 |
+| NIH      | Colorado             |          17 |
+| NIH      | Illinois             |          17 |
+| NIH      | Oregon               |          15 |
+| NIH      | Pennsylvania         |          15 |
+| NIH      | Iowa                 |          13 |
+| NIH      | Indiana              |          10 |
+| NIH      | Arizona              |           9 |
+| NIH      | Maryland             |           9 |
+| NIH      | South Carolina       |           8 |
+| NIH      | Virginia             |           8 |
+| NIH      | Kentucky             |           8 |
+| NIH      | Tennessee            |           7 |
+| NIH      | North Carolina       |           7 |
+| NIH      | Louisiana            |           6 |
+| NIH      | New Hampshire        |           5 |
+| NIH      | Nebraska             |           5 |
+| NIH      | district of columbia |           5 |
+| NIH      | South Dakota         |           5 |
+| NIH      | Rhode Island         |           5 |
+| NIH      | Nevada               |           5 |
+| NIH      | Minnesota            |           4 |
+| NIH      | New Mexico           |           3 |
+| NIH      | Wisconsin            |           3 |
+| NIH      | Ohio                 |           3 |
+| NIH      | Utah                 |           2 |
+| NIH      | Oklahoma             |           2 |
+| NIH      | Hawaii               |           2 |
+| NIH      | Michigan             |           2 |
+| NIH      | Connecticut          |           2 |
+| NIH      | Kansas               |           1 |
+| NIH      | USA                  |           1 |
+| NIH      | Missouri             |           1 |
+| NIH      | Vermont              |           1 |
+| NIH      | New jersey           |           1 |
+| NIH      | Arkansas             |           1 |
+| JHU      | Washington           |         366 |
+| JHU      | New York             |         220 |
+| JHU      | California           |         177 |
+| JHU      | Massachusetts        |          95 |
+| JHU      | Diamond Princess     |          46 |
+| JHU      | Colorado             |          34 |
+| JHU      | Florida              |          28 |
+| JHU      | Illinois             |          25 |
+| JHU      | New Jersey           |          23 |
+| JHU      | Georgia              |          23 |
+| JHU      | Grand Princess       |          21 |
+| JHU      | Texas                |          21 |
+| JHU      | Oregon               |          19 |
+| JHU      | Pennsylvania         |          16 |
+| JHU      | Iowa                 |          13 |
+| JHU      | Indiana              |          11 |
+| JHU      | District of Columbia |          10 |
+| JHU      | South Carolina       |          10 |
+| JHU      | Arizona              |           9 |
+| JHU      | Tennessee            |           9 |
+| JHU      | Maryland             |           9 |
+| JHU      | Kentucky             |           8 |
+| JHU      | South Dakota         |           8 |
+| JHU      | North Carolina       |           7 |
+| JHU      | Nevada               |           7 |
+| JHU      | Louisiana            |           6 |
+| JHU      | Wisconsin            |           6 |
+| JHU      | Rhode Island         |           5 |
+| JHU      | Minnesota            |           5 |
+| JHU      | Nebraska             |           5 |
+| JHU      | New Hampshire        |           5 |
+| JHU      | Ohio                 |           4 |
+| JHU      | Utah                 |           3 |
+| JHU      | Connecticut          |           3 |
+| JHU      | New Mexico           |           3 |
+| JHU      | Hawaii               |           2 |
+| JHU      | Oklahoma             |           2 |
+| JHU      | Michigan             |           2 |
+| JHU      | Kansas               |           1 |
+| JHU      | Missouri             |           1 |
+| JHU      | Vermont              |           1 |
+| JHU      | Arkansas             |           1 |
+| JHU      | Delaware             |           1 |
+| JHU      | Montana              |           1 |
+| JHU      | Ulster County        |           0 |
+| JHU      | Kittitas County      |           0 |
+| JHU      | Harford County       |           0 |
+| JHU      | Hendricks County     |           0 |
+| JHU      | Hudson County        |           0 |
+| JHU      | Johnson County       |           0 |
+| JHU      | Marion County        |           0 |
+| JHU      | Manatee County       |           0 |
+| JHU      | Douglas County       |           0 |
+| JHU      | Okaloosa County      |           0 |
+| JHU      | Polk County          |           0 |
+| JHU      | Fresno County        |           0 |
+| JHU      | Johnson County       |           0 |
+| JHU      | Davidson County      |           0 |
+| JHU      | Berkshire County     |           0 |
+| JHU      | Shelby County        |           0 |
+| JHU      | Harrison County      |           0 |
+| JHU      | Spartanburg County   |           0 |
+| JHU      | Shasta County        |           0 |
+| JHU      | Jefferson Parish     |           0 |
+| JHU      | Jefferson County     |           0 |
+| JHU      | Collin County        |           0 |
+| JHU      | Cherokee County      |           0 |
+| JHU      | Riverside County     |           0 |
+| JHU      | Wayne                |           0 |
+| JHU      | St. Louis County     |           0 |
+| JHU      | Orleans              |           0 |
+| JHU      | Howard               |           0 |
+| JHU      | St. Joseph           |           0 |
+| JHU      | Knox                 |           0 |
+| JHU      | Stark                |           0 |
+| JHU      | Anoka                |           0 |
+| JHU      | Olmsted              |           0 |
+| JHU      | Summit               |           0 |
+| JHU      | Fairfield            |           0 |
+| JHU      | Litchfield           |           0 |
+| JHU      | Pennington           |           0 |
+| JHU      | New Castle           |           0 |
+| JHU      | Beadle               |           0 |
+| JHU      | Charles Mix          |           0 |
+| JHU      | Davison              |           0 |
+| JHU      | Minnehaha            |           0 |
+| JHU      | Bon Homme            |           0 |
+| JHU      | Socorro              |           0 |
+| JHU      | Bernalillo           |           0 |
+| JHU      | Oakland              |           0 |
+| JHU      | Carver County        |           0 |
+| JHU      | Charlotte County     |           0 |
+| JHU      | Cuyahoga             |           0 |
+| JHU      | Bennington County    |           0 |
+| JHU      | Napa                 |           0 |
+| JHU      | Burlington           |           0 |
+| JHU      | Monmouth             |           0 |
+| JHU      | Gregg                |           0 |
+| JHU      | Fayette              |           0 |
+| JHU      | Floyd                |           0 |
+| JHU      | DeKalb               |           0 |
+| JHU      | Gwinnett             |           0 |
+| JHU      | Worcester            |           0 |
+| JHU      | Ventura              |           0 |
+| JHU      | Santa Cruz           |           0 |
+| JHU      | Passaic              |           0 |
+| JHU      | Solano               |           0 |
+| JHU      | Kitsap               |           0 |
+| JHU      | Wyoming              |           0 |
+| JHU      | West Virginia        |           0 |
+| JHU      | North Dakota         |           0 |
+| JHU      | Mississippi          |           0 |
+| JHU      | Maine                |           0 |
+| JHU      | Idaho                |           0 |
+| JHU      | Alaska               |           0 |
+| JHU      | Camden               |           0 |
+| JHU      | Union                |           0 |
+| JHU      | Weber                |           0 |
+| JHU      | Prince George's      |           0 |
+| JHU      | Volusia County       |           0 |
+| JHU      | Pierce               |           0 |
+| JHU      | Dane                 |           0 |
+| JHU      | Boone                |           0 |
+| JHU      | Adams                |           0 |
+| JHU      | Noble                |           0 |
+| JHU      | Pima                 |           0 |
+| JHU      | Camden               |           0 |
+| JHU      | Pottawattamie        |           0 |
+| JHU      | Loudoun              |           0 |
+| JHU      | Eagle                |           0 |
+| JHU      | Spotsylvania         |           0 |
+| JHU      | Arlington            |           0 |
+| JHU      | Norfolk              |           0 |
+| JHU      | Philadelphia         |           0 |
+| JHU      | Monroe               |           0 |
+| JHU      | Kane                 |           0 |
+| JHU      | Gunnison             |           0 |
+| JHU      | Arapahoe             |           0 |
+| JHU      | Larimer              |           0 |
+| JHU      | Johnson              |           0 |
+| JHU      | Sullivan             |           0 |
+| JHU      | Lancaster            |           0 |
+| JHU      | Yolo County          |           0 |
+| JHU      | Chatham County       |           0 |
+| JHU      | Delaware County      |           0 |
+| JHU      | Douglas County       |           0 |
+| JHU      | Fayette County       |           0 |
+| JHU      | Marion County        |           0 |
+| JHU      | Middlesex County     |           0 |
+| JHU      | Nassau County        |           0 |
+| JHU      | Ramsey County        |           0 |
+| JHU      | Washoe County        |           0 |
+| JHU      | Wayne County         |           0 |
+| JHU      | Santa Clara County   |           0 |
+| JHU      | Harris County        |           0 |
+| JHU      | Clark County         |           0 |
+| JHU      | Fort Bend County     |           0 |
+| JHU      | Grant County         |           0 |
+| JHU      | Santa Rosa County    |           0 |
+| JHU      | Suffolk County       |           0 |
+| JHU      | New York County      |           0 |
+| JHU      | Montgomery County    |           0 |
+| JHU      | Suffolk County       |           0 |
+| JHU      | Denver County        |           0 |
+| JHU      | Summit County        |           0 |
+| JHU      | Providence County    |           0 |
+| JHU      | Douglas County       |           0 |
+| JHU      | Tulsa County         |           0 |
+| JHU      | Pierce County        |           0 |
+| JHU      | Fairfax County       |           0 |
+| JHU      | Rockingham County    |           0 |
+| JHU      | Washington           |           0 |
+| JHU      | Montgomery County    |           0 |
+| JHU      | Alameda County       |           0 |
+| JHU      | Broward County       |           0 |
+| JHU      | Lee County           |           0 |
+| JHU      | Pinal County         |           0 |
+| JHU      | Rockland County      |           0 |
+| JHU      | Saratoga County      |           0 |
+| JHU      | Charleston County    |           0 |
+| JHU      | Clark County         |           0 |
+| JHU      | Cobb County          |           0 |
+| JHU      | Davis County         |           0 |
+| JHU      | El Paso County       |           0 |
+| JHU      | Honolulu County      |           0 |
+| JHU      | Jackson County       |           0 |
+| JHU      | Jefferson County     |           0 |
+| JHU      | Kershaw County       |           0 |
+| JHU      | Klamath County       |           0 |
+| JHU      | Madera County        |           0 |
+| JHU      | Bergen County        |           0 |
+| JHU      | San Francisco County |           0 |
+| JHU      | Hanover              |           0 |
+| JHU      | Pasco                |           0 |
+| JHU      | Marin                |           0 |
+| JHU      | Calaveras            |           0 |
+| JHU      | Stanislaus           |           0 |
+| JHU      | San Joaquin          |           0 |
+| JHU      | Essex                |           0 |
+| JHU      | Charlton             |           0 |
+| JHU      | Collier              |           0 |
+| JHU      | Pinellas             |           0 |
+| JHU      | Alachua              |           0 |
+| JHU      | Nassau               |           0 |
+| JHU      | Dallas               |           0 |
+| JHU      | Contra Costa County  |           0 |
+| JHU      | Tarrant              |           0 |
+| JHU      | Montgomery           |           0 |
+| JHU      | Middlesex            |           0 |
+| JHU      | Jefferson            |           0 |
+| JHU      | Multnomah            |           0 |
+| JHU      | Polk                 |           0 |
+| JHU      | Deschutes            |           0 |
+| JHU      | McHenry              |           0 |
+| JHU      | Lake                 |           0 |
+| JHU      | Bucks                |           0 |
+| JHU      | Whatcom              |           0 |
+| JHU      | Island               |           0 |
+| JHU      | Thurston             |           0 |
+| JHU      | Skagit               |           0 |
+| JHU      | Orange County        |           0 |
+| JHU      | Norfolk County       |           0 |
+| JHU      | Maricopa County      |           0 |
+| JHU      | Wake County          |           0 |
+| JHU      | Westchester County   |           0 |
+| JHU      | Grafton County       |           0 |
+| JHU      | Hillsborough         |           0 |
+| JHU      | Placer County        |           0 |
+| JHU      | San Mateo            |           0 |
+| JHU      | Sonoma County        |           0 |
+| JHU      | Umatilla             |           0 |
+| JHU      | Fulton County        |           0 |
+| JHU      | Washington County    |           0 |
+| JHU      | Snohomish County     |           0 |
+| JHU      | Humboldt County      |           0 |
+| JHU      | Sacramento County    |           0 |
+| JHU      | San Diego County     |           0 |
+| JHU      | San Benito           |           0 |
+| JHU      | Los Angeles          |           0 |
+| JHU      | King County          |           0 |
+| JHU      | Cook County          |           0 |
+| JHU      | Williamson County    |           0 |
+| BOP      | New York             |         142 |
+| BOP      | Washington           |         136 |
+| BOP      | California           |         110 |
+| BOP      | Massachusetts        |          28 |
+| BOP      | Texas                |          14 |
+| BOP      | Oregon               |          14 |
+| BOP      | Florida              |          13 |
+| BOP      | Georgia              |          12 |
+| BOP      | New Jersey           |          11 |
+| BOP      | Arizona              |           9 |
+| BOP      | Colorado             |           9 |
+| BOP      | Pennsylvania         |           7 |
+| BOP      | Illinois             |           7 |
+| BOP      | South Carolina       |           6 |
+| BOP      | Maryland             |           5 |
+| BOP      | Tennessee            |           5 |
+| BOP      | Nevada               |           4 |
+| BOP      | Indiana              |           4 |
+| BOP      | New Hampshire        |           4 |
+| BOP      | Kentucky             |           4 |
+| BOP      | Nebraska             |           3 |
+| BOP      | Rhode Island         |           3 |
+| BOP      | Virginia             |           3 |
+| BOP      | Hawaii               |           3 |
+| BOP      | Iowa                 |           3 |
+| BOP      | Minnesota            |           2 |
+| BOP      | North Carolina       |           2 |
+| BOP      | Utah                 |           1 |
+| BOP      | Wisconsin            |           1 |
+| BOP      | Louisiana            |           1 |
+| BOP      | District of Columbia |           1 |
+| BOP      | Connecticut          |           1 |
+| BOP      | Oklahoma             |           1 |
+| BOP      | Kansas               |           1 |
+| BOP      | Vermont              |           1 |
+| BOP      | Missouri             |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

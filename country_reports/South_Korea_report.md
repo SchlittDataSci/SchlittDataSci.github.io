@@ -1,6 +1,6 @@
 # South Korea
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/12/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
-|---------------------------|-----------------------------|-------------------------------|------------------|------------------|
-| First update logged       | 01/22/20                    | 02/04/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/09/20                    | 03/10/20                      | 03/04/20         | 03/10/20         |
-| Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
-| First known case          | 01/22/20                    | 02/04/20                      | 01/20/20         | 01/20/20         |
-| Total confirmed cases     | 7478                        | 3150                          | 938              | 114              |
-| New cases since yesterday |                             | 0                             |                  |                  |
-| Total suspected           |                             | 0                             |                  |                  |
-| Total hospitalized        |                             |                               | 24               | 9                |
-| Total recovered           | 118                         | 24                            | 0                |                  |
-| Total deaths              | 53                          | 13                            | 0                | 0                |
+|                           | Tencent                       | BOP              | NIHFogarty       |
+|---------------------------|-------------------------------|------------------|------------------|
+| First update logged       | 02/04/20                      | 01/12/20         | 01/13/20         |
+| Last update logged        | 03/12/20                      | 03/09/20         | 03/11/20         |
+| Method                    | Daily cases in country scrape | Public line list | Public line list |
+| First known case          | 02/04/20                      | 01/20/20         | 01/20/20         |
+| Total confirmed cases     | 3150                          | 938              | 114              |
+| New cases since yesterday | 0                             |                  |                  |
+| Total suspected           | 0                             |                  |                  |
+| Total hospitalized        |                               | 24               | 9                |
+| Total recovered           | 24                            | 0                |                  |
+| Total deaths              | 13                            | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -41,7 +41,6 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name          |   confirmed |
 |----------|-------------------|-------------|
 | NIH      | Seoul             |           2 |
-| JHU      | South Korea       |        7478 |
 | BOP      | Daegu             |         552 |
 | BOP      | North Gyeongsang  |         250 |
 | BOP      | Busan             |          40 |
@@ -49,13 +48,13 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | BOP      | Gyeonggi          |          16 |
 | BOP      | South Gyeongsang  |          10 |
 | BOP      | Gangwon           |           5 |
+| BOP      | South Chungcheong |           4 |
 | BOP      | Daejeon           |           4 |
 | BOP      | Gwangju           |           4 |
-| BOP      | South Chungcheong |           4 |
 | BOP      | North Chungcheong |           3 |
-| BOP      | Incheon           |           2 |
 | BOP      | Jeju              |           2 |
 | BOP      | Ulsan             |           2 |
+| BOP      | Incheon           |           2 |
 | BOP      | Sejong            |           1 |
 | BOP      | North Jeolla      |           1 |
 | BOP      | South Jeolla      |           1 |

@@ -1,6 +1,6 @@
 # Thailand
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/13/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | JHU                         | Tencent                       | NIHFogarty       | BOP              |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 02/04/20                      | 01/13/20         | 01/12/20         |
-| Last update logged        | 03/09/20                    | 03/10/20                      | 03/10/20         | 03/04/20         |
+| Last update logged        | 03/11/20                    | 03/12/20                      | 03/11/20         | 03/09/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/04/20                      | 01/13/20         | 01/12/20         |
-| Total confirmed cases     | 50                          | 42                            | 41               | 41               |
+| Total confirmed cases     | 59                          | 42                            | 41               | 41               |
 | New cases since yesterday |                             | 0                             |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
 | Total hospitalized        |                             |                               | 10               | 7                |
-| Total recovered           | 31                          | 28                            |                  | 1                |
+| Total recovered           | 34                          | 28                            |                  | 1                |
 | Total deaths              | 1                           | 0                             | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
@@ -40,12 +40,12 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name            |   confirmed |
 |----------|---------------------|-------------|
-| NIH      | Thailand            |          50 |
-| JHU      | Thailand            |          50 |
+| NIH      | Thailand            |          59 |
+| JHU      | Thailand            |          59 |
 | BOP      | Nonthaburi          |          13 |
 | BOP      | Bangkok Metropolis  |           4 |
-| BOP      | Prachuap Khiri Khan |           1 |
 | BOP      | Nakhon Pathom       |           1 |
+| BOP      | Prachuap Khiri Khan |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

@@ -1,6 +1,6 @@
 # Vietnam
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/13/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
-|---------------------------|-----------------------------|------------------|------------------|-------------------------------|
-| First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/04/20                      |
-| Last update logged        | 03/09/20                    | 03/10/20         | 03/04/20         | 02/24/20                      |
-| Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
-| First known case          | 01/22/20                    | 01/23/20         | 01/23/20         | 02/04/20                      |
-| Total confirmed cases     | 30                          | 16               | 16               | 16                            |
-| New cases since yesterday | 0                           |                  |                  |                               |
-| Total suspected           |                             |                  |                  | 0                             |
-| Total hospitalized        |                             | 1                | 9                |                               |
-| Total recovered           | 16                          |                  | 0                | 15                            |
-| Total deaths              | 0                           | 0                | 0                | 0                             |
+|                           | BOP              | NIHFogarty       | Tencent                       |
+|---------------------------|------------------|------------------|-------------------------------|
+| First update logged       | 01/12/20         | 01/13/20         | 02/04/20                      |
+| Last update logged        | 03/09/20         | 03/11/20         | 02/24/20                      |
+| Method                    | Public line list | Public line list | Daily cases in country scrape |
+| First known case          | 01/23/20         | 01/23/20         | 02/04/20                      |
+| Total confirmed cases     | 17               | 16               | 16                            |
+| New cases since yesterday |                  |                  |                               |
+| Total suspected           |                  |                  | 0                             |
+| Total hospitalized        | 9                | 1                |                               |
+| Total recovered           | 0                |                  | 15                            |
+| Total deaths              | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -44,7 +44,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Hanoi            |           2 |
 | NIH      | Ho Chi Minh City |           2 |
 | NIH      | Thanh Hoa        |           1 |
-| JHU      | Vietnam          |          30 |
+| JHU      | Vietnam          |          38 |
 | BOP      | Vinh Phuc        |          11 |
 | BOP      | Khanh Hoa        |           3 |
 | BOP      | Thanh Hoa        |           1 |

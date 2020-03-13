@@ -1,6 +1,6 @@
 # Sri Lanka
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/12/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | NIHFogarty       | JHU                         | BOP              | Tencent                       |
-|---------------------------|------------------|-----------------------------|------------------|-------------------------------|
-| First update logged       | 01/13/20         | 01/22/20                    | 01/12/20         | 02/04/20                      |
-| Last update logged        | 03/10/20         | 03/09/20                    | 03/04/20         | 02/11/20                      |
-| Method                    | Public line list | Cases by day & country list | Public line list | Daily cases in country scrape |
-| First known case          | 01/28/20         | 01/22/20                    | 01/27/20         | 02/04/20                      |
-| Total confirmed cases     | 1                | 1                           | 1                | 1                             |
-| New cases since yesterday |                  | 0                           |                  |                               |
-| Total suspected           |                  |                             |                  | 0                             |
-| Total hospitalized        | 1                |                             | 1                |                               |
-| Total recovered           |                  | 1                           | 0                | 1                             |
-| Total deaths              | 0                | 0                           | 0                | 0                             |
+|                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
+|---------------------------|-----------------------------|------------------|------------------|-------------------------------|
+| First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/04/20                      |
+| Last update logged        | 03/11/20                    | 03/11/20         | 03/09/20         | 02/11/20                      |
+| Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
+| First known case          | 01/22/20                    | 01/28/20         | 01/27/20         | 02/04/20                      |
+| Total confirmed cases     | 2                           | 1                | 1                | 1                             |
+| New cases since yesterday | 1                           |                  |                  |                               |
+| Total suspected           |                             |                  |                  | 0                             |
+| Total hospitalized        |                             | 1                | 1                |                               |
+| Total recovered           | 1                           |                  | 0                | 1                             |
+| Total deaths              | 0                           | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -40,8 +40,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Sri Lanka  |           1 |
-| JHU      | Sri Lanka  |           1 |
+| NIH      | Sri Lanka  |           2 |
+| JHU      | Sri Lanka  |           2 |
 | BOP      | Sri Lanka  |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

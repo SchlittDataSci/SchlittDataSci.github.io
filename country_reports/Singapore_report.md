@@ -1,6 +1,6 @@
 # Singapore
 ## NSSAC COVID-19 Summary
-## 03/10/2020
+## 03/12/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | JHU                         | NIHFogarty       | Tencent                       | BOP              |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 02/04/20                      | 01/12/20         |
-| Last update logged        | 03/09/20                    | 03/10/20         | 03/10/20                      | 03/04/20         |
+| Last update logged        | 03/11/20                    | 03/11/20         | 03/12/20                      | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 01/24/20         | 02/04/20                      | 01/23/20         |
-| Total confirmed cases     | 150                         | 112              | 102                           | 93               |
+| Total confirmed cases     | 178                         | 112              | 102                           | 99               |
 | New cases since yesterday |                             |                  | 0                             |                  |
 | Total suspected           |                             |                  | 0                             |                  |
-| Total hospitalized        |                             | 95               |                               | 69               |
-| Total recovered           | 78                          |                  | 72                            | 3                |
+| Total hospitalized        |                             | 95               |                               | 72               |
+| Total recovered           | 96                          |                  | 72                            | 3                |
 | Total deaths              | 0                           | 0                | 0                             | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
@@ -40,9 +40,9 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Singapore  |         150 |
-| JHU      | Singapore  |         150 |
-| BOP      | Singapore  |         138 |
+| NIH      | Singapore  |         178 |
+| JHU      | Singapore  |         178 |
+| BOP      | Singapore  |         160 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
