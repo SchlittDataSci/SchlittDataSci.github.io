@@ -1,6 +1,6 @@
 # Morocco
 ## NSSAC COVID-19 Summary
-## 03/11/2020
+## 03/12/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/10/20                    | 03/09/20         |
+| Last update logged        | 03/11/20                    | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 03/02/20         |
-| Total confirmed cases     | 3                           | 2                |
-| New cases since yesterday | 1                           |                  |
+| Total confirmed cases     | 5                           | 2                |
+| New cases since yesterday | 2                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 0                           | 0                |
@@ -40,8 +40,8 @@ Data sources: BOP, JHU,
 
 | source   | loc_name          |   confirmed |
 |----------|-------------------|-------------|
-| NIH      | Morocco           |           3 |
-| JHU      | Morocco           |           3 |
+| NIH      | Morocco           |           5 |
+| JHU      | Morocco           |           5 |
 | BOP      | Casablanca-Settat |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

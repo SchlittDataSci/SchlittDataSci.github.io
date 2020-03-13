@@ -1,4 +1,4 @@
-# Mongolia
+# Panama
 ## NSSAC COVID-19 Summary
 ## 03/12/2020
 
@@ -6,9 +6,9 @@
 
 ### Situation Report:
 #### Fig 1:
-![Mongolia cases](../merged_histories/Mongolia_merged_histories.png)
+![Panama cases](../merged_histories/Panama_merged_histories.png)
 
-[Merged data csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Mongolia_merged_daily.csv)
+[Merged data csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Panama_merged_daily.csv)
 
 #### Table 1: Situation summary
 
@@ -19,35 +19,35 @@
 | Last update logged        | 03/11/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 1                           |
-| New cases since yesterday | 0                           |
+| Total confirmed cases     | 8                           |
+| New cases since yesterday | 7                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
 | Total recovered           | 0                           |
-| Total deaths              | 0                           |
+| Total deaths              | 1                           |
 
 Data sources: JHU, 
 
 
-[Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Mongolia_sitrep.csv)
+[Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Panama_sitrep.csv)
 
 ### Geographic dispersal:
 #### Fig 2:
-![Mongolia mapped](../case_locs/Mongolia_case_locs.png)
+![Panama mapped](../case_locs/Panama_case_locs.png)
 
 #### Table 2: Confirmed cases by location
 
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Mongolia   |           1 |
-| JHU      | Mongolia   |           1 |
-| BOP      | Mongolia   |           1 |
+| NIH      | Panama     |           8 |
+| JHU      | Panama     |           8 |
+| BOP      | Panama     |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
-[Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Mongolia_case_locs.geojson)
+[Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Panama_case_locs.geojson)
 
 ### Observed case clusters:
 ### Data sources:
