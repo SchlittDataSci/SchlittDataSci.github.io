@@ -1,6 +1,6 @@
 # Croatia
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/14/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/11/20                    | 03/09/20         | 03/11/20         |
+| Last update logged        | 03/13/20                    | 03/09/20         | 03/11/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/25/20         | 02/25/20         |
-| Total confirmed cases     | 19                          | 6                | 1                |
-| New cases since yesterday | 5                           |                  |                  |
+| Total confirmed cases     | 32                          | 6                | 1                |
+| New cases since yesterday | 13                          |                  |                  |
 | Total suspected           |                             |                  |                  |
 | Total hospitalized        |                             | 0                | 0                |
-| Total recovered           | 0                           | 0                |                  |
+| Total recovered           | 1                           | 0                |                  |
 | Total deaths              | 0                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, 
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Croatia    |          19 |
-| JHU      | Croatia    |          19 |
+| JHU      | Croatia    |          32 |
 | BOP      | Croatia    |          14 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

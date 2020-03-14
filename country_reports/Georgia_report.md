@@ -1,6 +1,6 @@
 # Georgia
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/14/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/11/20                    | 03/09/20         |
+| Last update logged        | 03/13/20                    | 03/09/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/26/20         |
-| Total confirmed cases     | 24                          | 2                |
-| New cases since yesterday | 9                           |                  |
+| Total confirmed cases     | 25                          | 2                |
+| New cases since yesterday | 1                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 0                           | 0                |
@@ -41,7 +41,7 @@ Data sources: BOP, JHU,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Georgia    |          24 |
-| JHU      | Georgia    |          24 |
+| JHU      | Georgia    |          25 |
 | BOP      | Georgia    |          15 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

@@ -2,7 +2,7 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Czechia", "confirmed": 91, "color": "blue", "size": 5000.0, "label": "NIH : Czechia: 91" }, "geometry": { "type": "Point", "coordinates": [ 1722664.043857128359377, 6414591.869401436299086 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Czechia", "confirmed": 91, "color": "red", "size": 5000.0, "label": "JHU : Czechia: 91" }, "geometry": { "type": "Point", "coordinates": [ 1722664.043857128359377, 6414591.869401436299086 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Czechia", "confirmed": 94, "color": "blue", "size": 4082.4829046386308, "label": "NIH : Czechia: 94" }, "geometry": { "type": "Point", "coordinates": [ 1722664.043857128359377, 6414591.869401436299086 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Czechia", "confirmed": 141, "color": "red", "size": 5000.0, "label": "JHU : Czechia: 141" }, "geometry": { "type": "Point", "coordinates": [ 1722664.043857128359377, 6414591.869401436299086 ] } }
 ]
 }

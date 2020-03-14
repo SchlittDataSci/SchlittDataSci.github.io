@@ -1,6 +1,6 @@
 # Canada
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/13/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              | Tencent                       | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/12/20         | 02/04/20                      | 01/13/20         |
-| Last update logged        | 03/11/20                    | 03/09/20         | 03/12/20                      | 03/11/20         |
+| Last update logged        | 03/13/20                    | 03/09/20         | 03/13/20                      | 03/11/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 01/25/20         | 02/04/20                      | 01/26/20         |
-| Total confirmed cases     | 108                         | 64               | 13                            | 12               |
-| New cases since yesterday |                             |                  | 0                             |                  |
+| Total confirmed cases     | 193                         | 64               | 13                            | 12               |
+| New cases since yesterday | 76                          |                  | 0                             |                  |
 | Total suspected           |                             |                  | 0                             |                  |
 | Total hospitalized        |                             | 14               |                               | 3                |
 | Total recovered           | 8                           | 1                | 4                             |                  |
@@ -42,10 +42,13 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----------|------------------|-------------|
 | NIH      | Vancouver        |           7 |
 | NIH      | Toronto          |           5 |
-| JHU      | Ontario          |          41 |
-| JHU      | British Columbia |          39 |
-| JHU      | Alberta          |          19 |
-| JHU      | Quebec           |           8 |
+| JHU      | Ontario          |          74 |
+| JHU      | British Columbia |          64 |
+| JHU      | Alberta          |          29 |
+| JHU      | Quebec           |          17 |
+| JHU      | Manitoba         |           4 |
+| JHU      | Saskatchewan     |           2 |
+| JHU      | Grand Princess   |           2 |
 | JHU      | New Brunswick    |           1 |
 | BOP      | Ontario          |          28 |
 | BOP      | British Columbia |          27 |

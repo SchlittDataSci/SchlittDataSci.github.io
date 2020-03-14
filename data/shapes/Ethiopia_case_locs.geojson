@@ -1,0 +1,7 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Ethiopia", "confirmed": 1, "color": "red", "size": 5000.0, "label": "JHU : Ethiopia: 1" }, "geometry": { "type": "Point", "coordinates": [ 4302734.349876352585852, 1142824.342153009027243 ] } }
+]
+}

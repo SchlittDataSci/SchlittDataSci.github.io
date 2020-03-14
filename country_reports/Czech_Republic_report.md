@@ -1,6 +1,6 @@
 # Czech Republic
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/14/2020
 
 
 

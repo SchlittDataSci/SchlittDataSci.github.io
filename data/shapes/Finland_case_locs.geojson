@@ -2,9 +2,9 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Lapland", "confirmed": 1, "color": "blue", "size": 650.9445549041194, "label": "NIH : Lapland: 1" }, "geometry": { "type": "Point", "coordinates": [ 2975370.112443195655942, 10356341.00020414032042 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Finland", "confirmed": 59, "color": "red", "size": 5000.0, "label": "JHU : Finland: 59" }, "geometry": { "type": "Point", "coordinates": [ 2885503.214543013833463, 9161018.744482854381204 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Southern Finland", "confirmed": 2, "color": "darkorange", "size": 920.57461789832348, "label": "BOP : Southern Finland: 2" }, "geometry": { "type": "Point", "coordinates": [ 2728221.506810837425292, 8550373.08390206284821 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Lapland", "confirmed": 1, "color": "darkorange", "size": 650.9445549041194, "label": "BOP : Lapland: 1" }, "geometry": { "type": "Point", "coordinates": [ 2975370.112443195655942, 10356341.00020414032042 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Lapland", "confirmed": 1, "color": "blue", "size": 401.60966445124944, "label": "NIH : Lapland: 1" }, "geometry": { "type": "Point", "coordinates": [ 2975370.112443195655942, 10356341.00020414032042 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Finland", "confirmed": 155, "color": "red", "size": 5000.0, "label": "JHU : Finland: 155" }, "geometry": { "type": "Point", "coordinates": [ 2885503.214543013833463, 9161018.744482854381204 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Southern Finland", "confirmed": 2, "color": "darkorange", "size": 567.96183424706487, "label": "BOP : Southern Finland: 2" }, "geometry": { "type": "Point", "coordinates": [ 2728221.506810837425292, 8550373.08390206284821 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Lapland", "confirmed": 1, "color": "darkorange", "size": 401.60966445124944, "label": "BOP : Lapland: 1" }, "geometry": { "type": "Point", "coordinates": [ 2975370.112443195655942, 10356341.00020414032042 ] } }
 ]
 }

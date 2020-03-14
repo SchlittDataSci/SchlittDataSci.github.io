@@ -1,6 +1,6 @@
 # France
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/14/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         | 02/04/20                      |
-| Last update logged        | 03/11/20                    | 03/11/20         | 03/09/20         | 03/12/20                      |
+| Last update logged        | 03/13/20                    | 03/11/20         | 03/09/20         | 03/13/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/25/20         | 01/24/20         | 02/04/20                      |
-| Total confirmed cases     | 2284                        | 56               | 40               | 38                            |
-| New cases since yesterday |                             |                  |                  | 0                             |
+| Total confirmed cases     | 3667                        | 56               | 40               | 38                            |
+| New cases since yesterday | 1383                        |                  |                  | 0                             |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 7                | 3                |                               |
 | Total recovered           | 12                          |                  | 0                | 12                            |
-| Total deaths              | 48                          | 0                | 1                | 2                             |
+| Total deaths              | 79                          | 0                | 1                | 2                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -44,29 +44,30 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Saint-Mande          |           5 |
 | NIH      | Lyon                 |           4 |
 | NIH      | Annecy               |           4 |
-| NIH      | Pays de la Loire     |           4 |
 | NIH      | Dijon                |           4 |
+| NIH      | Pays de la Loire     |           4 |
 | NIH      | Guadeloupe           |           3 |
 | NIH      | Nice                 |           2 |
-| NIH      | Landes               |           1 |
-| NIH      | Montpellier          |           1 |
+| NIH      | Nantes               |           1 |
+| NIH      | Strasbourg           |           1 |
 | NIH      | Brest                |           1 |
+| NIH      | Amiens               |           1 |
+| NIH      | Montpellier          |           1 |
+| NIH      | Pays                 |           1 |
+| NIH      | Landes               |           1 |
+| NIH      | Lile                 |           1 |
 | NIH      | Bois-Guillaume       |           1 |
 | NIH      | Bordeaux             |           1 |
-| NIH      | Strasbourg           |           1 |
-| NIH      | Nantes               |           1 |
-| NIH      | Amiens               |           1 |
-| NIH      | Pays                 |           1 |
-| NIH      | Lile                 |           1 |
-| JHU      | France               |        2281 |
+| JHU      | France               |        3661 |
+| JHU      | French Polynesia     |           3 |
 | JHU      | St Martin            |           2 |
 | JHU      | Saint Barthelemy     |           1 |
 | BOP      | Auvergne-Rhone-Alpes |           9 |
 | BOP      | Ile-de-France        |           6 |
 | BOP      | Hauts-de-France      |           1 |
-| BOP      | Grand Est            |           1 |
 | BOP      | Nouvelle-Aquitaine   |           1 |
 | BOP      | Brittany             |           1 |
+| BOP      | Grand Est            |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
