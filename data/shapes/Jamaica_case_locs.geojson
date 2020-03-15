@@ -2,7 +2,7 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Jamaica", "confirmed": 1, "color": "blue", "size": 5000.0, "label": "NIH : Jamaica: 1" }, "geometry": { "type": "Point", "coordinates": [ -8589394.706408072263002, 2051048.137983335182071 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Jamaica", "confirmed": 1, "color": "red", "size": 5000.0, "label": "JHU : Jamaica: 1" }, "geometry": { "type": "Point", "coordinates": [ -8589394.706408072263002, 2051048.137983335182071 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Jamaica", "confirmed": 2, "color": "blue", "size": 2500.0, "label": "NIH : Jamaica: 2" }, "geometry": { "type": "Point", "coordinates": [ -8589394.706408072263002, 2051048.137983335182071 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Jamaica", "confirmed": 8, "color": "red", "size": 5000.0, "label": "JHU : Jamaica: 8" }, "geometry": { "type": "Point", "coordinates": [ -8589394.706408072263002, 2051048.137983335182071 ] } }
 ]
 }

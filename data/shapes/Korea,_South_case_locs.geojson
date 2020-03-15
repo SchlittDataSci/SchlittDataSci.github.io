@@ -2,7 +2,7 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Korea", "confirmed": 7755, "color": "blue", "size": 5000.0, "label": "NIH : Korea: 7755" }, "geometry": { "type": "Point", "coordinates": [ 14226246.143447866663337, 4269351.524986121803522 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Korea", "confirmed": 7755, "color": "red", "size": 5000.0, "label": "JHU : Korea: 7755" }, "geometry": { "type": "Point", "coordinates": [ 14226246.143447866663337, 4269351.524986121803522 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Korea", "confirmed": 7869, "color": "blue", "size": 4965.4149153281824, "label": "NIH : Korea: 7869" }, "geometry": { "type": "Point", "coordinates": [ 14226246.143447866663337, 4269351.524986121803522 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Korea", "confirmed": 7979, "color": "red", "size": 5000.0, "label": "JHU : Korea: 7979" }, "geometry": { "type": "Point", "coordinates": [ 14226246.143447866663337, 4269351.524986121803522 ] } }
 ]
 }

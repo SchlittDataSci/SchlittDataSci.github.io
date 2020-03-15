@@ -1,6 +1,6 @@
 # Korea, South
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/14/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/11/20                    |
+| Last update logged        | 03/13/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 7755                        |
-| New cases since yesterday | 242                         |
+| Total confirmed cases     | 7979                        |
+| New cases since yesterday | 110                         |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
-| Total recovered           | 288                         |
-| Total deaths              | 60                          |
+| Total recovered           | 510                         |
+| Total deaths              | 66                          |
 
 Data sources: JHU, 
 
@@ -40,8 +40,8 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Korea      |        7755 |
-| JHU      | Korea      |        7755 |
+| NIH      | Korea      |        7869 |
+| JHU      | Korea      |        7979 |
 
 Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 

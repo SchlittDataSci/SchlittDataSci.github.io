@@ -1,6 +1,6 @@
 # Kuwait
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/14/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | JHU                         | Tencent                       | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|-------------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 02/27/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/11/20                    | 03/03/20                      | 03/09/20         | 03/11/20         |
+| Last update logged        | 03/13/20                    | 03/03/20                      | 03/09/20         | 03/11/20         |
 | Method                    | Cases by day & country list | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/27/20                      | 02/24/20         | 02/24/20         |
-| Total confirmed cases     | 72                          | 43                            | 42               | 9                |
-| New cases since yesterday | 3                           |                               |                  |                  |
+| Total confirmed cases     | 80                          | 43                            | 42               | 9                |
+| New cases since yesterday | 0                           |                               |                  |                  |
 | Total suspected           |                             | 0                             |                  |                  |
 | Total hospitalized        |                             |                               | 0                | 0                |
-| Total recovered           | 2                           | 0                             | 0                |                  |
+| Total recovered           | 5                           | 0                             | 0                |                  |
 | Total deaths              | 0                           | 0                             | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
@@ -40,8 +40,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Kuwait     |          72 |
-| JHU      | Kuwait     |          72 |
+| NIH      | Kuwait     |          80 |
+| JHU      | Kuwait     |          80 |
 | BOP      | Kuwait     |          69 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

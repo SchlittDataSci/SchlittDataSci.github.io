@@ -1,6 +1,6 @@
 # Japan
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/14/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | BOP              | Tencent                       | JHU                         | NIHFogarty       |
 |---------------------------|------------------|-------------------------------|-----------------------------|------------------|
 | First update logged       | 01/12/20         | 02/04/20                      | 01/22/20                    | 01/13/20         |
-| Last update logged        | 03/09/20         | 02/20/20                      | 03/11/20                    | 03/11/20         |
+| Last update logged        | 03/09/20         | 02/20/20                      | 03/13/20                    | 03/11/20         |
 | Method                    | Public line list | Daily cases in country scrape | Cases by day & country list | Public line list |
 | First known case          | 01/15/20         | 02/04/20                      | 01/22/20                    | 01/15/20         |
-| Total confirmed cases     | 769              | 729                           | 639                         | 257              |
-| New cases since yesterday |                  |                               | 58                          |                  |
+| Total confirmed cases     | 769              | 729                           | 701                         | 257              |
+| New cases since yesterday |                  |                               | 62                          |                  |
 | Total suspected           |                  | 0                             |                             |                  |
 | Total hospitalized        | 63               |                               |                             | 192              |
 | Total recovered           | 1                | 1                             | 118                         |                  |
-| Total deaths              | 0                | 3                             | 15                          | 0                |
+| Total deaths              | 0                | 3                             | 19                          | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -47,33 +47,33 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Wakayama Prefecture |          12 |
 | NIH      | Sapporo             |          11 |
 | NIH      | Chiba Prefecture    |          11 |
-| NIH      | Sagamihara          |           9 |
 | NIH      | Kanagawa            |           9 |
+| NIH      | Sagamihara          |           9 |
 | NIH      | Osaka Prefecture    |           8 |
-| NIH      | Ishikawa            |           5 |
 | NIH      | Niigata City        |           5 |
-| NIH      | Kumamoto City       |           4 |
+| NIH      | Ishikawa            |           5 |
 | NIH      | Sagamihara City     |           4 |
-| NIH      | Kyoto               |           3 |
+| NIH      | Kumamoto City       |           4 |
 | NIH      | Okinawa Prefecture  |           3 |
 | NIH      | Kochi Prefecture    |           3 |
+| NIH      | Kyoto               |           3 |
+| NIH      | Fukuoka Prefecture  |           2 |
 | NIH      | Gifu Prefecture     |           2 |
 | NIH      | Nara Prefecture     |           2 |
-| NIH      | Fukuoka Prefecture  |           2 |
-| NIH      | Saitama Prefecture  |           1 |
-| NIH      | Sendai City         |           1 |
-| NIH      | Haneda              |           1 |
-| NIH      | Nishimiya City      |           1 |
-| NIH      | Mie                 |           1 |
-| NIH      | Shizuoka City       |           1 |
-| NIH      | Nagano Prefecture   |           1 |
 | NIH      | Funabashi City      |           1 |
-| NIH      | Oita City           |           1 |
-| NIH      | Asakihawa City      |           1 |
-| NIH      | Kobe City           |           1 |
-| NIH      | Kumamoto Prefecture |           1 |
+| NIH      | Sendai City         |           1 |
+| NIH      | Shizuoka City       |           1 |
 | NIH      | Kitakyushu City     |           1 |
-| JHU      | Japan               |         639 |
+| NIH      | Nagano Prefecture   |           1 |
+| NIH      | Oita City           |           1 |
+| NIH      | Nishimiya City      |           1 |
+| NIH      | Kumamoto Prefecture |           1 |
+| NIH      | Saitama Prefecture  |           1 |
+| NIH      | Mie                 |           1 |
+| NIH      | Kobe City           |           1 |
+| NIH      | Asakihawa City      |           1 |
+| NIH      | Haneda              |           1 |
+| JHU      | Japan               |         701 |
 | BOP      | Kanagawa Prefecture |         564 |
 | BOP      | Hokkaido            |          67 |
 | BOP      | Tokyo               |          34 |
@@ -81,20 +81,20 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | BOP      | Chiba Prefecture    |          16 |
 | BOP      | Wakayama Prefecture |           9 |
 | BOP      | Osaka               |           7 |
-| BOP      | Niigata             |           4 |
-| BOP      | Ishikawa            |           4 |
 | BOP      | Kyoto Prefecture    |           4 |
+| BOP      | Ishikawa            |           4 |
+| BOP      | Niigata             |           4 |
 | BOP      | Kumamoto            |           3 |
-| BOP      | Nagano              |           2 |
-| BOP      | Gifu                |           2 |
 | BOP      | Ehime               |           2 |
+| BOP      | Gifu                |           2 |
 | BOP      | Saitama             |           2 |
-| BOP      | Mie                 |           1 |
-| BOP      | Okinawa             |           1 |
-| BOP      | Miyazaki            |           1 |
-| BOP      | Shizuoka            |           1 |
+| BOP      | Nagano              |           2 |
 | BOP      | Kochi               |           1 |
+| BOP      | Okinawa             |           1 |
 | BOP      | Nara Prefecture     |           1 |
+| BOP      | Miyazaki            |           1 |
+| BOP      | Mie                 |           1 |
+| BOP      | Shizuoka            |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

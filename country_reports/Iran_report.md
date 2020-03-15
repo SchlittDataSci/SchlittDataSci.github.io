@@ -1,6 +1,6 @@
 # Iran
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/14/2020
 
 
 
@@ -16,7 +16,7 @@
 |                           | BOP              | Tencent                       | NIHFogarty       |
 |---------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/12/20         | 02/20/20                      | 01/13/20         |
-| Last update logged        | 03/09/20         | 03/12/20                      | 03/11/20         |
+| Last update logged        | 03/09/20         | 03/14/20                      | 03/11/20         |
 | Method                    | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 02/19/20         | 02/20/20                      | 02/19/20         |
 | Total confirmed cases     | 3513             | 270                           | 18               |
@@ -44,7 +44,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Tehran                      |           4 |
 | NIH      | Guilan                      |           2 |
 | NIH      | Araq                        |           1 |
-| JHU      | Iran                        |        9000 |
+| JHU      | Iran                        |       11364 |
 | BOP      | Tehran                      |        1352 |
 | BOP      | Qom                         |         386 |
 | BOP      | Gilan                       |         333 |

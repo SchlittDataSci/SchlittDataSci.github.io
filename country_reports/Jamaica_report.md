@@ -1,6 +1,6 @@
 # Jamaica
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/14/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/11/20                    |
+| Last update logged        | 03/13/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 1                           |
-| New cases since yesterday | 1                           |
+| Total confirmed cases     | 8                           |
+| New cases since yesterday | 6                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
 | Total recovered           | 0                           |
@@ -40,8 +40,8 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Jamaica    |           1 |
-| JHU      | Jamaica    |           1 |
+| NIH      | Jamaica    |           2 |
+| JHU      | Jamaica    |           8 |
 
 Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
 
