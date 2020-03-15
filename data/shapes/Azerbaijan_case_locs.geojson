@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Azerbaijan", "confirmed": 11, "color": "blue", "size": 4281.7441928883763, "label": "NIH : Azerbaijan: 11" }, "geometry": { "type": "Point", "coordinates": [ 5319652.425466455519199, 4923309.395181473344564 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Azerbaijan", "confirmed": 1, "color": "blue", "size": 1290.9944487358057, "label": "NIH : Azerbaijan: 1" }, "geometry": { "type": "Point", "coordinates": [ 5319652.425466455519199, 4923309.395181473344564 ] } },
 { "type": "Feature", "properties": { "source": "JHU", "loc_name": "Azerbaijan", "confirmed": 15, "color": "red", "size": 5000.0, "label": "JHU : Azerbaijan: 15" }, "geometry": { "type": "Point", "coordinates": [ 5319652.425466455519199, 4923309.395181473344564 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Azerbaijan", "confirmed": 11, "color": "darkorange", "size": 4281.7441928883763, "label": "BOP : Azerbaijan: 11" }, "geometry": { "type": "Point", "coordinates": [ 5319652.425466455519199, 4923309.395181473344564 ] } }
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Azerbaijan", "confirmed": 4, "color": "darkorange", "size": 2581.9888974716114, "label": "BOP : Azerbaijan: 4" }, "geometry": { "type": "Point", "coordinates": [ 5319652.425466455519199, 4923309.395181473344564 ] } }
 ]
 }

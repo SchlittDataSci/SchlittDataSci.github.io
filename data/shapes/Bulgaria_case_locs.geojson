@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Bulgaria", "confirmed": 7, "color": "blue", "size": 2758.3864218368526, "label": "NIH : Bulgaria: 7" }, "geometry": { "type": "Point", "coordinates": [ 2837050.882973635103554, 5252403.390579497441649 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Bulgaria", "confirmed": 23, "color": "red", "size": 5000.0, "label": "JHU : Bulgaria: 23" }, "geometry": { "type": "Point", "coordinates": [ 2837050.882973635103554, 5252403.390579497441649 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Bulgaria", "confirmed": 4, "color": "darkorange", "size": 2085.1441405707478, "label": "BOP : Bulgaria: 4" }, "geometry": { "type": "Point", "coordinates": [ 2837050.882973635103554, 5252403.390579497441649 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Bulgaria", "confirmed": 1, "color": "blue", "size": 780.86880944303039, "label": "NIH : Bulgaria: 1" }, "geometry": { "type": "Point", "coordinates": [ 2837050.882973635103554, 5252403.390579497441649 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Bulgaria", "confirmed": 41, "color": "red", "size": 5000.0, "label": "JHU : Bulgaria: 41" }, "geometry": { "type": "Point", "coordinates": [ 2837050.882973635103554, 5252403.390579497441649 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Bulgaria", "confirmed": 5, "color": "darkorange", "size": 1746.0757394239458, "label": "BOP : Bulgaria: 5" }, "geometry": { "type": "Point", "coordinates": [ 2837050.882973635103554, 5252403.390579497441649 ] } }
 ]
 }

@@ -1,6 +1,6 @@
 # Bangladesh
 ## NSSAC COVID-19 Summary
-## 03/13/2020
+## 03/15/2020
 
 
 
@@ -16,7 +16,7 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/13/20                    |
+| Last update logged        | 03/14/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
 | Total confirmed cases     | 3                           |
@@ -40,9 +40,9 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Bangladesh |           3 |
+| NIH      | Bangladesh |           1 |
 | JHU      | Bangladesh |           3 |
-| BOP      | Bangladesh |           3 |
+| BOP      | Bangladesh |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

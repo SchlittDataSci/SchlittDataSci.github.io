@@ -1,6 +1,6 @@
 # Cameroon
 ## NSSAC COVID-19 Summary
-## 03/13/2020
+## 03/15/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | BOP              |
-|---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/13/20                    | 03/09/20         |
-| Method                    | Cases by day & country list | Public line list |
-| First known case          | 01/22/20                    | 03/06/20         |
-| Total confirmed cases     | 2                           | 2                |
-| New cases since yesterday | 0                           |                  |
-| Total suspected           |                             |                  |
-| Total hospitalized        |                             | 0                |
-| Total recovered           | 0                           | 0                |
-| Total deaths              | 0                           | 0                |
+|                           | BOP              | JHU                         |
+|---------------------------|------------------|-----------------------------|
+| First update logged       | 01/06/20         | 01/22/20                    |
+| Last update logged        | 03/14/20         | 03/14/20                    |
+| Method                    | Public line list | Cases by day & country list |
+| First known case          | 03/06/20         | 01/22/20                    |
+| Total confirmed cases     | 2                | 2                           |
+| New cases since yesterday |                  | 0                           |
+| Total suspected           |                  |                             |
+| Total hospitalized        | 0                |                             |
+| Total recovered           | 0                | 0                           |
+| Total deaths              | 0                | 0                           |
 
 Data sources: BOP, JHU, 
 
@@ -40,7 +40,7 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Cameroon   |           2 |
+| NIH      | Cameroon   |           1 |
 | JHU      | Cameroon   |           2 |
 | BOP      | Cameroon   |           2 |
 

@@ -1,6 +1,6 @@
 # Bulgaria
 ## NSSAC COVID-19 Summary
-## 03/13/2020
+## 03/15/2020
 
 
 
@@ -15,16 +15,16 @@
 
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/13/20                    | 03/09/20         |
+| First update logged       | 01/22/20                    | 01/06/20         |
+| Last update logged        | 03/14/20                    | 03/14/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 03/08/20         |
-| Total confirmed cases     | 23                          | 4                |
-| New cases since yesterday | 16                          |                  |
+| Total confirmed cases     | 41                          | 4                |
+| New cases since yesterday | 18                          |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 0                           | 0                |
-| Total deaths              | 1                           | 0                |
+| Total deaths              | 2                           | 0                |
 
 Data sources: BOP, JHU, 
 
@@ -40,9 +40,9 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Bulgaria   |           7 |
-| JHU      | Bulgaria   |          23 |
-| BOP      | Bulgaria   |           4 |
+| NIH      | Bulgaria   |           1 |
+| JHU      | Bulgaria   |          41 |
+| BOP      | Bulgaria   |           5 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

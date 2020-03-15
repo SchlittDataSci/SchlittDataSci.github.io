@@ -2,9 +2,9 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Chile", "confirmed": 23, "color": "blue", "size": 3656.7872543061362, "label": "NIH : Chile: 23" }, "geometry": { "type": "Point", "coordinates": [ -7939169.127006748691201, -3732022.944911974482238 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Chile", "confirmed": 43, "color": "red", "size": 5000.0, "label": "JHU : Chile: 43" }, "geometry": { "type": "Point", "coordinates": [ -7939169.127006748691201, -3732022.944911974482238 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Santiago Metropolitan Region", "confirmed": 1, "color": "darkorange", "size": 762.49285166302332, "label": "BOP : Santiago Metropolitan Region: 1" }, "geometry": { "type": "Point", "coordinates": [ -7861443.86591599974781, -3971734.261539275292307 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Maule", "confirmed": 1, "color": "darkorange", "size": 762.49285166302332, "label": "BOP : Maule: 1" }, "geometry": { "type": "Point", "coordinates": [ -7958083.455083280801773, -4245341.214531387202442 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Chile", "confirmed": 1, "color": "blue", "size": 640.18439966447988, "label": "NIH : Chile: 1" }, "geometry": { "type": "Point", "coordinates": [ -7939169.127006748691201, -3732022.944911974482238 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Chile", "confirmed": 61, "color": "red", "size": 5000.0, "label": "JHU : Chile: 61" }, "geometry": { "type": "Point", "coordinates": [ -7939169.127006748691201, -3732022.944911974482238 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Maule", "confirmed": 1, "color": "darkorange", "size": 640.18439966447988, "label": "BOP : Maule: 1" }, "geometry": { "type": "Point", "coordinates": [ -7958083.455083280801773, -4245341.214531387202442 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Santiago Metropolitan Region", "confirmed": 1, "color": "darkorange", "size": 640.18439966447988, "label": "BOP : Santiago Metropolitan Region: 1" }, "geometry": { "type": "Point", "coordinates": [ -7861443.86591599974781, -3971734.261539275292307 ] } }
 ]
 }

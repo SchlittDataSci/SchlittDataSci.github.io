@@ -1,6 +1,6 @@
 # Brazil
 ## NSSAC COVID-19 Summary
-## 03/13/2020
+## 03/15/2020
 
 
 
@@ -15,12 +15,12 @@
 
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/13/20                    | 03/09/20         |
+| First update logged       | 01/22/20                    | 01/06/20         |
+| Last update logged        | 03/14/20                    | 03/14/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/25/20         |
 | Total confirmed cases     | 151                         | 13               |
-| New cases since yesterday | 99                          |                  |
+| New cases since yesterday | 0                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 4                |
 | Total recovered           | 0                           | 0                |
@@ -40,12 +40,12 @@ Data sources: BOP, JHU,
 
 | source   | loc_name       |   confirmed |
 |----------|----------------|-------------|
-| NIH      | Brazil         |          52 |
+| NIH      | Brazil         |           1 |
 | JHU      | Brazil         |         151 |
 | BOP      | Sao Paulo      |           3 |
 | BOP      | Rio de Janeiro |           2 |
-| BOP      | Espirito Santo |           1 |
 | BOP      | Bahia          |           1 |
+| BOP      | Espirito Santo |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

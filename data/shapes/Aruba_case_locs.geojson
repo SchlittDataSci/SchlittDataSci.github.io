@@ -2,6 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Aruba", "confirmed": 2, "color": "red", "size": 5000.0, "label": "JHU : Aruba: 2" }, "geometry": { "type": "Point", "coordinates": [ -7788117.238656659610569, 1402820.591334878001362 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Aruba", "confirmed": 1, "color": "blue", "size": 3535.5339059327375, "label": "NIH : Aruba: 1" }, "geometry": { "type": "Point", "coordinates": [ -7788117.238656659610569, 1402820.591334878001362 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Aruba", "confirmed": 2, "color": "red", "size": 5000.0, "label": "JHU : Aruba: 2" }, "geometry": { "type": "Point", "coordinates": [ -7788117.238656659610569, 1402820.591334878001362 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Aruba", "confirmed": 1, "color": "darkorange", "size": 3535.5339059327375, "label": "BOP : Aruba: 1" }, "geometry": { "type": "Point", "coordinates": [ -7788117.238656659610569, 1402820.591334878001362 ] } }
 ]
 }
