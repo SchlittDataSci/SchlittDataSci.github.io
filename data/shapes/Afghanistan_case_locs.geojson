@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Afghanistan", "confirmed": 7, "color": "blue", "size": 5000.0, "label": "NIH : Afghanistan: 7" }, "geometry": { "type": "Point", "coordinates": [ 7373637.638251174241304, 3997693.343693646136671 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Afghanistan", "confirmed": 7, "color": "red", "size": 5000.0, "label": "JHU : Afghanistan: 7" }, "geometry": { "type": "Point", "coordinates": [ 7373637.638251174241304, 3997693.343693646136671 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Herat", "confirmed": 4, "color": "darkorange", "size": 3779.6447300922723, "label": "BOP : Herat: 4" }, "geometry": { "type": "Point", "coordinates": [ 6925898.000386471860111, 4076007.404497355688363 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Afghanistan", "confirmed": 2, "color": "blue", "size": 2132.0071635561044, "label": "NIH : Afghanistan: 2" }, "geometry": { "type": "Point", "coordinates": [ 7373637.638251174241304, 3997693.343693646136671 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Afghanistan", "confirmed": 11, "color": "red", "size": 5000.0, "label": "JHU : Afghanistan: 11" }, "geometry": { "type": "Point", "coordinates": [ 7373637.638251174241304, 3997693.343693646136671 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Herat", "confirmed": 4, "color": "darkorange", "size": 3015.1134457776361, "label": "BOP : Herat: 4" }, "geometry": { "type": "Point", "coordinates": [ 6925898.000386471860111, 4076007.404497355688363 ] } }
 ]
 }
