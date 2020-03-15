@@ -2,9 +2,9 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Denmark", "confirmed": 617, "color": "blue", "size": 4388.3001865006281, "label": "NIH : Denmark: 617" }, "geometry": { "type": "Point", "coordinates": [ 1150300.844555723015219, 7493049.671201014891267 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Denmark", "confirmed": 801, "color": "red", "size": 5000.0, "label": "JHU : Denmark: 801" }, "geometry": { "type": "Point", "coordinates": [ 1150300.844555723015219, 7493049.671201014891267 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Faroe Islands", "confirmed": 3, "color": "red", "size": 305.99503068105224, "label": "JHU : Faroe Islands: 3" }, "geometry": { "type": "Point", "coordinates": [ 1334741.533874754793942, 7352182.89535163436085 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Denmark", "confirmed": 262, "color": "darkorange", "size": 2859.5940974196851, "label": "BOP : Denmark: 262" }, "geometry": { "type": "Point", "coordinates": [ 1150300.844555723015219, 7493049.671201014891267 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Denmark", "confirmed": 1, "color": "blue", "size": 173.86703560518023, "label": "NIH : Denmark: 1" }, "geometry": { "type": "Point", "coordinates": [ 1150300.844555723015219, 7493049.671201014891267 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Denmark", "confirmed": 827, "color": "red", "size": 5000.0, "label": "JHU : Denmark: 827" }, "geometry": { "type": "Point", "coordinates": [ 1150300.844555723015219, 7493049.671201014891267 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Faroe Islands", "confirmed": 9, "color": "red", "size": 521.60110681554067, "label": "JHU : Faroe Islands: 9" }, "geometry": { "type": "Point", "coordinates": [ 1334741.533874754793942, 7352182.89535163436085 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Denmark", "confirmed": 1, "color": "darkorange", "size": 173.86703560518023, "label": "BOP : Denmark: 1" }, "geometry": { "type": "Point", "coordinates": [ 1150300.844555723015219, 7493049.671201014891267 ] } }
 ]
 }
