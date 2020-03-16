@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "French Guiana", "confirmed": 5, "color": "blue", "size": 5000.0, "label": "NIH : French Guiana: 5" }, "geometry": { "type": "Point", "coordinates": [ -5899932.789404517039657, 446085.159248485811986 ] } },
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "French Guiana", "confirmed": 1, "color": "blue", "size": 2236.0679774997898, "label": "NIH : French Guiana: 1" }, "geometry": { "type": "Point", "coordinates": [ -5899932.789404517039657, 446085.159248485811986 ] } },
 { "type": "Feature", "properties": { "source": "JHU", "loc_name": "French Guiana", "confirmed": 5, "color": "red", "size": 5000.0, "label": "JHU : French Guiana: 5" }, "geometry": { "type": "Point", "coordinates": [ -5899932.789404517039657, 446085.159248485811986 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "French Guiana", "confirmed": 5, "color": "darkorange", "size": 5000.0, "label": "BOP : French Guiana: 5" }, "geometry": { "type": "Point", "coordinates": [ -5899932.789404517039657, 446085.159248485811986 ] } }
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "French Guiana", "confirmed": 1, "color": "darkorange", "size": 2236.0679774997898, "label": "BOP : French Guiana: 1" }, "geometry": { "type": "Point", "coordinates": [ -5899932.789404517039657, 446085.159248485811986 ] } }
 ]
 }

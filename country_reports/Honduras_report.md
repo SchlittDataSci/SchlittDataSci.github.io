@@ -1,6 +1,6 @@
 # Honduras
 ## NSSAC COVID-19 Summary
-## 03/14/2020
+## 03/15/2020
 
 
 
@@ -16,7 +16,7 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/13/20                    |
+| Last update logged        | 03/14/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
 | Total confirmed cases     | 2                           |
@@ -40,10 +40,11 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Honduras   |           2 |
+| NIH      | Honduras   |           1 |
 | JHU      | Honduras   |           2 |
+| BOP      | Honduras   |           1 |
 
-Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Honduras_case_locs.geojson)

@@ -1,6 +1,6 @@
 # Germany
 ## NSSAC COVID-19 Summary
-## 03/14/2020
+## 03/15/2020
 
 
 
@@ -15,16 +15,16 @@
 
 |                           | JHU                         | BOP              | NIHFogarty       | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
-| First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         | 02/04/20                      |
-| Last update logged        | 03/13/20                    | 03/09/20         | 03/11/20         | 03/14/20                      |
+| First update logged       | 01/22/20                    | 01/06/20         | 01/13/20         | 02/04/20                      |
+| Last update logged        | 03/14/20                    | 03/14/20         | 03/11/20         | 03/15/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/27/20         | 01/28/20         | 02/04/20                      |
-| Total confirmed cases     | 3675                        | 444              | 168              | 66                            |
+| Total confirmed cases     | 4585                        | 505              | 168              | 66                            |
 | New cases since yesterday |                             |                  |                  | 0                             |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 5                | 5                |                               |
 | Total recovered           | 46                          | 1                |                  | 16                            |
-| Total deaths              | 7                           | 0                | 0                | 0                             |
+| Total deaths              | 9                           | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -46,21 +46,21 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Bavaria                |          15 |
 | NIH      | Mecklenburg-Vorpommern |           8 |
 | NIH      | Saarland               |           5 |
-| NIH      | Frankfurt              |           2 |
 | NIH      | Brandenburg            |           2 |
-| NIH      | Rhineland-Palatinate   |           1 |
-| NIH      | Hamburg                |           1 |
+| NIH      | Frankfurt              |           2 |
 | NIH      | Thuringia              |           1 |
-| JHU      | Germany                |        3675 |
+| NIH      | Hamburg                |           1 |
+| NIH      | Rhineland-Palatinate   |           1 |
+| JHU      | Germany                |        4585 |
 | BOP      | Baden-Wurttemberg      |         182 |
 | BOP      | Bavaria                |         140 |
+| BOP      | Hamburg                |          80 |
 | BOP      | Berlin                 |          28 |
 | BOP      | North Rhine-Westphalia |          19 |
-| BOP      | Hamburg                |          17 |
 | BOP      | Hesse                  |          17 |
 | BOP      | Rhineland-Palatinate   |          12 |
-| BOP      | Lower Saxony           |           9 |
 | BOP      | Schleswig-Holstein     |           8 |
+| BOP      | Lower Saxony           |           7 |
 | BOP      | Mecklenburg-Vorpommern |           5 |
 | BOP      | Saarland               |           4 |
 | BOP      | Brandenburg            |           1 |
