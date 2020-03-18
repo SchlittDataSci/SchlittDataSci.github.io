@@ -1,6 +1,6 @@
 # Ethiopia
 ## NSSAC COVID-19 Summary
-## 03/15/2020
+## 03/17/2020
 
 
 
@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         |
-|---------------------------|------------------|-----------------------------|
-| First update logged       | 01/06/20         | 01/22/20                    |
-| Last update logged        | 03/14/20         | 03/14/20                    |
-| Method                    | Public line list | Cases by day & country list |
-| First known case          | 03/13/20         | 01/22/20                    |
-| Total confirmed cases     | 1                | 1                           |
-| New cases since yesterday |                  | 0                           |
-| Total suspected           |                  |                             |
-| Total hospitalized        | 0                |                             |
-| Total recovered           | 0                | 0                           |
-| Total deaths              | 0                | 0                           |
+|                           | JHU                         |
+|---------------------------|-----------------------------|
+| First update logged       | 01/22/20                    |
+| Last update logged        | 03/16/20                    |
+| Method                    | Cases by day & country list |
+| First known case          | 01/22/20                    |
+| Total confirmed cases     | 5                           |
+| New cases since yesterday | 4                           |
+| Total suspected           |                             |
+| Total hospitalized        |                             |
+| Total recovered           | 0                           |
+| Total deaths              | 0                           |
 
-Data sources: BOP, JHU, 
+Data sources: JHU, 
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Ethiopia_sitrep.csv)
@@ -41,7 +41,7 @@ Data sources: BOP, JHU,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Ethiopia   |           1 |
-| JHU      | Ethiopia   |           1 |
+| JHU      | Ethiopia   |           5 |
 | BOP      | Ethiopia   |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
@@ -50,14 +50,6 @@ Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Ethiopia_case_locs.geojson)
 
 ### Observed case clusters:
-#### Fig 3:
-![Ethiopia cases](../cluster_analysis/Ethiopia_imported_cases_BOP.png)
-
-
-
-Data source: BOP
-
-
 ### Data sources:
 * **[BOP](https://github.com/beoutbreakprepared/nCoV2019)**
 * **[JHU](https://github.com/CSSEGISandData/COVID-19)** 

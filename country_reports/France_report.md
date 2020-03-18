@@ -1,6 +1,6 @@
 # France
 ## NSSAC COVID-19 Summary
-## 03/15/2020
+## 03/17/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | NIHFogarty       | BOP              | Tencent                       |
+|                           | JHU                         | BOP              | NIHFogarty       | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
-| First update logged       | 01/22/20                    | 01/13/20         | 01/06/20         | 02/04/20                      |
-| Last update logged        | 03/14/20                    | 03/11/20         | 03/14/20         | 03/15/20                      |
+| First update logged       | 01/22/20                    | 01/06/20         | 01/13/20         | 02/04/20                      |
+| Last update logged        | 03/16/20                    | 03/16/20         | 03/13/20         | 03/17/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
-| First known case          | 01/22/20                    | 01/25/20         | 01/24/20         | 02/04/20                      |
-| Total confirmed cases     | 4480                        | 56               | 40               | 38                            |
-| New cases since yesterday |                             |                  |                  | 0                             |
+| First known case          | 01/22/20                    | 01/24/20         | 01/25/20         | 02/04/20                      |
+| Total confirmed cases     | 6659                        | 2859             | 56               | 38                            |
+| New cases since yesterday |                             |                  |                  |                               |
 | Total suspected           |                             |                  |                  | 0                             |
-| Total hospitalized        |                             | 7                | 9                |                               |
-| Total recovered           | 12                          |                  | 2                | 12                            |
-| Total deaths              | 91                          | 0                | 1                | 2                             |
+| Total hospitalized        |                             | 9                | 7                |                               |
+| Total recovered           | 12                          | 2                |                  | 12                            |
+| Total deaths              | 148                         | 1                | 0                | 2                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -38,37 +38,47 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name             |   confirmed |
-|----------|----------------------|-------------|
-| NIH      | Paris                |          14 |
-| NIH      | Saint-Mande          |           5 |
-| NIH      | Annecy               |           4 |
-| NIH      | Dijon                |           4 |
-| NIH      | Pays de la Loire     |           4 |
-| NIH      | Lyon                 |           4 |
-| NIH      | Guadeloupe           |           3 |
-| NIH      | Nice                 |           2 |
-| NIH      | Bois-Guillaume       |           1 |
-| NIH      | Landes               |           1 |
-| NIH      | Strasbourg           |           1 |
-| NIH      | Nantes               |           1 |
-| NIH      | Brest                |           1 |
-| NIH      | Lile                 |           1 |
-| NIH      | Bordeaux             |           1 |
-| NIH      | Amiens               |           1 |
-| NIH      | Pays                 |           1 |
-| NIH      | Montpellier          |           1 |
-| JHU      | France               |        4469 |
-| JHU      | Fench Guiana         |           5 |
-| JHU      | French Polynesia     |           3 |
-| JHU      | St Martin            |           2 |
-| JHU      | Saint Barthelemy     |           1 |
-| BOP      | Auvergne-Rhone-Alpes |           9 |
-| BOP      | Ile-de-France        |           6 |
-| BOP      | Grand Est            |           1 |
-| BOP      | Brittany             |           1 |
-| BOP      | Nouvelle-Aquitaine   |           1 |
-| BOP      | Hauts-de-France      |           1 |
+| source   | loc_name                   |   confirmed |
+|----------|----------------------------|-------------|
+| NIH      | Paris                      |          14 |
+| NIH      | Saint-Mande                |           5 |
+| NIH      | Lyon                       |           4 |
+| NIH      | Annecy                     |           4 |
+| NIH      | Pays de la Loire           |           4 |
+| NIH      | Dijon                      |           4 |
+| NIH      | Guadeloupe                 |           3 |
+| NIH      | Nice                       |           2 |
+| NIH      | Bois-Guillaume             |           1 |
+| NIH      | Pays                       |           1 |
+| NIH      | Montpellier                |           1 |
+| NIH      | Lile                       |           1 |
+| NIH      | Bordeaux                   |           1 |
+| NIH      | Nantes                     |           1 |
+| NIH      | Amiens                     |           1 |
+| NIH      | Strasbourg                 |           1 |
+| NIH      | Landes                     |           1 |
+| NIH      | Brest                      |           1 |
+| JHU      | France                     |        6633 |
+| JHU      | French Guiana              |          11 |
+| JHU      | Guadeloupe                 |           6 |
+| JHU      | Saint Barthelemy           |           3 |
+| JHU      | French Polynesia           |           3 |
+| JHU      | St Martin                  |           2 |
+| JHU      | Mayotte                    |           1 |
+| BOP      | Grand Est                  |         699 |
+| BOP      | Ile-de-France              |         577 |
+| BOP      | Hauts-de-France            |         349 |
+| BOP      | Auvergne-Rhone-Alpes       |         329 |
+| BOP      | Bourgogne-Franche-Comte    |         219 |
+| BOP      | Provence-Alpes-Cote d'Azur |         147 |
+| BOP      | Occitanie                  |         133 |
+| BOP      | Bretagne                   |         116 |
+| BOP      | Nouvelle-Aquitaine         |          87 |
+| BOP      | Normandie                  |          68 |
+| BOP      | Corse                      |          64 |
+| BOP      | Pays de la Loire           |          40 |
+| BOP      | Centre-Val de Loire        |          30 |
+| BOP      | Brittany                   |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
