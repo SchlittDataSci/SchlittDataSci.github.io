@@ -1,6 +1,6 @@
 # Armenia
 ## NSSAC COVID-19 Summary
-## 03/15/2020
+## 03/20/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/06/20         |
-| Last update logged        | 03/14/20                    | 03/14/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 03/01/20         |
-| Total confirmed cases     | 18                          | 1                |
-| New cases since yesterday | 10                          |                  |
+| Total confirmed cases     | 136                         | 1                |
+| New cases since yesterday | 21                          |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
-| Total recovered           | 0                           | 0                |
+| Total recovered           | 1                           | 0                |
 | Total deaths              | 0                           | 0                |
 
 Data sources: BOP, JHU, 
@@ -41,7 +41,7 @@ Data sources: BOP, JHU,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Armenia    |           1 |
-| JHU      | Armenia    |          18 |
+| JHU      | Armenia    |         136 |
 | BOP      | Armenia    |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

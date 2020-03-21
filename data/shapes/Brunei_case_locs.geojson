@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Brunei", "confirmed": 1, "color": "blue", "size": 790.56941504209476, "label": "NIH : Brunei: 1" }, "geometry": { "type": "Point", "coordinates": [ 12753360.966388389468193, 491819.229793430829886 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Brunei", "confirmed": 40, "color": "red", "size": 5000.0, "label": "JHU : Brunei: 40" }, "geometry": { "type": "Point", "coordinates": [ 12753360.966388389468193, 491819.229793430829886 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Brunei", "confirmed": 1, "color": "darkorange", "size": 790.56941504209476, "label": "BOP : Brunei: 1" }, "geometry": { "type": "Point", "coordinates": [ 12753360.966388389468193, 491819.229793430829886 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Brunei", "confirmed": 1, "color": "blue", "size": 566.13851707229787, "label": "NIH : Brunei: 1" }, "geometry": { "type": "Point", "coordinates": [ 12753360.966388389468193, 491819.229793430829886 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Brunei", "confirmed": 78, "color": "red", "size": 5000.0000000000009, "label": "JHU : Brunei: 78" }, "geometry": { "type": "Point", "coordinates": [ 12753360.966388389468193, 491819.229793430829886 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Brunei", "confirmed": 1, "color": "darkorange", "size": 566.13851707229787, "label": "BOP : Brunei: 1" }, "geometry": { "type": "Point", "coordinates": [ 12753360.966388389468193, 491819.229793430829886 ] } }
 ]
 }

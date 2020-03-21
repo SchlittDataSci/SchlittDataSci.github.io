@@ -1,6 +1,6 @@
 # Bahrain
 ## NSSAC COVID-19 Summary
-## 03/15/2020
+## 03/20/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | JHU                         | BOP              | Tencent                       | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/06/20         | 02/25/20                      | 01/13/20         |
-| Last update logged        | 03/14/20                    | 03/14/20         | 03/15/20                      | 03/11/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         | 03/20/20                      | 03/13/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 02/24/20         | 02/25/20                      | 02/24/20         |
-| Total confirmed cases     | 210                         | 34               | 33                            | 17               |
-| New cases since yesterday |                             |                  | 0                             |                  |
+| Total confirmed cases     | 285                         | 34               | 33                            | 17               |
+| New cases since yesterday | 7                           |                  |                               |                  |
 | Total suspected           |                             |                  | 0                             |                  |
 | Total hospitalized        |                             | 1                |                               | 0                |
-| Total recovered           | 44                          | 0                | 0                             |                  |
-| Total deaths              | 0                           | 0                | 0                             | 0                |
+| Total recovered           | 100                         | 0                | 0                             |                  |
+| Total deaths              | 1                           | 0                | 0                             | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Bahrain    |          18 |
-| JHU      | Bahrain    |         210 |
+| JHU      | Bahrain    |         285 |
 | BOP      | Bahrain    |          35 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

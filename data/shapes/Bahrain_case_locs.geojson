@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Bahrain", "confirmed": 18, "color": "blue", "size": 1463.8501094227997, "label": "NIH : Bahrain: 18" }, "geometry": { "type": "Point", "coordinates": [ 5625470.421504746191204, 3018306.546559724025428 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Bahrain", "confirmed": 210, "color": "red", "size": 5000.0, "label": "JHU : Bahrain: 210" }, "geometry": { "type": "Point", "coordinates": [ 5625470.421504746191204, 3018306.546559724025428 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Bahrain", "confirmed": 35, "color": "darkorange", "size": 2041.2414523193154, "label": "BOP : Bahrain: 35" }, "geometry": { "type": "Point", "coordinates": [ 5625470.421504746191204, 3018306.546559724025428 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Bahrain", "confirmed": 18, "color": "blue", "size": 1256.5617248750862, "label": "NIH : Bahrain: 18" }, "geometry": { "type": "Point", "coordinates": [ 5625470.421504746191204, 3018306.546559724025428 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Bahrain", "confirmed": 285, "color": "red", "size": 5000.0, "label": "JHU : Bahrain: 285" }, "geometry": { "type": "Point", "coordinates": [ 5625470.421504746191204, 3018306.546559724025428 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Bahrain", "confirmed": 35, "color": "darkorange", "size": 1752.1916101261559, "label": "BOP : Bahrain: 35" }, "geometry": { "type": "Point", "coordinates": [ 5625470.421504746191204, 3018306.546559724025428 ] } }
 ]
 }

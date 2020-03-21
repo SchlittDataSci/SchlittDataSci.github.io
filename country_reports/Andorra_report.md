@@ -1,6 +1,6 @@
 # Andorra
 ## NSSAC COVID-19 Summary
-## 03/17/2020
+## 03/20/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/06/20         |
-| Last update logged        | 03/16/20                    | 03/16/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 03/02/20         |
-| Total confirmed cases     | 2                           | 1                |
-| New cases since yesterday | 1                           |                  |
+| Total confirmed cases     | 75                          | 1                |
+| New cases since yesterday | 22                          |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 1                           | 0                |
@@ -41,7 +41,7 @@ Data sources: BOP, JHU,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Andorra    |           1 |
-| JHU      | Andorra    |           2 |
+| JHU      | Andorra    |          75 |
 | BOP      | Andorra    |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

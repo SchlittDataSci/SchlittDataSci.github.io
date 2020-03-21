@@ -1,6 +1,6 @@
 # Algeria
 ## NSSAC COVID-19 Summary
-## 03/17/2020
+## 03/20/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|------------------|
 | First update logged       | 01/22/20                    | 01/06/20         | 01/13/20         |
-| Last update logged        | 03/16/20                    | 03/16/20         | 03/13/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         | 03/13/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/25/20         | 02/26/20         |
-| Total confirmed cases     | 54                          | 14               | 1                |
-| New cases since yesterday | 6                           |                  |                  |
+| Total confirmed cases     | 90                          | 14               | 1                |
+| New cases since yesterday | 3                           |                  |                  |
 | Total suspected           |                             |                  |                  |
 | Total hospitalized        |                             | 0                | 0                |
-| Total recovered           | 12                          | 0                |                  |
-| Total deaths              | 4                           | 0                | 0                |
+| Total recovered           | 32                          | 0                |                  |
+| Total deaths              | 11                          | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, 
 
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Algeria    |           2 |
-| JHU      | Algeria    |          54 |
+| JHU      | Algeria    |          90 |
 | BOP      | Blida      |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

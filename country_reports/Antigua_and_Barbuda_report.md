@@ -1,6 +1,6 @@
 # Antigua and Barbuda
 ## NSSAC COVID-19 Summary
-## 03/17/2020
+## 03/20/2020
 
 
 
@@ -16,7 +16,7 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/16/20                    |
+| Last update logged        | 03/20/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
 | Total confirmed cases     | 1                           |

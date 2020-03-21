@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Colombia", "confirmed": 1, "color": "blue", "size": 1066.0035817780522, "label": "NIH : Colombia: 1" }, "geometry": { "type": "Point", "coordinates": [ -8213585.286185891367495, 321787.792822892253753 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Colombia", "confirmed": 22, "color": "red", "size": 5000.0, "label": "JHU : Colombia: 22" }, "geometry": { "type": "Point", "coordinates": [ -8213585.286185891367495, 321787.792822892253753 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Colombia", "confirmed": 2, "color": "darkorange", "size": 1507.5567228888183, "label": "BOP : Colombia: 2" }, "geometry": { "type": "Point", "coordinates": [ -8213585.286185891367495, 321787.792822892253753 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Colombia", "confirmed": 1, "color": "blue", "size": 441.94173824159219, "label": "NIH : Colombia: 1" }, "geometry": { "type": "Point", "coordinates": [ -8213585.286185891367495, 321787.792822892253753 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Colombia", "confirmed": 128, "color": "red", "size": 5000.0, "label": "JHU : Colombia: 128" }, "geometry": { "type": "Point", "coordinates": [ -8213585.286185891367495, 321787.792822892253753 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Colombia", "confirmed": 2, "color": "darkorange", "size": 625.0, "label": "BOP : Colombia: 2" }, "geometry": { "type": "Point", "coordinates": [ -8213585.286185891367495, 321787.792822892253753 ] } }
 ]
 }

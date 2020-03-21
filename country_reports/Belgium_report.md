@@ -1,6 +1,6 @@
 # Belgium
 ## NSSAC COVID-19 Summary
-## 03/15/2020
+## 03/20/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | JHU                         | BOP              | NIHFogarty       | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/06/20         | 01/13/20         | 02/13/20                      |
-| Last update logged        | 03/14/20                    | 03/14/20         | 03/11/20         | 02/14/20                      |
+| Last update logged        | 03/20/20                    | 03/18/20         | 03/13/20         | 02/14/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 02/04/20         | 02/04/20         | 02/13/20                      |
-| Total confirmed cases     | 689                         | 34               | 1                | 1                             |
-| New cases since yesterday | 130                         |                  |                  |                               |
+| Total confirmed cases     | 2257                        | 34               | 1                | 1                             |
+| New cases since yesterday | 462                         |                  |                  |                               |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 0                | 0                |                               |
 | Total recovered           | 1                           | 0                |                  | 0                             |
-| Total deaths              | 4                           | 0                | 0                | 0                             |
+| Total deaths              | 37                          | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Belgium    |           2 |
-| JHU      | Belgium    |         689 |
+| JHU      | Belgium    |        2257 |
 | BOP      | Flanders   |          17 |
 | BOP      | Wallonia   |           9 |
 | BOP      | Brussels   |           7 |

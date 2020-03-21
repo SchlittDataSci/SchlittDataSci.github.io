@@ -1,6 +1,6 @@
 # Bhutan
 ## NSSAC COVID-19 Summary
-## 03/15/2020
+## 03/20/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | BOP              | JHU                         |
-|---------------------------|------------------|-----------------------------|
-| First update logged       | 01/06/20         | 01/22/20                    |
-| Last update logged        | 03/14/20         | 03/14/20                    |
-| Method                    | Public line list | Cases by day & country list |
-| First known case          | 02/05/20         | 01/22/20                    |
-| Total confirmed cases     | 1                | 1                           |
-| New cases since yesterday |                  | 0                           |
-| Total suspected           |                  |                             |
-| Total hospitalized        | 1                |                             |
-| Total recovered           | 0                | 0                           |
-| Total deaths              | 0                | 0                           |
+|                           | JHU                         | BOP              |
+|---------------------------|-----------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/06/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         |
+| Method                    | Cases by day & country list | Public line list |
+| First known case          | 01/22/20                    | 02/05/20         |
+| Total confirmed cases     | 2                           | 1                |
+| New cases since yesterday | 1                           |                  |
+| Total suspected           |                             |                  |
+| Total hospitalized        |                             | 1                |
+| Total recovered           | 0                           | 0                |
+| Total deaths              | 0                           | 0                |
 
 Data sources: BOP, JHU, 
 
@@ -41,7 +41,7 @@ Data sources: BOP, JHU,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Bhutan     |           1 |
-| JHU      | Bhutan     |           1 |
+| JHU      | Bhutan     |           2 |
 | BOP      | Bhutan     |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

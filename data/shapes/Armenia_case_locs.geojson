@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Armenia", "confirmed": 1, "color": "blue", "size": 1178.5113019775793, "label": "NIH : Armenia: 1" }, "geometry": { "type": "Point", "coordinates": [ 4973049.595141491852701, 4978420.882550159469247 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Armenia", "confirmed": 18, "color": "red", "size": 5000.0, "label": "JHU : Armenia: 18" }, "geometry": { "type": "Point", "coordinates": [ 4973049.595141491852701, 4978420.882550159469247 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Armenia", "confirmed": 2, "color": "darkorange", "size": 1666.6666666666667, "label": "BOP : Armenia: 2" }, "geometry": { "type": "Point", "coordinates": [ 4973049.595141491852701, 4978420.882550159469247 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Armenia", "confirmed": 1, "color": "blue", "size": 428.74646285627205, "label": "NIH : Armenia: 1" }, "geometry": { "type": "Point", "coordinates": [ 4973049.595141491852701, 4978420.882550159469247 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Armenia", "confirmed": 136, "color": "red", "size": 5000.0, "label": "JHU : Armenia: 136" }, "geometry": { "type": "Point", "coordinates": [ 4973049.595141491852701, 4978420.882550159469247 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Armenia", "confirmed": 2, "color": "darkorange", "size": 606.33906259083244, "label": "BOP : Armenia: 2" }, "geometry": { "type": "Point", "coordinates": [ 4973049.595141491852701, 4978420.882550159469247 ] } }
 ]
 }

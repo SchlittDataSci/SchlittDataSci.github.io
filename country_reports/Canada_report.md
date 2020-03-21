@@ -1,6 +1,6 @@
 # Canada
 ## NSSAC COVID-19 Summary
-## 03/15/2020
+## 03/20/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | JHU                         | BOP              | Tencent                       | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/06/20         | 02/04/20                      | 01/13/20         |
-| Last update logged        | 03/14/20                    | 03/14/20         | 03/15/20                      | 03/11/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         | 03/20/20                      | 03/13/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 01/25/20         | 02/04/20                      | 01/26/20         |
-| Total confirmed cases     | 198                         | 150              | 13                            | 12               |
-| New cases since yesterday |                             |                  | 0                             |                  |
+| Total confirmed cases     | 943                         | 308              | 13                            | 12               |
+| New cases since yesterday | 143                         |                  |                               |                  |
 | Total suspected           |                             |                  | 0                             |                  |
 | Total hospitalized        |                             | 15               |                               | 3                |
-| Total recovered           | 8                           | 1                | 4                             |                  |
-| Total deaths              | 1                           | 0                | 0                             | 0                |
+| Total recovered           | 9                           | 1                | 4                             |                  |
+| Total deaths              | 12                          | 0                | 0                             | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -38,22 +38,31 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 #### Table 2: Confirmed cases by location
 
 
-| source   | loc_name         |   confirmed |
-|----------|------------------|-------------|
-| NIH      | Vancouver        |           7 |
-| NIH      | Toronto          |           5 |
-| JHU      | Ontario          |          79 |
-| JHU      | British Columbia |          64 |
-| JHU      | Alberta          |          29 |
-| JHU      | Quebec           |          17 |
-| JHU      | Manitoba         |           4 |
-| JHU      | Saskatchewan     |           2 |
-| JHU      | Grand Princess   |           2 |
-| JHU      | New Brunswick    |           1 |
-| BOP      | Ontario          |          57 |
-| BOP      | British Columbia |          53 |
-| BOP      | Alberta          |          23 |
-| BOP      | Quebec           |          17 |
+| source   | loc_name                  |   confirmed |
+|----------|---------------------------|-------------|
+| NIH      | Vancouver                 |           7 |
+| NIH      | Toronto                   |           5 |
+| JHU      | Ontario                   |         308 |
+| JHU      | British Columbia          |         271 |
+| JHU      | Alberta                   |         146 |
+| JHU      | Quebec                    |         139 |
+| JHU      | Saskatchewan              |          20 |
+| JHU      | Manitoba                  |          17 |
+| JHU      | Nova Scotia               |          15 |
+| JHU      | New Brunswick             |          11 |
+| JHU      | Grand Princess            |          10 |
+| JHU      | Newfoundland and Labrador |           4 |
+| JHU      | Prince Edward Island      |           2 |
+| BOP      | Alberta                   |          87 |
+| BOP      | Quebec                    |          70 |
+| BOP      | Ontario                   |          57 |
+| BOP      | British Columbia          |          53 |
+| BOP      | Manitoba                  |          15 |
+| BOP      | Saskatchewan              |           8 |
+| BOP      | Nova Scotia               |           7 |
+| BOP      | New Brunswick             |           7 |
+| BOP      | Newfoundland and Labrador |           3 |
+| BOP      | Prince Edward Island      |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
