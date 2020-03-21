@@ -1,6 +1,6 @@
 # Nepal
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/21/2020
 
 
 
@@ -13,17 +13,17 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | NIHFogarty       | BOP              |
+|                           | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|------------------|
-| First update logged       | 01/22/20                    | 01/13/20         | 01/12/20         |
-| Last update logged        | 03/11/20                    | 03/11/20         | 03/09/20         |
+| First update logged       | 01/22/20                    | 01/06/20         | 01/13/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         | 03/13/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
-| First known case          | 01/22/20                    | 01/25/20         | 01/24/20         |
+| First known case          | 01/22/20                    | 01/24/20         | 01/25/20         |
 | Total confirmed cases     | 1                           | 1                | 1                |
 | New cases since yesterday | 0                           |                  |                  |
 | Total suspected           |                             |                  |                  |
 | Total hospitalized        |                             | 1                | 1                |
-| Total recovered           | 1                           |                  | 1                |
+| Total recovered           | 1                           | 1                |                  |
 | Total deaths              | 0                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, 

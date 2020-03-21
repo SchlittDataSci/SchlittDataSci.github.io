@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Luxembourg", "confirmed": 7, "color": "blue", "size": 5000.0, "label": "NIH : Luxembourg: 7" }, "geometry": { "type": "Point", "coordinates": [ 682352.310860208352096, 6414448.329426940530539 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Luxembourg", "confirmed": 7, "color": "red", "size": 5000.0, "label": "JHU : Luxembourg: 7" }, "geometry": { "type": "Point", "coordinates": [ 682352.310860208352096, 6414448.329426940530539 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Luxembourg", "confirmed": 5, "color": "darkorange", "size": 4225.7712736425829, "label": "BOP : Luxembourg: 5" }, "geometry": { "type": "Point", "coordinates": [ 682352.310860208352096, 6414448.329426940530539 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Luxembourg", "confirmed": 1, "color": "blue", "size": 227.27272727272728, "label": "NIH : Luxembourg: 1" }, "geometry": { "type": "Point", "coordinates": [ 682352.310860208352096, 6414448.329426940530539 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Luxembourg", "confirmed": 484, "color": "red", "size": 5000.0, "label": "JHU : Luxembourg: 484" }, "geometry": { "type": "Point", "coordinates": [ 682352.310860208352096, 6414448.329426940530539 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Luxembourg", "confirmed": 4, "color": "darkorange", "size": 454.54545454545456, "label": "BOP : Luxembourg: 4" }, "geometry": { "type": "Point", "coordinates": [ 682352.310860208352096, 6414448.329426940530539 ] } }
 ]
 }

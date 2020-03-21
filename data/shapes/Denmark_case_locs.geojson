@@ -2,9 +2,10 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Denmark", "confirmed": 1, "color": "blue", "size": 173.86703560518023, "label": "NIH : Denmark: 1" }, "geometry": { "type": "Point", "coordinates": [ 1150300.844555723015219, 7493049.671201014891267 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Denmark", "confirmed": 827, "color": "red", "size": 5000.0, "label": "JHU : Denmark: 827" }, "geometry": { "type": "Point", "coordinates": [ 1150300.844555723015219, 7493049.671201014891267 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Faroe Islands", "confirmed": 9, "color": "red", "size": 521.60110681554067, "label": "JHU : Faroe Islands: 9" }, "geometry": { "type": "Point", "coordinates": [ 1334741.533874754793942, 7352182.89535163436085 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Denmark", "confirmed": 1, "color": "darkorange", "size": 173.86703560518023, "label": "BOP : Denmark: 1" }, "geometry": { "type": "Point", "coordinates": [ 1150300.844555723015219, 7493049.671201014891267 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Denmark", "confirmed": 1, "color": "blue", "size": 141.13935923440917, "label": "NIH : Denmark: 1" }, "geometry": { "type": "Point", "coordinates": [ 1150300.844555723015219, 7493049.671201014891267 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Denmark", "confirmed": 1255, "color": "red", "size": 5000.0, "label": "JHU : Denmark: 1255" }, "geometry": { "type": "Point", "coordinates": [ 1150300.844555723015219, 7493049.671201014891267 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Faroe Islands", "confirmed": 80, "color": "red", "size": 1262.3888061956063, "label": "JHU : Faroe Islands: 80" }, "geometry": { "type": "Point", "coordinates": [ 1334741.533874754793942, 7352182.89535163436085 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Greenland", "confirmed": 2, "color": "red", "size": 199.60119601394979, "label": "JHU : Greenland: 2" }, "geometry": { "type": "Point", "coordinates": [ -4325522.212596036493778, 11692628.303493527695537 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Denmark", "confirmed": 1, "color": "darkorange", "size": 141.13935923440917, "label": "BOP : Denmark: 1" }, "geometry": { "type": "Point", "coordinates": [ 1150300.844555723015219, 7493049.671201014891267 ] } }
 ]
 }

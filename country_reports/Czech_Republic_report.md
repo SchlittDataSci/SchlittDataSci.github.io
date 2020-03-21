@@ -1,6 +1,6 @@
 # Czech Republic
 ## NSSAC COVID-19 Summary
-## 03/15/2020
+## 03/21/2020
 
 
 
@@ -16,7 +16,7 @@
 |                           | BOP              |
 |---------------------------|------------------|
 | First update logged       | 01/06/20         |
-| Last update logged        | 03/14/20         |
+| Last update logged        | 03/18/20         |
 | Method                    | Public line list |
 | First known case          | 03/02/20         |
 | Total confirmed cases     | 4                |

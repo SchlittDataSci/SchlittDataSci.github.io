@@ -1,6 +1,6 @@
 # Panama
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/21/2020
 
 
 
@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         |
-|---------------------------|-----------------------------|
-| First update logged       | 01/22/20                    |
-| Last update logged        | 03/11/20                    |
-| Method                    | Cases by day & country list |
-| First known case          | 01/22/20                    |
-| Total confirmed cases     | 8                           |
-| New cases since yesterday | 7                           |
-| Total suspected           |                             |
-| Total hospitalized        |                             |
-| Total recovered           | 0                           |
-| Total deaths              | 1                           |
+|                           | JHU                         | BOP              |
+|---------------------------|-----------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/06/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         |
+| Method                    | Cases by day & country list | Public line list |
+| First known case          | 01/22/20                    | 03/09/20         |
+| Total confirmed cases     | 137                         | 1                |
+| New cases since yesterday | 28                          |                  |
+| Total suspected           |                             |                  |
+| Total hospitalized        |                             | 0                |
+| Total recovered           | 0                           | 0                |
+| Total deaths              | 1                           | 0                |
 
-Data sources: JHU, 
+Data sources: BOP, JHU, 
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Panama_sitrep.csv)
@@ -40,9 +40,9 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Panama     |           8 |
-| JHU      | Panama     |           8 |
-| BOP      | Panama     |           1 |
+| NIH      | Panama     |           1 |
+| JHU      | Panama     |         137 |
+| BOP      | Panama     |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
@@ -50,6 +50,14 @@ Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Panama_case_locs.geojson)
 
 ### Observed case clusters:
+#### Fig 3:
+![Panama cases](../cluster_analysis/Panama_imported_cases_BOP.png)
+
+
+
+Data source: BOP
+
+
 ### Data sources:
 * **[BOP](https://github.com/beoutbreakprepared/nCoV2019)**
 * **[JHU](https://github.com/CSSEGISandData/COVID-19)** 

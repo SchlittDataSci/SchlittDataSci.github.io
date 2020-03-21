@@ -1,6 +1,6 @@
 # India
 ## NSSAC COVID-19 Summary
-## 03/14/2020
+## 03/21/2020
 
 
 
@@ -15,16 +15,16 @@
 
 |                           | JHU                         | BOP              | NIHFogarty       | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
-| First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         | 02/04/20                      |
-| Last update logged        | 03/13/20                    | 03/09/20         | 03/11/20         | 02/14/20                      |
+| First update logged       | 01/22/20                    | 01/06/20         | 01/13/20         | 02/04/20                      |
+| Last update logged        | 03/20/20                    | 03/18/20         | 03/13/20         | 02/14/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/30/20         | 01/30/20         | 02/04/20                      |
-| Total confirmed cases     | 82                          | 31               | 3                | 3                             |
-| New cases since yesterday | 9                           |                  |                  |                               |
+| Total confirmed cases     | 244                         | 31               | 3                | 3                             |
+| New cases since yesterday | 50                          |                  |                  |                               |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 0                | 0                |                               |
-| Total recovered           | 4                           | 0                |                  | 0                             |
-| Total deaths              | 2                           | 0                | 0                | 0                             |
+| Total recovered           | 20                          | 0                |                  | 0                             |
+| Total deaths              | 5                           | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -42,13 +42,13 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 |----------|---------------|-------------|
 | NIH      | Kerala        |           2 |
 | NIH      | Alappuzha     |           1 |
-| JHU      | India         |          82 |
+| JHU      | India         |         244 |
 | BOP      | Rajasthan     |          16 |
 | BOP      | Uttar Pradesh |           6 |
 | BOP      | Telangana     |           3 |
 | BOP      | Kerala        |           3 |
-| BOP      | Haryana       |           1 |
 | BOP      | Delhi         |           1 |
+| BOP      | Haryana       |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Kuwait", "confirmed": 80, "color": "blue", "size": 5000.0, "label": "NIH : Kuwait: 80" }, "geometry": { "type": "Point", "coordinates": [ 5287447.340557591058314, 3410489.503308538347483 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Kuwait", "confirmed": 80, "color": "red", "size": 5000.0, "label": "JHU : Kuwait: 80" }, "geometry": { "type": "Point", "coordinates": [ 5287447.340557591058314, 3410489.503308538347483 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Kuwait", "confirmed": 69, "color": "darkorange", "size": 4643.5439052516776, "label": "BOP : Kuwait: 69" }, "geometry": { "type": "Point", "coordinates": [ 5287447.340557591058314, 3410489.503308538347483 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Kuwait", "confirmed": 10, "color": "blue", "size": 1253.9246564387979, "label": "NIH : Kuwait: 10" }, "geometry": { "type": "Point", "coordinates": [ 5287447.340557591058314, 3410489.503308538347483 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Kuwait", "confirmed": 159, "color": "red", "size": 5000.0, "label": "JHU : Kuwait: 159" }, "geometry": { "type": "Point", "coordinates": [ 5287447.340557591058314, 3410489.503308538347483 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Kuwait", "confirmed": 43, "color": "darkorange", "size": 2600.1935099734742, "label": "BOP : Kuwait: 43" }, "geometry": { "type": "Point", "coordinates": [ 5287447.340557591058314, 3410489.503308538347483 ] } }
 ]
 }

@@ -1,6 +1,6 @@
 # Norway
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/21/2020
 
 
 
@@ -15,16 +15,16 @@
 
 |                           | JHU                         | BOP              | Tencent                       |
 |---------------------------|-----------------------------|------------------|-------------------------------|
-| First update logged       | 01/22/20                    | 01/12/20         | 03/01/20                      |
-| Last update logged        | 03/11/20                    | 03/09/20         | 03/08/20                      |
+| First update logged       | 01/22/20                    | 01/06/20         | 03/01/20                      |
+| Last update logged        | 03/20/20                    | 03/18/20         | 03/08/20                      |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 02/26/20         | 03/01/20                      |
-| Total confirmed cases     | 598                         | 16               | 6                             |
-| New cases since yesterday | 198                         |                  |                               |
+| Total confirmed cases     | 1914                        | 16               | 6                             |
+| New cases since yesterday | 168                         |                  |                               |
 | Total suspected           |                             |                  | 0                             |
 | Total hospitalized        |                             | 0                |                               |
 | Total recovered           | 1                           | 0                | 0                             |
-| Total deaths              | 0                           | 0                | 0                             |
+| Total deaths              | 7                           | 0                | 0                             |
 
 Data sources: BOP, JHU, Tencent
 
@@ -40,10 +40,10 @@ Data sources: BOP, JHU, Tencent
 
 | source   | loc_name           |   confirmed |
 |----------|--------------------|-------------|
-| NIH      | Norway             |         598 |
-| JHU      | Norway             |         598 |
-| BOP      | Vestland           |           3 |
+| NIH      | Norway             |           1 |
+| JHU      | Norway             |        1914 |
 | BOP      | Viken              |           3 |
+| BOP      | Vestland           |           3 |
 | BOP      | Agder              |           1 |
 | BOP      | Troms and Finnmark |           1 |
 

@@ -1,6 +1,6 @@
 # Macau
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/21/2020
 
 
 
@@ -15,8 +15,8 @@
 
 |                           | BOP              |
 |---------------------------|------------------|
-| First update logged       | 01/12/20         |
-| Last update logged        | 03/09/20         |
+| First update logged       | 01/06/20         |
+| Last update logged        | 03/18/20         |
 | Method                    | Public line list |
 | First known case          | 01/21/20         |
 | Total confirmed cases     | 10               |

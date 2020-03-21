@@ -1,6 +1,6 @@
 # Australia
 ## NSSAC COVID-19 Summary
-## 03/20/2020
+## 03/21/2020
 
 
 
@@ -41,8 +41,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name                     |   confirmed |
 |----------|------------------------------|-------------|
 | NIH      | Queensland                   |           5 |
-| NIH      | NSW                          |           4 |
 | NIH      | Victoria                     |           4 |
+| NIH      | NSW                          |           4 |
 | NIH      | South Australia              |           2 |
 | JHU      | New South Wales              |         353 |
 | JHU      | Queensland                   |         184 |

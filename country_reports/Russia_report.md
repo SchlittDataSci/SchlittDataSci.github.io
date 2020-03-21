@@ -1,6 +1,6 @@
 # Russia
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/21/2020
 
 
 
@@ -15,12 +15,12 @@
 
 |                           | Tencent                       | BOP              | NIHFogarty       |
 |---------------------------|-------------------------------|------------------|------------------|
-| First update logged       | 02/06/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/12/20                      | 03/09/20         | 03/11/20         |
+| First update logged       | 02/06/20                      | 01/06/20         | 01/13/20         |
+| Last update logged        | 03/20/20                      | 03/18/20         | 03/13/20         |
 | Method                    | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 02/06/20                      | 01/31/20         | 01/31/20         |
 | Total confirmed cases     | 5                             | 5                | 2                |
-| New cases since yesterday | 0                             |                  |                  |
+| New cases since yesterday |                               |                  |                  |
 | Total suspected           | 0                             |                  |                  |
 | Total hospitalized        |                               | 1                | 0                |
 | Total recovered           | 2                             | 0                |                  |
@@ -40,9 +40,9 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
 | source   | loc_name      |   confirmed |
 |----------|---------------|-------------|
-| NIH      | Tyumen        |           1 |
 | NIH      | Zabaikalsky   |           1 |
-| JHU      | Russia        |          20 |
+| NIH      | Tyumen        |           1 |
+| JHU      | Russia        |         253 |
 | BOP      | Moscow City   |           2 |
 | BOP      | Transbaikalia |           1 |
 | BOP      | Tyumen        |           1 |

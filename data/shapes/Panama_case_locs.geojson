@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Panama", "confirmed": 8, "color": "blue", "size": 5000.0, "label": "NIH : Panama: 8" }, "geometry": { "type": "Point", "coordinates": [ -9031444.174916820600629, 956409.940722102997825 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Panama", "confirmed": 8, "color": "red", "size": 5000.0, "label": "JHU : Panama: 8" }, "geometry": { "type": "Point", "coordinates": [ -9031444.174916820600629, 956409.940722102997825 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Panama", "confirmed": 1, "color": "darkorange", "size": 1767.7669529663688, "label": "BOP : Panama: 1" }, "geometry": { "type": "Point", "coordinates": [ -9031444.174916820600629, 956409.940722102997825 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Panama", "confirmed": 1, "color": "blue", "size": 427.17882885838048, "label": "NIH : Panama: 1" }, "geometry": { "type": "Point", "coordinates": [ -9031444.174916820600629, 956409.940722102997825 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Panama", "confirmed": 137, "color": "red", "size": 5000.0, "label": "JHU : Panama: 137" }, "geometry": { "type": "Point", "coordinates": [ -9031444.174916820600629, 956409.940722102997825 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Panama", "confirmed": 2, "color": "darkorange", "size": 604.12209333017699, "label": "BOP : Panama: 2" }, "geometry": { "type": "Point", "coordinates": [ -9031444.174916820600629, 956409.940722102997825 ] } }
 ]
 }

@@ -1,6 +1,6 @@
 # Finland
 ## NSSAC COVID-19 Summary
-## 03/17/2020
+## 03/21/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              | Tencent                       | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|-------------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/06/20         | 02/05/20                      | 01/13/20         |
-| Last update logged        | 03/16/20                    | 03/16/20         | 03/17/20                      | 03/13/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         | 03/20/20                      | 03/13/20         |
 | Method                    | Cases by day & country list | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 01/22/20                    | 01/29/20         | 02/05/20                      | 01/29/20         |
-| Total confirmed cases     | 277                         | 7                | 2                             | 1                |
-| New cases since yesterday |                             |                  |                               |                  |
+| Total confirmed cases     | 450                         | 7                | 2                             | 1                |
+| New cases since yesterday | 50                          |                  |                               |                  |
 | Total suspected           |                             |                  | 0                             |                  |
 | Total hospitalized        |                             | 0                |                               | 1                |
 | Total recovered           | 10                          | 0                | 1                             |                  |
@@ -41,7 +41,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name         |   confirmed |
 |----------|------------------|-------------|
 | NIH      | Lapland          |           1 |
-| JHU      | Finland          |         277 |
+| JHU      | Finland          |         450 |
 | BOP      | Southern Finland |           2 |
 | BOP      | Lapland          |           1 |
 

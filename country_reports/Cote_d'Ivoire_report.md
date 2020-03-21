@@ -1,6 +1,6 @@
 # Cote d'Ivoire
 ## NSSAC COVID-19 Summary
-## 03/15/2020
+## 03/21/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/14/20                    |
+| Last update logged        | 03/20/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 1                           |
+| Total confirmed cases     | 9                           |
 | New cases since yesterday | 0                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
-| Total recovered           | 0                           |
+| Total recovered           | 1                           |
 | Total deaths              | 0                           |
 
 Data sources: JHU, 
@@ -41,7 +41,7 @@ Data sources: JHU,
 | source   | loc_name      |   confirmed |
 |----------|---------------|-------------|
 | NIH      | Cote d'Ivoire |           1 |
-| JHU      | Cote d'Ivoire |           1 |
+| JHU      | Cote d'Ivoire |           9 |
 | BOP      | Cote d'Ivoire |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

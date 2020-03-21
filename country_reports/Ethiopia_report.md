@@ -1,6 +1,6 @@
 # Ethiopia
 ## NSSAC COVID-19 Summary
-## 03/17/2020
+## 03/21/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/16/20                    |
+| Last update logged        | 03/20/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 5                           |
-| New cases since yesterday | 4                           |
+| Total confirmed cases     | 9                           |
+| New cases since yesterday | 3                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
 | Total recovered           | 0                           |
@@ -41,7 +41,7 @@ Data sources: JHU,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Ethiopia   |           1 |
-| JHU      | Ethiopia   |           5 |
+| JHU      | Ethiopia   |           9 |
 | BOP      | Ethiopia   |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

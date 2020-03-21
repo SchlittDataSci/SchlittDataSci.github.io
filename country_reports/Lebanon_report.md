@@ -1,6 +1,6 @@
 # Lebanon
 ## NSSAC COVID-19 Summary
-## 03/14/2020
+## 03/21/2020
 
 
 
@@ -15,16 +15,16 @@
 
 |                           | JHU                         | BOP              | NIHFogarty       |
 |---------------------------|-----------------------------|------------------|------------------|
-| First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/13/20                    | 03/09/20         | 03/11/20         |
+| First update logged       | 01/22/20                    | 01/06/20         | 01/13/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         | 03/13/20         |
 | Method                    | Cases by day & country list | Public line list | Public line list |
 | First known case          | 01/22/20                    | 02/21/20         | 02/21/20         |
-| Total confirmed cases     | 77                          | 6                | 1                |
-| New cases since yesterday | 16                          |                  |                  |
+| Total confirmed cases     | 163                         | 6                | 1                |
+| New cases since yesterday | 6                           |                  |                  |
 | Total suspected           |                             |                  |                  |
 | Total hospitalized        |                             | 0                | 0                |
-| Total recovered           | 1                           | 0                |                  |
-| Total deaths              | 3                           | 0                | 0                |
+| Total recovered           | 4                           | 0                |                  |
+| Total deaths              | 4                           | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, 
 
@@ -40,8 +40,8 @@ Data sources: BOP, JHU, NIH-Fogarty,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Lebanon    |          61 |
-| JHU      | Lebanon    |          77 |
+| NIH      | Lebanon    |           2 |
+| JHU      | Lebanon    |         163 |
 | BOP      | Beirut     |           3 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

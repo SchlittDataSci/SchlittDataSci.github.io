@@ -2,11 +2,11 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Norway", "confirmed": 598, "color": "blue", "size": 5000.0, "label": "NIH : Norway: 598" }, "geometry": { "type": "Point", "coordinates": [ 1013004.193613301846199, 8511913.416954673826694 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Norway", "confirmed": 598, "color": "red", "size": 5000.0, "label": "JHU : Norway: 598" }, "geometry": { "type": "Point", "coordinates": [ 1013004.193613301846199, 8511913.416954673826694 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Vestland", "confirmed": 3, "color": "darkorange", "size": 354.14412348741422, "label": "BOP : Vestland: 3" }, "geometry": { "type": "Point", "coordinates": [ 679926.864203670527786, 8609561.899213723838329 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Viken", "confirmed": 3, "color": "darkorange", "size": 354.14412348741422, "label": "BOP : Viken: 3" }, "geometry": { "type": "Point", "coordinates": [ 1102534.34341656928882, 8383353.530736530199647 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Agder", "confirmed": 1, "color": "darkorange", "size": 204.46520502738267, "label": "BOP : Agder: 1" }, "geometry": { "type": "Point", "coordinates": [ 894448.049209537333809, 8119993.103672627359629 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Troms and Finnmark", "confirmed": 1, "color": "darkorange", "size": 204.46520502738267, "label": "BOP : Troms and Finnmark: 1" }, "geometry": { "type": "Point", "coordinates": [ 2429801.533435979858041, 11026513.904316671192646 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Norway", "confirmed": 1, "color": "blue", "size": 114.28758022062361, "label": "NIH : Norway: 1" }, "geometry": { "type": "Point", "coordinates": [ 1013004.193613301846199, 8511913.416954673826694 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Norway", "confirmed": 1914, "color": "red", "size": 5000.0, "label": "JHU : Norway: 1914" }, "geometry": { "type": "Point", "coordinates": [ 1013004.193613301846199, 8511913.416954673826694 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Viken", "confirmed": 3, "color": "darkorange", "size": 197.95189561622396, "label": "BOP : Viken: 3" }, "geometry": { "type": "Point", "coordinates": [ 1102534.34341656928882, 8383353.530736530199647 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Vestland", "confirmed": 3, "color": "darkorange", "size": 197.95189561622396, "label": "BOP : Vestland: 3" }, "geometry": { "type": "Point", "coordinates": [ 679926.864203670527786, 8609561.899213723838329 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Agder", "confirmed": 1, "color": "darkorange", "size": 114.28758022062361, "label": "BOP : Agder: 1" }, "geometry": { "type": "Point", "coordinates": [ 894448.049209537333809, 8119993.103672627359629 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Troms and Finnmark", "confirmed": 1, "color": "darkorange", "size": 114.28758022062361, "label": "BOP : Troms and Finnmark: 1" }, "geometry": { "type": "Point", "coordinates": [ 2429801.533435979858041, 11026513.904316671192646 ] } }
 ]
 }

@@ -1,6 +1,6 @@
 # Iran
 ## NSSAC COVID-19 Summary
-## 03/14/2020
+## 03/21/2020
 
 
 
@@ -15,12 +15,12 @@
 
 |                           | BOP              | Tencent                       | NIHFogarty       |
 |---------------------------|------------------|-------------------------------|------------------|
-| First update logged       | 01/12/20         | 02/20/20                      | 01/13/20         |
-| Last update logged        | 03/09/20         | 03/14/20                      | 03/11/20         |
+| First update logged       | 01/06/20         | 02/20/20                      | 01/13/20         |
+| Last update logged        | 03/18/20         | 03/20/20                      | 03/13/20         |
 | Method                    | Public line list | Daily cases in country scrape | Public line list |
 | First known case          | 02/19/20         | 02/20/20                      | 02/19/20         |
-| Total confirmed cases     | 3513             | 270                           | 18               |
-| New cases since yesterday |                  | 0                             |                  |
+| Total confirmed cases     | 3512             | 270                           | 18               |
+| New cases since yesterday |                  |                               |                  |
 | Total suspected           |                  | 0                             |                  |
 | Total hospitalized        | 0                |                               | 0                |
 | Total recovered           | 0                | 49                            |                  |
@@ -44,7 +44,7 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Tehran                      |           4 |
 | NIH      | Guilan                      |           2 |
 | NIH      | Araq                        |           1 |
-| JHU      | Iran                        |       11364 |
+| JHU      | Iran                        |       19644 |
 | BOP      | Tehran                      |        1352 |
 | BOP      | Qom                         |         386 |
 | BOP      | Gilan                       |         333 |
@@ -56,18 +56,18 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | BOP      | Razavi Khorasan             |          89 |
 | BOP      | Fars                        |          68 |
 | BOP      | East Azarbaijan             |          65 |
-| BOP      | Khuzestan                   |          63 |
+| BOP      | Khuzestan                   |          62 |
 | BOP      | Semnan                      |          60 |
 | BOP      | Golestan                    |          37 |
 | BOP      | Lorestan                    |          30 |
 | BOP      | Ardebil                     |          26 |
 | BOP      | Kermanshah                  |          22 |
 | BOP      | Sistan and Baluchestan      |          19 |
-| BOP      | Kerman                      |          18 |
 | BOP      | Kordestan                   |          18 |
+| BOP      | Kerman                      |          18 |
 | BOP      | Hamadan                     |          16 |
-| BOP      | South Khorasan              |          15 |
 | BOP      | Zanjan                      |          15 |
+| BOP      | South Khorasan              |          15 |
 | BOP      | Hormozgan                   |          13 |
 | BOP      | Ilam                        |          11 |
 | BOP      | West Azarbaijan             |          10 |

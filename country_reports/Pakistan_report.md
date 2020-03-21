@@ -1,6 +1,6 @@
 # Pakistan
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/21/2020
 
 
 
@@ -15,16 +15,16 @@
 
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/11/20                    | 03/09/20         |
+| First update logged       | 01/22/20                    | 01/06/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/26/20         |
-| Total confirmed cases     | 19                          | 6                |
-| New cases since yesterday | 3                           |                  |
+| Total confirmed cases     | 501                         | 6                |
+| New cases since yesterday | 47                          |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 1                |
-| Total recovered           | 2                           | 0                |
-| Total deaths              | 0                           | 0                |
+| Total recovered           | 13                          | 0                |
+| Total deaths              | 3                           | 0                |
 
 Data sources: BOP, JHU, 
 
@@ -40,8 +40,8 @@ Data sources: BOP, JHU,
 
 | source   | loc_name                           |   confirmed |
 |----------|------------------------------------|-------------|
-| NIH      | Pakistan                           |          19 |
-| JHU      | Pakistan                           |          19 |
+| NIH      | Pakistan                           |           1 |
+| JHU      | Pakistan                           |         501 |
 | BOP      | Sindh                              |           3 |
 | BOP      | Gilgit-Baltistan                   |           2 |
 | BOP      | Federally Administered Tribal Area |           1 |

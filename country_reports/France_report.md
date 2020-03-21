@@ -1,6 +1,6 @@
 # France
 ## NSSAC COVID-19 Summary
-## 03/17/2020
+## 03/21/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | JHU                         | BOP              | NIHFogarty       | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
 | First update logged       | 01/22/20                    | 01/06/20         | 01/13/20         | 02/04/20                      |
-| Last update logged        | 03/16/20                    | 03/16/20         | 03/13/20         | 03/17/20                      |
+| Last update logged        | 03/20/20                    | 03/18/20         | 03/13/20         | 03/20/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/24/20         | 01/25/20         | 02/04/20                      |
-| Total confirmed cases     | 6659                        | 2859             | 56               | 38                            |
-| New cases since yesterday |                             |                  |                  |                               |
+| Total confirmed cases     | 12726                       | 2859             | 56               | 38                            |
+| New cases since yesterday | 1779                        |                  |                  |                               |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 9                | 7                |                               |
 | Total recovered           | 12                          | 2                |                  | 12                            |
-| Total deaths              | 148                         | 1                | 0                | 2                             |
+| Total deaths              | 450                         | 1                | 0                | 2                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -48,23 +48,25 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Dijon                      |           4 |
 | NIH      | Guadeloupe                 |           3 |
 | NIH      | Nice                       |           2 |
-| NIH      | Bois-Guillaume             |           1 |
 | NIH      | Pays                       |           1 |
-| NIH      | Montpellier                |           1 |
 | NIH      | Lile                       |           1 |
-| NIH      | Bordeaux                   |           1 |
-| NIH      | Nantes                     |           1 |
-| NIH      | Amiens                     |           1 |
-| NIH      | Strasbourg                 |           1 |
-| NIH      | Landes                     |           1 |
 | NIH      | Brest                      |           1 |
-| JHU      | France                     |        6633 |
-| JHU      | French Guiana              |          11 |
-| JHU      | Guadeloupe                 |           6 |
+| NIH      | Strasbourg                 |           1 |
+| NIH      | Montpellier                |           1 |
+| NIH      | Landes                     |           1 |
+| NIH      | Bois-Guillaume             |           1 |
+| NIH      | Nantes                     |           1 |
+| NIH      | Bordeaux                   |           1 |
+| NIH      | Amiens                     |           1 |
+| JHU      | France                     |       12612 |
+| JHU      | Guadeloupe                 |          45 |
+| JHU      | Reunion                    |          28 |
+| JHU      | French Guiana              |          15 |
+| JHU      | French Polynesia           |          11 |
+| JHU      | Mayotte                    |           6 |
+| JHU      | St Martin                  |           4 |
 | JHU      | Saint Barthelemy           |           3 |
-| JHU      | French Polynesia           |           3 |
-| JHU      | St Martin                  |           2 |
-| JHU      | Mayotte                    |           1 |
+| JHU      | New Caledonia              |           2 |
 | BOP      | Grand Est                  |         699 |
 | BOP      | Ile-de-France              |         577 |
 | BOP      | Hauts-de-France            |         349 |

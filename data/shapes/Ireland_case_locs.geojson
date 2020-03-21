@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Ireland", "confirmed": 43, "color": "blue", "size": 3456.0735588879529, "label": "NIH : Ireland: 43" }, "geometry": { "type": "Point", "coordinates": [ -888269.412873345776461, 6958101.651811616495252 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Ireland", "confirmed": 90, "color": "red", "size": 5000.0, "label": "JHU : Ireland: 90" }, "geometry": { "type": "Point", "coordinates": [ -888269.412873345776461, 6958101.651811616495252 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Ireland", "confirmed": 34, "color": "darkorange", "size": 3073.1814857642958, "label": "BOP : Ireland: 34" }, "geometry": { "type": "Point", "coordinates": [ -888269.412873345776461, 6958101.651811616495252 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Ireland", "confirmed": 1, "color": "blue", "size": 191.31968294834525, "label": "NIH : Ireland: 1" }, "geometry": { "type": "Point", "coordinates": [ -888269.412873345776461, 6958101.651811616495252 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Ireland", "confirmed": 683, "color": "red", "size": 5000.0, "label": "JHU : Ireland: 683" }, "geometry": { "type": "Point", "coordinates": [ -888269.412873345776461, 6958101.651811616495252 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Ireland", "confirmed": 15, "color": "darkorange", "size": 740.97794586062423, "label": "BOP : Ireland: 15" }, "geometry": { "type": "Point", "coordinates": [ -888269.412873345776461, 6958101.651811616495252 ] } }
 ]
 }

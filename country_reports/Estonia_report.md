@@ -1,6 +1,6 @@
 # Estonia
 ## NSSAC COVID-19 Summary
-## 03/17/2020
+## 03/21/2020
 
 
 
@@ -16,11 +16,11 @@
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
 | First update logged       | 01/22/20                    | 01/06/20         |
-| Last update logged        | 03/16/20                    | 03/14/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/26/20         |
-| Total confirmed cases     | 205                         | 1                |
-| New cases since yesterday | 34                          |                  |
+| Total confirmed cases     | 283                         | 1                |
+| New cases since yesterday | 16                          |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 1                           | 0                |
@@ -41,7 +41,7 @@ Data sources: BOP, JHU,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Estonia    |           1 |
-| JHU      | Estonia    |         205 |
+| JHU      | Estonia    |         283 |
 | BOP      | Estonia    |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

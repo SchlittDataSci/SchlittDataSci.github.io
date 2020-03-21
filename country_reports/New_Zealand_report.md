@@ -1,6 +1,6 @@
 # New Zealand
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/21/2020
 
 
 
@@ -15,12 +15,12 @@
 
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/11/20                    | 03/09/20         |
+| First update logged       | 01/22/20                    | 01/06/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/28/20         |
-| Total confirmed cases     | 5                           | 5                |
-| New cases since yesterday | 0                           |                  |
+| Total confirmed cases     | 39                          | 5                |
+| New cases since yesterday | 11                          |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 0                           | 0                |
@@ -40,9 +40,9 @@ Data sources: BOP, JHU,
 
 | source   | loc_name    |   confirmed |
 |----------|-------------|-------------|
-| NIH      | New Zealand |           5 |
-| JHU      | New Zealand |           5 |
-| BOP      | New Zealand |           5 |
+| NIH      | New Zealand |           1 |
+| JHU      | New Zealand |          39 |
+| BOP      | New Zealand |           6 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

@@ -1,6 +1,6 @@
 # Hong Kong
 ## NSSAC COVID-19 Summary
-## 03/14/2020
+## 03/21/2020
 
 
 
@@ -15,15 +15,15 @@
 
 |                           | Tencent                       | NIHFogarty       | BOP              |
 |---------------------------|-------------------------------|------------------|------------------|
-| First update logged       | 02/04/20                      | 01/13/20         | 01/12/20         |
-| Last update logged        | 03/14/20                      | 03/11/20         | 03/09/20         |
+| First update logged       | 02/04/20                      | 01/13/20         | 01/06/20         |
+| Last update logged        | 03/21/20                      | 03/13/20         | 03/18/20         |
 | Method                    | Daily cases in country scrape | Public line list | Public line list |
 | First known case          | 02/04/20                      | 01/22/20         | 01/22/20         |
-| Total confirmed cases     | 137                           | 102              | 45               |
-| New cases since yesterday | 0                             |                  |                  |
+| Total confirmed cases     | 273                           | 102              | 47               |
+| New cases since yesterday | 17                            |                  |                  |
 | Total suspected           | 0                             |                  |                  |
 | Total hospitalized        |                               | 75               | 29               |
-| Total recovered           | 78                            |                  | 0                |
+| Total recovered           | 98                            |                  | 0                |
 | Total deaths              | 4                             | 0                | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
@@ -43,13 +43,13 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Kowloon      |           4 |
 | NIH      | Kwun Tong    |           2 |
 | NIH      | Kwai Chung   |           2 |
+| NIH      | Zhuhai       |           1 |
 | NIH      | Fo Tan       |           1 |
 | NIH      | Ngau Chi Wan |           1 |
-| NIH      | Zhuhai       |           1 |
-| NIH      | Wan Chai     |           1 |
 | NIH      | Tsing Yi     |           1 |
 | NIH      | Yau Ma Tei   |           1 |
-| BOP      | Hong Kong    |          45 |
+| NIH      | Wan Chai     |           1 |
+| BOP      | Hong Kong    |          47 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

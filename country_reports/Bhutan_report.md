@@ -1,6 +1,6 @@
 # Bhutan
 ## NSSAC COVID-19 Summary
-## 03/20/2020
+## 03/21/2020
 
 
 
@@ -42,7 +42,7 @@ Data sources: BOP, JHU,
 |----------|------------|-------------|
 | NIH      | Bhutan     |           1 |
 | JHU      | Bhutan     |           2 |
-| BOP      | Bhutan     |           1 |
+| BOP      | Bhutan     |           2 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

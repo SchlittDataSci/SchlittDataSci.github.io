@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Costa Rica", "confirmed": 1, "color": "blue", "size": 980.5806756909202, "label": "NIH : Costa Rica: 1" }, "geometry": { "type": "Point", "coordinates": [ -9359064.872463408857584, 1149825.82924690656364 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Costa Rica", "confirmed": 26, "color": "red", "size": 5000.0, "label": "JHU : Costa Rica: 26" }, "geometry": { "type": "Point", "coordinates": [ -9359064.872463408857584, 1149825.82924690656364 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Costa Rica", "confirmed": 1, "color": "darkorange", "size": 980.5806756909202, "label": "BOP : Costa Rica: 1" }, "geometry": { "type": "Point", "coordinates": [ -9359064.872463408857584, 1149825.82924690656364 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Costa Rica", "confirmed": 1, "color": "blue", "size": 529.99894000318, "label": "NIH : Costa Rica: 1" }, "geometry": { "type": "Point", "coordinates": [ -9359064.872463408857584, 1149825.82924690656364 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Costa Rica", "confirmed": 89, "color": "red", "size": 5000.0, "label": "JHU : Costa Rica: 89" }, "geometry": { "type": "Point", "coordinates": [ -9359064.872463408857584, 1149825.82924690656364 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Costa Rica", "confirmed": 1, "color": "darkorange", "size": 529.99894000318, "label": "BOP : Costa Rica: 1" }, "geometry": { "type": "Point", "coordinates": [ -9359064.872463408857584, 1149825.82924690656364 ] } }
 ]
 }

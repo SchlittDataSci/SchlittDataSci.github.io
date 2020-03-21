@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Qatar", "confirmed": 262, "color": "blue", "size": 5000.0, "label": "NIH : Qatar: 262" }, "geometry": { "type": "Point", "coordinates": [ 5702845.137518986128271, 2916787.944913734681904 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Qatar", "confirmed": 262, "color": "red", "size": 5000.0, "label": "JHU : Qatar: 262" }, "geometry": { "type": "Point", "coordinates": [ 5702845.137518986128271, 2916787.944913734681904 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Qatar", "confirmed": 24, "color": "darkorange", "size": 1513.2998169159546, "label": "BOP : Qatar: 24" }, "geometry": { "type": "Point", "coordinates": [ 5702845.137518986128271, 2916787.944913734681904 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Qatar", "confirmed": 1, "color": "blue", "size": 230.63280200722127, "label": "NIH : Qatar: 1" }, "geometry": { "type": "Point", "coordinates": [ 5702845.137518986128271, 2916787.944913734681904 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Qatar", "confirmed": 470, "color": "red", "size": 5000.0, "label": "JHU : Qatar: 470" }, "geometry": { "type": "Point", "coordinates": [ 5702845.137518986128271, 2916787.944913734681904 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Qatar", "confirmed": 10, "color": "darkorange", "size": 729.32495748947281, "label": "BOP : Qatar: 10" }, "geometry": { "type": "Point", "coordinates": [ 5702845.137518986128271, 2916787.944913734681904 ] } }
 ]
 }

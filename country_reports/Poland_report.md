@@ -1,6 +1,6 @@
 # Poland
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/21/2020
 
 
 
@@ -15,16 +15,16 @@
 
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/11/20                    | 03/09/20         |
+| First update logged       | 01/22/20                    | 01/06/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 03/04/20         |
-| Total confirmed cases     | 31                          | 1                |
-| New cases since yesterday | 9                           |                  |
+| Total confirmed cases     | 425                         | 1                |
+| New cases since yesterday | 70                          |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
-| Total recovered           | 0                           | 0                |
-| Total deaths              | 0                           | 0                |
+| Total recovered           | 1                           | 0                |
+| Total deaths              | 5                           | 0                |
 
 Data sources: BOP, JHU, 
 
@@ -40,8 +40,8 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Poland     |          31 |
-| JHU      | Poland     |          31 |
+| NIH      | Poland     |           1 |
+| JHU      | Poland     |         425 |
 | BOP      | Lubusz     |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

@@ -1,6 +1,6 @@
 # San Marino
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/21/2020
 
 
 
@@ -15,16 +15,16 @@
 
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/11/20                    | 03/09/20         |
+| First update logged       | 01/22/20                    | 01/06/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 02/27/20         |
-| Total confirmed cases     | 62                          | 2                |
-| New cases since yesterday | 11                          |                  |
+| Total confirmed cases     | 144                         | 2                |
+| New cases since yesterday | 25                          |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 1                |
-| Total recovered           | 0                           | 0                |
-| Total deaths              | 2                           | 0                |
+| Total recovered           | 4                           | 0                |
+| Total deaths              | 14                          | 0                |
 
 Data sources: BOP, JHU, 
 
@@ -40,9 +40,9 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | San Marino |          62 |
-| JHU      | San Marino |          62 |
-| BOP      | San Marino |          51 |
+| NIH      | San Marino |           1 |
+| JHU      | San Marino |         144 |
+| BOP      | San Marino |           3 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

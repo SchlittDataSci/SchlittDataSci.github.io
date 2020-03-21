@@ -1,6 +1,6 @@
 # Brazil
 ## NSSAC COVID-19 Summary
-## 03/20/2020
+## 03/21/2020
 
 
 
@@ -44,8 +44,8 @@ Data sources: BOP, JHU,
 | JHU      | Brazil         |         793 |
 | BOP      | Sao Paulo      |           3 |
 | BOP      | Rio de Janeiro |           2 |
-| BOP      | Bahia          |           1 |
 | BOP      | Espirito Santo |           1 |
+| BOP      | Bahia          |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

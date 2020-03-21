@@ -1,6 +1,6 @@
 # Senegal
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/21/2020
 
 
 
@@ -15,15 +15,15 @@
 
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/11/20                    | 03/09/20         |
+| First update logged       | 01/22/20                    | 01/06/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 03/02/20         |
-| Total confirmed cases     | 4                           | 1                |
-| New cases since yesterday | 0                           |                  |
+| Total confirmed cases     | 38                          | 1                |
+| New cases since yesterday | 7                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
-| Total recovered           | 1                           | 0                |
+| Total recovered           | 2                           | 0                |
 | Total deaths              | 0                           | 0                |
 
 Data sources: BOP, JHU, 
@@ -40,8 +40,8 @@ Data sources: BOP, JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Senegal    |           4 |
-| JHU      | Senegal    |           4 |
+| NIH      | Senegal    |           1 |
+| JHU      | Senegal    |          38 |
 | BOP      | Dakar      |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

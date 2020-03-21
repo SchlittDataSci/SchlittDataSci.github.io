@@ -2,8 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Israel", "confirmed": 131, "color": "blue", "size": 4510.1679466326195, "label": "NIH : Israel: 131" }, "geometry": { "type": "Point", "coordinates": [ 3881350.569936529267579, 3701943.974123275373131 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Israel", "confirmed": 161, "color": "red", "size": 5000.0, "label": "JHU : Israel: 161" }, "geometry": { "type": "Point", "coordinates": [ 3881350.569936529267579, 3701943.974123275373131 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Israel", "confirmed": 58, "color": "darkorange", "size": 3001.0350181436111, "label": "BOP : Israel: 58" }, "geometry": { "type": "Point", "coordinates": [ 3881350.569936529267579, 3701943.974123275373131 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Israel", "confirmed": 2, "color": "blue", "size": 266.31182064565377, "label": "NIH : Israel: 2" }, "geometry": { "type": "Point", "coordinates": [ 3881350.569936529267579, 3701943.974123275373131 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Israel", "confirmed": 705, "color": "red", "size": 5000.0, "label": "JHU : Israel: 705" }, "geometry": { "type": "Point", "coordinates": [ 3881350.569936529267579, 3701943.974123275373131 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Israel", "confirmed": 12, "color": "darkorange", "size": 652.32807305344215, "label": "BOP : Israel: 12" }, "geometry": { "type": "Point", "coordinates": [ 3881350.569936529267579, 3701943.974123275373131 ] } }
 ]
 }
