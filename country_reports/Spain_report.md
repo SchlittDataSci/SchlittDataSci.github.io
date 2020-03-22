@@ -1,6 +1,6 @@
 # Spain
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/21/2020
 
 
 
@@ -15,16 +15,16 @@
 
 |                           | JHU                         | BOP              | NIHFogarty       | Tencent                       |
 |---------------------------|-----------------------------|------------------|------------------|-------------------------------|
-| First update logged       | 01/22/20                    | 01/12/20         | 01/13/20         | 02/11/20                      |
-| Last update logged        | 03/11/20                    | 03/09/20         | 03/11/20         | 03/12/20                      |
+| First update logged       | 01/22/20                    | 01/06/20         | 01/13/20         | 02/11/20                      |
+| Last update logged        | 03/20/20                    | 03/18/20         | 03/13/20         | 03/20/20                      |
 | Method                    | Cases by day & country list | Public line list | Public line list | Daily cases in country scrape |
 | First known case          | 01/22/20                    | 01/31/20         | 01/31/20         | 02/11/20                      |
-| Total confirmed cases     | 2277                        | 981              | 116              | 13                            |
-| New cases since yesterday |                             |                  |                  | 0                             |
+| Total confirmed cases     | 20410                       | 981              | 116              | 13                            |
+| New cases since yesterday | 2447                        |                  |                  |                               |
 | Total suspected           |                             |                  |                  | 0                             |
 | Total hospitalized        |                             | 1                | 9                |                               |
-| Total recovered           | 183                         | 0                |                  | 2                             |
-| Total deaths              | 54                          | 0                | 0                | 0                             |
+| Total recovered           | 1588                        | 0                |                  | 2                             |
+| Total deaths              | 1043                        | 0                | 0                | 0                             |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -44,23 +44,23 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | NIH      | Cantabria              |          10 |
 | NIH      | Valencia               |           7 |
 | NIH      | Castile and Leon       |           7 |
+| NIH      | Extremadura            |           6 |
 | NIH      | Tenerife               |           6 |
 | NIH      | Catalonia              |           6 |
-| NIH      | Extremadura            |           6 |
 | NIH      | Madrid                 |           5 |
 | NIH      | Aragon                 |           5 |
 | NIH      | Basque Country         |           4 |
 | NIH      | Barcelona              |           3 |
 | NIH      | Castilla-La Mancha     |           3 |
-| NIH      | Navarra                |           2 |
 | NIH      | La Rioja               |           2 |
-| NIH      | Zaragoza               |           1 |
-| NIH      | Mallorca               |           1 |
-| NIH      | Castellon              |           1 |
+| NIH      | Navarra                |           2 |
 | NIH      | Castille and Leon      |           1 |
+| NIH      | Zaragoza               |           1 |
+| NIH      | Castellon              |           1 |
 | NIH      | Canary Islands         |           1 |
+| NIH      | Mallorca               |           1 |
 | NIH      | Asturias               |           1 |
-| JHU      | Spain                  |        2277 |
+| JHU      | Spain                  |       20410 |
 | BOP      | Pais Vasco             |         147 |
 | BOP      | La Rioja               |          81 |
 | BOP      | Catalonia              |          70 |
@@ -72,8 +72,8 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | BOP      | Canary Islands         |          20 |
 | BOP      | Aragon                 |          13 |
 | BOP      | Baleares               |           9 |
-| BOP      | Galicia                |           6 |
 | BOP      | Principado de Asturias |           6 |
+| BOP      | Galicia                |           6 |
 | BOP      | Extremadura            |           5 |
 | BOP      | Region de Murcia       |           4 |
 | BOP      | Navarra                |           3 |

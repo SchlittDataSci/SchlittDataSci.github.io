@@ -2,8 +2,9 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Ukraine", "confirmed": 1, "color": "blue", "size": 5000.0, "label": "NIH : Ukraine: 1" }, "geometry": { "type": "Point", "coordinates": [ 3481164.425544747151434, 6357936.478724492713809 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Ukraine", "confirmed": 1, "color": "red", "size": 5000.0, "label": "JHU : Ukraine: 1" }, "geometry": { "type": "Point", "coordinates": [ 3481164.425544747151434, 6357936.478724492713809 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Ukraine", "confirmed": 1, "color": "darkorange", "size": 5000.0, "label": "BOP : Ukraine: 1" }, "geometry": { "type": "Point", "coordinates": [ 3481164.425544747151434, 6357936.478724492713809 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Ukraine", "confirmed": 1, "color": "blue", "size": 928.47669088525936, "label": "NIH : Ukraine: 1" }, "geometry": { "type": "Point", "coordinates": [ 3481164.425544747151434, 6357936.478724492713809 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Ukraine", "confirmed": 29, "color": "red", "size": 5000.0, "label": "JHU : Ukraine: 29" }, "geometry": { "type": "Point", "coordinates": [ 3481164.425544747151434, 6357936.478724492713809 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Chernivtsi", "confirmed": 1, "color": "darkorange", "size": 928.47669088525936, "label": "BOP : Chernivtsi: 1" }, "geometry": { "type": "Point", "coordinates": [ 2887366.346596522722393, 6154646.281772633083165 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Zhytomyr", "confirmed": 1, "color": "darkorange", "size": 928.47669088525936, "label": "BOP : Zhytomyr: 1" }, "geometry": { "type": "Point", "coordinates": [ 3191444.585972951725125, 6491395.975373033434153 ] } }
 ]
 }

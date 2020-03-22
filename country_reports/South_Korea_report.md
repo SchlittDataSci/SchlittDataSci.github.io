@@ -1,6 +1,6 @@
 # South Korea
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/21/2020
 
 
 
@@ -13,18 +13,18 @@
 #### Table 1: Situation summary
 
 
-|                           | Tencent                       | BOP              | NIHFogarty       |
-|---------------------------|-------------------------------|------------------|------------------|
-| First update logged       | 02/04/20                      | 01/12/20         | 01/13/20         |
-| Last update logged        | 03/12/20                      | 03/09/20         | 03/11/20         |
-| Method                    | Daily cases in country scrape | Public line list | Public line list |
-| First known case          | 02/04/20                      | 01/20/20         | 01/20/20         |
-| Total confirmed cases     | 3150                          | 938              | 114              |
-| New cases since yesterday | 0                             |                  |                  |
-| Total suspected           | 0                             |                  |                  |
-| Total hospitalized        |                               | 24               | 9                |
-| Total recovered           | 24                            | 0                |                  |
-| Total deaths              | 13                            | 0                | 0                |
+|                           | BOP              | Tencent                       | NIHFogarty       |
+|---------------------------|------------------|-------------------------------|------------------|
+| First update logged       | 01/06/20         | 02/04/20                      | 01/13/20         |
+| Last update logged        | 03/18/20         | 03/20/20                      | 03/13/20         |
+| Method                    | Public line list | Daily cases in country scrape | Public line list |
+| First known case          | 01/06/20         | 02/04/20                      | 01/20/20         |
+| Total confirmed cases     | 3548             | 3150                          | 114              |
+| New cases since yesterday |                  |                               |                  |
+| Total suspected           |                  | 0                             |                  |
+| Total hospitalized        | 28               |                               | 9                |
+| Total recovered           | 0                | 24                            |                  |
+| Total deaths              | 0                | 13                            | 0                |
 
 Data sources: BOP, JHU, NIH-Fogarty, Tencent
 
@@ -41,23 +41,23 @@ Data sources: BOP, JHU, NIH-Fogarty, Tencent
 | source   | loc_name          |   confirmed |
 |----------|-------------------|-------------|
 | NIH      | Seoul             |           2 |
-| BOP      | Daegu             |         552 |
-| BOP      | North Gyeongsang  |         250 |
-| BOP      | Busan             |          40 |
-| BOP      | Seoul             |          33 |
-| BOP      | Gyeonggi          |          16 |
-| BOP      | South Gyeongsang  |          10 |
-| BOP      | Gangwon           |           5 |
-| BOP      | South Chungcheong |           4 |
-| BOP      | Daejeon           |           4 |
-| BOP      | Gwangju           |           4 |
-| BOP      | North Chungcheong |           3 |
-| BOP      | Jeju              |           2 |
-| BOP      | Ulsan             |           2 |
-| BOP      | Incheon           |           2 |
-| BOP      | Sejong            |           1 |
-| BOP      | North Jeolla      |           1 |
-| BOP      | South Jeolla      |           1 |
+| BOP      | Daegu             |        2532 |
+| BOP      | North Gyeongsang  |         507 |
+| BOP      | Busan             |          79 |
+| BOP      | Seoul             |          71 |
+| BOP      | South Chungcheong |          66 |
+| BOP      | Gyeonggi          |          59 |
+| BOP      | South Gyeongsang  |          47 |
+| BOP      | Ulsan             |          44 |
+| BOP      | Gangwon           |          38 |
+| BOP      | North Chungcheong |          32 |
+| BOP      | Sejong            |          30 |
+| BOP      | Daejeon           |          10 |
+| BOP      | Gwangju           |           6 |
+| BOP      | South Jeolla      |           6 |
+| BOP      | Incheon           |           5 |
+| BOP      | North Jeolla      |           4 |
+| BOP      | Jeju              |           4 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 

@@ -2,7 +2,8 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "UAE", "confirmed": 74, "color": "blue", "size": 5000.0, "label": "NIH : UAE: 74" }, "geometry": { "type": "Point", "coordinates": [ 3481164.425544747151434, 6357936.478724492713809 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "United Arab Emirates", "confirmed": 74, "color": "red", "size": 5000.0, "label": "JHU : United Arab Emirates: 74" }, "geometry": { "type": "Point", "coordinates": [ 6011194.939528083428741, 2753438.426757344976068 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "UAE", "confirmed": 22, "color": "blue", "size": 1982.0624179302297, "label": "NIH : UAE: 22" }, "geometry": { "type": "Point", "coordinates": [ 3481164.425544747151434, 6357936.478724492713809 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "United Arab Emirates", "confirmed": 140, "color": "red", "size": 5000.0, "label": "JHU : United Arab Emirates: 140" }, "geometry": { "type": "Point", "coordinates": [ 6011194.939528083428741, 2753438.426757344976068 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "UAE", "confirmed": 1, "color": "darkorange", "size": 422.57712736425827, "label": "BOP : UAE: 1" }, "geometry": { "type": "Point", "coordinates": [ 3481164.425544747151434, 6357936.478724492713809 ] } }
 ]
 }

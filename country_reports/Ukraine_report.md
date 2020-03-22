@@ -1,6 +1,6 @@
 # Ukraine
 ## NSSAC COVID-19 Summary
-## 03/13/2020
+## 03/21/2020
 
 
 
@@ -15,16 +15,16 @@
 
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/12/20         |
-| Last update logged        | 03/11/20                    | 03/09/20         |
+| First update logged       | 01/22/20                    | 01/06/20         |
+| Last update logged        | 03/20/20                    | 03/18/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 03/03/20         |
-| Total confirmed cases     | 1                           | 1                |
-| New cases since yesterday | 0                           |                  |
+| Total confirmed cases     | 29                          | 3                |
+| New cases since yesterday | 13                          |                  |
 | Total suspected           |                             |                  |
-| Total hospitalized        |                             | 1                |
+| Total hospitalized        |                             | 2                |
 | Total recovered           | 0                           | 0                |
-| Total deaths              | 0                           | 0                |
+| Total deaths              | 3                           | 0                |
 
 Data sources: BOP, JHU, 
 
@@ -41,13 +41,16 @@ Data sources: BOP, JHU,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Ukraine    |           1 |
-| JHU      | Ukraine    |           1 |
-| BOP      | Ukraine    |           1 |
+| JHU      | Ukraine    |          29 |
+| BOP      | Chernivtsi |           1 |
+| BOP      | Zhytomyr   |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Ukraine_case_locs.geojson)
+
+[Case admin1 locs geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Ukraine_admin1_locs.geojson)
 
 ### Observed case clusters:
 #### Fig 3:

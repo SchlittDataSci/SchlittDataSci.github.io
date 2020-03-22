@@ -1,6 +1,6 @@
 # Taiwan*
 ## NSSAC COVID-19 Summary
-## 03/12/2020
+## 03/21/2020
 
 
 
@@ -16,15 +16,15 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/11/20                    |
+| Last update logged        | 03/20/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 48                          |
-| New cases since yesterday | 1                           |
+| Total confirmed cases     | 135                         |
+| New cases since yesterday | 27                          |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
-| Total recovered           | 17                          |
-| Total deaths              | 1                           |
+| Total recovered           | 26                          |
+| Total deaths              | 2                           |
 
 Data sources: JHU, 
 
@@ -40,10 +40,11 @@ Data sources: JHU,
 
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
-| NIH      | Taiwan*    |          48 |
-| JHU      | Taiwan*    |          48 |
+| NIH      | Taiwan*    |           1 |
+| JHU      | Taiwan*    |         135 |
+| BOP      | Taiwan*    |           1 |
 
-Data sources: JHU, Natural Earth, NIH-Fogarty, Tencent
+Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
 
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Taiwan*_case_locs.geojson)
