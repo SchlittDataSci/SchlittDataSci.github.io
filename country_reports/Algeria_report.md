@@ -1,6 +1,6 @@
 # Algeria
 ## NSSAC COVID-19 Summary
-## 03/21/2020
+## 03/25/2020
 
 
 
@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | BOP              | NIHFogarty       |
-|---------------------------|-----------------------------|------------------|------------------|
-| First update logged       | 01/22/20                    | 01/06/20         | 01/13/20         |
-| Last update logged        | 03/20/20                    | 03/18/20         | 03/13/20         |
-| Method                    | Cases by day & country list | Public line list | Public line list |
-| First known case          | 01/22/20                    | 02/25/20         | 02/26/20         |
-| Total confirmed cases     | 90                          | 14               | 1                |
-| New cases since yesterday | 3                           |                  |                  |
-| Total suspected           |                             |                  |                  |
-| Total hospitalized        |                             | 0                | 0                |
-| Total recovered           | 32                          | 0                |                  |
-| Total deaths              | 11                          | 0                | 0                |
+|                           | JHU                         | NIHFogarty       |
+|---------------------------|-----------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/13/20         |
+| Last update logged        | 03/23/20                    | 03/13/20         |
+| Method                    | Cases by day & country list | Public line list |
+| First known case          | 01/22/20                    | 02/26/20         |
+| Total confirmed cases     | 201                         | 1                |
+| New cases since yesterday | 0                           |                  |
+| Total suspected           |                             |                  |
+| Total hospitalized        |                             | 0                |
+| Total recovered           | 65                          |                  |
+| Total deaths              | 17                          | 0                |
 
-Data sources: BOP, JHU, NIH-Fogarty, 
+Data sources: JHU, NIH-Fogarty, 
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Algeria_sitrep.csv)
@@ -41,8 +41,8 @@ Data sources: BOP, JHU, NIH-Fogarty,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Algeria    |           2 |
-| JHU      | Algeria    |          90 |
-| BOP      | Blida      |           2 |
+| JHU      | Algeria    |         201 |
+| BOP      | Algeria    |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
@@ -61,14 +61,6 @@ Data source: NIH-Fogarty
 
 
 #### Fig 4:
-![Algeria cases](../cluster_analysis/Algeria_imported_cases_BOP.png)
-
-
-
-Data source: BOP
-
-
-#### Fig 5:
 ![Algeria network](../autochthonous_networks/Algeria_network.png)
 
 

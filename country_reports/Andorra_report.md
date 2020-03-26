@@ -1,6 +1,6 @@
 # Andorra
 ## NSSAC COVID-19 Summary
-## 03/21/2020
+## 03/25/2020
 
 
 
@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | BOP              |
-|---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/06/20         |
-| Last update logged        | 03/20/20                    | 03/18/20         |
-| Method                    | Cases by day & country list | Public line list |
-| First known case          | 01/22/20                    | 03/02/20         |
-| Total confirmed cases     | 75                          | 1                |
-| New cases since yesterday | 22                          |                  |
-| Total suspected           |                             |                  |
-| Total hospitalized        |                             | 0                |
-| Total recovered           | 1                           | 0                |
-| Total deaths              | 0                           | 0                |
+|                           | JHU                         |
+|---------------------------|-----------------------------|
+| First update logged       | 01/22/20                    |
+| Last update logged        | 03/23/20                    |
+| Method                    | Cases by day & country list |
+| First known case          | 01/22/20                    |
+| Total confirmed cases     | 113                         |
+| New cases since yesterday | 0                           |
+| Total suspected           |                             |
+| Total hospitalized        |                             |
+| Total recovered           | 1                           |
+| Total deaths              | 1                           |
 
-Data sources: BOP, JHU, 
+Data sources: JHU, 
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Andorra_sitrep.csv)
@@ -41,8 +41,8 @@ Data sources: BOP, JHU,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Andorra    |           1 |
-| JHU      | Andorra    |          75 |
-| BOP      | Andorra    |           2 |
+| JHU      | Andorra    |         113 |
+| BOP      | Andorra    |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
@@ -50,14 +50,6 @@ Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 [Case points geojson](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/shapes/Andorra_case_locs.geojson)
 
 ### Observed case clusters:
-#### Fig 3:
-![Andorra cases](../cluster_analysis/Andorra_imported_cases_BOP.png)
-
-
-
-Data source: BOP
-
-
 ### Data sources:
 * **[BOP](https://github.com/beoutbreakprepared/nCoV2019)**
 * **[JHU](https://github.com/CSSEGISandData/COVID-19)** 

@@ -1,6 +1,6 @@
 # Albania
 ## NSSAC COVID-19 Summary
-## 03/21/2020
+## 03/25/2020
 
 
 
@@ -16,14 +16,14 @@
 |                           | JHU                         |
 |---------------------------|-----------------------------|
 | First update logged       | 01/22/20                    |
-| Last update logged        | 03/20/20                    |
+| Last update logged        | 03/23/20                    |
 | Method                    | Cases by day & country list |
 | First known case          | 01/22/20                    |
-| Total confirmed cases     | 70                          |
-| New cases since yesterday | 6                           |
+| Total confirmed cases     | 89                          |
+| New cases since yesterday | 0                           |
 | Total suspected           |                             |
 | Total hospitalized        |                             |
-| Total recovered           | 0                           |
+| Total recovered           | 2                           |
 | Total deaths              | 2                           |
 
 Data sources: JHU, 
@@ -41,7 +41,7 @@ Data sources: JHU,
 | source   | loc_name   |   confirmed |
 |----------|------------|-------------|
 | NIH      | Albania    |           1 |
-| JHU      | Albania    |          70 |
+| JHU      | Albania    |          89 |
 | BOP      | Albania    |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent

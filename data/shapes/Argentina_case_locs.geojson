@@ -2,8 +2,12 @@
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
 "features": [
-{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Argentina", "confirmed": 1, "color": "blue", "size": 441.94173824159219, "label": "NIH : Argentina: 1" }, "geometry": { "type": "Point", "coordinates": [ -7232124.717067160643637, -4163405.015422670170665 ] } },
-{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Argentina", "confirmed": 128, "color": "red", "size": 5000.0, "label": "JHU : Argentina: 128" }, "geometry": { "type": "Point", "coordinates": [ -7232124.717067160643637, -4163405.015422670170665 ] } },
-{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Buenos Aires", "confirmed": 1, "color": "darkorange", "size": 441.94173824159219, "label": "BOP : Buenos Aires: 1" }, "geometry": { "type": "Point", "coordinates": [ -6505187.035449004732072, -4110678.290027811657637 ] } }
+{ "type": "Feature", "properties": { "source": "NIH", "loc_name": "Argentina", "confirmed": 1, "color": "blue", "size": 333.33333333333331, "label": "NIH : Argentina: 1" }, "geometry": { "type": "Point", "coordinates": [ -7232124.717067160643637, -4163405.015422670170665 ] } },
+{ "type": "Feature", "properties": { "source": "JHU", "loc_name": "Argentina", "confirmed": 225, "color": "red", "size": 5000.0, "label": "JHU : Argentina: 225" }, "geometry": { "type": "Point", "coordinates": [ -7232124.717067160643637, -4163405.015422670170665 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Buenos Aires", "confirmed": 4, "color": "darkorange", "size": 666.66666666666663, "label": "BOP : Buenos Aires: 4" }, "geometry": { "type": "Point", "coordinates": [ -6505187.035449004732072, -4110678.290027811657637 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Chaco", "confirmed": 2, "color": "darkorange", "size": 471.4045207910317, "label": "BOP : Chaco: 2" }, "geometry": { "type": "Point", "coordinates": [ -6777309.734819079749286, -3046590.598196191247553 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Entre Rios", "confirmed": 1, "color": "darkorange", "size": 333.33333333333331, "label": "BOP : Entre Rios: 1" }, "geometry": { "type": "Point", "coordinates": [ -6607252.35886144824326, -3714223.239532954059541 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Santa Fe", "confirmed": 1, "color": "darkorange", "size": 333.33333333333331, "label": "BOP : Santa Fe: 1" }, "geometry": { "type": "Point", "coordinates": [ -6808801.840653310529888, -3544165.869135439861566 ] } },
+{ "type": "Feature", "properties": { "source": "BOP", "loc_name": "Cordoba", "confirmed": 1, "color": "darkorange", "size": 333.33333333333331, "label": "BOP : Cordoba: 1" }, "geometry": { "type": "Point", "coordinates": [ -7144854.388502240180969, -3687068.004492409061641 ] } }
 ]
 }

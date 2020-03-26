@@ -1,6 +1,6 @@
 # Afghanistan
 ## NSSAC COVID-19 Summary
-## 03/21/2020
+## 03/25/2020
 
 
 
@@ -13,20 +13,20 @@
 #### Table 1: Situation summary
 
 
-|                           | JHU                         | BOP              | NIHFogarty       |
-|---------------------------|-----------------------------|------------------|------------------|
-| First update logged       | 01/22/20                    | 01/06/20         | 01/13/20         |
-| Last update logged        | 03/20/20                    | 03/18/20         | 03/13/20         |
-| Method                    | Cases by day & country list | Public line list | Public line list |
-| First known case          | 01/22/20                    | 02/24/20         | 02/24/20         |
-| Total confirmed cases     | 24                          | 4                | 1                |
-| New cases since yesterday | 2                           |                  |                  |
-| Total suspected           |                             |                  |                  |
-| Total hospitalized        |                             | 0                | 0                |
-| Total recovered           | 1                           | 0                |                  |
-| Total deaths              | 0                           | 0                | 0                |
+|                           | JHU                         | NIHFogarty       |
+|---------------------------|-----------------------------|------------------|
+| First update logged       | 01/22/20                    | 01/13/20         |
+| Last update logged        | 03/23/20                    | 03/13/20         |
+| Method                    | Cases by day & country list | Public line list |
+| First known case          | 01/22/20                    | 02/24/20         |
+| Total confirmed cases     | 40                          | 1                |
+| New cases since yesterday | 0                           |                  |
+| Total suspected           |                             |                  |
+| Total hospitalized        |                             | 0                |
+| Total recovered           | 1                           |                  |
+| Total deaths              | 1                           | 0                |
 
-Data sources: BOP, JHU, NIH-Fogarty, 
+Data sources: JHU, NIH-Fogarty, 
 
 
 [Sitrep csv](https://github.com/SchlittDataSci/SchlittDataSci.github.io/blob/master/data/tables/Afghanistan_sitrep.csv)
@@ -41,8 +41,8 @@ Data sources: BOP, JHU, NIH-Fogarty,
 | source   | loc_name    |   confirmed |
 |----------|-------------|-------------|
 | NIH      | Afghanistan |           2 |
-| JHU      | Afghanistan |          24 |
-| BOP      | Herat       |           4 |
+| JHU      | Afghanistan |          40 |
+| BOP      | Afghanistan |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
@@ -61,14 +61,6 @@ Data source: NIH-Fogarty
 
 
 #### Fig 4:
-![Afghanistan cases](../cluster_analysis/Afghanistan_imported_cases_BOP.png)
-
-
-
-Data source: BOP
-
-
-#### Fig 5:
 ![Afghanistan network](../autochthonous_networks/Afghanistan_network.png)
 
 

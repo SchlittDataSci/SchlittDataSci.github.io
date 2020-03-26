@@ -1,6 +1,6 @@
 # Argentina
 ## NSSAC COVID-19 Summary
-## 03/21/2020
+## 03/25/2020
 
 
 
@@ -15,16 +15,16 @@
 
 |                           | JHU                         | BOP              |
 |---------------------------|-----------------------------|------------------|
-| First update logged       | 01/22/20                    | 01/06/20         |
-| Last update logged        | 03/20/20                    | 03/18/20         |
+| First update logged       | 01/22/20                    | 01/20/20         |
+| Last update logged        | 03/23/20                    | 03/22/20         |
 | Method                    | Cases by day & country list | Public line list |
 | First known case          | 01/22/20                    | 03/03/20         |
-| Total confirmed cases     | 128                         | 7                |
-| New cases since yesterday | 31                          |                  |
+| Total confirmed cases     | 225                         | 28               |
+| New cases since yesterday | 0                           |                  |
 | Total suspected           |                             |                  |
 | Total hospitalized        |                             | 0                |
 | Total recovered           | 3                           | 0                |
-| Total deaths              | 3                           | 0                |
+| Total deaths              | 4                           | 0                |
 
 Data sources: BOP, JHU, 
 
@@ -41,8 +41,12 @@ Data sources: BOP, JHU,
 | source   | loc_name     |   confirmed |
 |----------|--------------|-------------|
 | NIH      | Argentina    |           1 |
-| JHU      | Argentina    |         128 |
-| BOP      | Buenos Aires |           1 |
+| JHU      | Argentina    |         225 |
+| BOP      | Buenos Aires |           4 |
+| BOP      | Chaco        |           2 |
+| BOP      | Entre Rios   |           1 |
+| BOP      | Santa Fe     |           1 |
+| BOP      | Cordoba      |           1 |
 
 Data sources: BOP, JHU, Natural Earth, NIH-Fogarty, Tencent
 
