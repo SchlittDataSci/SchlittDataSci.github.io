@@ -1637,6 +1637,14 @@ loadSheetCsv(
   d3.csv('outcome_forecasts.csv').then(rows => { ingestForecast(rows); afterForecast(); }).catch(()=>{});
 });
 
+// Forecast tab (published CSV); falls back to the bundled snapshot if the live tab is unreachable.
+d3.csv(GSHEET_FORECAST_URL).then(rows => {
+  if (!rows || !rows.length || !('p50' in rows[0])) throw new Error('bad forecast');
+  ingestForecast(rows); if (allRows.length) { renderStats(); renderTrendSection(); }
+}).catch(() => {
+  d3.csv('outcome_forecasts.csv').then(rows => { ingestForecast(rows); if (allRows.length) { renderStats(); renderTrendSection(); } }).catch(()=>{});
+});
+
 // --- AI event reports (Merged reports tab) ---
 const GSHEET_REPORTS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSV-zmb_y0Y1s_xOoiaUxhgsew4Cf5Vuo6EXOTbGjEk-X0D9DuM_26ZQRnUCfHPBuqWwVghogKsuR1k/pub?gid=649975965&single=true&output=csv";
 const GSHEET_REPORTS_EXPORT_URL = "https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8/export?format=csv&gid=649975965";
