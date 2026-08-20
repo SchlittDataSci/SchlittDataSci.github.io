@@ -1675,7 +1675,7 @@ const articleScoresByUrl = new Map();
 let articleScoresPromise = null;
 function chipBand(v, scale) { const t = v / scale; return t >= 0.66 ? 'q-high' : t >= 0.4 ? 'q-mod' : 'q-low'; }
 function chipHtml(s) {
-  return (s.lang ? `<span class="chip" title="Language — from the raw article data sourcecountry column">Lang ${escHtml(s.lang)}</span>` : '') +
+  return (s.lang ? `<span class="chip" title="Source country from the raw article data">Source: ${escHtml(s.lang)}</span>` : '') +
     `<span class="chip ${chipBand(s.prox,1)}" title="Proximity score (0–1)">P ${s.prox.toFixed(2)}</span>` +
     `<span class="chip ${chipBand(s.normed,100)}" title="Normed quality score, per location (0–100)">N ${Math.round(s.normed)}</span>`;
 }
