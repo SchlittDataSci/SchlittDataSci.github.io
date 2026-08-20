@@ -1,42 +1,24 @@
-# COVID-19 Cluster Analysis
+# OSINT-VHF Surveillance Dashboard
 
-This repository collects figures generated from the [BeOutbreakPrepared nCoV 2019 public line list](https://github.com/beoutbreakprepared/nCoV2019).
+Single-file dashboard (`dashboard.html`) tracking viral hemorrhagic fever outbreaks from open-source reporting. Built on the **Nocturne** design system (`_ds/nocturne-.../`).
 
-The figures are rendered with the following conventions:
+## What it is
+- Event list (AI-generated outbreak briefs) + world map + stat cards + DRC Ebola trend chart + latest-figures table.
+- Live data pulled from a published Google Sheet (CSV export), with a hardcoded fallback snapshot if the fetch fails.
 
-### Overview
-* Time within the outbreak is rendered as the x-axis.
-* Cases are rendered along the y-axis and labelled with their geographic location on the left side of the graph.
-* Each figure shows the imported COVID-19 cases for a given non-China country sorted by **cluster_ID,** then case **ID**.
-* Arrows for each case signify the flow of time between the first and last recorded event for a given case.
+## Data source
+Two published CSV tabs from one Google Sheet (`GSHEET_CSV_URL`, `GSHEET_REPORTS_URL` in `dashboard.html`):
 
+1. **Measurements tab** — long format, one row per (location, pathogen, measure, report_date [, source]). Known columns: `location`, `pathogen`, `measure` (`confirmed_cases`, `confirmed_deaths`, possibly others), `report_date`, `value`, `outlier` ("True"/"False" — statistically flagged), `sources` (semicolon-separated URLs), `n_sources`. See `DATA-NOTES.md` for open questions on geography level / outcome-vs-raw columns.
+2. **Merged reports tab** — one row per AI-written outbreak brief: `Event Title`, `Risk Severity Score`, `Latest Report`, `Outbreak Country`/`Outbreak Location`, `Status Report` (HTML).
 
-### Cluster Assignment & Visualization
-* **cluster_ID** is assigned via a combination of manual curation and inference where the cluster is named after the **ID** of the index case.
-* **cluster_IDs** are manually curated by volunteers via a review of press articles regarding the case origin, seeking evidence of autochthonous transmission.
-* For cases for whom no travel is recorded, **cluster_ID** is assigned as the **ID** of the first individual at their given named location who travelled to China and was infected.
-* **cluster_IDs** are represented by both a row color assignment (yellow for earlier clusters) and a right axes label constructed as such:
-  * '{ID} {"Inf" if inferred} - Cl {cluster_ID}'
-* Imported cases which appear to have originated in China and which are not the index case of an autochthonous cluster are rendered with an uncolored background and a right axes label constructed as such:
-  * '{ID} Imp' (for imported)
-* Cases which do not appear to have originated in China and which do not appear connected to any cluster by inference or curation are rendered with an uncolored background and a right axes label constructed as such:
-  * '{ID} Unk' (for unknown)
-* Inferred clusters' row backgrounds are rendered with lower saturation than manually curated clusters to convey a reduced confidence level.
+## Key aggregation rule (IMPORTANT — see current task)
+Cases/deaths are reported at mixed geographic granularity (national totals AND subnational/county-level rows can both exist for the same country+date). Naively summing all rows double-counts. The correct aggregation, per user instruction:
+- Filter to **national-level geography rows only** OR, when only subnational is available, take the **max value per county/subnational unit** then **sum across counties** — never sum raw rows blindly.
+- Use the **outcome-processed measure** (post statistical/outlier processing, i.e. `outlier == 'False'` rows / the "outcome" fields) rather than raw values, to reduce outlier distortion.
+- Language: always call these "reported"/"confirmed" cases and deaths aggregated from open-source reporting, not official epi totals.
 
+This rule currently lives in `latestFor()` (dashboard.html) in a simplified form (dedupes by max-per-date across duplicate rows, filters `outlier==='False'`) — it does NOT yet explicitly filter by geography level or do the per-county-max-then-sum step described above. That refinement plus the new charts is the active task — see `TODO.md`.
 
-### Case History Events and Ranges
-* Within this data set, temporal data is divided between singular events and ranges which occur between specific events.
-* Events include **date_travel, date_onset_symptoms, date_admission_hospital, date_death, date_discharge, date_confirmation,** and **date_missing** if no valid date data is present.
-* Ranges include time spans between all temporally proximal events excluding **date_confirmation**.
-* Ranges are determined by event occurence and presence in the source data set and are not uniformly present or ordered across cases.
-* Events are rendered as unfilled, rectangular glyphs over a singular day in a darkened shade of the event color.
-* For days with multiple events, the traditionally later event is rendered as an expanded rectangle over the traditionally earlier.
-* Ranges are rendered as filled rectangular spans between two events on the x axis.
-* For events with multiple dates, the first date is taken.
-* For cases with no date data, the **date_missing** date is assigned to one day prior to the first event in the data set.
-* **date_death** and **date_discharge** are calculated from the **date_death_or_discharge** and **outcome** fields of the original data.
-* Dates which are misformatted, occur in the future, are more than 30 days apart from their expected preceding event, or are before December 15th are set to NaT.
-
-
-
-
+## Design system
+Nocturne, bound at `_ds/nocturne-c236f95b-6f2d-4f5b-9bdc-974f09e4a112/`. Dark ground, single accent (#9184d9), Inter, outlined buttons. Load `styles.css` + `_ds_bundle.js` in any new component.
