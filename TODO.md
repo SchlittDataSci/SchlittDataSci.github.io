@@ -1,6 +1,12 @@
 # TODO
 
-## Done — event-driven map + layout rework (Aug 20)
+## Done — polish round 2 (Aug 20)
+1. Event reports list: fixed-height column (briefs-card 560px, events-col overflow-y auto) scrolling independently of the AI brief.
+2. Map risk colours muted to a low-chroma slate→crimson ramp (sevColor) with calmer marker glow + legend.
+3. Summary stats moved OUT of the plots panel INTO an expanded card beside the map (grid-main = map | 320px summary); larger stat numerals + forecast box. Plots panel is charts-only.
+4. Trend aggregation is national-scope only (isNationalScope classifier) AND forward-fills each country's last-known cumulative total across reporting-gap dates before summing — fixes both the national/subnational mixing and the cross-country reporting-gap cliff (e.g. Bundibugyo 08-09 was 19, now 3,992). latestCombo (summary/table) prefers national scope with fallback.
+
+## Earlier — event-driven map + layout rework
 - Map markers now represent REPORTED EVENTS (reports tab, 77 with coordinates), positioned at their real [lat,lon] (many sub-national), sized + coloured by Risk Severity Score 1–9 (sevColor heat, blurple→amber→red). Marker/globe click selects that event's brief (focusEvent). Size seg = Risk score | Cases. De-overlap spiral jitter for shared national coords.
 - Layout: grid-main is now the full-width map. row-2col = thin plots panel (0.82fr) + wide master-detail briefs panel (1.85fr) that holds the Event reports list beside the AI brief it drives (fixed 620px height, internal scroll on list + brief).
 - Summary counters are now scoped to the SELECTED pathogen (statScope label), fixing the cross-pathogen cumulative-sum inflation.
