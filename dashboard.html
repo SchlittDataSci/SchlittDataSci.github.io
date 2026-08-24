@@ -73,23 +73,25 @@
   .forecast-card p.f-line { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; border-top: 1px solid var(--color-divider); margin: 0; }
   .forecast-card p.f-line:first-of-type { border-top: 0; }
   .forecast-card .f-range { color: color-mix(in srgb, var(--color-text) 55%, transparent); font-size: 11.5px; }
-  .row-2col { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-4); margin-top: var(--space-4); align-items: start; }
+  .row-2col { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-4); margin-top: var(--space-4); align-items: stretch; }
   .row-2col > .card { display: flex; flex-direction: column; }
-  .briefs-card { height: 560px; }
-  .plots-card { min-height: 0; }
-  .summary-card { display: flex; flex-direction: column; padding: var(--space-4); }
+  .briefs-card { height: 672px; }
+  .plots-card { height: 672px; min-height: 0; display: flex; flex-direction: column; }
+  .summary-card { display: flex; flex-direction: column; padding: var(--space-4); height: auto; min-height: 560px; align-self: stretch; gap: var(--space-4); }
   .stat-scope { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: color-mix(in srgb, var(--color-text) 45%, transparent); margin: 0 0 18px; }
   .stat-scope span { color: var(--color-accent-300); font-weight: 600; }
-  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px var(--space-4); }
-  .stat-grid .stat-num { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 31px; line-height: 1.05; margin: 0; letter-spacing: -0.015em; }
-  .stat-grid .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: color-mix(in srgb, var(--color-text) 55%, transparent); margin: 8px 0 0; }
-  .forecast-box { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--color-divider); font-size: 12px; color: color-mix(in srgb, var(--color-text) 78%, transparent); line-height: 1.6; }
-  .forecast-box .fc-title { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: color-mix(in srgb, var(--color-text) 45%, transparent); margin: 0 0 12px; }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); flex: 1 1 0; min-height: 180px; }
+  .stat-grid .stat-cell { background: color-mix(in srgb, var(--color-neutral-800) 30%, transparent); border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: var(--space-3); display: flex; flex-direction: column; justify-content: center; min-height: 160px; }
+  .stat-grid .stat-num { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 28px; line-height: 1.05; margin: 0; letter-spacing: -0.015em; }
+  .stat-grid .stat-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: color-mix(in srgb, var(--color-text) 55%, transparent); margin: 6px 0 0; }
+  .forecast-box { margin-top: 0; flex: 1 1 0; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 18px; border-top: 1px solid var(--color-divider); font-size: 12px; color: color-mix(in srgb, var(--color-text) 78%, transparent); line-height: 1.5; min-height: 180px; }
+  .forecast-box .fc-title { font-size: 10.5px; text-transform: uppercase; letter-spacing: .04em; color: color-mix(in srgb, var(--color-text) 45%, transparent); margin: 0 0 12px; }
   .forecast-box .fc-sub { text-transform: none; letter-spacing: 0; color: color-mix(in srgb, var(--color-text) 40%, transparent); }
-  .forecast-box .fc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
-  .forecast-box .fc-num { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 27px; line-height: 1.05; margin: 0; letter-spacing: -0.015em; color: var(--color-text); }
-  .forecast-box .fc-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: color-mix(in srgb, var(--color-text) 55%, transparent); margin: 7px 0 3px; }
-  .forecast-box .fc-range { font-size: 10.5px; color: color-mix(in srgb, var(--color-text) 45%, transparent); margin: 0; }
+  .forecast-box .fc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+  .forecast-box .fc-cell { background: color-mix(in srgb, var(--color-neutral-800) 30%, transparent); border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: var(--space-3); display: flex; flex-direction: column; justify-content: center; min-height: 140px; }
+  .forecast-box .fc-num { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 28px; line-height: 1.05; margin: 0; letter-spacing: -0.015em; color: var(--color-text); }
+  .forecast-box .fc-lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: color-mix(in srgb, var(--color-text) 55%, transparent); margin: 6px 0 4px; }
+  .forecast-box .fc-range { font-size: 10px; color: color-mix(in srgb, var(--color-text) 50%, transparent); margin: 0; line-height: 1.35; white-space: nowrap; }
   .forecast-box .fc-none { font-size: 12px; line-height: 1.55; color: color-mix(in srgb, var(--color-text) 55%, transparent); margin: 0; }
   .forecast-box strong { color: var(--color-text); font-weight: 600; }
   .forecast-box span.mut { color: color-mix(in srgb, var(--color-text) 50%, transparent); }
@@ -102,10 +104,14 @@
   .event-doc .doc-meta { font-size: 9.5px; color: color-mix(in srgb, var(--color-text) 45%, transparent); }
   .brief-quality { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 0 12px; padding-bottom: 10px; border-bottom: 1px solid var(--color-divider); }
   .brief-quality .bq-meta { font-size: 11px; color: color-mix(in srgb, var(--color-text) 58%, transparent); }
-  .sub-swatch { display: inline-flex; align-items: center; gap: 4px; margin-right: 10px; white-space: nowrap; }
+  .sub-swatch { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; font-size: 10.5px; max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
+  #subLegend { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; flex: 1 1 220px; min-width: 200px; }
+  #subLegend .sub-swatch:nth-child(n+6) { opacity: 0.95; }
+  #subToggleWrap { display: flex; align-items: center; gap: 8px; font-size: 11px; color: color-mix(in srgb, var(--color-text) 65%, transparent); margin-bottom: 8px; }
+  #subToggleWrap label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
   .brief-col { display: flex; flex-direction: column; min-height: 0; }
-  .chart-wrap { width: 100%; height: 190px; }
-  .source-chart-wrap { width: 100%; height: 92px; margin-top: 2px; }
+  .chart-wrap { width: 100%; height: 228px; }
+  .source-chart-wrap { width: 100%; height: 110px; margin-top: 2px; }
   .chart-divider { border-top: 1px solid var(--color-divider); margin: 6px 0 8px; }
   .methodology-note { font-size: 11px; line-height: 1.5; color: color-mix(in srgb, var(--color-text) 55%, transparent); margin: 12px 0 0; padding-top: 10px; }
   .brief-body { flex: 1; min-height: 0; overflow-y: auto; padding-right: 4px; }
@@ -166,7 +172,9 @@
   .art-link { display: inline-block; font-size: 12.5px; font-weight: 600; margin-bottom: 5px; word-break: break-word; }
   .art-extract { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 74%, transparent); padding: 2px 0; }
   .art-extract strong { color: var(--color-text); }
-  @media (max-width: 980px) { .grid-main, .row-2col { grid-template-columns: 1fr; } .briefs-card { height: auto; } .briefs-split { grid-template-columns: 1fr; } .events-col { border-right: 0; border-bottom: 1px solid var(--color-divider); padding-right: 0; padding-bottom: var(--space-3); max-height: 260px; } .stat-inline, .stat-grid { grid-template-columns: 1fr 1fr; } .map-wrap { height: 420px; } }
+  #tablePager { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin-top: 12px; flex-wrap: wrap; }
+  #tablePager .pager-info { font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+  @media (max-width: 980px) { .grid-main, .row-2col { grid-template-columns: 1fr; } .briefs-card, .plots-card { height: auto; min-height: 560px; } .briefs-split { grid-template-columns: 1fr; } .events-col { border-right: 0; border-bottom: 1px solid var(--color-divider); padding-right: 0; padding-bottom: var(--space-3); max-height: 260px; } .stat-inline, .stat-grid { grid-template-columns: 1fr 1fr; } .map-wrap { height: 420px; } .summary-card { height: auto; min-height: 420px; } #subLegend { grid-template-columns: repeat(3, minmax(0,1fr)); } }
 </style>
 </head>
 <body>
@@ -189,7 +197,7 @@
   <div class="page-head">
     <div>
       <h1 class="page-title">Viral Hemorrhagic Fever Surveillance</h1>
-      <p class="page-sub">Case figures extracted from open-source news reporting, aggregated per country and pathogen — last measurement Aug 18, 2026</p>
+      <p class="page-sub" id="pageSub">Case figures extracted from open-source news reporting, aggregated per country and pathogen — last updated 18 August 2026</p>
     </div>
   </div>
 
@@ -272,13 +280,17 @@
         <button type="button" class="seg-opt" aria-selected="true" data-type="confirmed">Confirmed</button>
         <button type="button" class="seg-opt" data-type="suspected">Suspected</button>
       </div>
-      <div id="subTrendBar" style="display:none;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+      <div id="subTrendBar" style="display:none;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap">
         <button type="button" class="btn btn-secondary" id="trendBack" style="font-size:11px;padding:3px 9px">← National overview</button>
         <div class="seg" role="tablist" aria-label="Measure" id="subMeasureSeg">
           <button type="button" class="seg-opt" aria-selected="true" data-m="cases">Cases</button>
           <button type="button" class="seg-opt" data-m="deaths">Deaths</button>
         </div>
-        <span class="card-meta" id="subLegend" style="flex:1;min-width:0"></span>
+        <span class="card-meta" id="subLegend" style="flex:1 1 220px;min-width:200px"></span>
+      </div>
+      <div id="subToggleWrap" style="display:none">
+        <label><input type="checkbox" id="subToggle"> Show subnational breakdown (<span id="subToggleCount">0</span> locations)</label>
+        <span class="card-meta" style="margin-left:6px">National view by default — toggle when available</span>
       </div>
       <div class="chart-wrap" id="chartWrap"><svg id="trendSvg" width="100%" height="190"></svg></div>
       <div class="chart-divider"></div>
@@ -332,6 +344,7 @@
       </thead>
       <tbody id="reportRows"></tbody>
     </table>
+    <p class="card-meta" id="tableMore" style="display:none;margin:8px 0 0"></p>
   </div>
 
   <footer class="note">Data aggregated from open-source reporting; not a substitute for official WHO / national ministry of health situation reports.</footer>
@@ -399,52 +412,82 @@ function visibleRecords() {
     return regionOk && locOk;
   });
 }
-document.getElementById('region').addEventListener('change', (e) => { activeRegion = e.target.value; renderStats(); renderTable(); renderMap(); });
-document.getElementById('search').addEventListener('input', (e) => { locationQuery = e.target.value.trim().toLowerCase(); renderStats(); renderTable(); renderMap(); });
+document.getElementById('region').addEventListener('change', (e) => { activeRegion = e.target.value; renderStats(); renderTable(); renderMap(); flyToFilteredMarkers(); });
+document.getElementById('search').addEventListener('input', (e) => { locationQuery = e.target.value.trim().toLowerCase(); renderStats(); renderTable(); renderMap(); flyToFilteredMarkers(); });
 
+function worstCombo() {
+  const candidates = records.filter(r => !isFlu(r.pathogenRaw));
+  if (!candidates.length) return null;
+  let best=null, bestScore=-1;
+  candidates.forEach(r => {
+    const risk = riskByCombo.get(r.country+'||'+r.pathogenRaw) || 1;
+    const score = (r.cases||0) * Math.pow(risk,3);
+    if (score > bestScore) { bestScore=score; best=r; }
+  });
+  return best;
+}
 function renderStats() {
+  const all = isAll();
   const scope = document.getElementById('statScope');
-  if (scope) scope.textContent = PATHOGEN_LABELS[selectedPathogen] || selectedPathogen;
+  if (scope) scope.textContent = all ? 'All pathogens' : (PATHOGEN_LABELS[selectedPathogen] || selectedPathogen);
   const ct = document.getElementById('clustersTag');
   if (ct && records.length) ct.textContent = `${new Set(records.map(r=>r.country)).size} countries · ${records.length} clusters`;
   if (!allRows.length) return;
-  // National figures only — the primary national series' latest canonical value. Never summed.
-  const series = aggregatePathogenSeries(allRows, selectedPathogen);
-  const lastCase = [...series].reverse().find(d=>d.cases!=null);
-  const lastDeath = [...series].reverse().find(d=>d.deaths!=null);
-  document.getElementById('statCases').textContent = lastCase ? lastCase.cases.toLocaleString() : '—';
-  document.getElementById('statDeaths').textContent = lastDeath ? lastDeath.deaths.toLocaleString() : '—';
+  // Score card: sum of highest canonical value for each distinct country (national preferred,
+  // subnational proxy only where no national figure exists). This matches liveRecords construction.
+  // Influenza is filtered out on this dashboard (separate dashboard retained for it).
+  const baseFiltered = records.filter(r => !isFlu(r.pathogenRaw));
+  const filtered = all ? baseFiltered : baseFiltered.filter(r => r.pathogenRaw === selectedPathogen);
+  const sumCases = filtered.reduce((s,r) => s + (r.cases || 0), 0);
+  const sumDeaths = filtered.reduce((s,r) => s + (r.deaths || 0), 0);
+  document.getElementById('statCases').textContent = sumCases ? sumCases.toLocaleString() : '—';
+  document.getElementById('statDeaths').textContent = sumDeaths ? sumDeaths.toLocaleString() : '—';
   const datasetMax = allRows.reduce((m,r)=>r.report_date>m?r.report_date:m,'');
-  const natLocs = nationalLocations(allRows, selectedPathogen, 'confirmed_cases');
   let active = 0;
-  natLocs.forEach(loc => {
-    const rs = allRows.filter(r=>r.pathogen===selectedPathogen && r.location===loc && r.measure==='confirmed_cases' && r.outlier==='False');
-    const md = rs.reduce((m,r)=>r.report_date>m?r.report_date:m,'');
-    if (md && Math.round((new Date(datasetMax)-new Date(md))/86400000) <= 3) active++;
+  filtered.forEach(r => {
+    if (r.date && Math.round((new Date(datasetMax)-new Date(r.date))/86400000) <= 3) active++;
   });
   document.getElementById('statActive').textContent = active;
-  document.getElementById('statCountries').textContent = natLocs.length;
-  renderForecastCard(series);
+  document.getElementById('statCountries').textContent = new Set(filtered.map(r => r.country)).size;
+  // Forecast: when All selected show worst outbreak (hardest-hit country) instead of summing all pathogens*countries
+  let forecastSeries, fcPathogen;
+  if (all) {
+    const w = worstCombo();
+    fcPathogen = w ? w.pathogenRaw : trendPathogen();
+    forecastSeries = aggregatePathogenSeries(allRows, fcPathogen);
+  } else {
+    fcPathogen = selectedPathogen;
+    forecastSeries = aggregatePathogenSeries(allRows, selectedPathogen);
+  }
+  renderForecastCard(forecastSeries, fcPathogen);
 }
-function renderForecastCard(series) {
+function renderForecastCard(series, fcPathogenOverride) {
   const box = document.getElementById('forecastBox');
   if (!box) return;
   const loc = series.loc;
   const lastCase = [...series].reverse().find(d=>d.cases!=null);
   const lastDeath = [...series].reverse().find(d=>d.deaths!=null);
-  const pc = projectionFor(selectedPathogen, loc, 'confirmed_cases', lastCase?lastCase.cases:null);
-  const pd = projectionFor(selectedPathogen, loc, 'confirmed_deaths', lastDeath?lastDeath.deaths:null);
+  const fcPathogen = fcPathogenOverride || (isAll() ? trendPathogen() : selectedPathogen);
+  const label = PATHOGEN_LABELS[fcPathogen] || fcPathogen || '—';
+  let pc = projectionFor(fcPathogen, loc, 'confirmed_cases', lastCase?lastCase.cases:null);
+  let pd = projectionFor(fcPathogen, loc, 'confirmed_deaths', lastDeath?lastDeath.deaths:null);
+  if (pc) pc = cappedToMultipleOf5(pc, lastCase ? lastCase.date : null);
+  if (pd) pd = cappedToMultipleOf5(pd, lastDeath ? lastDeath.date : null);
   if (!pc && !pd) {
-    box.innerHTML = `<p class="fc-title">Forecast</p><p class="fc-none">No projection — the trend model needs more reporting history than ${loc||'this series'} currently has.</p>`;
+    box.innerHTML = `<p class="fc-title">Forecast · ${label} · ${loc||'—'}</p><p class="fc-none">No projection — the trend model needs more reporting history than ${loc||'this series'} currently has.</p>`;
     return;
   }
   const ref = pc || pd;
   const anchor = lastCase || lastDeath;
   const days = Math.round((new Date(ref[ref.length-1].date) - new Date(anchor.date)) / 86400000);
-  const cell = (label, proj) => proj ? (function(){ const f = proj[proj.length-1]; return `<div class="fc-cell"><p class="fc-num">${Math.round(f.p50).toLocaleString()}</p><p class="fc-lbl">${label}</p><p class="fc-range">p25–p75 ${Math.round(f.p25).toLocaleString()}–${Math.round(f.p75).toLocaleString()}</p></div>`; })() : '';
-  box.innerHTML = `<p class="fc-title">${days}-day forecast · ${loc} <span class="fc-sub">median (p50)</span></p><div class="fc-grid">${cell('Proj. cases', pc)}${cell('Proj. deaths', pd)}</div>`;
+  const isAllSelected = isAll();
+  const scopeLabel = isAllSelected ? 'top pathogen' : 'selected pathogen';
+  const cell = (label2, proj) => proj ? (function(){ const f = proj[proj.length-1]; return `<div class="fc-cell"><p class="fc-num">${Math.round(f.p50).toLocaleString()}</p><p class="fc-lbl">${label2}</p><p class="fc-range">50% Range: (${Math.round(f.p25).toLocaleString()}–${Math.round(f.p75).toLocaleString()})</p></div>`; })() : '';
+  box.innerHTML = `<p class="fc-title">${days}-day forecast · median (p50) · ${loc} · ${scopeLabel} · ${label}</p><div class="fc-grid">${cell('Proj. cases', pc)}${cell('Proj. deaths', pd)}</div>`;
 }
 let tableView = { mode:'national', id:null };
+const TABLE_MAX = 40;
+let highlightSubLoc = null;
 function subnationalRowsFor(rec) {
   return rec.subLocs.map(loc => {
     const c = latestOf(allRows.filter(r=>r.pathogen===rec.pathogenRaw && r.location===loc && r.measure==='confirmed_cases' && r.outlier==='False'));
@@ -463,12 +506,18 @@ function renderTable() {
   if (tableView.mode === 'subnational') { rec = records.find(r => r.id === tableView.id); if (rec) { rows = subnationalRowsFor(rec); subnational = true; } }
   if (!subnational) { tableView.mode = 'national'; rows = visibleRecords(); }
   rows = sortRecords(rows, tableSort);
+  const displayRows = rows.slice(0, TABLE_MAX);
   backBtn.style.display = subnational ? '' : 'none';
   titleEl.textContent = subnational ? `${rec.country} · ${rec.disease} — subnational reports` : 'Latest figures by location — national events';
   if (thFirst && thFirst.firstChild) thFirst.firstChild.textContent = subnational ? 'Subnational location' : 'Country';
   const body = document.getElementById('reportRows');
-  if (!rows.length) { body.innerHTML = `<tr><td colspan="9" style="text-align:center;color:var(--color-neutral-400);padding:20px">${subnational?'No subnational reports for this country.':'No locations match the current filters.'}</td></tr>`; return; }
-  body.innerHTML = rows.map(r => {
+  const more = document.getElementById('tableMore');
+  if (!rows.length) {
+    body.innerHTML = `<tr><td colspan="9" style="text-align:center;color:var(--color-neutral-400);padding:20px">${subnational?'No subnational reports for this country.':'No locations match the current filters.'}</td></tr>`;
+    if (more) more.style.display='none';
+    return;
+  }
+  body.innerHTML = displayRows.map(r => {
     const rangeHtml = r.casesRange && r.casesRange[1] > r.casesRange[0] ? `<span class="cell-range">range ${r.casesRange[0].toLocaleString()}–${r.casesRange[1].toLocaleString()}</span>` : '';
     const srcHtml = `<span title="Independent proximal sources backing this figure">${r.sources}</span>`;
     const speciesHtml = r.speciesLabel ? `<span class="cell-range">${r.speciesLabel}</span>` : '';
@@ -480,42 +529,63 @@ function renderTable() {
     const nameExtra = subnational ? '' : (r.scope==='subnational'
       ? `<span class="tag tag-outline" style="margin-left:6px;font-size:9px" title="No national figure reported — showing the largest subnational event: ${r.proxyLoc}">subnational proxy</span>`
       : (drillable ? `<span class="drill-hint">▸ ${r.subCount} subnational</span>` : ''));
+    const subAttr = subnational ? ` data-sub="${r.country.replace(/"/g,'&quot;')}" data-sub-pathogen="${r.pathogen.replace(/"/g,'&quot;')}"` : '';
     return `
-    <tr data-id="${r.id}"${drillable?' data-drill="1"':''}>
+    <tr data-id="${r.id}"${drillable?' data-drill="1"':''}${subAttr}>
       <td>${r.country}${nameExtra}</td>
       <td>${r.disease}${speciesHtml}</td>
       <td><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="cell-range">${doc.vettings} vettings · ${doc.days}d</span></td>
       <td>${r.cases!=null ? r.cases.toLocaleString() : '—'}${rangeHtml}</td>
       <td>${r.deaths!=null ? r.deaths.toLocaleString() : '—'}</td>
       <td>${cfrHtml}</td>
-      <td>${new Date(r.date).toLocaleDateString('en-US',{month:'short',day:'numeric'})}</td>
+      <td>${formatUKDate(r.date)}</td>
       <td>${srcHtml}</td>
       <td><span class="tag status-tag ${statusTagClass[r.status]}" title="${r.statusNote||''}">${r.status}</span></td>
     </tr>`;
   }).join('');
+  if (more) {
+    if (rows.length > TABLE_MAX) { more.textContent = `Showing first ${TABLE_MAX} of ${rows.length} locations — use search or region filter to narrow.`; more.style.display=''; }
+    else more.style.display='none';
+  }
 }
-let tableSort = { key: 'priority', dir: -1 };
+let tableSort = { key: 'date', dir: -1 };
 let riskByCombo = new Map();
 function rowPriority(r) { return (r.cases||0) * ((riskByCombo.get((r.country)+'||'+(r.pathogenRaw||'')) || 1)); }
 function sortRecords(list, sort) {
   if (!sort.key) return list;
-  const val = (r) => {
-    if (sort.key === 'cfr') return (r.deaths != null && r.cases) ? r.deaths / r.cases : -1;
-    if (sort.key === 'priority') return rowPriority(r);
-    if (sort.key === 'doc') return (r.pathogenRaw ? eventDocumentation(r.pathogenRaw, r.country) : locDocumentation(r.pathogen, r.country)).tier;
-    return r[sort.key];
+  const val = (r, key) => {
+    if (key === 'cfr') return (r.deaths != null && r.cases) ? r.deaths / r.cases : -1;
+    if (key === 'priority') return rowPriority(r);
+    if (key === 'doc') return (r.pathogenRaw ? eventDocumentation(r.pathogenRaw, r.country) : locDocumentation(r.pathogen, r.country)).tier;
+    return r[key];
   };
   return [...list].sort((a,b) => {
-    const va = val(a), vb = val(b);
-    if (va == null) return 1; if (vb == null) return -1;
-    if (typeof va === 'string') return va.localeCompare(vb) * sort.dir;
-    return (va - vb) * sort.dir;
+    const primA = val(a, sort.key), primB = val(b, sort.key);
+    let cmp = 0;
+    if (primA == null && primB == null) cmp = 0;
+    else if (primA == null) cmp = 1;
+    else if (primB == null) cmp = -1;
+    else if (typeof primA === 'string') cmp = primA.localeCompare(primB) * sort.dir;
+    else cmp = (primA - primB) * sort.dir;
+    if (cmp !== 0) return cmp;
+    if (sort.key !== 'date') {
+      const da = a.date || '', db = b.date || ''; if (da !== db) return db.localeCompare(da);
+    }
+    if (sort.key !== 'deaths') {
+      const da = a.deaths || -1, db = b.deaths || -1; if (da !== db) return db - da;
+    }
+    if (sort.key !== 'cases') {
+      const ca = a.cases || -1, cb = b.cases || -1; if (ca !== cb) return cb - ca;
+    }
+    return 0;
   });
 }
 document.querySelectorAll('th.sortable').forEach(th => {
   th.addEventListener('click', () => {
     const key = th.dataset.key;
-    tableSort = { key, dir: tableSort.key === key ? -tableSort.dir : 1 };
+    if (tableSort.key === key) tableSort.dir = -tableSort.dir;
+    else tableSort = { key, dir: key === 'date' ? -1 : (key === 'deaths' || key === 'cases' ? -1 : 1) };
+    if (tableSort.key === 'date' || tableSort.key === 'deaths' || tableSort.key === 'cases') tableSort.dir = -1;
     document.querySelectorAll('th.sortable .sort-arrow').forEach(a => a.textContent = '');
     th.querySelector('.sort-arrow').textContent = tableSort.dir === 1 ? '↑' : '↓';
     renderTable();
@@ -544,12 +614,44 @@ function openDrilldown(record) {
   document.getElementById('drillBackdrop').style.display = 'flex';
 }
 document.getElementById('reportRows').addEventListener('click', (e) => {
-  const tr = e.target.closest('tr[data-drill]');
-  if (!tr) return;
-  tableView = { mode:'subnational', id: tr.dataset.id };
-  renderTable();
+  const trDrill = e.target.closest('tr[data-drill]');
+  if (trDrill) {
+    tableView = { mode:'subnational', id: trDrill.dataset.id };
+    const rec = records.find(r => r.id === trDrill.dataset.id);
+    if (rec) {
+      highlightedCountry = rec.country;
+      highlightSubLoc = null;
+      const sel = document.getElementById('disease');
+      if (sel && [...sel.options].some(o=>o.value===rec.pathogenRaw)) { sel.value=rec.pathogenRaw; selectedPathogen=rec.pathogenRaw; }
+      renderStats();
+      updateSubToggleVisibility(rec.country, rec.pathogenRaw);
+      renderTrendSection();
+    }
+    renderTable();
+    const rec2 = records.find(r => r.id === trDrill.dataset.id);
+    if (rec2 && rec2.lonlat) flyToLonlat(rec2.lonlat);
+    return;
+  }
+  const trSub = e.target.closest('tr[data-sub]');
+  if (trSub) {
+    const loc = trSub.dataset.sub;
+    const pat = trSub.dataset.subPathogen;
+    const parentRec = records.find(r => r.id === tableView.id);
+    const country = parentRec ? parentRec.country : geoCountry(loc) || loc.split(',').pop().trim();
+    const pathogen = pat || (parentRec ? parentRec.pathogenRaw : selectedPathogen);
+    highlightedCountry = country;
+    highlightSubLoc = loc;
+    showSubnational = true;
+    const cb = document.getElementById('subToggle'); if (cb) cb.checked = true;
+    trendMode = { mode:'subnational', country, pathogen };
+    const sel = document.getElementById('disease');
+    if (sel && [...sel.options].some(o=>o.value===pathogen)) { sel.value=pathogen; selectedPathogen=pathogen; }
+    renderStats(); renderTrendSection(); renderTable();
+    flyToLonlat(parentRec?.lonlat || null);
+    return;
+  }
 });
-document.getElementById('tableBack').addEventListener('click', () => { tableView = { mode:'national', id:null }; renderTable(); });
+document.getElementById('tableBack').addEventListener('click', () => { tableView = { mode:'national', id:null }; highlightedCountry=null; highlightSubLoc=null; renderTrendSection(); renderTable(); flyToFilteredMarkers(); updateSubToggleVisibility(null,null); });
 document.getElementById('drillClose').addEventListener('click', () => { document.getElementById('drillBackdrop').style.display = 'none'; });
 document.getElementById('drillBackdrop').addEventListener('click', (e) => { if (e.target.id === 'drillBackdrop') e.target.style.display = 'none'; });
 
@@ -683,7 +785,7 @@ let eventMarkers = [];
 function visibleEventMarkers() {
   if (records.length) eventMarkers.forEach(m => { if (m.cases==null) { const rec = records.find(x => x.country===m.country && x.pathogenRaw===m.pathogen); if (rec) { m.cases = rec.cases; m.deaths = rec.deaths; } } });
   return eventMarkers.filter(m => {
-    const pathOk = !selectedPathogen || m.pathogen === selectedPathogen;
+    const pathOk = isAll() || !selectedPathogen || m.pathogen === selectedPathogen;
     const regionOk = activeRegion === 'All regions' || m.region === activeRegion;
     const q = locationQuery;
     const locOk = !q || m.country.toLowerCase().includes(q) || (m.place||'').toLowerCase().includes(q) || (m.title||'').toLowerCase().includes(q) || (m.disease||'').toLowerCase().includes(q);
@@ -715,11 +817,30 @@ function renderMap() {
       svg.call(zoomBehavior).on('dblclick.zoom', null);
     }
     currentMarkers = visibleEventMarkers();
-    const dataAtlas = new Set(currentMarkers.map(m => GEO[m.country] && GEO[m.country].atlas).filter(Boolean));
+    // Flat choropleth: subtle shading by total cases per country, normed to max for current selection
+    // (All pathogens respects African filter when activeRegion !== 'All regions')
+    const filteredRecords = (isAll() ? records : records.filter(r => r.pathogenRaw === selectedPathogen))
+      .filter(r => !isFlu(r.pathogenRaw))
+      .filter(r => activeRegion === 'All regions' || REGION_BY_COUNTRY[r.country] === activeRegion);
+    const casesByAtlas = new Map();
+    let maxCases = 0;
+    filteredRecords.forEach(r => {
+      const atlas = GEO[r.country]?.atlas;
+      if (!atlas) return;
+      const v = r.cases || 0;
+      casesByAtlas.set(atlas, Math.max(casesByAtlas.get(atlas) || 0, v));
+      if (v > maxCases) maxCases = v;
+    });
+    const choropleth = maxCases > 0 ? d3.scaleSqrt().domain([0, maxCases]).range([0, 1]).clamp(true) : () => 0;
     baseGroup.selectAll('path.country')
       .data(countryFeatures).join('path')
       .attr('class', 'country').attr('d', path)
-      .attr('fill', d => dataAtlas.has(d.properties.name) ? dataCountryFill : noDataColor);
+      .attr('fill', d => {
+        const v = casesByAtlas.get(d.properties.name);
+        if (v == null) return noDataColor;
+        const t = choropleth(v);
+        return `color-mix(in srgb, ${col('--color-accent-700')} ${8 + t * 34}%, ${col('--color-neutral-800')})`;
+      });
     mapGroup.selectAll('g.marker-g')
       .data(currentMarkers, d => d.id)
       .join(enter => {
@@ -739,28 +860,6 @@ function renderMap() {
       .on('blur', hideTooltip)
       .on('click', (event, d) => { hideTooltip(); zoomToMarker(d); if (typeof focusEvent==='function') focusEvent(d.reportIdx); })
       .on('keydown', (event, d) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); zoomToMarker(d); if (typeof focusEvent==='function') focusEvent(d.reportIdx); } });
-    // Zoom to fit visible markers when a region filter is active
-    if (activeRegion !== 'All regions' && currentMarkers.length > 0) {
-      const onGlobe = globe && document.getElementById('globeMap').style.display !== 'none';
-      if (onGlobe && globe) {
-        const bounds = currentMarkers.reduce((b, m) => {
-          b.extend(m.lonlat);
-          return b;
-        }, new maplibregl.LngLatBounds(m.lonlat[0], m.lonlat[1]));
-        globe.fitBounds(bounds, { padding: 50, duration: 650 });
-      } else if (zoomBehavior && projection) {
-        const points = currentMarkers.map(m => projection(m.lonlat));
-        const minX = Math.min(...points.map(p => p[0]));
-        const maxX = Math.max(...points.map(p => p[0]));
-        const minY = Math.min(...points.map(p => p[1]));
-        const maxY = Math.max(...points.map(p => p[1]));
-        const dx = maxX - minX, dy = maxY - minY;
-        const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
-        const k = Math.min(12, Math.max(1, 0.9 * Math.min(width / dx, height / dy)));
-        const t = d3.zoomIdentity.translate(width/2, height/2).scale(k).translate(-cx, -cy);
-        svg.transition().duration(650).call(zoomBehavior.transform, t);
-      }
-    }
     applyZoomScaling();
     const el = document.getElementById('mapCount');
     if (el) el.textContent = `${currentMarkers.length} reported events`;
@@ -797,8 +896,23 @@ function flyToLonlat(lonlat) {
   if (onGlobe) globe.flyTo({ center: lonlat, zoom: 3.6, duration: 800 });
   else zoomToMarker({ lonlat });
 }
+function topRiskSizeMarker() {
+  let best = null, bestScore = -1;
+  visibleEventMarkers().forEach(m => {
+    const size = m.cases || 0;
+    const score = size ? (m.risk || 0) * size : -1;
+    if (score > bestScore) { bestScore = score; best = m; }
+  });
+  return best;
+}
+function flyToFilteredMarkers() {
+  const markers = (typeof visibleEventMarkers === 'function' ? visibleEventMarkers() : currentMarkers) || [];
+  if (!markers.length) return;
+  const cx = markers.reduce((s,m)=>s+m.lonlat[0],0)/markers.length;
+  const cy = markers.reduce((s,m)=>s+m.lonlat[1],0)/markers.length;
+  flyToLonlat([cx, cy]);
+}
 
-// Region centers for zoom-to-region functionality
 document.getElementById('zoomIn').addEventListener('click', () => { if (zoomBehavior) svg.transition().duration(250).call(zoomBehavior.scaleBy, 1.6); });
 document.getElementById('zoomOut').addEventListener('click', () => { if (zoomBehavior) svg.transition().duration(250).call(zoomBehavior.scaleBy, 1/1.6); });
 document.getElementById('zoomReset').addEventListener('click', () => { if (zoomBehavior) svg.transition().duration(450).call(zoomBehavior.transform, d3.zoomIdentity); });
@@ -873,7 +987,7 @@ function openMarkerDetail(m) {
   document.getElementById('drillTitle').textContent = m.country + ' — reported activity';
   const trs = m.pathogens.map(p => {
     const cfr = (p.deaths != null && p.cases) ? ((p.deaths/p.cases)*100).toFixed(1) + '%' : '—';
-    const dt = p.date ? new Date(p.date).toLocaleDateString('en-US',{month:'short',day:'numeric'}) : '—';
+    const dt = p.date ? new Date(p.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'}) : '—';
     return `<tr><td>${p.label}</td><td>${p.cases!=null?p.cases.toLocaleString():'—'}</td><td>${p.deaths!=null?p.deaths.toLocaleString():'—'}</td><td>${cfr}</td><td>${dt}</td></tr>`;
   }).join('');
   const statusLine = allRows.length ? `Status <strong>${m.status}</strong> — most recent report ${m.days}d before the dataset's latest entry.` : '';
@@ -911,7 +1025,7 @@ function openArticlePopup(dateStr, caseRows) {
   articles.sort((a,b) => (b.canonical?1:0)-(a.canonical?1:0) || b.n-a.n || b.value-a.value);
   const label = PATHOGEN_LABELS[selectedPathogen] || selectedPathogen;
   const totalVet = articles.reduce((s,a)=>s+a.n,0);
-  document.getElementById('drillTitle').textContent = `${label} — source quality for ${new Date(dateStr).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}`;
+  document.getElementById('drillTitle').textContent = `${label} — source quality for ${new Date(dateStr).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`;
   document.getElementById('drillBody').innerHTML = articles.length ? (
     `<p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5">${articles.length} distinct figure${articles.length>1?'s':''} extracted this date, vetted across <strong>${totalVet}</strong> proximal source${totalVet>1?'s':''}. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the point the pipeline selected. Raw article links are withheld (they resolve to internal processing endpoints, not publisher pages).</p>` +
     articles.map(a => { const q=qualityBand(a.score); return `<div class="art-row">
@@ -932,10 +1046,66 @@ function openArticlePopup(dateStr, caseRows) {
 
 // --- Trend + sources-per-day charts (shared x-axis, driven by pathogen selector) ---
 let allRows = [];
-let selectedPathogen = 'Bundibugyo Virus';
+const ALL = 'ALL';
+let selectedPathogen = ALL;
+let defaultPathogen = null;
+let userChangedPathogen = false;
+function isAll() { return selectedPathogen === ALL; }
+function trendPathogen() { return isAll() ? (defaultPathogen || selectedPathogen) : selectedPathogen; }
+function isFlu(pathogen) { return /influenza/i.test(pathogen || ''); }
+function pathogenScoreMap() {
+  const scores = new Map();
+  records.forEach(r => {
+    let p = r.pathogenRaw;
+    if (!p) {
+      const combo = COMBOS.find(c => c.country === r.country && (c.pathogens || []).some(pp => PATHOGEN_LABELS[pp] === r.disease));
+      if (combo && combo.pathogens) p = combo.pathogens[0];
+    }
+    if (!p) return;
+    const risk = riskByCombo.get(r.country + '||' + p) || 1;
+    scores.set(p, (scores.get(p) || 0) + (r.cases || 0) * Math.pow(risk, 3));
+  });
+  return scores;
+}
+function computeDefaultPathogen() {
+  const scores = pathogenScoreMap();
+  if (!scores.size) return null;
+  return [...scores.entries()].sort((a,b) => b[1] - a[1])[0][0];
+}
+function dataDepthPathogen() {
+  if (!allRows.length) return null;
+  const caseLen = new Map();
+  const byLoc = new Map();
+  allRows.forEach(r => {
+    if (r.measure !== 'confirmed_cases' || r.outlier !== 'False' || !r.pathogen) return;
+    const k = r.pathogen + '||' + r.location;
+    if (!byLoc.has(k)) byLoc.set(k, new Set());
+    byLoc.get(k).add(r.report_date);
+  });
+  byLoc.forEach((set, k) => { const p = k.split('||')[0]; if (!caseLen.has(p) || set.size > caseLen.get(p)) caseLen.set(p, set.size); });
+  const projLen = new Map();
+  forecastIndex.forEach((arr, key) => { const p = key.split('||')[0]; projLen.set(p, (projLen.get(p)||0) + arr.length); });
+  const present = new Set(records.map(r => r.pathogenRaw).filter(Boolean));
+  let best = null, bestScore = -1;
+  caseLen.forEach((n, p) => {
+    if (isFlu(p) || !present.has(p)) return;
+    const score = n + (projLen.get(p)||0);
+    if (score > bestScore) { bestScore = score; best = p; }
+  });
+  return best;
+}
+function refreshDefaultPathogen() {
+  if (userChangedPathogen) return;
+  const def = dataDepthPathogen();
+  if (def && def !== defaultPathogen) {
+    defaultPathogen = def;
+    renderStats(); renderTrendSection();
+  }
+}
 let reportType = 'confirmed';
 let trendMode = { mode:'national' };
 let subMeasure = 'cases';
+let showSubnational = false;
 const SUB_PALETTE = ['#9184d9','#b45c64','#5aa6b0','#c9a24a','#7f9c5a','#c07fb0','#6f78c9','#cf8a5a','#8a8f99'];
 const SUB_SYMBOLS = [d3.symbolCircle,d3.symbolDiamond,d3.symbolSquare,d3.symbolTriangle,d3.symbolStar,d3.symbolWye,d3.symbolCross];
 function subnationalLocations(pathogen, country, measure) {
@@ -1019,6 +1189,24 @@ function ingestForecast(rows) {
   });
   forecastIndex.forEach(arr => arr.sort((a,b) => a.date < b.date ? -1 : 1));
 }
+// Snap projection to highest multiple of 5 days (17 → 15) as requested
+function cappedToMultipleOf5(proj, anchorDateStr) {
+  if (!proj || !proj.length || !anchorDateStr) return proj;
+  const anchor = new Date(anchorDateStr);
+  const totalDays = Math.round((new Date(proj[proj.length-1].date) - anchor) / 86400000);
+  const cappedDays = Math.floor(totalDays / 5) * 5;
+  if (cappedDays <= 0) return null;
+  if (cappedDays === totalDays) return proj;
+  // proj is sorted by date ascending
+  let cutIdx = -1;
+  for (let i = 0; i < proj.length; i++) {
+    const d = Math.round((new Date(proj[i].date) - anchor) / 86400000);
+    if (d <= cappedDays) cutIdx = i;
+    else break;
+  }
+  if (cutIdx < 0) return null;
+  return proj.slice(0, cutIdx + 1);
+}
 // Return a drawable projection for loc+measure IF the model had enough history and isn't runaway.
 function projectionFor(pathogen, loc, measure, lastObserved) {
   if (!loc || lastObserved == null) return null;
@@ -1052,6 +1240,18 @@ function topSubnationalOf(rows, country, pathogen, measure) {
   return best;
 }
 let DATASET_MAX = '';
+function formatUKDate(dateStr) { if(!dateStr) return '—'; const d=new Date(dateStr); return d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}); }
+function renderPageSub() {
+  const el=document.getElementById('pageSub');
+  if(!el) return;
+  const raw = DATASET_MAX || (allRows.length ? allRows.reduce((m,r)=>r.report_date>m?r.report_date:m,'') : '');
+  const base = raw || trend[trend.length-1]?.date || '';
+  if(!base) return;
+  const last = new Date(base); last.setDate(last.getDate()+1);
+  const today = new Date(); today.setHours(0,0,0,0);
+  const eff = new Date(Math.min(today.getTime(), last.getTime()));
+  el.textContent = `Case figures extracted from open-source news reporting, aggregated per country and pathogen — last updated ${eff.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`;
+}
 function statusOf(dateStr) { const days = Math.round((new Date(DATASET_MAX||dateStr) - new Date(dateStr)) / 86400000); return days<=4 ? 'Reporting' : days<=14 ? 'Slowing' : 'Quiet'; }
 function statusNoteOf(dateStr) { const days = Math.round((new Date(DATASET_MAX||dateStr) - new Date(dateStr)) / 86400000); return `Most recent figure is ${days} day${days===1?'':'s'} old (dataset current to ${DATASET_MAX}). Reflects reporting recency, not outbreak control.`; }
 // --- Information quality ---
@@ -1092,57 +1292,93 @@ function populatePathogenSelect(rows) {
   const sel = document.getElementById('disease');
   const withCases = present.filter(p => rows.some(r => r.pathogen === p && r.measure === 'confirmed_cases' && r.outlier === 'False'));
   if (!withCases.length) return;
-  const ordered = [selectedPathogen, ...withCases.filter(p => p !== selectedPathogen)].filter(p => withCases.includes(p));
-  sel.innerHTML = ordered.map(p => `<option value="${p}"${p===selectedPathogen?' selected':''}>${PATHOGEN_LABELS[p] || p}</option>`).join('');
+  if (!userChangedPathogen) {
+    const def = dataDepthPathogen() || computeDefaultPathogen();
+    if (def) defaultPathogen = def;
+  }
+  const ordered = [...withCases].sort((a,b) => a.localeCompare(b, undefined, {sensitivity:'base'}));
+  sel.innerHTML = [ALL, ...ordered].map(p => `<option value="${p}"${p===selectedPathogen?' selected':''}>${p===ALL ? 'All pathogens' : (PATHOGEN_LABELS[p] || p)}</option>`).join('');
 }document.getElementById('disease').addEventListener('change', (e) => {
   selectedPathogen = e.target.value;
+  userChangedPathogen = true;
   highlightedCountry = null;
+  highlightSubLoc = null;
   renderStats();
   renderTrendSection();
+  renderTable();
   renderMap();
+  if (selectedPathogen !== ALL) { const t = topRiskSizeMarker(); if (t) flyToLonlat(t.lonlat); } else { flyToFilteredMarkers(); }
 });
 
-let tw = 620; const th = 190, margin = {top:12,right:12,bottom:20,left:44};
+let tw = 620; const th = 228, margin = {top:12,right:12,bottom:20,left:44};
 const tsvg = d3.select('#trendSvg').attr('viewBox', `0 0 ${tw} ${th}`).attr('preserveAspectRatio','none');
-let shTw = 620; const shTh = 92, shMargin = {top:6,right:12,bottom:22,left:40};
+let shTw = 620; const shTh = 110, shMargin = {top:6,right:12,bottom:22,left:40};
 const shsvg = d3.select('#sourceSvg').attr('viewBox', `0 0 ${shTw} ${shTh}`).attr('preserveAspectRatio','none');
 let _chartResizeT;
 window.addEventListener('resize', () => { clearTimeout(_chartResizeT); _chartResizeT = setTimeout(renderTrendSection, 180); });
 
 function renderTrendSection() {
+  // When All pathogens selected, show worst outbreak's country+pathogen instead of summing all
+  let tp = trendPathogen();
+  let effectiveTp = tp;
+  let worst = null;
+  if (isAll() && records.length) {
+    worst = worstCombo();
+    if (worst) effectiveTp = worst.pathogenRaw;
+  }
+  // Toggle-driven subnational: if checkbox checked and a country is aligned, auto-show overlay
+  if (showSubnational && !isAll()) {
+    const cc = highlightedCountry || trendMode.country || null;
+    if (cc) {
+      const n = subnationalLocations(effectiveTp, cc, 'confirmed_'+subMeasure).length;
+      if (n>0) trendMode = { mode:'subnational', country: cc, pathogen: effectiveTp };
+    }
+  }
   const nat = trendMode.mode !== 'subnational';
   document.getElementById('reportTypeSeg').style.display = nat ? '' : 'none';
   document.getElementById('subTrendBar').style.display = nat ? 'none' : 'flex';
-  if (!nat) { renderSubnationalTrend(); return; }
-  const series = allRows.length ? aggregatePathogenSeries(allRows, selectedPathogen) : (function(){const s=trend.map(d=>({...d,sources:null}));s.loc=null;s.natCount=0;return s;})();
-  const label = PATHOGEN_LABELS[selectedPathogen] || selectedPathogen;
+  // Update toggle visibility for current context
+  const toggleCountry = highlightedCountry || trendMode.country || (worst?worst.country:null);
+  if (!nat) { renderSubnationalTrend(); updateSubToggleVisibility(toggleCountry, effectiveTp); return; }
+  const series = allRows.length ? aggregatePathogenSeries(allRows, effectiveTp) : (function(){const s=trend.map(d=>({...d,sources:null}));s.loc=null;s.natCount=0;return s;})();
+  const label = PATHOGEN_LABELS[effectiveTp] || effectiveTp;
   const locName = series.loc || '—';
-  document.getElementById('trendTitle').textContent = `${label} · ${locName} — ${reportType} cases & deaths`;
+  if (isAll() && worst) {
+    document.getElementById('trendTitle').textContent = `${label} · ${locName} — ${reportType} cases & deaths · worst outbreak (All-pathogens view)`;
+  } else {
+    document.getElementById('trendTitle').textContent = `${label} · ${locName} — ${reportType} cases & deaths`;
+  }
   const lastObs = [...series].reverse().find(d => d.cases != null || d.deaths != null);
   const metaEl = document.getElementById('trendMeta');
   if (lastObs) {
     const others = series.natCount > 1 ? ` · +${series.natCount-1} other national series` : '';
-    metaEl.textContent = 'National · observed to ' + new Date(lastObs.date).toLocaleDateString('en-US',{month:'short',day:'numeric'}) + others;
+    const obsDate = new Date(lastObs.date).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+    metaEl.textContent = (isAll() ? 'Hardest-hit country · ' : '') + 'National · observed to ' + obsDate + others;
   } else metaEl.textContent = '';
   const outlierNoteEl = document.getElementById('outlierNote');
   if (allRows.length && series.loc) {
-    const relevant = allRows.filter(r => r.pathogen === selectedPathogen && r.location === series.loc && r.measure === reportType + '_cases');
+    const relevant = allRows.filter(r => r.pathogen === effectiveTp && r.location === series.loc && r.measure === reportType + '_cases');
     const excluded = relevant.filter(r => r.outlier === 'True').length;
     outlierNoteEl.textContent = relevant.length ? `${excluded}/${relevant.length} figures screened out for ${series.loc}.` : '';
   } else if (outlierNoteEl) outlierNoteEl.textContent = '';
-  renderChart(series);
+  renderChart(series, effectiveTp);
   renderSourceChart(series);
+  const toggleCountry2 = highlightedCountry || (worst?worst.country:null);
+  updateSubToggleVisibility(toggleCountry2, effectiveTp);
 }
 
-function renderChart(series) {
+function renderChart(series, effectiveTp) {
   tsvg.selectAll('*').remove();
   tw = Math.max(340, Math.round((document.getElementById('chartWrap')||{}).clientWidth || 620));
   tsvg.attr('viewBox', `0 0 ${tw} ${th}`);
   if (!series.length) { tsvg.append('text').attr('x',tw/2).attr('y',th/2).attr('text-anchor','middle').attr('font-size','12px').attr('fill',col('--color-neutral-400')).text('No national series reported for this pathogen'); return; }
   const lastCase = [...series].reverse().find(d => d.cases != null);
   const lastDeath = [...series].reverse().find(d => d.deaths != null);
-  const projCases = projectionFor(selectedPathogen, series.loc, reportType+'_cases', lastCase ? lastCase.cases : null);
-  const projDeaths = projectionFor(selectedPathogen, series.loc, reportType+'_deaths', lastDeath ? lastDeath.deaths : null);
+  const projPathogen = effectiveTp || trendPathogen();
+  let projCases = projectionFor(projPathogen, series.loc, reportType+'_cases', lastCase ? lastCase.cases : null);
+  let projDeaths = projectionFor(projPathogen, series.loc, reportType+'_deaths', lastDeath ? lastDeath.deaths : null);
+  if (projCases) projCases = cappedToMultipleOf5(projCases, lastCase ? lastCase.date : null);
+  if (projDeaths) projDeaths = cappedToMultipleOf5(projDeaths, lastDeath ? lastDeath.date : null);
   const allDates = series.map(d => new Date(d.date));
   [projCases, projDeaths].forEach(p => { if (p) p.forEach(pt => allDates.push(new Date(pt.date))); });
   const x = d3.scaleUtc().domain(d3.extent(allDates)).range([margin.left, tw-margin.right]);
@@ -1180,7 +1416,7 @@ function renderChart(series) {
   const shownDates = series.filter(d=>d.cases!=null||d.deaths!=null).map(d=>d.date);
   [shownDates[0], shownDates[shownDates.length-1]].forEach((d,i) => {
     if (!d) return;
-    tsvg.append('text').attr('x', x(new Date(d))).attr('y', th-4).attr('text-anchor', i===0?'start':'end').attr('font-size','10px').attr('fill', col('--color-neutral-400')).text(new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric'}));
+    tsvg.append('text').attr('x', x(new Date(d))).attr('y', th-4).attr('text-anchor', i===0?'start':'end').attr('font-size','10px').attr('fill', col('--color-neutral-400')).text(new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short'}));
   });
   tsvg.append('circle').attr('cx',margin.left).attr('cy',margin.top-2).attr('r',3).attr('fill',col('--color-accent-300'));
   tsvg.append('text').attr('x',margin.left+8).attr('y',margin.top+2).attr('font-size','10.5px').attr('fill',col('--color-text')).text('Cases');
@@ -1199,7 +1435,7 @@ function renderChart(series) {
         : dotsG.append('circle').attr('cx',cx).attr('cy',cy).attr('r',3.2);
       dot.attr('fill', baseColor).attr('stroke', col('--color-bg')).attr('stroke-width',1).style('cursor','pointer');
       dot.on('mousemove', (ev) => showChartTip(ev,
-          `<p class="t-title">${new Date(d.date).toLocaleDateString('en-US',{month:'short',day:'numeric'})}</p>` +
+          `<p class="t-title">${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p>` +
           `<div class="t-row"><span>${reportType} cases</span><span>${d.cases!=null?d.cases.toLocaleString():'—'}</span></div>` +
           `<div class="t-row"><span>${reportType} deaths</span><span>${d.deaths!=null?d.deaths.toLocaleString():'—'}</span></div>` +
           (q ? `<div class="t-foot">${measureLabel}: ${q.vettings} vetting${q.vettings>1?'s':''} · ${qualityBand(q.score).label} quality — click for detail</div>` : '')))
@@ -1236,7 +1472,7 @@ function renderSourceChart(series) {
     .style('cursor','pointer')
     .on('mouseover', function(){ d3.select(this).attr('fill', col('--color-accent-400')); })
     .on('mousemove', (ev,d) => showChartTip(ev,
-        `<p class="t-title">${new Date(d.date).toLocaleDateString('en-US',{month:'short',day:'numeric'})}</p>` +
+        `<p class="t-title">${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p>` +
         `<div class="t-row"><span>Source articles</span><span>${d.sources}</span></div>` +
         `<div class="t-foot">Click to list all articles ↗</div>`))
     .on('mouseout', function(){ d3.select(this).attr('fill', col('--color-accent-600')); hideChartTip(); })
@@ -1245,7 +1481,7 @@ function renderSourceChart(series) {
     if (!d) return;
     shsvg.append('text').attr('x', i===0?shMargin.left:shTw-shMargin.right).attr('y', shTh-5).attr('text-anchor', i===0?'start':'end')
       .attr('font-size','9.5px').attr('fill', col('--color-neutral-400'))
-      .text(new Date(d.date).toLocaleDateString('en-US',{month:'short',day:'numeric'}));
+      .text(new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'}));
   });
 }
 
@@ -1255,7 +1491,30 @@ document.getElementById('subMeasureSeg').addEventListener('click', (e) => {
   document.querySelectorAll('#subMeasureSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
   renderTrendSection();
 });
-document.getElementById('trendBack').addEventListener('click', () => { trendMode = { mode:'national' }; renderTrendSection(); });
+document.getElementById('trendBack').addEventListener('click', () => { trendMode = { mode:'national' }; highlightSubLoc=null; showSubnational=false; const cb=document.getElementById('subToggle'); if(cb) cb.checked=false; renderTrendSection(); });
+function updateSubToggleVisibility(country, pathogen) {
+  const wrap = document.getElementById('subToggleWrap');
+  const cntEl = document.getElementById('subToggleCount');
+  if (!wrap) return;
+  const c = country || highlightedCountry || (trendMode.mode==='subnational' ? trendMode.country : null);
+  const p = pathogen || selectedPathogen;
+  if (!c || !p || isAll() || !allRows.length) { wrap.style.display='none'; return; }
+  const n = subnationalLocations(p, c, 'confirmed_'+subMeasure).length;
+  if (cntEl) cntEl.textContent = n;
+  wrap.style.display = n>0 ? 'flex' : 'none';
+}
+document.getElementById('subToggle')?.addEventListener('change', (e) => {
+  showSubnational = e.target.checked;
+  if (showSubnational) {
+    const c = highlightedCountry || (trendMode.country) || (worstCombo()?.country);
+    const p = selectedPathogen;
+    if (c && p) { trendMode = { mode:'subnational', country: c, pathogen: p }; }
+  } else {
+    trendMode = { mode:'national' };
+    highlightSubLoc=null;
+  }
+  renderTrendSection();
+});
 function renderSubnationalTrend() {
   const { country, pathogen } = trendMode;
   const measure = 'confirmed_' + subMeasure;
@@ -1269,7 +1528,11 @@ function renderSubnationalTrend() {
   const locs = ranked.slice(0, 8);
   const hidden = ranked.length - locs.length;
   const style = {}; locs.forEach((l,i)=>style[l]={color:SUB_PALETTE[i%SUB_PALETTE.length], sym:SUB_SYMBOLS[i%SUB_SYMBOLS.length]});
-  document.getElementById('subLegend').innerHTML = locs.map(l=>`<span class="sub-swatch"><span style="width:9px;height:9px;border-radius:2px;background:${style[l].color};display:inline-block"></span>${l.split(',')[0]}</span>`).join('') + (hidden>0?`<span class="sub-swatch" style="opacity:.6">+${hidden} smaller</span>`:'');
+  document.getElementById('subLegend').innerHTML = locs.map(l=>{
+    const isHi = highlightSubLoc && l===highlightSubLoc;
+    const short = l.split(',')[0].trim();
+    return `<span class="sub-swatch" title="${l.replace(/"/g,'&quot;')}" style="${isHi?'font-weight:600;opacity:1':''}"><span style="width:9px;height:9px;border-radius:2px;background:${style[l].color};display:inline-block;${isHi?'box-shadow:0 0 0 1px '+style[l].color:''}"></span>${short}${isHi?' ★':''}</span>`;
+  }).join('') + (hidden>0?`<span class="sub-swatch" style="opacity:.6">+${hidden} smaller</span>`:'');
   const perLoc = locs.map(loc => ({ loc, pts:[...canonicalByDate(allRows, pathogen, loc, measure).values()] }));
   tsvg.selectAll('*').remove();
   tw = Math.max(340, Math.round((document.getElementById('chartWrap')||{}).clientWidth||620));
@@ -1282,13 +1545,14 @@ function renderSubnationalTrend() {
   y.ticks(4).forEach(t => { gGrid.append('line').attr('x1',margin.left).attr('x2',tw-margin.right).attr('y1',y(t)).attr('y2',y(t)).attr('stroke',col('--color-divider')).attr('stroke-width',1); gGrid.append('text').attr('x',margin.left-8).attr('y',y(t)+3).attr('text-anchor','end').attr('font-size','10px').attr('fill',col('--color-neutral-400')).text(t>=1000?(t/1000)+'k':t); });
   perLoc.forEach(s => {
     const c = style[s.loc].color;
+    const isHi = highlightSubLoc && s.loc===highlightSubLoc;
     const line = d3.line().defined(d=>d.value!=null).x(d=>x(new Date(d.date))).y(d=>y(d.value));
-    tsvg.append('path').datum(s.pts).attr('d',line).attr('fill','none').attr('stroke',c).attr('stroke-width',1.75).attr('opacity',0.9);
-    s.pts.forEach(d => { if (d.value==null) return; tsvg.append('path').attr('transform',`translate(${x(new Date(d.date))},${y(d.value)})`).attr('d',d3.symbol().type(style[s.loc].sym).size(34)()).attr('fill',c).attr('stroke',col('--color-bg')).attr('stroke-width',0.8).style('cursor','default')
-      .on('mousemove',(ev)=>showChartTip(ev,`<p class="t-title">${s.loc}</p><div class="t-row"><span>${new Date(d.date).toLocaleDateString('en-US',{month:'short',day:'numeric'})}</span><span>${d.value.toLocaleString()} ${subMeasure}</span></div>`)).on('mouseleave',hideChartTip); });
+    tsvg.append('path').datum(s.pts).attr('d',line).attr('fill','none').attr('stroke',c).attr('stroke-width',isHi?3.2:1.75).attr('opacity',isHi?1:0.9).style('filter', isHi?'drop-shadow(0 0 2px '+c+')':null);
+    s.pts.forEach(d => { if (d.value==null) return; tsvg.append('path').attr('transform',`translate(${x(new Date(d.date))},${y(d.value)})`).attr('d',d3.symbol().type(style[s.loc].sym).size(isHi?58:34)()).attr('fill',c).attr('stroke',col('--color-bg')).attr('stroke-width',isHi?1.4:0.8).style('cursor','default')
+      .on('mousemove',(ev)=>showChartTip(ev,`<p class="t-title">${s.loc}</p><div class="t-row"><span>${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span><span>${d.value.toLocaleString()} ${subMeasure}</span></div>`)).on('mouseleave',hideChartTip); });
   });
   const ds = [...new Set(allPts.map(p=>p.date))].sort();
-  [ds[0], ds[ds.length-1]].forEach((d,i)=>{ if(!d) return; tsvg.append('text').attr('x',x(new Date(d))).attr('y',th-4).attr('text-anchor',i===0?'start':'end').attr('font-size','10px').attr('fill',col('--color-neutral-400')).text(new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric'})); });
+  [ds[0], ds[ds.length-1]].forEach((d,i)=>{ if(!d) return; tsvg.append('text').attr('x',x(new Date(d))).attr('y',th-4).attr('text-anchor',i===0?'start':'end').attr('font-size','10px').attr('fill',col('--color-neutral-400')).text(new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short'})); });
   renderSubSourceChart(perLoc, style);
 }
 function renderSubSourceChart(perLoc, style) {
@@ -1312,12 +1576,12 @@ function renderSubSourceChart(perLoc, style) {
     const cx = x(new Date(d)); let yb = shTh-shMargin.bottom;
     perLoc.forEach(s => { const n=(dateMap.get(d)[s.loc])||0; if(!n) return; const h=n*pxPer; yb-=h;
       shsvg.append('rect').attr('x',Math.max(shMargin.left,cx-bw/2)).attr('width',bw).attr('y',yb).attr('height',h).attr('fill',style[s.loc].color).attr('opacity',0.85).style('cursor','default')
-        .on('mousemove',(ev)=>showChartTip(ev,`<p class="t-title">${new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric'})}</p><div class="t-row"><span>${s.loc.split(',')[0]}</span><span>${n} sources</span></div>`)).on('mouseleave',hideChartTip);
+        .on('mousemove',(ev)=>showChartTip(ev,`<p class="t-title">${new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p><div class="t-row"><span>${s.loc.split(',')[0]}</span><span>${n} sources</span></div>`)).on('mouseleave',hideChartTip);
     });
   });
-  [dates[0], dates[dates.length-1]].forEach((d,i)=>{ shsvg.append('text').attr('x',i===0?shMargin.left:shTw-shMargin.right).attr('y',shTh-5).attr('text-anchor',i===0?'start':'end').attr('font-size','9.5px').attr('fill',col('--color-neutral-400')).text(new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric'})); });
+  [dates[0], dates[dates.length-1]].forEach((d,i)=>{ shsvg.append('text').attr('x',i===0?shMargin.left:shTw-shMargin.right).attr('y',shTh-5).attr('text-anchor',i===0?'start':'end').attr('font-size','9.5px').attr('fill',col('--color-neutral-400')).text(new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short'})); });
 }
-function renderAll() { renderStats(); renderTable(); renderMap(); renderTrendSection(); }
+function renderAll() { renderPageSub(); renderStats(); renderTable(); renderMap(); renderTrendSection(); }
 renderAll();
 
 // --- Live fetch from the published Google Sheet ---
@@ -1342,6 +1606,7 @@ function latestFor(rows, country, pathogens, measure) {
 }
 
 d3.csv(GSHEET_CSV_URL).then(rows => {
+  rows = rows.filter(r => !isFlu(r.pathogen));
   const datasetMaxDate = rows.reduce((m,r)=>r.report_date>m?r.report_date:m, '');
   DATASET_MAX = datasetMaxDate;
   function deriveStatus(dateStr) {
@@ -1385,14 +1650,16 @@ d3.csv(GSHEET_CSV_URL).then(rows => {
   }
 }).catch(() => {
   syncTagEl.innerHTML = '<span class="sync-dot" style="background:var(--color-neutral-500);box-shadow:none"></span>Cached snapshot · live sheet unreachable';
+  renderPageSub();
 });
 
 // Forecast tab (published CSV); falls back to the bundled snapshot if the live tab is unreachable.
+function afterForecast() { if (allRows.length) { renderStats(); renderTrendSection(); refreshDefaultPathogen(); } }
 d3.csv(GSHEET_FORECAST_URL).then(rows => {
   if (!rows || !rows.length || !('p50' in rows[0])) throw new Error('bad forecast');
-  ingestForecast(rows); if (allRows.length) { renderStats(); renderTrendSection(); }
+  ingestForecast(rows); afterForecast();
 }).catch(() => {
-  d3.csv('outcome_forecasts.csv').then(rows => { ingestForecast(rows); if (allRows.length) { renderStats(); renderTrendSection(); } }).catch(()=>{});
+  d3.csv('outcome_forecasts.csv').then(rows => { ingestForecast(rows); afterForecast(); }).catch(()=>{});
 });
 
 // --- AI event reports (Merged reports tab) ---
@@ -1454,9 +1721,30 @@ function selectEvent(idx) {
     if (sel && [...sel.options].some(o=>o.value===r.pathogen)) { sel.value=r.pathogen; selectedPathogen=r.pathogen; }
   }
   highlightedCountry = r.geoCountry || null;
-  if (isNational(r.place) && r.geoCountry) {
-    drillNational(r.geoCountry, r.pathogen);
+  if (r.geoCountry && r.pathogen) {
+    const rec = records.find(x=>x.country===r.geoCountry && x.pathogenRaw===r.pathogen);
+    tableView = (rec && rec.subCount>0) ? { mode:'subnational', id: rec.id } : { mode:'national', id:null };
+    reportFilter = { country: r.geoCountry, pathogen: r.pathogen };
+    selectedPathogen = r.pathogen;
+    const sel2 = document.getElementById('disease'); if (sel2 && [...sel2.options].some(o=>o.value===r.pathogen)) sel2.value=r.pathogen;
+    renderStats(); renderTable();
+    if (!isNational(r.place)) {
+      highlightSubLoc = r.place;
+      showSubnational = true;
+      const cb = document.getElementById('subToggle'); if (cb) cb.checked = true;
+      trendMode = { mode:'subnational', country: r.geoCountry, pathogen: r.pathogen };
+    } else {
+      // Align to country: show toggle if subnational data exists, keep national view until toggled
+      highlightedCountry = r.geoCountry;
+      highlightSubLoc = null;
+      updateSubToggleVisibility(r.geoCountry, r.pathogen);
+      // keep current showSubnational state; if already enabled keep overlay, else national
+      if (!showSubnational) trendMode = { mode:'national' };
+      else trendMode = { mode:'subnational', country: r.geoCountry, pathogen: r.pathogen };
+    }
+    renderTrendSection();
   } else {
+    highlightSubLoc = null;
     trendMode = { mode:'national' };
     renderStats(); renderTrendSection(); renderTable();
   }
@@ -1468,11 +1756,15 @@ function selectEvent(idx) {
 function drillNational(country, pathogen) {
   const rec = records.find(x=>x.country===country && x.pathogenRaw===pathogen);
   tableView = (rec && rec.subCount>0) ? { mode:'subnational', id: rec.id } : { mode:'national', id:null };
+  highlightSubLoc = null;
+  highlightedCountry = country;
   reportFilter = { country, pathogen };
-  trendMode = { mode:'subnational', country, pathogen };
   selectedPathogen = pathogen;
   const sel = document.getElementById('disease'); if (sel && [...sel.options].some(o=>o.value===pathogen)) sel.value=pathogen;
-  renderStats(); renderTrendSection(); renderTable();
+  renderStats(); renderTable();
+  updateSubToggleVisibility(country, pathogen);
+  if (showSubnational) trendMode = { mode:'subnational', country, pathogen }; else trendMode = { mode:'national' };
+  renderTrendSection();
 }
 function focusEvent(idx) { selectEvent(idx); }
 
