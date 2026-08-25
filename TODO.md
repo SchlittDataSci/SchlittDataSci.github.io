@@ -1,5 +1,17 @@
 # TODO
 
+## Done — audit closeout round (Aug 25)
+1. Region filter now scopes the event-reports list too (unclassifiable reports always kept); empty-state copy updated.
+2. Sortable table headers keyboard-accessible (tabindex/role/aria-sort + Enter/Space).
+3. Subnational legend swatches click-to-highlight the location (toggle, ★ marker).
+4. localStorage preference persistence (pathogen/species/view/measure/type/region) — URL hash wins when present; invalid pathogens still fall back to All.
+5. Globe view degrades honestly on WebGL/tile failure: inline explanation + automatic revert to Flat (was a silent blank + console error).
+6. Map risk legend gradient now derives from the sevColor CSS vars (no more hardcoded hex drift).
+7. Sticky table header inside the scroll area.
+8. Hovering an event report lifts its map glyph (marker-hi ring).
+9. Species filter labelled as table-scoping via tooltip.
+10. Deferred (documented): full keyboard tooltips for individual chart points — figures table serves as the accessible data surface.
+
 ## Done — reliability & exports round (Aug 25)
 1. ROOT-CAUSED "live sheet unreachable": a `.textContent()` call on a d3 selection in the bars renderer threw whenever the bars view rendered, and the silent `.catch` blamed the network. Fixed (`.text`), render errors now caught separately from fetch errors, and all fetch catches log the real reason to console.
 2. Live-data orchestration: `fetchSheet/fetchReports/fetchForecast` + `loadLiveData()` with 20s timeouts, auto-retry ×2 (2s/5s), working "Sync now" button (was dead — no handler), sync-tag states (Loading → Refreshing (retry n) → Live · HH:MM → Sample data · unreachable — Retry with error tooltip).

@@ -114,6 +114,9 @@
   .marker-pulse { fill: none; stroke: var(--color-accent-300); stroke-width: 1.2; opacity: 0; transform-box: fill-box; transform-origin: center; animation: mapPulse 2.6s ease-out infinite; }
   @keyframes mapPulse { 0% { transform: scale(0.6); opacity: 0.55; } 100% { transform: scale(2.2); opacity: 0; } }
   .marker { cursor: pointer; }
+  /* Hovering an event report lifts its map glyph (CSS overrides the per-zoom attributes). */
+  .marker-g.marker-hi .marker { stroke-width: 3px; }
+  .marker-g.marker-hi .marker-hit { stroke: var(--color-accent-300); stroke-width: 1.5px; }
   .tooltip { position: absolute; pointer-events: none; background: var(--color-neutral-800); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); padding: 8px 10px; font-size: 12.5px; box-shadow: var(--shadow-md); max-width: 230px; opacity: 0; transform: translate(-50%, -100%); transition: opacity .1s; z-index: 5; }
   .tooltip.show { opacity: 1; }
   body > .tooltip { max-width: 420px; }
@@ -192,6 +195,7 @@
   th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
   th.sortable:hover { color: var(--color-text); }
   th.sortable .sort-arrow { font-size: 9px; opacity: 0.6; margin-left: 3px; }
+  .table thead th { position: sticky; top: 0; background: var(--color-bg); z-index: 2; }
   .cfr-flag { cursor: help; border-bottom: 1px dotted var(--ink-4); }
   #reportRows tr[data-drill] { cursor: pointer; }
   #reportRows tr[data-drill]:hover { background: color-mix(in srgb, var(--color-accent) 6%, transparent); }
@@ -324,7 +328,7 @@
       <input id="search" class="input" type="text" placeholder="Filter by country, pathogen…" style="min-width:180px">
     </div>
     <div class="field-inline">
-      <label for="species">Host species</label>
+      <label for="species" title="Scopes the figures table; the summary stats and map are unaffected">Host species</label>
       <select id="species" class="input" style="min-width:150px"><option>All species</option></select>
     </div>
     <span class="spacer"></span>
@@ -348,7 +352,7 @@
           <button type="button" class="seg-opt" data-view="globe">Globe</button>
         </div>
         <div class="map-legend">
-          <span class="legend-swatch">Risk<span style="display:inline-block;width:92px;height:9px;border-radius:5px;margin:0 7px;background:linear-gradient(90deg,#6b7789,#9a7d86,#b45c64)"></span>1 → 9</span>
+          <span class="legend-swatch">Risk<span style="display:inline-block;width:92px;height:9px;border-radius:5px;margin:0 7px;background:linear-gradient(90deg,var(--sev-lo),var(--sev-mid),var(--sev-hi))"></span>1 → 9</span>
           <span class="legend-swatch"><svg width="46" height="16" style="overflow:visible"><circle cx="7" cy="8" r="3" fill="#b45c64" fill-opacity="0.7" stroke="var(--color-neutral-100)"></circle><circle cx="30" cy="8" r="7" fill="#b45c64" fill-opacity="0.7" stroke="var(--color-neutral-100)"></circle></svg><span id="mapSizeLabel">size ∝ score</span></span>
           <span class="legend-swatch" id="mapCount"></span>
         </div>
@@ -931,15 +935,21 @@ function sortRecords(list, sort) {
   });
 }
 document.querySelectorAll('th.sortable').forEach(th => {
-  th.addEventListener('click', () => {
+  const applySort = () => {
     const key = th.dataset.key;
     if (tableSort.key === key) tableSort.dir = -tableSort.dir;
     else tableSort = { key, dir: key === 'date' ? -1 : (key === 'deaths' || key === 'cases' ? -1 : 1) };
     if (tableSort.key === 'date' || tableSort.key === 'deaths' || tableSort.key === 'cases') tableSort.dir = -1;
     document.querySelectorAll('th.sortable .sort-arrow').forEach(a => a.textContent = '');
     th.querySelector('.sort-arrow').textContent = tableSort.dir === 1 ? '↑' : '↓';
+    document.querySelectorAll('th.sortable').forEach(o => o.setAttribute('aria-sort', o === th ? (tableSort.dir === 1 ? 'ascending' : 'descending') : 'none'));
     renderTable();
-  });
+  };
+  th.setAttribute('tabindex', '0');
+  th.setAttribute('role', 'button');
+  th.setAttribute('aria-sort', 'none');
+  th.addEventListener('click', applySort);
+  th.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); applySort(); } });
 });
 
 // --- Location drill-down: surfaces the raw, variably-granular location strings
@@ -1300,9 +1310,26 @@ const ESRI_SAT = { type:'raster', tiles:['https://server.arcgisonline.com/ArcGIS
 function globeStyle(sat) { return { version:8, sources:{ base: sat ? ESRI_SAT : CARTO_DARK }, layers:[{ id:'base', type:'raster', source:'base' }], projection:{ type:'globe' } }; }
 function initGlobe() {
   if (globe || typeof maplibregl === 'undefined') return;
-  globe = new maplibregl.Map({ container:'globeMap', style:globeStyle(false), center:[18,4], zoom:1.4, attributionControl:{ compact:true }, preserveDrawingBuffer:true });
-  globe.addControl(new maplibregl.NavigationControl({ showCompass:true, visualizePitch:true }), 'bottom-right');
-  globe.on('style.load', () => { try { globe.setProjection({ type:'globe' }); } catch(e){} addGlobeMarkers(); });
+  try {
+    globe = new maplibregl.Map({ container:'globeMap', style:globeStyle(false), center:[18,4], zoom:1.4, attributionControl:{ compact:true }, preserveDrawingBuffer:true });
+    globe.addControl(new maplibregl.NavigationControl({ showCompass:true, visualizePitch:true }), 'bottom-right');
+    globe.on('style.load', () => { try { globe.setProjection({ type:'globe' }); } catch(e){} addGlobeMarkers(); });
+    // WebGL/tile failures: degrade honestly instead of showing a blank globe.
+    let globeFailed = false;
+    globe.on('error', (e) => {
+      if (globeFailed) return;
+      const msg = String(e && e.error && e.error.message || e && e.errorStatus || '');
+      if (!/webgl|context/i.test(msg) && !e && !e.errorStatus) return;
+      globeFailed = true;
+      const gm = document.getElementById('globeMap');
+      if (gm) gm.innerHTML = '<p style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:12px;color:var(--color-neutral-400)">The globe view needs WebGL and map-tile access, which are unavailable here. The flat map remains fully functional.</p>';
+      const fb = [...document.querySelectorAll('#mapViewSeg .seg-opt')].find(b => b.dataset.view === 'flat');
+      if (fb) fb.click();
+    });
+  } catch (err) {
+    console.warn('[globe] init failed:', err && (err.message || err));
+    globe = null;
+  }
 }
 function globeMarkerEl(m) {
   const r = Math.max(8, Math.min(46, markerR(m) * 1.7));
@@ -2365,10 +2392,14 @@ function renderSubnationalTrend() {
   document.getElementById('subLegend').innerHTML = locs.map(l=>{
     const isHi = highlightSubLoc && l===highlightSubLoc;
     const short = l.split(',')[0].trim();
-    return `<span class="sub-swatch" title="${l.replace(/"/g,'&quot;')}" style="${isHi?'font-weight:600;opacity:1':''}"><span style="width:9px;height:9px;border-radius:2px;background:${style[l].color};display:inline-block;${isHi?'box-shadow:0 0 0 1px '+style[l].color:''}"></span>${short}${isHi?' ★':''}</span>`;
+    return `<span class="sub-swatch" data-loc="${esc(l)}" title="${l.replace(/"/g,'&quot;')} — click to highlight" style="cursor:pointer;${isHi?'font-weight:600;opacity:1':''}"><span style="width:9px;height:9px;border-radius:2px;background:${style[l].color};display:inline-block;${isHi?'box-shadow:0 0 0 1px '+style[l].color:''}"></span>${short}${isHi?' ★':''}</span>`;
   }).join('')
     + (OTHER ? `<span class="sub-swatch" title="${esc(rest.join(' · '))}"><span style="width:9px;height:9px;border-radius:2px;background:${style[OTHER].color};display:inline-block"></span>${OTHER}</span>` : '')
     + (aggregateExcluded.length ? `<span class="sub-swatch" style="opacity:.6" title="Not point-located, so not plotted: ${esc(aggregateExcluded.join(' · '))}">${aggregateExcluded.length} unlocated aggregate${aggregateExcluded.length>1?'s':''}</span>` : '');
+  // Legend swatches are clickable: toggle the highlighted location on the overlay.
+  document.querySelectorAll('#subLegend .sub-swatch[data-loc]').forEach(sw => {
+    sw.addEventListener('click', () => { highlightSubLoc = highlightSubLoc === sw.dataset.loc ? null : sw.dataset.loc; renderSubnationalTrend(); });
+  });
   const perLoc = locs.map(loc => ({ loc, pts:[...canonicalByDate(allRows, pathogen, loc, measure).values()] }))
     .concat(OTHER ? [{ loc: OTHER, pts: otherPts }] : []);
   tsvg.selectAll('*').remove();
@@ -2445,6 +2476,8 @@ function renderSubSourceChart(perLoc, style) {
 }
 function renderAll() { renderPageSub(); renderStats(); renderTable(); renderMap(); renderTrendSection(); }
 // --- Shareable URL state (hash): pathogen, country, plot view, measure, type, region, species ---
+// Hash wins for sharing; localStorage restores a returning visitor's last filters otherwise.
+function savePrefs() { try { localStorage.setItem('vhf-prefs', JSON.stringify({ p: selectedPathogen, s: activeSpecies, v: plotViewSel, m: subMeasure, t: reportType, r: activeRegion })); } catch (e) {} }
 function writeHash() {
   const parts = [];
   if (!isAll()) parts.push('p=' + encodeURIComponent(selectedPathogen));
@@ -2455,11 +2488,12 @@ function writeHash() {
   if (activeRegion !== 'All regions') parts.push('r=' + encodeURIComponent(activeRegion));
   if (activeSpecies !== ALL_SPECIES) parts.push('s=' + encodeURIComponent(activeSpecies));
   history.replaceState(null, '', parts.length ? '#' + parts.join('&') : location.pathname + location.search);
+  savePrefs();
 }
 (function readHash() {
-  if (!location.hash || location.hash.length < 2) return;
-  const h = new URLSearchParams(location.hash.slice(1));
-  const g = k => h.get(k);
+  let st = {}; try { st = JSON.parse(localStorage.getItem('vhf-prefs') || '{}'); } catch (e) {}
+  const h = (location.hash && location.hash.length >= 2) ? new URLSearchParams(location.hash.slice(1)) : new URLSearchParams();
+  const g = k => (h.get(k) != null ? h.get(k) : st[k]);
   if (g('p')) selectedPathogen = g('p');
   if (g('c')) highlightedCountry = g('c');
   if (['auto','bars','national','subnational'].includes(g('v'))) plotViewSel = g('v');
@@ -2607,10 +2641,13 @@ let reportFilter = null; // {country, pathogen} — restrict list to subnational
 function visibleReports() {
   const idx = reports.map((r,i)=>({r,i}));
   if (reportFilter) return idx.filter(({r}) => r.geoCountry===reportFilter.country && r.pathogen===reportFilter.pathogen && !isNational(r.place));
+  // Region is a global filter — the event list honours it like the map, stats and table do.
+  // Reports with no resolvable country are always kept (they cannot be region-classified).
+  const regionOk = ({r}) => !r.geoCountry || activeRegion === 'All regions' || REGION_BY_COUNTRY[r.geoCountry] === activeRegion;
   // No drill-down filter: still scope the list to the selected pathogen so the selector
   // refreshes every data element, including the event reports panel.
-  if (!isAll() && selectedPathogen) return idx.filter(({r}) => r.pathogen===selectedPathogen);
-  return idx;
+  if (!isAll() && selectedPathogen) return idx.filter(({r}) => r.pathogen===selectedPathogen && regionOk({r}));
+  return idx.filter(regionOk);
 }
 // Full filter reset: back to All pathogens, national overview, unfiltered event list.
 function resetFilters() {
@@ -2652,12 +2689,14 @@ function renderEventList() {
       <div class="event-meta"><span>${r.date} · ${scope}${r.crossover?' · zoonotic':''}</span><span class="tag ${riskTagClass(r.risk)}" title="${r.riskRationale||''}">Risk ${r.risk}</span></div>
       <div class="event-doc"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="doc-meta">${doc.vettings} vettings · ${doc.days}d reporting</span></div>
     </div>`;
-  }).join('') : '<p style="font-size:12px;color:var(--color-neutral-400);padding:8px 4px">No reports match the current pathogen / filter.</p>');
+  }).join('') : '<p style="font-size:12px;color:var(--color-neutral-400);padding:8px 4px">No reports match the current pathogen / region / filter.</p>');
   const rfBtn = document.getElementById('resetFilters'); if (rfBtn) rfBtn.addEventListener('click', resetFilters);
   eventListEl.querySelectorAll('.event-item').forEach(el => {
     el.setAttribute('role','button'); el.setAttribute('tabindex','0');
     el.addEventListener('click', (e) => { if (e.target.closest('a')) return; selectEvent(+el.dataset.idx); });
     el.addEventListener('keydown', (e) => { if (e.key==='Enter'||e.key===' ') { e.preventDefault(); selectEvent(+el.dataset.idx); } });
+    el.addEventListener('mouseenter', () => { if (mapGroup) mapGroup.selectAll('g.marker-g').filter(d => d.reportIdx === +el.dataset.idx).classed('marker-hi', true); });
+    el.addEventListener('mouseleave', () => { if (mapGroup) mapGroup.selectAll('g.marker-g').classed('marker-hi', false); });
   });
 }
 function renderBrief() {
