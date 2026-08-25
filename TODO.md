@@ -1,5 +1,23 @@
 # TODO
 
+## Done — reliability & exports round (Aug 25)
+1. ROOT-CAUSED "live sheet unreachable": a `.textContent()` call on a d3 selection in the bars renderer threw whenever the bars view rendered, and the silent `.catch` blamed the network. Fixed (`.text`), render errors now caught separately from fetch errors, and all fetch catches log the real reason to console.
+2. Live-data orchestration: `fetchSheet/fetchReports/fetchForecast` + `loadLiveData()` with 20s timeouts, auto-retry ×2 (2s/5s), working "Sync now" button (was dead — no handler), sync-tag states (Loading → Refreshing (retry n) → Live · HH:MM → Sample data · unreachable — Retry with error tooltip).
+3. First-paint: `body.preload` skeletons (stat shimmer, dimmed map/plots, "Loading live data…") until first resolve; on failure a "cached sample data" banner with Retry replaces the old silent seed presentation.
+4. Fixed `undefined · —` trend title (worstCombo pathogenRaw guard + label fallback) and the bars/subnational overlap (zoom stale-callback render-generation guard).
+5. URL deep-links: hash encodes pathogen/country/view/measure/type/region/species; parsed at boot, written on every filter change; invalid pathogens fall back to All.
+6. Exports & print (audit trail): figures CSV now includes figure source URL + all source article URLs; new Events CSV export (title/pathogen/place/risk/rationale/coords/source URLs); "Print / PDF" button with print stylesheet (light theme, expanded panels, link URLs printed after anchors).
+7. Copy/labels: pathogen toolbar label, status legend (Reporting ≤4d / Slowing ≤14d / Quiet), search placeholder, "All pathogens" in popup titles, chart zoom hint, map size-legend follows metric, popup ESC-to-close + focus management, table source links split into "Pipeline: processing sheet · data output (CSV)".
+
+## Done — polish round 3 (Aug 25)
+1. Two-axis plot zoom (rescaleX + rescaleY) with translateExtent clamped to the plot box; content clipped so nothing exceeds the graph bounds.
+2. Map glyphs: invisible enlarged hit circles (~12px min, 1.7× glyph); filter banner in the events panel (prominent pathogen name + count) with a "Reset ✕" button returning everything to All pathogens/national view; pathogen name also shown prominently in the brief header.
+3. Article popups: stale fixed-position chart tooltip dismissed on open; .art-extract wraps long locations (fixes crushed popup rows).
+4. "L A County" scope fix: comma-less county strings are subnational (was standing in as the US national West Nile figure).
+5. Comparison bar plot: auto-selected when the target geography has ≤3 observation dates (8 West Nile countries trigger); target's latest observation + up to 5 nearest same-measure national neighbours (haversine over GEO centroids), ghost diamonds for other observations, excluded chi-sq/monotonicity glyphs, "as of" date under the target bar, and the note "Bar plot selected due to lack of time series data". New Bars|National|Subnational switcher (auto default); legacy subnational checkbox retired.
+6. Round-3 addenda: bars sorted ascending, larger labels, bar fill uses the SAME colormap + min/max domain as the map choropleth (shared choroplethDomain/choroplethColor helpers), thicker glyph strokes (2.2px ghosts / 2px excluded) for contrast, target bar outlined in accent. Compact plot-header seg buttons (was default button styling). FIXED: Subnational switcher seeded trendMode (was rendering "undefined · undefined" for DRC); "← National overview" also resets the switcher to auto.
+7. Round-3 final: comparison bars now ZOOM (band-range transform + rescaleY, clipped, shared two-axis zoom, dblclick reset); metric (Cases/Deaths) selector moved into the plots header row beside the view selector; bar labels enlarged (13px values, 12px dynamic-truncated names, 11px meta). Pathogen names link to curated Wikipedia articles (PATHOGEN_WIKI, REST-verified; graceful no-link fallback) in the brief header AND event-report titles; brief meta row unified to one 13px font (colour/weight-only hierarchy); event titles tint pathogen (accent-200, linked) vs location (neutral-300) at unchanged size. FIXED: figures table now filters by the pathogen selector (visibleRecords); pathogen selector lists only renderable pathogens (≥1 unflagged confirmed_cases row resolving via geoCountry — drops Puumala/Cape Verde and no-cases entries); subnational-only pathogens (Seoul/Andes) get a reachable Subnational overlay via a top-record context-country fallback.
+
 ## Done — polish round 2 (Aug 20)
 1. Event reports list: fixed-height column (briefs-card 560px, events-col overflow-y auto) scrolling independently of the AI brief.
 2. Map risk colours muted to a low-chroma slate→crimson ramp (sevColor) with calmer marker glow + legend.
