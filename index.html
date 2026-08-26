@@ -57,14 +57,14 @@
   body { margin: 0; background: var(--color-bg); font-family: var(--font-body); color: var(--color-text); }
   a { color: var(--color-accent-300); text-decoration: none; }
   a:hover { color: var(--color-accent); text-decoration: underline; }
-  .wrap { max-width: 1560px; margin: 0 auto; padding: var(--space-4) var(--space-6) var(--space-8); }
-  .page-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-4); flex-wrap: wrap; }
+  .wrap { max-width: 1560px; margin: 0 auto; padding: 6px var(--space-6) var(--space-8); }
+  .page-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); margin-bottom: 8px; flex-wrap: wrap; }
   .page-title { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 25px; margin: 0; letter-spacing: -0.01em; }
   .page-sub { font-size: 13.5px; color: var(--ink-3); margin: 4px 0 0; }
-  /* Vector wordmark — two-tone italic heavy type, offset shadow, raster scan-slices */
-  .brand-logo { display: block; height: 42px; width: auto; margin-right: auto; }
+  /* Vector wordmark — two-tone italic heavy type, offset shadow, background-bar scan-slices per OSINfluenza */
+  .brand-logo { display: block; height: 76px; width: auto; margin-right: auto; margin-top: 2px; }
+  .nav { padding: 4px var(--space-4); }
   .brand-logo .t { font-family: var(--font-heading); font-weight: 800; font-style: italic; font-size: 30px; letter-spacing: .5px; }
-  .brand-logo .tagline { font-family: Inter, system-ui, sans-serif; font-size: 9.5px; font-weight: 600; letter-spacing: .5px; fill: var(--ink-3); }
   .toolbar { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; padding: var(--space-3) 0; margin-bottom: var(--space-4); border-bottom: 1px solid var(--color-divider); }
   .toolbar .spacer { flex: 1; }
   .field-inline { display: flex; align-items: center; gap: 8px; }
@@ -190,7 +190,7 @@
   .brief-content h1 { display: none; }
   .brief-content h2 { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 14.5px; margin: 16px 0 8px; color: var(--color-text); }
   .brief-content h2:first-of-type { margin-top: 0; }
-  .brief-content p { font-size: 12.5px; line-height: 1.55; color: var(--ink-1); margin: 0 0 10px; }
+  .brief-content p { font-size: 12.5px; line-height: 1.55; color: var(--ink-2); margin: 0 0 10px; }
   .brief-content ul, .brief-content ol { margin: 0 0 10px; padding-left: 18px; font-size: 12px; line-height: 1.5; color: var(--ink-2); }
   .brief-content li { margin-bottom: 4px; }
   /* Status Report HTML arrives with <details> sections carrying inline 24px headings — normalize
@@ -207,16 +207,16 @@
   .brief-content > *:last-child { margin-bottom: 0 !important; }
   .brief-content hr { border: 0; border-top: 1px solid var(--color-divider); margin: 10px 0; }
   .brief-content strong { color: var(--color-text); font-weight: 600; }
-  .brief-content hr { border: 0; border-top: 1px solid var(--color-divider); margin: 10px 0; }
-  .brief-content details { border-top: 1px solid var(--color-divider); padding: 10px 0; }
-  .brief-content summary { cursor: pointer; font-size: 12px; font-weight: 600; color: var(--color-accent-300); list-style: none; }
-  .brief-content summary::-webkit-details-marker { display: none; }
-  .brief-content summary::before { content: '+ '; color: var(--color-accent-300); font-size: 10.5px; }
-  .brief-content details[open] summary::before { content: '– '; font-size: 10.5px; }
   .brief-bullets { margin: 6px 0 0; padding-left: 18px; font-size: 12px; line-height: 1.5; color: var(--ink-2); }
   .brief-bullets li { margin-bottom: 4px; }
   .brief-content em { color: var(--ink-4); }
   .brief-content a { word-break: break-word; }
+  .cite-ref { color: var(--color-accent-300); cursor: pointer; border-bottom: 1px dotted color-mix(in srgb, var(--color-accent-300) 55%, transparent); text-decoration: none; padding: 0 1px; border-radius: 2px; }
+  .cite-ref:hover, .cite-ref:focus { color: var(--color-accent); border-bottom-color: var(--color-accent); background: color-mix(in srgb, var(--color-accent) 10%, transparent); outline: none; }
+  .cite-ref.cite-hi { background: color-mix(in srgb, var(--color-accent) 18%, transparent); outline: 1px solid var(--color-accent); }
+  .plain-ref { cursor: pointer; border-radius: var(--radius-sm); transition: background 0.15s; }
+  .plain-ref:hover, .plain-ref:focus { background: color-mix(in srgb, var(--color-accent) 6%, transparent); outline: none; }
+  .plain-ref.ref-hi { background: color-mix(in srgb, var(--color-accent) 12%, transparent); outline: 1px solid var(--color-accent); }
   .table-card { margin-top: var(--space-4); }
   .card-head-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--space-3); flex-wrap: wrap; gap: 8px; }
   th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
@@ -334,23 +334,22 @@
 <body class="preload">
 
 <nav class="nav">
-  <svg class="brand-logo" viewBox="0 0 210 56" role="img" aria-label="OSINT-VHF — Global Outbreak Intelligence">
+  <svg class="brand-logo" viewBox="0 0 210 38" role="img" aria-label="OSINT-VHF">
     <defs>
       <linearGradient id="vhfGrad" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#cfc7ff"/>
         <stop offset="1" stop-color="#8f80e8"/>
       </linearGradient>
-      <clipPath id="sliceA"><rect x="-6" y="12" width="224" height="3.4"/></clipPath>
-      <clipPath id="sliceB"><rect x="-6" y="21" width="224" height="2.1"/></clipPath>
     </defs>
-    <!-- offset print-shadow layer: neutral ink under OSINT, deep violet under VHF -->
-    <text class="t" x="3.2" y="31.8" opacity=".85"><tspan fill="#04050c">OSINT</tspan><tspan fill="#241d4d">VHF</tspan></text>
-    <!-- base wordmark -->
-    <text class="t base" x="0" y="29"><tspan fill="var(--color-text)">OSINT</tspan><tspan fill="url(#vhfGrad)">VHF</tspan></text>
-    <!-- surveillance scan-slices: thin bands of the wordmark, shifted, like a raster sweep -->
-    <g clip-path="url(#sliceA)"><text class="t" x="3" y="29" fill="var(--color-accent-600)" opacity=".95"><tspan>OSINT</tspan><tspan>VHF</tspan></text></g>
-    <g clip-path="url(#sliceB)"><text class="t" x="-2.2" y="29" fill="#04050c"><tspan>OSINT</tspan><tspan>VHF</tspan></text></g>
-    <text class="tagline" x="1" y="49">Global Outbreak Intelligence</text>
+    <!-- shadow face — increased contrast vs #161826 background -->
+    <text class="t" x="3.2" y="27.5" opacity="1"><tspan fill="#0e0c1f">OSINT</tspan><tspan fill="#3b2e6b">VHF</tspan></text>
+    <!-- background bar BETWEEN shadow and front — cuts shadow only (per OSINfluenza) -->
+    <rect x="-2" y="9.8" width="212" height="2.8" fill="var(--color-bg)"/>
+    <!-- front face -->
+    <text class="t base" x="0" y="25"><tspan fill="var(--color-text)">OSINT</tspan><tspan fill="url(#vhfGrad)">VHF</tspan></text>
+    <!-- background bars IN FRONT of front face — pattern duplicated from source log: one full-width, one O-to-F -->
+    <rect x="-2" y="19.2" width="212" height="2.8" fill="var(--color-bg)"/>
+    <rect x="9" y="13.2" width="176" height="2.2" fill="var(--color-bg)"/>
   </svg>
   <a href="#" aria-current="location">Dashboard</a>
   <a href="#" id="navSources">Data sources</a>
@@ -392,7 +391,7 @@
     </div>
     <div class="field-inline">
       <label for="search">Location</label>
-      <input id="search" class="input" type="text" placeholder="Filter by country, pathogen…" style="min-width:180px" autocomplete="off" spellcheck="false">
+      <input id="search" class="input" type="text" placeholder="Filter by country, pathogen…" style="min-width:180px">
     </div>
     <div class="field-inline">
       <label for="species" title="Scopes every data element — summary stats, map, plots and the figures table">Host species</label>
@@ -673,7 +672,7 @@ function visibleRecords() {
     return regionOk && locOk && pathOk;
   });
 }
-document.getElementById('region').addEventListener('change', (e) => { activeRegion = e.target.value; tablePage = 0; renderStats(); renderTable(); renderMap(); renderEventList(); flyToFilteredMarkers(); writeHash(); });
+document.getElementById('region').addEventListener('change', (e) => { activeRegion = e.target.value; tablePage = 0; renderStats(); renderTable(); renderMap(); renderEventList(); flyToFilteredMarkers(); });
 document.getElementById('search').addEventListener('input', (e) => { locationQuery = e.target.value.trim().toLowerCase(); tablePage = 0; renderStats(); renderTable(); renderMap(); flyToFilteredMarkers(); });
 
 function worstCombo() {
@@ -865,8 +864,6 @@ function populateSpeciesSelect() {
   html += opt(ALL_SPECIES, `All species (${Object.values(hits).reduce((a,b)=>a+b,0).toLocaleString()})`);
   html += rest.map(s => opt(s, `${s} (${hits[s].toLocaleString()})`)).join('');
   sel.innerHTML = html;
-  // A hash-restored pathogen may not exist in the live data — fall back to All gracefully.
-  if (!isAll() && ![...sel.options].some(o => o.value === selectedPathogen)) { selectedPathogen = ALL; sel.value = ALL; }
 }
 function exportTableCsv() {
   const cols = [['country','Location'],['disease','Pathogen'],['host','Host species'],['cases','Confirmed cases'],
@@ -1780,7 +1777,6 @@ document.getElementById('plotViewSeg').addEventListener('click', (e) => {
   const btn = e.target.closest('.seg-opt');
   if (!btn || btn.disabled) return;
   plotViewSel = btn.dataset.view;
-  writeHash();
   renderTrendSection();
 });
 
@@ -2051,6 +2047,8 @@ function populatePathogenSelect(rows) {
     if (def) defaultPathogen = def;
   }
   const ordered = [...withCases].sort((a,b) => (priorityTier(b) - priorityTier(a)) || a.localeCompare(b, undefined, {sensitivity:'base'}));
+  // Hash-restored pathogen may not exist in the live data — fall back to All.
+  if (!isAll() && !ordered.includes(selectedPathogen) && selectedPathogen !== ALL) { selectedPathogen = ALL; }
   sel.innerHTML = [ALL, ...ordered].map(p => `<option value="${p}"${p===selectedPathogen?' selected':''}>${p===ALL ? 'All pathogens' : (PATHOGEN_LABELS[p] || p)}</option>`).join('');
 }document.getElementById('disease').addEventListener('change', (e) => {
   selectedPathogen = e.target.value;
@@ -2772,63 +2770,7 @@ function renderSubSourceChart(perLoc, style) {
   [binned[0], binned[binned.length-1]].forEach((b,i)=>{ if (!b) return; shsvg.append('text').attr('x', x(new Date(b.date))).attr('y',shTh-5).attr('text-anchor',i===0?'start':'end').attr('font-size','9.5px').attr('fill',col('--color-neutral-400')).text(new Date(b.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})); });
 }
 function renderAll() { renderPageSub(); renderStats(); renderTable(); renderMap(); renderTrendSection(); }
-// --- Shareable URL state (hash): pathogen, country, plot view, measure, type, region, species ---
-// Hash wins for sharing; localStorage restores a returning visitor's last filters otherwise.
-// Pathogen and species are deliberately NOT persisted — a fresh load always starts at
-// All pathogens / humans so the landing view is the surveillance-priority default (highest
-// projected deaths), not a stale filter from a previous session. Deep-link hash still wins.
-function savePrefs() { try { localStorage.setItem('vhf-prefs', JSON.stringify({ v: plotViewSel, m: subMeasure, t: reportType, r: activeRegion, sc: screenState, tm: tableMode })); } catch (e) {} }
-function writeHash() {
-  const parts = [];
-  if (!isAll()) parts.push('p=' + encodeURIComponent(selectedPathogen));
-  if (highlightedCountry) parts.push('c=' + encodeURIComponent(highlightedCountry));
-  if (plotViewSel !== 'auto') parts.push('v=' + plotViewSel);
-  if (subMeasure !== 'cases') parts.push('m=' + subMeasure);
-  if (reportType !== 'confirmed') parts.push('t=' + reportType);
-  if (activeRegion !== 'All regions') parts.push('r=' + encodeURIComponent(activeRegion));
-  if (activeSpecies !== 'humans') parts.push('s=' + encodeURIComponent(activeSpecies));
-  if (screenState !== 'accepted') parts.push('sc=' + screenState);
-  if (tableMode !== 'figures') parts.push('tm=raw');
-  history.replaceState(null, '', parts.length ? '#' + parts.join('&') : location.pathname + location.search);
-  savePrefs();
-}
-(function readHash() {
-  let st = {}; try { st = JSON.parse(localStorage.getItem('vhf-prefs') || '{}'); } catch (e) {}
-  const h = (location.hash && location.hash.length >= 2) ? new URLSearchParams(location.hash.slice(1)) : new URLSearchParams();
-  const g = k => (h.get(k) != null ? h.get(k) : st[k]);
-  if (h.get('p')) selectedPathogen = h.get('p');
-  if (g('c')) highlightedCountry = g('c');
-  if (['auto','bars','national','subnational'].includes(g('v'))) plotViewSel = g('v');
-  if (['cases','deaths'].includes(g('m'))) subMeasure = g('m');
-  if (['confirmed','suspected'].includes(g('t'))) reportType = g('t');
-  if (g('r')) activeRegion = g('r');
-  // Species: deep-link hash wins; localStorage never restores it (fresh loads default to humans).
-  if (h.get('s')) activeSpecies = h.get('s');
-  const sc = h.get('sc') || st.sc;
-  if (['accepted','all','rejected'].includes(sc)) screenState = sc;
-  const tmv = h.get('tm') || st.tm;
-  if (tmv === 'raw') {
-    tableMode = 'raw';
-    const seg = document.getElementById('tableModeSeg');
-    seg.querySelectorAll('.seg-opt').forEach(b => b.setAttribute('aria-selected', String(b.dataset.mode === 'raw')));
-    document.getElementById('screenSeg').style.display = 'none';
-    const ex = document.getElementById('exportCsvBtn');
-    ex.disabled = true;
-    ex.title = 'Switch to Figures to export the aggregated table';
-  }
-  const rs = document.getElementById('region');
-  if (rs && [...rs.options].some(o => o.value === activeRegion)) rs.value = activeRegion;
-  // Search term should never persist — stale location filters on reload look like missing data.
-  const sEl = document.getElementById('search');
-  if (sEl) { sEl.value = ''; locationQuery = ''; }
-  // One-time clean-up of stale persisted pathogen key (persistence removed above).
-  if (st.p) { try { delete st.p; localStorage.setItem('vhf-prefs', JSON.stringify(st)); } catch(e){} }
-})();
- // BFCache (back/forward) can restore form values after our initial clear — keep search un-persisted.
-window.addEventListener('pageshow', () => {
-  const el = document.getElementById('search');
-  if (el && el.value) { el.value = ''; locationQuery = ''; renderStats(); renderTable(); renderMap(); }
-});
+// Fresh load: no hash or localStorage persistence — defaults on every page load.
 renderAll();
 
 // --- Live fetch from the published Google Sheet ---
@@ -3066,6 +3008,159 @@ function renderBrief() {
     tg.setAttribute('aria-expanded', String(open));
     tg.textContent = open ? 'Evidence ▴' : 'Evidence ▾';
   });
+  enhanceBriefCitations();
+}
+function enhanceBriefCitations() {
+  const container = briefContentEl;
+  if (!container) return;
+  // 1) Identify plain reference items — covers both <li id="ref1"> (actual feed, <ol> numbered, no bracket text)
+  // and legacy <p>[1] ...</p> bracket-prefixed items. Plain list is inside <details> References.
+  const refMap = new Map();
+  // First: existing <li id="ref1"> / id="ref-1" from Status Report HTML (105 reports use this)
+  container.querySelectorAll('li[id^="ref"], li[id^="ref-"], ol li[id]').forEach(el => {
+    const m = (el.id || '').match(/^ref-?(\d+)$/);
+    if (!m) return;
+    const n = m[1];
+    if (el.classList.contains('plain-ref')) return;
+    // Normalize: keep original id (ref1) but also ensure alias ref-n exists via dataset; add plain-ref styling
+    el.classList.add('plain-ref');
+    el.setAttribute('tabindex', '0');
+    el.setAttribute('role', 'button');
+    el.setAttribute('aria-label', 'Reference ' + n + ', click to highlight citations');
+    el.dataset.ref = n;
+    // Ensure we can find via both ref1 and ref-1
+    if (!document.getElementById('ref-' + n) && el.id === 'ref' + n) {
+      // Create alias element id for hyphen form without duplicating DOM: store mapping via data, lookup will try both
+    }
+    if (!refMap.has(n)) refMap.set(n, el);
+  });
+  // Second: fallback bracket-prefixed text like <p>[1] Title...</p> or <div>[1]...</div> (if feed varies)
+  const candidates = container.querySelectorAll('p, li, div');
+  candidates.forEach(el => {
+    if (el.classList.contains('plain-ref') || el.closest('.cite-ref')) return;
+    // Skip already-handled <li id="refN"> — they have plain-ref now
+    if (el.id && /^ref-?\d+$/.test(el.id)) return;
+    const txt = (el.textContent || '').trim();
+    const m = txt.match(/^\s*\[(\d+)\]\s*/);
+    if (m) {
+      const n = m[1];
+      if (!refMap.has(n)) {
+        // Don't overwrite existing li#refN — create new id only if free
+        if (!document.getElementById('ref-' + n) && !document.getElementById('ref' + n)) {
+          el.id = 'ref-' + n;
+        } else if (!el.id) {
+          el.id = 'ref-' + n + '-' + Math.random().toString(36).slice(2,6);
+        }
+        el.classList.add('plain-ref');
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('role', 'button');
+        el.setAttribute('aria-label', 'Reference ' + n + ', click to highlight citations');
+        el.dataset.ref = n;
+        refMap.set(n, el);
+      } else {
+        if (!el.id) {
+          el.id = 'ref-' + n + '-' + Math.random().toString(36).slice(2,6);
+          el.classList.add('plain-ref');
+          el.setAttribute('tabindex', '0');
+          el.setAttribute('role', 'button');
+          el.dataset.ref = n;
+        }
+      }
+    }
+  });
+
+  // 2) Wrap citations [n] in body text, skipping ref items themselves
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
+    acceptNode: function(node) {
+      if (!node.nodeValue || !node.nodeValue.includes('[')) return NodeFilter.FILTER_REJECT;
+      const parent = node.parentElement;
+      if (!parent) return NodeFilter.FILTER_REJECT;
+      if (parent.closest('.plain-ref') || parent.closest('.cite-ref') || parent.tagName === 'A' || parent.tagName === 'SCRIPT' || parent.tagName === 'STYLE') return NodeFilter.FILTER_REJECT;
+      // Skip empty or whitespace-only
+      if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  const textNodes = [];
+  while (walker.nextNode()) textNodes.push(walker.currentNode);
+  const citationRegex = /\[(\d+)\]/g;
+  textNodes.forEach(node => {
+    const text = node.nodeValue;
+    let match;
+    let lastIndex = 0;
+    const frag = document.createDocumentFragment();
+    let hasMatch = false;
+    citationRegex.lastIndex = 0;
+    while ((match = citationRegex.exec(text)) !== null) {
+      hasMatch = true;
+      const before = text.slice(lastIndex, match.index);
+      if (before) frag.appendChild(document.createTextNode(before));
+      const span = document.createElement('span');
+      span.className = 'cite-ref';
+      span.dataset.ref = match[1];
+      span.textContent = match[0];
+      span.setAttribute('tabindex', '0');
+      span.setAttribute('role', 'button');
+      span.setAttribute('aria-label', 'Citation ' + match[1] + ', click to view reference');
+      frag.appendChild(span);
+      lastIndex = citationRegex.lastIndex;
+    }
+    if (hasMatch) {
+      const after = text.slice(lastIndex);
+      if (after) frag.appendChild(document.createTextNode(after));
+      node.parentNode.replaceChild(frag, node);
+    }
+  });
+  // 3) Delegated interaction (remove old listeners if any by cloning)
+  // Use single delegated listener per render — remove previous by replacing with cloned node? Instead, attach once via flag.
+  if (container._citeListenersAttached) return;
+  container._citeListenersAttached = true;
+  const flash = (els, cls) => {
+    els.forEach(el => {
+      el.classList.add(cls);
+      setTimeout(() => el.classList.remove(cls), 2000);
+    });
+  };
+  container.addEventListener('click', (e) => {
+    const cite = e.target.closest('.cite-ref');
+    if (cite) {
+      const n = cite.dataset.ref;
+      const target = document.getElementById('ref-' + n) || document.getElementById('ref' + n) || container.querySelector('.plain-ref[data-ref="' + n + '"]');
+      if (target) {
+        const details = target.closest('details');
+        if (details && !details.open) details.open = true;
+        target.scrollIntoView({behavior: 'smooth', block: 'center'});
+        flash([target], 'ref-hi');
+        flash(container.querySelectorAll('.cite-ref[data-ref="' + n + '"]'), 'cite-hi');
+      } else {
+        // No plain ref found — just flash cites (e.g., out-of-range [99] or not yet rendered)
+        flash(container.querySelectorAll('.cite-ref[data-ref="' + n + '"]'), 'cite-hi');
+      }
+      return;
+    }
+    const ref = e.target.closest('.plain-ref');
+    if (ref) {
+      const n = ref.dataset.ref;
+      const cites = container.querySelectorAll('.cite-ref[data-ref="' + n + '"]');
+      if (cites.length) {
+        // Auto-expand is not needed for cites (they are visible), just highlight and scroll to first
+        cites[0].scrollIntoView({behavior: 'smooth', block: 'center'});
+        flash(cites, 'cite-hi');
+        flash([ref], 'ref-hi');
+      } else {
+        flash([ref], 'ref-hi');
+      }
+    }
+  });
+  container.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const cite = e.target.closest('.cite-ref');
+    const ref = e.target.closest('.plain-ref');
+    if (cite || ref) {
+      e.preventDefault();
+      (cite || ref).click();
+    }
+  });
 }
 // Latest-figure vettings for every event of the same pathogen — the peer distribution that gives
 // the evidence strips a frame of reference (a bare "N vettings" bar otherwise means nothing).
@@ -3143,9 +3238,11 @@ function reportEvidenceHtml(rep, ev) {
       </div>`;
     }).join('') + `</div>`;
   }
-  return `<p class="ev-note" style="margin:2px 0 10px">${ev.direct} of ${ev.articles} citation${ev.articles!==1?'s':''} contributed structured figures (${ev.coverage}%)` +
-    `${ev.medianProx!=null?` · median proximity ${ev.medianProx.toFixed(2)}`:''}. ` +
-    `${ev.related?`${ev.related} citation${ev.related>1?'s':''} contributed context only — e.g. zoonotic linkage or response reporting; good intelligence that was never going to produce a figure.`:''}${ev.citedOnly?`${ev.citedOnly} citation${ev.citedOnly>1?'s are':' is'} outside the current records${EVIDENCE.windowLabel?` (${EVIDENCE.windowLabel})`:''} — archived or out-of-window.`:''}</p>` +
+  return `<p class="ev-note" style="margin:2px 0 6px">${ev.direct} of ${ev.articles} citation${ev.articles!==1?'s':''} contributed structured figures (${ev.coverage}%)${ev.medianProx!=null?` · median proximity ${ev.medianProx.toFixed(2)}`:''}.</p>` +
+    ((ev.related || ev.citedOnly) ? `<ul class="brief-bullets" style="margin:4px 0 10px">` +
+      (ev.related ? `<li>${ev.related} citation${ev.related>1?'s':''} contributed context only — e.g. zoonotic linkage or response reporting.</li>` : '') +
+      (ev.citedOnly ? `<li>${ev.citedOnly} citation${ev.citedOnly>1?'s are':' is'} outside the current records${EVIDENCE.windowLabel?` (${EVIDENCE.windowLabel})`:''} — archived or out-of-window.</li>` : '') +
+    `</ul>` : '') +
     bars +
     `<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-label);margin:12px 0 6px">Citations</div>
      <div class="ev-cards" style="margin-left:0;border-left:0;padding-left:0">${cites.map(c => citeCard(c.url, c.rel)).join('')}</div>`;
@@ -3303,9 +3400,7 @@ document.getElementById('syncBtn').addEventListener('click', () => loadLiveData(
 document.getElementById('bannerRetry').addEventListener('click', () => { document.body.classList.remove('fallback'); loadLiveData(true); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const d = document.getElementById('drillBackdrop'); if (d && d.style.display === 'flex') { hideChartTip(); d.style.display = 'none'; restoreDialogFocus(); } } });
 
-// Deep links are read at boot; an EXTERNAL hash change (edited URL, back/forward) reloads so
-// state re-resolves cleanly. Our own writeHash uses replaceState, which never fires this event.
-window.addEventListener('hashchange', () => location.reload());
+
 
 // Default the map to the globe view once everything is wired.
 function openDialog(title, html) { hideChartTip(); dialogOpener = document.activeElement; document.getElementById('drillTitle').textContent = title; document.getElementById('drillBody').innerHTML = html; document.getElementById('drillBackdrop').style.display = 'flex'; document.getElementById('drillClose').focus(); }
@@ -3619,7 +3714,6 @@ document.getElementById('tableModeSeg').addEventListener('click', (e) => {
   ex.disabled = tableMode === 'raw';
   ex.title = tableMode === 'raw' ? 'Switch to Figures to export the aggregated table' : 'Export the current figures table as CSV';
   tablePage = 0;
-  writeHash();
   renderTable();
 });
 document.addEventListener('rawarticles', () => {
@@ -3650,14 +3744,14 @@ document.getElementById('exportEventsBtn').addEventListener('click', exportEvent
 document.getElementById('printBtn').addEventListener('click', () => window.print());
 document.getElementById('species').addEventListener('change', (e) => {
   activeSpecies = e.target.value; tablePage = 0;
-  renderStats(); renderTable(); renderMap(); renderTrendSection(); writeHash();
+  renderStats(); renderTable(); renderMap(); renderTrendSection();
 });
 document.getElementById('screenSeg').addEventListener('click', (e) => {
   const btn = e.target.closest('.seg-opt'); if (!btn) return;
   screenState = btn.dataset.screen;
   document.querySelectorAll('#screenSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
   tablePage = 0;
-  renderStats(); renderTable(); renderMap(); writeHash();
+  renderStats(); renderTable(); renderMap();
 });
 document.getElementById('pagerPrev').addEventListener('click', () => { if (tableMode === 'raw') { if (rawPage > 0) { rawPage--; renderTable(); } } else if (tablePage > 0) { tablePage--; renderTable(); } });
 document.getElementById('pagerNext').addEventListener('click', () => { if (tableMode === 'raw') { rawPage++; renderTable(); } else { tablePage++; renderTable(); } });
