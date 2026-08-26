@@ -62,7 +62,7 @@
   .page-title { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 25px; margin: 0; letter-spacing: -0.01em; }
   .page-sub { font-size: 13.5px; color: var(--ink-3); margin: 4px 0 0; }
   /* Vector wordmark — two-tone italic heavy type, offset shadow, background-bar scan-slices */
-  .brand-logo { display: block; height: 63px; width: auto; margin-right: auto; }
+  .brand-logo { display: block; height: 76px; width: auto; margin-right: auto; margin-top: 6px; }
   .brand-logo .t { font-family: var(--font-heading); font-weight: 800; font-style: italic; font-size: 30px; letter-spacing: .5px; }
   .toolbar { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; padding: var(--space-3) 0; margin-bottom: var(--space-4); border-bottom: 1px solid var(--color-divider); }
   .toolbar .spacer { flex: 1; }
@@ -336,13 +336,12 @@
     </defs>
     <!-- shadow face -->
     <text class="t" x="3.2" y="27.5" opacity=".85"><tspan fill="#04050c">OSINT</tspan><tspan fill="#241d4d">VHF</tspan></text>
-    <!-- background bar z-ordered BETWEEN shadow and front face — cuts shadow only -->
-    <rect x="-2" y="13.5" width="212" height="3.6" fill="var(--color-bg)"/>
+    <!-- background bar BETWEEN shadow and front — cuts shadow only (visible as gap in offset) -->
+    <rect x="-2" y="12.8" width="212" height="3.2" fill="var(--color-bg)"/>
     <!-- front face -->
     <text class="t base" x="0" y="25"><tspan fill="var(--color-text)">OSINT</tspan><tspan fill="url(#vhfGrad)">VHF</tspan></text>
-    <!-- background bars z-ordered IN FRONT of front face — cut through both faces -->
-    <rect x="-2" y="18.2" width="212" height="2.2" fill="var(--color-bg)"/>
-    <rect x="14" y="23.8" width="82" height="2" fill="var(--color-bg)"/>
+    <!-- background bar IN FRONT of front face — cuts through both faces -->
+    <rect x="-2" y="19.2" width="212" height="2.8" fill="var(--color-bg)"/>
   </svg>
   <a href="#" aria-current="location">Dashboard</a>
   <a href="#" id="navSources">Data sources</a>
