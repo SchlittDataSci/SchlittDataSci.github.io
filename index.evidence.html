@@ -2765,9 +2765,10 @@ function renderSubSourceChart(perLoc, style) {
 function renderAll() { renderPageSub(); renderStats(); renderTable(); renderMap(); renderTrendSection(); }
 // --- Shareable URL state (hash): pathogen, country, plot view, measure, type, region, species ---
 // Hash wins for sharing; localStorage restores a returning visitor's last filters otherwise.
-// Species is deliberately NOT persisted — a fresh load always starts at the human default so
-// scorecard numbers never silently reflect a forgotten animal-host filter (deep-link hash still wins).
-function savePrefs() { try { localStorage.setItem('vhf-prefs', JSON.stringify({ p: selectedPathogen, v: plotViewSel, m: subMeasure, t: reportType, r: activeRegion, sc: screenState, tm: tableMode })); } catch (e) {} }
+// Pathogen and species are deliberately NOT persisted — a fresh load always starts at
+// All pathogens / humans so the landing view is the surveillance-priority default (highest
+// projected deaths), not a stale filter from a previous session. Deep-link hash still wins.
+function savePrefs() { try { localStorage.setItem('vhf-prefs', JSON.stringify({ v: plotViewSel, m: subMeasure, t: reportType, r: activeRegion, sc: screenState, tm: tableMode })); } catch (e) {} }
 function writeHash() {
   const parts = [];
   if (!isAll()) parts.push('p=' + encodeURIComponent(selectedPathogen));
@@ -2786,7 +2787,7 @@ function writeHash() {
   let st = {}; try { st = JSON.parse(localStorage.getItem('vhf-prefs') || '{}'); } catch (e) {}
   const h = (location.hash && location.hash.length >= 2) ? new URLSearchParams(location.hash.slice(1)) : new URLSearchParams();
   const g = k => (h.get(k) != null ? h.get(k) : st[k]);
-  if (g('p')) selectedPathogen = g('p');
+  if (h.get('p')) selectedPathogen = h.get('p');
   if (g('c')) highlightedCountry = g('c');
   if (['auto','bars','national','subnational'].includes(g('v'))) plotViewSel = g('v');
   if (['cases','deaths'].includes(g('m'))) subMeasure = g('m');
