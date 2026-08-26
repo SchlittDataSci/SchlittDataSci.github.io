@@ -1,7 +1,9 @@
 # Project Manifest
 
 ## Files
-- `dashboard.html` — the entire deliverable. Single Design surface (not a .dc.html — plain HTML page using D3 + the Nocturne CSS/bundle directly). All JS is inline in one `<script>` at the bottom.
+- `index.html` — the entire deliverable. Single Design surface (not a .dc.html — plain HTML page using D3 + the Nocturne CSS/bundle directly). All JS is inline in one `<script>` at the bottom.
+- `index.evidence.html` — working copy kept in sync with `index.html` post-promotion (identical).
+- `EVIDENCE-PLAN.md` — evidence-graph deployment plan: verified feed statistics, architecture (citation relationship taxonomy), step scope, verification results.
 - `_ds/nocturne-c236f95b-6f2d-4f5b-9bdc-974f09e4a112/` — bound design system (Nocturne). Do not edit; read `readme.md`/`theme.json` there for tokens if needed.
 - `README.md` — what this project is, data source shape, the aggregation rule.
 - `TODO.md` — active task checklist + open questions (read this first after any context reset).
