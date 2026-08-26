@@ -623,7 +623,7 @@ function visibleRecords() {
     return regionOk && locOk && pathOk;
   });
 }
-document.getElementById('region').addEventListener('change', (e) => { activeRegion = e.target.value; tablePage = 0; renderStats(); renderTable(); renderMap(); flyToFilteredMarkers(); writeHash(); });
+document.getElementById('region').addEventListener('change', (e) => { activeRegion = e.target.value; tablePage = 0; renderStats(); renderTable(); renderMap(); renderEventList(); flyToFilteredMarkers(); writeHash(); });
 document.getElementById('search').addEventListener('input', (e) => { locationQuery = e.target.value.trim().toLowerCase(); tablePage = 0; renderStats(); renderTable(); renderMap(); flyToFilteredMarkers(); });
 
 function worstCombo() {
@@ -665,7 +665,9 @@ function renderStats() {
     const host = activeSpecies === 'humans' ? '' : (activeSpecies === ALL_SPECIES ? ' · all hosts' : ` · ${activeSpecies} host`);
     scope.textContent = (all ? 'All pathogens' : (PATHOGEN_LABELS[selectedPathogen] || selectedPathogen)) + host;
   }
-  const shown = displayRecords();
+  // The region filter scopes the scorecard like it scopes the map, table and event list.
+  const regionOk = r => activeRegion === 'All regions' || REGION_BY_COUNTRY[r.country] === activeRegion;
+  const shown = displayRecords().filter(regionOk);
   const ct = document.getElementById('clustersTag');
   if (ct && shown.length) ct.textContent = `${new Set(shown.map(r=>r.country)).size} countries · ${shown.length} clusters`;
   if (!allRows.length) return;
@@ -730,6 +732,12 @@ let activeSpecies = 'humans';
 // rejected ones. "Vetting" language is deliberately NOT used here — vetting means
 // cross-source fact corroboration, a different mechanism (see VETTING_TIP).
 let screenState = 'accepted';
+// Which table the figures card is showing. Declared HERE, not in the raw block below:
+// readHash() (earlier in this script) assigns it at boot, and a let declared further down
+// would be in its temporal dead zone — deep links with tm=raw killed the entire script.
+let tableMode = 'figures'; // 'figures' | 'raw'
+let rawSort = { key: 'published', dir: -1 };
+let figuresTheadHtml = null; // snapshot so the figures table can be restored verbatim
 let tablePage = 0;
 const ALL_SPECIES = 'All species';
 // Does a measurement row pass the current statistical-screen view?
@@ -850,6 +858,10 @@ function exportEventsCsv() {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 let highlightSubLoc = null;
+// Dialog focus management: remember the opener, hand focus back on close (a11y).
+let dialogOpener = null;
+function restoreDialogFocus() { if (dialogOpener) { try { dialogOpener.focus(); } catch (e) {} dialogOpener = null; } }
+
 // Every article behind ONE row's figure on its last-updated date — the row-scoped
 // counterpart to openArticlePopup (which is scoped to a date across the whole pathogen).
 function openFigureSourcePopup(rowId) {
@@ -877,6 +889,7 @@ function openFigureSourcePopup(rowId) {
       <div class="art-meta">${a.canonical?`<span class="tag tag-accent" style="font-size:9px">canonical · ${canonReasonLabel(a.reason)}</span> `:''}<span title="${VETTING_TIP.replace(/"/g,'&quot;')}">${a.n} vetting${a.n>1?'s':''}</span>${a.quality&&a.quality!=='good'?` · <span title="statistical screening flag">${a.quality} flag</span>`:''}${a.url?` · <a class="art-link" style="font-size:11.5px;font-weight:400" href="${a.url}" target="_blank" rel="noopener" title="${t ? t.replace(/"/g,'&quot;') : (h||'')}">${t ? t + ' — ' + h : h} ↗</a>`:''}</div>
     </div>`; }).join('')
   ) : '<p style="font-size:12px">No per-article detail recorded for this figure.</p>';
+  dialogOpener = document.activeElement;
   document.getElementById('drillBackdrop').style.display = 'flex';
   document.getElementById('drillClose').focus();
 }
@@ -1061,6 +1074,7 @@ function openDrilldown(record) {
       <thead><tr><th>Location string (as scraped)</th><th>Measure</th><th>Latest value</th><th>Date</th><th>Screening</th></tr></thead>
       <tbody>${items.map(r => `<tr><td>${r.location}</td><td>${r.measure.replace('confirmed_','')}</td><td>${(+r.value).toLocaleString()}</td><td>${r.report_date}</td><td>${r.outlier==='True' ? `<span class="tag tag-outline" title="Rejected by the statistical screen (${r.quality_flag})">rejected</span>` : '<span class="tag tag-neutral">accepted</span>'}</td></tr>`).join('')}</tbody>
     </table>` : '<p style="font-size:12px">No location-level detail available (showing the cached fallback snapshot, not the live sheet).</p>';
+  dialogOpener = document.activeElement;
   document.getElementById('drillBackdrop').style.display = 'flex';
   document.getElementById('drillClose').focus();
 }
@@ -1112,8 +1126,8 @@ document.getElementById('reportRows').addEventListener('click', (e) => {
   }
 });
 document.getElementById('tableBack').addEventListener('click', () => { tableView = { mode:'national', id:null }; highlightedCountry=null; highlightSubLoc=null; renderTrendSection(); renderTable(); flyToFilteredMarkers(); updateSubToggleVisibility(null,null); });
-document.getElementById('drillClose').addEventListener('click', () => { hideChartTip(); document.getElementById('drillBackdrop').style.display = 'none'; });
-document.getElementById('drillBackdrop').addEventListener('click', (e) => { if (e.target.id === 'drillBackdrop') { hideChartTip(); e.target.style.display = 'none'; } });
+document.getElementById('drillClose').addEventListener('click', () => { hideChartTip(); document.getElementById('drillBackdrop').style.display = 'none'; restoreDialogFocus(); });
+document.getElementById('drillBackdrop').addEventListener('click', (e) => { if (e.target.id === 'drillBackdrop') { hideChartTip(); e.target.style.display = 'none'; restoreDialogFocus(); } });
 
 // --- Map (zoomable world map; every reporting country rendered) ---
 const svg = d3.select('#mapSvg');
@@ -1486,6 +1500,7 @@ function openMarkerDetail(m) {
   document.getElementById('drillBody').innerHTML = `
     <p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5">Latest confirmed figures for each pathogen reported in ${m.country}, aggregated from open-source reporting (highest screen-accepted value on the most recent reporting date). ${statusLine}</p>
     <table class="table"><thead><tr><th>Pathogen</th><th>Confirmed cases</th><th>Confirmed deaths</th><th>CFR</th><th>Latest</th></tr></thead><tbody>${trs}</tbody></table>`;
+  dialogOpener = document.activeElement;
   document.getElementById('drillBackdrop').style.display = 'flex';
   document.getElementById('drillClose').focus();
 }
@@ -1543,6 +1558,7 @@ function openArticlePopup(dateStr, caseRows) {
       dateUrls.slice(0,20).map(u => { const t = titleFor(u); const h = _host(u); return `<div class="art-row"><a class="art-link" href="${u}" target="_blank" rel="noopener" title="${t ? String(t).replace(/"/g,'&quot;') : String(h).replace(/"/g,'&quot;')}">${t ? t + ' — ' + h : h} ↗</a></div>`; }).join('') +
       (dateUrls.length > 20 ? `<p class="art-meta" style="margin-top:6px">+ ${dateUrls.length - 20} more in the CSV export</p>` : '');
   }
+  dialogOpener = document.activeElement;
   document.getElementById('drillBackdrop').style.display = 'flex';
   document.getElementById('drillClose').focus();
 }
@@ -2662,20 +2678,18 @@ function renderSubSourceChart(perLoc, style) {
   const bw = SRC_HIST.barWidth(step);
   binned.forEach(b => {
     const cx = x(new Date(b.date)); let yb = shTh-shMargin.bottom;
+    const dayTot = totals[binned.indexOf(b)];
     const dayRows = [];
     perLoc.forEach(s => { const c=(b.cells[s.loc]); if(!c || !c.vet) return; const h=c.vet*pxPer; yb-=h; dayRows.push(...c.rows);
+      const va = vettingsAndArticles(c.rows);
       shsvg.append('rect').attr('x',Math.max(shMargin.left,cx-bw/2)).attr('width',bw).attr('y',yb).attr('height',h).attr('rx',1).attr('fill',style[s.loc].color).attr('opacity',0.85).style('cursor','default')
-        .on('mousemove',(ev)=>{ const va = vettingsAndArticles(c.rows); showChartTip(ev,
+        .on('mousemove',(ev)=>showChartTip(ev,
           `<p class="t-title">${new Date(b.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'})}</p>` +
           `<div class="t-row"><span>${s.loc.split(',')[0]}</span><span>${va.vet} vetting${va.vet>1?'s':''}</span></div>` +
-          `<div class="t-row"><span>Distinct articles</span><span>${va.art}</span></div>`); })
+          `<div class="t-row"><span>Distinct articles</span><span>${va.art}</span></div>` +
+          `<div class="t-foot">Day total: ${dayTot} vetting${dayTot>1?'s':''}</div>`))
         .on('mouseleave',hideChartTip);
     });
-    // Whole-bar hover target: the date's combined total on one tooltip, matching the national strip.
-    shsvg.append('rect').attr('x',Math.max(shMargin.left,cx-bw/2)).attr('width',bw).attr('y',shTh-shMargin.bottom-totals[binned.indexOf(b)]*pxPer)
-      .attr('height',Math.max(1,totals[binned.indexOf(b)]*pxPer)).attr('fill','transparent').style('cursor','default')
-      .on('mousemove',(ev)=>showChartTip(ev, srcHistTip(b.date, totals[binned.indexOf(b)], vettingsAndArticles(dayRows).art)))
-      .on('mouseleave',hideChartTip);
   });
   [binned[0], binned[binned.length-1]].forEach((b,i)=>{ if (!b) return; shsvg.append('text').attr('x', x(new Date(b.date))).attr('y',shTh-5).attr('text-anchor',i===0?'start':'end').attr('font-size','9.5px').attr('fill',col('--color-neutral-400')).text(new Date(b.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})); });
 }
@@ -2719,6 +2733,9 @@ function writeHash() {
     const seg = document.getElementById('tableModeSeg');
     seg.querySelectorAll('.seg-opt').forEach(b => b.setAttribute('aria-selected', String(b.dataset.mode === 'raw')));
     document.getElementById('screenSeg').style.display = 'none';
+    const ex = document.getElementById('exportCsvBtn');
+    ex.disabled = true;
+    ex.title = 'Switch to Figures to export the aggregated table';
   }
   const rs = document.getElementById('region');
   if (rs && [...rs.options].some(o => o.value === activeRegion)) rs.value = activeRegion;
@@ -2786,6 +2803,9 @@ function fetchSheet() {
     records = liveRecords;
     allRows = rows;
     populatePathogenSelect(rows);
+    // The species select must populate here as well as in fetchReports — the two feeds resolve
+    // concurrently, and reports-first left it a lone "All species" option.
+    populateSpeciesSelect();
     // Flip the flag BEFORE rendering — the render guards key off it. Render errors are caught
     // separately: a rendering bug must never masquerade as "live sheet unreachable".
     dataLoaded = true;
@@ -3086,20 +3106,21 @@ function loadLiveData(manual) {
 loadLiveData();
 document.getElementById('syncBtn').addEventListener('click', () => loadLiveData(true));
 document.getElementById('bannerRetry').addEventListener('click', () => { document.body.classList.remove('fallback'); loadLiveData(true); });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const d = document.getElementById('drillBackdrop'); if (d && d.style.display === 'flex') { hideChartTip(); d.style.display = 'none'; } } });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const d = document.getElementById('drillBackdrop'); if (d && d.style.display === 'flex') { hideChartTip(); d.style.display = 'none'; restoreDialogFocus(); } } });
+
+// Deep links are read at boot; an EXTERNAL hash change (edited URL, back/forward) reloads so
+// state re-resolves cleanly. Our own writeHash uses replaceState, which never fires this event.
+window.addEventListener('hashchange', () => location.reload());
 
 // Default the map to the globe view once everything is wired.
-function openDialog(title, html) { hideChartTip(); document.getElementById('drillTitle').textContent = title; document.getElementById('drillBody').innerHTML = html; document.getElementById('drillBackdrop').style.display = 'flex'; document.getElementById('drillClose').focus(); }
+function openDialog(title, html) { hideChartTip(); dialogOpener = document.activeElement; document.getElementById('drillTitle').textContent = title; document.getElementById('drillBody').innerHTML = html; document.getElementById('drillBackdrop').style.display = 'flex'; document.getElementById('drillClose').focus(); }
 
 // --- Raw article–fact table: the figures card's ALTERNATE, swappable table ---
 // Fetched lazily — it is large (~8 MB) — so it never blocks first paint. The raw tab and the
 // aggregated tab are parallel views sharing only ~31% of URLs, so NO screening or admission
 // semantics are projected onto raw rows; the Accepted/All/Rejected toggle belongs to figures only.
 const GSHEET_RAW_URL = "https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8/export?format=csv&gid=361501048";
-let rawArticles = null, rawArticlesState = 'idle', rawPage = 0, rawQuery = '';
-let tableMode = 'figures'; // 'figures' | 'raw' — which table the figures card is showing
-let rawSort = { key: 'published', dir: -1 };
-let figuresTheadHtml = null; // snapshot so the figures table can be restored verbatim
+let rawArticles = null, rawArticlesState = 'idle', rawPage = 0;
 const articleTitles = new Map(); // normalized URL -> original-language title
 const VETTING_TIP = "Vettings count article–fact corroborations: an admitted article from one domain stating a fact found independently on a different domain. One article corroborating two facts counts as two vettings; ‘distinct sources’ counts unique article URLs.";
 function normUrl(u) {
@@ -3149,7 +3170,7 @@ function rawFiltered() {
   let rows = rawArticles || [];
   if (!isAll() && selectedPathogen) rows = rows.filter(r => r.pathogen === selectedPathogen);
   if (activeSpecies !== ALL_SPECIES) rows = rows.filter(r => cleanText(r.host_species) === activeSpecies);
-  const q = (rawQuery || locationQuery).toLowerCase();
+  const q = locationQuery.toLowerCase();
   if (q) rows = rows.filter(r => ((r.title||'') + ' ' + (r.title_translated||'') + ' ' + (r.location||'') + ' ' + (r.pathogen||'') + ' ' + (r.domain||'')).toLowerCase().includes(q));
   return rows;
 }
@@ -3261,6 +3282,10 @@ document.getElementById('tableModeSeg').addEventListener('click', (e) => {
   tableMode = btn.dataset.mode;
   document.querySelectorAll('#tableModeSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
   document.getElementById('screenSeg').style.display = tableMode === 'figures' ? '' : 'none';
+  // The CSV export serialises the FIGURES table — it would silently export stale rows in raw mode.
+  const ex = document.getElementById('exportCsvBtn');
+  ex.disabled = tableMode === 'raw';
+  ex.title = tableMode === 'raw' ? 'Switch to Figures to export the aggregated table' : 'Export the current figures table as CSV';
   tablePage = 0;
   writeHash();
   renderTable();

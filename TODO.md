@@ -1,5 +1,16 @@
 # TODO
 
+## Done — function testing + adversarial round (Aug 26, pre-handoff)
+Self-review of the diff plus a fresh Playwright pass caught and fixed five real bugs:
+1. **Boot crash on deep links (TDZ)**: readHash assigned `tableMode`, declared ~450 lines later — any `#tm=raw` deep link or persisted pref threw "Cannot access 'tableMode' before initialization" and killed the entire script at boot. Declarations moved up beside the other table state.
+2. **Region filter never scoped the scorecard**: Europe selected → stat card still showed 160,597 global cases (pre-existing; `renderStats` never applied `activeRegion`). Now scoped (623 cases · 11 countries · 17 clusters), and the region change listener re-renders the event list too (the `visibleReports` filter existed but nothing re-rendered it — list stayed at 105).
+3. **Species-select race**: `populateSpeciesSelect()` ran only in `fetchReports`; reports-before-sheet resolution left the select a lone "All species" while the hash filter silently applied. Now populated in both fetch paths (3/3 timing orders verified).
+4. **Dialog focus lost on close**: Esc/backdrop/button hid the dialog with focus stranded on the hidden close button. Opener is now remembered and focus restored on all three close paths.
+5. **Stacked sources histogram**: a whole-bar transparent hover overlay sat on top of the segments, making per-segment tooltips unreachable. Overlay removed; the day total folded into each segment tooltip.
+Also: Export CSV is disabled in raw mode (it serialised the stale figures rows — the raw tab's own CSV link sits beside it); external `hashchange` now reloads so edited URLs and back/forward re-resolve (our own `writeHash` uses `replaceState` and never fires it); dead `rawQuery` removed.
+Testing note: same-document hash navigation does NOT re-run boot — deep links must be verified with fresh document loads.
+Deferred (unchanged): XSS-hardening the AI-brief HTML; keyboard access for globe markers; the `reportFilter` event-list swap on event selection (design pass needed).
+
 ## Done — second fix round (Aug 26)
 1. Top-pathogen determination = most FORECASTED DEATHS (max final-horizon p50 of confirmed_deaths series; max not sum — subnational series overlap). A surveillance-priority pathogen within 10% of the leader wins the near-tie, so Bundibugyo (3,185) keeps featuring over the nonspecific Ebola catch-all (3,310). Replaces data-depth scoring; selector order keeps the priority tier.
 2. Species filter defaults to HUMANS on every fresh load — dropped from localStorage persistence (hash s= still wins). Scorecard scope line names a non-default host ("· birds host") so scoped numbers never read as unscoped. Host species column now reflects the filtered subset (viewRows).
