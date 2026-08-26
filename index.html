@@ -61,9 +61,10 @@
   .page-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-4); flex-wrap: wrap; }
   .page-title { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 25px; margin: 0; letter-spacing: -0.01em; }
   .page-sub { font-size: 13.5px; color: var(--ink-3); margin: 4px 0 0; }
-  /* Vector wordmark — two-tone italic heavy type, offset shadow, background-bar scan-slices */
-  .brand-logo { display: block; height: 76px; width: auto; margin-right: auto; margin-top: 6px; }
+  /* Vector wordmark — two-tone italic heavy type, offset shadow, raster scan-slices */
+  .brand-logo { display: block; height: 42px; width: auto; margin-right: auto; }
   .brand-logo .t { font-family: var(--font-heading); font-weight: 800; font-style: italic; font-size: 30px; letter-spacing: .5px; }
+  .brand-logo .tagline { font-family: Inter, system-ui, sans-serif; font-size: 9.5px; font-weight: 600; letter-spacing: .5px; fill: var(--ink-3); }
   .toolbar { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; padding: var(--space-3) 0; margin-bottom: var(--space-4); border-bottom: 1px solid var(--color-divider); }
   .toolbar .spacer { flex: 1; }
   .field-inline { display: flex; align-items: center; gap: 8px; }
@@ -206,6 +207,12 @@
   .brief-content > *:last-child { margin-bottom: 0 !important; }
   .brief-content hr { border: 0; border-top: 1px solid var(--color-divider); margin: 10px 0; }
   .brief-content strong { color: var(--color-text); font-weight: 600; }
+  .brief-content hr { border: 0; border-top: 1px solid var(--color-divider); margin: 10px 0; }
+  .brief-content details { border-top: 1px solid var(--color-divider); padding: 10px 0; }
+  .brief-content summary { cursor: pointer; font-size: 12px; font-weight: 600; color: var(--color-accent-300); list-style: none; }
+  .brief-content summary::-webkit-details-marker { display: none; }
+  .brief-content summary::before { content: '+ '; color: var(--color-accent-300); font-size: 10.5px; }
+  .brief-content details[open] summary::before { content: '– '; font-size: 10.5px; }
   .brief-bullets { margin: 6px 0 0; padding-left: 18px; font-size: 12px; line-height: 1.5; color: var(--ink-2); }
   .brief-bullets li { margin-bottom: 4px; }
   .brief-content em { color: var(--ink-4); }
@@ -327,21 +334,23 @@
 <body class="preload">
 
 <nav class="nav">
-  <svg class="brand-logo" viewBox="0 0 210 38" role="img" aria-label="OSINT-VHF">
+  <svg class="brand-logo" viewBox="0 0 210 56" role="img" aria-label="OSINT-VHF — Global Outbreak Intelligence">
     <defs>
       <linearGradient id="vhfGrad" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#cfc7ff"/>
         <stop offset="1" stop-color="#8f80e8"/>
       </linearGradient>
+      <clipPath id="sliceA"><rect x="-6" y="12" width="224" height="3.4"/></clipPath>
+      <clipPath id="sliceB"><rect x="-6" y="21" width="224" height="2.1"/></clipPath>
     </defs>
-    <!-- shadow face -->
-    <text class="t" x="3.2" y="27.5" opacity=".85"><tspan fill="#04050c">OSINT</tspan><tspan fill="#241d4d">VHF</tspan></text>
-    <!-- background bar BETWEEN shadow and front — cuts shadow only (visible as gap in offset) -->
-    <rect x="-2" y="12.8" width="212" height="3.2" fill="var(--color-bg)"/>
-    <!-- front face -->
-    <text class="t base" x="0" y="25"><tspan fill="var(--color-text)">OSINT</tspan><tspan fill="url(#vhfGrad)">VHF</tspan></text>
-    <!-- background bar IN FRONT of front face — cuts through both faces -->
-    <rect x="-2" y="19.2" width="212" height="2.8" fill="var(--color-bg)"/>
+    <!-- offset print-shadow layer: neutral ink under OSINT, deep violet under VHF -->
+    <text class="t" x="3.2" y="31.8" opacity=".85"><tspan fill="#04050c">OSINT</tspan><tspan fill="#241d4d">VHF</tspan></text>
+    <!-- base wordmark -->
+    <text class="t base" x="0" y="29"><tspan fill="var(--color-text)">OSINT</tspan><tspan fill="url(#vhfGrad)">VHF</tspan></text>
+    <!-- surveillance scan-slices: thin bands of the wordmark, shifted, like a raster sweep -->
+    <g clip-path="url(#sliceA)"><text class="t" x="3" y="29" fill="var(--color-accent-600)" opacity=".95"><tspan>OSINT</tspan><tspan>VHF</tspan></text></g>
+    <g clip-path="url(#sliceB)"><text class="t" x="-2.2" y="29" fill="#04050c"><tspan>OSINT</tspan><tspan>VHF</tspan></text></g>
+    <text class="tagline" x="1" y="49">Global Outbreak Intelligence</text>
   </svg>
   <a href="#" aria-current="location">Dashboard</a>
   <a href="#" id="navSources">Data sources</a>
@@ -383,7 +392,7 @@
     </div>
     <div class="field-inline">
       <label for="search">Location</label>
-      <input id="search" class="input" type="text" placeholder="Filter by country, pathogen…" style="min-width:180px">
+      <input id="search" class="input" type="text" placeholder="Filter by country, pathogen…" style="min-width:180px" autocomplete="off" spellcheck="false">
     </div>
     <div class="field-inline">
       <label for="species" title="Scopes every data element — summary stats, map, plots and the figures table">Host species</label>
@@ -856,6 +865,8 @@ function populateSpeciesSelect() {
   html += opt(ALL_SPECIES, `All species (${Object.values(hits).reduce((a,b)=>a+b,0).toLocaleString()})`);
   html += rest.map(s => opt(s, `${s} (${hits[s].toLocaleString()})`)).join('');
   sel.innerHTML = html;
+  // A hash-restored pathogen may not exist in the live data — fall back to All gracefully.
+  if (!isAll() && ![...sel.options].some(o => o.value === selectedPathogen)) { selectedPathogen = ALL; sel.value = ALL; }
 }
 function exportTableCsv() {
   const cols = [['country','Location'],['disease','Pathogen'],['host','Host species'],['cases','Confirmed cases'],
@@ -2040,8 +2051,6 @@ function populatePathogenSelect(rows) {
     if (def) defaultPathogen = def;
   }
   const ordered = [...withCases].sort((a,b) => (priorityTier(b) - priorityTier(a)) || a.localeCompare(b, undefined, {sensitivity:'base'}));
-  // Hash-restored pathogen may not exist in the live data — fall back to All.
-  if (!isAll() && !ordered.includes(selectedPathogen) && selectedPathogen !== ALL) { selectedPathogen = ALL; }
   sel.innerHTML = [ALL, ...ordered].map(p => `<option value="${p}"${p===selectedPathogen?' selected':''}>${p===ALL ? 'All pathogens' : (PATHOGEN_LABELS[p] || p)}</option>`).join('');
 }document.getElementById('disease').addEventListener('change', (e) => {
   selectedPathogen = e.target.value;
@@ -2809,30 +2818,17 @@ function writeHash() {
   }
   const rs = document.getElementById('region');
   if (rs && [...rs.options].some(o => o.value === activeRegion)) rs.value = activeRegion;
+  // Search term should never persist — stale location filters on reload look like missing data.
+  const sEl = document.getElementById('search');
+  if (sEl) { sEl.value = ''; locationQuery = ''; }
+  // One-time clean-up of stale persisted pathogen key (persistence removed above).
+  if (st.p) { try { delete st.p; localStorage.setItem('vhf-prefs', JSON.stringify(st)); } catch(e){} }
 })();
- // Keep segment controls in sync when the deep-link hash drives state (e.g. #p=...&v=bars)
-function syncHashSegs() {
-  const setSeg = (id, val) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.querySelectorAll('.seg-opt').forEach(b => {
-      const bv = b.dataset.view || b.dataset.m || b.dataset.type || b.dataset.screen || b.dataset.mode;
-      if (bv != null) b.setAttribute('aria-selected', String(bv === val));
-    });
-  };
-  setSeg('plotViewSeg', plotViewSel);
-  setSeg('subMeasureSeg', subMeasure);
-  setSeg('reportTypeSeg', reportType);
-  setSeg('screenSeg', screenState);
-  setSeg('tableModeSeg', tableMode);
-  if (highlightedCountry && typeof flyToFilteredMarkers === 'function' && dataLoaded && reports.length) {
-    setTimeout(() => {
-      const hit = (typeof visibleEventMarkers === 'function' ? visibleEventMarkers() : []).find(m => m.country === highlightedCountry);
-      if (hit && hit.lonlat) flyToLonlat(hit.lonlat);
-      else flyToFilteredMarkers();
-    }, 350);
-  }
-}
+ // BFCache (back/forward) can restore form values after our initial clear — keep search un-persisted.
+window.addEventListener('pageshow', () => {
+  const el = document.getElementById('search');
+  if (el && el.value) { el.value = ''; locationQuery = ''; renderStats(); renderTable(); renderMap(); }
+});
 renderAll();
 
 // --- Live fetch from the published Google Sheet ---
@@ -2908,7 +2904,6 @@ function fetchSheet() {
     // Reports may already be on screen with placeholder relationship states — refresh them now
     // that the measurement side of the index exists.
     if (reports.length) { renderEventList(); renderBrief(); }
-    syncHashSegs();
   } else {
     throw new Error('empty live dataset');
   }
@@ -3148,11 +3143,9 @@ function reportEvidenceHtml(rep, ev) {
       </div>`;
     }).join('') + `</div>`;
   }
-  return `<p class="ev-note" style="margin:2px 0 6px">${ev.direct} of ${ev.articles} citation${ev.articles!==1?'s':''} contributed structured figures (${ev.coverage}%)${ev.medianProx!=null?` · median proximity ${ev.medianProx.toFixed(2)}`:''}.</p>` +
-    ((ev.related || ev.citedOnly) ? `<ul class="brief-bullets" style="margin:4px 0 10px">` +
-      (ev.related ? `<li>${ev.related} citation${ev.related>1?'s':''} contributed context only — e.g. zoonotic linkage or response reporting.</li>` : '') +
-      (ev.citedOnly ? `<li>${ev.citedOnly} citation${ev.citedOnly>1?'s are':' is'} outside the current records${EVIDENCE.windowLabel?` (${EVIDENCE.windowLabel})`:''} — archived or out-of-window.</li>` : '') +
-    `</ul>` : '') +
+  return `<p class="ev-note" style="margin:2px 0 10px">${ev.direct} of ${ev.articles} citation${ev.articles!==1?'s':''} contributed structured figures (${ev.coverage}%)` +
+    `${ev.medianProx!=null?` · median proximity ${ev.medianProx.toFixed(2)}`:''}. ` +
+    `${ev.related?`${ev.related} citation${ev.related>1?'s':''} contributed context only — e.g. zoonotic linkage or response reporting; good intelligence that was never going to produce a figure.`:''}${ev.citedOnly?`${ev.citedOnly} citation${ev.citedOnly>1?'s are':' is'} outside the current records${EVIDENCE.windowLabel?` (${EVIDENCE.windowLabel})`:''} — archived or out-of-window.`:''}</p>` +
     bars +
     `<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-label);margin:12px 0 6px">Citations</div>
      <div class="ev-cards" style="margin-left:0;border-left:0;padding-left:0">${cites.map(c => citeCard(c.url, c.rel)).join('')}</div>`;
@@ -3270,7 +3263,6 @@ function fetchReports() {
   selectedIdx = 0;
   renderEventList();
   renderBrief();
-  syncHashSegs();
   }).catch(err => {
     console.warn('[data] event reports unreachable:', err && (err.message || err));
     eventListEl.innerHTML = '<p style="font-size:12px;color:var(--color-neutral-400);padding:8px 4px">Reports unavailable.</p>';
