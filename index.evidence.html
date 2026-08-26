@@ -2808,30 +2808,30 @@ function writeHash() {
   }
   const rs = document.getElementById('region');
   if (rs && [...rs.options].some(o => o.value === activeRegion)) rs.value = activeRegion;
-  // Keep segment controls in sync when the deep-link hash drives state (e.g. #p=...&v=bars)
-  function syncHashSegs() {
-    const setSeg = (id, val) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.querySelectorAll('.seg-opt').forEach(b => {
-        const bv = b.dataset.view || b.dataset.m || b.dataset.type || b.dataset.screen || b.dataset.mode;
-        if (bv != null) b.setAttribute('aria-selected', String(bv === val));
-      });
-    };
-    setSeg('plotViewSeg', plotViewSel);
-    setSeg('subMeasureSeg', subMeasure);
-    setSeg('reportTypeSeg', reportType);
-    setSeg('screenSeg', screenState);
-    setSeg('tableModeSeg', tableMode);
-    if (highlightedCountry && typeof flyToFilteredMarkers === 'function' && dataLoaded && reports.length) {
-      setTimeout(() => {
-        const hit = (typeof visibleEventMarkers === 'function' ? visibleEventMarkers() : []).find(m => m.country === highlightedCountry);
-        if (hit && hit.lonlat) flyToLonlat(hit.lonlat);
-        else flyToFilteredMarkers();
-      }, 350);
-    }
-  }
 })();
+ // Keep segment controls in sync when the deep-link hash drives state (e.g. #p=...&v=bars)
+function syncHashSegs() {
+  const setSeg = (id, val) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.querySelectorAll('.seg-opt').forEach(b => {
+      const bv = b.dataset.view || b.dataset.m || b.dataset.type || b.dataset.screen || b.dataset.mode;
+      if (bv != null) b.setAttribute('aria-selected', String(bv === val));
+    });
+  };
+  setSeg('plotViewSeg', plotViewSel);
+  setSeg('subMeasureSeg', subMeasure);
+  setSeg('reportTypeSeg', reportType);
+  setSeg('screenSeg', screenState);
+  setSeg('tableModeSeg', tableMode);
+  if (highlightedCountry && typeof flyToFilteredMarkers === 'function' && dataLoaded && reports.length) {
+    setTimeout(() => {
+      const hit = (typeof visibleEventMarkers === 'function' ? visibleEventMarkers() : []).find(m => m.country === highlightedCountry);
+      if (hit && hit.lonlat) flyToLonlat(hit.lonlat);
+      else flyToFilteredMarkers();
+    }, 350);
+  }
+}
 renderAll();
 
 // --- Live fetch from the published Google Sheet ---
