@@ -79,9 +79,11 @@
   .event-title { font-size: 12px; line-height: 1.35; margin: 0 0 6px; color: var(--color-text); }
   .event-title .ev-path { color: var(--color-accent-200); font-weight: 600; }
   .event-title .ev-loc { color: var(--color-neutral-300); }
-  .meta-wiki { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
-  .meta-wiki:hover { color: var(--color-text); border-bottom-style: solid; }
-  .event-meta { display: flex; justify-content: space-between; align-items: center; gap: 6px; font-size: 10.5px; color: var(--ink-4); }
+  .meta-ref { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
+  .meta-ref:hover { color: var(--color-text); border-bottom-style: solid; }
+  .event-meta { display: flex; justify-content: space-between; align-items: center; gap: 6px; font-size: 10.5px; color: var(--ink-4); flex-wrap: nowrap; min-width: 0; }
+  .event-meta > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .event-meta .tag { flex: none; white-space: nowrap; }
   .stat-stack { display: flex; flex-direction: column; gap: var(--space-3); }
   .cell-range { display: block; font-size: 10.5px; color: var(--ink-4); margin-top: 2px; }
   .src-link { color: var(--color-accent-300); font-size: 12px; }
@@ -128,7 +130,9 @@
   .forecast-card p.f-line { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; border-top: 1px solid var(--color-divider); margin: 0; }
   .forecast-card p.f-line:first-of-type { border-top: 0; }
   .forecast-card .f-range { color: var(--ink-4); font-size: 11.5px; }
-  .row-2col { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-4); margin-top: var(--space-4); align-items: stretch; }
+  .row-2col { display: grid; grid-template-columns: 1.5fr 1fr; gap: var(--space-4); margin-top: var(--space-4); align-items: stretch; }
+  /* Events + reports lead the row; the plots panel reads as the right-hand analysis column. */
+  .row-2col > .briefs-card { order: -1; }
   .row-2col > .card { display: flex; flex-direction: column; }
   .briefs-card { height: var(--panel-h); }
   .plots-card { height: var(--panel-h); min-height: 0; display: flex; flex-direction: column; }
@@ -153,7 +157,7 @@
   .forecast-box .fc-none { font-size: 12px; line-height: 1.55; color: var(--ink-4); margin: 0; }
   .forecast-box strong { color: var(--color-text); font-weight: 600; }
   .forecast-box span.mut { color: var(--ink-4); }
-  .briefs-split { display: grid; grid-template-columns: 216px minmax(0,1fr); gap: var(--space-4); height: 100%; min-height: 0; }
+  .briefs-split { display: grid; grid-template-columns: 244px minmax(0,1fr); gap: var(--space-4); height: 100%; min-height: 0; }
   .events-col { min-height: 0; overflow-y: auto; border-right: 1px solid var(--color-divider); padding-right: var(--space-3); }
   .events-hint { font-size: 10.5px; color: var(--color-accent-300); margin: 0 0 10px; }
   .rf-bar { font-size: 10.5px; color: var(--color-accent-200); background: color-mix(in srgb, var(--color-accent-500) 14%, transparent); border-radius: var(--radius-sm); padding: 5px 8px; margin: 0 0 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
@@ -212,8 +216,16 @@
   .tooltip .t-sub { font-size: 11px; color: var(--ink-3); margin: 0 0 6px; }
   #globeMap { border-radius: var(--radius-md); }
   #globeMap canvas { outline: none; }
-  .globe-pop .maplibregl-popup-content { background: var(--color-neutral-900); color: var(--color-text); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); font-family: var(--font-body); box-shadow: var(--shadow-md); padding: 10px 12px; max-width: 260px; }
+  /* Globe popups share the exact tooltip language (bg, border, type scale, row layout) so the
+     two maps read as one product — and .t-row spans get real spacing via flex gap. */
+  .globe-pop .maplibregl-popup-content { background: var(--color-neutral-800); color: var(--color-text); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 12.5px; box-shadow: var(--shadow-md); padding: 8px 10px; max-width: 260px; }
   .globe-pop .maplibregl-popup-tip { display: none; }
+  .globe-pop .t-title { font-weight: 600; margin: 0 0 3px; }
+  .globe-pop .t-sub { font-size: 11px; color: var(--ink-3); margin: 0 0 6px; }
+  .globe-pop .t-row { display: flex; justify-content: space-between; gap: 10px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .globe-pop .t-foot { margin-top: 6px; padding-top: 5px; border-top: 1px solid var(--color-divider); font-size: 10.5px; color: var(--color-accent-300); }
+  /* Dialogs must sit above every in-page layer (sticky table header z2, map tooltip z5). */
+  .dialog-backdrop { z-index: 60; }
   #globeMap .maplibregl-ctrl-group { background: var(--color-neutral-900); border: 1px solid var(--color-divider); }
   #globeMap .maplibregl-ctrl-group button + button { border-top: 1px solid var(--color-divider); }
   #globeMap .maplibregl-ctrl-group button span { filter: invert(1); }
@@ -254,6 +266,11 @@
   .table-scroll th { white-space: nowrap; }
   #tablePager { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin-top: 12px; flex-wrap: wrap; }
   #tablePager .pager-info { font-size: 11.5px; color: var(--ink-4); }
+  .footer-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--color-accent-300); border: 1px solid var(--color-divider); border-radius: 999px; padding: 3px 10px; }
+  .footer-badge:hover { color: var(--color-accent-200); border-color: var(--color-accent-300); text-decoration: none; }
+  /* Raw-articles table (figures card's alternate view): compact article-level rows. */
+  .raw-row-title { font-size: 12px; font-weight: 600; word-break: break-word; }
+  .raw-row-trans { font-size: 10.5px; color: var(--ink-4); font-style: italic; word-break: break-word; }
   /* Print / PDF: light theme, expanded panels, controls hidden, and every link prints its URL
      so the ephemeral AI briefs and event reports keep their sources as an audit trail. */
   @media print {
@@ -328,7 +345,7 @@
       <input id="search" class="input" type="text" placeholder="Filter by country, pathogen…" style="min-width:180px">
     </div>
     <div class="field-inline">
-      <label for="species" title="Scopes the figures table; the summary stats and map are unaffected">Host species</label>
+      <label for="species" title="Scopes every data element — summary stats, map, plots and the figures table">Host species</label>
       <select id="species" class="input" style="min-width:150px"><option>All species</option></select>
     </div>
     <span class="spacer"></span>
@@ -419,7 +436,7 @@
       <div class="chart-divider"></div>
       <p class="card-meta" style="margin:0 0 2px">Sources per day backing the cases figure — click a bar to list the articles</p>
       <div class="source-chart-wrap" id="sourceChartWrap"><svg id="sourceSvg" width="100%" height="92"></svg></div>
-      <p class="methodology-note" title="For the selected pathogen, each reporting country's highest outlier-screened NATIONAL value per date is used, then summed across countries. Subnational (province/region/municipality) reports are excluded so national and subnational figures are never mixed.">National figure for the primary reporting country — the comma-free location total, never summed across countries. Subnational (comma) reports appear only in the drill-down. Open-source press reporting, not official WHO/IHR figures. <span id="outlierNote"></span> <span style="text-decoration:underline dotted;cursor:help">Methodology ⓘ</span></p>
+      <p class="methodology-note" title="Per reporting date, the highest screen-accepted NATIONAL figure (comma-free location) of the primary reporting country — never summed across countries. Subnational (comma) reports appear only in the drill-down. Open-source press reporting, not official WHO/IHR figures.">National totals only — never summed across countries. Open-source press figures, not WHO/IHR data. <span id="outlierNote"></span></p>
     </div>
 
     <div class="card briefs-card elev-sm">
@@ -428,7 +445,7 @@
           <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
             <p class="card-title" style="margin:0 0 4px">Event reports</p>
             <span style="display:flex;gap:6px">
-              <button type="button" class="btn btn-secondary" id="exportEventsBtn" style="font-size:10.5px;padding:2px 8px" title="Export all event reports with source URLs as an audit trail">Events CSV</button>
+              <button type="button" class="btn btn-secondary" id="exportEventsBtn" style="font-size:10.5px;padding:2px 8px" title="Export the event reports matching the current filters, with source URLs, as an audit trail">Events CSV</button>
               <button type="button" class="btn btn-secondary" id="printBtn" style="font-size:10.5px;padding:2px 8px" title="Print / save the briefs, event list and figures table as PDF — source links included">Print / PDF</button>
             </span>
           </div>
@@ -452,11 +469,20 @@
       <p class="card-title" style="margin:0" id="tableTitle">Latest figures by location — national events</p>
       <button type="button" class="btn btn-secondary" id="tableBack" style="display:none;font-size:11px;padding:4px 10px">← Back to national</button>
       <span style="display:flex;align-items:center;gap:10px">
+        <div class="seg" role="tablist" aria-label="Table view" id="tableModeSeg">
+          <button type="button" class="seg-opt" aria-selected="true" data-mode="figures">Figures</button>
+          <button type="button" class="seg-opt" data-mode="raw" title="The raw article–fact extraction table behind both the statistical figures and the event reports">Raw articles</button>
+        </div>
+        <div class="seg" role="tablist" aria-label="Statistical screening" id="screenSeg" title="Lone article values are treated as a sampling distribution: each figure is screened by a chi-square outlier test and a cumulative-monotonicity check, then accepted or rejected. Separate from ‘vettings’, which count independent-domain articles corroborating a fact.">
+          <button type="button" class="seg-opt" aria-selected="true" data-screen="accepted">Accepted</button>
+          <button type="button" class="seg-opt" data-screen="all">All</button>
+          <button type="button" class="seg-opt" data-screen="rejected">Rejected</button>
+        </div>
         <button type="button" class="btn btn-secondary" id="exportCsvBtn" style="padding:4px 10px;font-size:12px">Export CSV</button>
-        <span class="card-meta">Pipeline: <a href="https://docs.google.com/spreadsheets/d/1kDQZvv9FwNpQkBN191BzsgPmYGNwng_Qjp-RV6RUov4" target="_blank" rel="noopener">processing sheet</a> · <a href="https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8/export?format=csv&amp;gid=881754490" target="_blank" rel="noopener">data output (CSV) ↗</a></span>
+        <span class="card-meta"><a href="https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8/export?format=csv&amp;gid=881754490" target="_blank" rel="noopener">data output (CSV) ↗</a></span>
       </span>
     </div>
-    <p style="font-size:11.5px;color:color-mix(in srgb, var(--color-text) 68%, transparent);margin:-6px 0 12px">Range = spread across sources reporting on that date. Status: Reporting ≤4 days since the latest figure · Slowing ≤14 days · Quiet beyond that, relative to the sheet's latest entry. <strong>Documentation</strong> describes the outbreak event as a whole; <strong>Source articles</strong> describes only this row's figure on its last-updated date — click a source count to list the articles and vettings behind it.</p>
+    <p id="tableIntro" style="font-size:11.5px;color:color-mix(in srgb, var(--color-text) 68%, transparent);margin:-6px 0 12px">Range = spread across sources for that date. Status reflects reporting recency — Reporting ≤4d · Slowing ≤14d · Quiet — not outbreak control. <strong>Documentation</strong> covers the whole event; <strong>Vettings</strong> cover only this row's latest figure — click a count to list the articles behind it.</p>
     <div class="table-scroll">
     <table class="table">
       <thead>
@@ -464,12 +490,12 @@
           <th class="sortable" data-key="country" id="thFirst">Country<span class="sort-arrow"></span></th>
           <th class="sortable" data-key="disease">Pathogen<span class="sort-arrow"></span></th>
           <th>Host species</th>
-          <th class="sortable" data-key="doc" title="How well the whole outbreak event is documented: total source vettings and the span of reporting days behind it">Outbreak documentation<span class="sort-arrow"></span></th>
+          <th class="sortable" data-key="doc" title="How well the whole outbreak event is documented: total vettings — article–fact corroborations across independent domains — and the span of reporting days behind it">Outbreak documentation<span class="sort-arrow"></span></th>
           <th class="sortable" data-key="cases">Confirmed cases<span class="sort-arrow"></span></th>
           <th class="sortable" data-key="deaths" id="thDeaths">Confirmed deaths<span class="sort-arrow"></span></th>
           <th class="sortable" data-key="cfr">CFR<span class="sort-arrow"></span></th>
           <th class="sortable" data-key="date">Last updated<span class="sort-arrow"></span></th>
-          <th class="sortable" data-key="sources" title="Articles and vettings behind THIS row's case figure on its last-updated date — click a count to list them">Source articles<span class="sort-arrow"></span></th>
+          <th class="sortable" data-key="sources" title="Vettings count article–fact corroborations: an admitted article from one domain stating a fact found independently on a different domain. One article corroborating two facts counts as two vettings; ‘distinct sources’ counts unique article URLs. Click a count to list the articles.">Vettings<span class="sort-arrow"></span></th>
           <th class="sortable" data-key="status">Status<span class="sort-arrow"></span></th>
         </tr>
       </thead>
@@ -479,9 +505,6 @@
     <div id="tablePager" style="display:none">
       <span class="pager-info" id="pagerInfo"></span>
       <span style="display:flex;align-items:center;gap:8px">
-        <label style="display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink-3)">
-          <input type="checkbox" id="unvettedToggle"> Include outlier-screened figures
-        </label>
         <button type="button" class="btn btn-secondary" id="pagerPrev" style="padding:3px 10px;font-size:12px">← Prev</button>
         <button type="button" class="btn btn-secondary" id="pagerNext" style="padding:3px 10px;font-size:12px">Next →</button>
       </span>
@@ -489,7 +512,20 @@
     <p class="card-meta" id="tableMore" style="display:none;margin:8px 0 0"></p>
   </div>
 
-  <footer class="note">Data aggregated from open-source reporting; not a substitute for official WHO / national ministry of health situation reports.</footer>
+  <footer class="note" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span>Data aggregated from open-source reporting; not a substitute for official WHO / national ministry of health situation reports. West Nile virus is not a hemorrhagic fever — it is tracked here for completeness alongside the VHF pathogens.</span>
+    <span style="display:flex;align-items:center;gap:8px;flex:none">
+      <a class="footer-badge" href="https://github.com/schlittdatasci" target="_blank" rel="noopener" title="github.com/schlittdatasci">
+        <svg class="icon" viewBox="0 0 16 16" style="width:13px;height:13px;fill:currentColor;stroke:none"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        GitHub
+      </a>
+      <a class="footer-badge" href="https://www.linkedin.com/in/james-schlitt-phd-mph-4377a81b/" target="_blank" rel="noopener" title="LinkedIn — James Schlitt PhD MPH">
+        <svg class="icon" viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;stroke:none"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.55V9h3.57v11.45Z"/></svg>
+        LinkedIn
+      </a>
+      <span style="font-size:11px;color:var(--ink-4)">© James Schlitt 2026</span>
+    </span>
+  </footer>
 </div>
 
 <div class="dialog-backdrop" id="drillBackdrop" style="display:none">
@@ -518,29 +554,35 @@ const COMBOS = [
   { country: "Uganda", alias: ["Uganda"], pathogens: ["Ebola Virus","Bundibugyo Virus"], disease: "Ebola virus disease", status: "Monitoring", lonlat: [32.3, 1.4] },
   { country: "Spain", alias: ["Spain"], pathogens: ["Crimean-Congo Hemorrhagic Fever Virus"], disease: "Crimean-Congo HF", status: "Monitoring", lonlat: [-3.7, 40.4] },
 ];
-// No remapping — pathogen selector and all labels are fully data-driven from
-// the sheet's `pathogen` column (unspecified "Ebola Virus" vs "Bundibugyo Virus", etc.).
-// Intentionally empty so raw strain names are displayed verbatim.
-const PATHOGEN_LABELS = {};
-// Curated English Wikipedia articles for the pathogens that appear in the data (verified via
-// the Wikipedia REST API; Wikipedia handles redirects). Unknown pathogens simply get no link.
-const PATHOGEN_WIKI = {
-  'Ebola Virus': 'Ebola',
-  'Bundibugyo Virus': 'Bundibugyo_ebolavirus',
-  'Lassa Virus': 'Lassa_virus',
-  'Marburg Virus': 'Marburg_virus',
-  'Yellow Fever Virus': 'Yellow_fever',
-  'West Nile Virus': 'West_Nile_virus',
-  'Crimean-Congo Hemorrhagic Fever Virus': 'Crimean%E2%80%93Congo_hemorrhagic_fever',
-  'Dengue Virus (Hemorrhagic)': 'Dengue_virus',
-  'Mpox': 'Mpox',
-  'Hantavirus': 'Hantavirus',
-  'Andes Virus': 'Andes_virus',
-  'Dobrava Virus': 'Dobrava-Belgrade_virus',
-  'Puumala Virus': 'Puumala_virus',
-  'Seoul Virus': 'Seoul_virus'
+// Pathogen labels — verbatim from the sheet except where a category needs honest framing.
+const PATHOGEN_LABELS = {
+  // The sheet's non-specific Ebola category is a mixed-strain catch-all that otherwise
+  // out-features the strain-specific Bundibugyo series; label it as what it is.
+  'Ebola Virus': 'Ebola Virus (unspecified strain)'
 };
-function pathogenWikiUrl(p) { const t = PATHOGEN_WIKI[p]; return t ? 'https://en.wikipedia.org/wiki/' + t : null; }
+// Surveillance priority (data owner, Aug 2026): 1) Bundibugyo ebolavirus, 2) West Nile virus
+// (not a true VHF — retained for completeness), 3) Hantavirus. priorityTier() LEADS every
+// "which pathogen should the dashboard feature" decision (default selection, All-pathogens
+// outbreak pick, selector order) with data depth / case load as tie-breaker — raw depth alone
+// lets the nonspecific Ebola catch-all eat the Bundibugyo series.
+const PATHOGEN_PRIORITY = { 'Bundibugyo Virus': 3, 'West Nile Virus': 2, 'Hantavirus': 1 };
+function priorityTier(p) { return PATHOGEN_PRIORITY[p] || 0; }
+// Curated WHO topic / fact-sheet pages for the pathogens that appear in the data (URLs verified
+// live). Authoritative source beats Wikipedia for a health-surveillance surface. Pathogens with
+// no WHO page (hantaviruses: Andes, Dobrava, Puumala, Seoul) simply get no link.
+const PATHOGEN_WHO = {
+  'Ebola Virus': 'https://www.who.int/health-topics/ebola-virus-disease',
+  'Bundibugyo Virus': 'https://www.who.int/health-topics/ebola-virus-disease',
+  'Lassa Virus': 'https://www.who.int/news-room/fact-sheets/detail/lassa-fever',
+  'Marburg Virus': 'https://www.who.int/news-room/fact-sheets/detail/marburg-virus-disease',
+  'Yellow Fever Virus': 'https://www.who.int/health-topics/yellow-fever',
+  'West Nile Virus': 'https://www.who.int/news-room/fact-sheets/detail/west-nile-virus',
+  'Crimean-Congo Hemorrhagic Fever Virus': 'https://www.who.int/news-room/fact-sheets/detail/crimean-congo-haemorrhagic-fever',
+  'Dengue Virus (Hemorrhagic)': 'https://www.who.int/health-topics/dengue',
+  'Mpox': 'https://www.who.int/health-topics/mpox',
+  'Rift Valley Fever Virus': 'https://www.who.int/health-topics/rift-valley-fever'
+};
+function pathogenWhoUrl(p) { return PATHOGEN_WHO[p] || null; }
 function speciesLabel(pathogens) { return pathogens.map(p => PATHOGEN_LABELS[p] || p).join(' / '); }
 
 // Fallback snapshot (used until/unless the live sheet loads)
@@ -585,44 +627,65 @@ document.getElementById('region').addEventListener('change', (e) => { activeRegi
 document.getElementById('search').addEventListener('input', (e) => { locationQuery = e.target.value.trim().toLowerCase(); tablePage = 0; renderStats(); renderTable(); renderMap(); flyToFilteredMarkers(); });
 
 function worstCombo() {
-  const candidates = records.filter(r => r.pathogenRaw && !isFlu(r.pathogenRaw));
+  const candidates = displayRecords().filter(r => r.pathogenRaw && !isFlu(r.pathogenRaw));
   if (!candidates.length) return null;
+  // Feature the pathogen with the most forecasted deaths (near-tie keeps surveillance
+  // priority — see dataDepthPathogen), then its hardest-hit cluster by case load × risk³.
+  const featured = dataDepthPathogen();
+  const pool = featured ? candidates.filter(r => r.pathogenRaw === featured) : [];
+  const scope = pool.length ? pool : candidates;
   let best=null, bestScore=-1;
-  candidates.forEach(r => {
+  scope.forEach(r => {
     const risk = riskByCombo.get(r.country+'||'+r.pathogenRaw) || 1;
     const score = (r.cases||0) * Math.pow(risk,3);
     if (score > bestScore) { bestScore=score; best=r; }
   });
   return best;
 }
+// Species scoping: viewRows() is the row view behind every plot/documentation aggregation;
+// displayRecords() is the record view behind the stats, map and scorecard. refineRecord()
+// recomputes each record from the species- and screening-filtered subset, so the selector
+// scopes ALL data elements — not just the figures table.
+function viewRows() {
+  if (activeSpecies === ALL_SPECIES) return allRows;
+  return allRows.filter(r => cleanText(r.species) === activeSpecies);
+}
+function displayRecords() {
+  if (activeSpecies === ALL_SPECIES && screenState === 'accepted') return records;
+  return records.map(refineRecord).filter(Boolean);
+}
+// The forecast model fits human outcome series only — never overlay it on animal-host views.
+function forecastAllowed() { return activeSpecies === ALL_SPECIES || isHumanHost(activeSpecies); }
 function renderStats() {
   if (!dataLoaded) return;
   const all = isAll();
   const scope = document.getElementById('statScope');
-  if (scope) scope.textContent = all ? 'All pathogens' : (PATHOGEN_LABELS[selectedPathogen] || selectedPathogen);
+  if (scope) {
+    // Never let scoped numbers read as unscoped: name the active host whenever it isn't the default.
+    const host = activeSpecies === 'humans' ? '' : (activeSpecies === ALL_SPECIES ? ' · all hosts' : ` · ${activeSpecies} host`);
+    scope.textContent = (all ? 'All pathogens' : (PATHOGEN_LABELS[selectedPathogen] || selectedPathogen)) + host;
+  }
+  const shown = displayRecords();
   const ct = document.getElementById('clustersTag');
-  if (ct && records.length) ct.textContent = `${new Set(records.map(r=>r.country)).size} countries · ${records.length} clusters`;
+  if (ct && shown.length) ct.textContent = `${new Set(shown.map(r=>r.country)).size} countries · ${shown.length} clusters`;
   if (!allRows.length) return;
   // Score card: sum of highest canonical value for each distinct country (national preferred,
   // subnational proxy only where no national figure exists). This matches liveRecords construction.
   // Influenza is filtered out on this dashboard (separate dashboard retained for it).
-  const baseFiltered = records.filter(r => !isFlu(r.pathogenRaw));
+  const baseFiltered = shown.filter(r => !isFlu(r.pathogenRaw));
   const filtered = all ? baseFiltered : baseFiltered.filter(r => r.pathogenRaw === selectedPathogen);
   const sumCases = filtered.reduce((s,r) => s + (r.cases || 0), 0);
   const sumDeaths = filtered.reduce((s,r) => s + (r.deaths || 0), 0);
   document.getElementById('statCases').textContent = sumCases ? sumCases.toLocaleString() : '—';
   document.getElementById('statDeaths').textContent = sumDeaths ? sumDeaths.toLocaleString() : '—';
-  const datasetMax = allRows.reduce((m,r)=>r.report_date>m?r.report_date:m,'');
-  let active = 0;
-  filtered.forEach(r => {
-    if (r.date && Math.round((new Date(datasetMax)-new Date(r.date))/86400000) <= 3) active++;
-  });
+  // Active = the figures table's own "Reporting" band (≤4d) — one recency vocabulary everywhere.
+  const active = filtered.filter(r => r.date && statusOf(r.date) === 'Reporting').length;
   document.getElementById('statActive').textContent = active;
   document.getElementById('statCountries').textContent = new Set(filtered.map(r => r.country)).size;
   // Forecast: when All selected show worst outbreak (hardest-hit country) instead of summing all pathogens*countries
   let forecastSeries, fcPathogen;
   fcPathogen = activePathogen();
-  forecastSeries = aggregatePathogenSeries(allRows, fcPathogen);
+  forecastSeries = aggregatePathogenSeries(viewRows(), fcPathogen);
   renderForecastCard(forecastSeries, fcPathogen);
 }
 function renderForecastCard(series, fcPathogenOverride) {
@@ -633,6 +696,10 @@ function renderForecastCard(series, fcPathogenOverride) {
   const lastDeath = [...series].reverse().find(d=>d.deaths!=null);
   const fcPathogen = fcPathogenOverride || (isAll() ? trendPathogen() : selectedPathogen);
   const label = PATHOGEN_LABELS[fcPathogen] || fcPathogen || '—';
+  if (!forecastAllowed()) {
+    box.innerHTML = `<p class="fc-title">Forecast · ${label} · ${loc||'—'}</p><p class="fc-none">No projection — the forecast model covers human outcome series only.</p>`;
+    return;
+  }
   let pc = projectionFor(fcPathogen, loc, 'confirmed_cases', lastCase?lastCase.cases:null);
   let pd = projectionFor(fcPathogen, loc, 'confirmed_deaths', lastDeath?lastDeath.deaths:null);
   if (pc) pc = cappedToMultipleOf5(pc, lastCase ? lastCase.date : null);
@@ -658,13 +725,22 @@ let tableView = { mode:'national', id:null };
 const TABLE_MAX = 40;
 let lastTableRows = [];
 let activeSpecies = 'humans';
-let includeUnvetted = false;
+// Statistical screening state for the figures table: 'accepted' (default) shows only figures
+// that passed the chi-square/monotonicity screens; 'all' shows both; 'rejected' only the
+// rejected ones. "Vetting" language is deliberately NOT used here — vetting means
+// cross-source fact corroboration, a different mechanism (see VETTING_TIP).
+let screenState = 'accepted';
 let tablePage = 0;
 const ALL_SPECIES = 'All species';
-// Rows behind one figure, honouring the species filter and the vetting toggle.
+// Does a measurement row pass the current statistical-screen view?
+function passesScreen(r) {
+  if (screenState === 'all') return true;
+  return screenState === 'accepted' ? r.outlier === 'False' : r.outlier === 'True';
+}
+// Rows behind one figure, honouring the species filter and the statistical-screen view.
 function rowsForFigure(pathogen, country, measure, preferLoc) {
   const base = allRows.filter(r => r.pathogen === pathogen && r.measure === measure
-    && (includeUnvetted || r.outlier === 'False')
+    && passesScreen(r)
     && (activeSpecies === ALL_SPECIES || cleanText(r.species) === activeSpecies));
   // the record's own location string first, then any national row for the country, then anything
   // in-country — otherwise a species that was only ever reported subnationally drops the row
@@ -673,10 +749,10 @@ function rowsForFigure(pathogen, country, measure, preferLoc) {
   if (nat.length) return nat;
   return base.filter(r => geoCountry(r.location) === country);
 }
-// Records are built once from vetted human-and-animal rows; when either filter is on we
+// Records are built once from accepted human-and-animal rows; when either filter is on we
 // recompute the displayed figure from the matching subset instead of rebuilding everything.
 function refineRecord(r) {
-  if (activeSpecies === ALL_SPECIES && !includeUnvetted) return r;
+  if (activeSpecies === ALL_SPECIES && screenState === 'accepted') return r;
   const p = r.pathogenRaw || r.pathogen, loc = r.figureLoc || r.country;
   const country = geoCountry(loc) || r.country;
   const c = latestOf(rowsForFigure(p, country, 'confirmed_cases', loc));
@@ -696,7 +772,8 @@ function isAnimalRow(r) {
 }
 function hostFor(r) {
   const p = r.pathogenRaw || r.pathogen, loc = r.figureLoc || r.country;
-  const sp = [...new Set(allRows.filter(x => x.pathogen === p && x.location === loc)
+  // Scoped to the species view so the column reflects the filtered subset, not every host ever recorded.
+  const sp = [...new Set(viewRows().filter(x => x.pathogen === p && x.location === loc)
     .map(x => cleanText(x.species)).filter(Boolean))];
   return sp.join(' / ');
 }
@@ -715,11 +792,12 @@ function resetDrilldowns() {
 function populateSpeciesSelect() {
   const sel = document.getElementById('species');
   if (!sel || !allRows.length) return;
-  // Article hits per species: total vettings recorded across every row for that host.
+  // Figures recorded per host — the count in each option label.
   const hits = {};
-  allRows.forEach(r => { const s = cleanText(r.species); if (!s) return; hits[s] = (hits[s]||0) + (+r.n_sources||1); });
+  allRows.forEach(r => { const s = cleanText(r.species); if (!s) return; hits[s] = (hits[s]||0) + 1; });
   let sp = Object.keys(hits);
-  if (activeSpecies !== ALL_SPECIES && !sp.includes(activeSpecies)) activeSpecies = ALL_SPECIES;
+  // A stale/invalid species falls back to the human default, not the unscoped view.
+  if (activeSpecies !== ALL_SPECIES && !sp.includes(activeSpecies)) activeSpecies = sp.includes('humans') ? 'humans' : ALL_SPECIES;
   sp.sort((a,b) => a.localeCompare(b));
   const humanKey = sp.find(s => /^humans?$/i.test(s));
   const rest = humanKey ? sp.filter(s => s !== humanKey) : sp;
@@ -734,8 +812,8 @@ function populateSpeciesSelect() {
 }
 function exportTableCsv() {
   const cols = [['country','Location'],['disease','Pathogen'],['host','Host species'],['cases','Confirmed cases'],
-    ['deaths', (activeSpecies !== ALL_SPECIES && !isHumanHost(activeSpecies)) ? 'Animals culled / died' : 'Confirmed deaths'],['cfr','CFR %'],['date','Last updated'],['articles','Source articles'],
-    ['sources','Source vettings'],['status','Status'],['figureLoc','Figure location string'],
+    ['deaths', (activeSpecies !== ALL_SPECIES && !isHumanHost(activeSpecies)) ? 'Animals culled / died' : 'Confirmed deaths'],['cfr','CFR %'],['date','Last updated'],['articles','Distinct source URLs'],
+    ['sources','Vettings'],['status','Status'],['figureLoc','Figure location string'],
     ['sourceUrl','Figure source URL'],['sourceUrls','All source article URLs']];
   const q = v => { const s = v == null ? '' : String(v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
   const value = (r, k) => {
@@ -759,7 +837,7 @@ function exportTableCsv() {
 function exportEventsCsv() {
   const q = v => { const s = v == null ? '' : String(v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
   const head = 'Latest report,Event title,Pathogen,Country,Location,Scope,Risk severity,Risk rationale,Latitude,Longitude,Source URLs';
-  const body = reports.map(r => [
+  const body = visibleReports().map(({r}) => [
     r.date, r.title, r.pathogen, r.country, r.place,
     isNational(r.place) ? 'National' : 'Subnational', r.risk, r.riskRationale || '',
     r.lonlat ? r.lonlat[1] : '', r.lonlat ? r.lonlat[0] : '', (r.urls || []).join('; ')
@@ -793,10 +871,10 @@ function openFigureSourcePopup(rowId) {
   const host = (u) => { try { return new URL(u).hostname.replace(/^www\./,''); } catch(e){ return null; } };
   document.getElementById('drillTitle').textContent = `${row.country} · ${row.disease} — source articles for ${formatUKDate(row.date)}`;
   document.getElementById('drillBody').innerHTML = arts.length ? (
-    `<p style="font-size:12px;color:var(--ink-3);margin:0 0 12px;line-height:1.5">${arts.length} distinct figure${arts.length>1?'s':''} extracted for <strong>${row.figureLoc||row.country}</strong> on this date, vetted across <strong>${totalVet}</strong> proximal source${totalVet>1?'s':''}. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the one the pipeline selected and the one shown in the table.</p>` +
-    arts.map(a => { const q = qualityBand(a.score); const h = host(a.url); return `<div class="art-row">
+    `<p style="font-size:12px;color:var(--ink-3);margin:0 0 12px;line-height:1.5" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${arts.length} distinct figure${arts.length>1?'s':''} reported for <strong>${row.figureLoc||row.country}</strong> on this date, corroborated by <strong>${totalVet}</strong> vetting${totalVet>1?'s':''} — admitted articles from independent domains matching one discrete fact. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the one shown in the table.</p>` +
+    arts.map(a => { const q = qualityBand(a.score); const h = host(a.url); const t = a.url ? titleFor(a.url) : null; return `<div class="art-row">
       <div class="art-extract"><span><strong>${a.value.toLocaleString()}</strong> ${a.measure} · ${a.location}${a.species?' · '+a.species:''}</span><span class="qbadge ${q.cls}">${q.label} quality</span></div>
-      <div class="art-meta">${a.canonical?`<span class="tag tag-accent" style="font-size:9px">canonical · ${canonReasonLabel(a.reason)}</span> `:''}${a.n} vetting${a.n>1?'s':''}${a.quality&&a.quality!=='good'?` · <span title="screening flag">${a.quality} flag</span>`:''}${h?` · <a class="art-link" style="font-size:11.5px;font-weight:400" href="${a.url}" target="_blank" rel="noopener">${h} ↗</a>`:''}</div>
+      <div class="art-meta">${a.canonical?`<span class="tag tag-accent" style="font-size:9px">canonical · ${canonReasonLabel(a.reason)}</span> `:''}<span title="${VETTING_TIP.replace(/"/g,'&quot;')}">${a.n} vetting${a.n>1?'s':''}</span>${a.quality&&a.quality!=='good'?` · <span title="statistical screening flag">${a.quality} flag</span>`:''}${a.url?` · <a class="art-link" style="font-size:11.5px;font-weight:400" href="${a.url}" target="_blank" rel="noopener" title="${t ? t.replace(/"/g,'&quot;') : (h||'')}">${t ? t + ' — ' + h : h} ↗</a>`:''}</div>
     </div>`; }).join('')
   ) : '<p style="font-size:12px">No per-article detail recorded for this figure.</p>';
   document.getElementById('drillBackdrop').style.display = 'flex';
@@ -821,8 +899,8 @@ function updatePager(total) {
   const to = Math.min(total, (tablePage + 1) * TABLE_MAX);
   document.getElementById('pagerInfo').textContent =
     `${from}–${to} of ${total} location${total === 1 ? '' : 's'}` +
-    (activeSpecies !== ALL_SPECIES ? ` · host: ${activeSpecies}` : '') +
-    (includeUnvetted ? ' · including outlier-screened figures' : ' · outlier-screened figures excluded');
+    (activeSpecies !== 'humans' ? ` · host: ${activeSpecies}` : '') +
+    (screenState === 'accepted' ? ' · screen-accepted figures' : screenState === 'rejected' ? ' · screen-rejected figures only' : ' · accepted and rejected figures');
   document.getElementById('pagerPrev').disabled = tablePage === 0;
   document.getElementById('pagerNext').disabled = to >= total;
 }
@@ -834,6 +912,12 @@ function renderTable() {
     if (pg) pg.style.display = 'none';
     return;
   }
+  if (tableMode === 'raw') { renderRawTable(); return; }
+  // Figures mode: restore the static thead if the raw table swapped it out.
+  const theadEl = document.querySelector('.table-card thead');
+  if (figuresTheadHtml != null && theadEl.innerHTML !== figuresTheadHtml) theadEl.innerHTML = figuresTheadHtml;
+  const intro = document.getElementById('tableIntro');
+  if (intro) intro.style.display = '';
   const backBtn = document.getElementById('tableBack');
   const titleEl = document.getElementById('tableTitle');
   const thFirst = document.getElementById('thFirst');
@@ -870,9 +954,9 @@ function renderTable() {
   }
   body.innerHTML = displayRows.map(r => {
     const rangeHtml = r.casesRange && r.casesRange[1] > r.casesRange[0] ? `<span class="cell-range">range ${r.casesRange[0].toLocaleString()}–${r.casesRange[1].toLocaleString()}</span>` : '';
-    const nArt = r.articles || 0, nVet = r.sources || 0;
-    const srcHtml = nArt
-      ? `<button type="button" class="src-cell" data-src="${r.id.replace(/"/g,'&quot;')}" title="List the ${nArt} article${nArt>1?'s':''} behind this figure">${nArt} article${nArt>1?'s':''}<span class="src-vet">${nVet} vetting${nVet>1?'s':''}</span></button>`
+    const nVet = r.sources || 0;
+    const srcHtml = nVet
+      ? `<button type="button" class="src-cell" data-src="${r.id.replace(/"/g,'&quot;')}" title="List the articles behind this figure's ${nVet} vetting${nVet>1?'s':''} (independent-domain corroboration)">${nVet} vetting${nVet>1?'s':''}</button>`
       : '<span class="src-vet">—</span>';
     const hostHtml = hostFor(r) || '<span class="src-vet">—</span>';
     const doc = subnational ? locDocumentation(r.pathogen, r.country) : eventDocumentation(r.pathogenRaw, r.country);
@@ -934,29 +1018,34 @@ function sortRecords(list, sort) {
     return 0;
   });
 }
-document.querySelectorAll('th.sortable').forEach(th => {
-  const applySort = () => {
+document.querySelectorAll('th.sortable').forEach(th => { th.setAttribute('tabindex', '0'); th.setAttribute('role', 'button'); if (!th.getAttribute('aria-sort')) th.setAttribute('aria-sort', 'none'); });
+// Delegated sorting: the raw table rebuilds the thead when it swaps in, so the handlers live on the table.
+function applySortFromTh(th) {
+  if (tableMode === 'raw') {
     const key = th.dataset.key;
-    if (tableSort.key === key) tableSort.dir = -tableSort.dir;
-    else tableSort = { key, dir: key === 'date' ? -1 : (key === 'deaths' || key === 'cases' ? -1 : 1) };
-    if (tableSort.key === 'date' || tableSort.key === 'deaths' || tableSort.key === 'cases') tableSort.dir = -1;
-    document.querySelectorAll('th.sortable .sort-arrow').forEach(a => a.textContent = '');
-    th.querySelector('.sort-arrow').textContent = tableSort.dir === 1 ? '↑' : '↓';
-    document.querySelectorAll('th.sortable').forEach(o => o.setAttribute('aria-sort', o === th ? (tableSort.dir === 1 ? 'ascending' : 'descending') : 'none'));
+    // Numeric score/count columns lead with their most useful end: highest first.
+    rawSort = rawSort.key === key ? { key, dir: -rawSort.dir } : { key, dir: (key === 'published' || key === 'fact' || key === 'vscore' || key === 'vet' || key === 'prox') ? -1 : 1 };
     renderTable();
-  };
-  th.setAttribute('tabindex', '0');
-  th.setAttribute('role', 'button');
-  th.setAttribute('aria-sort', 'none');
-  th.addEventListener('click', applySort);
-  th.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); applySort(); } });
-});
+    return;
+  }
+  const key = th.dataset.key;
+  if (tableSort.key === key) tableSort.dir = -tableSort.dir;
+  else tableSort = { key, dir: key === 'date' ? -1 : (key === 'deaths' || key === 'cases' ? -1 : 1) };
+  if (tableSort.key === 'date' || tableSort.key === 'deaths' || tableSort.key === 'cases') tableSort.dir = -1;
+  document.querySelectorAll('th.sortable .sort-arrow').forEach(a => a.textContent = '');
+  th.querySelector('.sort-arrow').textContent = tableSort.dir === 1 ? '↑' : '↓';
+  document.querySelectorAll('th.sortable').forEach(o => o.setAttribute('aria-sort', o === th ? (tableSort.dir === 1 ? 'ascending' : 'descending') : 'none'));
+  renderTable();
+}
+const tableHead = document.querySelector('.table-card thead');
+tableHead.addEventListener('click', (e) => { const th = e.target.closest('th.sortable'); if (th) applySortFromTh(th); });
+tableHead.addEventListener('keydown', (e) => { if (e.key !== 'Enter' && e.key !== ' ') return; const th = e.target.closest('th.sortable'); if (th) { e.preventDefault(); applySortFromTh(th); } });
 
 // --- Location drill-down: surfaces the raw, variably-granular location strings
 // (national re-phrasings AND genuine subnational reports) behind a country's figure.
 function openDrilldown(record) {
   const pathogens = record.pathogenRaw ? [record.pathogenRaw] : ((COMBOS.find(c => c.country === record.country)||{}).pathogens || []);
-  const rows = allRows.filter(r => geoCountry(r.location) === record.country && pathogens.includes(r.pathogen) && (r.measure === 'confirmed_cases' || r.measure === 'confirmed_deaths'));
+  const rows = viewRows().filter(r => geoCountry(r.location) === record.country && pathogens.includes(r.pathogen) && (r.measure === 'confirmed_cases' || r.measure === 'confirmed_deaths'));
   const byLocMeasure = new Map();
   rows.forEach(r => {
     const key = r.location + '|' + r.measure;
@@ -966,11 +1055,11 @@ function openDrilldown(record) {
   const items = [...byLocMeasure.values()].sort((a,b) => a.location.localeCompare(b.location) || a.measure.localeCompare(b.measure));
   document.getElementById('drillTitle').textContent = record.country + ' — reported location strings';
   document.getElementById('drillBody').innerHTML = items.length ? `
-    <p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5">Every distinct location string scraped for this country's ${(record.disease||'').toLowerCase()} reporting, with its most recently reported value. Several are alternate phrasings of the same <strong>national</strong> total (e.g. "Africa, X" vs "Central African Nation, X") rather than genuine subnational breakdowns — matching values are duplicates of one report, not additive. Distinctly smaller values against place names (provinces, cities, territories) are likely real subnational figures.</p>
+    <p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5">Every location string scraped for this country's ${(record.disease||'').toLowerCase()} reporting, with its latest value. Comma-free strings are national totals — matching values are duplicate re-phrasings of one report, not additive. Smaller values against named places are genuine subnational figures.</p>
     <div class="table-scroll">
     <table class="table">
       <thead><tr><th>Location string (as scraped)</th><th>Measure</th><th>Latest value</th><th>Date</th><th>Screening</th></tr></thead>
-      <tbody>${items.map(r => `<tr><td>${r.location}</td><td>${r.measure.replace('confirmed_','')}</td><td>${(+r.value).toLocaleString()}</td><td>${r.report_date}</td><td>${r.outlier==='True' ? `<span class="tag tag-outline" title="${r.quality_flag}">screened out</span>` : '<span class="tag tag-neutral">used</span>'}</td></tr>`).join('')}</tbody>
+      <tbody>${items.map(r => `<tr><td>${r.location}</td><td>${r.measure.replace('confirmed_','')}</td><td>${(+r.value).toLocaleString()}</td><td>${r.report_date}</td><td>${r.outlier==='True' ? `<span class="tag tag-outline" title="Rejected by the statistical screen (${r.quality_flag})">rejected</span>` : '<span class="tag tag-neutral">accepted</span>'}</td></tr>`).join('')}</tbody>
     </table>` : '<p style="font-size:12px">No location-level detail available (showing the cached fallback snapshot, not the live sheet).</p>';
   document.getElementById('drillBackdrop').style.display = 'flex';
   document.getElementById('drillClose').focus();
@@ -1109,7 +1198,7 @@ function latestMeasure(rows, measure) {
 // Shared cases→colour mapping used by BOTH the map choropleth and the comparison bars so the
 // two always share the same colormap and the same min/max normalisation for the selection.
 function choroplethDomain() {
-  return (isAll() ? records : records.filter(r => r.pathogenRaw === selectedPathogen))
+  return (isAll() ? displayRecords() : displayRecords().filter(r => r.pathogenRaw === selectedPathogen))
     .filter(r => !isFlu(r.pathogenRaw))
     .filter(r => activeRegion === 'All regions' || REGION_BY_COUNTRY[r.country] === activeRegion)
     .reduce((m, r) => Math.max(m, r.cases || 0), 0);
@@ -1151,7 +1240,7 @@ function buildMarkers() {
     if (!items.length) return;
     items.sort((a,b) => (b.cases||0) - (a.cases||0));
     const days = Math.round((new Date(datasetMax) - new Date(latestDate)) / 86400000);
-    const status = days <= 2 ? 'Active' : days <= 10 ? 'Monitoring' : 'Contained';
+    const status = statusOf(latestDate);
     const coord = coordFor(country, items[0] && items[0].pathogen);
     markers.push({ country, lonlat: (coord && coord.lonlat) || geo.lonlat, located: !!coord, place: coord ? coord.place : null, region: geo.region, pathogens: items, totalCases, totalDeaths, status, date: latestDate, days });
   });
@@ -1166,7 +1255,7 @@ const sevColor = d3.scaleLinear().domain([1,5,9]).range([col('--sev-lo'),col('--
 const eventRadius = d3.scaleSqrt().domain([1,9]).range([5,20]).clamp(true);
 let eventMarkers = [];
 function visibleEventMarkers() {
-  if (records.length) eventMarkers.forEach(m => { if (m.cases==null) { const rec = records.find(x => x.country===m.country && x.pathogenRaw===m.pathogen); if (rec) { m.cases = rec.cases; m.deaths = rec.deaths; } } });
+  if (records.length) eventMarkers.forEach(m => { if (m.cases==null) { const rec = records.find(x => x.country===m.country && x.pathogenRaw===m.pathogen); if (rec) { const ref = refineRecord(rec); if (ref) { m.cases = ref.cases; m.deaths = ref.deaths; } } } });
   return eventMarkers.filter(m => {
     const pathOk = isAll() || !selectedPathogen || m.pathogen === selectedPathogen;
     const regionOk = activeRegion === 'All regions' || m.region === activeRegion;
@@ -1205,7 +1294,7 @@ function renderMap() {
     // Flat choropleth: subtle shading by total cases per country, normed to max for current selection
     // (All pathogens respects African filter when activeRegion !== 'All regions')
     const casesByAtlas = new Map();
-    (isAll() ? records : records.filter(r => r.pathogenRaw === selectedPathogen))
+    (isAll() ? displayRecords() : displayRecords().filter(r => r.pathogenRaw === selectedPathogen))
       .filter(r => !isFlu(r.pathogenRaw))
       .filter(r => activeRegion === 'All regions' || REGION_BY_COUNTRY[r.country] === activeRegion)
       .forEach(r => {
@@ -1395,7 +1484,7 @@ function openMarkerDetail(m) {
   }).join('');
   const statusLine = allRows.length ? `Status <strong>${m.status}</strong> — most recent report ${m.days}d before the dataset's latest entry.` : '';
   document.getElementById('drillBody').innerHTML = `
-    <p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5">Latest confirmed figures for each pathogen reported in ${m.country}, aggregated from open-source reporting (highest outlier-screened value on the most recent reporting date). ${statusLine}</p>
+    <p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5">Latest confirmed figures for each pathogen reported in ${m.country}, aggregated from open-source reporting (highest screen-accepted value on the most recent reporting date). ${statusLine}</p>
     <table class="table"><thead><tr><th>Pathogen</th><th>Confirmed cases</th><th>Confirmed deaths</th><th>CFR</th><th>Latest</th></tr></thead><tbody>${trs}</tbody></table>`;
   document.getElementById('drillBackdrop').style.display = 'flex';
   document.getElementById('drillClose').focus();
@@ -1414,7 +1503,14 @@ function hideTooltip() { tooltip.classList.remove('show'); }
 // Fixed-position tooltip for the charts (the map tooltip is anchored to the map pane)
 let _chartTip;
 function chartTipEl() { if (!_chartTip) { _chartTip = document.createElement('div'); _chartTip.className = 'tooltip'; _chartTip.style.position = 'fixed'; _chartTip.style.zIndex = '9999'; _chartTip.style.pointerEvents = 'none'; document.body.appendChild(_chartTip); } return _chartTip; }
-function showChartTip(ev, html) { const t = chartTipEl(); t.innerHTML = html; t.style.left = (ev.clientX + 14) + 'px'; t.style.top = (ev.clientY - 8) + 'px'; t.classList.add('show'); }
+function showChartTip(ev, html) {
+  const t = chartTipEl(); t.innerHTML = html; t.classList.add('show');
+  const r = t.getBoundingClientRect();
+  let x = ev.clientX + 14, y = ev.clientY - 8;
+  if (x + r.width > window.innerWidth - 8) x = Math.max(8, ev.clientX - r.width - 14);
+  if (y + r.height > window.innerHeight - 8) y = Math.max(8, window.innerHeight - r.height - 8);
+  t.style.left = x + 'px'; t.style.top = y + 'px';
+}
 function hideChartTip() { if (_chartTip) _chartTip.classList.remove('show'); }
 
 // Article popup for a trend date: every source article behind that day's cases figure,
@@ -1430,21 +1526,22 @@ function openArticlePopup(dateStr, caseRows) {
   articles.sort((a,b) => (b.canonical?1:0)-(a.canonical?1:0) || b.n-a.n || b.value-a.value);
   const label = selectedPathogen === ALL ? 'All pathogens' : (PATHOGEN_LABELS[selectedPathogen] || selectedPathogen);
   const totalVet = articles.reduce((s,a)=>s+a.n,0);
+  // EXACTLY the articles behind this date's figures — distinct URLs from these rows, not the
+  // combo-wide pool, so the count here matches the sources-per-day bar and its tooltip.
+  const dateUrls = [...new Set((caseRows||[]).flatMap(r => extractUrls(r.sources)))];
+  const _host = (u) => { try { return new URL(u).hostname.replace(/^www\./,''); } catch(e){ return u; } };
   document.getElementById('drillTitle').textContent = `${label} — source quality for ${new Date(dateStr).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`;
   document.getElementById('drillBody').innerHTML = articles.length ? (
-    `<p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5">${articles.length} distinct figure${articles.length>1?'s':''} extracted this date, vetted across <strong>${totalVet}</strong> proximal source${totalVet>1?'s':''}. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the point the pipeline selected. Raw article links are withheld (they resolve to internal processing endpoints, not publisher pages).</p>` +
+    `<p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${articles.length} distinct figure${articles.length>1?'s':''} reported this date, corroborated by <strong>${totalVet}</strong> vetting${totalVet>1?'s':''} across ${dateUrls.length} distinct article${dateUrls.length===1?'':'s'} — admitted articles from independent domains matching one discrete fact. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the plotted point.</p>` +
     articles.map(a => { const q=qualityBand(a.score); return `<div class="art-row">
       <div class="art-extract"><span><strong>${a.value.toLocaleString()}</strong> ${a.measure} · ${a.location} · ${a.species}</span><span class="qbadge ${q.cls}">${q.label} quality</span></div>
-      <div class="art-meta">${a.canonical?`<span class="tag tag-accent" style="font-size:9px">canonical · ${canonReasonLabel(a.reason)}</span> `:''}${a.n} vetting${a.n>1?'s':''}${a.quality&&a.quality!=='good'?` · <span title="screening flag">${a.quality} flag</span>`:''}</div>
+      <div class="art-meta">${a.canonical?`<span class="tag tag-accent" style="font-size:9px">canonical · ${canonReasonLabel(a.reason)}</span> `:''}<span title="${VETTING_TIP.replace(/"/g,'&quot;')}">${a.n} vetting${a.n>1?'s':''}</span>${a.quality&&a.quality!=='good'?` · <span title="statistical screening flag">${a.quality} flag</span>`:''}</div>
     </div>`; }).join('')
   ) : '<p style="font-size:12px">No source detail recorded for this date.</p>';
-  const _country = (caseRows && caseRows[0]) ? geoCountry(caseRows[0].location) : null;
-  const _urls = articleUrlsByCombo.get(selectedPathogen + '||' + _country) || [];
-  const _host = (u) => { try { return new URL(u).hostname.replace(/^www\./,''); } catch(e){ return u; } };
-  const _doc = (_country && typeof eventDocumentation==='function' && allRows.length) ? eventDocumentation(selectedPathogen, _country) : null;
-  if (_urls.length) {
-    const hdr = `<p class="art-src-h">Source articles (${_urls.length})${_doc?` <span class="doc-badge ${DOC_CLASS[_doc.tier]}">${_doc.label}</span> <span style="font-weight:400;text-transform:none;letter-spacing:0">${_doc.vettings} vettings · ${Math.round(_doc.good*100)}% clean-screened</span>`:''}</p>`;
-    document.getElementById('drillBody').innerHTML += hdr + _urls.slice(0,15).map(u=>`<div class="art-row"><a class="art-link" href="${u}" target="_blank" rel="noopener">${_host(u)} ↗</a></div>`).join('');
+  if (dateUrls.length) {
+    document.getElementById('drillBody').innerHTML += `<p class="art-src-h">Source articles (${dateUrls.length})</p>` +
+      dateUrls.slice(0,20).map(u => { const t = titleFor(u); const h = _host(u); return `<div class="art-row"><a class="art-link" href="${u}" target="_blank" rel="noopener" title="${t ? String(t).replace(/"/g,'&quot;') : String(h).replace(/"/g,'&quot;')}">${t ? t + ' — ' + h : h} ↗</a></div>`; }).join('') +
+      (dateUrls.length > 20 ? `<p class="art-meta" style="margin-top:6px">+ ${dateUrls.length - 20} more in the CSV export</p>` : '');
   }
   document.getElementById('drillBackdrop').style.display = 'flex';
   document.getElementById('drillClose').focus();
@@ -1477,7 +1574,7 @@ function pathogenScoreMap() {
     }
     if (!p) return;
     const risk = riskByCombo.get(r.country + '||' + p) || 1;
-    scores.set(p, (scores.get(p) || 0) + (r.cases || 0) * Math.pow(risk, 3));
+    scores.set(p, (scores.get(p) || 0) + priorityTier(p) * 1e7 + (r.cases || 0) * Math.pow(risk, 3));
   });
   return scores;
 }
@@ -1485,6 +1582,18 @@ function computeDefaultPathogen() {
   const scores = pathogenScoreMap();
   if (!scores.size) return null;
   return [...scores.entries()].sort((a,b) => b[1] - a[1])[0][0];
+}
+// Projected death load: the highest final-horizon median of any confirmed-deaths forecast
+// series for a pathogen. Max, not sum — subnational series overlap their national series.
+function forecastDeathLoad(pathogen) {
+  let best = 0;
+  forecastIndex.forEach((arr, key) => {
+    const parts = key.split('||');
+    if (parts[0] !== pathogen || parts[2] !== 'confirmed_deaths' || !arr.length) return;
+    const p50 = arr[arr.length-1].p50;
+    if (isFinite(p50) && p50 > best) best = p50;
+  });
+  return best;
 }
 function dataDepthPathogen() {
   if (!allRows.length) return null;
@@ -1500,13 +1609,20 @@ function dataDepthPathogen() {
   const projLen = new Map();
   forecastIndex.forEach((arr, key) => { const p = key.split('||')[0]; projLen.set(p, (projLen.get(p)||0) + arr.length); });
   const present = new Set(records.map(r => r.pathogenRaw).filter(Boolean));
-  let best = null, bestScore = -1;
+  const cands = [];
   caseLen.forEach((n, p) => {
     if (isFlu(p) || !present.has(p)) return;
-    const score = n + (projLen.get(p)||0);
-    if (score > bestScore) { bestScore = score; best = p; }
+    cands.push({ p, load: forecastDeathLoad(p), tier: priorityTier(p), depth: n + (projLen.get(p)||0) });
   });
-  return best;
+  if (!cands.length) return null;
+  // Featured = whichever pathogen has the most forecasted deaths — a simpler, more emotive
+  // metric than data depth. A surveillance-priority pathogen within 10% of the leader wins the
+  // near-tie (keeps the strain-specific Bundibugyo series ahead of the nonspecific Ebola
+  // catch-all); reporting depth breaks what remains.
+  const maxLoad = Math.max(...cands.map(c => c.load));
+  const near = cands.filter(c => c.load >= maxLoad * 0.9);
+  near.sort((a,b) => b.tier - a.tier || b.load - a.load || b.depth - a.depth);
+  return near[0].p;
 }
 function refreshDefaultPathogen() {
   if (userChangedPathogen) return;
@@ -1563,7 +1679,7 @@ function isAggregateLoc(loc) {
 }
 function subnationalLocationsRaw(pathogen, country, measure) {
   const seen = new Map(); // casefolded -> first-seen spelling
-  allRows.forEach(r => {
+  viewRows().forEach(r => {
     if (r.pathogen!==pathogen || geoCountry(r.location)!==country || isNational(r.location) || r.measure!==measure || r.outlier!=='False') return;
     const k = (r.location||'').trim().toLowerCase();
     if (k && !seen.has(k)) seen.set(k, r.location);
@@ -1703,23 +1819,35 @@ function ingestForecast(rows) {
   });
   best.forEach((v, ak) => forecastAliases.set(ak, v.key));
 }
-// Snap projection to highest multiple of 5 days (17 → 15) as requested
+// Snap the projection horizon to the highest multiple of 5 days past the anchor (19 → 15,
+// 24 → 20). Points at/under the cap are kept; p25/p50/p75 are then LINEARLY INTERPOLATED at
+// exactly the cap so the stated "N-day forecast" is itself a multiple of 5 and the drawn fan
+// ends on the same day — truncation alone left the label at whatever the last feed point was
+// (e.g. 19 days, the very number this cap was asked to remove).
 function cappedToMultipleOf5(proj, anchorDateStr) {
   if (!proj || !proj.length || !anchorDateStr) return proj;
   const anchor = new Date(anchorDateStr);
-  const totalDays = Math.round((new Date(proj[proj.length-1].date) - anchor) / 86400000);
+  const day = (d) => Math.round((new Date(d) - anchor) / 86400000);
+  const totalDays = day(proj[proj.length-1].date);
   const cappedDays = Math.floor(totalDays / 5) * 5;
   if (cappedDays <= 0) return null;
   if (cappedDays === totalDays) return proj;
-  // proj is sorted by date ascending
-  let cutIdx = -1;
-  for (let i = 0; i < proj.length; i++) {
-    const d = Math.round((new Date(proj[i].date) - anchor) / 86400000);
-    if (d <= cappedDays) cutIdx = i;
-    else break;
-  }
-  if (cutIdx < 0) return null;
-  return proj.slice(0, cutIdx + 1);
+  const kept = proj.filter(p => day(p.date) <= cappedDays);
+  if (!kept.length) return null;
+  const lastKept = kept[kept.length-1];
+  if (day(lastKept.date) === cappedDays) return kept;
+  const next = proj[kept.length]; // first feed point beyond the cap (proj is date-sorted)
+  if (!next) return kept;
+  const t = (cappedDays - day(lastKept.date)) / (day(next.date) - day(lastKept.date));
+  const lerp = (a, b) => a + (b - a) * t;
+  kept.push({
+    date: new Date(anchor.getTime() + cappedDays * 86400000).toISOString().slice(0, 10),
+    p25: lerp(lastKept.p25, next.p25),
+    p50: lerp(lastKept.p50, next.p50),
+    p75: lerp(lastKept.p75, next.p75),
+    nObs: lastKept.nObs
+  });
+  return kept;
 }
 // Return a drawable projection for loc+measure IF the model had enough history and isn't runaway.
 function projectionFor(pathogen, loc, measure, lastObserved) {
@@ -1782,20 +1910,20 @@ function dateQuality(rows) {
   const canon = rows.find(r=>r.is_canonical==='True') || rows[0];
   return { score: factQuality(+canon.n_sources||1, canon.quality_flag), vettings: rowsVettings(rows), flag: canon.quality_flag, n:+canon.n_sources||1, sources: rows.length, reason: canon.canonical_reason };
 }
-// Event documentation tier from its measurement corroboration + temporal density.
+// Event documentation tier from corroboration volume + temporal span. Rows here are already
+// outlier-screened, so a "% clean-screened" share would be vacuous (~always 100%) — not shown.
 function docFromRows(rows) {
-  if (!rows.length) return { tier:0, label:'Sparse / developing', vettings:0, days:0, good:0 };
+  if (!rows.length) return { tier:0, label:'Sparse / developing', vettings:0, days:0 };
   const days = new Set(rows.map(r=>r.report_date)).size;
   const vettings = rowsVettings(rows);
-  const good = rows.filter(r=>r.quality_flag==='good').length / rows.length;
-  let tier; if (vettings>=15 && good>=0.65 && days>=5) tier=2; else if (vettings<=4 || days<=2) tier=0; else tier=1;
-  return { tier, label:['Sparse / developing','Less documented','Well documented'][tier], vettings, days, good };
+  let tier; if (vettings>=15 && days>=5) tier=2; else if (vettings<=4 || days<=2) tier=0; else tier=1;
+  return { tier, label:['Sparse / developing','Less documented','Well documented'][tier], vettings, days };
 }
 function eventDocumentation(pathogen, country) {
-  return docFromRows(allRows.filter(r=>r.pathogen===pathogen && geoCountry(r.location)===country && (r.measure==='confirmed_cases'||r.measure==='confirmed_deaths') && r.outlier==='False'));
+  return docFromRows(viewRows().filter(r=>r.pathogen===pathogen && geoCountry(r.location)===country && (r.measure==='confirmed_cases'||r.measure==='confirmed_deaths') && r.outlier==='False'));
 }
 function locDocumentation(pathogen, loc) {
-  return docFromRows(allRows.filter(r=>r.pathogen===pathogen && r.location===loc && (r.measure==='confirmed_cases'||r.measure==='confirmed_deaths') && r.outlier==='False'));
+  return docFromRows(viewRows().filter(r=>r.pathogen===pathogen && r.location===loc && (r.measure==='confirmed_cases'||r.measure==='confirmed_deaths') && r.outlier==='False'));
 }
 const DOC_CLASS = ['doc-sparse','doc-less','doc-well'];
 // Sheet cells arrive as pandas exports, so empty values surface as the string "nan".
@@ -1842,7 +1970,7 @@ function populatePathogenSelect(rows) {
     const def = dataDepthPathogen() || computeDefaultPathogen();
     if (def) defaultPathogen = def;
   }
-  const ordered = [...withCases].sort((a,b) => a.localeCompare(b, undefined, {sensitivity:'base'}));
+  const ordered = [...withCases].sort((a,b) => (priorityTier(b) - priorityTier(a)) || a.localeCompare(b, undefined, {sensitivity:'base'}));
   sel.innerHTML = [ALL, ...ordered].map(p => `<option value="${p}"${p===selectedPathogen?' selected':''}>${p===ALL ? 'All pathogens' : (PATHOGEN_LABELS[p] || p)}</option>`).join('');
 }document.getElementById('disease').addEventListener('change', (e) => {
   selectedPathogen = e.target.value;
@@ -1920,7 +2048,7 @@ function renderTrendSection() {
     if (top) toggleCountry = top.country;
   }
   const subAvail = !!toggleCountry && subnationalLocations(effectiveTp, toggleCountry, 'confirmed_'+subMeasure).length > 0;
-  const series = allRows.length ? aggregatePathogenSeries(allRows, effectiveTp) : (function(){const s=trend.map(d=>({...d,sources:null}));s.loc=null;s.natCount=0;return s;})();
+  const series = allRows.length ? aggregatePathogenSeries(viewRows(), effectiveTp) : (function(){const s=trend.map(d=>({...d,sources:null}));s.loc=null;s.natCount=0;return s;})();
   // Resolve the effective plot view: an explicit switcher choice wins; 'auto' picks comparison
   // bars when the target geography has too few observation dates to draw a real time series.
   let view = plotViewSel;
@@ -1969,23 +2097,23 @@ function renderTrendSection() {
     metaEl.textContent = (isAll() ? 'Hardest-hit country · ' : '') + 'National · observed to ' + obsDate + others;
   } else metaEl.textContent = '';
   if (allRows.length && series.loc) {
-    const relevant = allRows.filter(r => r.pathogen === effectiveTp && r.location === series.loc && r.measure === reportType + '_cases');
+    const relevant = viewRows().filter(r => r.pathogen === effectiveTp && r.location === series.loc && r.measure === reportType + '_cases');
     const excluded = relevant.filter(r => r.outlier === 'True').length;
-    outlierNoteEl.textContent = relevant.length ? `${excluded}/${relevant.length} figures screened out for ${series.loc}.` : '';
+    outlierNoteEl.textContent = relevant.length ? `${excluded} of ${relevant.length} figures rejected by screening.` : '';
   } else if (outlierNoteEl) outlierNoteEl.textContent = '';
   if (trendSeriesKey !== effectiveTp + '|' + reportType + '|' + (series.loc||'')) {
     trendSeriesKey = effectiveTp + '|' + reportType + '|' + (series.loc||'');
     trendTransform = d3.zoomIdentity;
     if (tsvg.node() && tsvg.node().__zoomBehavior) tsvg.call(tsvg.node().__zoomBehavior.transform, d3.zoomIdentity);
   }
-  renderChart(series, effectiveTp);
-  renderSourceChart(series);
+  const fcEnd = renderChart(series, effectiveTp);
+  renderSourceChart(series, fcEnd);
 }
 // Number of distinct observation dates behind one geography+measure — the sparsity test.
 function obsDatesFor(loc, pathogen, measure) {
   const lk = (loc||'').trim().toLowerCase();
   const seen = new Set();
-  allRows.forEach(r => {
+  viewRows().forEach(r => {
     if (r.pathogen !== pathogen || (r.location||'').trim().toLowerCase() !== lk || r.measure !== measure || r.outlier !== 'False') return;
     seen.add(r.report_date);
   });
@@ -2017,7 +2145,7 @@ function renderComparisonBars(effectiveTp, series) {
     if (tsvg.node().__zoomBehavior) tsvg.call(tsvg.node().__zoomBehavior.transform, d3.zoomIdentity);
   }
   document.getElementById('outlierNote').textContent = '';
-  const cts = [...canonicalByDate(allRows, effectiveTp, targetLoc, measure).values()].filter(p => p.value != null)
+  const cts = [...canonicalByDate(viewRows(), effectiveTp, targetLoc, measure).values()].filter(p => p.value != null)
     .sort((a,b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0);
   if (!cts.length) {
     document.getElementById('trendTitle').textContent = `${label} · ${targetLoc} — no confirmed ${measureName}`;
@@ -2030,7 +2158,7 @@ function renderComparisonBars(effectiveTp, series) {
   const targetCoord = (GEO[targetCountry]||{}).lonlat || placeCoords.get((targetLoc||'').trim().toLowerCase()) || null;
   // Nearest national neighbours reporting the same pathogen+measure (haversine over centroids).
   const pool = new Map();
-  allRows.forEach(r => {
+  viewRows().forEach(r => {
     if (r.pathogen !== effectiveTp || r.measure !== measure || r.outlier !== 'False' || !isNational(r.location)) return;
     const c = geoCountry(r.location);
     if (!c || c === targetCountry) return;
@@ -2045,7 +2173,7 @@ function renderComparisonBars(effectiveTp, series) {
   const maxNeighbours = Math.max(2, Math.min(5, Math.floor(plotW / 46) - 1));
   const entries = [{ loc: targetLoc, isTarget: true, dist: 0 }];
   neighbours.slice(0, maxNeighbours).forEach(nb => entries.push({ loc: nb.loc, isTarget: false, dist: nb.dist }));
-  entries.forEach(e => { e.data = latestOf(allRows.filter(r => r.pathogen === effectiveTp && r.location === e.loc && r.measure === measure && r.outlier === 'False')); });
+  entries.forEach(e => { e.data = latestOf(viewRows().filter(r => r.pathogen === effectiveTp && r.location === e.loc && r.measure === measure && r.outlier === 'False')); });
   const drawable = entries.filter(e => e.data && isFinite(e.data.value));
   // Ascending order: smallest figure on the left, largest on the right.
   drawable.sort((a,b) => a.data.value - b.data.value);
@@ -2099,7 +2227,7 @@ function renderComparisonBars(effectiveTp, series) {
           .on('mouseleave', hideChartTip)
           .on('click', () => openArticlePopup(p.date, p.rows||[]));
       });
-      excludedByDate(allRows, effectiveTp, targetLoc, measure).forEach((rs, date) => rs.forEach((r,i) => {
+      excludedByDate(viewRows(), effectiveTp, targetLoc, measure).forEach((rs, date) => rs.forEach((r,i) => {
         const v2 = +r.value; if (isNaN(v2)) return;
         const jx = cx + (i-(rs.length-1)/2)*3.6;
         const chi = r.quality_flag === 'chi-sq';
@@ -2128,7 +2256,9 @@ function renderComparisonBars(effectiveTp, series) {
     .attr('fill',col('--color-neutral-400'))
     .text(`Bar plot selected due to lack of time series data (${cts.length} observation${cts.length===1?'':'s'})`);
   // Source-per-day strip still makes sense for the target itself.
-  const styleObj = {}; styleObj[targetLoc] = { color: col('--color-accent-300') };
+  // Single-series strip in the bars view wears the SAME fill as the national histogram
+  // (SRC_HIST.fill), not the trend line's accent — one histogram identity across views.
+  const styleObj = {}; styleObj[targetLoc] = { color: SRC_HIST.fill() };
   renderSubSourceChart([{ loc: targetLoc, pts: cts }], styleObj);
 }
 
@@ -2155,12 +2285,12 @@ function renderChart(series, effectiveTp) {
   tsvg.selectAll('*').remove();
   tw = Math.max(340, Math.round((document.getElementById('chartWrap')||{}).clientWidth || 620));
   tsvg.attr('viewBox', `0 0 ${tw} ${th}`);
-  if (!series.length) { tsvg.append('text').attr('x',tw/2).attr('y',th/2).attr('text-anchor','middle').attr('font-size','12px').attr('fill',col('--color-neutral-400')).text('No national series reported for this pathogen'); return; }
+  if (!series.length) { tsvg.append('text').attr('x',tw/2).attr('y',th/2).attr('text-anchor','middle').attr('font-size','12px').attr('fill',col('--color-neutral-400')).text('No national series reported for this pathogen'); return null; }
   const lastCase = [...series].reverse().find(d => d.cases != null);
   const lastDeath = [...series].reverse().find(d => d.deaths != null);
   const projPathogen = effectiveTp || trendPathogen();
-  let projCases = projectionFor(projPathogen, series.loc, reportType+'_cases', lastCase ? lastCase.cases : null);
-  let projDeaths = projectionFor(projPathogen, series.loc, reportType+'_deaths', lastDeath ? lastDeath.deaths : null);
+  let projCases = forecastAllowed() ? projectionFor(projPathogen, series.loc, reportType+'_cases', lastCase ? lastCase.cases : null) : null;
+  let projDeaths = forecastAllowed() ? projectionFor(projPathogen, series.loc, reportType+'_deaths', lastDeath ? lastDeath.deaths : null) : null;
   if (projCases) projCases = cappedToMultipleOf5(projCases, lastCase ? lastCase.date : null);
   if (projDeaths) projDeaths = cappedToMultipleOf5(projDeaths, lastDeath ? lastDeath.date : null);
   const allDates = series.map(d => new Date(d.date));
@@ -2270,7 +2400,7 @@ function renderChart(series, effectiveTp) {
   // triangle = monotonicity) with tooltips explaining why each point is not on the line.
   function drawExcluded(baseColor, measureName, measureStr) {
     if (!series.loc) return;
-    const ex = excludedByDate(allRows, projPathogen, series.loc, measureStr);
+    const ex = excludedByDate(viewRows(), projPathogen, series.loc, measureStr);
     ex.forEach((rs, date) => {
       rs.forEach((r, i) => {
         const v = +r.value; if (isNaN(v)) return;
@@ -2295,16 +2425,59 @@ function renderChart(series, effectiveTp) {
   }
   drawExcluded(col('--color-accent-200'), 'Reported cases', reportType+'_cases');
   drawExcluded('#cf7b82', 'Reported deaths', reportType+'_deaths');
+  // Hand the forecast horizon back so the sources strip can share this chart's x-domain.
+  return (projCases && projCases.length ? projCases[projCases.length-1].date : (projDeaths && projDeaths.length ? projDeaths[projDeaths.length-1].date : null));
 }
 
-function renderSourceChart(series) {
+// --- Sources-per-day histogram: ONE geometry/hover/tooltip spec shared by every view ---
+// Bars count VETTINGS (Σ n_sources backing that date's canonical figures); tooltips always
+// pair "N vettings · M distinct articles", and click-throughs list EXACTLY those articles, so
+// bar height, tooltip and popup can never disagree. Single-series strips share one fill/hover;
+// the stacked subnational variant keeps its series colours but the same geometry and copy.
+const SRC_HIST = {
+  fill: () => col('--color-accent-600'),
+  hover: () => col('--color-accent-400'),
+  barWidth: step => Math.max(3, Math.min(14, step - 3)),
+};
+function vettingsAndArticles(rows) {
+  let vet = 0; const urls = new Set();
+  (rows || []).forEach(r => { vet += (+r.n_sources || 1); extractUrls(r.sources).forEach(u => urls.add(normUrl(u))); });
+  return { vet, art: urls.size };
+}
+function srcHistTip(dateStr, vet, art) {
+  return `<p class="t-title">${new Date(dateStr).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'})}</p>` +
+    `<div class="t-row"><span title="${VETTING_TIP.replace(/"/g,'&quot;')}">Vettings</span><span>${vet}</span></div>` +
+    `<div class="t-row"><span>Distinct articles</span><span>${art}</span></div>` +
+    `<div class="t-foot">Click to list these articles ↗</div>`;
+}
+
+function renderSourceChart(series, fcEnd) {
   shsvg.selectAll('*').remove();
   shTw = Math.max(340, Math.round((document.getElementById('sourceChartWrap')||{}).clientWidth || 620));
   shsvg.attr('viewBox', `0 0 ${shTw} ${shTh}`);
   if (!series.length || series.every(d => !d.sources)) { shsvg.append('text').attr('x',shTw/2).attr('y',shTh/2).attr('text-anchor','middle').attr('font-size','11px').attr('fill',col('--color-neutral-400')).text('Source counts unavailable'); return; }
   const dates = series.map(d=>d.date);
-  const x = d3.scaleUtc().domain(d3.extent(dates, d=>new Date(d))).range([shMargin.left, shTw-shMargin.right]);
-  const maxS = d3.max(series, d=>d.sources) || 1;
+  // Extend the domain to the forecast horizon so the strip shares the trend chart's x-axis.
+  const dom = d3.extent(dates, d=>new Date(d));
+  if (fcEnd) dom[1] = new Date(Math.max(dom[1].getTime(), new Date(fcEnd).getTime()));
+  const x = d3.scaleUtc().domain(dom).range([shMargin.left, shTw-shMargin.right]);
+  // Bin daily bars into 7-day buckets when they would fall under ~7px — the crush that made
+  // glyphs overlap at longer histories. Buckets sum vettings and pool their article sets.
+  const shown = series.filter(d => d.cases != null || d.deaths != null);
+  const step = (shTw-shMargin.left-shMargin.right) / Math.max(1, shown.length);
+  let bins;
+  if (step < 7 && shown.length > 1) {
+    bins = [];
+    let cur = null;
+    shown.forEach(d => {
+      if (!cur || (new Date(d.date) - new Date(cur.date)) >= 7 * 86400000) { cur = { date: d.date, vet: 0, rows: [] }; bins.push(cur); }
+      cur.vet += d.sources || 0;
+      cur.rows.push(...(d.caseRows || []), ...(d.deathRows || []));
+    });
+  } else {
+    bins = shown.map(d => ({ date: d.date, vet: d.sources || 0, rows: [...(d.caseRows || []), ...(d.deathRows || [])] }));
+  }
+  const maxS = Math.max(1, ...bins.map(b => b.vet));
   const y = d3.scaleLinear().domain([0, maxS*1.15]).range([shTh-shMargin.bottom, shMargin.top]);
   y.ticks(2).forEach(t => {
     shsvg.append('line').attr('x1',shMargin.left).attr('x2',shTw-shMargin.right).attr('y1',y(t)).attr('y2',y(t))
@@ -2312,24 +2485,22 @@ function renderSourceChart(series) {
     if (t > 0) shsvg.append('text').attr('x',shMargin.left-6).attr('y',y(t)+3).attr('text-anchor','end')
       .attr('font-size','9.5px').attr('fill', col('--color-neutral-400')).text(t);
   });
-  const shown = series.filter(d => d.cases != null || d.deaths != null);
-  const step = (shTw-shMargin.left-shMargin.right) / Math.max(1, shown.length);
-  const bw = Math.max(3, Math.min(14, step - 3));
-  shsvg.selectAll('rect.src-bar').data(shown).join('rect').attr('class','src-bar')
-    .attr('x', d => Math.max(shMargin.left, x(new Date(d.date)) - bw/2)).attr('width', bw)
-    .attr('y', d => y(d.sources||0)).attr('height', d => (shTh-shMargin.bottom) - y(d.sources||0))
-    .attr('fill', col('--color-accent-600'))
-    .style('cursor','pointer')
-    .on('mouseover', function(){ d3.select(this).attr('fill', col('--color-accent-400')); })
-    .on('mousemove', (ev,d) => showChartTip(ev,
-        `<p class="t-title">${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p>` +
-        `<div class="t-row"><span>Source articles</span><span>${d.sources}</span></div>` +
-        `<div class="t-foot">Click to list all articles ↗</div>`))
-    .on('mouseout', function(){ d3.select(this).attr('fill', col('--color-accent-600')); hideChartTip(); })
-    .on('click', (ev,d) => { hideChartTip(); openArticlePopup(d.date, d.caseRows.length?d.caseRows:d.deathRows); });
+  const bw = SRC_HIST.barWidth(step);
+  bins.forEach(b => {
+    const { art } = vettingsAndArticles(b.rows);
+    shsvg.append('rect')
+      .attr('x', Math.max(shMargin.left, x(new Date(b.date)) - bw/2)).attr('width', bw)
+      .attr('y', y(b.vet)).attr('height', (shTh-shMargin.bottom) - y(b.vet))
+      .attr('fill', SRC_HIST.fill()).attr('rx', 1)
+      .style('cursor','pointer')
+      .on('mouseover', function(){ d3.select(this).attr('fill', SRC_HIST.hover()); })
+      .on('mousemove', ev => showChartTip(ev, srcHistTip(b.date, b.vet, art)))
+      .on('mouseout', function(){ d3.select(this).attr('fill', SRC_HIST.fill()); hideChartTip(); })
+      .on('click', (ev) => { hideChartTip(); openArticlePopup(b.date, b.rows); });
+  });
   [shown[0], shown[shown.length-1]].forEach((d,i) => {
     if (!d) return;
-    shsvg.append('text').attr('x', i===0?shMargin.left:shTw-shMargin.right).attr('y', shTh-5).attr('text-anchor', i===0?'start':'end')
+    shsvg.append('text').attr('x', x(new Date(d))).attr('y', shTh-5).attr('text-anchor', i===0?'start':'end')
       .attr('font-size','9.5px').attr('fill', col('--color-neutral-400'))
       .text(new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'}));
   });
@@ -2368,7 +2539,7 @@ function renderSubnationalTrend() {
   document.getElementById('trendMeta').textContent = '';
   const outEl = document.getElementById('outlierNote'); if (outEl) outEl.textContent = '';
   const locs0 = subnationalLocations(pathogen, country, measure);
-  const peak = {}; allRows.filter(r=>r.pathogen===pathogen && !isNational(r.location) && geoCountry(r.location)===country && r.measure===measure && r.outlier==='False').forEach(r=>{ peak[r.location]=Math.max(peak[r.location]||0, +r.value||0); });
+  const peak = {}; viewRows().filter(r=>r.pathogen===pathogen && !isNational(r.location) && geoCountry(r.location)===country && r.measure===measure && r.outlier==='False').forEach(r=>{ peak[r.location]=Math.max(peak[r.location]||0, +r.value||0); });
   const ranked = locs0.slice().sort((a,b)=>(peak[b]||0)-(peak[a]||0));
   const NAMED_MAX = 8;
   const locs = ranked.slice(0, NAMED_MAX);
@@ -2381,7 +2552,7 @@ function renderSubnationalTrend() {
   let otherPts = [];
   if (OTHER) {
     const acc = new Map();
-    rest.forEach(loc => canonicalByDate(allRows, pathogen, loc, measure).forEach((p, d) => {
+    rest.forEach(loc => canonicalByDate(viewRows(), pathogen, loc, measure).forEach((p, d) => {
       if (p.value == null) return;
       if (!acc.has(d)) acc.set(d, { date: d, value: 0, rows: [], sources: 0 });
       const e = acc.get(d); e.value += p.value; e.rows.push(...(p.rows || [])); e.sources += (p.sources || 0);
@@ -2400,7 +2571,7 @@ function renderSubnationalTrend() {
   document.querySelectorAll('#subLegend .sub-swatch[data-loc]').forEach(sw => {
     sw.addEventListener('click', () => { highlightSubLoc = highlightSubLoc === sw.dataset.loc ? null : sw.dataset.loc; renderSubnationalTrend(); });
   });
-  const perLoc = locs.map(loc => ({ loc, pts:[...canonicalByDate(allRows, pathogen, loc, measure).values()] }))
+  const perLoc = locs.map(loc => ({ loc, pts:[...canonicalByDate(viewRows(), pathogen, loc, measure).values()] }))
     .concat(OTHER ? [{ loc: OTHER, pts: otherPts }] : []);
   tsvg.selectAll('*').remove();
   tw = Math.max(340, Math.round((document.getElementById('chartWrap')||{}).clientWidth||620));
@@ -2427,7 +2598,7 @@ function renderSubnationalTrend() {
     s.pts.forEach(d => { if (d.value==null) return; plotG.append('path').attr('transform',`translate(${x(new Date(d.date))},${y(d.value)})`).attr('d',d3.symbol().type(style[s.loc].sym).size(isHi?58:34)()).attr('fill',c).attr('stroke',col('--color-bg')).attr('stroke-width',isHi?1.4:0.8).style('cursor','default')
       .on('mousemove',(ev)=>showChartTip(ev,`<p class="t-title">${s.loc}</p><div class="t-row"><span>${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span><span>${d.value.toLocaleString()} ${subMeasure}</span></div>`)).on('mouseleave',hideChartTip); });
     // Excluded rows (chi-square / monotonicity screens) as alternate hollow glyphs.
-    excludedByDate(allRows, pathogen, s.loc, measure).forEach((rs, date) => {
+    excludedByDate(viewRows(), pathogen, s.loc, measure).forEach((rs, date) => {
       rs.forEach((r, i) => {
         const v = +r.value; if (isNaN(v)) return;
         const jx = x(new Date(date)) + (i - (rs.length - 1) / 2) * 3.6;
@@ -2448,36 +2619,72 @@ function renderSubnationalTrend() {
   [ds[0], ds[ds.length-1]].forEach((d,i)=>{ if(!d) return; plotG.append('text').attr('x',x(new Date(d))).attr('y',th-4).attr('text-anchor',i===0?'start':'end').attr('font-size','10px').attr('fill',col('--color-neutral-400')).text(new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short'})); });
   renderSubSourceChart(perLoc, style);
 }
+// Stacked variant of the sources histogram — same geometry, hover and tooltip language as the
+// national strip (SRC_HIST); segments keep the colour of the series they belong to so the
+// histogram reads against the overlay legend above it.
 function renderSubSourceChart(perLoc, style) {
   shsvg.selectAll('*').remove();
   shTw = Math.max(340, Math.round((document.getElementById('sourceChartWrap')||{}).clientWidth||620));
   shsvg.attr('viewBox', `0 0 ${shTw} ${shTh}`);
-  const dateMap = new Map();
-  perLoc.forEach(s => s.pts.forEach(p => { const n=(p.rows||[]).reduce((a,r)=>a+(+r.n_sources||1),0); if(!n) return; if(!dateMap.has(p.date)) dateMap.set(p.date,{}); dateMap.get(p.date)[s.loc]=(dateMap.get(p.date)[s.loc]||0)+n; }));
+  const dateMap = new Map(); // date -> { loc -> {vet, rows} }
+  perLoc.forEach(s => s.pts.forEach(p => {
+    const rows = p.rows || [];
+    const vet = rows.reduce((a,r)=>a+(+r.n_sources||1),0);
+    if (!vet) return;
+    if (!dateMap.has(p.date)) dateMap.set(p.date, {});
+    const cell = dateMap.get(p.date)[s.loc] || (dateMap.get(p.date)[s.loc] = { vet: 0, rows: [] });
+    cell.vet += vet; cell.rows.push(...rows);
+  }));
   const dates = [...dateMap.keys()].sort();
   if (!dates.length) { shsvg.append('text').attr('x',shTw/2).attr('y',shTh/2).attr('text-anchor','middle').attr('font-size','11px').attr('fill',col('--color-neutral-400')).text('Source counts unavailable'); return; }
-  const totals = dates.map(d=>Object.values(dateMap.get(d)).reduce((a,b)=>a+b,0));
+  // Weekly binning under ~7px per bar — the shared anti-crush rule.
+  const step = (shTw-shMargin.left-shMargin.right)/Math.max(1,dates.length);
+  let binned = dates.map(d => ({ date: d, cells: dateMap.get(d) }));
+  if (step < 7 && binned.length > 1) {
+    const bins = [];
+    let cur = null;
+    binned.forEach(b => {
+      if (!cur || (new Date(b.date) - new Date(cur.date)) >= 7 * 86400000) { cur = { date: b.date, cells: {} }; bins.push(cur); }
+      Object.entries(b.cells).forEach(([loc, c]) => {
+        const cell = cur.cells[loc] || (cur.cells[loc] = { vet: 0, rows: [] });
+        cell.vet += c.vet; cell.rows.push(...c.rows);
+      });
+    });
+    binned = bins;
+  }
+  const totals = binned.map(b => Object.values(b.cells).reduce((a,c)=>a+c.vet,0));
   const maxT = Math.max(...totals,1);
-  const x = d3.scaleUtc().domain(d3.extent(dates,d=>new Date(d))).range([shMargin.left, shTw-shMargin.right]);
+  const x = d3.scaleUtc().domain(d3.extent(binned,b=>new Date(b.date))).range([shMargin.left, shTw-shMargin.right]);
   const y = d3.scaleLinear().domain([0, maxT*1.15]).range([shTh-shMargin.bottom, shMargin.top]);
   y.ticks(2).forEach(t => { shsvg.append('line').attr('x1',shMargin.left).attr('x2',shTw-shMargin.right).attr('y1',y(t)).attr('y2',y(t)).attr('stroke',col('--color-divider')).attr('stroke-width',1); if(t>0) shsvg.append('text').attr('x',shMargin.left-6).attr('y',y(t)+3).attr('text-anchor','end').attr('font-size','9.5px').attr('fill',col('--color-neutral-400')).text(t); });
   const usableH = (shTh-shMargin.bottom)-shMargin.top;
   const pxPer = usableH/(maxT*1.15);
-  const step = (shTw-shMargin.left-shMargin.right)/Math.max(1,dates.length);
-  const bw = Math.max(3, Math.min(14, step-3));
-  dates.forEach(d => {
-    const cx = x(new Date(d)); let yb = shTh-shMargin.bottom;
-    perLoc.forEach(s => { const n=(dateMap.get(d)[s.loc])||0; if(!n) return; const h=n*pxPer; yb-=h;
-      shsvg.append('rect').attr('x',Math.max(shMargin.left,cx-bw/2)).attr('width',bw).attr('y',yb).attr('height',h).attr('fill',style[s.loc].color).attr('opacity',0.85).style('cursor','default')
-        .on('mousemove',(ev)=>showChartTip(ev,`<p class="t-title">${new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p><div class="t-row"><span>${s.loc.split(',')[0]}</span><span>${n} sources</span></div>`)).on('mouseleave',hideChartTip);
+  const bw = SRC_HIST.barWidth(step);
+  binned.forEach(b => {
+    const cx = x(new Date(b.date)); let yb = shTh-shMargin.bottom;
+    const dayRows = [];
+    perLoc.forEach(s => { const c=(b.cells[s.loc]); if(!c || !c.vet) return; const h=c.vet*pxPer; yb-=h; dayRows.push(...c.rows);
+      shsvg.append('rect').attr('x',Math.max(shMargin.left,cx-bw/2)).attr('width',bw).attr('y',yb).attr('height',h).attr('rx',1).attr('fill',style[s.loc].color).attr('opacity',0.85).style('cursor','default')
+        .on('mousemove',(ev)=>{ const va = vettingsAndArticles(c.rows); showChartTip(ev,
+          `<p class="t-title">${new Date(b.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'})}</p>` +
+          `<div class="t-row"><span>${s.loc.split(',')[0]}</span><span>${va.vet} vetting${va.vet>1?'s':''}</span></div>` +
+          `<div class="t-row"><span>Distinct articles</span><span>${va.art}</span></div>`); })
+        .on('mouseleave',hideChartTip);
     });
+    // Whole-bar hover target: the date's combined total on one tooltip, matching the national strip.
+    shsvg.append('rect').attr('x',Math.max(shMargin.left,cx-bw/2)).attr('width',bw).attr('y',shTh-shMargin.bottom-totals[binned.indexOf(b)]*pxPer)
+      .attr('height',Math.max(1,totals[binned.indexOf(b)]*pxPer)).attr('fill','transparent').style('cursor','default')
+      .on('mousemove',(ev)=>showChartTip(ev, srcHistTip(b.date, totals[binned.indexOf(b)], vettingsAndArticles(dayRows).art)))
+      .on('mouseleave',hideChartTip);
   });
-  [dates[0], dates[dates.length-1]].forEach((d,i)=>{ shsvg.append('text').attr('x',i===0?shMargin.left:shTw-shMargin.right).attr('y',shTh-5).attr('text-anchor',i===0?'start':'end').attr('font-size','9.5px').attr('fill',col('--color-neutral-400')).text(new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short'})); });
+  [binned[0], binned[binned.length-1]].forEach((b,i)=>{ if (!b) return; shsvg.append('text').attr('x', x(new Date(b.date))).attr('y',shTh-5).attr('text-anchor',i===0?'start':'end').attr('font-size','9.5px').attr('fill',col('--color-neutral-400')).text(new Date(b.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})); });
 }
 function renderAll() { renderPageSub(); renderStats(); renderTable(); renderMap(); renderTrendSection(); }
 // --- Shareable URL state (hash): pathogen, country, plot view, measure, type, region, species ---
 // Hash wins for sharing; localStorage restores a returning visitor's last filters otherwise.
-function savePrefs() { try { localStorage.setItem('vhf-prefs', JSON.stringify({ p: selectedPathogen, s: activeSpecies, v: plotViewSel, m: subMeasure, t: reportType, r: activeRegion })); } catch (e) {} }
+// Species is deliberately NOT persisted — a fresh load always starts at the human default so
+// scorecard numbers never silently reflect a forgotten animal-host filter (deep-link hash still wins).
+function savePrefs() { try { localStorage.setItem('vhf-prefs', JSON.stringify({ p: selectedPathogen, v: plotViewSel, m: subMeasure, t: reportType, r: activeRegion, sc: screenState, tm: tableMode })); } catch (e) {} }
 function writeHash() {
   const parts = [];
   if (!isAll()) parts.push('p=' + encodeURIComponent(selectedPathogen));
@@ -2486,7 +2693,9 @@ function writeHash() {
   if (subMeasure !== 'cases') parts.push('m=' + subMeasure);
   if (reportType !== 'confirmed') parts.push('t=' + reportType);
   if (activeRegion !== 'All regions') parts.push('r=' + encodeURIComponent(activeRegion));
-  if (activeSpecies !== ALL_SPECIES) parts.push('s=' + encodeURIComponent(activeSpecies));
+  if (activeSpecies !== 'humans') parts.push('s=' + encodeURIComponent(activeSpecies));
+  if (screenState !== 'accepted') parts.push('sc=' + screenState);
+  if (tableMode !== 'figures') parts.push('tm=raw');
   history.replaceState(null, '', parts.length ? '#' + parts.join('&') : location.pathname + location.search);
   savePrefs();
 }
@@ -2500,7 +2709,17 @@ function writeHash() {
   if (['cases','deaths'].includes(g('m'))) subMeasure = g('m');
   if (['confirmed','suspected'].includes(g('t'))) reportType = g('t');
   if (g('r')) activeRegion = g('r');
-  if (g('s')) activeSpecies = g('s');
+  // Species: deep-link hash wins; localStorage never restores it (fresh loads default to humans).
+  if (h.get('s')) activeSpecies = h.get('s');
+  const sc = h.get('sc') || st.sc;
+  if (['accepted','all','rejected'].includes(sc)) screenState = sc;
+  const tmv = h.get('tm') || st.tm;
+  if (tmv === 'raw') {
+    tableMode = 'raw';
+    const seg = document.getElementById('tableModeSeg');
+    seg.querySelectorAll('.seg-opt').forEach(b => b.setAttribute('aria-selected', String(b.dataset.mode === 'raw')));
+    document.getElementById('screenSeg').style.display = 'none';
+  }
   const rs = document.getElementById('region');
   if (rs && [...rs.options].some(o => o.value === activeRegion)) rs.value = activeRegion;
 })();
@@ -2604,7 +2823,6 @@ const briefContentEl = document.getElementById('briefContent');
 const briefMetaEl = document.getElementById('briefMeta');
 let reports = [];
 let selectedIdx = 0;
-const articleUrlsByCombo = new Map();
 function extractUrls(s) { if (!s) return []; const m = (s.match(/https?:\/\/[^\s'"<>\)\]]+/g)||[]).map(u=>u.replace(/[.,;]+$/,'')); return [...new Set(m)]; }
 
 function riskTagClass(score) {
@@ -2612,10 +2830,11 @@ function riskTagClass(score) {
   if (score >= 5) return 'tag-outline';
   return 'tag-neutral';
 }
-// Tint the pathogen (linked to Wikipedia) and location mentions inside an event title —
-// same size as the surrounding text, colour-only differentiation. First occurrence of each,
-// non-overlapping, pathogen takes priority.
-function highlightEventTitle(r) {
+// Tint the pathogen and location mentions inside an event title — same size as the surrounding
+// text, colour-only differentiation. `linked` renders the pathogen as an outbound WHO link; the
+// event LIST keeps it a plain tint (links on every row read as noise), the brief header links.
+// First occurrence of each, non-overlapping, pathogen takes priority.
+function highlightEventTitle(r, linked) {
   const title = r.title || '';
   const terms = [];
   if (r.pathogen) terms.push({ s: r.pathogen, cls: 'ev-path' });
@@ -2630,8 +2849,8 @@ function highlightEventTitle(r) {
   picked.forEach(rg => {
     const seg = title.slice(rg.start, rg.end);
     if (rg.cls === 'ev-path') {
-      const wiki = pathogenWikiUrl(r.pathogen);
-      out += wiki ? `<a class="ev-path meta-wiki" href="${wiki}" target="_blank" rel="noopener" title="Wikipedia — ${r.pathogen}">${seg} ↗</a>` : `<span class="ev-path">${seg}</span>`;
+      const who = linked ? pathogenWhoUrl(r.pathogen) : null;
+      out += who ? `<a class="ev-path meta-ref" href="${who}" target="_blank" rel="noopener" title="WHO — ${r.pathogen}">${seg} ↗</a>` : `<span class="ev-path">${seg}</span>`;
     } else out += `<span class="ev-loc">${seg}</span>`;
     pos = rg.end;
   });
@@ -2685,9 +2904,9 @@ function renderEventList() {
     const doc = eventDocumentation(r.pathogen, r.geoCountry);
     const scope = isNational(r.place) ? 'National' : 'Subnational';
     return `<div class="event-item${i===selectedIdx?' selected':''}" data-idx="${i}">
-      <p class="event-title">${highlightEventTitle(r)}</p>
+      <p class="event-title">${highlightEventTitle(r, false)}</p>
       <div class="event-meta"><span>${r.date} · ${scope}${r.crossover?' · zoonotic':''}</span><span class="tag ${riskTagClass(r.risk)}" title="${r.riskRationale||''}">Risk ${r.risk}</span></div>
-      <div class="event-doc"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="doc-meta">${doc.vettings} vettings · ${doc.days}d reporting</span></div>
+      <div class="event-doc"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="doc-meta" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${doc.vettings} vettings · ${doc.days}d reporting</span></div>
     </div>`;
   }).join('') : '<p style="font-size:12px;color:var(--color-neutral-400);padding:8px 4px">No reports match the current pathogen / region / filter.</p>');
   const rfBtn = document.getElementById('resetFilters'); if (rfBtn) rfBtn.addEventListener('click', resetFilters);
@@ -2705,16 +2924,16 @@ function renderBrief() {
   if (!r) { briefContentEl.innerHTML = 'No event reports available.'; return; }
   // One font, one size — hierarchy by colour/weight only: pathogen (linked) · country · date.
   const pName = PATHOGEN_LABELS[r.pathogen] || r.pathogen || '';
-  const wiki = pathogenWikiUrl(r.pathogen);
-  const pHtml = wiki
-    ? `<a class="meta-wiki" href="${wiki}" target="_blank" rel="noopener" title="Wikipedia — ${pName}">${pName} ↗</a>`
+  const who = pathogenWhoUrl(r.pathogen);
+  const pHtml = who
+    ? `<a class="meta-ref" href="${who}" target="_blank" rel="noopener" title="WHO — ${pName}">${pName} ↗</a>`
     : pName;
   briefMetaEl.innerHTML = '<span style="font-size:13px;font-weight:600;color:var(--color-accent-200)">' + pHtml + '</span>' +
     '<span style="font-size:13px;font-weight:700;color:#fff"> · ' + r.country + '</span>' +
     '<span style="font-size:13px;font-weight:400;color:var(--ink-3)"> · ' + r.date + '</span>';
   const doc = eventDocumentation(r.pathogen, r.geoCountry);
   const scope = isNational(r.place) ? 'National report' : 'Subnational report';
-  const banner = `<div class="brief-quality"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="bq-meta">${scope} · ${doc.vettings} source vettings over ${doc.days} reporting day${doc.days===1?'':'s'} · ${Math.round(doc.good*100)}% clean-screened</span></div>`;
+  const banner = `<div class="brief-quality"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="bq-meta" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${scope} · ${doc.vettings} vettings over ${doc.days} reporting day${doc.days===1?'':'s'}</span></div>`;
   briefContentEl.innerHTML = banner + (r.crossover ? `<div style="background:color-mix(in srgb, var(--color-accent) 12%, transparent);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;margin:0 0 12px"><p style="margin:0"><strong>Zoonotic link reported:</strong></p>${briefMarkup(r.crossoverDetail)}</div>` : '') + stripNan(r.html);
 }
 function selectEvent(idx) {
@@ -2797,8 +3016,6 @@ function fetchReports() {
   }).filter(r => r.title && r.html)
     .sort((a,b) => b.risk - a.risk || (b.date>a.date?1:-1));
   if (!reports.length) throw new Error('empty reports');
-  articleUrlsByCombo.clear();
-  reports.forEach(r => { if (!r.geoCountry) return; const k = r.pathogen + '||' + r.geoCountry; const cur = articleUrlsByCombo.get(k) || []; articleUrlsByCombo.set(k, [...new Set([...cur, ...r.urls])]); });
   // Place-level coordinates power geographic-proximity ranking in the comparison bar view.
   reports.forEach(r => { if (!r.lonlat || !r.place) return; const k = r.place.trim().toLowerCase(); if (k && !placeCoords.has(k)) placeCoords.set(k, r.lonlat); });
 
@@ -2850,6 +3067,8 @@ function loadLiveData(manual) {
       dataLoaded = true;
       document.body.classList.remove('preload', 'fallback');
       setSync('<span class="sync-dot"></span>Live from Google Sheets · loaded ' + new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }));
+      // Raw table is large — fetch it lazily once the primary views have painted.
+      setTimeout(ensureRawArticles, 2500);
     } else if (sheetRetries < 2) {
       sheetRetries++;
       setSync('<span class="sync-dot"></span>Refreshing live data… (retry ' + sheetRetries + '/2)');
@@ -2871,6 +3090,182 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const d 
 
 // Default the map to the globe view once everything is wired.
 function openDialog(title, html) { hideChartTip(); document.getElementById('drillTitle').textContent = title; document.getElementById('drillBody').innerHTML = html; document.getElementById('drillBackdrop').style.display = 'flex'; document.getElementById('drillClose').focus(); }
+
+// --- Raw article–fact table: the figures card's ALTERNATE, swappable table ---
+// Fetched lazily — it is large (~8 MB) — so it never blocks first paint. The raw tab and the
+// aggregated tab are parallel views sharing only ~31% of URLs, so NO screening or admission
+// semantics are projected onto raw rows; the Accepted/All/Rejected toggle belongs to figures only.
+const GSHEET_RAW_URL = "https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8/export?format=csv&gid=361501048";
+let rawArticles = null, rawArticlesState = 'idle', rawPage = 0, rawQuery = '';
+let tableMode = 'figures'; // 'figures' | 'raw' — which table the figures card is showing
+let rawSort = { key: 'published', dir: -1 };
+let figuresTheadHtml = null; // snapshot so the figures table can be restored verbatim
+const articleTitles = new Map(); // normalized URL -> original-language title
+const VETTING_TIP = "Vettings count article–fact corroborations: an admitted article from one domain stating a fact found independently on a different domain. One article corroborating two facts counts as two vettings; ‘distinct sources’ counts unique article URLs.";
+function normUrl(u) {
+  let s = String(u || '').trim().toLowerCase();
+  s = s.replace(/^https?:\/\//, '').replace(/^www\./, '');
+  s = s.split('#')[0].split('?')[0];
+  return s.replace(/\/+$/, '');
+}
+// Original-language headline from the URL slug when the raw table has no row for the article.
+function slugTitle(u) {
+  try {
+    const p = new URL(u).pathname.split('/').filter(Boolean).pop() || '';
+    const words = decodeURIComponent(p).replace(/\.(html?|php|aspx?)$/i, '').split(/[-_\s]+/).filter(Boolean);
+    if (words.length < 4) return null;
+    const joined = words.join(' ');
+    if (/^[\d\s.\-]+$/.test(joined)) return null;
+    return joined;
+  } catch (e) { return null; }
+}
+function titleFor(u) { return articleTitles.get(normUrl(u)) || slugTitle(u) || null; }
+function ensureRawArticles() {
+  if (rawArticlesState !== 'idle') return;
+  rawArticlesState = 'loading';
+  withTimeout(d3.csv(GSHEET_RAW_URL), 45000, 'raw articles').then(rows => {
+    rawArticles = rows || [];
+    rawArticles.forEach(r => {
+      const t = cleanText(r.title) || cleanText(r.title_translated);
+      if (t && r.url) articleTitles.set(normUrl(r.url), t);
+      const v = parseFloat(r.article_vetting_score);
+      if (isFinite(v) && v > rawMaxVettingScore) rawMaxVettingScore = v;
+      const key = factVetKey(r);
+      if (key) {
+        if (!factVettings.has(key)) factVettings.set(key, new Set());
+        factVettings.get(key).add(normUrl(r.url));
+      }
+    });
+    rawArticlesState = 'ready';
+    document.dispatchEvent(new CustomEvent('rawarticles'));
+  }).catch(err => {
+    console.warn('[data] raw article table unreachable:', err && (err.message || err));
+    rawArticlesState = 'unavailable';
+    document.dispatchEvent(new CustomEvent('rawarticles'));
+  });
+}
+// Toolbar filters apply to the raw table too (pathogen, host, location search).
+function rawFiltered() {
+  let rows = rawArticles || [];
+  if (!isAll() && selectedPathogen) rows = rows.filter(r => r.pathogen === selectedPathogen);
+  if (activeSpecies !== ALL_SPECIES) rows = rows.filter(r => cleanText(r.host_species) === activeSpecies);
+  const q = (rawQuery || locationQuery).toLowerCase();
+  if (q) rows = rows.filter(r => ((r.title||'') + ' ' + (r.title_translated||'') + ' ' + (r.location||'') + ' ' + (r.pathogen||'') + ' ' + (r.domain||'')).toLowerCase().includes(q));
+  return rows;
+}
+// Minimal figure-aligned columns only — the pipeline's QA/agent columns stay out to prevent crowding.
+const RAW_MEASURES = [['confirmed cases','confirmed_cases'],['confirmed deaths','confirmed_deaths'],['suspected cases','suspected_cases'],['suspected deaths','suspected_deaths'],['mortality','mortality'],['prevalence','prevalence']];
+function rawFactOf(r) {
+  for (const [label, k] of RAW_MEASURES) {
+    const v = cleanText(r[k]);
+    if (v) { const num = +v; return { label, num: isFinite(num) ? num : null, text: `${label}: ${isFinite(num) ? num.toLocaleString() : v}` }; }
+  }
+  return { label: null, num: null, text: '—' };
+}
+// Vettings count for a raw row: the distinct articles reporting this EXACT fact (pathogen +
+// location + measure + value) — corroboration computed within the raw table itself, no lossy
+// join against the aggregated tab. The vetting score is log-normalised to 0–100 for display
+// (the raw score is unbounded, 0–~8,200); the tooltip always carries the raw number.
+const factVettings = new Map(); // pathogen|location|measure|value -> Set of normalised article URLs
+let rawMaxVettingScore = 0;
+function factVetKey(r) {
+  for (const [, k] of RAW_MEASURES) {
+    const val = cleanText(r[k]);
+    if (val) return (r.pathogen || '') + '|' + (r.location || '') + '|' + k + '|' + val;
+  }
+  return null;
+}
+function factVetCount(r) {
+  const key = factVetKey(r);
+  if (!key) return 0;
+  const s = factVettings.get(key);
+  return s ? s.size : 1;
+}
+function normVetScore(r) {
+  const v = parseFloat(r.article_vetting_score);
+  if (!isFinite(v) || rawMaxVettingScore <= 0) return 0;
+  return Math.round(Math.log1p(Math.max(0, v)) / Math.log1p(rawMaxVettingScore) * 1000) / 10;
+}
+function rawPublishedOf(r) {
+  const m = (r.published || '').match(/^(\d{4})(\d{2})(\d{2})/);
+  return m ? new Date(m[1] + '-' + m[2] + '-' + m[3]).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: '2-digit' }) : (r.date || '').replace('Report_', '');
+}
+function renderRawTable() {
+  const titleEl = document.getElementById('tableTitle');
+  const intro = document.getElementById('tableIntro');
+  const backBtn = document.getElementById('tableBack');
+  const thead = document.querySelector('.table-card thead');
+  const body = document.getElementById('reportRows');
+  const pager = document.getElementById('tablePager');
+  if (figuresTheadHtml == null) figuresTheadHtml = thead.innerHTML;
+  backBtn.style.display = 'none';
+  if (intro) intro.style.display = 'none';
+  titleEl.textContent = 'Raw articles — one row per article and extracted fact';
+  if (rawArticlesState !== 'ready') {
+    thead.innerHTML = '<tr><th>Article (original title)</th><th>Domain</th><th>Pathogen</th><th>Location</th><th>Host</th><th>Extracted fact</th><th>Vetting score</th><th>Vettings</th><th>Proximity</th><th>Published</th><th>Run</th></tr>';
+    body.innerHTML = `<tr><td colspan="11" style="text-align:center;color:var(--ink-3);padding:20px">${rawArticlesState === 'unavailable' ? 'The raw article table is unreachable right now — the figures table remains available above.' : 'Loading the raw article–fact table…'}</td></tr>`;
+    pager.style.display = 'none';
+    if (rawArticlesState === 'idle' || rawArticlesState === 'loading') ensureRawArticles();
+    return;
+  }
+  const rawSortVal = r => {
+    if (rawSort.key === 'fact') return rawFactOf(r).num ?? -1;
+    if (rawSort.key === 'vscore') return normVetScore(r);
+    if (rawSort.key === 'vet') return factVetCount(r);
+    if (rawSort.key === 'prox') { const v = parseFloat(r.functional_proximity_score); return isFinite(v) ? v : -1; }
+    return String(r[rawSort.key] || '').replace('Report_', '');
+  };
+  const rows = rawFiltered().sort((a, b) => {
+    const va = rawSortVal(a), vb = rawSortVal(b);
+    const cmp = (typeof va === 'number' && typeof vb === 'number') ? va - vb : String(va).localeCompare(String(vb));
+    return cmp * rawSort.dir;
+  });
+  const cols = [['title','Article (original title)',false],['domain','Domain',false],['pathogen','Pathogen',true],['location','Location',true],['host','Host',true],['fact','Extracted fact',true],['vscore','Vetting score',true],['vet','Vettings',true],['prox','Proximity',true],['published','Published',true],['run','Run',true]];
+  thead.innerHTML = '<tr>' + cols.map(([k, label, sortable]) => {
+    if (!sortable) return `<th>${label}</th>`;
+    const active = rawSort.key === k;
+    return `<th class="sortable" data-key="${k}" tabindex="0" role="button" aria-sort="${active ? (rawSort.dir === 1 ? 'ascending' : 'descending') : 'none'}">${label}<span class="sort-arrow">${active ? (rawSort.dir === 1 ? '↑' : '↓') : ''}</span></th>`;
+  }).join('') + '</tr>';
+  const pages = Math.max(1, Math.ceil(rows.length / TABLE_MAX));
+  if (rawPage >= pages) rawPage = 0;
+  const slice = rows.slice(rawPage * TABLE_MAX, (rawPage + 1) * TABLE_MAX);
+  body.innerHTML = slice.length ? slice.map(r => {
+    const t = cleanText(r.title), tt = cleanText(r.title_translated);
+    const fact = rawFactOf(r);
+    const vetRaw = parseFloat(r.article_vetting_score);
+    const proxRaw = parseFloat(r.functional_proximity_score);
+    const combRaw = parseFloat(r.combined_score);
+    return `<tr>
+      <td style="min-width:220px"><div class="raw-row-title">${t || '—'}</div>${tt && tt !== t ? `<div class="raw-row-trans">${tt}</div>` : ''}</td>
+      <td>${r.url ? `<a href="${r.url}" target="_blank" rel="noopener">${cleanText(r.domain) || 'link'} ↗</a>` : '—'}</td>
+      <td>${cleanText(r.pathogen) || '—'}</td>
+      <td>${cleanText(r.location) || '—'}</td>
+      <td>${cleanText(r.host_species) || '—'}</td>
+      <td>${fact.text}</td>
+      <td title="Pipeline article_vetting_score ${isFinite(vetRaw) ? vetRaw.toFixed(1) : '—'}, log-normalised here to a 0–100 scale">${normVetScore(r).toFixed(1)}</td>
+      <td title="${VETTING_TIP.replace(/"/g,'&quot;')} Counted here as the distinct articles reporting this exact fact (pathogen, location, measure and value).">${factVetCount(r) || '—'}</td>
+      <td title="Functional proximity score (0–1)${isFinite(combRaw) ? ` · pipeline combined score ${combRaw.toFixed(1)}` : ''}">${isFinite(proxRaw) ? proxRaw.toFixed(2) : '—'}</td>
+      <td style="white-space:nowrap">${rawPublishedOf(r)}</td>
+      <td style="white-space:nowrap">${(r.date || '').replace('Report_', '')}</td>
+    </tr>`;
+  }).join('') : '<tr><td colspan="11" style="text-align:center;color:var(--ink-3);padding:20px">No raw rows match the current pathogen, host or location filters.</td></tr>';
+  pager.style.display = 'flex';
+  const from = rows.length ? rawPage * TABLE_MAX + 1 : 0;
+  const to = Math.min(rows.length, (rawPage + 1) * TABLE_MAX);
+  document.getElementById('pagerInfo').textContent = `${from.toLocaleString()}–${to.toLocaleString()} of ${rows.length.toLocaleString()} raw row${rows.length === 1 ? '' : 's'}` + (activeSpecies !== 'humans' ? ` · host: ${activeSpecies}` : '');
+  document.getElementById('pagerPrev').disabled = rawPage === 0;
+  document.getElementById('pagerNext').disabled = to >= rows.length;
+}
+document.getElementById('tableModeSeg').addEventListener('click', (e) => {
+  const btn = e.target.closest('.seg-opt'); if (!btn) return;
+  tableMode = btn.dataset.mode;
+  document.querySelectorAll('#tableModeSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
+  document.getElementById('screenSeg').style.display = tableMode === 'figures' ? '' : 'none';
+  tablePage = 0;
+  writeHash();
+  renderTable();
+});
+document.addEventListener('rawarticles', () => { if (tableMode === 'raw') renderTable(); });
 document.getElementById('navSources').addEventListener('click', (e) => { e.preventDefault();
   openDialog('Data sources', `<p style="font-size:12.5px;line-height:1.6;color:color-mix(in srgb,var(--color-text) 75%,transparent)">Three published Google Sheet feeds, refreshed on load and via <strong>Sync now</strong>.</p>
     <table class="table"><thead><tr><th>Feed</th><th>Records</th><th>Content</th><th>Open</th></tr></thead><tbody>
@@ -2891,13 +3286,18 @@ document.getElementById('exportCsvBtn').addEventListener('click', exportTableCsv
 document.getElementById('exportEventsBtn').addEventListener('click', exportEventsCsv);
 document.getElementById('printBtn').addEventListener('click', () => window.print());
 document.getElementById('species').addEventListener('change', (e) => {
-  activeSpecies = e.target.value; tablePage = 0; renderStats(); renderTable(); renderMap(); writeHash();
+  activeSpecies = e.target.value; tablePage = 0;
+  renderStats(); renderTable(); renderMap(); renderTrendSection(); writeHash();
 });
-document.getElementById('unvettedToggle').addEventListener('change', (e) => {
-  includeUnvetted = e.target.checked; tablePage = 0; renderTable();
+document.getElementById('screenSeg').addEventListener('click', (e) => {
+  const btn = e.target.closest('.seg-opt'); if (!btn) return;
+  screenState = btn.dataset.screen;
+  document.querySelectorAll('#screenSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
+  tablePage = 0;
+  renderStats(); renderTable(); renderMap(); writeHash();
 });
-document.getElementById('pagerPrev').addEventListener('click', () => { if (tablePage > 0) { tablePage--; renderTable(); } });
-document.getElementById('pagerNext').addEventListener('click', () => { tablePage++; renderTable(); });
+document.getElementById('pagerPrev').addEventListener('click', () => { if (tableMode === 'raw') { if (rawPage > 0) { rawPage--; renderTable(); } } else if (tablePage > 0) { tablePage--; renderTable(); } });
+document.getElementById('pagerNext').addEventListener('click', () => { if (tableMode === 'raw') { rawPage++; renderTable(); } else { tablePage++; renderTable(); } });
 requestAnimationFrame(() => { const gb = [...document.querySelectorAll('#mapViewSeg .seg-opt')].find(b=>b.dataset.view==='globe'); if (gb && typeof maplibregl !== 'undefined') gb.click(); });
 </script>
 </body>
