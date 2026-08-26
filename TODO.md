@@ -1,5 +1,15 @@
 # TODO
 
+## Done — Evidence layer Tier 1, in `index.evidence.html` (Aug 26) — AWAITING ACCEPTANCE
+Cross-feed evidence graph per `EVIDENCE-PLAN.md`. Working copy `index.evidence.html`; `index.html` UNTOUCHED until accepted.
+1. Evidence index (`rebuildEvidenceIndex`, near `normUrl`): normUrl → raw row; pathogen||geoCountry → measurement source URLs. Rebuilt on sheet resolve, reports resolve, and the `rawarticles` event (brief + event list re-render when it lands late).
+2. Figure source popup → evidence cards: value header · quality band · canonical/not-canonical chip (+ screen flag, superseded-by-canonical note) · per-article cards with original title, domain, published (parsed from `YYYYMMDDTHHMMSSZ`), vetting/proximity/combined scores. Shared `citeCard()` also powers report citations.
+3. Brief banner now shows the CITATION-derived profile (strength label + N articles · M domains · K corroborated facts · P% contributed figures) with an expandable Evidence section: coverage summary, corroboration bars (cases/deaths latest vettings), citation cards chipped DIRECT / RELATED / CITED-ONLY with tooltips. Measurement doc badge intentionally KEPT on event list rows + figures table (different corpora; banner decision recorded in plan doc).
+4. Tooltips: map markers gain an Evidence block (articles/domains/vettings/facts on latest date, `comboEvidence`); trend dots gain articles/domains + median article scores + canonical reason; rejected dots gain the canonical figure + reason; sources histogram (daily + stacked + weekly bins) gains Independent domains row (`vettingsAndArticles` now returns `dom`).
+5. New helpers all `esc()`-escaped for third-party titles/domains: `esc`, `urlHost`, `measureUrlSet`, `measureFactKey`, `reportEvidence`, `evidenceStrength`, `medianRawScores`, `comboEvidence`, `citeCard`, `reportEvidenceHtml`.
+6. Verified live via headless Chromium + full-network-failure pass: index 34 combos/811 urls; relationships 350 direct · 28 related · 53 cited-only across 105 reports; all UI checks PASS; zero page errors both passes. Live-corpus finding: ~14% of report citations have no extraction record (the CITED-ONLY class).
+Deferred to Tier 2/3 (see plan): raw-table "Used in" column, distribution sparklines, evidence convergence, cross-report source analysis.
+
 ## Done — function testing + adversarial round (Aug 26, pre-handoff)
 Self-review of the diff plus a fresh Playwright pass caught and fixed five real bugs:
 1. **Boot crash on deep links (TDZ)**: readHash assigned `tableMode`, declared ~450 lines later — any `#tm=raw` deep link or persisted pref threw "Cannot access 'tableMode' before initialization" and killed the entire script at boot. Declarations moved up beside the other table state.

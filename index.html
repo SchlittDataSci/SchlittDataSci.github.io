@@ -61,6 +61,10 @@
   .page-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-4); flex-wrap: wrap; }
   .page-title { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 25px; margin: 0; letter-spacing: -0.01em; }
   .page-sub { font-size: 13.5px; color: var(--ink-3); margin: 4px 0 0; }
+  /* Vector wordmark — two-tone italic heavy type, offset shadow, raster scan-slices */
+  .brand-logo { display: block; height: 42px; width: auto; margin-right: auto; }
+  .brand-logo .t { font-family: var(--font-heading); font-weight: 800; font-style: italic; font-size: 30px; letter-spacing: .5px; }
+  .brand-logo .tagline { font-family: Inter, system-ui, sans-serif; font-size: 9.5px; font-weight: 600; letter-spacing: .5px; fill: var(--ink-3); }
   .toolbar { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; padding: var(--space-3) 0; margin-bottom: var(--space-4); border-bottom: 1px solid var(--color-divider); }
   .toolbar .spacer { flex: 1; }
   .field-inline { display: flex; align-items: center; gap: 8px; }
@@ -78,6 +82,9 @@
   .event-item.selected { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
   .event-title { font-size: 12px; line-height: 1.35; margin: 0 0 6px; color: var(--color-text); }
   .event-title .ev-path { color: var(--color-accent-200); font-weight: 600; }
+  /* Weight transition (600→400) optically swallows the space after a tinted segment at 12px —
+     restore it. Data verified: the sheet titles carry normal spaces. */
+  .event-title .ev-path, .event-title .ev-loc { padding-right: .14em; }
   .event-title .ev-loc { color: var(--color-neutral-300); }
   .meta-ref { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
   .meta-ref:hover { color: var(--color-text); border-bottom-style: solid; }
@@ -165,6 +172,9 @@
   .event-doc { margin-top: 6px; display: flex; align-items: center; gap: 6px; }
   .event-doc .doc-meta { font-size: 9.5px; color: var(--ink-4); }
   .brief-quality { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 0 12px; padding-bottom: 10px; border-bottom: 1px solid var(--color-divider); }
+  .brief-headline { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; color: var(--color-text); margin: 2px 0 12px; }
+  .brief-headline .meta-ref { border-bottom: 0; }
+  .brief-headline .ev-path { color: var(--color-accent-200); }
   .brief-quality .bq-meta { font-size: 11px; color: var(--ink-4); }
   .sub-swatch { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; font-size: 10.5px; max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
   #subLegend { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; flex: 1 1 220px; min-width: 200px; }
@@ -183,6 +193,19 @@
   .brief-content p { font-size: 12.5px; line-height: 1.55; color: var(--ink-1); margin: 0 0 10px; }
   .brief-content ul, .brief-content ol { margin: 0 0 10px; padding-left: 18px; font-size: 12px; line-height: 1.5; color: var(--ink-2); }
   .brief-content li { margin-bottom: 4px; }
+  /* Status Report HTML arrives with <details> sections carrying inline 24px headings — normalize
+     to the page hierarchy, replace the native disclosure marker with a Nocturne-styled toggle,
+     and kill the trailing whitespace before the disclaimer. */
+  .brief-content details { margin: 0 !important; padding: 0 !important; border-top: 1px solid var(--color-divider); }
+  .brief-content details:first-of-type { border-top: 0; }
+  .brief-content summary { list-style: none; display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 9px 0; font-size: 12.5px !important; color: var(--color-text); }
+  .brief-content summary::-webkit-details-marker { display: none; }
+  .brief-content summary::before { content: '+'; flex: 0 0 auto; width: 14px; height: 14px; line-height: 12px; text-align: center; font-size: 11px; font-weight: 700; color: var(--color-accent-300); border: 1px solid color-mix(in srgb, var(--color-accent-300) 45%, transparent); border-radius: 3px; }
+  .brief-content details[open] summary::before { content: '\2212'; }
+  .brief-content summary span { font-size: 12.5px !important; font-weight: 600 !important; color: var(--color-text) !important; letter-spacing: .02em; }
+  .brief-content details > *:last-child { margin-bottom: 10px; }
+  .brief-content > *:last-child { margin-bottom: 0 !important; }
+  .brief-content hr { border: 0; border-top: 1px solid var(--color-divider); margin: 10px 0; }
   .brief-content strong { color: var(--color-text); font-weight: 600; }
   .brief-content hr { border: 0; border-top: 1px solid var(--color-divider); margin: 10px 0; }
   .brief-content details { border-top: 1px solid var(--color-divider); padding: 10px 0; }
@@ -246,6 +269,11 @@
   .art-extract { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 11.5px; color: var(--ink-2); padding: 2px 0; flex-wrap: wrap; }
   .art-extract > span:first-child { min-width: 0; word-break: break-word; }
   .art-extract .qbadge, .art-extract .tag { flex-shrink: 0; }
+  /* Evidence cards: cited articles enriched from the raw extraction corpus */
+  .ev-cards { margin: 6px 0 2px 12px; border-left: 2px solid var(--color-divider); padding-left: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .ev-card { font-size: 11.5px; }
+  .ev-card-title { font-weight: 600; color: var(--color-text); word-break: break-word; line-height: 1.35; }
+  .ev-note { font-size: 11px; color: var(--ink-3); margin-top: 4px; }
   .filter-banner { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: color-mix(in srgb, var(--color-accent-500) 14%, transparent); border: 1px solid color-mix(in srgb, var(--color-accent-300) 35%, transparent); border-radius: var(--radius-sm); padding: 8px 10px; margin: 0 0 12px; }
   .fb-pathogen { font-size: 14px; font-weight: 700; color: var(--color-accent-200); margin: 0; letter-spacing: .2px; line-height: 1.25; }
   .fb-sub { font-size: 11px; color: var(--ink-3); margin: 2px 0 0; }
@@ -282,6 +310,11 @@
     .map-wrap { height:420px; }
     .events-col, .brief-body, .briefs-card, .plots-card, .summary-card, .table-scroll { height:auto !important; max-height:none !important; overflow:visible !important; }
     .brief-content a[href]:after, .event-title a[href]:after { content:' (' attr(href) ')'; font-size:9px; color:#555; word-break:break-all; }
+    /* Logo must survive the light print theme: base wordmark only, dark ink */
+    .brand-logo { height: 34px; }
+    .brand-logo text { display: none; }
+    .brand-logo text.base { display: block; }
+    .brand-logo text.base tspan { fill: #111 !important; }
   }
   @media (max-width: 980px) { .grid-main, .row-2col { grid-template-columns: 1fr; } .briefs-card, .plots-card { height: auto; min-height: 560px; } .briefs-split { grid-template-columns: 1fr; } .events-col { border-right: 0; border-bottom: 1px solid var(--color-divider); padding-right: 0; padding-bottom: var(--space-3); max-height: 260px; } .stat-inline, .stat-grid { grid-template-columns: 1fr 1fr; } .map-wrap { height: 420px; } .summary-card { height: auto; min-height: 420px; } #subLegend { grid-template-columns: repeat(3, minmax(0,1fr)); } }
   @media (max-width: 620px) {
@@ -301,7 +334,24 @@
 <body class="preload">
 
 <nav class="nav">
-  <span class="nav-brand">OSINT-VHF</span>
+  <svg class="brand-logo" viewBox="0 0 210 56" role="img" aria-label="OSINT-VHF — Global Outbreak Intelligence">
+    <defs>
+      <linearGradient id="vhfGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#cfc7ff"/>
+        <stop offset="1" stop-color="#8f80e8"/>
+      </linearGradient>
+      <clipPath id="sliceA"><rect x="-6" y="12" width="224" height="3.4"/></clipPath>
+      <clipPath id="sliceB"><rect x="-6" y="21" width="224" height="2.1"/></clipPath>
+    </defs>
+    <!-- offset print-shadow layer: neutral ink under OSINT, deep violet under VHF -->
+    <text class="t" x="3.2" y="31.8" opacity=".85"><tspan fill="#04050c">OSINT</tspan><tspan fill="#241d4d">VHF</tspan></text>
+    <!-- base wordmark -->
+    <text class="t base" x="0" y="29"><tspan fill="var(--color-text)">OSINT</tspan><tspan fill="url(#vhfGrad)">VHF</tspan></text>
+    <!-- surveillance scan-slices: thin bands of the wordmark, shifted, like a raster sweep -->
+    <g clip-path="url(#sliceA)"><text class="t" x="3" y="29" fill="var(--color-accent-600)" opacity=".95"><tspan>OSINT</tspan><tspan>VHF</tspan></text></g>
+    <g clip-path="url(#sliceB)"><text class="t" x="-2.2" y="29" fill="#04050c"><tspan>OSINT</tspan><tspan>VHF</tspan></text></g>
+    <text class="tagline" x="1" y="49">Global Outbreak Intelligence</text>
+  </svg>
   <a href="#" aria-current="location">Dashboard</a>
   <a href="#" id="navSources">Data sources</a>
   <a href="#" id="navReports">Reports</a>
@@ -872,22 +922,30 @@ function openFigureSourcePopup(rowId) {
   const row = all.find(r => r.id === rowId);
   if (!row) return;
   const rows = row.rowsAt || [];
+  const ev = vettingsAndArticles(rows);
   const arts = rows.map(r => {
     const nn = +r.n_sources || 1;
     return { value:+r.value, measure:(r.measure||'').replace('confirmed_','').replace('suspected_',''),
       location:r.location, species:r.species, canonical:r.is_canonical==='True', reason:r.canonical_reason,
       quality:r.quality_flag, n:nn, score:factQuality(nn, r.quality_flag),
-      url:(r.sources||'').split(';')[0].trim() };
+      urls: extractUrls(r.sources || '') };
   }).sort((a,b) => (b.canonical?1:0)-(a.canonical?1:0) || b.n-a.n || b.value-a.value);
-  const totalVet = arts.reduce((s,a)=>s+a.n,0);
-  const host = (u) => { try { return new URL(u).hostname.replace(/^www\./,''); } catch(e){ return null; } };
-  document.getElementById('drillTitle').textContent = `${row.country} · ${row.disease} — source articles for ${formatUKDate(row.date)}`;
+  document.getElementById('drillTitle').textContent = `${row.country} · ${row.disease} — evidence for ${formatUKDate(row.date)}`;
   document.getElementById('drillBody').innerHTML = arts.length ? (
-    `<p style="font-size:12px;color:var(--ink-3);margin:0 0 12px;line-height:1.5" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${arts.length} distinct figure${arts.length>1?'s':''} reported for <strong>${row.figureLoc||row.country}</strong> on this date, corroborated by <strong>${totalVet}</strong> vetting${totalVet>1?'s':''} — admitted articles from independent domains matching one discrete fact. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the one shown in the table.</p>` +
-    arts.map(a => { const q = qualityBand(a.score); const h = host(a.url); const t = a.url ? titleFor(a.url) : null; return `<div class="art-row">
-      <div class="art-extract"><span><strong>${a.value.toLocaleString()}</strong> ${a.measure} · ${a.location}${a.species?' · '+a.species:''}</span><span class="qbadge ${q.cls}">${q.label} quality</span></div>
-      <div class="art-meta">${a.canonical?`<span class="tag tag-accent" style="font-size:9px">canonical · ${canonReasonLabel(a.reason)}</span> `:''}<span title="${VETTING_TIP.replace(/"/g,'&quot;')}">${a.n} vetting${a.n>1?'s':''}</span>${a.quality&&a.quality!=='good'?` · <span title="statistical screening flag">${a.quality} flag</span>`:''}${a.url?` · <a class="art-link" style="font-size:11.5px;font-weight:400" href="${a.url}" target="_blank" rel="noopener" title="${t ? t.replace(/"/g,'&quot;') : (h||'')}">${t ? t + ' — ' + h : h} ↗</a>`:''}</div>
-    </div>`; }).join('')
+    `<p style="font-size:12px;color:var(--ink-3);margin:0 0 12px;line-height:1.5" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${arts.length} distinct figure${arts.length>1?'s':''} reported for <strong>${esc(row.figureLoc||row.country)}</strong> on this date, backed by <strong>${ev.vet}</strong> vetting${ev.vet!==1?'s':''} across <strong>${ev.art}</strong> distinct article${ev.art!==1?'s':''} from <strong>${ev.dom}</strong> independent domain${ev.dom!==1?'s':''}. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the one shown in the table.</p>` +
+    arts.map(a => {
+      const q = qualityBand(a.score);
+      // Noncanonical observations say WHAT displaced them: the canonical figure for the same measure.
+      const sup = a.canonical ? null : arts.find(x => x.canonical && x.measure === a.measure);
+      return `<div class="art-row">
+      <div class="art-extract"><span><strong>${a.value.toLocaleString()}</strong> ${a.measure} · ${esc(a.location)}${a.species?' · '+esc(a.species):''}</span><span class="qbadge ${q.cls}">${q.label} quality</span></div>
+      <div class="art-meta">${a.canonical
+        ? `<span class="tag tag-accent" style="font-size:9px">canonical · ${canonReasonLabel(a.reason)}</span>`
+        : `<span class="tag tag-neutral" style="font-size:9px">not canonical</span>${a.quality&&a.quality!=='good'?` <span class="tag tag-neutral" style="font-size:9px" title="statistical screening flag">${esc(a.quality)} screen</span>`:''}`}<span title="${VETTING_TIP.replace(/"/g,'&quot;')}"> · ${a.n} vetting${a.n!==1?'s':''}</span></div>
+      ${sup?`<div class="ev-note">Superseded by the canonical figure: <strong>${sup.value.toLocaleString()}</strong> ${sup.measure}</div>`:''}
+      ${a.urls.length?`<div class="ev-cards">${a.urls.map(u => citeCard(u)).join('')}</div>`:'<div class="art-meta">No article link recorded.</div>'}
+    </div>`;
+    }).join('')
   ) : '<p style="font-size:12px">No per-article detail recorded for this figure.</p>';
   dialogOpener = document.activeElement;
   document.getElementById('drillBackdrop').style.display = 'flex';
@@ -1481,12 +1539,18 @@ function tooltipHTML(m) {
   const scope = m.scope==='national' ? 'National report' : 'Subnational report';
   const doc = (typeof eventDocumentation==='function' && allRows.length) ? eventDocumentation(m.pathogen, m.country) : null;
   const cd = (m.cases!=null || m.deaths!=null) ? `<div class="t-row"><span>Cases / deaths</span><span>${m.cases!=null?m.cases.toLocaleString():'\u2014'} / ${m.deaths!=null?m.deaths.toLocaleString():'\u2014'}</span></div>` : '';
+  // Evidence density: the articles/domains/facts behind this event's current figures.
+  const evd = (allRows.length && typeof comboEvidence==='function') ? comboEvidence(m.pathogen, m.country) : null;
+  const evHtml = evd ? `<div class="t-cols" style="text-align:left;margin-top:6px">Evidence</div>
+    <div class="t-row"><span>${evd.art} article${evd.art!==1?'s':''} · ${evd.dom||'\u2014'} domain${evd.dom!==1?'s':''}</span><span title="${VETTING_TIP.replace(/"/g,'&quot;')}">${evd.vet} vetting${evd.vet!==1?'s':''}</span></div>
+    <div class="t-row"><span>Corroborated facts</span><span>${evd.facts}</span></div>` : '';
   return `<p class="t-title">${m.title||m.country}</p>
     <div class="t-sub">${m.disease||''}${m.place?' \u00b7 '+m.place:''}</div>
     <div class="t-sub" style="margin-top:-3px">${scope}${doc?' \u00b7 '+doc.label:''}</div>
     <div class="t-row"><span>Risk severity</span><span style="color:${fill};font-weight:600">${m.risk} / 9</span></div>
     <div class="t-row"><span>Latest report</span><span>${m.date||'\u2014'}</span></div>
     ${cd}
+    ${evHtml}
     <div class="t-foot">${m.scope==='national'?'Click to drill into subnational detail':'Click to open the full brief'}</div>`;
 }
 function openMarkerDetail(m) {
@@ -2122,8 +2186,10 @@ function renderTrendSection() {
     trendTransform = d3.zoomIdentity;
     if (tsvg.node() && tsvg.node().__zoomBehavior) tsvg.call(tsvg.node().__zoomBehavior.transform, d3.zoomIdentity);
   }
-  const fcEnd = renderChart(series, effectiveTp);
-  renderSourceChart(series, fcEnd);
+  renderChart(series, effectiveTp);
+  // The strip's x-domain stays on the CONTRIBUTING-data span — extending it over the forecast
+  // horizon crushed the bars against the left edge. The trend chart keeps its own extension.
+  renderSourceChart(series);
 }
 // Number of distinct observation dates behind one geography+measure — the sparsity test.
 function obsDatesFor(loc, pathogen, measure) {
@@ -2383,7 +2449,10 @@ function renderChart(series, effectiveTp) {
             `<p class="t-title">${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · not canonical</p>` +
             `<div class="t-row"><span>${label}</span><span>${(+r.value).toLocaleString()}</span></div>` +
             `<div class="t-row"><span>${r.location}</span><span>${(+r.n_sources||1)} vetting${(+r.n_sources||1)>1?'s':''}</span></div>` +
-            `<div class="t-foot">Superseded by the canonical figure — click for detail</div>`))
+            ((rowsKey==='caseRows'&&d.cases!=null)||(rowsKey==='deathRows'&&d.deaths!=null)
+              ? `<div class="t-row"><span>Canonical figure</span><span>${(rowsKey==='caseRows'?d.cases:d.deaths).toLocaleString()}</span></div>`
+              : '') +
+            `<div class="t-foot">${r.canonical_reason?canonReasonLabel(r.canonical_reason)+' — ':''}Superseded by the canonical figure · click for detail</div>`))
           .on('mouseleave', hideChartTip)
           .on('click', () => { hideChartTip(); openArticlePopup(d.date, d[rowsKey] || []); });
       });
@@ -2394,6 +2463,8 @@ function renderChart(series, effectiveTp) {
       if (d[valueKey] == null) return;
       const cx = x(new Date(d.date)), cy = y(d[valueKey]);
       const q = dateQuality(d[rowsKey]);
+      const va = vettingsAndArticles(d[rowsKey]);
+      const mr = medianRawScores(d[rowsKey]);
       const dot = shape==='diamond'
         ? dotsG.append('path').attr('transform',`translate(${cx},${cy})`).attr('d', d3.symbol().type(d3.symbolDiamond).size(46)())
         : dotsG.append('circle').attr('cx',cx).attr('cy',cy).attr('r',3.2);
@@ -2402,7 +2473,9 @@ function renderChart(series, effectiveTp) {
           `<p class="t-title">${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p>` +
           `<div class="t-row"><span>${reportType} cases</span><span>${d.cases!=null?d.cases.toLocaleString():'—'}</span></div>` +
           `<div class="t-row"><span>${reportType} deaths</span><span>${d.deaths!=null?d.deaths.toLocaleString():'—'}</span></div>` +
-          (q ? `<div class="t-foot">${measureLabel}: ${q.vettings} vetting${q.vettings>1?'s':''} · ${qualityBand(q.score).label} quality — click for detail</div>` : '')))
+          (q ? `<div class="t-row"><span>Vettings</span><span>${q.vettings} · ${va.art} article${va.art!==1?'s':''} · ${va.dom} domain${va.dom!==1?'s':''}</span></div>` : '') +
+          (mr.prox!=null || mr.vetting!=null ? `<div class="t-row"><span>Median article scores</span><span>${mr.prox!=null?('proximity '+mr.prox.toFixed(2)):''}${mr.prox!=null&&mr.vetting!=null?' · ':''}${mr.vetting!=null?('vetting '+Math.round(mr.vetting)):''}</span></div>` : '') +
+          (q ? `<div class="t-foot">Canonical${q.reason?' — '+canonReasonLabel(q.reason):''} · click for detail</div>` : '')))
         .on('mouseleave', hideChartTip);
       dot.on('click', () => { hideChartTip(); openArticlePopup(d.date, (d[rowsKey]&&d[rowsKey].length)?d[rowsKey]:[]); });
     });
@@ -2456,26 +2529,30 @@ const SRC_HIST = {
   barWidth: step => Math.max(3, Math.min(14, step - 3)),
 };
 function vettingsAndArticles(rows) {
-  let vet = 0; const urls = new Set();
-  (rows || []).forEach(r => { vet += (+r.n_sources || 1); extractUrls(r.sources).forEach(u => urls.add(normUrl(u))); });
-  return { vet, art: urls.size };
+  let vet = 0; const urls = new Set(); const doms = new Set();
+  (rows || []).forEach(r => {
+    vet += (+r.n_sources || 1);
+    extractUrls(r.sources).forEach(u => { urls.add(normUrl(u)); const h = urlHost(u); if (h) doms.add(h); });
+  });
+  return { vet, art: urls.size, dom: doms.size };
 }
-function srcHistTip(dateStr, vet, art) {
+function srcHistTip(dateStr, vet, art, dom) {
   return `<p class="t-title">${new Date(dateStr).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'})}</p>` +
     `<div class="t-row"><span title="${VETTING_TIP.replace(/"/g,'&quot;')}">Vettings</span><span>${vet}</span></div>` +
     `<div class="t-row"><span>Distinct articles</span><span>${art}</span></div>` +
+    `<div class="t-row"><span>Independent domains</span><span>${dom!=null?dom:'\u2014'}</span></div>` +
     `<div class="t-foot">Click to list these articles ↗</div>`;
 }
 
-function renderSourceChart(series, fcEnd) {
+function renderSourceChart(series) {
   shsvg.selectAll('*').remove();
   shTw = Math.max(340, Math.round((document.getElementById('sourceChartWrap')||{}).clientWidth || 620));
   shsvg.attr('viewBox', `0 0 ${shTw} ${shTh}`);
   if (!series.length || series.every(d => !d.sources)) { shsvg.append('text').attr('x',shTw/2).attr('y',shTh/2).attr('text-anchor','middle').attr('font-size','11px').attr('fill',col('--color-neutral-400')).text('Source counts unavailable'); return; }
   const dates = series.map(d=>d.date);
-  // Extend the domain to the forecast horizon so the strip shares the trend chart's x-axis.
+  // Domain = the span that actually contributed data. Sharing the trend chart's forecast-extended
+  // axis crushed these bars; the plots read as aligned without sharing x-extents.
   const dom = d3.extent(dates, d=>new Date(d));
-  if (fcEnd) dom[1] = new Date(Math.max(dom[1].getTime(), new Date(fcEnd).getTime()));
   const x = d3.scaleUtc().domain(dom).range([shMargin.left, shTw-shMargin.right]);
   // Bin daily bars into 7-day buckets when they would fall under ~7px — the crush that made
   // glyphs overlap at longer histories. Buckets sum vettings and pool their article sets.
@@ -2503,14 +2580,14 @@ function renderSourceChart(series, fcEnd) {
   });
   const bw = SRC_HIST.barWidth(step);
   bins.forEach(b => {
-    const { art } = vettingsAndArticles(b.rows);
+    const { art, dom } = vettingsAndArticles(b.rows);
     shsvg.append('rect')
       .attr('x', Math.max(shMargin.left, x(new Date(b.date)) - bw/2)).attr('width', bw)
       .attr('y', y(b.vet)).attr('height', (shTh-shMargin.bottom) - y(b.vet))
       .attr('fill', SRC_HIST.fill()).attr('rx', 1)
       .style('cursor','pointer')
       .on('mouseover', function(){ d3.select(this).attr('fill', SRC_HIST.hover()); })
-      .on('mousemove', ev => showChartTip(ev, srcHistTip(b.date, b.vet, art)))
+      .on('mousemove', ev => showChartTip(ev, srcHistTip(b.date, b.vet, art, dom)))
       .on('mouseout', function(){ d3.select(this).attr('fill', SRC_HIST.fill()); hideChartTip(); })
       .on('click', (ev) => { hideChartTip(); openArticlePopup(b.date, b.rows); });
   });
@@ -2687,6 +2764,7 @@ function renderSubSourceChart(perLoc, style) {
           `<p class="t-title">${new Date(b.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'})}</p>` +
           `<div class="t-row"><span>${s.loc.split(',')[0]}</span><span>${va.vet} vetting${va.vet>1?'s':''}</span></div>` +
           `<div class="t-row"><span>Distinct articles</span><span>${va.art}</span></div>` +
+          `<div class="t-row"><span>Independent domains</span><span>${va.dom||'\u2014'}</span></div>` +
           `<div class="t-foot">Day total: ${dayTot} vetting${dayTot>1?'s':''}</div>`))
         .on('mouseleave',hideChartTip);
     });
@@ -2811,6 +2889,10 @@ function fetchSheet() {
     dataLoaded = true;
     document.body.classList.remove('preload');
     try { renderAll(); } catch (err) { console.error('[render] post-load render failed:', err); }
+    rebuildEvidenceIndex();
+    // Reports may already be on screen with placeholder relationship states — refresh them now
+    // that the measurement side of the index exists.
+    if (reports.length) { renderEventList(); renderBrief(); }
   } else {
     throw new Error('empty live dataset');
   }
@@ -2951,10 +3033,111 @@ function renderBrief() {
   briefMetaEl.innerHTML = '<span style="font-size:13px;font-weight:600;color:var(--color-accent-200)">' + pHtml + '</span>' +
     '<span style="font-size:13px;font-weight:700;color:#fff"> · ' + r.country + '</span>' +
     '<span style="font-size:13px;font-weight:400;color:var(--ink-3)"> · ' + r.date + '</span>';
-  const doc = eventDocumentation(r.pathogen, r.geoCountry);
   const scope = isNational(r.place) ? 'National report' : 'Subnational report';
-  const banner = `<div class="brief-quality"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="bq-meta" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${scope} · ${doc.vettings} vettings over ${doc.days} reporting day${doc.days===1?'':'s'}</span></div>`;
-  briefContentEl.innerHTML = banner + (r.crossover ? `<div style="background:color-mix(in srgb, var(--color-accent) 12%, transparent);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;margin:0 0 12px"><p style="margin:0"><strong>Zoonotic link reported:</strong></p>${briefMarkup(r.crossoverDetail)}</div>` : '') + stripNan(r.html);
+  // Citation-derived evidence profile replaces the measurement-derived documentation badge here:
+  // this banner describes the REPORTING the brief was built from; figure-level corroboration
+  // stays in the event list rows and figures table where it belongs to figures.
+  const ev = reportEvidence(r);
+  const banner = `<div class="brief-quality"><span class="doc-badge ${ev.strength.cls}">${ev.strength.label}</span>` +
+    `<span class="bq-meta" title="${REL_SUMMARY}">${scope} · ${ev.articles} article${ev.articles!==1?'s':''} · ${ev.domains} domain${ev.domains!==1?'s':''} · ${ev.facts} corroborated fact${ev.facts!==1?'s':''}${ev.articles?` · ${ev.coverage}% contributed figures`:''}</span>` +
+    `<button type="button" id="evToggle" aria-expanded="false" style="margin-left:auto;font-size:10.5px;padding:2px 9px">Evidence ▾</button></div>` +
+    `<div id="reportEvidence" hidden>${reportEvidenceHtml(r, ev)}</div>`;
+  // Newspaper-style headline: the report's own title leads the article body, pathogen mention
+  // linked. The meta row above stays the byline; the evidence banner follows the headline.
+  const headline = `<div class="brief-headline">${highlightEventTitle(r, true)}</div>`;
+  briefContentEl.innerHTML = headline + banner + (r.crossover ? `<div style="background:color-mix(in srgb, var(--color-accent) 12%, transparent);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;margin:0 0 12px"><p style="margin:0"><strong>Zoonotic link reported:</strong></p>${briefMarkup(r.crossoverDetail)}</div>` : '') + stripNan(r.html);
+  const tg = document.getElementById('evToggle');
+  if (tg) tg.addEventListener('click', () => {
+    const sec = document.getElementById('reportEvidence');
+    if (!sec) return;
+    const open = sec.hasAttribute('hidden');
+    if (open) sec.removeAttribute('hidden'); else sec.setAttribute('hidden','');
+    tg.setAttribute('aria-expanded', String(open));
+    tg.textContent = open ? 'Evidence ▴' : 'Evidence ▾';
+  });
+}
+// Latest-figure vettings for every event of the same pathogen — the peer distribution that gives
+// the evidence strips a frame of reference (a bare "N vettings" bar otherwise means nothing).
+function peerVettings(pathogen, kind) {
+  return records.filter(r => r.pathogenRaw === pathogen).map(rec => {
+    if (kind === 'cases') return rec.cases != null ? rowsVettings(rec.rowsAt || []) : null;
+    const dl = latestOf(viewRows().filter(r2 => r2.pathogen === pathogen && geoCountry(r2.location) === rec.country && r2.measure === 'confirmed_deaths' && r2.outlier === 'False'));
+    return dl ? dl.sources : null;
+  }).filter(v => v != null);
+}
+// Compact box plot: this event's latest-figure vettings positioned against its same-pathogen
+// peers. Box = middle 50%, tick = median, dot = this event. Pure position — no composite score.
+function evDistStrip(vet, peers) {
+  const vals = [...peers, vet].filter(v => v != null && isFinite(v)).sort((a,b) => a-b);
+  const min = vals[0], max = vals[vals.length-1];
+  const med = vals[Math.floor((vals.length-1)/2)];
+  const q1 = vals[Math.floor((vals.length-1)*0.25)], q3 = vals[Math.floor((vals.length-1)*0.75)];
+  const tip = `Latest-figure vettings across ${vals.length} same-pathogen event${vals.length!==1?'s':''} — box = middle 50%, tick = peer median, dot = this event (${vet})`;
+  if (vals.length < 3 || max === min) {
+    return { med, tip, html: `<span class="ev-dist" style="flex:1;height:8px;background:var(--color-divider);border-radius:999px;overflow:hidden"><span style="display:block;height:100%;width:${max===min?100:Math.max(3, Math.min(100, vet/max*100))}%;background:var(--color-accent-500)"></span></span>` };
+  }
+  const pos = v => Math.max(0, Math.min(100, (v - min) / (max - min) * 100));
+  const html = `<span class="ev-dist" style="position:relative;flex:1;height:14px" title="${tip.replace(/"/g,'&quot;')}">
+    <span style="position:absolute;left:0;right:0;top:6px;height:2px;background:var(--color-divider)"></span>
+    <span style="position:absolute;left:${pos(q1)}%;width:${Math.max(1.5, pos(q3)-pos(q1))}%;top:3px;height:8px;background:color-mix(in srgb, var(--color-accent-500) 30%, transparent);border-radius:2px"></span>
+    <span style="position:absolute;left:${pos(med)}%;top:1px;height:12px;width:1.5px;background:var(--ink-3)"></span>
+    <span style="position:absolute;left:${pos(vet)}%;top:3px;width:8px;height:8px;margin-left:-4px;border-radius:999px;background:var(--color-accent-300);border:1.5px solid var(--color-bg)"></span>
+  </span>`;
+  return { med, tip, html };
+}
+const REL_SUMMARY = 'Direct evidence = the citation contributed a structured figure for this event. Related reporting = observed for this event but contextual (e.g. zoonotic linkage, response efforts) rather than a numeric input. Cited only = cited by the brief but absent from the current extraction records — archived or outside the records window. Brief citations are heuristically selected (quality balanced against recency), so the cited set is a subset of what was available.';
+// Median raw-corpus scores across the distinct articles behind a set of measurement rows
+// (nulls when those URLs don't resolve in the raw feed — only ~31% do).
+function medianRawScores(rows) {
+  const vs = [], px = []; const seen = new Set();
+  (rows || []).forEach(r => measureUrlSet(r.sources).forEach(u => {
+    if (seen.has(u)) return; seen.add(u);
+    const raw = rawForUrl(u); if (!raw) return;
+    const v = parseFloat(raw.article_vetting_score), p = parseFloat(raw.functional_proximity_score);
+    if (isFinite(v)) vs.push(v);
+    if (isFinite(p)) px.push(p);
+  }));
+  const med = a => a.length ? a.slice().sort((x,y) => x-y)[Math.floor(a.length/2)] : null;
+  return { vetting: med(vs), prox: med(px) };
+}
+// Evidence density behind an event's current figures: vettings/articles/domains/facts across
+// BOTH outcome measures on the latest reporting date for that pathogen+country.
+function comboEvidence(pathogen, country) {
+  const rows = viewRows().filter(r => r.pathogen === pathogen && geoCountry(r.location) === country &&
+    (r.measure === 'confirmed_cases' || r.measure === 'confirmed_deaths') && r.outlier === 'False');
+  if (!rows.length) return null;
+  const maxDate = rows.reduce((m,r) => r.report_date > m ? r.report_date : m, '');
+  const at = rows.filter(r => r.report_date === maxDate);
+  return Object.assign(vettingsAndArticles(at), { facts: new Set(at.map(measureFactKey)).size });
+}
+// Expandable per-report evidence section: transparent coverage summary, corroboration bars for
+// the event's latest figures, then every citation as an evidence card grouped by relationship.
+function reportEvidenceHtml(rep, ev) {
+  if (!ev.cites.length) return '<p class="ev-note" style="margin:8px 0">This brief lists no machine-readable citations.</p>';
+  const order = { direct:0, related:1, cited:2 };
+  const cites = [...ev.cites].sort((a,b) => order[a.rel] - order[b.rel] || (b.vetting||0) - (a.vetting||0));
+  let bars = '';
+  const rec = records.find(x => x.country === rep.geoCountry && x.pathogenRaw === rep.pathogen);
+  if (rec && rec.cases != null) {
+    const rows2 = viewRows().filter(r => r.pathogen === rec.pathogenRaw && geoCountry(r.location) === rec.country && r.measure === 'confirmed_deaths' && r.outlier === 'False');
+    const dl = latestOf(rows2);
+    const entries = [['reported cases', rec.cases, rowsVettings(rec.rowsAt||[]), 'cases']];
+    if (dl) entries.push(['reported deaths', dl.value, dl.sources, 'deaths']);
+    bars = `<div style="margin:4px 0 2px">` + entries.map(([label, v, vet, kind]) => {
+      const d = evDistStrip(vet, peerVettings(rep.pathogen, kind));
+      return `<div style="display:flex;align-items:center;gap:10px;margin:6px 0">
+        <span style="font-size:12px;font-weight:600;min-width:150px">${v.toLocaleString()} ${label}</span>
+        ${d.html}
+        <span style="font-size:11px;color:var(--ink-3);white-space:nowrap" title="${d.tip.replace(/"/g,'&quot;')}">${vet} vetting${vet===1?'':'s'} · peer median ${d.med}</span>
+      </div>`;
+    }).join('') + `</div>`;
+  }
+  return `<p class="ev-note" style="margin:2px 0 10px">${ev.direct} of ${ev.articles} citation${ev.articles!==1?'s':''} contributed structured figures (${ev.coverage}%)` +
+    `${ev.medianProx!=null?` · median proximity ${ev.medianProx.toFixed(2)}`:''}. ` +
+    `${ev.related?`${ev.related} citation${ev.related>1?'s':''} contributed context only — e.g. zoonotic linkage or response reporting; good intelligence that was never going to produce a figure.`:''}${ev.citedOnly?`${ev.citedOnly} citation${ev.citedOnly>1?'s are':' is'} outside the current records${EVIDENCE.windowLabel?` (${EVIDENCE.windowLabel})`:''} — archived or out-of-window.`:''}</p>` +
+    bars +
+    `<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-label);margin:12px 0 6px">Citations</div>
+     <div class="ev-cards" style="margin-left:0;border-left:0;padding-left:0">${cites.map(c => citeCard(c.url, c.rel)).join('')}</div>`;
 }
 function selectEvent(idx) {
   const r = reports[idx]; if (!r) return;
@@ -3018,7 +3201,7 @@ function fetchReports() {
     const loc = (r['Outbreak Location'] || r['Outbreak Country'] || '').trim();
     const gc = geoCountry(loc) || geoCountry((r['Outbreak Country']||'').replace('United States of America','United States'));
     return {
-      title: r['Event Title'],
+      title: (r['Event Title'] || '').trim() || [PATHOGEN_LABELS[r['Pathogen']] || r['Pathogen'], (r['Outbreak Location'] || r['Outbreak Country'] || '').trim()].filter(Boolean).join(' — '),
       risk: +r['Risk Severity Score'] || 0,
       riskRationale: r['Risk Rationale'] || '',
       date: r['Latest Report'],
@@ -3065,6 +3248,7 @@ function fetchReports() {
   populateSpeciesSelect();
   if (records.length) { renderStats(); renderTable(); renderTrendSection(); }
 
+  rebuildEvidenceIndex();
   selectedIdx = 0;
   renderEventList();
   renderBrief();
@@ -3141,6 +3325,143 @@ function slugTitle(u) {
   } catch (e) { return null; }
 }
 function titleFor(u) { return articleTitles.get(normUrl(u)) || slugTitle(u) || null; }
+
+// --- Cross-feed evidence index (Tier 1) ---
+// Joins the three feeds on normalized URL + pathogen + geo-normalized location. Rebuilt after
+// each feed arrives; every accessor degrades silently while a feed is missing or still loading.
+// Third-party text (titles, domains) must go through esc() before any innerHTML surface.
+function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function urlHost(u) { try { return new URL(u).hostname.replace(/^www\./,'').toLowerCase(); } catch(e) { const m = String(u||'').match(/^https?:\/\/(?:www\.)?([^\/\s'"]+)/); return m ? m[1].toLowerCase() : null; } }
+// A measurement `sources` cell ("; "-delimited) -> set of normalized article URLs.
+function measureUrlSet(cell) { const out = new Set(); extractUrls(String(cell||'')).forEach(u => out.add(normUrl(u))); return out; }
+// One discrete observed fact within the measurements feed (internal key — location verbatim).
+function measureFactKey(r) { return (r.pathogen||'')+'|'+(r.location||'')+'|'+(r.measure||'')+'|'+String(r.value)+'|'+(r.report_date||''); }
+
+const EVIDENCE = {
+  byUrl: new Map(),     // normUrl -> { raw: representative raw row, n: raw rows seen }
+  comboUrls: new Map(), // pathogen||geoCountry -> Set(normUrl) cited by that event's measurement rows
+  windowLabel: null,    // raw corpus run-date span, e.g. '30 Jul – 22 Aug 26' (null while unknown)
+};
+function rebuildEvidenceIndex() {
+  EVIDENCE.byUrl = new Map();
+  EVIDENCE.comboUrls = new Map();
+  EVIDENCE.windowLabel = null;
+  if (Array.isArray(rawArticles)) {
+    let minD = null, maxD = null;
+    rawArticles.forEach(r => {
+      if (!r.url) return;
+      const k = normUrl(r.url);
+      const e = EVIDENCE.byUrl.get(k);
+      if (e) e.n++; else EVIDENCE.byUrl.set(k, { raw: r, n: 1 });
+      // Run-date window ("Report_26-08-22") — the concrete span "current records" refers to.
+      const m = (r.date || '').replace('Report_', '').match(/^(\d{2})-(\d{2})-(\d{2})$/);
+      if (m) {
+        const d = new Date('20' + m[1] + '-' + m[2] + '-' + m[3]);
+        if (!isNaN(d)) { if (!minD || d < minD) minD = d; if (!maxD || d > maxD) maxD = d; }
+      }
+    });
+    if (minD && maxD) {
+      const f = d => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+      EVIDENCE.windowLabel = f(minD) + ' – ' + f(maxD) + ' ' + String(maxD.getFullYear()).slice(2);
+    }
+  }
+  viewRows().forEach(r => {
+    const c = geoCountry(r.location);
+    if (!c || !r.pathogen) return;
+    const ck = r.pathogen + '||' + c;
+    let set = EVIDENCE.comboUrls.get(ck);
+    if (!set) { set = new Set(); EVIDENCE.comboUrls.set(ck, set); }
+    measureUrlSet(r.sources).forEach(u => set.add(u));
+  });
+}
+function rawForUrl(u) { const e = EVIDENCE.byUrl.get(normUrl(u)); return e ? e.raw : null; }
+
+// Citation-derived evidence profile for one report. Three honest relationship states:
+// DIRECT — the citation URL appears in the sources of a measurement row for the same
+//          pathogen + country, i.e. it demonstrably contributed a structured figure.
+// RELATED — no figure input, but the raw corpus extracted it for this event: contextual
+//           reporting (zoonotic linkage, response efforts, travel warnings) that never was
+//           going to produce a number. That is intelligence, not broken data.
+// CITED ONLY — absent from the current extraction records. Brief citations are heuristically
+// selected (quality balanced against recency) from a pool broader than the rolling raw corpus,
+// so absence here means the article is archived or outside the records window — NOT that it
+// doesn't exist. It simply cannot be tied to any figure on the dashboard.
+function reportEvidence(rep) {
+  const urls = [...new Set((rep.urls || []).map(u => String(u || '').trim()).filter(Boolean))];
+  const combo = EVIDENCE.comboUrls.get((rep.pathogen || '') + '||' + (rep.geoCountry || ''));
+  const cites = urls.map(u => {
+    const nu = normUrl(u);
+    const raw = rawForUrl(nu);
+    let rel = 'cited';
+    if (combo && combo.has(nu)) rel = 'direct';
+    else if (raw && raw.pathogen === rep.pathogen && (!rep.geoCountry || geoCountry(raw.location) === rep.geoCountry)) rel = 'related';
+    const vs = raw ? parseFloat(raw.article_vetting_score) : NaN;
+    const px = raw ? parseFloat(raw.functional_proximity_score) : NaN;
+    return { url: u, rel,
+      domain: cleanText(raw && raw.domain) || urlHost(u),
+      title: titleFor(u),
+      published: raw ? rawPublishedOf(raw) : null,
+      vetting: isFinite(vs) ? vs : null,
+      prox: isFinite(px) ? px : null };
+  });
+  const domains = new Set(cites.map(c => c.domain).filter(Boolean));
+  const directs = cites.filter(c => c.rel === 'direct');
+  // Corroborated facts: distinct measurement observations (pathogen+place+measure+value+date)
+  // whose source list includes at least one DIRECT citation of this report's event.
+  const factKeys = new Set();
+  if (directs.length) viewRows().forEach(r => {
+    if (r.pathogen !== rep.pathogen || geoCountry(r.location) !== rep.geoCountry) return;
+    const s = measureUrlSet(r.sources);
+    if (directs.some(c => s.has(normUrl(c.url)))) factKeys.add(measureFactKey(r));
+  });
+  const proxVals = cites.map(c => c.prox).filter(v => v != null).sort((a,b) => a-b);
+  return {
+    cites,
+    articles: cites.length,
+    domains: domains.size,
+    direct: directs.length,
+    related: cites.filter(c => c.rel === 'related').length,
+    citedOnly: cites.filter(c => c.rel === 'cited').length,
+    facts: factKeys.size,
+    coverage: cites.length ? Math.round(directs.length / cites.length * 100) : 0,
+    medianProx: proxVals.length ? proxVals[Math.floor(proxVals.length/2)] : null,
+    strength: evidenceStrength(cites.length, domains.size, directs.length > 0),
+  };
+}
+// Transparent thresholds with a visible breakdown — deliberately NOT a composite score.
+function evidenceStrength(nArticles, nDomains, hasDirect) {
+  if (nArticles >= 5 && nDomains >= 3 && hasDirect) return { label:'Strong evidence', cls:'doc-well' };
+  if (nArticles >= 3 || (nDomains >= 2 && hasDirect)) return { label:'Moderate evidence', cls:'doc-less' };
+  return { label:'Limited evidence', cls:'doc-sparse' };
+}
+const REL_LABEL = { direct:'Direct evidence', related:'Related reporting', cited:'Cited only' };
+const REL_TIP = {
+  direct:'This article is listed among the sources of a structured figure for this event.',
+  related:'The extraction corpus observed this article for this event, but it contributed context — such as zoonotic linkage or response reporting — rather than a numeric figure.',
+  cited:'The brief cites this article, but it is not in the current extraction records — it is either archived or outside the records window, so it cannot be tied to any figure here.'
+};
+// One cited/extracted article as an evidence card. Enriched from the raw corpus when the URL
+// resolves there (~31% overlap with measurement sources) — otherwise title-slug + domain only.
+function citeCard(u, rel) {
+  const raw = rawForUrl(u);
+  const h = cleanText(raw && raw.domain) || urlHost(u) || '';
+  const t = titleFor(u);
+  const vs = raw ? parseFloat(raw.article_vetting_score) : NaN;
+  const px = raw ? parseFloat(raw.functional_proximity_score) : NaN;
+  const cb = raw ? parseFloat(raw.combined_score) : NaN;
+  const pub = raw ? rawPublishedOf(raw) : null;
+  const meta = [
+    pub ? 'published ' + esc(pub) : '',
+    h ? esc(h) : '',
+    isFinite(vs) ? 'vetting ' + vs.toFixed(0) : '',
+    isFinite(px) ? 'proximity ' + px.toFixed(2) : '',
+    isFinite(cb) ? 'combined ' + cb.toFixed(1) : '',
+  ].filter(Boolean).join(' · ');
+  const chip = rel ? `<span class="tag ${rel==='direct'?'tag-accent':rel==='related'?'tag-outline':'tag-neutral'}" style="font-size:9px" title="${REL_TIP[rel]}">${REL_LABEL[rel]}</span> ` : '';
+  return `<div class="ev-card"><div class="ev-card-title">${chip}${t ? esc(t) : esc(h || 'Article')}</div>` +
+    `<div class="art-meta">${meta}${u ? `${meta ? ' · ' : ''}<a class="art-link" style="font-size:11px;font-weight:400;margin-bottom:0" href="${esc(u)}" target="_blank" rel="noopener">Open ↗</a>` : ''}</div></div>`;
+}
+
 function ensureRawArticles() {
   if (rawArticlesState !== 'idle') return;
   rawArticlesState = 'loading';
@@ -3290,7 +3611,13 @@ document.getElementById('tableModeSeg').addEventListener('click', (e) => {
   writeHash();
   renderTable();
 });
-document.addEventListener('rawarticles', () => { if (tableMode === 'raw') renderTable(); });
+document.addEventListener('rawarticles', () => {
+  // The evidence index gains its raw side once this lands — refresh every citation-derived
+  // surface that may already be on screen, not just the raw table swap.
+  rebuildEvidenceIndex();
+  if (tableMode === 'raw') renderTable();
+  if (reports.length) { renderEventList(); renderBrief(); }
+});
 document.getElementById('navSources').addEventListener('click', (e) => { e.preventDefault();
   openDialog('Data sources', `<p style="font-size:12.5px;line-height:1.6;color:color-mix(in srgb,var(--color-text) 75%,transparent)">Three published Google Sheet feeds, refreshed on load and via <strong>Sync now</strong>.</p>
     <table class="table"><thead><tr><th>Feed</th><th>Records</th><th>Content</th><th>Open</th></tr></thead><tbody>
