@@ -598,7 +598,7 @@
         <svg class="icon" viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;stroke:none"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.55V9h3.57v11.45Z"/></svg>
         LinkedIn
       </a>
-      <span style="font-size:11px;color:var(--ink-4)">© James Schlitt 2026</span>
+      <span style="font-size:11px;color:var(--ink-4)">© James Schlitt, PhD, MPH 2026</span>
     </span>
   </footer>
 </div>
@@ -1721,32 +1721,23 @@ function forecastDeathLoad(pathogen) {
 }
 function dataDepthPathogen() {
   if (!allRows.length) return null;
-  const caseLen = new Map();
-  const byLoc = new Map();
-  allRows.forEach(r => {
-    if (r.measure !== 'confirmed_cases' || r.outlier !== 'False' || !r.pathogen) return;
-    const k = r.pathogen + '||' + r.location;
-    if (!byLoc.has(k)) byLoc.set(k, new Set());
-    byLoc.get(k).add(r.report_date);
-  });
-  byLoc.forEach((set, k) => { const p = k.split('||')[0]; if (!caseLen.has(p) || set.size > caseLen.get(p)) caseLen.set(p, set.size); });
-  const projLen = new Map();
-  forecastIndex.forEach((arr, key) => { const p = key.split('||')[0]; projLen.set(p, (projLen.get(p)||0) + arr.length); });
   const present = new Set(records.map(r => r.pathogenRaw).filter(Boolean));
+  const sumVettings = new Map();
+  allRows.forEach(r => {
+    if (r.outlier !== 'False' || !r.pathogen || isFlu(r.pathogen)) return;
+    const p = r.pathogen;
+    if (!present.has(p)) return;
+    sumVettings.set(p, (sumVettings.get(p) || 0) + (+r.n_sources || 1));
+  });
   const cands = [];
-  caseLen.forEach((n, p) => {
-    if (isFlu(p) || !present.has(p)) return;
-    cands.push({ p, load: forecastDeathLoad(p), tier: priorityTier(p), depth: n + (projLen.get(p)||0) });
+  sumVettings.forEach((sum, p) => {
+    const load = forecastDeathLoad(p);
+    const score = load * Math.sqrt(sum);
+    cands.push({ p, load, sum, score });
   });
   if (!cands.length) return null;
-  // Featured = whichever pathogen has the most forecasted deaths — a simpler, more emotive
-  // metric than data depth. A surveillance-priority pathogen within 10% of the leader wins the
-  // near-tie (keeps the strain-specific Bundibugyo series ahead of the nonspecific Ebola
-  // catch-all); reporting depth breaks what remains.
-  const maxLoad = Math.max(...cands.map(c => c.load));
-  const near = cands.filter(c => c.load >= maxLoad * 0.9);
-  near.sort((a,b) => b.tier - a.tier || b.load - a.load || b.depth - a.depth);
-  return near[0].p;
+  cands.sort((a,b) => b.score - a.score || b.load - a.load || b.sum - a.sum);
+  return cands[0].p;
 }
 function refreshDefaultPathogen() {
   if (userChangedPathogen) return;
@@ -1915,14 +1906,57 @@ function excludedByDate(rows, pathogen, loc, measure) {
   });
   return byDate;
 }
+// Article-level acceptance: if any accepted figure came from an article URL, that article's
+// other rows are considered accepted even if flagged chi-sq/monotonicity. Histogram and caption
+// counts are figure-level, but the article flip is applied to decide rejected vs accepted.
+function buildAcceptedUrlSet() {
+  const s = new Set();
+  viewRows().forEach(r => {
+    if (r.outlier === 'False') extractUrls(r.sources || '').forEach(u => s.add(normUrl(u)));
+  });
+  return s;
+}
+function isFigureRejected(r, acceptedSet) {
+  if (r.outlier !== 'True') return false;
+  const f = r.quality_flag;
+  if (f !== 'chi-sq' && f !== 'monotonicity') return false;
+  const urls = extractUrls(r.sources || '');
+  if (!urls.length) return true;
+  // If any URL from this row was ever accepted elsewhere, treat as accepted
+  return urls.every(u => !acceptedSet.has(normUrl(u)));
+}
+function filteredExcludedByDate(rows, pathogen, loc, measure, acceptedSet) {
+  const raw = excludedByDate(rows, pathogen, loc, measure);
+  if (!raw.size) return raw;
+  const acc = acceptedSet || buildAcceptedUrlSet();
+  const out = new Map();
+  raw.forEach((arr, date) => {
+    const kept = arr.filter(r => isFigureRejected(r, acc));
+    if (kept.length) out.set(date, kept);
+  });
+  return out;
+}
+function latestRejected(rows, pathogen, loc, measure, acceptedSet) {
+  const byDate = filteredExcludedByDate(rows, pathogen, loc, measure, acceptedSet);
+  if (!byDate.size) return null;
+  const all = [];
+  byDate.forEach(arr => arr.forEach(r => all.push(r)));
+  if (!all.length) return null;
+  const maxDate = all.reduce((m,r) => r.report_date > m ? r.report_date : m, '');
+  const at = all.filter(r => r.report_date === maxDate);
+  const vals = at.map(r => +r.value).filter(v => !isNaN(v));
+  if (!vals.length) return null;
+  const urlSet = new Set(at.flatMap(r => extractUrls(r.sources)));
+  return { value: Math.max(...vals), min: Math.min(...vals), max: Math.max(...vals), date: maxDate, sources: at.reduce((s,r)=>s+(+r.n_sources||1),0), articles: urlSet.size || at.length, rowsAt: at, url: ((at.find(r=>r.value==Math.max(...vals))||at[0]).sources||'').split(';')[0].trim(), loc };
+}
 function aggregatePathogenSeries(rows, pathogen) {
   const casesMeasure = reportType + '_cases', deathsMeasure = reportType + '_deaths';
   const loc = primaryNationalLocation(rows, pathogen);
   if (!loc) { const s = []; s.loc = null; s.natCount = 0; return s; }
   const cByDate = canonicalByDate(rows, pathogen, loc, casesMeasure);
   const dByDate = canonicalByDate(rows, pathogen, loc, deathsMeasure);
-  const excC = excludedByDate(rows, pathogen, loc, casesMeasure);
-  const excD = excludedByDate(rows, pathogen, loc, deathsMeasure);
+  const excC = filteredExcludedByDate(rows, pathogen, loc, casesMeasure);
+  const excD = filteredExcludedByDate(rows, pathogen, loc, deathsMeasure);
   const dates = [...new Set([...cByDate.keys(), ...dByDate.keys()])].sort();
   const series = dates.map(date => {
     const c = cByDate.get(date), d = dByDate.get(date);
@@ -2323,8 +2357,8 @@ function renderTrendSection() {
     // Count what the user actually sees: plotted dots/diamonds + excluded glyphs (squares/triangles)
     const plottedCases = series.filter(d => d.cases != null).length;
     const plottedDeaths = series.filter(d => d.deaths != null).length;
-    const exCases = excludedByDate(viewRows(), effectiveTp, series.loc, reportType + '_cases');
-    const exDeaths = excludedByDate(viewRows(), effectiveTp, series.loc, reportType + '_deaths');
+    const exCases = filteredExcludedByDate(viewRows(), effectiveTp, series.loc, reportType + '_cases');
+    const exDeaths = filteredExcludedByDate(viewRows(), effectiveTp, series.loc, reportType + '_deaths');
     let exCount = 0; exCases.forEach(a => exCount += a.length); exDeaths.forEach(a => exCount += a.length);
     const totalVisible = plottedCases + plottedDeaths + exCount;
     if (exCount) outlierNoteEl.textContent = `${exCount} of ${totalVisible} plotted figures rejected by screening — ${plottedCases + plottedDeaths} accepted.`;
@@ -2452,8 +2486,21 @@ function renderComparisonBars(effectiveTp, series) {
   const maxNeighbours = Math.max(2, Math.min(5, Math.floor(plotW / 46) - 1));
   const entries = [{ loc: targetLoc, isTarget: true, dist: 0 }];
   neighbours.slice(0, maxNeighbours).forEach(nb => entries.push({ loc: nb.loc, isTarget: false, dist: nb.dist }));
-  entries.forEach(e => { e.casesData = latestOf(viewRows().filter(r => r.pathogen === effectiveTp && r.location === e.loc && r.measure === casesMeasure && r.outlier === 'False')); e.deathsData = latestOf(viewRows().filter(r => r.pathogen === effectiveTp && r.location === e.loc && r.measure === deathsMeasure && r.outlier === 'False')); });
-  const drawable = entries.filter(e => (e.casesData && isFinite(e.casesData.value)) || (e.deathsData && isFinite(e.deathsData.value)));
+  const acceptedSet = buildAcceptedUrlSet();
+  entries.forEach(e => {
+    const accC = latestOf(viewRows().filter(r => r.pathogen === effectiveTp && r.location === e.loc && r.measure === casesMeasure && r.outlier === 'False'));
+    const accD = latestOf(viewRows().filter(r => r.pathogen === effectiveTp && r.location === e.loc && r.measure === deathsMeasure && r.outlier === 'False'));
+    const rejC = latestRejected(viewRows(), effectiveTp, e.loc, casesMeasure, acceptedSet);
+    const rejD = latestRejected(viewRows(), effectiveTp, e.loc, deathsMeasure, acceptedSet);
+    e.accCasesData = accC; e.accDeathsData = accD;
+    e.rejCasesData = rejC; e.rejDeathsData = rejD;
+    // Rejected bars replace low-quality bars, same style; rejected-only locations remain absent (require accepted)
+    e.casesData = rejC ? rejC : accC;
+    e.deathsData = rejD ? rejD : accD;
+    e.casesRejected = !!rejC;
+    e.deathsRejected = !!rejD;
+  });
+  const drawable = entries.filter(e => (e.accCasesData && isFinite(e.accCasesData.value)) || (e.accDeathsData && isFinite(e.accDeathsData.value)));
   drawable.sort((a,b) => Math.max(a.casesData?.value||0, a.deathsData?.value||0) - Math.max(b.casesData?.value||0, b.deathsData?.value||0));
   // Subtitle mirrors the other bar plots: location context + quality cue (opacity encodes vetting/screen flag)
   if (isSubnationalBars) {
@@ -2467,18 +2514,19 @@ function renderComparisonBars(effectiveTp, series) {
     document.getElementById('sourceSubtitle').textContent = 'Sources per day';
   }
   document.getElementById('trendMeta').textContent = `Observed to ${formatUKDate(chosen.date)}`;
-  // Data-quality note (mirrors the timeseries outlierNote) — counted across the displayed bar locations
+  // Data-quality note — figure-level, article-any-accepted counts as accepted
   {
     const noteEl = document.getElementById('outlierNote');
     if (noteEl) {
-      let ex = 0;
+      let plotted = 0, ex = 0;
       drawable.forEach(e => {
-        excludedByDate(viewRows(), effectiveTp, e.loc, casesMeasure).forEach(a=> ex+=a.length);
-        excludedByDate(viewRows(), effectiveTp, e.loc, deathsMeasure).forEach(a=> ex+=a.length);
+        if (e.casesData && isFinite(e.casesData.value)) { plotted++; if (e.casesRejected) ex++; }
+        if (e.deathsData && isFinite(e.deathsData.value)) { plotted++; if (e.deathsRejected) ex++; }
       });
-      const nBars = drawable.length;
-      if (ex) noteEl.textContent = `${ex} figure${ex>1?'s':''} rejected by screening — not plotted as bars · bars shaded by data quality (darker = higher vetting · good screen) — ${nBars} location${nBars>1?'s':''} shown`;
-      else noteEl.textContent = `Bars shaded by data quality (darker = higher vetting · good screen) — ${nBars} location${nBars>1?'s':''} shown`;
+      if (plotted) {
+        if (ex) noteEl.textContent = `${ex} of ${plotted} plotted figures rejected by screening — ${plotted - ex} accepted.`;
+        else noteEl.textContent = `${plotted} figures plotted.`;
+      } else noteEl.textContent = '';
     }
   }
   const yMax = Math.max(...drawable.flatMap(e => [e.casesData?.value||0, e.deathsData?.value||0]), 1) * 1.15;
@@ -2561,15 +2609,15 @@ function renderComparisonBars(effectiveTp, series) {
           .on('mouseleave', hideChartTip)
           .on('click', () => openArticlePopup(p.date, p.rows||[]));
       });
-      // Excluded glyphs per measure
+      // Excluded glyphs per measure — article-any-accepted counts as accepted
       [ [ctsCases, casesMeasure, col('--color-accent-300')], [ctsDeaths, deathsMeasure, '#b45c64'] ].forEach(([ctsArr, meas, colStr]) => {
-        excludedByDate(viewRows(), effectiveTp, targetLoc, meas).forEach((rs, date) => rs.forEach((r,i) => {
+        filteredExcludedByDate(viewRows(), effectiveTp, targetLoc, meas, acceptedSet).forEach((rs, date) => rs.forEach((r,i) => {
           const v2 = +r.value; if (isNaN(v2)) return;
           const isCases = meas === casesMeasure;
           const jx = baseX + x1(isCases ? 'cases' : 'deaths') + x1.bandwidth()/2 + (i-(rs.length-1)/2)*3.6;
           const chi = r.quality_flag === 'chi-sq';
           const jy = y(v2);
-          const tipEx = () => `<p class="t-title">${new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · excluded</p><div class="t-row"><span>Reported ${isCases ? 'cases' : 'deaths'}</span><span>${v2.toLocaleString()}</span></div><div class="t-foot">${chi?'Failed the chi-square screen':'Breaks cumulative monotonicity'} — not plotted</div>`;
+           const tipEx = () => `<p class="t-title">${new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · excluded</p><div class="t-row"><span>Reported ${isCases ? 'cases' : 'deaths'}</span><span>${v2.toLocaleString()}</span></div><div class="t-foot">${chi?'Failed the chi-square screen':'Breaks cumulative monotonicity'}</div>`;
           addHollowHit(plotG, jx, jy, tipEx, null);
           plotG.append('path').attr('transform',`translate(${jx},${jy})${chi?'':' rotate(180)'}`)
             .attr('d', d3.symbol().type(chi?d3.symbolSquare:d3.symbolTriangle).size(22)())
@@ -2595,7 +2643,7 @@ function renderComparisonBars(effectiveTp, series) {
   const styleObj = {}; styleObj[targetLoc] = { color: SRC_HIST.fill() };
   const rejByDate = new Map();
   [casesMeasure, deathsMeasure].forEach(m=>{
-    excludedByDate(viewRows(), effectiveTp, targetLoc, m).forEach((arr,date)=>{
+    filteredExcludedByDate(viewRows(), effectiveTp, targetLoc, m, acceptedSet).forEach((arr,date)=>{
       const cur = rejByDate.get(date) || {rej:0, rejRows:[]};
       cur.rej += arr.length;
       cur.rejRows.push(...arr);
@@ -2752,7 +2800,7 @@ function renderChart(series, effectiveTp) {
   // triangle = monotonicity) with tooltips explaining why each point is not on the line.
   function drawExcluded(baseColor, measureName, measureStr) {
     if (!series.loc) return;
-    const ex = excludedByDate(viewRows(), projPathogen, series.loc, measureStr);
+    const ex = filteredExcludedByDate(viewRows(), projPathogen, series.loc, measureStr);
     ex.forEach((rs, date) => {
       rs.forEach((r, i) => {
         const v = +r.value; if (isNaN(v)) return;
@@ -2760,7 +2808,7 @@ function renderChart(series, effectiveTp) {
         const jx = cx0 + (i - (rs.length - 1) / 2) * 3.6;
         const vy = y(v); if (!isFinite(vy)) return;
         const chi = r.quality_flag === 'chi-sq';
-        const tipEx2 = () => `<p class="t-title">${new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · excluded</p><div class="t-row"><span>${measureName}</span><span>${v.toLocaleString()}</span></div><div class="t-row"><span>${r.location}</span><span>${+r.n_sources||1} vetting${(+r.n_sources||1)>1?'s':''}</span></div><div class="t-foot">${chi ? 'Failed the chi-square screen — not plotted' : 'Breaks cumulative monotonicity — not plotted'} · click for detail</div>`;
+         const tipEx2 = () => `<p class="t-title">${new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · excluded</p><div class="t-row"><span>${measureName}</span><span>${v.toLocaleString()}</span></div><div class="t-row"><span>${r.location}</span><span>${+r.n_sources||1} vetting${(+r.n_sources||1)>1?'s':''}</span></div><div class="t-foot">${chi ? 'Failed the chi-square screen' : 'Breaks cumulative monotonicity'} · click for detail</div>`;
         addHollowHit(dotsG, jx, vy, tipEx2, () => { hideChartTip(); openArticlePopup(date, rs); });
         dotsG.append('path')
           .attr('transform', `translate(${jx},${vy})${chi ? '' : ' rotate(180)'}`)
@@ -2944,7 +2992,7 @@ function renderSubnationalTrend() {
     return `<span class="sub-swatch" data-loc="${esc(l)}" title="${l.replace(/"/g,'&quot;')} — click to highlight" style="cursor:pointer;${isHi?'font-weight:600;opacity:1':''}"><span style="width:9px;height:9px;border-radius:2px;background:${style[l].color};display:inline-block;${isHi?'box-shadow:0 0 0 1px '+style[l].color:''}"></span>${short}${isHi?' ★':''}</span>`;
   }).join('')
     + (OTHER ? `<span class="sub-swatch" title="${esc(rest.join(' · '))}"><span style="width:9px;height:9px;border-radius:2px;background:${style[OTHER].color};display:inline-block"></span>${OTHER}</span>` : '')
-    + (aggregateExcluded.length ? `<span class="sub-swatch" style="opacity:.6" title="Not point-located, so not plotted: ${esc(aggregateExcluded.join(' · '))}">${aggregateExcluded.length} unlocated aggregate${aggregateExcluded.length>1?'s':''}</span>` : '');
+    + (aggregateExcluded.length ? `<span class="sub-swatch" style="opacity:.6" title="Not point-located: ${esc(aggregateExcluded.join(' · '))}">${aggregateExcluded.length} unlocated aggregate${aggregateExcluded.length>1?'s':''}</span>` : '');
   // Legend swatches are clickable: toggle the highlighted location on the overlay.
   document.querySelectorAll('#subLegend .sub-swatch[data-loc]').forEach(sw => {
     sw.addEventListener('click', () => { highlightSubLoc = highlightSubLoc === sw.dataset.loc ? null : sw.dataset.loc; renderSubnationalTrend(); });
@@ -2968,8 +3016,8 @@ function renderSubnationalTrend() {
   {
     let exC = 0;
     locs0.forEach(loc => {
-      excludedByDate(viewRows(), pathogen, loc, casesMeasure).forEach(a => exC += a.length);
-      excludedByDate(viewRows(), pathogen, loc, deathsMeasure).forEach(a => exC += a.length);
+      filteredExcludedByDate(viewRows(), pathogen, loc, casesMeasure).forEach(a => exC += a.length);
+      filteredExcludedByDate(viewRows(), pathogen, loc, deathsMeasure).forEach(a => exC += a.length);
     });
     const totalV = allPts.length + exC;
     const outEl2 = document.getElementById('outlierNote');
@@ -3029,8 +3077,8 @@ function renderSubnationalTrend() {
           .on('click', () => { hideChartTip(); openArticlePopup(d.date, d.rows || []); });
       }
     });
-    const exMapC = excludedByDate(viewRows(), pathogen, s.loc, casesMeasure);
-    const exMapD = excludedByDate(viewRows(), pathogen, s.loc, deathsMeasure);
+    const exMapC = filteredExcludedByDate(viewRows(), pathogen, s.loc, casesMeasure);
+    const exMapD = filteredExcludedByDate(viewRows(), pathogen, s.loc, deathsMeasure);
     const combinedEx = new Map([...exMapC, ...Array.from(exMapD.entries()).map(([k,v])=>[k, [...(exMapC.get(k)||[]), ...v]])]);
     combinedEx.forEach((rs, date) => {
       rs.forEach((r, i) => {
@@ -3038,7 +3086,7 @@ function renderSubnationalTrend() {
         const jx = x(new Date(date)) + (i - (rs.length - 1) / 2) * 3.6;
         const vy = y(v); if (!isFinite(vy)) return;
         const chi = r.quality_flag === 'chi-sq';
-        const tipExSub = () => `<p class="t-title">${s.loc}</p><div class="t-row"><span>${new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · excluded</span><span>${v.toLocaleString()} ${reportType} ${r.measure.includes('cases')?'cases':'deaths'}</span></div><div class="t-foot">${chi ? 'Failed the chi-square screen — not plotted' : 'Breaks cumulative monotonicity — not plotted'}</div>`;
+         const tipExSub = () => `<p class="t-title">${s.loc}</p><div class="t-row"><span>${new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · excluded</span><span>${v.toLocaleString()} ${reportType} ${r.measure.includes('cases')?'cases':'deaths'}</span></div><div class="t-foot">${chi ? 'Failed the chi-square screen' : 'Breaks cumulative monotonicity'}</div>`;
         addHollowHit(plotG, jx, vy, tipExSub, () => { hideChartTip(); openArticlePopup(date, rs); });
         plotG.append('path').attr('transform', `translate(${jx},${vy})${chi ? '' : ' rotate(180)'}`)
           .attr('d', d3.symbol().type(chi ? d3.symbolSquare : d3.symbolTriangle).size(isHi ? 40 : 26)())
