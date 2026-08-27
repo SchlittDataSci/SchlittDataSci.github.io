@@ -27,7 +27,8 @@
     --ink-label: color-mix(in srgb, var(--color-text) 70%, transparent);
     --sev-lo: #6b7789; --sev-mid: #9a7d86; --sev-hi: #b45c64;
     --warn: #c9a24a; --warn-ink: #e0c37e; --danger-ink: #d98d92;
-    --panel-h: 672px;
+    --panel-h: 620px;
+    --row2-h: 720px;
   }
   .stat-num, .forecast-box .fc-num, .table td, .tooltip .t-row, .cell-range,
   .stat-grid .stat-num { font-variant-numeric: tabular-nums; }
@@ -54,7 +55,7 @@
   .src-cell[disabled] { color: var(--ink-4); border-bottom: 0; cursor: default; }
   .seg-opt { font-weight: 500; }
   /* Compact seg buttons in the plots header — default button styling is too tall and crowded. */
-  #plotViewSeg .seg-opt, #reportTypeSeg .seg-opt, #subMeasureSeg .seg-opt { font-size: 10.5px; padding: 2px 9px; }
+  #chartTypeSeg .seg-opt, #granularitySeg .seg-opt, #reportTypeSeg .seg-opt { font-size: 10.5px; padding: 2px 9px; }
   .seg-opt[aria-selected="true"] {
     background: color-mix(in srgb, var(--color-accent) 20%, transparent);
     border: 1px solid var(--color-accent);
@@ -71,7 +72,7 @@
   .page-title { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 25px; margin: 0; letter-spacing: -0.01em; }
   .page-sub { font-size: 13.5px; color: var(--ink-3); margin: 4px 0 0; }
   /* Vector wordmark — two-tone italic heavy type, offset shadow, background-bar scan-slices per OSINfluenza */
-  .brand-logo { display: block; height: 76px; width: auto; margin-right: auto; margin-top: 2px; }
+  .brand-logo { display: block; height: 40.8px; width: auto; margin-right: auto; margin-top: 2px; }
   .nav { padding: 4px var(--space-4); }
   .brand-logo .t { font-family: var(--font-heading); font-weight: 800; font-style: italic; font-size: 30px; letter-spacing: .5px; }
   .toolbar { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; padding: var(--space-3) 0; margin-bottom: var(--space-4); border-bottom: 1px solid var(--color-divider); }
@@ -110,10 +111,14 @@
   .q-low { background: color-mix(in srgb, var(--sev-hi) 24%, transparent); color: var(--danger-ink); }
   .art-meta { font-size: 10.5px; color: var(--ink-4); margin-top: 4px; }
   .art-src-h { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-label); margin: 16px 0 6px; }
-  .doc-badge { font-size: 9px; font-weight: 600; padding: 1px 6px; border-radius: 999px; letter-spacing: .02em; }
+  .doc-badge { font-size: 9.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px; letter-spacing: .02em; }
   .doc-well { background: color-mix(in srgb, var(--color-accent-500) 22%, transparent); color: var(--color-accent-200); }
   .doc-less { background: color-mix(in srgb, var(--color-neutral-500) 26%, transparent); color: var(--color-neutral-200); }
   .doc-sparse { background: color-mix(in srgb, var(--sev-hi) 20%, transparent); color: var(--danger-ink); }
+  /* Standardize the three pill columns in the figures table — Outbreak documentation / Article screening / Status */
+  .table td .doc-badge, .table td .tag { font-size: 10px; font-weight: 600; padding: 3px 9px; line-height: 1; border-radius: 999px; letter-spacing: .02em; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; min-height: 18px; box-sizing: border-box; vertical-align: middle; }
+  .table td .tag { border-width: 1px; }
+  .table td .status-tag { font-size: 10px; }
   .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
   .stat-num { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 28px; line-height: 1.1; margin: 0; letter-spacing: -0.015em; }
   .stat-label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); margin: 6px 0 0; }
@@ -135,9 +140,9 @@
   /* Hovering an event report lifts its map glyph (CSS overrides the per-zoom attributes). */
   .marker-g.marker-hi .marker { stroke-width: 3px; }
   .marker-g.marker-hi .marker-hit { stroke: var(--color-accent-300); stroke-width: 1.5px; }
-  .tooltip { position: absolute; pointer-events: none; background: var(--color-neutral-800); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); padding: 8px 10px; font-size: 12.5px; box-shadow: var(--shadow-md); max-width: 230px; opacity: 0; transform: translate(-50%, -100%); transition: opacity .1s; z-index: 5; }
-  .tooltip.show { opacity: 1; }
-  body > .tooltip { max-width: 420px; }
+  .tooltip { position: absolute; pointer-events: none; background: var(--color-neutral-800); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); padding: 8px 10px; font-size: 12.5px; box-shadow: var(--shadow-md); max-width: 230px; opacity: 0; transform: translate(-50%, -100%); transition: opacity .1s; z-index: 5; display: block; }
+  .tooltip.show { opacity: 1; display: block; }
+  body > .tooltip { max-width: 420px; transform: none; display: block; }
   body > .tooltip .t-row { gap: 20px; }
   body > .tooltip .t-row span, body > .tooltip .t-title { white-space: nowrap; }
   body > .tooltip .t-foot { white-space: normal; }
@@ -150,8 +155,9 @@
   /* Events + reports lead the row; the plots panel reads as the right-hand analysis column. */
   .row-2col > .briefs-card { order: -1; }
   .row-2col > .card { display: flex; flex-direction: column; }
-  .briefs-card { height: var(--panel-h); }
-  .plots-card { height: var(--panel-h); min-height: 0; display: flex; flex-direction: column; }
+  .briefs-card { height: var(--row2-h); }
+  .plots-card { height: var(--row2-h); min-height: 0; display: flex; flex-direction: column; overflow: visible; }
+  .plots-card > * { flex-shrink: 0; }
   .summary-card { display: flex; flex-direction: column; padding: var(--space-4); height: auto; min-height: 560px; align-self: stretch; gap: var(--space-4); }
   .stat-band { display: flex; flex-direction: column; min-width: 0; }
   .stat-scope { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-label); margin: 0 0 18px; }
@@ -191,10 +197,18 @@
   #subToggleWrap { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--ink-3); margin-bottom: 8px; }
   #subToggleWrap label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
   .brief-col { display: flex; flex-direction: column; min-height: 0; }
-  .chart-wrap { width: 100%; height: 228px; }
-  .source-chart-wrap { width: 100%; height: 110px; margin-top: 2px; }
+  .plots-card { gap: 10px; }
+  .plots-card .card-head-row { margin-bottom: 4px; }
+  .plots-card .plot-block { display: block; }
+  .chart-wrap { width: 100%; height: 320px; }
+  .source-chart-wrap { width: 100%; height: 140px; margin-top: 0; }
+  .plots-card .chart-wrap svg, .plots-card .source-chart-wrap svg { width: 100%; height: 100%; display: block; }
   .chart-divider { border-top: 1px solid var(--color-divider); margin: 6px 0 8px; }
   .methodology-note { font-size: 11px; line-height: 1.5; color: var(--ink-4); margin: 12px 0 0; padding-top: 10px; }
+  .plot-subtitle { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-label); margin: 0 0 8px; font-weight: 600; }
+  .plot-block + .plot-block { margin-top: 0; }
+  .glyph-hit { transition: filter .1s ease, opacity .1s ease; }
+  .glyph-hit:hover { filter: brightness(1.4) saturate(1.15); }
   .brief-body { flex: 1; min-height: 0; overflow-y: auto; padding-right: 4px; }
   .brief-content h1 { display: none; }
   .brief-content h2 { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 14.5px; margin: 16px 0 8px; color: var(--color-text); }
@@ -299,8 +313,10 @@
   @media (prefers-reduced-motion: reduce) { body.preload .stat-num { animation: none; } }
   .art-extract strong { color: var(--color-text); }
   .table-scroll { overflow-x: auto; min-width: 0; max-width: 100%; }
-  .table-scroll .table { min-width: 900px; }
+  .table-scroll .table { min-width: 920px; }
   .table-scroll th { white-space: nowrap; }
+  /* Article screening column hosts badge + vettings button (collapsed, like outbreak doc) */
+  .table-scroll th:nth-child(5), .table-scroll td:nth-child(5) { min-width: 160px; }
   #tablePager { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin-top: 12px; flex-wrap: wrap; }
   #tablePager .pager-info { font-size: 11.5px; color: var(--ink-4); }
   .footer-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--color-accent-300); border: 1px solid var(--color-divider); border-radius: 999px; padding: 3px 10px; }
@@ -463,38 +479,39 @@
   <div class="row-2col">
     <div class="card plots-card elev-sm">
       <div class="card-head-row">
-        <p class="card-title" id="trendTitle" style="margin:0">Bundibugyo ebolavirus trend — confirmed cases &amp; deaths</p>
+        <p class="card-title" id="trendTitle" style="margin:0">Bundibugyo ebolavirus</p>
         <span class="card-meta" id="trendMeta">Observed to Aug 18</span>
       </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
-        <div class="seg" role="tablist" aria-label="Plot type" id="plotViewSeg">
-          <button type="button" class="seg-opt" data-view="bars">Bars</button>
-          <button type="button" class="seg-opt" aria-selected="true" data-view="national">National</button>
-          <button type="button" class="seg-opt" data-view="subnational">Subnational</button>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+        <div class="seg" role="tablist" aria-label="Chart type" id="chartTypeSeg">
+          <button type="button" class="seg-opt" aria-selected="true" data-chart="timeseries">Time series</button>
+          <button type="button" class="seg-opt" data-chart="bars">Bars</button>
+        </div>
+        <div class="seg" role="tablist" aria-label="Granularity" id="granularitySeg">
+          <button type="button" class="seg-opt" aria-selected="true" data-gran="national">National</button>
+          <button type="button" class="seg-opt" data-gran="subnational">Subnational</button>
         </div>
         <div class="seg" role="tablist" aria-label="Report type" id="reportTypeSeg">
           <button type="button" class="seg-opt" aria-selected="true" data-type="confirmed">Confirmed</button>
           <button type="button" class="seg-opt" data-type="suspected">Suspected</button>
         </div>
-        <div class="seg" role="tablist" aria-label="Measure" id="subMeasureSeg" style="display:none">
-          <button type="button" class="seg-opt" aria-selected="true" data-m="cases">Cases</button>
-          <button type="button" class="seg-opt" data-m="deaths">Deaths</button>
-        </div>
       </div>
-      <div id="subTrendBar" style="display:none;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap">
-        <button type="button" class="btn btn-secondary" id="trendBack" style="font-size:11px;padding:3px 9px">← National overview</button>
+      <div id="subTrendBar" style="display:none;align-items:center;gap:10px;margin:0 0 10px;flex-wrap:wrap">
         <span class="card-meta" id="subLegend" style="flex:1 1 220px;min-width:200px"></span>
       </div>
-      <div id="subToggleWrap" style="display:none">
+      <div id="subToggleWrap" style="display:none;margin:0 0 10px">
         <label><input type="checkbox" id="subToggle"> Show subnational breakdown (<span id="subToggleCount">0</span> locations)</label>
         <span class="card-meta" style="margin-left:6px">National view by default — toggle when available</span>
       </div>
-      <div class="chart-wrap" id="chartWrap"><svg id="trendSvg" width="100%" height="190"></svg></div>
-      <p class="card-meta" style="margin:2px 0 0;font-size:10px">Scroll to zoom · drag to pan · double-click to reset — zoom works in every plot view</p>
-      <div class="chart-divider"></div>
-      <p class="card-meta" style="margin:0 0 2px">Sources per day backing the cases figure — click a bar to list the articles</p>
-      <div class="source-chart-wrap" id="sourceChartWrap"><svg id="sourceSvg" width="100%" height="92"></svg></div>
-      <p class="methodology-note" title="Per reporting date, the highest screen-accepted NATIONAL figure (comma-free location) of the primary reporting country — never summed across countries. Subnational (comma) reports appear only in the drill-down. Open-source press reporting, not official WHO/IHR figures.">National totals only — never summed across countries. Open-source press figures, not WHO/IHR data. <span id="outlierNote"></span></p>
+      <div class="plot-block">
+        <p class="plot-subtitle" id="trendSubtitle">Confirmed cases &amp; deaths</p>
+        <div class="chart-wrap" id="chartWrap"><svg id="trendSvg" width="100%" height="190"></svg></div>
+      </div>
+      <div class="plot-block">
+        <p class="plot-subtitle" id="sourceSubtitle">Sources per day</p>
+        <div class="source-chart-wrap" id="sourceChartWrap"><svg id="sourceSvg" width="100%" height="92"></svg></div>
+      </div>
+      <p class="card-meta" id="outlierNote" style="margin:6px 0 0;font-size:10.5px;color:var(--ink-4)"></p>
     </div>
 
     <div class="card briefs-card elev-sm">
@@ -527,17 +544,17 @@
       <p class="card-title" style="margin:0" id="tableTitle">Latest figures by location — national events</p>
       <button type="button" class="btn btn-secondary" id="tableBack" style="display:none;font-size:11px;padding:4px 10px">← Back to national</button>
       <span style="display:flex;align-items:center;gap:10px">
-        <div class="seg" role="tablist" aria-label="Table view" id="tableModeSeg">
-          <button type="button" class="seg-opt" aria-selected="true" data-mode="figures">Figures</button>
-          <button type="button" class="seg-opt" data-mode="raw" title="The raw article–fact extraction table behind both the statistical figures and the event reports">Raw articles</button>
-        </div>
         <div class="seg" role="tablist" aria-label="Statistical screening" id="screenSeg" title="Lone article values are treated as a sampling distribution: each figure is screened by a chi-square outlier test and a cumulative-monotonicity check, then accepted or rejected. Separate from ‘vettings’, which count independent-domain articles corroborating a fact.">
           <button type="button" class="seg-opt" aria-selected="true" data-screen="accepted">Accepted</button>
           <button type="button" class="seg-opt" data-screen="all">All</button>
           <button type="button" class="seg-opt" data-screen="rejected">Rejected</button>
         </div>
+        <div class="seg" role="tablist" aria-label="Table view" id="tableModeSeg">
+          <button type="button" class="seg-opt" aria-selected="true" data-mode="figures">Figures</button>
+          <button type="button" class="seg-opt" data-mode="raw" title="The raw article–fact extraction table behind both the statistical figures and the event reports">Raw articles</button>
+        </div>
         <button type="button" class="btn btn-secondary" id="exportCsvBtn" style="padding:4px 10px;font-size:12px">Export CSV</button>
-        <span class="card-meta"><a href="https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8/export?format=csv&amp;gid=881754490" target="_blank" rel="noopener">data output (CSV) ↗</a></span>
+        <span class="card-meta"><a href="https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8#gid=881754490" target="_blank" rel="noopener">data output (Sheet) ↗</a></span>
       </span>
     </div>
     <p id="tableIntro" style="font-size:11.5px;color:color-mix(in srgb, var(--color-text) 68%, transparent);margin:-6px 0 12px">Range = spread across sources for that date. Status reflects reporting recency — Reporting ≤4d · Slowing ≤14d · Quiet — not outbreak control. <strong>Documentation</strong> covers the whole event; <strong>Vettings</strong> cover only this row's latest figure — click a count to list the articles behind it.</p>
@@ -549,11 +566,11 @@
           <th class="sortable" data-key="disease">Pathogen<span class="sort-arrow"></span></th>
           <th>Host species</th>
           <th class="sortable" data-key="doc" title="How well the whole outbreak event is documented: total vettings — article–fact corroborations across independent domains — and the span of reporting days behind it">Outbreak documentation<span class="sort-arrow"></span></th>
+          <th class="sortable" data-key="sources" style="min-width:160px" title="Whether this figure passed the chi-square outlier test and cumulative-monotonicity check, or the reason it was screened out — vettings count the independent-domain articles corroborating this row's latest figure (click to list); sort by n vettings">Article screening<span class="sort-arrow"></span></th>
           <th class="sortable" data-key="cases">Confirmed cases<span class="sort-arrow"></span></th>
           <th class="sortable" data-key="deaths" id="thDeaths">Confirmed deaths<span class="sort-arrow"></span></th>
           <th class="sortable" data-key="cfr">CFR<span class="sort-arrow"></span></th>
           <th class="sortable" data-key="date">Last updated<span class="sort-arrow"></span></th>
-          <th class="sortable" data-key="sources" title="Vettings count article–fact corroborations: an admitted article from one domain stating a fact found independently on a different domain. One article corroborating two facts counts as two vettings; ‘distinct sources’ counts unique article URLs. Click a count to list the articles.">Vettings<span class="sort-arrow"></span></th>
           <th class="sortable" data-key="status">Status<span class="sort-arrow"></span></th>
         </tr>
       </thead>
@@ -836,6 +853,17 @@ function isAnimalRow(r) {
   const hosts = hostFor(r).split(' / ').map(s => s.trim()).filter(Boolean);
   return hosts.length > 0 && hosts.every(x => !isHumanHost(x));
 }
+// Whether a figure-table row's latest figure passed statistical screening, or why it didn't —
+// derived from the raw rows behind that figure (r.rowsAt), so it matches whatever screenState filtered in.
+function figureAcceptance(r) {
+  const at = r.rowsAt || [];
+  if (!at.length) return '<span class="src-vet">—</span>';
+  const accepted = at.some(x => x.outlier === 'False');
+  if (accepted) return '<span class="doc-badge doc-well">Accepted</span>';
+  const flag = at[0].quality_flag;
+  const label = flag === 'chi-sq' ? 'Failed chi-square' : flag === 'monotonicity' ? 'Breaks monotonicity' : 'Rejected';
+  return `<span class="doc-badge doc-less" title="Screened out of the canonical series">${label}</span>`;
+}
 function hostFor(r) {
   const p = r.pathogenRaw || r.pathogen, loc = r.figureLoc || r.country;
   // Scoped to the species view so the column reflects the filtered subset, not every host ever recorded.
@@ -845,7 +873,7 @@ function hostFor(r) {
 }
 // Clears every subnational/filtered scope so a new selection starts from the national view.
 function resetDrilldowns() {
-  trendMode = { mode: 'national' };
+  trendMode = { mode: 'national' }; granPref='national'; chartPref='auto'; plotViewSel='auto';
   tableView = { mode: 'national', id: null };
   tablePage = 0;
   highlightSubLoc = null;
@@ -1036,6 +1064,7 @@ function renderTable() {
       ? `<button type="button" class="src-cell" data-src="${r.id.replace(/"/g,'&quot;')}" title="List the articles behind this figure's ${nVet} vetting${nVet>1?'s':''} (independent-domain corroboration)">${nVet} vetting${nVet>1?'s':''}</button>`
       : '<span class="src-vet">—</span>';
     const hostHtml = hostFor(r) || '<span class="src-vet">—</span>';
+    const screenHtml = figureAcceptance(r);
     const doc = subnational ? locDocumentation(r.pathogen, r.country) : eventDocumentation(r.pathogenRaw, r.country);
     const hasCfr = r.deaths != null && r.cases;
     const cfrLow = hasCfr && r.cases < 30;
@@ -1052,11 +1081,11 @@ function renderTable() {
       <td>${r.disease}</td>
       <td>${hostHtml}</td>
       <td><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="cell-range">${doc.vettings} vettings · ${doc.days}d</span></td>
+      <td style="min-width:160px">${screenHtml}<span class="cell-range">${srcHtml}</span></td>
       <td>${r.cases!=null ? r.cases.toLocaleString() : '—'}${rangeHtml}</td>
       <td>${r.deaths!=null ? r.deaths.toLocaleString() : '—'}${(r.deaths!=null && (animalView || isAnimalRow(r))) ? '<span class="cell-range">animals culled / died</span>' : ''}</td>
       <td>${cfrHtml}</td>
       <td>${formatUKDate(r.date)}</td>
-      <td>${srcHtml}</td>
       <td><span class="tag status-tag ${statusTagClass[r.status]}" title="${r.statusNote||''}">${r.status}</span></td>
     </tr>`;
   }).join('');
@@ -1189,7 +1218,7 @@ document.getElementById('reportRows').addEventListener('click', (e) => {
     return;
   }
 });
-document.getElementById('tableBack').addEventListener('click', () => { tableView = { mode:'national', id:null }; highlightedCountry=null; highlightSubLoc=null; renderTrendSection(); renderTable(); flyToFilteredMarkers(); updateSubToggleVisibility(null,null); });
+document.getElementById('tableBack').addEventListener('click', () => { tableView = { mode:'national', id:null }; highlightedCountry=null; highlightSubLoc=null; granPref='national'; chartPref='auto'; plotViewSel='auto'; renderTrendSection(); renderTable(); flyToFilteredMarkers(); updateSubToggleVisibility(null,null); });
 document.getElementById('drillClose').addEventListener('click', () => { hideChartTip(); document.getElementById('drillBackdrop').style.display = 'none'; restoreDialogFocus(); });
 document.getElementById('drillBackdrop').addEventListener('click', (e) => { if (e.target.id === 'drillBackdrop') { hideChartTip(); e.target.style.display = 'none'; restoreDialogFocus(); } });
 
@@ -1597,6 +1626,15 @@ function showChartTip(ev, html) {
   t.style.left = x + 'px'; t.style.top = y + 'px';
 }
 function hideChartTip() { if (_chartTip) _chartTip.classList.remove('show'); }
+// Maintainable invisible hit enlargement for hollow glyphs (stroke-only paths/circles).
+// Mirrors map marker-hit pattern: transparent circle captures hover without changing visuals.
+function addHollowHit(parent, cx, cy, tipHtmlFn, clickFn) {
+  const hit = parent.append('circle').attr('cx', cx).attr('cy', cy).attr('r', 11)
+    .attr('fill', 'transparent').style('cursor','pointer');
+  if (tipHtmlFn) hit.on('mousemove', ev => showChartTip(ev, typeof tipHtmlFn==='function'?tipHtmlFn():tipHtmlFn)).on('mouseleave', hideChartTip);
+  if (clickFn) hit.on('click', clickFn);
+  return hit;
+}
 
 // Article popup for a trend date: every source article behind that day's cases figure,
 // canonical first, with a one-line summary of what each article contributed.
@@ -1721,6 +1759,9 @@ function refreshDefaultPathogen() {
 let reportType = 'confirmed';
 let trendMode = { mode:'national' };
 let trendSeriesKey = '';
+let chartPref = 'auto';
+let granPref = 'national';
+const TIMESERIES_MIN_OBS = 5;
 let subMeasure = 'cases';
 let showSubnational = false;
 const SUB_PALETTE = ['#9184d9','#b45c64','#5aa6b0','#c9a24a','#7f9c5a','#c07fb0','#6f78c9','#cf8a5a','#8a8f99'];
@@ -1782,10 +1823,34 @@ document.getElementById('reportTypeSeg').addEventListener('click', (e) => {
   document.querySelectorAll('#reportTypeSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
   renderTrendSection();
 });
-document.getElementById('plotViewSeg').addEventListener('click', (e) => {
+document.getElementById('chartTypeSeg')?.addEventListener('click', (e) => {
+  const btn = e.target.closest('.seg-opt');
+  if (!btn || btn.disabled) return;
+  chartPref = btn.dataset.chart;
+  plotViewSel = chartPref;
+  document.querySelectorAll('#chartTypeSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
+  renderTrendSection();
+});
+document.getElementById('granularitySeg')?.addEventListener('click', (e) => {
+  const btn = e.target.closest('.seg-opt');
+  if (!btn || btn.disabled) return;
+  granPref = btn.dataset.gran;
+  const c = highlightedCountry || trendMode.country || (typeof worstCombo==='function' ? worstCombo()?.country : null);
+  const p = trendMode.pathogen || selectedPathogen;
+  trendMode = { mode: granPref, country: c, pathogen: p };
+  if (granPref === 'national') { highlightSubLoc = null; }
+  document.querySelectorAll('#granularitySeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
+  renderTrendSection();
+});
+document.getElementById('plotViewSeg')?.addEventListener('click', (e) => {
   const btn = e.target.closest('.seg-opt');
   if (!btn || btn.disabled) return;
   plotViewSel = btn.dataset.view;
+  if (btn.dataset.view === 'bars') chartPref = 'bars';
+  else if (btn.dataset.view === 'national' || btn.dataset.view === 'subnational') {
+    chartPref = 'timeseries';
+    granPref = btn.dataset.view;
+  } else chartPref = 'auto';
   renderTrendSection();
 });
 
@@ -1856,13 +1921,17 @@ function aggregatePathogenSeries(rows, pathogen) {
   if (!loc) { const s = []; s.loc = null; s.natCount = 0; return s; }
   const cByDate = canonicalByDate(rows, pathogen, loc, casesMeasure);
   const dByDate = canonicalByDate(rows, pathogen, loc, deathsMeasure);
+  const excC = excludedByDate(rows, pathogen, loc, casesMeasure);
+  const excD = excludedByDate(rows, pathogen, loc, deathsMeasure);
   const dates = [...new Set([...cByDate.keys(), ...dByDate.keys()])].sort();
   const series = dates.map(date => {
     const c = cByDate.get(date), d = dByDate.get(date);
+    const exC = excC.get(date) || [], exD = excD.get(date) || [];
     return { date,
       cases: c ? c.value : null, deaths: d ? d.value : null,
       sources: c ? c.sources : (d ? d.sources : 0),
       caseRows: c ? c.rows : [], deathRows: d ? d.rows : [],
+      rejectedRows: [...exC, ...exD],
       casesUrl: c ? c.url : null, casesReason: c ? c.reason : null,
       deathsUrl: d ? d.url : null, deathsReason: d ? d.reason : null };
   });
@@ -2021,8 +2090,25 @@ function cleanText(s) {
 // Strip standalone "nan" cells out of pre-rendered brief HTML.
 function stripNan(html) {
   return String(html || '')
-    .replace(/>\s*nan\s*</gi, '><')
-    .replace(/(^|[\s(;,>])nan([\s).;,<]|$)/gi, '$1$2');
+    .replace(/>\s*nan\s*</gi, '><')    .replace(/(^|[\s(;,>])nan([\s).;,<]|$)/gi, '$1$2');
+}
+function stripBriefDisclaimers(html) {
+  let h = String(html || '');
+  // Some upstream reports leave literal Markdown syntax un-rendered inside the HTML body
+  // (e.g. "## Epidemiological Summary", "**Rationale:**") instead of real tags. Convert what
+  // we recognize so it reads as prose instead of raw syntax.
+  h = h.replace(/##\s+([^<\n]+)/g, '<strong style="font-size:14.5px">$1</strong>')
+       .replace(/\*\*([^*<]+)\*\*/g, '<strong>$1</strong>');
+  // Remove trailing disclaimer paragraphs that duplicate the site footer / plots disclaimer.
+  // These appear as the last <p> or <em> in the Status Report HTML (e.g. "National totals only…",
+  // "Data aggregated from open-source reporting…", "Open-source press figures, not WHO/IHR…").
+  // The top-of-brief AI warning (index.html:518) is outside r.html, so stripping here never
+  // removes the keeper disclaimer — only the duplicate at the bottom of the injected HTML.
+  const disclaimerRe = /(?:<hr[^>]*>\s*)?(?:<p[^>]*>\s*(?:<em[^>]*>)?\s*(?:National totals only|Data aggregated from open-source|Open-source press figures|Not a substitute for official WHO)[^<]*?(?:<\/em>)?\s*<\/p>\s*)+$/i;
+  h = h.replace(disclaimerRe, '');
+  // Also handle plain-text disclaimer wrapped in <div> or without <p> at the very end
+  h = h.replace(/(?:National totals only[^<]*?WHO\/IHR[^<]*?<\/[^>]+>\s*)+$/i, '');
+  return h;
 }
 function briefMarkup(s) {
   const t = cleanText(s);
@@ -2079,7 +2165,7 @@ function populatePathogenSelect(rows) {
   if (selectedPathogen !== ALL) { const t = topRiskSizeMarker(); if (t) flyToLonlat(t.lonlat); } else { flyToFilteredMarkers(); }
 });
 
-let tw = 620; const th = 228, margin = {top:12,right:12,bottom:20,left:44};
+let tw = 620; const th = 320, margin = {top:28,right:12,bottom:40,left:44};
 // Zoom transform applied to BOTH axes (rescaleX + rescaleY) so zooming reads like a map zoom,
 // while translateExtent keeps the plot pinned to its bounds.
 let trendTransform = d3.zoomIdentity;
@@ -2087,7 +2173,7 @@ let lastChartArgs = null;
 let subTransform = d3.zoomIdentity;
 // Plot-view switcher: 'auto' selects comparison bars for time-series-poor geographies.
 let plotViewSel = 'auto';
-const BAR_MAX_OBS = 3;
+const BAR_MAX_OBS = 5;
 let placeCoords = new Map(); // normalized place string -> [lon,lat] from the reports tab
 // Comparison-bar zoom state (band range + linear y under one transform).
 let barTransform = d3.zoomIdentity;
@@ -2097,7 +2183,7 @@ let barsSeriesKey = null;
 // invoke the PREVIOUS view's zoom callback and redraw the old chart underneath the new one.
 let trendGen = 0;
 const tsvg = d3.select('#trendSvg').attr('viewBox', `0 0 ${tw} ${th}`).attr('preserveAspectRatio','none');
-let shTw = 620; const shTh = 110, shMargin = {top:6,right:12,bottom:22,left:40};
+let shTw = 620; const shTh = 140, shMargin = {top:6,right:12,bottom:22,left:40};
 const shsvg = d3.select('#sourceSvg').attr('viewBox', `0 0 ${shTw} ${shTh}`).attr('preserveAspectRatio','none');
 let _chartResizeT;
 window.addEventListener('resize', () => { clearTimeout(_chartResizeT); _chartResizeT = setTimeout(renderTrendSection, 180); });
@@ -2106,6 +2192,8 @@ function renderTrendSection() {
   if (!dataLoaded) {
     document.getElementById('trendTitle').textContent = 'Loading live data…';
     document.getElementById('trendMeta').textContent = '';
+    const ts = document.getElementById('trendSubtitle'); if (ts) ts.textContent = '';
+    const ss = document.getElementById('sourceSubtitle'); if (ss) ss.textContent = '';
     tsvg.selectAll('*').remove();
     shsvg.selectAll('*').remove();
     return;
@@ -2123,8 +2211,9 @@ function renderTrendSection() {
   if (showSubnational && !isAll()) {
     const cc = highlightedCountry || trendMode.country || null;
     if (cc) {
-      const n = subnationalLocations(effectiveTp, cc, 'confirmed_'+subMeasure).length;
-      if (n>0) trendMode = { mode:'subnational', country: cc, pathogen: effectiveTp };
+      const nCases = subnationalLocations(effectiveTp, cc, reportType+'_cases').length;
+      const nDeaths = subnationalLocations(effectiveTp, cc, reportType+'_deaths').length;
+      if (nCases>0 || nDeaths>0) trendMode = { mode:'subnational', country: cc, pathogen: effectiveTp };
     }
   }
   let toggleCountry = highlightedCountry || trendMode.country || (worst?worst.country:null);
@@ -2134,37 +2223,82 @@ function renderTrendSection() {
     const top = records.filter(r => r.pathogenRaw === selectedPathogen).sort((a,b) => (b.cases||0)-(a.cases||0))[0];
     if (top) toggleCountry = top.country;
   }
-  const subAvail = !!toggleCountry && subnationalLocations(effectiveTp, toggleCountry, 'confirmed_'+subMeasure).length > 0;
+  const subAvail = !!toggleCountry && (subnationalLocations(effectiveTp, toggleCountry, reportType+'_cases').length > 0 || subnationalLocations(effectiveTp, toggleCountry, reportType+'_deaths').length > 0);
   const series = allRows.length ? aggregatePathogenSeries(viewRows(), effectiveTp) : (function(){const s=trend.map(d=>({...d,sources:null}));s.loc=null;s.natCount=0;return s;})();
-  // Resolve the effective plot view: an explicit switcher choice wins; 'auto' picks comparison
-  // bars when the target geography has too few observation dates to draw a real time series.
-  let view = plotViewSel;
-  if (view === 'auto') {
-    const sparse = !!(series.length && series.loc &&
-      Math.max(obsDatesFor(series.loc, effectiveTp, 'confirmed_cases'), obsDatesFor(series.loc, effectiveTp, 'confirmed_deaths')) <= BAR_MAX_OBS);
-    view = sparse ? 'bars' : (trendMode.mode === 'subnational' ? 'subnational' : 'national');
+  // Resolve the effective plot view: orthogonal pairs (chart type vs granularity).
+  // Auto only on page load or new event click (chartPref==='auto'): time series requires ≥5 canonical dates for cases OR deaths.
+  let view;
+  const gran = granPref;
+  const chart = chartPref;
+  let nextTrendMode = {...trendMode};
+  // Effective view from explicit chart+gran, or auto
+  if (chartPref === 'auto' && plotViewSel === 'auto') {
+    const nationalEnough = !!(series.length && series.loc &&
+      Math.max(canonicalDatesFor(series.loc, effectiveTp, reportType+'_cases'), canonicalDatesFor(series.loc, effectiveTp, reportType+'_deaths')) >= TIMESERIES_MIN_OBS);
+    let subEnough = false;
+    if (toggleCountry) {
+      const allSubLocsRaw = [...new Set([
+        ...subnationalLocationsRaw(effectiveTp, toggleCountry, reportType+'_cases'),
+        ...subnationalLocationsRaw(effectiveTp, toggleCountry, reportType+'_deaths')
+      ])].filter(l => !isAggregateLoc(l));
+      let maxSub = 0;
+      allSubLocsRaw.forEach(loc => {
+        maxSub = Math.max(maxSub, canonicalDatesFor(loc, effectiveTp, reportType+'_cases'), canonicalDatesFor(loc, effectiveTp, reportType+'_deaths'));
+      });
+      subEnough = allSubLocsRaw.length > 0 && maxSub >= TIMESERIES_MIN_OBS;
+    }
+    // National first for clarity when both have enough
+    if (gran === 'subnational' && subAvail) {
+      view = subEnough ? 'subnational' : 'bars';
+      if (view === 'bars') nextTrendMode = { mode: 'subnational', country: toggleCountry, pathogen: effectiveTp, barsSubnational: true }; else nextTrendMode = { mode: 'subnational', country: toggleCountry, pathogen: effectiveTp };
+    } else {
+      // gran national or sub not available
+      const enough = gran === 'subnational' ? subEnough : nationalEnough;
+      if (!enough) {
+        view = 'bars';
+        if (gran === 'subnational') nextTrendMode = { mode: 'subnational', country: toggleCountry, pathogen: effectiveTp, barsSubnational: true };
+      } else {
+        view = gran === 'subnational' ? 'subnational' : 'national';
+      }
+    }
+    // Also handle case where national not enough but subnational has enough and gran is national: still prefer national bars per user pick
+  } else {
+    // Explicit user choices via chartPref/granPref (or legacy plotViewSel)
+    const explicitChart = chartPref !== 'auto' ? chartPref : (plotViewSel === 'bars' ? 'bars' : plotViewSel === 'national' || plotViewSel === 'subnational' ? 'timeseries' : 'timeseries');
+    const explicitGran = granPref !== 'national' ? granPref : (plotViewSel === 'subnational' ? 'subnational' : 'national');
+    // Map to legacy view values
+    if (explicitGran === 'subnational') view = explicitChart === 'bars' ? 'bars' : 'subnational';
+    else view = explicitChart === 'bars' ? 'bars' : 'national';
+    if (view === 'bars' && explicitGran === 'subnational') nextTrendMode.barsSubnational = true;
   }
-  if (view === 'bars' && (!series.length || !series.loc)) view = trendMode.mode === 'subnational' ? 'subnational' : 'national';
+  if (view === 'bars' && (!series.length || !series.loc) && !(trendMode && trendMode.barsSubnational)) view = trendMode.mode === 'subnational' ? 'subnational' : 'national';
+  if (view === 'bars' && toggleCountry && nextTrendMode.mode === 'subnational') {
+    nextTrendMode.barsSubnational = true;
+  } else if (view !== 'bars' && nextTrendMode.barsSubnational) {
+    delete nextTrendMode.barsSubnational;
+  }
+  // Commit pure state
+  trendMode = nextTrendMode;
   if (view === 'subnational' && (!toggleCountry || !subAvail)) view = 'national';
-  document.querySelectorAll('#plotViewSeg .seg-opt').forEach(b => {
-    b.setAttribute('aria-selected', String(b.dataset.view === view));
-    if (b.dataset.view === 'subnational') {
+  document.querySelectorAll('#reportTypeSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b.dataset.type === reportType)));
+  document.querySelectorAll('#chartTypeSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b.dataset.chart === (view==='bars'?'bars':'timeseries'))));
+  document.querySelectorAll('#granularitySeg .seg-opt').forEach(b => {
+    b.setAttribute('aria-selected', String(b.dataset.gran === (view==='subnational' || (view==='bars' && trendMode.barsSubnational)?'subnational':'national')));
+    if (b.dataset.gran === 'subnational') {
       b.disabled = !subAvail;
       b.title = subAvail ? '' : 'No subnational breakdown available for this selection';
     } else { b.disabled = false; b.title = ''; }
   });
-  const barsBtn = document.querySelector('#plotViewSeg [data-view="bars"]');
-  if (barsBtn) barsBtn.textContent = (plotViewSel === 'auto' && view === 'bars') ? 'Bars · auto' : 'Bars';
-  document.querySelectorAll('#reportTypeSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b.dataset.type === reportType)));
-  document.querySelectorAll('#subMeasureSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b.dataset.m === subMeasure)));
-  document.getElementById('reportTypeSeg').style.display = view === 'national' ? '' : 'none';
-  document.getElementById('subMeasureSeg').style.display = (view === 'bars' || view === 'subnational') ? '' : 'none';
+  // report type always visible now (fixes buried suspected/confirmed)
+  document.getElementById('reportTypeSeg').style.display = '';
+  const smSeg = document.getElementById('subMeasureSeg'); if (smSeg) smSeg.style.display = 'none';
   document.getElementById('subTrendBar').style.display = view === 'subnational' ? 'flex' : 'none';
   document.getElementById('subLegend').textContent = '';
   if (view === 'subnational') {
     // Seed the drill state so renderSubnationalTrend has a country/pathogen even when the
     // overlay was reached from the switcher rather than a map/table drill-down.
     trendMode = { mode: 'subnational', country: toggleCountry, pathogen: effectiveTp };
+    granPref = 'subnational';
     renderSubnationalTrend(); return;
   }
   const label = PATHOGEN_LABELS[effectiveTp] || effectiveTp || '—';
@@ -2173,20 +2307,29 @@ function renderTrendSection() {
   const outlierNoteEl = document.getElementById('outlierNote');
   if (view === 'bars') { renderComparisonBars(effectiveTp, series); return; }
   if (isAll() && worst) {
-    document.getElementById('trendTitle').textContent = `${label} · ${locName} — ${reportType} cases & deaths · worst outbreak (All-pathogens view)`;
+    document.getElementById('trendTitle').textContent = `${label} · ${locName}`;
+    document.getElementById('trendSubtitle').textContent = `${reportType} cases & deaths`;
   } else {
-    document.getElementById('trendTitle').textContent = `${label} · ${locName} — ${reportType} cases & deaths`;
+    document.getElementById('trendTitle').textContent = `${label} · ${locName}`;
+    document.getElementById('trendSubtitle').textContent = `${reportType} cases & deaths`;
   }
+  document.getElementById('sourceSubtitle').textContent = 'Sources per day';
   const lastObs = [...series].reverse().find(d => d.cases != null || d.deaths != null);
   if (lastObs) {
-    const others = series.natCount > 1 ? ` · +${series.natCount-1} other national series` : '';
     const obsDate = new Date(lastObs.date).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
-    metaEl.textContent = (isAll() ? 'Hardest-hit country · ' : '') + 'National · observed to ' + obsDate + others;
+    metaEl.textContent = 'Observed to ' + obsDate;
   } else metaEl.textContent = '';
   if (allRows.length && series.loc) {
-    const relevant = viewRows().filter(r => r.pathogen === effectiveTp && r.location === series.loc && r.measure === reportType + '_cases');
-    const excluded = relevant.filter(r => r.outlier === 'True').length;
-    outlierNoteEl.textContent = relevant.length ? `${excluded} of ${relevant.length} figures rejected by screening.` : '';
+    // Count what the user actually sees: plotted dots/diamonds + excluded glyphs (squares/triangles)
+    const plottedCases = series.filter(d => d.cases != null).length;
+    const plottedDeaths = series.filter(d => d.deaths != null).length;
+    const exCases = excludedByDate(viewRows(), effectiveTp, series.loc, reportType + '_cases');
+    const exDeaths = excludedByDate(viewRows(), effectiveTp, series.loc, reportType + '_deaths');
+    let exCount = 0; exCases.forEach(a => exCount += a.length); exDeaths.forEach(a => exCount += a.length);
+    const totalVisible = plottedCases + plottedDeaths + exCount;
+    if (exCount) outlierNoteEl.textContent = `${exCount} of ${totalVisible} plotted figures rejected by screening — ${plottedCases + plottedDeaths} accepted.`;
+    else if (totalVisible) outlierNoteEl.textContent = `${totalVisible} figures plotted.`;
+    else outlierNoteEl.textContent = '';
   } else if (outlierNoteEl) outlierNoteEl.textContent = '';
   if (trendSeriesKey !== effectiveTp + '|' + reportType + '|' + (series.loc||'')) {
     trendSeriesKey = effectiveTp + '|' + reportType + '|' + (series.loc||'');
@@ -2208,6 +2351,15 @@ function obsDatesFor(loc, pathogen, measure) {
   });
   return seen.size;
 }
+function canonicalDatesFor(loc, pathogen, measure) {
+  const lk = (loc||'').trim().toLowerCase();
+  const seen = new Set();
+  viewRows().forEach(r => {
+    if (r.pathogen !== pathogen || (r.location||'').trim().toLowerCase() !== lk || r.measure !== measure || r.is_canonical !== 'True') return;
+    seen.add(r.report_date);
+  });
+  return seen.size;
+}
 function haversineKm(a, b) {
   const R = 6371, t = Math.PI / 180;
   const dLat = (b[1]-a[1])*t, dLon = (b[0]-a[0])*t;
@@ -2218,137 +2370,247 @@ function haversineKm(a, b) {
 // the same-measure figures of the nearest same-granularity locations, with ghost glyphs for
 // the target's other observations and a note explaining why bars were chosen.
 function renderComparisonBars(effectiveTp, series) {
-  const targetLoc = series.loc;
-  const measure = 'confirmed_' + subMeasure;
-  const measureName = subMeasure === 'deaths' ? 'deaths' : 'cases';
+  const isSubnationalBars = !!(trendMode && trendMode.barsSubnational && trendMode.country);
+  let targetLoc = series.loc;
+  const casesMeasure = reportType + '_cases';
+  const deathsMeasure = reportType + '_deaths';
   const label = PATHOGEN_LABELS[effectiveTp] || effectiveTp;
+  // For subnational bars, target is the best subnational location within the country
+  if (isSubnationalBars) {
+    const country = trendMode.country;
+    const candLocs = [...new Set([...subnationalLocations(effectiveTp, country, casesMeasure), ...subnationalLocations(effectiveTp, country, deathsMeasure)])];
+    if (candLocs.length) {
+      // Prefer highlighted location if present, else highest peak value
+      if (highlightSubLoc && candLocs.includes(highlightSubLoc)) {
+        targetLoc = highlightSubLoc;
+      } else {
+        let best = null, bestVal = -1;
+        candLocs.forEach(loc => {
+          const latestC = latestOf(viewRows().filter(r => r.pathogen === effectiveTp && r.location === loc && r.measure === casesMeasure && r.outlier === 'False'));
+          const latestD = latestOf(viewRows().filter(r => r.pathogen === effectiveTp && r.location === loc && r.measure === deathsMeasure && r.outlier === 'False'));
+          const latest = (latestC && latestD) ? (latestC.value > latestD.value ? latestC : latestD) : (latestC || latestD);
+          if (latest && latest.value > bestVal) { bestVal = latest.value; best = loc; }
+        });
+        if (best) targetLoc = best;
+      }
+    }
+  }
   tsvg.selectAll('*').remove();
   tw = Math.max(340, Math.round((document.getElementById('chartWrap')||{}).clientWidth || 620));
   tsvg.attr('viewBox', `0 0 ${tw} ${th}`);
   // Zoom state: re-render on zoom like the line charts; reset when target/measure changes.
   lastBarsArgs = [effectiveTp, series];
-  const barsKey = effectiveTp + '|' + subMeasure + '|' + targetLoc;
+  const barsKey = effectiveTp + '|' + reportType + '|' + targetLoc + '|' + (isSubnationalBars ? 'sub' : 'nat');
   if (barsSeriesKey !== barsKey) {
     barsSeriesKey = barsKey;
     barTransform = d3.zoomIdentity;
     if (tsvg.node().__zoomBehavior) tsvg.call(tsvg.node().__zoomBehavior.transform, d3.zoomIdentity);
   }
-  document.getElementById('outlierNote').textContent = '';
-  const cts = [...canonicalByDate(viewRows(), effectiveTp, targetLoc, measure).values()].filter(p => p.value != null)
-    .sort((a,b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0);
-  if (!cts.length) {
-    document.getElementById('trendTitle').textContent = `${label} · ${targetLoc} — no confirmed ${measureName}`;
+  const ctsCases = [...canonicalByDate(viewRows(), effectiveTp, targetLoc, casesMeasure).values()].filter(p => p.value != null).sort((a,b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0);
+  const ctsDeaths = [...canonicalByDate(viewRows(), effectiveTp, targetLoc, deathsMeasure).values()].filter(p => p.value != null).sort((a,b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0);
+  const cts = [...ctsCases, ...ctsDeaths].length ? [...new Map([...ctsCases, ...ctsDeaths].map(p=>[p.date,p])).values()].sort((a,b)=>a.date<b.date?-1:1) : [];
+  if (!ctsCases.length && !ctsDeaths.length) {
+    document.getElementById('trendTitle').textContent = `${label} · ${targetLoc}`;
+    document.getElementById('trendSubtitle').textContent = `No ${reportType} cases & deaths`;
+    document.getElementById('sourceSubtitle').textContent = '';
     document.getElementById('trendMeta').textContent = '';
     shsvg.selectAll('*').remove();
     return;
   }
-  const chosen = cts[cts.length - 1];
+  const chosen = (ctsCases[ctsCases.length-1] && ctsDeaths[ctsDeaths.length-1]) ? (ctsCases[ctsCases.length-1].date > ctsDeaths[ctsDeaths.length-1].date ? ctsCases[ctsCases.length-1] : ctsDeaths[ctsDeaths.length-1]) : (ctsCases[ctsCases.length-1] || ctsDeaths[ctsDeaths.length-1]);
   const targetCountry = geoCountry(targetLoc) || targetLoc;
-  const targetCoord = (GEO[targetCountry]||{}).lonlat || placeCoords.get((targetLoc||'').trim().toLowerCase()) || null;
-  // Nearest national neighbours reporting the same pathogen+measure (haversine over centroids).
-  const pool = new Map();
-  viewRows().forEach(r => {
-    if (r.pathogen !== effectiveTp || r.measure !== measure || r.outlier !== 'False' || !isNational(r.location)) return;
-    const c = geoCountry(r.location);
-    if (!c || c === targetCountry) return;
-    if (!pool.has(c)) pool.set(c, (GEO[c]||{}).lonlat || null);
-  });
-  const neighbours = [...pool.keys()].map(loc => {
-    const co = pool.get(loc);
-    return { loc, dist: (co && targetCoord) ? haversineKm(targetCoord, co) : Infinity };
-  }).sort((a,b) => a.dist - b.dist || a.loc.localeCompare(b.loc));
+  const targetCoord = (GEO[targetCountry]||{}).lonlat || placeCoords.get((targetLoc||'').trim().toLowerCase()) || placeCoords.get((targetLoc||'').split(',')[0].trim().toLowerCase()) || null;
+  let neighbours = [];
+  if (isSubnationalBars) {
+    // Intra-country subnational neighbours only
+    const country = trendMode.country;
+    const poolCases = subnationalLocations(effectiveTp, country, casesMeasure);
+    const poolDeaths = subnationalLocations(effectiveTp, country, deathsMeasure);
+    const poolLocs = [...new Set([...poolCases, ...poolDeaths])];
+    // distance via placeCoords if available, else fallback to alphabetical
+    neighbours = poolLocs.filter(l => l !== targetLoc).map(loc => {
+      const co = placeCoords.get((loc||'').trim().toLowerCase()) || placeCoords.get((loc||'').split(',')[0].trim().toLowerCase()) || null;
+      const dist = (co && targetCoord) ? haversineKm(targetCoord, co) : Infinity;
+      return { loc, dist };
+    }).sort((a,b) => a.dist - b.dist || a.loc.localeCompare(b.loc));
+  } else {
+    // Nearest national neighbours reporting the same pathogen+measure (haversine over centroids).
+    const pool = new Map();
+    viewRows().forEach(r => {
+      if (r.pathogen !== effectiveTp || (r.measure !== casesMeasure && r.measure !== deathsMeasure) || r.outlier !== 'False' || !isNational(r.location)) return;
+      const c = geoCountry(r.location);
+      if (!c || c === targetCountry) return;
+      if (!pool.has(c)) pool.set(c, (GEO[c]||{}).lonlat || null);
+    });
+    neighbours = [...pool.keys()].map(loc => {
+      const co = pool.get(loc);
+      return { loc, dist: (co && targetCoord) ? haversineKm(targetCoord, co) : Infinity };
+    }).sort((a,b) => a.dist - b.dist || a.loc.localeCompare(b.loc));
+  }
   // Readability first: as many neighbour bars as fit comfortably, never fewer than two.
   const plotW = tw - margin.left - margin.right;
   const maxNeighbours = Math.max(2, Math.min(5, Math.floor(plotW / 46) - 1));
   const entries = [{ loc: targetLoc, isTarget: true, dist: 0 }];
   neighbours.slice(0, maxNeighbours).forEach(nb => entries.push({ loc: nb.loc, isTarget: false, dist: nb.dist }));
-  entries.forEach(e => { e.data = latestOf(viewRows().filter(r => r.pathogen === effectiveTp && r.location === e.loc && r.measure === measure && r.outlier === 'False')); });
-  const drawable = entries.filter(e => e.data && isFinite(e.data.value));
-  // Ascending order: smallest figure on the left, largest on the right.
-  drawable.sort((a,b) => a.data.value - b.data.value);
-  document.getElementById('trendTitle').textContent = `${label} · ${targetLoc.split(',')[0]} — confirmed ${measureName} vs nearest regions`;
-  document.getElementById('trendMeta').textContent = `Comparison bars · as of ${formatUKDate(chosen.date)}`;
-  const yMax = Math.max(...drawable.map(e => e.data.value), 1) * 1.15;
-  const domMax = choroplethDomain();
+  entries.forEach(e => { e.casesData = latestOf(viewRows().filter(r => r.pathogen === effectiveTp && r.location === e.loc && r.measure === casesMeasure && r.outlier === 'False')); e.deathsData = latestOf(viewRows().filter(r => r.pathogen === effectiveTp && r.location === e.loc && r.measure === deathsMeasure && r.outlier === 'False')); });
+  const drawable = entries.filter(e => (e.casesData && isFinite(e.casesData.value)) || (e.deathsData && isFinite(e.deathsData.value)));
+  drawable.sort((a,b) => Math.max(a.casesData?.value||0, a.deathsData?.value||0) - Math.max(b.casesData?.value||0, b.deathsData?.value||0));
+  // Subtitle mirrors the other bar plots: location context + quality cue (opacity encodes vetting/screen flag)
+  if (isSubnationalBars) {
+    document.getElementById('trendTitle').textContent = `${label} · ${trendMode.country}`;
+    document.getElementById('trendSubtitle').textContent = `${targetLoc.split(',')[0]} — ${reportType} cases & deaths vs nearest subnational areas · bars shaded by data quality`;
+    const _histLabel = (targetLoc.split(',')[0] || trendMode.country || targetLoc).trim();
+    document.getElementById('sourceSubtitle').textContent = 'Sources per day — ' + _histLabel;
+  } else {
+    document.getElementById('trendTitle').textContent = `${label} · ${targetLoc.split(',')[0]}`;
+    document.getElementById('trendSubtitle').textContent = `${reportType} cases & deaths vs nearest regions · bars shaded by data quality`;
+    document.getElementById('sourceSubtitle').textContent = 'Sources per day';
+  }
+  document.getElementById('trendMeta').textContent = `Observed to ${formatUKDate(chosen.date)}`;
+  // Data-quality note (mirrors the timeseries outlierNote) — counted across the displayed bar locations
+  {
+    const noteEl = document.getElementById('outlierNote');
+    if (noteEl) {
+      let ex = 0;
+      drawable.forEach(e => {
+        excludedByDate(viewRows(), effectiveTp, e.loc, casesMeasure).forEach(a=> ex+=a.length);
+        excludedByDate(viewRows(), effectiveTp, e.loc, deathsMeasure).forEach(a=> ex+=a.length);
+      });
+      const nBars = drawable.length;
+      if (ex) noteEl.textContent = `${ex} figure${ex>1?'s':''} rejected by screening — not plotted as bars · bars shaded by data quality (darker = higher vetting · good screen) — ${nBars} location${nBars>1?'s':''} shown`;
+      else noteEl.textContent = `Bars shaded by data quality (darker = higher vetting · good screen) — ${nBars} location${nBars>1?'s':''} shown`;
+    }
+  }
+  const yMax = Math.max(...drawable.flatMap(e => [e.casesData?.value||0, e.deathsData?.value||0]), 1) * 1.15;
   const yBase = d3.scaleLinear().domain([0, yMax]).range([th-margin.bottom, margin.top]);
   const y = barTransform.rescaleY(yBase);
-  // Band scale zooms by transforming its PIXEL range (ordinal domains don't rescale).
-  const x = d3.scaleBand().domain(drawable.map(e => e.loc))
-    .range([barTransform.applyX(margin.left), barTransform.applyX(tw - margin.right)]).padding(0.28);
-  // Clip zoomable content to the plot area, then bind the shared two-axis zoom behaviour.
-  tsvg.append('defs').append('clipPath').attr('id', 'trendClip').append('rect')
-    .attr('x', margin.left - 1).attr('y', 0)
-    .attr('width', Math.max(0, tw - margin.left - margin.right + 2)).attr('height', th);
-  const plotG = tsvg.append('g').attr('clip-path', 'url(#trendClip)');
+  const x0 = d3.scaleBand().domain(drawable.map(e => e.loc)).range([barTransform.applyX(margin.left), barTransform.applyX(tw - margin.right)]).padding(0.28);
+  const x1 = d3.scaleBand().domain(['cases','deaths']).range([0, x0.bandwidth()]).padding(0.12);
+  const x = x0;
+  tsvg.append('rect').attr('x',margin.left).attr('y',margin.top).attr('width',tw-margin.left-margin.right).attr('height',th-margin.top-margin.bottom).attr('fill',col('--color-neutral-800')).attr('fill-opacity',0.35).attr('stroke',col('--color-divider')).attr('stroke-width',1);
+  const yAxisG = tsvg.append('g').attr('transform',`translate(${margin.left},0)`).call(d3.axisLeft(y).ticks(3).tickSize(-(tw-margin.left-margin.right)).tickPadding(8).tickFormat(d=>d>=1000?(d/1000)+'k':d));
+  yAxisG.selectAll('text').attr('font-size','10px').attr('fill',col('--color-neutral-400'));
+  yAxisG.selectAll('line').attr('stroke',col('--color-divider')).attr('stroke-opacity',0.85);
+  yAxisG.selectAll('path').attr('stroke',col('--color-divider'));
+  tsvg.append('text').attr('x',margin.left-32).attr('y',margin.top+(th-margin.top-margin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${margin.left-32},${margin.top+(th-margin.top-margin.bottom)/2})`).attr('font-size','10px').attr('fill',col('--color-neutral-400')).text('Cases / deaths');
+  tsvg.append('defs').append('clipPath').attr('id', 'barsClip').append('rect')
+    .attr('x', margin.left - 8).attr('y', margin.top - 8)
+    .attr('width', Math.max(0, tw - margin.left - margin.right) + 16).attr('height', th - margin.top - margin.bottom + 16);
+  const plotG = tsvg.append('g').attr('clip-path', 'url(#barsClip)');
   installTrendZoom(tsvg, () => { barTransform = d3.zoomIdentity; }, t => { barTransform = t; if (lastBarsArgs) renderComparisonBars.apply(null, lastBarsArgs); });
-  y.ticks(3).forEach(t => { if (!t) return;
-    tsvg.append('line').attr('x1',margin.left).attr('x2',tw-margin.right).attr('y1',y(t)).attr('y2',y(t)).attr('stroke',col('--color-divider')).attr('stroke-width',1);
-    tsvg.append('text').attr('x',margin.left-8).attr('y',y(t)+3).attr('text-anchor','end').attr('font-size','11px').attr('fill',col('--color-neutral-400')).text(t>=1000?(t/1000)+'k':t);
-  });
   drawable.forEach(e => {
-    const cx = x(e.loc) + x.bandwidth()/2, bw = x.bandwidth(), v = e.data.value;
-    // Same colormap + min/max mapping as the map choropleth (shared helper), so bar shading is
-    // directly comparable with the map above. Target bar carries a crisp accent outline.
-    plotG.append('rect').attr('x',x(e.loc)).attr('width',bw).attr('y',y(v)).attr('height',(th-margin.bottom)-y(v))
-      .attr('rx',2).attr('fill', choroplethColor(v, domMax))
-      .attr('stroke', e.isTarget ? col('--color-accent-300') : 'none').attr('stroke-width', e.isTarget ? 1.4 : 0)
-      .style('cursor','default')
-      .on('mousemove', ev => showChartTip(ev,
-        `<p class="t-title">${e.loc}</p>` +
-        `<div class="t-row"><span>${new Date(e.data.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span><span>${v.toLocaleString()} ${measureName}</span></div>` +
-        `<div class="t-row"><span>${e.data.sources} vetting${e.data.sources>1?'s':''}</span><span>${e.dist?Math.round(e.dist).toLocaleString()+' km away':'target'}</span></div>` +
-        `<div class="t-foot">${e.isTarget ? 'Latest observation for this geography' : 'Nearest reporting region'}</div>`))
-      .on('mouseleave', hideChartTip);
-    plotG.append('text').attr('x',cx).attr('y',y(v)-5).attr('text-anchor','middle').attr('font-size','13px')
-      .attr('fill', e.isTarget ? col('--color-text') : col('--ink-3')).text(v.toLocaleString());
+    const baseX = x0(e.loc);
+    const bw1 = x1.bandwidth();
+    const cx = baseX + x0.bandwidth()/2;
+    const vC = e.casesData ? e.casesData.value : null;
+    const vD = e.deathsData ? e.deathsData.value : null;
+    // Cases bar (left) — shaded by data quality (opacity = factQuality of the canonical row)
+    if (vC != null && isFinite(vC)) {
+      const qC = e.casesData ? dateQuality(e.casesData.rowsAt) : null;
+      const oC = qC ? (qC.score>=0.66?1 : qC.score>=0.4?0.58:0.36) : 0.72;
+      const qLabC = qC ? qualityBand(qC.score).label : null;
+      plotG.append('rect').attr('x', baseX + x1('cases')).attr('width', bw1).attr('y', y(vC)).attr('height', (th-margin.bottom)-y(vC))
+        .attr('rx',2).attr('fill', col('--color-accent-300')).attr('opacity', oC)
+        .attr('stroke', e.isTarget ? col('--color-accent-300') : 'none').attr('stroke-width', e.isTarget ? 1.2 : 0)
+        .style('cursor','pointer').classed('glyph-hit',true)
+        .on('mousemove', ev => showChartTip(ev, `<p class="t-title">${e.loc}</p><div class="t-row"><span>${new Date(e.casesData.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span><span>${vC.toLocaleString()} cases</span></div><div class="t-row"><span>${e.casesData.sources} vetting${e.casesData.sources>1?'s':''}${qLabC?` · ${qLabC} quality`:''}</span><span>${e.dist?Math.round(e.dist).toLocaleString()+' km away':'target'}</span></div><div class="t-foot">${e.isTarget ? 'Latest observation' : 'Nearest region'} — cases · click for detail</div>`))
+        .on('mouseleave', hideChartTip)
+        .on('click', () => { hideChartTip(); openArticlePopup(e.casesData.date, e.casesData.rowsAt || []); });
+      plotG.append('text').attr('x', baseX + x1('cases') + bw1/2).attr('y', Math.max(margin.top+10, Math.min(y(vC)-9, (th-margin.bottom)-14))).attr('text-anchor','middle').attr('font-size','10px').attr('fill', e.isTarget ? col('--color-text') : col('--ink-3')).text(vC.toLocaleString());
+    }
+    // Deaths bar (right) — shaded by data quality
+    if (vD != null && isFinite(vD)) {
+      const qD = e.deathsData ? dateQuality(e.deathsData.rowsAt) : null;
+      const oD = qD ? (qD.score>=0.66?1 : qD.score>=0.4?0.58:0.36) : 0.72;
+      const qLabD = qD ? qualityBand(qD.score).label : null;
+      plotG.append('rect').attr('x', baseX + x1('deaths')).attr('width', bw1).attr('y', y(vD)).attr('height', (th-margin.bottom)-y(vD))
+        .attr('rx',2).attr('fill', '#b45c64').attr('opacity', oD)
+        .attr('stroke', e.isTarget ? col('--color-accent-300') : 'none').attr('stroke-width', e.isTarget ? 1.2 : 0)
+        .style('cursor','pointer').classed('glyph-hit',true)
+        .on('mousemove', ev => showChartTip(ev, `<p class="t-title">${e.loc}</p><div class="t-row"><span>${new Date(e.deathsData.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span><span>${vD.toLocaleString()} deaths</span></div><div class="t-row"><span>${e.deathsData.sources} vetting${e.deathsData.sources>1?'s':''}${qLabD?` · ${qLabD} quality`:''}</span><span>${e.dist?Math.round(e.dist).toLocaleString()+' km away':'target'}</span></div><div class="t-foot">${e.isTarget ? 'Latest observation' : 'Nearest region'} — deaths · click for detail</div>`))
+        .on('mouseleave', hideChartTip)
+        .on('click', () => { hideChartTip(); openArticlePopup(e.deathsData.date, e.deathsData.rowsAt || []); });
+      plotG.append('text').attr('x', baseX + x1('deaths') + bw1/2).attr('y', Math.max(margin.top+10, Math.min(y(vD)-9, (th-margin.bottom)-14))).attr('text-anchor','middle').attr('font-size','10px').attr('fill', e.isTarget ? col('--color-text') : col('--ink-3')).text(vD.toLocaleString());
+    }
     // Ghost diamonds: this geography's OTHER observations in the record window. Thick strokes
     // keep them readable over the map-coloured bar fill.
     if (e.isTarget) {
-      cts.slice(0,-1).forEach(p => {
-        const g = plotG.append('path').attr('transform',`translate(${cx},${y(p.value)})`)
-          .attr('d', d3.symbol().type(d3.symbolDiamond).size(40)())
-          .attr('fill','none').attr('stroke',col('--color-accent-200')).attr('stroke-width',2.2).attr('opacity',0.9)
-          .style('cursor','pointer')
-          .on('mousemove', ev => showChartTip(ev,
-            `<p class="t-title">${new Date(p.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p>` +
-            `<div class="t-row"><span>Earlier observation</span><span>${p.value.toLocaleString()} ${measureName}</span></div>` +
-            `<div class="t-row"><span>${p.sources} vetting${p.sources>1?'s':''}</span><span>click for detail</span></div>`))
+      // Ghost diamonds for earlier observations - per measure with hue
+      const baseX = x0(e.loc);
+      ctsCases.slice(0,-1).forEach(p => {
+        const gx = baseX + x1('cases') + x1.bandwidth()/2, gy = y(p.value);
+        const tipC = () => `<p class="t-title">${new Date(p.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p><div class="t-row"><span>Earlier observation — cases</span><span>${p.value.toLocaleString()}</span></div><div class="t-row"><span>${p.sources} vetting${p.sources>1?'s':''}</span><span>click for detail</span></div>`;
+        addHollowHit(plotG, gx, gy, tipC, () => openArticlePopup(p.date, p.rows||[]));
+        plotG.append('path').attr('transform',`translate(${gx},${gy})`)
+          .attr('d', d3.symbol().type(d3.symbolCircle).size(40)())
+          .attr('fill','none').attr('stroke',col('--color-accent-300')).attr('stroke-width',2.2).attr('opacity',0.9)
+          .style('cursor','pointer').classed('glyph-hit',true)
+          .on('mousemove', ev => showChartTip(ev, tipC()))
           .on('mouseleave', hideChartTip)
           .on('click', () => openArticlePopup(p.date, p.rows||[]));
       });
-      excludedByDate(viewRows(), effectiveTp, targetLoc, measure).forEach((rs, date) => rs.forEach((r,i) => {
-        const v2 = +r.value; if (isNaN(v2)) return;
-        const jx = cx + (i-(rs.length-1)/2)*3.6;
-        const chi = r.quality_flag === 'chi-sq';
-        plotG.append('path').attr('transform',`translate(${jx},${y(v2)})${chi?'':' rotate(180)'}`)
-          .attr('d', d3.symbol().type(chi?d3.symbolSquare:d3.symbolTriangle).size(22)())
-          .attr('fill','none').attr('stroke','#cf7b82').attr('stroke-width',2).attr('opacity',0.85).style('cursor','pointer')
-          .on('mousemove', ev => showChartTip(ev,
-            `<p class="t-title">${new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · excluded</p>` +
-            `<div class="t-row"><span>Reported ${measureName}</span><span>${v2.toLocaleString()}</span></div>` +
-            `<div class="t-foot">${chi?'Failed the chi-square screen':'Breaks cumulative monotonicity'} — not plotted</div>`))
-          .on('mouseleave', hideChartTip);
-      }));
+      ctsDeaths.slice(0,-1).forEach(p => {
+        const gx = baseX + x1('deaths') + x1.bandwidth()/2, gy = y(p.value);
+        const tipD = () => `<p class="t-title">${new Date(p.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p><div class="t-row"><span>Earlier observation — deaths</span><span>${p.value.toLocaleString()}</span></div><div class="t-row"><span>${p.sources} vetting${p.sources>1?'s':''}</span><span>click for detail</span></div>`;
+        addHollowHit(plotG, gx, gy, tipD, () => openArticlePopup(p.date, p.rows||[]));
+        plotG.append('path').attr('transform',`translate(${gx},${gy})`)
+          .attr('d', d3.symbol().type(d3.symbolDiamond).size(40)())
+          .attr('fill','none').attr('stroke','#b45c64').attr('stroke-width',2.2).attr('opacity',0.9)
+          .style('cursor','pointer').classed('glyph-hit',true)
+          .on('mousemove', ev => showChartTip(ev, tipD()))
+          .on('mouseleave', hideChartTip)
+          .on('click', () => openArticlePopup(p.date, p.rows||[]));
+      });
+      // Excluded glyphs per measure
+      [ [ctsCases, casesMeasure, col('--color-accent-300')], [ctsDeaths, deathsMeasure, '#b45c64'] ].forEach(([ctsArr, meas, colStr]) => {
+        excludedByDate(viewRows(), effectiveTp, targetLoc, meas).forEach((rs, date) => rs.forEach((r,i) => {
+          const v2 = +r.value; if (isNaN(v2)) return;
+          const isCases = meas === casesMeasure;
+          const jx = baseX + x1(isCases ? 'cases' : 'deaths') + x1.bandwidth()/2 + (i-(rs.length-1)/2)*3.6;
+          const chi = r.quality_flag === 'chi-sq';
+          const jy = y(v2);
+          const tipEx = () => `<p class="t-title">${new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · excluded</p><div class="t-row"><span>Reported ${isCases ? 'cases' : 'deaths'}</span><span>${v2.toLocaleString()}</span></div><div class="t-foot">${chi?'Failed the chi-square screen':'Breaks cumulative monotonicity'} — not plotted</div>`;
+          addHollowHit(plotG, jx, jy, tipEx, null);
+          plotG.append('path').attr('transform',`translate(${jx},${jy})${chi?'':' rotate(180)'}`)
+            .attr('d', d3.symbol().type(chi?d3.symbolSquare:d3.symbolTriangle).size(22)())
+            .attr('fill','none').attr('stroke',chi ? '#cf7b82' : colStr).attr('stroke-width',2).attr('opacity',0.85).style('cursor','pointer').classed('glyph-hit',true)
+            .on('mousemove', ev => showChartTip(ev, tipEx()))
+            .on('mouseleave', hideChartTip);
+        }));
+      });
     }
     // X labels: short name (dynamically truncated to the band width), plus the observation
     // date under the target bar.
     const short = e.loc.split(',')[0];
     const maxChars = Math.max(6, Math.floor(x.step() / 7));
     const name = short.length > maxChars ? short.slice(0, maxChars-1)+'…' : short;
-    plotG.append('text').attr('x',cx).attr('y',th-16).attr('text-anchor','middle').attr('font-size','12px')
+    tsvg.append('text').attr('x',cx).attr('y',th-24).attr('text-anchor','middle').attr('font-size','12px')
       .attr('fill', e.isTarget ? col('--color-text') : col('--color-neutral-400')).text(name);
-    if (e.isTarget) plotG.append('text').attr('x',cx).attr('y',th-4).attr('text-anchor','middle')
+    if (e.isTarget) tsvg.append('text').attr('x',cx).attr('y',th-9).attr('text-anchor','middle')
       .attr('font-size','11px').attr('fill',col('--color-accent-200'))
       .text('as of ' + new Date(chosen.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'}));
   });
-  tsvg.append('text').attr('x',margin.left+2).attr('y',margin.top+9).attr('font-size','11px').attr('font-style','italic')
-    .attr('fill',col('--color-neutral-400'))
-    .text(`Bar plot selected due to lack of time series data (${cts.length} observation${cts.length===1?'':'s'})`);
-  // Source-per-day strip still makes sense for the target itself.
-  // Single-series strip in the bars view wears the SAME fill as the national histogram
-  // (SRC_HIST.fill), not the trend line's accent — one histogram identity across views.
+  // Source-per-day strip still makes sense for the target itself — include target-only
+  // rejected stacks so histogram change from time-series to bars is obvious.
   const styleObj = {}; styleObj[targetLoc] = { color: SRC_HIST.fill() };
-  renderSubSourceChart([{ loc: targetLoc, pts: cts }], styleObj);
+  const rejByDate = new Map();
+  [casesMeasure, deathsMeasure].forEach(m=>{
+    excludedByDate(viewRows(), effectiveTp, targetLoc, m).forEach((arr,date)=>{
+      const cur = rejByDate.get(date) || {rej:0, rejRows:[]};
+      cur.rej += arr.length;
+      cur.rejRows.push(...arr);
+      rejByDate.set(date, cur);
+    });
+  });
+  const ctsHist = cts.map(p=>{
+    const r = rejByDate.get(p.date);
+    return r ? {...p, rej: r.rej, rejRows: r.rejRows} : p;
+  });
+  rejByDate.forEach((v,date)=>{
+    if(!ctsHist.some(p=>p.date===date)) ctsHist.push({date, rows:[], sources:0, value:null, rej: v.rej, rejRows: v.rejRows});
+  });
+  ctsHist.sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:0);
+  renderSubSourceChart([{ loc: targetLoc, pts: ctsHist }], styleObj);
 }
 
 // One zoom behaviour per svg, re-pointed at whichever renderer owns it. The behaviour object
@@ -2387,21 +2649,25 @@ function renderChart(series, effectiveTp) {
   lastChartArgs = [series, effectiveTp];
   const xBase = d3.scaleUtc().domain(d3.extent(allDates)).range([margin.left, tw-margin.right]);
   const x = trendTransform.rescaleX(xBase);
-  installTrendZoom(tsvg, () => { trendTransform = d3.zoomIdentity; }, t => { trendTransform = t; if (lastChartArgs) renderChart.apply(null, lastChartArgs); });
-  // Clip all zoomable content to the plot area: rescaled points outside the visible window
-  // would otherwise draw into the axis gutters / past the card edge when zoomed or panned.
-  tsvg.append('defs').append('clipPath').attr('id', 'trendClip').append('rect')
-    .attr('x', margin.left - 1).attr('y', 0)
-    .attr('width', Math.max(0, tw - margin.left - margin.right + 2)).attr('height', th);
-  const plotG = tsvg.append('g').attr('clip-path', 'url(#trendClip)');
-  const maxCases = Math.max(d3.max(series, d=>d.cases)||0, projCases ? d3.max(projCases,p=>p.p75) : 0, 1);
-  const yBase = d3.scaleLinear().domain([0, maxCases*1.1]).range([th-margin.bottom, margin.top]);
+  const maxVal = Math.max(d3.max(series, d=>d.cases)||0, d3.max(series, d=>d.deaths)||0, projCases ? d3.max(projCases,p=>p.p75) : 0, projDeaths ? d3.max(projDeaths,p=>p.p75) : 0, 1);
+  const yBase = d3.scaleLinear().domain([0, maxVal*1.1]).range([th-margin.bottom, margin.top]);
   const y = trendTransform.rescaleY(yBase);
-  const gGrid = tsvg.append('g');
-  y.ticks(4).forEach(t => {
-    gGrid.append('line').attr('x1',margin.left).attr('x2',tw-margin.right).attr('y1',y(t)).attr('y2',y(t)).attr('stroke', col('--color-divider')).attr('stroke-width',1);
-    gGrid.append('text').attr('x',margin.left-8).attr('y',y(t)+3).attr('text-anchor','end').attr('font-size','10px').attr('fill', col('--color-neutral-400')).text(t>=1000? (t/1000)+'k' : t);
-  });
+  // Plot area box + axes (before clipped content so grid stays behind data)
+  tsvg.append('rect').attr('x',margin.left).attr('y',margin.top).attr('width',tw-margin.left-margin.right).attr('height',th-margin.top-margin.bottom).attr('fill',col('--color-neutral-800')).attr('fill-opacity',0.35).attr('stroke',col('--color-divider')).attr('stroke-width',1);
+  const yAxisG = tsvg.append('g').attr('transform',`translate(${margin.left},0)`).call(d3.axisLeft(y).ticks(4).tickSize(-(tw-margin.left-margin.right)).tickPadding(8).tickFormat(d=>d>=1000?(d/1000)+'k':d));
+  yAxisG.selectAll('text').attr('font-size','10px').attr('fill',col('--color-neutral-400'));
+  yAxisG.selectAll('line').attr('stroke',col('--color-divider')).attr('stroke-opacity',0.85);
+  yAxisG.selectAll('path').attr('stroke',col('--color-divider'));
+  const xAxisG = tsvg.append('g').attr('transform',`translate(0,${th-margin.bottom})`).call(d3.axisBottom(x).ticks(5).tickSize(4).tickPadding(4));
+  xAxisG.selectAll('text').attr('font-size','10px').attr('fill',col('--color-neutral-400'));
+  xAxisG.selectAll('path,line').attr('stroke',col('--color-divider'));
+  tsvg.append('text').attr('x',margin.left-32).attr('y',margin.top+(th-margin.top-margin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${margin.left-32},${margin.top+(th-margin.top-margin.bottom)/2})`).attr('font-size','10px').attr('fill',col('--color-neutral-400')).text('Cases / deaths');
+  installTrendZoom(tsvg, () => { trendTransform = d3.zoomIdentity; }, t => { trendTransform = t; if (lastChartArgs) renderChart.apply(null, lastChartArgs); });
+  // Clip all zoomable content to the plot interior
+  tsvg.append('defs').append('clipPath').attr('id', 'trendClip').append('rect')
+    .attr('x', margin.left - 8).attr('y', margin.top - 8)
+    .attr('width', Math.max(0, tw - margin.left - margin.right) + 16).attr('height', th - margin.top - margin.bottom + 16);
+  const plotG = tsvg.append('g').attr('clip-path', 'url(#trendClip)');
   // Forecast fan (p25–p75 band + dashed p50) drawn behind the observed lines, anchored to the last figure.
   function drawBand(proj, anchor, anchorVal, color) {
     if (!proj || anchorVal == null || !anchor) return;
@@ -2426,11 +2692,6 @@ function renderChart(series, effectiveTp) {
   const lineDeaths = d3.line().defined(d=>d.deaths!=null).x(d=>x(new Date(d.date))).y(d=>y(d.deaths));
   plotG.append('path').datum(series).attr('d', lineCases).attr('fill','none').attr('stroke', col('--color-accent-300')).attr('stroke-width',2);
   plotG.append('path').datum(series).attr('d', lineDeaths).attr('fill','none').attr('stroke', '#b45c64').attr('stroke-width',2);
-  const shownDates = series.filter(d=>d.cases!=null||d.deaths!=null).map(d=>d.date);
-  [shownDates[0], shownDates[shownDates.length-1]].forEach((d,i) => {
-    if (!d) return;
-    plotG.append('text').attr('x', x(new Date(d))).attr('y', th-4).attr('text-anchor', i===0?'start':'end').attr('font-size','10px').attr('fill', col('--color-neutral-400')).text(new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short'}));
-  });
   tsvg.append('circle').attr('cx',margin.left).attr('cy',margin.top-2).attr('r',3).attr('fill',col('--color-accent-300'));
   tsvg.append('text').attr('x',margin.left+8).attr('y',margin.top+2).attr('font-size','10.5px').attr('fill',col('--color-text')).text('Cases');
   tsvg.append('path').attr('transform',`translate(${margin.left+58},${margin.top-2})`).attr('d', d3.symbol().type(d3.symbolDiamond).size(42)()).attr('fill','#b45c64');
@@ -2449,17 +2710,12 @@ function renderChart(series, effectiveTp) {
         const jx = cx0 + (i - (alts.length - 1) / 2) * 3.6;
         const vy = y(+r.value);
         if (!isFinite(vy)) return;
+        const tipRej = () => `<p class="t-title">${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · not canonical</p><div class="t-row"><span>${label}</span><span>${(+r.value).toLocaleString()}</span></div><div class="t-row"><span>${r.location}</span><span>${(+r.n_sources||1)} vetting${(+r.n_sources||1)>1?'s':''}</span></div>` + ((rowsKey==='caseRows'&&d.cases!=null)||(rowsKey==='deathRows'&&d.deaths!=null) ? `<div class="t-row"><span>Canonical figure</span><span>${(rowsKey==='caseRows'?d.cases:d.deaths).toLocaleString()}</span></div>` : '') + `<div class="t-foot">${r.canonical_reason?canonReasonLabel(r.canonical_reason)+' — ':''}Superseded by the canonical figure · click for detail</div>`;
+        addHollowHit(dotsG, jx, vy, tipRej, () => { hideChartTip(); openArticlePopup(d.date, d[rowsKey] || []); });
         dotsG.append('circle').attr('cx', jx).attr('cy', vy).attr('r', 2.9)
           .attr('fill', 'none').attr('stroke', baseColor).attr('stroke-width', 1.1).attr('opacity', 0.65)
-          .style('cursor', 'pointer')
-          .on('mousemove', (ev) => showChartTip(ev,
-            `<p class="t-title">${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · not canonical</p>` +
-            `<div class="t-row"><span>${label}</span><span>${(+r.value).toLocaleString()}</span></div>` +
-            `<div class="t-row"><span>${r.location}</span><span>${(+r.n_sources||1)} vetting${(+r.n_sources||1)>1?'s':''}</span></div>` +
-            ((rowsKey==='caseRows'&&d.cases!=null)||(rowsKey==='deathRows'&&d.deaths!=null)
-              ? `<div class="t-row"><span>Canonical figure</span><span>${(rowsKey==='caseRows'?d.cases:d.deaths).toLocaleString()}</span></div>`
-              : '') +
-            `<div class="t-foot">${r.canonical_reason?canonReasonLabel(r.canonical_reason)+' — ':''}Superseded by the canonical figure · click for detail</div>`))
+          .style('cursor', 'pointer').classed('glyph-hit',true)
+          .on('mousemove', (ev) => showChartTip(ev, tipRej()))
           .on('mouseleave', hideChartTip)
           .on('click', () => { hideChartTip(); openArticlePopup(d.date, d[rowsKey] || []); });
       });
@@ -2473,9 +2729,9 @@ function renderChart(series, effectiveTp) {
       const va = vettingsAndArticles(d[rowsKey]);
       const mr = medianRawScores(d[rowsKey]);
       const dot = shape==='diamond'
-        ? dotsG.append('path').attr('transform',`translate(${cx},${cy})`).attr('d', d3.symbol().type(d3.symbolDiamond).size(46)())
-        : dotsG.append('circle').attr('cx',cx).attr('cy',cy).attr('r',3.2);
-      dot.attr('fill', baseColor).attr('stroke', col('--color-bg')).attr('stroke-width',1).style('cursor','pointer');
+        ? dotsG.append('path').attr('transform',`translate(${cx},${cy})`).attr('d', d3.symbol().type(d3.symbolDiamond).size(64)())
+        : dotsG.append('circle').attr('cx',cx).attr('cy',cy).attr('r',4.6);
+      dot.attr('fill', baseColor).attr('stroke', col('--color-bg')).attr('stroke-width',1).style('cursor','pointer').classed('glyph-hit',true);
       dot.on('mousemove', (ev) => showChartTip(ev,
           `<p class="t-title">${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p>` +
           `<div class="t-row"><span>${reportType} cases</span><span>${d.cases!=null?d.cases.toLocaleString():'—'}</span></div>` +
@@ -2504,16 +2760,14 @@ function renderChart(series, effectiveTp) {
         const jx = cx0 + (i - (rs.length - 1) / 2) * 3.6;
         const vy = y(v); if (!isFinite(vy)) return;
         const chi = r.quality_flag === 'chi-sq';
+        const tipEx2 = () => `<p class="t-title">${new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · excluded</p><div class="t-row"><span>${measureName}</span><span>${v.toLocaleString()}</span></div><div class="t-row"><span>${r.location}</span><span>${+r.n_sources||1} vetting${(+r.n_sources||1)>1?'s':''}</span></div><div class="t-foot">${chi ? 'Failed the chi-square screen — not plotted' : 'Breaks cumulative monotonicity — not plotted'} · click for detail</div>`;
+        addHollowHit(dotsG, jx, vy, tipEx2, () => { hideChartTip(); openArticlePopup(date, rs); });
         dotsG.append('path')
           .attr('transform', `translate(${jx},${vy})${chi ? '' : ' rotate(180)'}`)
           .attr('d', d3.symbol().type(chi ? d3.symbolSquare : d3.symbolTriangle).size(34)())
           .attr('fill', 'none').attr('stroke', baseColor).attr('stroke-width', 1.1).attr('opacity', 0.7)
-          .style('cursor', 'pointer')
-          .on('mousemove', (ev) => showChartTip(ev,
-            `<p class="t-title">${new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · excluded</p>` +
-            `<div class="t-row"><span>${measureName}</span><span>${v.toLocaleString()}</span></div>` +
-            `<div class="t-row"><span>${r.location}</span><span>${+r.n_sources||1} vetting${(+r.n_sources||1)>1?'s':''}</span></div>` +
-            `<div class="t-foot">${chi ? 'Failed the chi-square screen — not plotted' : 'Breaks cumulative monotonicity — not plotted'} · click for detail</div>`))
+          .style('cursor', 'pointer').classed('glyph-hit',true)
+          .on('mousemove', (ev) => showChartTip(ev, tipEx2()))
           .on('mouseleave', hideChartTip)
           .on('click', () => { hideChartTip(); openArticlePopup(date, rs); });
       });
@@ -2570,49 +2824,64 @@ function renderSourceChart(series) {
     bins = [];
     let cur = null;
     shown.forEach(d => {
-      if (!cur || (new Date(d.date) - new Date(cur.date)) >= 7 * 86400000) { cur = { date: d.date, vet: 0, rows: [] }; bins.push(cur); }
+      if (!cur || (new Date(d.date) - new Date(cur.date)) >= 7 * 86400000) { cur = { date: d.date, vet: 0, rej: 0, rows: [], rejRows: [] }; bins.push(cur); }
       cur.vet += d.sources || 0;
       cur.rows.push(...(d.caseRows || []), ...(d.deathRows || []));
+      cur.rejRows.push(...(d.rejectedRows || []));
+      cur.rej += (d.rejectedRows || []).length;
     });
   } else {
-    bins = shown.map(d => ({ date: d.date, vet: d.sources || 0, rows: [...(d.caseRows || []), ...(d.deathRows || [])] }));
+    bins = shown.map(d => ({ date: d.date, vet: d.sources || 0, rej: (d.rejectedRows||[]).length, rows: [...(d.caseRows || []), ...(d.deathRows || [])], rejRows: d.rejectedRows || [] }));
   }
-  const maxS = Math.max(1, ...bins.map(b => b.vet));
+  const maxS = Math.max(1, ...bins.map(b => b.vet + b.rej));
   const y = d3.scaleLinear().domain([0, maxS*1.15]).range([shTh-shMargin.bottom, shMargin.top]);
-  y.ticks(2).forEach(t => {
-    shsvg.append('line').attr('x1',shMargin.left).attr('x2',shTw-shMargin.right).attr('y1',y(t)).attr('y2',y(t))
-      .attr('stroke', col('--color-divider')).attr('stroke-width',1);
-    if (t > 0) shsvg.append('text').attr('x',shMargin.left-6).attr('y',y(t)+3).attr('text-anchor','end')
-      .attr('font-size','9.5px').attr('fill', col('--color-neutral-400')).text(t);
-  });
+  // Plot area box + y-axis with ticks, and x-axis
+  shsvg.append('rect').attr('x',shMargin.left).attr('y',shMargin.top).attr('width',shTw-shMargin.left-shMargin.right).attr('height',shTh-shMargin.top-shMargin.bottom).attr('fill',col('--color-neutral-800')).attr('fill-opacity',0.35).attr('stroke',col('--color-divider')).attr('stroke-width',1);
+  const syAxisG = shsvg.append('g').attr('transform',`translate(${shMargin.left},0)`).call(d3.axisLeft(y).ticks(2).tickSize(-(shTw-shMargin.left-shMargin.right)).tickPadding(6).tickFormat(d=>d));
+  syAxisG.selectAll('text').attr('font-size','9.5px').attr('fill',col('--color-neutral-400'));
+  syAxisG.selectAll('line').attr('stroke',col('--color-divider')).attr('stroke-opacity',0.85);
+  syAxisG.selectAll('path').attr('stroke',col('--color-divider'));
+  const sxAxisG = shsvg.append('g').attr('transform',`translate(0,${shTh-shMargin.bottom})`).call(d3.axisBottom(x).ticks(4).tickSize(4).tickPadding(4));
+  sxAxisG.selectAll('text').attr('font-size','9.5px').attr('fill',col('--color-neutral-400'));
+  sxAxisG.selectAll('path,line').attr('stroke',col('--color-divider'));
+  shsvg.append('text').attr('x',shMargin.left-28).attr('y',shMargin.top+(shTh-shMargin.top-shMargin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${shMargin.left-28},${shMargin.top+(shTh-shMargin.top-shMargin.bottom)/2})`).attr('font-size','9.5px').attr('fill',col('--color-neutral-400')).text('Vettings');
+  shsvg.append('defs').append('clipPath').attr('id','sourceClip').append('rect').attr('x',shMargin.left-8).attr('y',shMargin.top-8).attr('width',shTw-shMargin.left-shMargin.right+16).attr('height',shTh-shMargin.top-shMargin.bottom+16);
+  const plotGS = shsvg.append('g').attr('clip-path','url(#sourceClip)');
   const bw = SRC_HIST.barWidth(step);
   bins.forEach(b => {
     const { art, dom } = vettingsAndArticles(b.rows);
-    shsvg.append('rect')
-      .attr('x', Math.max(shMargin.left, x(new Date(b.date)) - bw/2)).attr('width', bw)
+    plotGS.append('rect')
+      .attr('x', Math.min(Math.max(shMargin.left, x(new Date(b.date)) - bw/2), shTw - shMargin.right - bw)).attr('width', bw)
       .attr('y', y(b.vet)).attr('height', (shTh-shMargin.bottom) - y(b.vet))
       .attr('fill', SRC_HIST.fill()).attr('rx', 1)
-      .style('cursor','pointer')
-      .on('mouseover', function(){ d3.select(this).attr('fill', SRC_HIST.hover()); })
+      .style('cursor','pointer').classed('glyph-hit',true)
       .on('mousemove', ev => showChartTip(ev, srcHistTip(b.date, b.vet, art, dom)))
-      .on('mouseout', function(){ d3.select(this).attr('fill', SRC_HIST.fill()); hideChartTip(); })
+      .on('mouseleave', hideChartTip)
       .on('click', (ev) => { hideChartTip(); openArticlePopup(b.date, b.rows); });
-  });
-  [shown[0], shown[shown.length-1]].forEach((d,i) => {
-    if (!d) return;
-    shsvg.append('text').attr('x', x(new Date(d))).attr('y', shTh-5).attr('text-anchor', i===0?'start':'end')
-      .attr('font-size','9.5px').attr('fill', col('--color-neutral-400'))
-      .text(new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'}));
+    if (b.rej) {
+      const { art: rArt, dom: rDom } = vettingsAndArticles(b.rejRows);
+      plotGS.append('rect')
+        .attr('x', Math.min(Math.max(shMargin.left, x(new Date(b.date)) - bw/2), shTw - shMargin.right - bw)).attr('width', bw)
+        .attr('y', y(b.vet+b.rej)).attr('height', y(b.vet) - y(b.vet+b.rej))
+        .attr('fill', col('--color-neutral-500')).attr('fill-opacity',0.5).attr('rx', 1)
+        .style('cursor','pointer').classed('glyph-hit',true)
+        .on('mousemove', ev => showChartTip(ev,
+          `<p class="t-title">${new Date(b.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p>` +
+          `<div class="t-row"><span>${b.rej} screened out</span><span>${rArt} article${rArt!==1?'s':''} · ${rDom} domain${rDom!==1?'s':''}</span></div>` +
+          `<div class="t-foot">Failed chi-square or monotonicity screening — click for detail</div>`))
+        .on('mouseleave', hideChartTip)
+        .on('click', (ev) => { hideChartTip(); openArticlePopup(b.date, b.rejRows); });
+    }
   });
 }
 
-document.getElementById('subMeasureSeg').addEventListener('click', (e) => {
+document.getElementById('subMeasureSeg')?.addEventListener('click', (e) => {
   const btn = e.target.closest('.seg-opt'); if (!btn) return;
   subMeasure = btn.dataset.m;
   document.querySelectorAll('#subMeasureSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
   renderTrendSection();
 });
-document.getElementById('trendBack').addEventListener('click', () => { trendMode = { mode:'national' }; plotViewSel='auto'; highlightSubLoc=null; showSubnational=false; const cb=document.getElementById('subToggle'); if(cb) cb.checked=false; renderTrendSection(); });
+document.getElementById('trendBack')?.addEventListener('click', () => { trendMode = { mode:'national' }; plotViewSel='auto'; highlightSubLoc=null; showSubnational=false; const cb=document.getElementById('subToggle'); if(cb) cb.checked=false; renderTrendSection(); });
 // Retired: the subnational checkbox was superseded by the Bars/National/Subnational switcher.
 // Kept as a no-op so existing callers stay valid; availability now drives the switcher button.
 function updateSubToggleVisibility(country, pathogen) {
@@ -2633,30 +2902,39 @@ document.getElementById('subToggle')?.addEventListener('change', (e) => {
 });
 function renderSubnationalTrend() {
   const { country, pathogen } = trendMode;
-  const measure = 'confirmed_' + subMeasure;
+  const casesMeasure = reportType + '_cases';
+  const deathsMeasure = reportType + '_deaths';
   const label = PATHOGEN_LABELS[pathogen] || pathogen;
-  document.getElementById('trendTitle').textContent = `${label} · ${country} — subnational ${subMeasure}`;
+  document.getElementById('trendTitle').textContent = `${label} · ${country}`;
+  document.getElementById('trendSubtitle').textContent = `${reportType} cases & deaths`;
+  document.getElementById('sourceSubtitle').textContent = 'Sources per day (stacked)';
   document.getElementById('trendMeta').textContent = '';
-  const outEl = document.getElementById('outlierNote'); if (outEl) outEl.textContent = '';
-  const locs0 = subnationalLocations(pathogen, country, measure);
-  const peak = {}; viewRows().filter(r=>r.pathogen===pathogen && !isNational(r.location) && geoCountry(r.location)===country && r.measure===measure && r.outlier==='False').forEach(r=>{ peak[r.location]=Math.max(peak[r.location]||0, +r.value||0); });
+  const locsCases = subnationalLocations(pathogen, country, casesMeasure);
+  const locsDeaths = subnationalLocations(pathogen, country, deathsMeasure);
+  const locs0 = [...new Set([...locsCases, ...locsDeaths])];
+  const peak = {}; viewRows().filter(r=>r.pathogen===pathogen && !isNational(r.location) && geoCountry(r.location)===country && (r.measure===casesMeasure || r.measure===deathsMeasure) && r.outlier==='False').forEach(r=>{ peak[r.location]=Math.max(peak[r.location]||0, +r.value||0); });
   const ranked = locs0.slice().sort((a,b)=>(peak[b]||0)-(peak[a]||0));
   const NAMED_MAX = 8;
   const locs = ranked.slice(0, NAMED_MAX);
   const rest = ranked.slice(NAMED_MAX);
   const OTHER = rest.length ? `Other (${rest.length} location${rest.length>1?'s':''})` : null;
-  const aggregateExcluded = subnationalLocationsRaw(pathogen, country, measure).filter(isAggregateLoc);
+  const aggregateExcluded = [...subnationalLocationsRaw(pathogen, country, casesMeasure), ...subnationalLocationsRaw(pathogen, country, deathsMeasure)].filter(isAggregateLoc);
   const style = {}; locs.forEach((l,i)=>style[l]={color:SUB_PALETTE[i%SUB_PALETTE.length], sym:SUB_SYMBOLS[i%SUB_SYMBOLS.length]});
   if (OTHER) style[OTHER] = { color: col('--color-neutral-400'), sym: d3.symbolCircle };
   // The tail is summed into one series rather than dropped, so the plot still accounts for it.
   let otherPts = [];
   if (OTHER) {
     const acc = new Map();
-    rest.forEach(loc => canonicalByDate(viewRows(), pathogen, loc, measure).forEach((p, d) => {
-      if (p.value == null) return;
-      if (!acc.has(d)) acc.set(d, { date: d, value: 0, rows: [], sources: 0 });
-      const e = acc.get(d); e.value += p.value; e.rows.push(...(p.rows || [])); e.sources += (p.sources || 0);
-    }));
+    rest.forEach(loc => {
+      const mapC = canonicalByDate(viewRows(), pathogen, loc, casesMeasure);
+      const mapD = canonicalByDate(viewRows(), pathogen, loc, deathsMeasure);
+      const combinedOther = new Map([...mapC, ...Array.from(mapD.entries()).filter(([k,v])=>!mapC.has(k))]);
+      combinedOther.forEach((p, d) => {
+        if (p.value == null) return;
+        if (!acc.has(d)) acc.set(d, { date: d, value: 0, rows: [], sources: 0 });
+        const e = acc.get(d); e.value += p.value; e.rows.push(...(p.rows || [])); e.sources += (p.sources || 0);
+      });
+    });
     otherPts = [...acc.values()].sort((a, b) => a.date < b.date ? -1 : 1);
   }
   const esc = s => String(s).replace(/"/g, '&quot;');
@@ -2671,47 +2949,103 @@ function renderSubnationalTrend() {
   document.querySelectorAll('#subLegend .sub-swatch[data-loc]').forEach(sw => {
     sw.addEventListener('click', () => { highlightSubLoc = highlightSubLoc === sw.dataset.loc ? null : sw.dataset.loc; renderSubnationalTrend(); });
   });
-  const perLoc = locs.map(loc => ({ loc, pts:[...canonicalByDate(viewRows(), pathogen, loc, measure).values()] }))
-    .concat(OTHER ? [{ loc: OTHER, pts: otherPts }] : []);
+  const perLoc = locs.map(loc => {
+    const ptsC = [...canonicalByDate(viewRows(), pathogen, loc, casesMeasure).values()].filter(p=>p.value!=null);
+    const ptsD = [...canonicalByDate(viewRows(), pathogen, loc, deathsMeasure).values()].filter(p=>p.value!=null);
+    // Merge by date: for each date, keep both values if available, but for line we need separate series
+    // For now, pts is union sorted by date where each entry is max of cases/deaths? To preserve both, we keep combined as union for domain, but rendering will handle both separately
+    const byDate = new Map();
+    ptsC.forEach(p=>{ byDate.set(p.date, {date:p.date, cases:p.value, deaths: byDate.get(p.date)?.deaths || null, rowsC:p.rows, rowsD: byDate.get(p.date)?.rowsD||[]})});
+    ptsD.forEach(p=>{ const e=byDate.get(p.date)||{date:p.date, cases:null, deaths:null}; e.deaths=p.value; e.rowsD=p.rows; byDate.set(p.date,e);});
+    const pts = [...byDate.values()].map(e=>({date:e.date, value: e.cases!=null?e.cases:e.deaths, cases:e.cases, deaths:e.deaths, rows:e.rows||e.rowsD}));
+    return { loc, pts, ptsCases: ptsC, ptsDeaths: ptsD };
+  }).concat(OTHER ? [{ loc: OTHER, pts: otherPts }] : []);
   tsvg.selectAll('*').remove();
   tw = Math.max(340, Math.round((document.getElementById('chartWrap')||{}).clientWidth||620));
   tsvg.attr('viewBox', `0 0 ${tw} ${th}`);
   const allPts = perLoc.flatMap(s=>s.pts).filter(p=>p.value!=null);
-  if (!allPts.length) { tsvg.append('text').attr('x',tw/2).attr('y',th/2).attr('text-anchor','middle').attr('font-size','12px').attr('fill',col('--color-neutral-400')).text('No subnational '+subMeasure+' series for '+country); renderSubSourceChart(perLoc, style); return; }
+  // Outlier note aligned to plotted glyphs (subnational) + standardized subtitle
+  {
+    let exC = 0;
+    locs0.forEach(loc => {
+      excludedByDate(viewRows(), pathogen, loc, casesMeasure).forEach(a => exC += a.length);
+      excludedByDate(viewRows(), pathogen, loc, deathsMeasure).forEach(a => exC += a.length);
+    });
+    const totalV = allPts.length + exC;
+    const outEl2 = document.getElementById('outlierNote');
+    if (outEl2) {
+      if (exC) outEl2.textContent = `${exC} of ${totalV} plotted figures rejected by screening — ${allPts.length} accepted.`;
+      else if (allPts.length) outEl2.textContent = `${allPts.length} figures plotted.`;
+      else outEl2.textContent = '';
+    }
+    const metaEl2 = document.getElementById('trendMeta');
+    if (metaEl2) {
+      if (allPts.length) {
+        const latest = allPts.reduce((m,p) => p.date > m ? p.date : m, '');
+        metaEl2.textContent = 'Observed to ' + formatUKDate(latest);
+      } else metaEl2.textContent = '';
+    }
+  }
+  if (!allPts.length) { tsvg.append('text').attr('x',tw/2).attr('y',th/2).attr('text-anchor','middle').attr('font-size','12px').attr('fill',col('--color-neutral-400')).text('No subnational '+reportType+' series for '+country); renderSubSourceChart(perLoc, style); return; }
   const xBase = d3.scaleUtc().domain(d3.extent(allPts, p=>new Date(p.date))).range([margin.left, tw-margin.right]);
   const x = subTransform.rescaleX(xBase);
-  installTrendZoom(tsvg, () => { subTransform = d3.zoomIdentity; }, t => { subTransform = t; renderSubnationalTrend(); });
-  // Same zoom-overflow guard as the national chart: clip series content to the plot area.
-  tsvg.append('defs').append('clipPath').attr('id', 'trendClip').append('rect')
-    .attr('x', margin.left - 1).attr('y', 0)
-    .attr('width', Math.max(0, tw - margin.left - margin.right + 2)).attr('height', th);
-  const plotG = tsvg.append('g').attr('clip-path', 'url(#trendClip)');
-  const yBase = d3.scaleLinear().domain([0, (d3.max(allPts,p=>p.value)||1)*1.1]).range([th-margin.bottom, margin.top]);
+  // Plot area box
+  tsvg.append('rect').attr('x',margin.left).attr('y',margin.top).attr('width',tw-margin.left-margin.right).attr('height',th-margin.top-margin.bottom).attr('fill',col('--color-neutral-800')).attr('fill-opacity',0.35).attr('stroke',col('--color-divider')).attr('stroke-width',1);
+  const yMaxSub = Math.max(d3.max(allPts,p=>p.value)||0, d3.max(allPts,p=>p.cases)||0, d3.max(allPts,p=>p.deaths)||0, 1);
+  const yBase = d3.scaleLinear().domain([0, yMaxSub*1.1]).range([th-margin.bottom, margin.top]);
   const y = subTransform.rescaleY(yBase);
-  const gGrid = tsvg.append('g');
-  y.ticks(4).forEach(t => { gGrid.append('line').attr('x1',margin.left).attr('x2',tw-margin.right).attr('y1',y(t)).attr('y2',y(t)).attr('stroke',col('--color-divider')).attr('stroke-width',1); gGrid.append('text').attr('x',margin.left-8).attr('y',y(t)+3).attr('text-anchor','end').attr('font-size','10px').attr('fill',col('--color-neutral-400')).text(t>=1000?(t/1000)+'k':t); });
+  const yAxisG = tsvg.append('g').attr('transform',`translate(${margin.left},0)`).call(d3.axisLeft(y).ticks(4).tickSize(-(tw-margin.left-margin.right)).tickPadding(8).tickFormat(d=>d>=1000?(d/1000)+'k':d));
+  installTrendZoom(tsvg, () => { subTransform = d3.zoomIdentity; }, t => { subTransform = t; renderSubnationalTrend(); });
+  // Clip series content to the plot interior
+  tsvg.append('defs').append('clipPath').attr('id', 'subClip').append('rect')
+    .attr('x', margin.left - 8).attr('y', margin.top - 8)
+    .attr('width', Math.max(0, tw - margin.left - margin.right) + 16).attr('height', th - margin.top - margin.bottom + 16);
+  const plotG = tsvg.append('g').attr('clip-path', 'url(#subClip)');
+  yAxisG.selectAll('text').attr('font-size','10px').attr('fill',col('--color-neutral-400'));
+  yAxisG.selectAll('line').attr('stroke',col('--color-divider')).attr('stroke-opacity',0.85);
+  yAxisG.selectAll('path').attr('stroke',col('--color-divider'));
+  const xAxisG = tsvg.append('g').attr('transform',`translate(0,${th-margin.bottom})`).call(d3.axisBottom(x).ticks(5).tickSize(4).tickPadding(4));
+  xAxisG.selectAll('text').attr('font-size','10px').attr('fill',col('--color-neutral-400'));
+  xAxisG.selectAll('path,line').attr('stroke',col('--color-divider'));
+  tsvg.append('text').attr('x',margin.left-32).attr('y',margin.top+(th-margin.top-margin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${margin.left-32},${margin.top+(th-margin.top-margin.bottom)/2})`).attr('font-size','10px').attr('fill',col('--color-neutral-400')).text('Cases / deaths');
   perLoc.forEach(s => {
     const c = style[s.loc].color;
     const isHi = highlightSubLoc && s.loc===highlightSubLoc;
-    const line = d3.line().defined(d=>d.value!=null).x(d=>x(new Date(d.date))).y(d=>y(d.value));
-    plotG.append('path').datum(s.pts).attr('d',line).attr('fill','none').attr('stroke',c).attr('stroke-width',isHi?3.2:1.75).attr('opacity',isHi?1:0.9).style('filter', isHi?'drop-shadow(0 0 2px '+c+')':null);
-    s.pts.forEach(d => { if (d.value==null) return; plotG.append('path').attr('transform',`translate(${x(new Date(d.date))},${y(d.value)})`).attr('d',d3.symbol().type(style[s.loc].sym).size(isHi?58:34)()).attr('fill',c).attr('stroke',col('--color-bg')).attr('stroke-width',isHi?1.4:0.8).style('cursor','default')
-      .on('mousemove',(ev)=>showChartTip(ev,`<p class="t-title">${s.loc}</p><div class="t-row"><span>${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span><span>${d.value.toLocaleString()} ${subMeasure}</span></div>`)).on('mouseleave',hideChartTip); });
-    // Excluded rows (chi-square / monotonicity screens) as alternate hollow glyphs.
-    excludedByDate(viewRows(), pathogen, s.loc, measure).forEach((rs, date) => {
+    // Cases line (circle, lavender tint per location but cases hue is accent)
+    const lineCases = d3.line().defined(d=>d.cases!=null).x(d=>x(new Date(d.date))).y(d=>y(d.cases));
+    const lineDeaths = d3.line().defined(d=>d.deaths!=null).x(d=>x(new Date(d.date))).y(d=>y(d.deaths));
+    // Use location color for both, but deaths with red hue mixed
+    plotG.append('path').datum(s.pts).attr('d',lineCases).attr('fill','none').attr('stroke',c).attr('stroke-width',isHi?3.2:1.75).attr('opacity',isHi?1:0.9).style('filter', isHi?'drop-shadow(0 0 2px '+c+')':null);
+    plotG.append('path').datum(s.pts).attr('d',lineDeaths).attr('fill','none').attr('stroke','#b45c64').attr('stroke-width',isHi?2.2:1.4).attr('opacity',isHi?0.9:0.7).attr('stroke-dasharray', isHi?'0':'3 3');
+    s.pts.forEach(d => {
+      if (d.cases!=null) {
+        plotG.append('path').attr('transform',`translate(${x(new Date(d.date))},${y(d.cases)})`).attr('d',d3.symbol().type(d3.symbolCircle).size(isHi?78:52)()).attr('fill',c).attr('stroke',col('--color-bg')).attr('stroke-width',isHi?1.4:0.8).style('cursor','pointer').classed('glyph-hit',true)
+          .on('mousemove',(ev)=>showChartTip(ev,`<p class="t-title">${s.loc}</p><div class="t-row"><span>${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span><span>${d.cases.toLocaleString()} cases</span></div>`)).on('mouseleave',hideChartTip)
+          .on('click', () => { hideChartTip(); openArticlePopup(d.date, d.rows || []); });
+      }
+      if (d.deaths!=null) {
+        plotG.append('path').attr('transform',`translate(${x(new Date(d.date))},${y(d.deaths)})`).attr('d',d3.symbol().type(d3.symbolDiamond).size(isHi?78:52)()).attr('fill','#b45c64').attr('stroke',col('--color-bg')).attr('stroke-width',isHi?1.4:0.8).style('cursor','pointer').classed('glyph-hit',true)
+          .on('mousemove',(ev)=>showChartTip(ev,`<p class="t-title">${s.loc}</p><div class="t-row"><span>${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span><span>${d.deaths.toLocaleString()} deaths</span></div>`)).on('mouseleave',hideChartTip)
+          .on('click', () => { hideChartTip(); openArticlePopup(d.date, d.rows || []); });
+      }
+    });
+    const exMapC = excludedByDate(viewRows(), pathogen, s.loc, casesMeasure);
+    const exMapD = excludedByDate(viewRows(), pathogen, s.loc, deathsMeasure);
+    const combinedEx = new Map([...exMapC, ...Array.from(exMapD.entries()).map(([k,v])=>[k, [...(exMapC.get(k)||[]), ...v]])]);
+    combinedEx.forEach((rs, date) => {
       rs.forEach((r, i) => {
         const v = +r.value; if (isNaN(v)) return;
         const jx = x(new Date(date)) + (i - (rs.length - 1) / 2) * 3.6;
         const vy = y(v); if (!isFinite(vy)) return;
         const chi = r.quality_flag === 'chi-sq';
+        const tipExSub = () => `<p class="t-title">${s.loc}</p><div class="t-row"><span>${new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · excluded</span><span>${v.toLocaleString()} ${reportType} ${r.measure.includes('cases')?'cases':'deaths'}</span></div><div class="t-foot">${chi ? 'Failed the chi-square screen — not plotted' : 'Breaks cumulative monotonicity — not plotted'}</div>`;
+        addHollowHit(plotG, jx, vy, tipExSub, () => { hideChartTip(); openArticlePopup(date, rs); });
         plotG.append('path').attr('transform', `translate(${jx},${vy})${chi ? '' : ' rotate(180)'}`)
           .attr('d', d3.symbol().type(chi ? d3.symbolSquare : d3.symbolTriangle).size(isHi ? 40 : 26)())
-          .attr('fill', 'none').attr('stroke', c).attr('stroke-width', 1).attr('opacity', 0.7).style('cursor', 'pointer')
-          .on('mousemove', (ev) => showChartTip(ev,
-            `<p class="t-title">${s.loc}</p>` +
-            `<div class="t-row"><span>${new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · excluded</span><span>${v.toLocaleString()} ${subMeasure}</span></div>` +
-            `<div class="t-foot">${chi ? 'Failed the chi-square screen — not plotted' : 'Breaks cumulative monotonicity — not plotted'}</div>`))
-          .on('mouseleave', hideChartTip);
+          .attr('fill', 'none').attr('stroke', c).attr('stroke-width', 1).attr('opacity', 0.7).style('cursor', 'pointer').classed('glyph-hit',true)
+          .on('mousemove', (ev) => showChartTip(ev, tipExSub()))
+          .on('mouseleave', hideChartTip)
+          .on('click', () => { hideChartTip(); openArticlePopup(date, rs); });
       });
     });
   });
@@ -2726,17 +3060,20 @@ function renderSubSourceChart(perLoc, style) {
   shsvg.selectAll('*').remove();
   shTw = Math.max(340, Math.round((document.getElementById('sourceChartWrap')||{}).clientWidth||620));
   shsvg.attr('viewBox', `0 0 ${shTw} ${shTh}`);
-  const dateMap = new Map(); // date -> { loc -> {vet, rows} }
+  const dateMap = new Map(); // date -> { loc -> {vet, rows, rej, rejRows} }
   perLoc.forEach(s => s.pts.forEach(p => {
     const rows = p.rows || [];
     const vet = rows.reduce((a,r)=>a+(+r.n_sources||1),0);
-    if (!vet) return;
+    const rej = p.rej || 0;
+    const rejRows = p.rejRows || [];
+    if (!vet && !rej) return;
     if (!dateMap.has(p.date)) dateMap.set(p.date, {});
-    const cell = dateMap.get(p.date)[s.loc] || (dateMap.get(p.date)[s.loc] = { vet: 0, rows: [] });
+    const cell = dateMap.get(p.date)[s.loc] || (dateMap.get(p.date)[s.loc] = { vet: 0, rows: [], rej:0, rejRows:[] });
     cell.vet += vet; cell.rows.push(...rows);
+    cell.rej += rej; cell.rejRows.push(...rejRows);
   }));
   const dates = [...dateMap.keys()].sort();
-  if (!dates.length) { shsvg.append('text').attr('x',shTw/2).attr('y',shTh/2).attr('text-anchor','middle').attr('font-size','11px').attr('fill',col('--color-neutral-400')).text('Source counts unavailable'); return; }
+  if (!dates.length) { shsvg.append('text').attr('x',shTw/2).attr('y',shTh/2).attr('text-anchor','middle').attr('font-size','11px').attr('fill',col('--color-neutral-400')).text('No vetted sources within this observation window'); return; }
   // Weekly binning under ~7px per bar — the shared anti-crush rule.
   const step = (shTw-shMargin.left-shMargin.right)/Math.max(1,dates.length);
   let binned = dates.map(d => ({ date: d, cells: dateMap.get(d) }));
@@ -2746,17 +3083,28 @@ function renderSubSourceChart(perLoc, style) {
     binned.forEach(b => {
       if (!cur || (new Date(b.date) - new Date(cur.date)) >= 7 * 86400000) { cur = { date: b.date, cells: {} }; bins.push(cur); }
       Object.entries(b.cells).forEach(([loc, c]) => {
-        const cell = cur.cells[loc] || (cur.cells[loc] = { vet: 0, rows: [] });
+        const cell = cur.cells[loc] || (cur.cells[loc] = { vet: 0, rows: [], rej:0, rejRows:[] });
         cell.vet += c.vet; cell.rows.push(...c.rows);
+        cell.rej += (c.rej||0); cell.rejRows.push(...(c.rejRows||[]));
       });
     });
     binned = bins;
   }
-  const totals = binned.map(b => Object.values(b.cells).reduce((a,c)=>a+c.vet,0));
+  const totals = binned.map(b => Object.values(b.cells).reduce((a,c)=>a+c.vet+(c.rej||0),0));
   const maxT = Math.max(...totals,1);
   const x = d3.scaleUtc().domain(d3.extent(binned,b=>new Date(b.date))).range([shMargin.left, shTw-shMargin.right]);
   const y = d3.scaleLinear().domain([0, maxT*1.15]).range([shTh-shMargin.bottom, shMargin.top]);
-  y.ticks(2).forEach(t => { shsvg.append('line').attr('x1',shMargin.left).attr('x2',shTw-shMargin.right).attr('y1',y(t)).attr('y2',y(t)).attr('stroke',col('--color-divider')).attr('stroke-width',1); if(t>0) shsvg.append('text').attr('x',shMargin.left-6).attr('y',y(t)+3).attr('text-anchor','end').attr('font-size','9.5px').attr('fill',col('--color-neutral-400')).text(t); });
+  shsvg.append('rect').attr('x',shMargin.left).attr('y',shMargin.top).attr('width',shTw-shMargin.left-shMargin.right).attr('height',shTh-shMargin.top-shMargin.bottom).attr('fill',col('--color-neutral-800')).attr('fill-opacity',0.35).attr('stroke',col('--color-divider')).attr('stroke-width',1);
+  const sy2 = shsvg.append('g').attr('transform',`translate(${shMargin.left},0)`).call(d3.axisLeft(y).ticks(2).tickSize(-(shTw-shMargin.left-shMargin.right)).tickPadding(6).tickFormat(d=>d));
+  sy2.selectAll('text').attr('font-size','9.5px').attr('fill',col('--color-neutral-400'));
+  sy2.selectAll('line').attr('stroke',col('--color-divider')).attr('stroke-opacity',0.85);
+  sy2.selectAll('path').attr('stroke',col('--color-divider'));
+  const sx2 = shsvg.append('g').attr('transform',`translate(0,${shTh-shMargin.bottom})`).call(d3.axisBottom(x).ticks(4).tickSize(4).tickPadding(4));
+  sx2.selectAll('text').attr('font-size','9.5px').attr('fill',col('--color-neutral-400'));
+  sx2.selectAll('path,line').attr('stroke',col('--color-divider'));
+  shsvg.append('text').attr('x',shMargin.left-28).attr('y',shMargin.top+(shTh-shMargin.top-shMargin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${shMargin.left-28},${shMargin.top+(shTh-shMargin.top-shMargin.bottom)/2})`).attr('font-size','9.5px').attr('fill',col('--color-neutral-400')).text('Vettings');
+  shsvg.append('defs').append('clipPath').attr('id','subSourceClip').append('rect').attr('x',shMargin.left-8).attr('y',shMargin.top-8).attr('width',shTw-shMargin.left-shMargin.right+16).attr('height',shTh-shMargin.top-shMargin.bottom+16);
+  const plotGS2 = shsvg.append('g').attr('clip-path','url(#subSourceClip)');
   const usableH = (shTh-shMargin.bottom)-shMargin.top;
   const pxPer = usableH/(maxT*1.15);
   const bw = SRC_HIST.barWidth(step);
@@ -2764,19 +3112,37 @@ function renderSubSourceChart(perLoc, style) {
     const cx = x(new Date(b.date)); let yb = shTh-shMargin.bottom;
     const dayTot = totals[binned.indexOf(b)];
     const dayRows = [];
-    perLoc.forEach(s => { const c=(b.cells[s.loc]); if(!c || !c.vet) return; const h=c.vet*pxPer; yb-=h; dayRows.push(...c.rows);
-      const va = vettingsAndArticles(c.rows);
-      shsvg.append('rect').attr('x',Math.max(shMargin.left,cx-bw/2)).attr('width',bw).attr('y',yb).attr('height',h).attr('rx',1).attr('fill',style[s.loc].color).attr('opacity',0.85).style('cursor','default')
-        .on('mousemove',(ev)=>showChartTip(ev,
-          `<p class="t-title">${new Date(b.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'})}</p>` +
-          `<div class="t-row"><span>${s.loc.split(',')[0]}</span><span>${va.vet} vetting${va.vet>1?'s':''}</span></div>` +
-          `<div class="t-row"><span>Distinct articles</span><span>${va.art}</span></div>` +
-          `<div class="t-row"><span>Independent domains</span><span>${va.dom||'\u2014'}</span></div>` +
-          `<div class="t-foot">Day total: ${dayTot} vetting${dayTot>1?'s':''}</div>`))
-        .on('mouseleave',hideChartTip);
+    perLoc.forEach(s => { const c=(b.cells[s.loc]); if(!c || (!c.vet && !c.rej)) return;
+      // Stacked vet bar (colored) then grey rej cap on top for target-only bar case
+      if(c.vet){
+        const h=c.vet*pxPer; yb-=h; dayRows.push(...c.rows);
+        const va = vettingsAndArticles(c.rows);
+        plotGS2.append('rect').attr('x',Math.min(Math.max(shMargin.left,cx-bw/2), shTw-shMargin.right-bw)).attr('width',bw).attr('y',yb).attr('height',h).attr('rx',1).attr('fill',style[s.loc].color).attr('opacity',0.85).style('cursor','pointer').classed('glyph-hit',true)
+          .on('mouseover', function(){ d3.select(this).attr('opacity',1); })
+          .on('mouseout', function(){ d3.select(this).attr('opacity',0.85); })
+          .on('mousemove',(ev)=>showChartTip(ev,
+            `<p class="t-title">${new Date(b.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'})}</p>` +
+            `<div class="t-row"><span>${s.loc.split(',')[0]}</span><span>${va.vet} vetting${va.vet>1?'s':''}</span></div>` +
+            `<div class="t-row"><span>Distinct articles</span><span>${va.art}</span></div>` +
+            `<div class="t-row"><span>Independent domains</span><span>${va.dom||'\u2014'}</span></div>` +
+            `<div class="t-foot">Day total: ${dayTot} vetting${dayTot>1?'s':''} · click for detail</div>`))
+          .on('mouseleave',hideChartTip)
+          .on('click', () => { hideChartTip(); openArticlePopup(b.date, c.rows || []); });
+      }
+      if(c.rej){
+        const rh=c.rej*pxPer; yb-=rh;
+        const rva = vettingsAndArticles(c.rejRows);
+        const hRej = Math.max(2, rh);
+        plotGS2.append('rect').attr('x',Math.min(Math.max(shMargin.left,cx-bw/2), shTw-shMargin.right-bw)).attr('width',bw).attr('y',yb).attr('height',hRej).attr('rx',1).attr('fill', col('--color-neutral-500')).attr('fill-opacity',0.55).style('cursor','pointer').classed('glyph-hit',true)
+          .on('mousemove', ev=>showChartTip(ev,
+            `<p class="t-title">${new Date(b.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'})} · excluded</p>`+
+            `<div class="t-row"><span>${c.rej} screened out</span><span>${rva.art} article${rva.art!==1?'s':''} · ${rva.dom} domain${rva.dom!==1?'s':''}</span></div>`+
+            `<div class="t-foot">Failed chi-square or monotonicity screening — click for detail</div>`))
+          .on('mouseleave', hideChartTip)
+          .on('click', ()=>{ hideChartTip(); openArticlePopup(b.date, c.rejRows); });
+      }
     });
   });
-  [binned[0], binned[binned.length-1]].forEach((b,i)=>{ if (!b) return; shsvg.append('text').attr('x', x(new Date(b.date))).attr('y',shTh-5).attr('text-anchor',i===0?'start':'end').attr('font-size','9.5px').attr('fill',col('--color-neutral-400')).text(new Date(b.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})); });
 }
 function renderAll() { renderPageSub(); renderStats(); renderTable(); renderMap(); renderTrendSection(); }
 // Fresh load: no hash or localStorage persistence — defaults on every page load.
@@ -3007,7 +3373,7 @@ function renderBrief() {
   // Newspaper-style headline: the report's own title leads the article body, pathogen mention
   // linked. The meta row above stays the byline; the evidence banner follows the headline.
   const headline = `<div class="brief-headline">${highlightEventTitle(r, true)}</div>`;
-  briefContentEl.innerHTML = headline + banner + (r.crossover ? `<div style="background:color-mix(in srgb, var(--color-accent) 12%, transparent);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;margin:0 0 12px"><p style="margin:0"><strong>Zoonotic link reported:</strong></p>${briefMarkup(r.crossoverDetail)}</div>` : '') + stripNan(r.html);
+  briefContentEl.innerHTML = headline + banner + (r.crossover ? `<div style="background:color-mix(in srgb, var(--color-accent) 12%, transparent);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;margin:0 0 12px"><p style="margin:0"><strong>Zoonotic link reported:</strong></p>${briefMarkup(r.crossoverDetail)}</div>` : '') + stripBriefDisclaimers(stripNan(r.html));
   const tg = document.getElementById('evToggle');
   if (tg) tg.addEventListener('click', () => {
     const sec = document.getElementById('reportEvidence');
@@ -3016,6 +3382,12 @@ function renderBrief() {
     if (open) sec.removeAttribute('hidden'); else sec.setAttribute('hidden','');
     tg.setAttribute('aria-expanded', String(open));
     tg.textContent = open ? 'Evidence ▴' : 'Evidence ▾';
+  });
+  // The upstream Status Report HTML occasionally leaves an unfilled section placeholder, e.g.
+  // <details>[response_efforts]</details> with no <summary> — the browser falls back to a bare
+  // "Details" native toggle for it, which reads as broken. Drop these unresolved stubs entirely.
+  briefContentEl.querySelectorAll('details').forEach(d => {
+    if (!d.querySelector('summary') && /^\s*\[[a-z_]+\]\s*$/i.test(d.textContent)) d.remove();
   });
   enhanceBriefCitations();
 }
@@ -3180,25 +3552,162 @@ function peerVettings(pathogen, kind) {
     return dl ? dl.sources : null;
   }).filter(v => v != null);
 }
-// Compact box plot: this event's latest-figure vettings positioned against its same-pathogen
-// peers. Box = middle 50%, tick = median, dot = this event. Pure position — no composite score.
-function evDistStrip(vet, peers) {
+function peerVettingsGlobal(kind) {
+  return records.filter(r => !isFlu(r.pathogenRaw)).map(rec => {
+    if (kind === 'cases') return rec.cases != null ? rowsVettings(rec.rowsAt || []) : null;
+    const dl = latestOf(viewRows().filter(r2 => r2.pathogen === rec.pathogenRaw && geoCountry(r2.location) === rec.country && r2.measure === 'confirmed_deaths' && r2.outlier === 'False'));
+    return dl ? dl.sources : null;
+  }).filter(v => v != null);
+}
+// Peer median raw-corpus scores (vetting/proximity) across same-pathogen events, giving the
+// evidence strips a frame of reference for article quality — mirrors peerVettings.
+function peerRawScores(pathogen, kind, rec) {
+  return records.filter(r => r.pathogenRaw === pathogen).map(r => {
+    if (kind === 'cases') return r.rowsAt ? medianRawScores(r.rowsAt)[rec] : null;
+    const dl = latestOf(viewRows().filter(r2 => r2.pathogen === pathogen && geoCountry(r2.location) === r.country && r2.measure === 'confirmed_deaths' && r2.outlier === 'False'));
+    return dl ? medianRawScores(dl.rowsAt)[rec] : null;
+  }).filter(v => v != null && isFinite(v));
+}
+function peerRawScoresGlobal(kind, rec) {
+  return records.filter(r => !isFlu(r.pathogenRaw)).map(r => {
+    if (kind === 'cases') return r.rowsAt ? medianRawScores(r.rowsAt)[rec] : null;
+    const dl = latestOf(viewRows().filter(r2 => r2.pathogen === r.pathogenRaw && geoCountry(r2.location) === r.country && r2.measure === 'confirmed_deaths' && r2.outlier === 'False'));
+    return dl ? medianRawScores(dl.rowsAt)[rec] : null;
+  }).filter(v => v != null && isFinite(v));
+}
+// KDE helper: Gaussian kernel density estimate path for a 0-100 x domain, 18px tall SVG.
+// Shows the peer distribution shape instead of a crushed box when n is small.
+function kdePath(peers, min, max) {
+  const n = peers.length;
+  if (n < 2 || max === min) return null;
+  const sorted = [...peers].sort((a,b)=>a-b);
+  const q1 = sorted[Math.floor((n-1)*0.25)], q3 = sorted[Math.floor((n-1)*0.75)];
+  const iqr = q3 - q1;
+  let sd = 0; const mean = sorted.reduce((s,v)=>s+v,0)/n; sorted.forEach(v=> sd += (v-mean)*(v-mean)); sd = Math.sqrt(sd/n);
+  const h = (iqr ? Math.min(sd, iqr/1.34) : sd) || (max-min)/4;
+  const bw = 0.9 * h * Math.pow(n, -0.2) || (max-min)/6;
+  if (!isFinite(bw) || bw <= 0) return null;
+  const steps = 48;
+  const xs = [], dens = [];
+  for (let i=0;i<steps;i++) xs.push(min + (max-min)*i/(steps-1));
+  let maxD = 0;
+  xs.forEach(x => {
+    let s=0; for (const v of peers) s += Math.exp(-0.5*Math.pow((x-v)/bw,2));
+    const d = s / (n * bw * Math.sqrt(2*Math.PI));
+    dens.push(d); if (d>maxD) maxD=d;
+  });
+  if (!maxD) return null;
+  const pos = v => (v - min)/(max - min)*100;
+  // Build SVG path: baseline at y=14, peak up to y=2 (12px tall density)
+  let d = `M ${pos(xs[0]).toFixed(2)},14 `;
+  xs.forEach((x,i)=>{ const y = 14 - (dens[i]/maxD)*10; d += `L ${pos(x).toFixed(2)},${y.toFixed(2)} `; });
+  d += `L ${pos(xs[xs.length-1]).toFixed(2)},14 Z`;
+  return d;
+}
+// --- Fixed-domain helpers (Q1-Q4) ---
+// nextNice with 1,2,5,10 series; used for both vettings and vetScore ceilings
+function nextNiceCeil(v, p){
+  if(!isFinite(v)||v<=0) return p;
+  const nices=[1,2,5,10];
+  for(const m of nices){ const c=m*p; if(c>=v) return c; }
+  return 10*p;
+}
+function vettingsDomain(peerMax, vet){
+  const m = Math.max(peerMax||0, vet||0);
+  if(m <= 20) return 20;
+  const p = Math.pow(10, Math.floor(Math.log10(m)));
+  return nextNiceCeil(m, p);
+}
+function vetScoreDomain(median){
+  if(!isFinite(median)||median<=0) return 10;
+  const p = Math.pow(10, Math.floor(Math.log10(median)));
+  const raw = median*2;
+  return nextNiceCeil(raw, p);
+}
+// Compact KDE strip: density fill + pathogen median (solid) + global median (dashed) + focal dot.
+// Peers are by-pathogen; globalPeers provide the second median for cross-pathogen context.
+// Domains are fixed per spec: vettings [0,20+dynamic], proximity [0,1], vetScore [0, nextNice(median*2)]
+function evDistStrip(vet, peers, opts) {
+  opts = opts || {};
+  const pathogen = opts.pathogen || '';
+  const globalPeers = opts.globalPeers || [];
+  const label = opts.label || (pathogen ? (PATHOGEN_LABELS[pathogen]||pathogen) : 'pathogen');
   const vals = [...peers, vet].filter(v => v != null && isFinite(v)).sort((a,b) => a-b);
-  const min = vals[0], max = vals[vals.length-1];
+  if (!vals.length) return { med: vet, globalMed: null, tip: '', html: `<span style="flex:1"></span>` };
   const med = vals[Math.floor((vals.length-1)/2)];
+  const valsG = globalPeers.length ? [...globalPeers, vet].filter(v=>v!=null&&isFinite(v)).sort((a,b)=>a-b) : [];
+  const globalMed = valsG.length ? valsG[Math.floor((valsG.length-1)/2)] : null;
   const q1 = vals[Math.floor((vals.length-1)*0.25)], q3 = vals[Math.floor((vals.length-1)*0.75)];
-  const tip = `Latest-figure vettings across ${vals.length} same-pathogen event${vals.length!==1?'s':''} — box = middle 50%, tick = peer median, dot = this event (${vet})`;
-  if (vals.length < 3 || max === min) {
-    return { med, tip, html: `<span class="ev-dist" style="flex:1;height:8px;background:var(--color-divider);border-radius:999px;overflow:hidden"><span style="display:block;height:100%;width:${max===min?100:Math.max(3, Math.min(100, vet/max*100))}%;background:var(--color-accent-500)"></span></span>` };
+  const nPeers = peers.length;
+  // Fixed domain [0, xMax] per spec Q1: xMin 0 inclusive, xMax 20+dynamic for vettings
+  const peerMax = peers.length ? Math.max(...peers, vet) : vet;
+  const xMin = 0, xMax = vettingsDomain(peerMax, vet);
+  const domRange = xMax - xMin || 1;
+  const tip = `${label} — ${vals.length} peer event${vals.length!==1?'s':''} (pathogen n=${nPeers}${globalPeers.length?`, global n=${globalPeers.length}`:''}) — domain [0,${xMax}] — density = peer distribution, solid tick = pathogen median ${med}, ${globalMed!=null?`dashed = global median ${globalMed}, `:''}dot = this event (${vet})`;
+  const pos = v => Math.max(0, Math.min(100, (v - xMin) / domRange * 100));
+  if (vals.length < 2) {
+    const w = Math.max(6, Math.min(100, vet/xMax*100));
+    return { med, globalMed, tip, html: `<span class="ev-dist" style="flex:1;min-width:80px;height:10px;background:var(--color-divider);border-radius:999px;overflow:hidden" title="${tip.replace(/"/g,'&quot;')}"><span style="display:block;height:100%;width:${w}%;background:var(--color-accent-500)"></span></span>` };
   }
-  const pos = v => Math.max(0, Math.min(100, (v - min) / (max - min) * 100));
-  const html = `<span class="ev-dist" style="position:relative;flex:1;height:14px" title="${tip.replace(/"/g,'&quot;')}">
-    <span style="position:absolute;left:0;right:0;top:6px;height:2px;background:var(--color-divider)"></span>
-    <span style="position:absolute;left:${pos(q1)}%;width:${Math.max(1.5, pos(q3)-pos(q1))}%;top:3px;height:8px;background:color-mix(in srgb, var(--color-accent-500) 30%, transparent);border-radius:2px"></span>
-    <span style="position:absolute;left:${pos(med)}%;top:1px;height:12px;width:1.5px;background:var(--ink-3)"></span>
-    <span style="position:absolute;left:${pos(vet)}%;top:3px;width:8px;height:8px;margin-left:-4px;border-radius:999px;background:var(--color-accent-300);border:1.5px solid var(--color-bg)"></span>
+  const d = kdePath(peers, xMin, xMax);
+  const globalPos = globalMed!=null ? pos(globalMed) : null;
+  const html = `<span class="ev-dist" style="position:relative;flex:1;min-width:80px;height:18px" title="${tip.replace(/"/g,'&quot;')}">
+    <svg viewBox="0 0 100 18" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+      ${d ? `<path d="${d}" fill="color-mix(in srgb, var(--color-accent-500) 22%, transparent)" stroke="color-mix(in srgb, var(--color-accent-500) 35%, transparent)" stroke-width="0.6" vector-effect="non-scaling-stroke"></path>` : ''}
+      <line x1="0" y1="14" x2="100" y2="14" stroke="var(--color-divider)" stroke-width="0.8" vector-effect="non-scaling-stroke"/>
+      ${d ? '' : `<rect x="${pos(q1).toFixed(2)}" y="4" width="${Math.max(1.5, pos(q3)-pos(q1)).toFixed(2)}" height="8" fill="color-mix(in srgb, var(--color-accent-500) 30%, transparent)" rx="1"></rect>`}
+    </svg>
+    <span style="position:absolute;left:${pos(med).toFixed(2)}%;top:1px;height:16px;width:1.7px;background:var(--ink-3)"></span>
+    ${globalPos!=null && Math.abs(globalPos-pos(med))>2 ? `<span style="position:absolute;left:${globalPos.toFixed(2)}%;top:1px;height:16px;width:1.2px;background:var(--ink-4);opacity:0.85;border-left:1.2px dashed var(--ink-4)"></span>` : ''}
+    <span style="position:absolute;left:${pos(vet).toFixed(2)}%;top:4px;width:9px;height:9px;margin-left:-4.5px;border-radius:999px;background:var(--color-accent-300);border:1.6px solid var(--color-bg);box-shadow:0 0 0 0.5px var(--color-accent-300)"></span>
   </span>`;
-  return { med, tip, html };
+  return { med, globalMed, tip, html };
+}
+function evDistStripGeneric(val, peers, fmt, opts) {
+  opts = opts || {};
+  const label = opts.label || '';
+  const kind = opts.kind || '';
+  const globalPeers = opts.globalPeers || [];
+  const vals = [...peers, val].filter(v => v != null && isFinite(v)).sort((a,b) => a-b);
+  if (!vals.length) return null;
+  if (vals.length < 2) {
+    // Single-value fallback: show baseline + dot at val position on fixed domain
+    // (peers sparse for proximity — ~31% raw hit rate — so val alone would otherwise hide)
+    let xMin=0, xMax=1;
+    if(kind==='prox'){ xMin=0; xMax=1; }
+    else if(kind==='vetting'){ xMin=0; xMax=10; }
+    else { xMin=0; xMax=Math.max(1, val||1); }
+    const pos = v => Math.max(0, Math.min(100, (v - xMin) / (xMax - xMin) * 100));
+    const tip = `${label ? label + ' — ' : ''}1 peer event — domain [${xMin},${xMax}] — dot = this event (${fmt(val)})`;
+    return { med: val, globalMed: null, html: `<span style="position:relative;flex:1;min-width:80px;height:18px" title="${tip.replace(/"/g,'&quot;')}"><svg viewBox="0 0 100 18" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible"><line x1="0" y1="14" x2="100" y2="14" stroke="var(--color-divider)" stroke-width="0.8" vector-effect="non-scaling-stroke"/></svg><span style="position:absolute;left:${pos(val).toFixed(2)}%;top:1px;height:16px;width:1.7px;background:var(--ink-3)"></span><span style="position:absolute;left:${pos(val).toFixed(2)}%;top:4px;width:9px;height:9px;margin-left:-4.5px;border-radius:999px;background:var(--color-accent-300);border:1.6px solid var(--color-bg)"></span></span>` };
+  }
+  const med = vals[Math.floor((vals.length-1)/2)];
+  const valsG = globalPeers.length ? [...globalPeers, val].filter(v=>v!=null&&isFinite(v)).sort((a,b)=>a-b) : [];
+  const globalMed = valsG.length ? valsG[Math.floor((valsG.length-1)/2)] : null;
+  const q1 = vals[Math.floor((vals.length-1)*0.25)], q3 = vals[Math.floor((vals.length-1)*0.75)];
+  // Fixed domains per spec: proximity [0,1], vetting score [0, nextNice(median*2)]
+  let xMin=0, xMax=1;
+  if(kind==='prox'){ xMin=0; xMax=1; }
+  else if(kind==='vetting'){ xMax = vetScoreDomain(med); xMin=0; }
+  else { // fallback: data-derived if kind missing
+    const lo = Math.min(...vals), hi=Math.max(...vals);
+    xMin=0; xMax= hi>lo ? hi : lo+1;
+  }
+  const domRange = xMax - xMin || 1;
+  const pos = v => Math.max(0, Math.min(100, (v - xMin) / domRange * 100));
+  const tip = `${label ? label + ' — ' : ''}${vals.length} peer event${vals.length!==1?'s':''} — domain [${xMin},${xMax}] — density + median, dot = this event (${fmt(val)})`;
+  const d = kdePath(peers, xMin, xMax);
+  const globalPos = globalMed!=null ? pos(globalMed) : null;
+  return { med, globalMed, html: `<span style="position:relative;flex:1;min-width:80px;height:18px" title="${tip.replace(/"/g,'&quot;')}">
+    <svg viewBox="0 0 100 18" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+      ${d ? `<path d="${d}" fill="color-mix(in srgb, var(--color-accent-500) 22%, transparent)" stroke="color-mix(in srgb, var(--color-accent-500) 35%, transparent)" stroke-width="0.6" vector-effect="non-scaling-stroke"></path>` : ''}
+      <line x1="0" y1="14" x2="100" y2="14" stroke="var(--color-divider)" stroke-width="0.8" vector-effect="non-scaling-stroke"/>
+      ${d ? '' : `<rect x="${pos(q1).toFixed(2)}" y="4" width="${Math.max(1.5, pos(q3)-pos(q1)).toFixed(2)}" height="8" fill="color-mix(in srgb, var(--color-accent-500) 30%, transparent)" rx="1"></rect>`}
+    </svg>
+    <span style="position:absolute;left:${pos(med).toFixed(2)}%;top:1px;height:16px;width:1.7px;background:var(--ink-3)"></span>
+    ${globalPos!=null && Math.abs(globalPos-pos(med))>2 ? `<span style="position:absolute;left:${globalPos.toFixed(2)}%;top:1px;height:16px;width:1.2px;background:var(--ink-4);opacity:0.85"></span>` : ''}
+    <span style="position:absolute;left:${pos(val).toFixed(2)}%;top:4px;width:9px;height:9px;margin-left:-4.5px;border-radius:999px;background:var(--color-accent-300);border:1.6px solid var(--color-bg)"></span>
+  </span>` };
 }
 const REL_SUMMARY = 'Direct evidence = the citation contributed a structured figure for this event. Related reporting = observed for this event but contextual (e.g. zoonotic linkage, response efforts) rather than a numeric input. Cited only = cited by the brief but absent from the current extraction records — archived or outside the records window. Brief citations are heuristically selected (quality balanced against recency), so the cited set is a subset of what was available.';
 // Median raw-corpus scores across the distinct articles behind a set of measurement rows
@@ -3236,14 +3745,30 @@ function reportEvidenceHtml(rep, ev) {
   if (rec && rec.cases != null) {
     const rows2 = viewRows().filter(r => r.pathogen === rec.pathogenRaw && geoCountry(r.location) === rec.country && r.measure === 'confirmed_deaths' && r.outlier === 'False');
     const dl = latestOf(rows2);
-    const entries = [['reported cases', rec.cases, rowsVettings(rec.rowsAt||[]), 'cases']];
-    if (dl) entries.push(['reported deaths', dl.value, dl.sources, 'deaths']);
-    bars = `<div style="margin:4px 0 2px">` + entries.map(([label, v, vet, kind]) => {
-      const d = evDistStrip(vet, peerVettings(rep.pathogen, kind));
-      return `<div style="display:flex;align-items:center;gap:10px;margin:6px 0">
-        <span style="font-size:12px;font-weight:600;min-width:150px">${v.toLocaleString()} ${label}</span>
-        ${d.html}
-        <span style="font-size:11px;color:var(--ink-3);white-space:nowrap" title="${d.tip.replace(/"/g,'&quot;')}">${vet} vetting${vet===1?'':'s'} · peer median ${d.med}</span>
+    const entries = [['reported cases', rec.cases, rowsVettings(rec.rowsAt||[]), 'cases', rec.rowsAt]];
+    if (dl) entries.push(['reported deaths', dl.value, dl.sources, 'deaths', rows2.filter(r=>r.report_date===dl.date)]);
+    bars = `<div style="margin:6px 0 2px">` + entries.map(([label, v, vet, kind, rowsAt]) => {
+      const peers = peerVettings(rep.pathogen, kind);
+      const gPeers = peerVettingsGlobal(kind);
+      const patLabel = PATHOGEN_LABELS[rep.pathogen] || rep.pathogen;
+      const d = evDistStrip(vet, peers, { pathogen: rep.pathogen, globalPeers: gPeers, label: patLabel });
+      const mr = medianRawScores(rowsAt || []);
+      const peersProx = peerRawScores(rep.pathogen, kind, 'prox');
+      const gPeersProx = peerRawScoresGlobal(kind, 'prox');
+      const proxStrip = mr.prox != null ? evDistStripGeneric(mr.prox, peersProx, v2 => v2.toFixed(2), { label: patLabel + ' · proximity', globalPeers: gPeersProx, kind: 'prox' }) : null;
+      const vetPeerNote = `pathogen median ${d.med}${d.globalMed!=null && d.globalMed!==d.med ? ` · global median ${d.globalMed}` : ''}`;
+      const proxNote = proxStrip ? `pathogen median ${proxStrip.med.toFixed(2)}${proxStrip.globalMed!=null && proxStrip.globalMed!==proxStrip.med ? ` · global ${proxStrip.globalMed.toFixed(2)}` : ''}` : '';
+      return `<div style="margin:10px 0;padding:6px 8px;border:1px solid var(--color-divider);border-radius:8px;background:color-mix(in srgb, var(--color-neutral-800) 22%, transparent)">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span style="font-size:12px;font-weight:600;flex:0 0 124px;min-width:124px">${v.toLocaleString()} ${label}</span>
+          <span style="flex:1 1 90px;min-width:80px;display:flex">${d.html}</span>
+          <span style="font-size:10.5px;color:var(--ink-3);flex:0 1 auto;white-space:nowrap;text-align:right" title="${d.tip.replace(/"/g,'&quot;')}">${vet} vetting${vet===1?'':'s'} · ${vetPeerNote}</span>
+        </div>
+        ${proxStrip ? `<div style="display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap">
+          <span style="font-size:10.5px;color:var(--ink-4);flex:0 0 124px;min-width:124px">Functional proximity</span>
+          <span style="flex:1 1 90px;min-width:80px;display:flex">${proxStrip.html}</span>
+          <span style="font-size:10.5px;color:var(--ink-4);white-space:nowrap;flex:0 1 auto;text-align:right">${mr.prox.toFixed(2)} · ${proxNote}</span>
+        </div>` : ''}
       </div>`;
     }).join('') + `</div>`;
   }
@@ -3259,6 +3784,7 @@ function reportEvidenceHtml(rep, ev) {
 function selectEvent(idx) {
   const r = reports[idx]; if (!r) return;
   selectedIdx = idx;
+  chartPref = 'auto'; plotViewSel = 'auto';
   if (r.pathogen && r.pathogen !== selectedPathogen) {
     const sel = document.getElementById('disease');
     if (sel && [...sel.options].some(o=>o.value===r.pathogen)) { sel.value=r.pathogen; selectedPathogen=r.pathogen; }
@@ -3276,19 +3802,20 @@ function selectEvent(idx) {
       showSubnational = true;
       const cb = document.getElementById('subToggle'); if (cb) cb.checked = true;
       trendMode = { mode:'subnational', country: r.geoCountry, pathogen: r.pathogen };
+      granPref = 'subnational';
     } else {
       // Align to country: show toggle if subnational data exists, keep national view until toggled
       highlightedCountry = r.geoCountry;
       highlightSubLoc = null;
       updateSubToggleVisibility(r.geoCountry, r.pathogen);
       // keep current showSubnational state; if already enabled keep overlay, else national
-      if (!showSubnational) trendMode = { mode:'national' };
-      else trendMode = { mode:'subnational', country: r.geoCountry, pathogen: r.pathogen };
+      if (!showSubnational) { trendMode = { mode:'national' }; granPref = 'national'; }
+      else { trendMode = { mode:'subnational', country: r.geoCountry, pathogen: r.pathogen }; granPref = 'subnational'; }
     }
     renderTrendSection();
   } else {
     highlightSubLoc = null;
-    trendMode = { mode:'national' };
+    trendMode = { mode:'national' }; granPref = 'national';
     renderStats(); renderTrendSection(); renderTable();
   }
   renderEventList(); renderBrief(); renderMap();
@@ -3303,6 +3830,7 @@ function drillNational(country, pathogen) {
   highlightedCountry = country;
   reportFilter = { country, pathogen };
   selectedPathogen = pathogen;
+  chartPref = 'auto'; plotViewSel='auto'; granPref = 'national';
   const sel = document.getElementById('disease'); if (sel && [...sel.options].some(o=>o.value===pathogen)) sel.value=pathogen;
   renderStats(); renderTable();
   updateSubToggleVisibility(country, pathogen);
