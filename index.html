@@ -88,6 +88,23 @@
   .forecast-card .f-detail { margin-top: auto; }
   .event-item { padding: 9px 4px; border-top: 1px solid var(--color-divider); cursor: pointer; }
   .event-item:first-child { border-top: 0; }
+  /* Change flags. A report carrying situational developments gets a faint warm wash; the badges
+     themselves live in .event-meta. Declared BEFORE the hover/selected rules so those still win. */
+  .event-item.has-dev { background: color-mix(in srgb, var(--warn) 6%, transparent); }
+  .ev-flags { display: flex; gap: 4px; align-items: center; flex: none; }
+  .ev-flag { font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1.5px 5px; border-radius: 999px; white-space: nowrap; display: inline-flex; align-items: center; gap: 3px; }
+  .ev-flag-dev { background: color-mix(in srgb, var(--warn) 24%, transparent); color: var(--warn-ink); }
+  .ev-flag-new { border: 1px solid color-mix(in srgb, var(--color-accent-300) 45%, transparent); color: var(--color-accent-300); }
+  .dev-flash { border: 1px solid color-mix(in srgb, var(--warn) 30%, transparent); background: color-mix(in srgb, var(--warn) 8%, transparent); border-radius: var(--radius-sm); padding: 9px 11px; margin: 0 0 12px; }
+  .dev-flash-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .dev-flash-head .dev-count { flex: 1 1 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dev-flash-head .dev-count { font-size: 10.5px; color: var(--ink-4); }
+  .dev-flash-body { font-size: 12px; line-height: 1.55; color: var(--ink-2); }
+  .dev-flash-body p, .dev-flash-body ul, .dev-flash-body ol { margin: 0 0 6px; }
+  .dev-flash-body ul, .dev-flash-body ol { padding-left: 16px; }
+  .dev-flash-body > *:last-child { margin-bottom: 0; }
+  .dev-item { display: flex; gap: 7px; padding: 2px 0; }
+  .dev-item .dev-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--warn-ink); white-space: nowrap; padding-top: 1px; }
   .event-item:hover { background: color-mix(in srgb, var(--color-accent) 6%, transparent); }
   .event-item.selected { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
   .event-title { font-size: 12px; line-height: 1.35; margin: 0 0 6px; color: var(--color-text); }
@@ -184,7 +201,8 @@
   .events-hint { font-size: 10.5px; color: var(--color-accent-300); margin: 0 0 10px; }
   .rf-bar { font-size: 10.5px; color: var(--color-accent-200); background: color-mix(in srgb, var(--color-accent-500) 14%, transparent); border-radius: var(--radius-sm); padding: 5px 8px; margin: 0 0 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
   .rf-bar button { background: none; border: 0; color: var(--color-accent-200); cursor: pointer; font-size: 10.5px; padding: 0; }
-  .event-doc { margin-top: 6px; display: flex; align-items: center; gap: 6px; }
+  .event-doc { margin-top: 6px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .event-doc .ev-flags { margin-left: auto; }
   .event-doc .doc-meta { font-size: 9.5px; color: var(--ink-4); }
   .brief-quality { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 0 12px; padding-bottom: 10px; border-bottom: 1px solid var(--color-divider); }
   .brief-headline { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; color: var(--color-text); margin: 2px 0 12px; }
@@ -928,10 +946,12 @@ function exportTableCsv() {
 // Full event-report export with sources — reports are ephemeral, this is the audit trail.
 function exportEventsCsv() {
   const q = v => { const s = v == null ? '' : String(v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
-  const head = 'Latest report,Event title,Pathogen,Country,Location,Scope,Risk severity,Risk rationale,Latitude,Longitude,Source URLs';
+  const head = 'Latest report,Event title,Pathogen,Country,Location,Scope,Event status,Developments,Risk severity,Risk rationale,Latitude,Longitude,Source URLs';
   const body = visibleReports().map(({r}) => [
     r.date, r.title, r.pathogen, r.country, r.place,
-    isNational(r.place) ? 'National' : 'Subnational', r.risk, r.riskRationale || '',
+    isNational(r.place) ? 'National' : 'Subnational',
+    r.status || '', (r.developments || []).map(d => [d.label, d.text].filter(Boolean).join(': ')).join(' | '),
+    r.risk, r.riskRationale || '',
     r.lonlat ? r.lonlat[1] : '', r.lonlat ? r.lonlat[0] : '', (r.urls || []).join('; ')
   ].map(q).join(','));
   const csv = [head, ...body].join('\n');
@@ -2145,6 +2165,11 @@ function stripBriefDisclaimers(html) {
   h = h.replace(disclaimerRe, '');
   // Also handle plain-text disclaimer wrapped in <div> or without <p> at the very end
   h = h.replace(/(?:National totals only[^<]*?WHO\/IHR[^<]*?<\/[^>]+>\s*)+$/i, '');
+  // Truncate the generator's own trailing AI disclaimer + copyright line: the panel already carries
+  // a permanent AI-provenance warning above the brief, so this repeats it at every report's foot.
+  h = h.replace(/(?:<hr[^>]*>\s*)?(?:<p[^>]*>\s*)?(?:<em[^>]*>|<i[^>]*>)?\s*Disclaimer\s*:\s*This report is procedurally generated[\s\S]*$/i, '');
+  // …and the run of empty <br>-only paragraphs the disclaimer used to sit under.
+  h = h.replace(/(?:<p[^>]*>(?:\s|<br\s*\/?>|&nbsp;)*<\/p>\s*|<br\s*\/?>\s*)+$/gi, '');
   return h;
 }
 function briefMarkup(s) {
@@ -3337,6 +3362,80 @@ function highlightEventTitle(r, linked) {
   });
   return out + title.slice(pos);
 }
+// --- Change flags: Event Status + Situational Developments -------------------------------------
+// The aggregated feed carries three change columns: `Event Status` (New / Ongoing — whether this
+// pathogen*location was already in the previous day's data), `Situational Developments` (a
+// structured JSON diff against the prior report) and `Developments Formatted` (the same, as HTML).
+// The entry schema is not fixed, so developments are read tolerantly: known label/text/severity
+// keys first, then any remaining scalar fields, then the raw cell as a last resort.
+const DEV_LABEL_KEYS = ['category','type','change_type','kind','heading','title','area','topic'];
+const DEV_TEXT_KEYS = ['description','summary','detail','details','development','change','text','note'];
+const DEV_SEV_KEYS = ['severity','significance','priority','magnitude','importance'];
+const devEsc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function devPick(o, keys) { for (const k of keys) { const v = o[k]; if (v != null && typeof v !== 'object' && String(v).trim()) return String(v).trim(); } return ''; }
+function parseDevelopments(raw) {
+  const s = String(raw == null ? '' : raw).trim();
+  if (!s || /^(none|nan|null|\[\]|\{\})$/i.test(s)) return [];
+  let obj = null;
+  try { obj = JSON.parse(s); } catch (e) {
+    // Python-side dumps sometimes arrive single-quoted with True/False/None literals.
+    try { obj = JSON.parse(s.replace(/'/g,'"').replace(/\bTrue\b/g,'true').replace(/\bFalse\b/g,'false').replace(/\bNone\b/g,'null')); } catch (e2) { obj = null; }
+  }
+  if (obj == null) return [{ label: '', text: s, sev: '' }];
+  const list = Array.isArray(obj) ? obj : (obj.developments || obj.situational_developments || obj.changes || obj.items || []);
+  if (!Array.isArray(list)) return [];
+  return list.map(d => {
+    if (typeof d === 'string') return d.trim() ? { label: '', text: d.trim(), sev: '' } : null;
+    if (!d || typeof d !== 'object') return null;
+    const label = devPick(d, DEV_LABEL_KEYS);
+    let text = devPick(d, DEV_TEXT_KEYS);
+    if (!text) text = Object.entries(d)
+      .filter(([k,v]) => v != null && typeof v !== 'object' && String(v).trim() && !DEV_LABEL_KEYS.includes(k) && !DEV_SEV_KEYS.includes(k))
+      .map(([k,v]) => k.replace(/_/g,' ') + ': ' + v).join(' · ');
+    return (label || text) ? { label, text, sev: devPick(d, DEV_SEV_KEYS) } : null;
+  }).filter(Boolean);
+}
+function isNewEvent(r) { return /^new/i.test(r && r.status || ''); }
+function hasDevelopments(r) { return !!(r && (r.devCount || r.devHtml)); }
+// Risk stays the PRIMARY sort — the list still reads by severity. Within a risk band a report that
+// changed outranks a static one: developments first, then newly-logged events, then recency.
+function changeRank(r) { return (hasDevelopments(r) ? 2 : 0) + (isNewEvent(r) ? 1 : 0); }
+function eventFlagsHtml(r) {
+  let h = '';
+  if (hasDevelopments(r)) {
+    const n = r.devCount;
+    h += `<span class="ev-flag ev-flag-dev" title="${n ? n + ' situational development' + (n===1?'':'s') : 'Situational developments'} reported since the prior report">▲${n ? ' ' + n : ''}</span>`;
+  }
+  if (isNewEvent(r)) h += `<span class="ev-flag ev-flag-new" title="Not present in the previous day's data — newly logged pathogen × location">New</span>`;
+  return h ? `<span class="ev-flags">${h}</span>` : '';
+}
+// The feed's `Developments Formatted` cell carries its own hard-coded light-mode styling (white
+// card, red left border, 18px red heading) which is unreadable inside this dark panel. So: render
+// the structured JSON through the themed .dev-item markup whenever it parsed, and fall back to the
+// formatted HTML only with every inline style stripped so it inherits .dev-flash-body.
+function sanitizeDevHtml(html) {
+  const t = document.createElement('div');
+  t.innerHTML = stripNan(html);
+  t.querySelectorAll('[style]').forEach(el => el.removeAttribute('style'));
+  t.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(h => {
+    const p = document.createElement('p');
+    p.innerHTML = '<strong>' + h.innerHTML + '</strong>';
+    h.replaceWith(p);
+  });
+  // The .dev-flash head already labels the block — drop the feed's own title line.
+  [...t.querySelectorAll('*')].forEach(el => { if (/^[^a-z0-9]*(key\s+)?situational developments\s*:?\s*$/i.test((el.textContent || '').trim())) el.remove(); });
+  return t.innerHTML;
+}
+// Brief-panel block: the structured JSON when it parsed, else the de-styled formatted HTML.
+function developmentsBlockHtml(r) {
+  if (!hasDevelopments(r)) return '';
+  const n = r.devCount;
+  const body = !r.devCount ? sanitizeDevHtml(r.devHtml)
+    : r.developments.map(d => `<div class="dev-item">${d.label ? `<span class="dev-label">${devEsc(d.label)}</span>` : ''}<span>${devEsc(d.text)}${d.sev ? ` <span style="color:var(--ink-4)">(${devEsc(d.sev)})</span>` : ''}</span></div>`).join('');
+  return `<div class="dev-flash"><div class="dev-flash-head"><span class="ev-flag ev-flag-dev">▲ Situational developments</span>` +
+    `<span class="dev-count">${n ? n + ' change' + (n===1?'':'s') + ' since the prior report' : 'Changes since the prior report'}</span></div>` +
+    `<div class="dev-flash-body">${body}</div></div>`;
+}
 let reportFilter = null; // {country, pathogen} — restrict list to subnational reports in a country
 function visibleReports() {
   const idx = reports.map((r,i)=>({r,i}));
@@ -3380,14 +3479,22 @@ function renderEventList() {
       <button type="button" id="resetFilters" title="Clear all filters and return to All pathogens">Reset ✕</button>
     </div>`;
   }
+  // Hint line doubles as the legend for the change flags, but only when the list actually has them.
+  const hintEl = document.querySelector('.events-hint');
+  if (hintEl) {
+    const nDev = vis.filter(({r}) => hasDevelopments(r)).length;
+    const nNew = vis.filter(({r}) => isNewEvent(r)).length;
+    const legend = [nDev ? '▲ ' + nDev + ' with new developments' : '', nNew ? nNew + ' newly logged' : ''].filter(Boolean).join(' · ');
+    hintEl.textContent = 'Select an event to load its brief →' + (legend ? '  ' + legend : '');
+  }
   eventListEl.setAttribute('aria-busy','false');
   eventListEl.innerHTML = header + (vis.length ? vis.map(({r,i}) => {
     const doc = eventDocumentation(r.pathogen, r.geoCountry);
     const scope = isNational(r.place) ? 'National' : 'Subnational';
-    return `<div class="event-item${i===selectedIdx?' selected':''}" data-idx="${i}">
+    return `<div class="event-item${i===selectedIdx?' selected':''}${hasDevelopments(r)?' has-dev':''}" data-idx="${i}">
       <p class="event-title">${highlightEventTitle(r, false)}</p>
       <div class="event-meta"><span>${r.date} · ${scope}${r.crossover?' · zoonotic':''}</span><span class="tag ${riskTagClass(r.risk)}" title="${r.riskRationale||''}">Risk ${r.risk}</span></div>
-      <div class="event-doc"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="doc-meta" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${doc.vettings} vettings · ${doc.days}d reporting</span></div>
+      <div class="event-doc"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="doc-meta" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${doc.vettings} vettings · ${doc.days}d reporting</span>${eventFlagsHtml(r)}</div>
     </div>`;
   }).join('') : '<p style="font-size:12px;color:var(--color-neutral-400);padding:8px 4px">No reports match the current pathogen / region / filter.</p>');
   const rfBtn = document.getElementById('resetFilters'); if (rfBtn) rfBtn.addEventListener('click', resetFilters);
@@ -3417,14 +3524,14 @@ function renderBrief() {
   // this banner describes the REPORTING the brief was built from; figure-level corroboration
   // stays in the event list rows and figures table where it belongs to figures.
   const ev = reportEvidence(r);
-  const banner = `<div class="brief-quality"><span class="doc-badge ${ev.strength.cls}">${ev.strength.label}</span>` +
+  const banner = `<div class="brief-quality"><span class="doc-badge ${ev.strength.cls}">${ev.strength.label}</span>${eventFlagsHtml(r)}` +
     `<span class="bq-meta" title="${REL_SUMMARY}">${scope} · ${ev.articles} article${ev.articles!==1?'s':''} · ${ev.domains} domain${ev.domains!==1?'s':''} · ${ev.facts} corroborated fact${ev.facts!==1?'s':''}${ev.articles?` · ${ev.coverage}% contributed figures`:''}</span>` +
     `<button type="button" id="evToggle" aria-expanded="false" style="margin-left:auto;font-size:10.5px;padding:2px 9px">Evidence ▾</button></div>` +
     `<div id="reportEvidence" hidden>${reportEvidenceHtml(r, ev)}</div>`;
   // Newspaper-style headline: the report's own title leads the article body, pathogen mention
   // linked. The meta row above stays the byline; the evidence banner follows the headline.
   const headline = `<div class="brief-headline">${highlightEventTitle(r, true)}</div>`;
-  briefContentEl.innerHTML = headline + banner + (r.crossover ? `<div style="background:color-mix(in srgb, var(--color-accent) 12%, transparent);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;margin:0 0 12px"><p style="margin:0"><strong>Zoonotic link reported:</strong></p>${briefMarkup(r.crossoverDetail)}</div>` : '') + stripBriefDisclaimers(stripNan(r.html));
+  briefContentEl.innerHTML = headline + banner + developmentsBlockHtml(r) + (r.crossover ? `<div style="background:color-mix(in srgb, var(--color-accent) 12%, transparent);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;margin:0 0 12px"><p style="margin:0"><strong>Zoonotic link reported:</strong></p>${briefMarkup(r.crossoverDetail)}</div>` : '') + stripBriefDisclaimers(stripNan(r.html));
   const tg = document.getElementById('evToggle');
   if (tg) tg.addEventListener('click', () => {
     const sec = document.getElementById('reportEvidence');
@@ -3440,6 +3547,29 @@ function renderBrief() {
   briefContentEl.querySelectorAll('details').forEach(d => {
     if (!d.querySelector('summary') && /^\s*\[[a-z_]+\]\s*$/i.test(d.textContent)) d.remove();
   });
+  // The Status Report HTML now embeds its own "Key Situational Developments" card between the
+  // date line and the epidemiological summary. The panel shows the themed .dev-flash block
+  // instead, so remove the duplicate rather than printing the same changes twice.
+  // Leading decoration matters: the feed's heading reads "⚠ Key Situational Developments", and \s
+  // does not cover the glyph — allow any run of non-alphanumerics before the title.
+  const devRe = /^[^a-z0-9]*(key\s+)?situational developments/i;
+  const embedded = [...briefContentEl.querySelectorAll('div,section,table,blockquote,p,h1,h2,h3,h4,h5,h6,strong')]
+    .filter(el => !el.closest('.dev-flash') && devRe.test(el.textContent || ''));
+  if (embedded.length) {
+    // Walk out to the card wrapper — the outermost ancestor whose text still STARTS with the title.
+    let target = embedded[embedded.length - 1];
+    while (target.parentElement && target.parentElement !== briefContentEl && devRe.test(target.parentElement.textContent || '')) target = target.parentElement;
+    if (/^(H\d|P|STRONG|SPAN|SUMMARY)$/.test(target.tagName)) {
+      // A bare heading: take the following siblings that belong to it (up to the next heading).
+      let sib = target.nextElementSibling;
+      while (sib && !/^H\d$/.test(sib.tagName) && !/^\s*epidemiological summary/i.test(sib.textContent || '')) {
+        const next = sib.nextElementSibling;
+        if (/^(UL|OL|P|DIV|TABLE|BLOCKQUOTE)$/.test(sib.tagName)) sib.remove(); else break;
+        sib = next;
+      }
+    }
+    target.remove();
+  }
   enhanceBriefCitations();
 }
 function enhanceBriefCitations() {
@@ -3788,7 +3918,7 @@ function comboEvidence(pathogen, country) {
 // Expandable per-report evidence section: transparent coverage summary, corroboration bars for
 // the event's latest figures, then every citation as an evidence card grouped by relationship.
 function reportEvidenceHtml(rep, ev) {
-  if (!ev.cites.length) return '<p class="ev-note" style="margin:8px 0">This brief lists no machine-readable citations.</p>';
+  if (!ev.cites.length) return '<p class="ev-note" style="margin:8px 0">This brief lists no machine-readable citations.</p><hr style="border:0;border-top:1px solid var(--color-divider);margin:14px 0 2px">';
   const order = { direct:0, related:1, cited:2 };
   const cites = [...ev.cites].sort((a,b) => order[a.rel] - order[b.rel] || (b.vetting||0) - (a.vetting||0));
   let bars = '';
@@ -3830,7 +3960,8 @@ function reportEvidenceHtml(rep, ev) {
     `</ul>` : '') +
     bars +
     `<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-label);margin:12px 0 6px">Citations</div>
-     <div class="ev-cards" style="margin-left:0;border-left:0;padding-left:0">${cites.map(c => citeCard(c.url, c.rel)).join('')}</div>`;
+     <div class="ev-cards" style="margin-left:0;border-left:0;padding-left:0">${cites.map(c => citeCard(c.url, c.rel)).join('')}</div>
+     <hr style="border:0;border-top:1px solid var(--color-divider);margin:14px 0 2px">`;
 }
 function selectEvent(idx) {
   const r = reports[idx]; if (!r) return;
@@ -3895,6 +4026,8 @@ function fetchReports() {
   function parseCoord(raw){ if(!raw||raw==='None'||!/\[/.test(raw)) return null; const n=raw.match(/-?\d+\.?\d*/g); if(!n||n.length<2) return null; return [parseFloat(n[1]), parseFloat(n[0])]; }
   reports = rows.map(r => {
     const loc = (r['Outbreak Location'] || r['Outbreak Country'] || '').trim();
+    const devs = parseDevelopments(r['Situational Developments']);
+    const devHtml = cleanText(r['Developments Formatted']) ? String(r['Developments Formatted']).trim() : '';
     const gc = geoCountry(loc) || geoCountry((r['Outbreak Country']||'').replace('United States of America','United States'));
     return {
       title: (r['Event Title'] || '').trim() || [PATHOGEN_LABELS[r['Pathogen']] || r['Pathogen'], (r['Outbreak Location'] || r['Outbreak Country'] || '').trim()].filter(Boolean).join(' — '),
@@ -3910,10 +4043,14 @@ function fetchReports() {
       html: r['Status Report'] || '',
       crossover: cleanText(r['Crossover Events']).length > 0,
       crossoverDetail: r['Crossover Events'] || '',
+      status: (r['Event Status'] || '').trim(),
+      developments: devs,
+      devCount: devs.length,
+      devHtml: devHtml,
       urls: extractUrls((r['Urls']||'') + ' ' + (r['Reference List']||'')),
     };
   }).filter(r => r.title && r.html)
-    .sort((a,b) => b.risk - a.risk || (b.date>a.date?1:-1));
+    .sort((a,b) => b.risk - a.risk || changeRank(b) - changeRank(a) || (b.date>a.date?1:-1));
   if (!reports.length) throw new Error('empty reports');
   // Place-level coordinates power geographic-proximity ranking in the comparison bar view.
   reports.forEach(r => { if (!r.lonlat || !r.place) return; const k = r.place.trim().toLowerCase(); if (k && !placeCoords.has(k)) placeCoords.set(k, r.lonlat); });
