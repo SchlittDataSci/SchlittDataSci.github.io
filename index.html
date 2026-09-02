@@ -403,7 +403,7 @@
     <rect x="-2" y="19.2" width="212" height="2.8" fill="var(--color-bg)"/>
     <rect x="9" y="13.2" width="176" height="2.2" fill="var(--color-bg)"/>
   </svg>
-  <a href="#" aria-current="location">Dashboard</a>
+  <a href="#" id="navDashboard" aria-current="page">Dashboard</a>
   <a href="#" id="navSources">Data sources</a>
   <a href="#" id="navReports">Reports</a>
   <a href="#" id="navAlerts">Alerts</a>
@@ -460,6 +460,7 @@
 
   <div class="grid-main">
     <div class="card map-card elev-sm">
+      <p class="card-title" style="margin:0 0 10px">Outbreak map <span style="font-weight:400;color:var(--ink-4);font-size:11.5px">— vetted events sized by risk &amp; case load</span></p>
       <div class="map-head">
         <div class="seg" role="tablist" aria-label="Marker size" id="mapMetricSeg">
           <button type="button" class="seg-opt" aria-selected="true" data-metric="risk">Risk score</button>
@@ -757,8 +758,32 @@ function visibleRecords() {
     return regionOk && locOk && pathOk;
   });
 }
-document.getElementById('region').addEventListener('change', (e) => { activeRegion = e.target.value; tablePage = 0; refreshPathogenSelector(); renderStats(); renderTable(); renderMap(); renderEventList(); flyToFilteredMarkers(); });
-document.getElementById('search').addEventListener('input', (e) => { locationQuery = e.target.value.trim().toLowerCase(); tablePage = 0; refreshPathogenSelector(); renderStats(); renderTable(); renderMap(); flyToFilteredMarkers(); });
+document.getElementById('region').addEventListener('change', (e) => { activeRegion = e.target.value; tablePage = 0; refreshPathogenSelector(); renderStats(); renderTable(); renderMap(); renderEventList(); flyToFilteredMarkers(); applyEmptyQueryState(); });
+document.getElementById('search').addEventListener('input', (e) => { locationQuery = e.target.value.trim().toLowerCase(); tablePage = 0; refreshPathogenSelector(); renderStats(); renderTable(); renderMap(); renderEventList(); flyToFilteredMarkers(); applyEmptyQueryState(); });
+// When a location search (or region) excludes every event, the brief, trend and forecast panels
+// must not keep showing the previously-selected outbreak — clear them to an explicit empty state
+// so nothing contradicts the '0 events' the map and table already report. Restores on clear.
+let _queryEmpty = false;
+function applyEmptyQueryState() {
+  const q = locationQuery;
+  const noMatch = !!q && !visibleReports().length && !(typeof visibleEventMarkers==='function' && visibleEventMarkers().length);
+  const box = document.getElementById('forecastBox');
+  if (noMatch) {
+    _queryEmpty = true;
+    const esc = String(q).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    if (typeof briefMetaEl!=='undefined' && briefMetaEl) briefMetaEl.innerHTML = '';
+    if (typeof briefContentEl!=='undefined' && briefContentEl) briefContentEl.innerHTML = '<p style="font-size:12.5px;line-height:1.6;color:var(--ink-3);margin:0">No events match \u201c<strong style="color:var(--color-text)">'+esc+'</strong>\u201d in the current pathogen / region. Clear the filter to return to the outbreak briefs.</p>';
+    const tt=document.getElementById('trendTitle'); if(tt) tt.textContent='No data for the current filter';
+    const tm=document.getElementById('trendMeta'); if(tm) tm.textContent='';
+    try { tsvg.selectAll('*').remove(); shsvg.selectAll('*').remove(); } catch(e){}
+    const on=document.getElementById('outlierNote'); if(on) on.textContent='';
+    if (box) box.innerHTML='<p class="fc-none">No projection — no events match the current filter.</p>';
+  } else if (_queryEmpty) {
+    _queryEmpty = false;
+    renderTrendSection();
+    renderBrief();
+  }
+}
 
 function worstCombo() {
   const candidates = displayRecords().filter(r => r.pathogenRaw && !isFlu(r.pathogenRaw) && isRecordVetted(r));
@@ -2022,18 +2047,6 @@ document.getElementById('granularitySeg')?.addEventListener('click', (e) => {
   document.querySelectorAll('#granularitySeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
   renderTrendSection();
 });
-document.getElementById('plotViewSeg')?.addEventListener('click', (e) => {
-  const btn = e.target.closest('.seg-opt');
-  if (!btn || btn.disabled) return;
-  plotViewSel = btn.dataset.view;
-  if (btn.dataset.view === 'bars') chartPref = 'bars';
-  else if (btn.dataset.view === 'national' || btn.dataset.view === 'subnational') {
-    chartPref = 'timeseries';
-    granPref = btn.dataset.view;
-  } else chartPref = 'auto';
-  renderTrendSection();
-});
-
 // Aggregation: national totals per pathogen = for each reporting country on a date, take the
 // highest statistically-screened (outlier==='False') value reported, then SUM across countries.
 // This avoids double-counting duplicate/subnational rows for the same country while still
@@ -2050,7 +2063,6 @@ function isNational(loc) {
   if (/\bcount(y|ies)\b/i.test(s)) return false;
   return !s.includes(',');
 }
-function isNationalScope(loc) { return isNational(loc); } // alias for older callers
 function nationalLocations(rows, pathogen, measure) {
   return [...new Set(rows.filter(r => r.pathogen===pathogen && isNational(r.location) && r.measure===measure && r.outlier==='False').map(r => r.location))];
 }
@@ -3201,12 +3213,6 @@ function renderSourceChart(series) {
   });
 }
 
-document.getElementById('subMeasureSeg')?.addEventListener('click', (e) => {
-  const btn = e.target.closest('.seg-opt'); if (!btn) return;
-  subMeasure = btn.dataset.m;
-  document.querySelectorAll('#subMeasureSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
-  renderTrendSection();
-});
 document.getElementById('trendBack')?.addEventListener('click', () => { trendMode = { mode:'national' }; plotViewSel='auto'; highlightSubLoc=null; showSubnational=false; const cb=document.getElementById('subToggle'); if(cb) cb.checked=false; renderTrendSection(); });
 // Retired: the subnational checkbox was superseded by the Bars/National/Subnational switcher.
 // Kept as a no-op so existing callers stay valid; availability now drives the switcher button.
@@ -3704,10 +3710,13 @@ function visibleReports() {
   // Region is a global filter — the event list honours it like the map, stats and table do.
   // Reports with no resolvable country are always kept (they cannot be region-classified).
   const regionOk = ({r}) => !r.geoCountry || activeRegion === 'All regions' || REGION_BY_COUNTRY[r.geoCountry] === activeRegion;
+  // Location search scopes the event list too, mirroring the map markers, so the panels agree.
+  const q = locationQuery;
+  const locOk = ({r}) => !q || (r.country||'').toLowerCase().includes(q) || (r.place||'').toLowerCase().includes(q) || (r.title||'').toLowerCase().includes(q) || (r.pathogen||'').toLowerCase().includes(q) || (PATHOGEN_LABELS[r.pathogen]||'').toLowerCase().includes(q);
   // No drill-down filter: still scope the list to the selected pathogen so the selector
   // refreshes every data element, including the event reports panel.
-  if (!isAll() && selectedPathogen) return idx.filter(({r}) => r.pathogen===selectedPathogen && regionOk({r}));
-  return idx.filter(regionOk);
+  if (!isAll() && selectedPathogen) return idx.filter(({r}) => r.pathogen===selectedPathogen && regionOk({r}) && locOk({r}));
+  return idx.filter(({r}) => regionOk({r}) && locOk({r}));
 }
 // Full filter reset: back to All pathogens, national overview, unfiltered event list.
 function resetFilters() {
@@ -4709,6 +4718,7 @@ document.addEventListener('rawarticles', () => {
   if (tableMode === 'raw') renderTable();
   if (reports.length) { renderEventList(); renderBrief(); }
 });
+document.getElementById('navDashboard')?.addEventListener('click', (e) => { e.preventDefault(); if (typeof resetFilters==='function') resetFilters(); const sq=document.getElementById('search'); if(sq){ sq.value=''; locationQuery=''; } window.scrollTo({ top: 0, behavior: 'smooth' }); });
 document.getElementById('navSources').addEventListener('click', (e) => { e.preventDefault();
   openDialog('Data sources', `<p style="font-size:12.5px;line-height:1.6;color:color-mix(in srgb,var(--color-text) 75%,transparent)">Three published Google Sheet feeds, refreshed on load and via <strong>Sync now</strong>.</p>
     <table class="table"><thead><tr><th>Feed</th><th>Records</th><th>Content</th><th>Open</th></tr></thead><tbody>
