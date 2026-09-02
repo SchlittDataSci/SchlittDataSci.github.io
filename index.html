@@ -192,7 +192,10 @@
   .forecast-box { margin-top: 0; flex: 1 1 auto; display: flex; flex-direction: column;
     justify-content: flex-start; padding-top: 18px; border-top: 1px solid var(--color-divider); font-size: 12px; color: var(--ink-2); line-height: 1.5; }
   .forecast-box .fc-title { font-size: 10.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-label); margin: 0 0 12px; }
-  .forecast-box .fc-title span.fc-strain { color: var(--color-accent-300); font-weight: 600; }
+  .forecast-box .fc-title span.fc-strain { color: var(--color-accent-300); font-weight: 700; text-transform: uppercase; }
+  .forecast-box .fc-title button.fc-strain.fc-link { background:none; border:0; padding:0; font:inherit; color:var(--color-accent-300); font-weight:700; text-transform: uppercase; letter-spacing: .02em; cursor:pointer; border-bottom:1px dotted color-mix(in srgb,var(--color-accent-300) 55%,transparent); }
+  .forecast-box .fc-title button.fc-strain.fc-link:hover { color:var(--color-accent); border-bottom-color:var(--color-accent); }
+  .forecast-box .fc-title button.fc-strain.fc-link:focus-visible { outline:2px solid var(--color-accent); outline-offset:2px; border-radius:2px; }
   .forecast-box .fc-sub { text-transform: none; letter-spacing: 0; color: var(--ink-4); }
   .forecast-box .fc-grid { display: grid; grid-template-columns: minmax(0,1fr); grid-auto-rows: 1fr; gap: var(--space-3); }
   .forecast-box .fc-cell { min-width: 0; background: color-mix(in srgb, var(--color-neutral-800) 40%, transparent); border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: var(--space-3); }
@@ -492,7 +495,7 @@
         <div class="stat-grid">
           <div class="stat-cell"><p class="stat-num" id="statCases">–</p><p class="stat-label">Confirmed cases</p></div>
           <div class="stat-cell"><p class="stat-num" id="statDeaths">–</p><p class="stat-label">Confirmed deaths</p></div>
-          <div class="stat-cell"><p class="stat-num" id="statActive">–</p><p class="stat-label">Active outbreaks</p></div>
+          <div class="stat-cell" id="statActiveCell" title="Active = ≤14 days since last vetted figure (Reporting ≤4d + Slowing ≤14d) · one per country×pathogen · includes subnational proxy where no national figure exists"><p class="stat-num" id="statActive">–</p><p class="stat-label">Active outbreaks</p><p class="cell-range" id="statActiveBreakdown" style="margin:4px 0 0;font-size:10.5px"></p></div>
           <div class="stat-cell"><p class="stat-num" id="statCountries">–</p><p class="stat-label">Countries reporting</p></div>
         </div>
       </div>
@@ -754,8 +757,8 @@ function visibleRecords() {
     return regionOk && locOk && pathOk;
   });
 }
-document.getElementById('region').addEventListener('change', (e) => { activeRegion = e.target.value; tablePage = 0; renderStats(); renderTable(); renderMap(); renderEventList(); flyToFilteredMarkers(); });
-document.getElementById('search').addEventListener('input', (e) => { locationQuery = e.target.value.trim().toLowerCase(); tablePage = 0; renderStats(); renderTable(); renderMap(); flyToFilteredMarkers(); });
+document.getElementById('region').addEventListener('change', (e) => { activeRegion = e.target.value; tablePage = 0; refreshPathogenSelector(); renderStats(); renderTable(); renderMap(); renderEventList(); flyToFilteredMarkers(); });
+document.getElementById('search').addEventListener('input', (e) => { locationQuery = e.target.value.trim().toLowerCase(); tablePage = 0; refreshPathogenSelector(); renderStats(); renderTable(); renderMap(); flyToFilteredMarkers(); });
 
 function worstCombo() {
   const candidates = displayRecords().filter(r => r.pathogenRaw && !isFlu(r.pathogenRaw) && isRecordVetted(r));
@@ -821,9 +824,17 @@ function renderStats() {
   const sumDeaths = filtered.reduce((s,r) => s + (r.deaths || 0), 0);
   document.getElementById('statCases').textContent = sumCases ? sumCases.toLocaleString() : '—';
   document.getElementById('statDeaths').textContent = sumDeaths ? sumDeaths.toLocaleString() : '—';
-  // Active = the figures table's own "Reporting" band (≤4d) — one recency vocabulary everywhere.
-  const active = filtered.filter(r => r.date && statusOf(r.date) === 'Reporting').length;
-  document.getElementById('statActive').textContent = active;
+  // Active = ≤14 days since last vetted figure (Reporting ≤4d + Slowing ≤14d) — one hit per country×pathogen with vettings,
+  // including subnational proxy where no independent national figure is tracked (proxy already baked into `filtered` via liveRecords/refineRecord).
+  const activeAll = filtered.filter(r => r.date && statusOf(r.date) !== 'Quiet');
+  const reporting = activeAll.filter(r => statusOf(r.date) === 'Reporting').length;
+  const slowing = activeAll.length - reporting;
+  const quiet = filtered.length - activeAll.length;
+  document.getElementById('statActive').textContent = activeAll.length;
+  const breakdownEl = document.getElementById('statActiveBreakdown');
+  if (breakdownEl) breakdownEl.textContent = filtered.length ? `${reporting} reporting · ${slowing} slowing · ${quiet} quiet (>14d)` : '';
+  const activeCell = document.getElementById('statActiveCell');
+  if (activeCell) activeCell.title = `Active (≤14d) = ${activeAll.length} outbreaks — ${reporting} Reporting (≤4d) + ${slowing} Slowing (≤14d); ${quiet} Quiet (>14d) excluded. One per country×pathogen, vetted only, subnational proxy where no national figure.`;
   document.getElementById('statCountries').textContent = new Set(filtered.map(r => r.country)).size;
   // Forecast: when All selected show worst outbreak (hardest-hit country) instead of summing all pathogens*countries
   let forecastSeries, fcPathogen;
@@ -862,8 +873,73 @@ function renderForecastCard(series, fcPathogenOverride) {
   const isAllSelected = isAll();
   const scopeLabel = isAllSelected ? 'top pathogen' : 'selected pathogen';
   const cell = (label2, proj) => proj ? (function(){ const f = proj[proj.length-1]; return `<div class="fc-cell"><p class="fc-num">${Math.round(f.p50).toLocaleString()}</p><p class="fc-lbl">${label2}</p><p class="fc-range">50% Range: (${Math.round(f.p25).toLocaleString()}–${Math.round(f.p75).toLocaleString()})</p></div>`; })() : '';
-  box.innerHTML = `<p class="fc-title">${days}-day forecast · median (p50) · ${loc} · ${scopeLabel} · <span class="fc-strain">${label}</span></p><div class="fc-grid">${cell('Proj. cases', pc)}${cell('Proj. deaths', pd)}</div>`;
+  // Primary outbreak beacon — click the pathogen name to jump there (resets region, sets pathogen+location to worstCombo)
+  let fcLink = `<span class="fc-strain">${label}</span>`;
+  try {
+    const best = (typeof worstCombo === 'function') ? worstCombo() : null;
+    const tgt = best || (loc && fcPathogen ? { country: (typeof geoCountry==='function' ? geoCountry(loc) : null) || loc.split(',').pop().trim() || loc, pathogenRaw: fcPathogen, lonlat: null } : null);
+    if (tgt && tgt.country && tgt.pathogenRaw) {
+      const esc = s => String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+      fcLink = `<button type="button" class="fc-strain fc-link" data-fc-country="${esc(tgt.country)}" data-fc-pathogen="${esc(tgt.pathogenRaw)}" aria-label="Go to primary outbreak — ${esc(tgt.country)} · ${esc(label)}" title="Go to ${esc(label)} in ${esc(tgt.country)} — resets region filter">` + label + `</button>`;
+    }
+  } catch(e) {}
+  box.innerHTML = `<p class="fc-title">${days}-day forecast · median (p50) · ${loc} · ${scopeLabel} · ${fcLink}</p><div class="fc-grid">${cell('Proj. cases', pc)}${cell('Proj. deaths', pd)}</div>`;
 }
+// Forecast primary-outbreak fast path — click the pathogen name to jump to worstCombo (resets region, sets pathogen+location)
+(function(){
+  const box = document.getElementById('forecastBox');
+  if (!box) return;
+  function goToPrimary(pathogen, country) {
+    // Reset region + location search so the target is not filtered out
+    activeRegion = 'All regions';
+    const rs = document.getElementById('region'); if (rs) rs.value = 'All regions';
+    locationQuery = '';
+    const sq = document.getElementById('search'); if (sq) sq.value = '';
+    tablePage = 0;
+    selectedPathogen = pathogen; userChangedPathogen = true;
+    const sel = document.getElementById('disease'); if (sel && [...sel.options].some(o=>o.value===pathogen)) sel.value = pathogen;
+    else { refreshPathogenSelector(); const sel2=document.getElementById('disease'); if(sel2) sel2.value=pathogen; }
+    // Location beacon — national scope (reports + time series stay national)
+    highlightedCountry = country; highlightSubLoc = null; showSubnational = false;
+    const rec = (typeof records!=='undefined' ? records.find(x=>x.country===country && x.pathogenRaw===pathogen) : null);
+    tableView = { mode:'national', id: null };
+    // Clear subnational report filter so visibleReports shows national events for the pathogen
+    if (typeof reportFilter!=='undefined') reportFilter = null;
+    chartPref='auto'; plotViewSel='auto'; granPref='national'; trendMode={ mode:'national' };
+    const cb=document.getElementById('subToggle'); if(cb) cb.checked=false;
+    refreshPathogenSelector();
+    renderStats(); renderTable(); renderTrendSection(); renderMap();
+    // Prefer the national report for this outbreak so the brief + plot are national
+    let idx = -1;
+    if (typeof reports!=='undefined' && typeof isNational==='function') {
+      idx = reports.findIndex(r=>r.geoCountry===country && r.pathogen===pathogen && isNational(r.place));
+      if (idx<0) idx = reports.findIndex(r=>r.geoCountry===country && r.pathogen===pathogen);
+    }
+    if (idx>=0 && typeof selectEvent==='function') {
+      // selectEvent will re-apply reportFilter for subnational places — force national before it
+      showSubnational = false; granPref='national'; trendMode={ mode:'national' };
+      selectEvent(idx);
+      // selectEvent set subnational state if the chosen report was subnational — correct it back to national
+      showSubnational = false; granPref='national'; trendMode={ mode:'national' };
+      highlightSubLoc = null;
+      if (typeof reportFilter!=='undefined') reportFilter = null;
+      tableView = { mode:'national', id: null };
+      renderStats(); renderTable(); renderTrendSection(); renderMap(); if (typeof renderEventList==='function') renderEventList(); if (typeof renderBrief==='function') renderBrief();
+    } else { if (typeof renderEventList==='function') renderEventList(); if (typeof renderBrief==='function') renderBrief(); if (typeof flyToFilteredMarkers==='function') flyToFilteredMarkers(); }
+    const rec2 = rec; if (rec2 && rec2.lonlat && typeof flyToLonlat==='function') flyToLonlat(rec2.lonlat);
+    else if (typeof flyToFilteredMarkers==='function') flyToFilteredMarkers();
+    document.querySelector('.row-2col')?.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  box.addEventListener('click', (e)=>{
+    const btn=e.target.closest('.fc-link'); if(!btn) return;
+    const pathogen=btn.dataset.fcPathogen, country=btn.dataset.fcCountry;
+    if(!pathogen || !country) return;
+    goToPrimary(pathogen, country);
+  });
+  box.addEventListener('keydown', (e)=>{
+    if((e.key==='Enter'||e.key===' ') && e.target.closest('.fc-link')){ e.preventDefault(); e.target.closest('.fc-link').click(); }
+  });
+})();
 let tableView = { mode:'national', id:null };
 let tablePrevPathogen = null;
 const TABLE_MAX = 40;
@@ -2318,12 +2394,44 @@ function speciesForCombo(rows, country, pathogen) {
   const sp = [...new Set(rows.filter(r => geoCountry(r.location)===country && r.pathogen===pathogen).map(r => (r.species||'').trim()).filter(s => s && s.toLowerCase()!=='humans'))];
   return sp.length ? sp.join(' / ') : '';
 }
+function availablePathogenRaws() {
+  // Pathogens for which *displayable* data exists under the current filters
+  // (region + location search + host species + screen state), ignoring the
+  // pathogen selector itself. Backed by refined records, not raw rows, so the
+  // list matches what the table/map/plots can actually render.
+  if (!records.length) return [];
+  const regionOk = r => activeRegion === 'All regions' || REGION_BY_COUNTRY[r.country] === activeRegion;
+  const locOk = r => !locationQuery || r.country.toLowerCase().includes(locationQuery) || (r.disease||'').toLowerCase().includes(locationQuery);
+  const base = records.map(refineRecord).filter(Boolean)
+    .filter(r => regionOk(r) && locOk(r) && !isFlu(r.pathogenRaw));
+  return [...new Set(base.map(r => r.pathogenRaw).filter(Boolean))];
+}
+function refreshPathogenSelector() {
+  const sel = document.getElementById('disease');
+  if (!sel || !records.length) return;
+  const avail = availablePathogenRaws();
+  if (!avail.length) {
+    // No pathogen matches the current filters — keep only "All pathogens" and fall back.
+    if (!isAll()) { selectedPathogen = ALL; userChangedPathogen = false; resetDrilldowns(); }
+    sel.innerHTML = `<option value="${ALL}" selected>All pathogens</option>`;
+    sel.disabled = false;
+    sel.title = 'No pathogen matches the current region/location/host filters';
+    return;
+  }
+  sel.disabled = false;
+  sel.removeAttribute('title');
+  const ordered = [...avail].sort((a,b) => (priorityTier(b) - priorityTier(a)) || a.localeCompare(b, undefined, {sensitivity:'base'}));
+  if (!isAll() && !ordered.includes(selectedPathogen)) { selectedPathogen = ALL; userChangedPathogen = false; resetDrilldowns(); }
+  if (!userChangedPathogen) {
+    const def = dataDepthPathogen() || computeDefaultPathogen();
+    if (def && ordered.includes(def)) defaultPathogen = def;
+  }
+  sel.innerHTML = [ALL, ...ordered].map(p => `<option value="${p}"${p===selectedPathogen?' selected':''}>${p===ALL ? 'All pathogens' : (PATHOGEN_LABELS[p] || p)}</option>`).join('');
+}
 function populatePathogenSelect(rows) {
   const present = [...new Set(rows.map(r => r.pathogen).filter(Boolean))];
   const sel = document.getElementById('disease');
-  // Only list pathogens that can actually render somewhere: at least one unflagged
-  // confirmed_cases row whose location resolves to a known country. Pathogens reported
-  // solely from unmapped places (e.g. "Praia, Cape Verde") would show empty views everywhere.
+  // Initial guard: only pathogens that can actually render somewhere (national location exists)
   const withCases = present.filter(p => rows.some(r => r.pathogen === p
     && r.measure === 'confirmed_cases' && r.outlier === 'False' && geoCountry(r.location)));
   if (!withCases.length) return;
@@ -2331,10 +2439,12 @@ function populatePathogenSelect(rows) {
     const def = dataDepthPathogen() || computeDefaultPathogen();
     if (def) defaultPathogen = def;
   }
-  const ordered = [...withCases].sort((a,b) => (priorityTier(b) - priorityTier(a)) || a.localeCompare(b, undefined, {sensitivity:'base'}));
-  // Hash-restored pathogen may not exist in the live data — fall back to All.
-  if (!isAll() && !ordered.includes(selectedPathogen) && selectedPathogen !== ALL) { selectedPathogen = ALL; }
-  sel.innerHTML = [ALL, ...ordered].map(p => `<option value="${p}"${p===selectedPathogen?' selected':''}>${p===ALL ? 'All pathogens' : (PATHOGEN_LABELS[p] || p)}</option>`).join('');
+  const orderedInit = [...withCases].sort((a,b) => (priorityTier(b) - priorityTier(a)) || a.localeCompare(b, undefined, {sensitivity:'base'}));
+  if (!isAll() && !orderedInit.includes(selectedPathogen) && selectedPathogen !== ALL) { selectedPathogen = ALL; }
+  sel.innerHTML = [ALL, ...orderedInit].map(p => `<option value="${p}"${p===selectedPathogen?' selected':''}>${p===ALL ? 'All pathogens' : (PATHOGEN_LABELS[p] || p)}</option>`).join('');
+  // Immediately narrow to the current filter state (region/host/search) so the
+  // selector never shows pathogens with no visible data.
+  refreshPathogenSelector();
 }document.getElementById('disease').addEventListener('change', (e) => {
   selectedPathogen = e.target.value;
   userChangedPathogen = true;
@@ -4627,6 +4737,7 @@ document.getElementById('exportEventsBtn').addEventListener('click', exportEvent
 document.getElementById('printBtn').addEventListener('click', () => window.print());
 document.getElementById('species').addEventListener('change', (e) => {
   activeSpecies = e.target.value; tablePage = 0;
+  refreshPathogenSelector();
   renderStats(); renderTable(); renderMap(); renderTrendSection();
 });
 document.getElementById('screenSeg').addEventListener('click', (e) => {
@@ -4634,6 +4745,7 @@ document.getElementById('screenSeg').addEventListener('click', (e) => {
   screenState = btn.dataset.screen;
   document.querySelectorAll('#screenSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
   tablePage = 0;
+  refreshPathogenSelector();
   renderStats(); renderTable(); renderMap();
 });
 document.getElementById('pagerPrev').addEventListener('click', () => { if (tableMode === 'raw') { if (rawPage > 0) { rawPage--; renderTable(); } } else if (tablePage > 0) { tablePage--; renderTable(); } });
