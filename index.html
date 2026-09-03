@@ -70,6 +70,10 @@
   .src-cell.vet-unvetted:hover { color: var(--ink-3); border-bottom: 0; }
   tr.row-unvetted { opacity: .92; }
   tr.row-unvetted td:first-child { border-left: 2px solid color-mix(in srgb, var(--sev-lo) 70%, transparent); }
+  /* Vetted (interactive) rows: colour the location title like the "N sources" screening link so it
+     reads as clickable — clicking loads that outbreak's AI brief. */
+  #reportRows tr.row-vetted td:first-child { color: var(--color-accent-300); cursor: pointer; }
+  #reportRows tr.row-vetted:hover td:first-child { color: var(--color-accent); text-decoration: underline; text-underline-offset: 2px; }
   body { margin: 0; background: var(--color-bg); font-family: var(--font-body); color: var(--color-text); }
   a { color: var(--color-accent-300); text-decoration: none; }
   a:hover { color: var(--color-accent); text-decoration: underline; }
@@ -219,7 +223,7 @@
   .brief-headline .ev-path { color: var(--color-accent-200); }
   .brief-quality .bq-meta { font-size: 11px; color: var(--ink-4); }
   .sub-swatch { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; font-size: 10.5px; max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
-  #subLegend { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; flex: 1 1 220px; min-width: 200px; }
+  #subLegend { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; align-content: flex-start; flex: 1 1 220px; min-width: 200px; max-height: 46px; overflow-y: auto; overscroll-behavior: contain; }
   #subLegend .sub-swatch:nth-child(n+6) { opacity: 0.95; }
   #subToggleWrap { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--ink-3); margin-bottom: 8px; }
   #subToggleWrap label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
@@ -1258,7 +1262,7 @@ function renderTable() {
       }
     }
     const subAttr = subnational ? ` data-sub="${r.country.replace(/"/g,'&quot;')}" data-sub-pathogen="${r.pathogen.replace(/"/g,'&quot;')}"` : '';
-    const rowCls = vetted ? '' : ' class="row-unvetted"';
+    const rowCls = vetted ? ' class="row-vetted"' : ' class="row-unvetted"';
     return `
     <tr data-id="${r.id}"${rowCls}${drillable?' data-drill="1" tabindex="0" role="button" aria-label="Show subnational reports"':''}${subAttr}>
       <td>${r.country}${nameExtra}</td>
@@ -1373,6 +1377,31 @@ document.getElementById('reportRows').addEventListener('keydown', (e) => {
   if (!tr) return;
   e.preventDefault(); tr.click();
 });
+// Table title → brief: after opening the AI summary, bring the brief panel into view.
+// rAF-based easing so it animates even in preview hosts that ignore scroll-behavior:smooth,
+// and the target is measured on the NEXT frame so selectEvent's table/brief reflow has settled
+// (fixes stale targets when clicking rows far down the table).
+function smoothScrollTo(y, dur) {
+  const maxY = Math.max(0, (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight);
+  y = Math.max(0, Math.min(y, maxY));
+  const start = window.pageYOffset, dist = y - start, t0 = performance.now();
+  dur = dur || 460;
+  if (Math.abs(dist) < 2) { window.scrollTo(0, y); return; }
+  const ease = t => t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2;
+  (function step(now) {
+    const p = Math.min(1, (now - t0) / dur);
+    window.scrollTo(0, Math.round(start + dist * ease(p)));
+    if (p < 1) requestAnimationFrame(step);
+  })(t0);
+}
+function scrollToBrief() {
+  const el = document.querySelector('.briefs-card') || document.querySelector('.brief-col');
+  if (!el) return;
+  requestAnimationFrame(() => {
+    const y = el.getBoundingClientRect().top + window.pageYOffset - 12;
+    smoothScrollTo(y, 460);
+  });
+}
 document.getElementById('reportRows').addEventListener('click', (e) => {
   const srcBtn = e.target.closest('.src-cell');
   if (srcBtn) { e.stopPropagation(); openFigureSourcePopup(srcBtn.dataset.src); return; }
@@ -1380,6 +1409,14 @@ document.getElementById('reportRows').addEventListener('click', (e) => {
   if (trDrill) {
     const rec = records.find(r => r.id === trDrill.dataset.id);
     if (rec && rec.pathogenRaw !== selectedPathogen) tablePrevPathogen = selectedPathogen;
+    // Link the figures table to the briefs: clicking a national title loads that outbreak's national
+    // brief (selectEvent also opens the subnational figures view). Fall back to a table-only drill
+    // when no national report exists for the row.
+    const natIdx = rec ? reports.findIndex(rp => rp.geoCountry === rec.country && rp.pathogen === rec.pathogenRaw && isNational(rp.place)) : -1;
+    // Prefer the national brief; if this outbreak has no national report, fall back to any report
+    // for it (subnational) so a vetted title always opens a brief and scrolls to it.
+    const openIdx = (natIdx < 0 && rec) ? reports.findIndex(rp => rp.geoCountry === rec.country && rp.pathogen === rec.pathogenRaw) : natIdx;
+    if (openIdx >= 0) { selectEvent(openIdx); scrollToBrief(); return; }
     tableView = { mode:'subnational', id: trDrill.dataset.id };
     if (rec) {
       highlightedCountry = rec.country;
@@ -1402,6 +1439,13 @@ document.getElementById('reportRows').addEventListener('click', (e) => {
     const parentRec = records.find(r => r.id === tableView.id);
     const country = parentRec ? parentRec.country : geoCountry(loc) || loc.split(',').pop().trim();
     const pathogen = pat || (parentRec ? parentRec.pathogenRaw : selectedPathogen);
+    // Link the figures table to the briefs: clicking a subnational row opens that location's
+    // subnational brief + subnational event-reports view when a report matches; otherwise just
+    // highlight its series on the plot (original behaviour).
+    const norm = s => (s||'').toLowerCase().replace(/\b(province|region|district|county|prefecture|governorate|state|health zone|city|department|division)\b/g,'').replace(/[^a-z0-9]/g,'');
+    const nl = norm(loc);
+    const subIdx = nl ? reports.findIndex(rp => rp.geoCountry===country && rp.pathogen===pathogen && !isNational(rp.place) && (()=>{ const np = norm(rp.place); return np && (np===nl || np.includes(nl) || nl.includes(np)); })()) : -1;
+    if (subIdx >= 0) { selectEvent(subIdx); scrollToBrief(); return; }
     highlightedCountry = country;
     highlightSubLoc = loc;
     showSubnational = true;
@@ -3121,6 +3165,16 @@ const SRC_HIST = {
   hover: () => col('--color-accent-400'),
   barWidth: step => Math.max(3, Math.min(14, step - 3)),
 };
+// Bar width from the ACTUAL minimum spacing between adjacent bars on the (time) x-axis, so bars
+// never overlap where dates cluster nor pile up at the clamped edges — the average-step width
+// couldn't see local density. Sparse spans still read as real no-data gaps.
+function srcBarWidth(bins, x) {
+  const xs = bins.map(b => x(new Date(b.date))).sort((a, b) => a - b);
+  let g = Infinity;
+  for (let i = 1; i < xs.length; i++) { const d = xs[i] - xs[i-1]; if (d > 0.5) g = Math.min(g, d); }
+  if (!isFinite(g)) g = 14;
+  return Math.max(2.5, Math.min(14, g - 2));
+}
 function vettingsAndArticles(rows) {
   let vet = 0; const urls = new Set(); const doms = new Set();
   (rows || []).forEach(r => {
@@ -3185,7 +3239,7 @@ function renderSourceChart(series) {
   shsvg.append('text').attr('x',shMargin.left-28).attr('y',shMargin.top+(shTh-shMargin.top-shMargin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${shMargin.left-28},${shMargin.top+(shTh-shMargin.top-shMargin.bottom)/2})`).attr('font-size','9.5px').attr('fill',col('--color-neutral-400')).text('Sources');
   shsvg.append('defs').append('clipPath').attr('id','sourceClip').append('rect').attr('x',shMargin.left-8).attr('y',shMargin.top-8).attr('width',shTw-shMargin.left-shMargin.right+16).attr('height',shTh-shMargin.top-shMargin.bottom+16);
   const plotGS = shsvg.append('g').attr('clip-path','url(#sourceClip)');
-  const bw = SRC_HIST.barWidth(step);
+  const bw = srcBarWidth(bins, x);
   bins.forEach(b => {
     const { art, dom } = vettingsAndArticles(b.rows);
     plotGS.append('rect')
@@ -3442,7 +3496,7 @@ function renderSubSourceChart(perLoc, style) {
   const plotGS2 = shsvg.append('g').attr('clip-path','url(#subSourceClip)');
   const usableH = (shTh-shMargin.bottom)-shMargin.top;
   const pxPer = usableH/(maxT*1.15);
-  const bw = SRC_HIST.barWidth(step);
+  const bw = srcBarWidth(binned, x);
   binned.forEach(b => {
     const cx = x(new Date(b.date)); let yb = shTh-shMargin.bottom;
     const dayTot = totals[binned.indexOf(b)];
@@ -3620,6 +3674,7 @@ function highlightEventTitle(r, linked) {
   ranges.forEach(rg => { if (rg.start >= last) { picked.push(rg); last = rg.end; } });
   let out = '', pos = 0;
   picked.forEach(rg => {
+    if (rg.start > pos) out += title.slice(pos, rg.start); // preserve text BETWEEN highlights (e.g. "Outbreak Escalates in")
     const seg = title.slice(rg.start, rg.end);
     if (rg.cls === 'ev-path') {
       const who = linked ? pathogenWhoUrl(r.pathogen) : null;
@@ -3996,8 +4051,8 @@ function enhanceBriefCitations() {
 }
 // Latest-figure vettings for every event of the same pathogen — the peer distribution that gives
 // the evidence strips a frame of reference (a bare "N vettings" bar otherwise means nothing).
-function peerVettings(pathogen, kind) {
-  return records.filter(r => r.pathogenRaw === pathogen).map(rec => {
+function peerVettings(pathogen, kind, exceptCountry) {
+  return records.filter(r => r.pathogenRaw === pathogen && (exceptCountry == null || r.country !== exceptCountry)).map(rec => {
     if (kind === 'cases') return rec.cases != null ? rowsVettings(rec.rowsAt || []) : null;
     const dl = latestOf(viewRows().filter(r2 => r2.pathogen === pathogen && geoCountry(r2.location) === rec.country && r2.measure === 'confirmed_deaths' && r2.outlier === 'False'));
     return dl ? dl.sources : null;
@@ -4199,7 +4254,7 @@ function reportEvidenceHtml(rep, ev) {
     const entries = [['reported cases', rec.cases, rowsVettings(rec.rowsAt||[]), 'cases', rec.rowsAt]];
     if (dl) entries.push(['reported deaths', dl.value, dl.sources, 'deaths', rows2.filter(r=>r.report_date===dl.date)]);
     bars = `<div style="margin:6px 0 2px">` + entries.map(([label, v, vet, kind, rowsAt]) => {
-      const peers = peerVettings(rep.pathogen, kind);
+      const peers = peerVettings(rep.pathogen, kind, rec.country);
       const gPeers = peerVettingsGlobal(kind);
       const patLabel = PATHOGEN_LABELS[rep.pathogen] || rep.pathogen;
       const d = evDistStrip(vet, peers, { pathogen: rep.pathogen, globalPeers: gPeers, label: patLabel });
