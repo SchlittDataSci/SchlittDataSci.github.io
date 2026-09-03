@@ -70,10 +70,12 @@
   .src-cell.vet-unvetted:hover { color: var(--ink-3); border-bottom: 0; }
   tr.row-unvetted { opacity: .92; }
   tr.row-unvetted td:first-child { border-left: 2px solid color-mix(in srgb, var(--sev-lo) 70%, transparent); }
-  /* Vetted (interactive) rows: colour the location title like the "N sources" screening link so it
-     reads as clickable — clicking loads that outbreak's AI brief. */
-  #reportRows tr.row-vetted td:first-child { color: var(--color-accent-300); cursor: pointer; }
-  #reportRows tr.row-vetted:hover td:first-child { color: var(--color-accent); text-decoration: underline; text-underline-offset: 2px; }
+  /* Rows that actually open an AI brief on click get the accent “link” title (matched to the
+     “N sources” screening colour). Rows with no matching brief stay plain so the affordance never
+     lies; drillable rows keep their own pointer + ▸ drill hint. */
+  #reportRows tr.row-brief td:first-child { color: var(--color-accent-300); cursor: pointer; }
+  #reportRows tr.row-brief:hover td:first-child { color: var(--color-accent); text-decoration: underline; text-underline-offset: 2px; }
+  #reportRows tr[data-drill] { cursor: pointer; }
   body { margin: 0; background: var(--color-bg); font-family: var(--font-body); color: var(--color-text); }
   a { color: var(--color-accent-300); text-decoration: none; }
   a:hover { color: var(--color-accent); text-decoration: underline; }
@@ -1262,7 +1264,13 @@ function renderTable() {
       }
     }
     const subAttr = subnational ? ` data-sub="${r.country.replace(/"/g,'&quot;')}" data-sub-pathogen="${r.pathogen.replace(/"/g,'&quot;')}"` : '';
-    const rowCls = vetted ? ' class="row-vetted"' : ' class="row-unvetted"';
+    // Only rows that will actually open a brief get the accent link styling (same test as the click).
+    const opensBrief = subnational
+      ? subBriefIdx((rec ? rec.country : r.country), r.pathogen, r.country) >= 0
+      : nationalBriefIdx(r.country, r.pathogenRaw) >= 0;
+    const clsList = [vetted ? 'row-vetted' : 'row-unvetted'];
+    if (opensBrief) clsList.push('row-brief');
+    const rowCls = ` class="${clsList.join(' ')}"`;
     return `
     <tr data-id="${r.id}"${rowCls}${drillable?' data-drill="1" tabindex="0" role="button" aria-label="Show subnational reports"':''}${subAttr}>
       <td>${r.country}${nameExtra}</td>
@@ -1409,13 +1417,9 @@ document.getElementById('reportRows').addEventListener('click', (e) => {
   if (trDrill) {
     const rec = records.find(r => r.id === trDrill.dataset.id);
     if (rec && rec.pathogenRaw !== selectedPathogen) tablePrevPathogen = selectedPathogen;
-    // Link the figures table to the briefs: clicking a national title loads that outbreak's national
-    // brief (selectEvent also opens the subnational figures view). Fall back to a table-only drill
-    // when no national report exists for the row.
-    const natIdx = rec ? reports.findIndex(rp => rp.geoCountry === rec.country && rp.pathogen === rec.pathogenRaw && isNational(rp.place)) : -1;
-    // Prefer the national brief; if this outbreak has no national report, fall back to any report
-    // for it (subnational) so a vetted title always opens a brief and scrolls to it.
-    const openIdx = (natIdx < 0 && rec) ? reports.findIndex(rp => rp.geoCountry === rec.country && rp.pathogen === rec.pathogenRaw) : natIdx;
+    // Link the figures table to the briefs: prefer the national brief, else any report for this
+    // outbreak; when none exists, fall through to the table-only subnational drill.
+    const openIdx = rec ? nationalBriefIdx(rec.country, rec.pathogenRaw) : -1;
     if (openIdx >= 0) { selectEvent(openIdx); scrollToBrief(); return; }
     tableView = { mode:'subnational', id: trDrill.dataset.id };
     if (rec) {
@@ -1442,9 +1446,7 @@ document.getElementById('reportRows').addEventListener('click', (e) => {
     // Link the figures table to the briefs: clicking a subnational row opens that location's
     // subnational brief + subnational event-reports view when a report matches; otherwise just
     // highlight its series on the plot (original behaviour).
-    const norm = s => (s||'').toLowerCase().replace(/\b(province|region|district|county|prefecture|governorate|state|health zone|city|department|division)\b/g,'').replace(/[^a-z0-9]/g,'');
-    const nl = norm(loc);
-    const subIdx = nl ? reports.findIndex(rp => rp.geoCountry===country && rp.pathogen===pathogen && !isNational(rp.place) && (()=>{ const np = norm(rp.place); return np && (np===nl || np.includes(nl) || nl.includes(np)); })()) : -1;
+    const subIdx = subBriefIdx(country, pathogen, loc);
     if (subIdx >= 0) { selectEvent(subIdx); scrollToBrief(); return; }
     highlightedCountry = country;
     highlightSubLoc = loc;
@@ -2110,8 +2112,35 @@ function isNational(loc) {
 function nationalLocations(rows, pathogen, measure) {
   return [...new Set(rows.filter(r => r.pathogen===pathogen && isNational(r.location) && r.measure===measure && r.outlier==='False').map(r => r.location))];
 }
+// Reports lookups shared by the table click handler AND the row builder, so the "opens a brief"
+// affordance (accent title) is decided by the exact same test that the click uses — no row can
+// look like a brief-link without actually opening one.
+function nationalBriefIdx(country, pathogenRaw) {
+  const nat = reports.findIndex(rp => rp.geoCountry === country && rp.pathogen === pathogenRaw && isNational(rp.place));
+  if (nat >= 0) return nat;
+  return reports.findIndex(rp => rp.geoCountry === country && rp.pathogen === pathogenRaw);
+}
+const SUB_NORM_RE = /\b(province|region|district|county|prefecture|governorate|state|health zone|city|department|division)\b/g;
+function subBriefIdx(country, pathogen, loc) {
+  const norm = s => (s||'').toLowerCase().replace(SUB_NORM_RE,'').replace(/[^a-z0-9]/g,'');
+  const nl = norm(loc); if (!nl) return -1;
+  return reports.findIndex(rp => rp.geoCountry===country && rp.pathogen===pathogen && !isNational(rp.place) && (()=>{ const np = norm(rp.place); return np && (np===nl || np.includes(nl) || nl.includes(np)); })());
+}
 // The primary national series = the comma-free location carrying the highest confirmed-case
 // figure (the dominant national outbreak). Never a sum across countries.
+// The national series for a SPECIFIC country (comma-free location whose geoCountry matches),
+// so an explicit selection (US) keeps its own national series instead of snapping to the
+// pathogen's dominant national outbreak.
+function nationalLocationForCountry(rows, pathogen, country) {
+  if (!country) return null;
+  const cm = reportType + '_cases', dm = reportType + '_deaths';
+  const locs = [...new Set(rows.filter(r => r.pathogen===pathogen && isNational(r.location) && geoCountry(r.location)===country && (r.measure===cm || r.measure===dm) && r.outlier==='False').map(r => r.location))];
+  if (!locs.length) return null;
+  const peak = {};
+  rows.filter(r => r.pathogen===pathogen && isNational(r.location) && geoCountry(r.location)===country && r.measure===cm && r.outlier==='False')
+      .forEach(r => { peak[r.location] = Math.max(peak[r.location]||0, +r.value||0); });
+  return [...locs].sort((a,b) => (peak[b]||0) - (peak[a]||0))[0];
+}
 function primaryNationalLocation(rows, pathogen) {
   const m = reportType + '_cases';
   const locs = nationalLocations(rows, pathogen, m);
@@ -2203,9 +2232,12 @@ function latestRejected(rows, pathogen, loc, measure, acceptedSet) {
   const urlSet = new Set(at.flatMap(r => extractUrls(r.sources)));
   return { value: Math.max(...vals), min: Math.min(...vals), max: Math.max(...vals), date: maxDate, sources: at.reduce((s,r)=>s+(+r.n_sources||1),0), articles: urlSet.size || at.length, rowsAt: at, url: ((at.find(r=>r.value==Math.max(...vals))||at[0]).sources||'').split(';')[0].trim(), loc };
 }
-function aggregatePathogenSeries(rows, pathogen) {
+function aggregatePathogenSeries(rows, pathogen, preferCountry) {
   const casesMeasure = reportType + '_cases', deathsMeasure = reportType + '_deaths';
-  const loc = primaryNationalLocation(rows, pathogen);
+  // Honour an explicitly-selected country so the national series matches the rest of the panel;
+  // fall back to the dominant national outbreak only when nothing is selected (or the selected
+  // country has no national series for this pathogen).
+  const loc = (preferCountry ? nationalLocationForCountry(rows, pathogen, preferCountry) : null) || primaryNationalLocation(rows, pathogen);
   if (!loc) { const s = []; s.loc = null; s.natCount = 0; return s; }
   const cByDate = canonicalByDate(rows, pathogen, loc, casesMeasure);
   const dByDate = canonicalByDate(rows, pathogen, loc, deathsMeasure);
@@ -2580,7 +2612,7 @@ function renderTrendSection() {
     if (top) toggleCountry = top.country;
   }
   const subAvail = !!toggleCountry && (subnationalLocations(effectiveTp, toggleCountry, reportType+'_cases').length > 0 || subnationalLocations(effectiveTp, toggleCountry, reportType+'_deaths').length > 0);
-  const series = allRows.length ? aggregatePathogenSeries(viewRows(), effectiveTp) : (function(){const s=trend.map(d=>({...d,sources:null}));s.loc=null;s.natCount=0;return s;})();
+  const series = allRows.length ? aggregatePathogenSeries(viewRows(), effectiveTp, (highlightedCountry || trendMode.country || null)) : (function(){const s=trend.map(d=>({...d,sources:null}));s.loc=null;s.natCount=0;return s;})();
   // Resolve the effective plot view: orthogonal pairs (chart type vs granularity).
   // Auto only on page load or new event click (chartPref==='auto'): time series requires ≥5 canonical dates for cases OR deaths.
   let view;
