@@ -334,9 +334,7 @@
   .filter-banner button { background: none; border: 1px solid color-mix(in srgb, var(--color-accent-300) 45%, transparent); color: var(--color-accent-200); border-radius: 999px; font-size: 12px; font-weight: 600; padding: 4px 10px; cursor: pointer; white-space: nowrap; }
   .filter-banner button:hover { background: color-mix(in srgb, var(--color-accent-300) 18%, transparent); }
   /* Live-data states: skeleton shimmer before first load, sample-data banner on failure. */
-  .data-banner { display: none; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 var(--space-3); padding: 8px 12px; border: 1px solid color-mix(in srgb, #d29a5a 45%, transparent); background: color-mix(in srgb, #d29a5a 12%, transparent); border-radius: var(--radius-sm); font-size: 12px; color: var(--ink-1); }
-  body.fallback .data-banner { display: flex; }
-  .data-banner button { background: none; border: 1px solid color-mix(in srgb, #d29a5a 55%, transparent); color: var(--ink-1); border-radius: 999px; font-size: 12px; font-weight: 600; padding: 3px 10px; cursor: pointer; white-space: nowrap; }
+  /* Live-data states: skeleton shimmer before first load. */
   @keyframes skshine { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
   body.preload .stat-num { color: transparent; border-radius: 6px; background: linear-gradient(90deg, rgba(255,255,255,.05), rgba(255,255,255,.16), rgba(255,255,255,.05)); background-size: 200% 100%; animation: skshine 1.2s infinite linear; }
   body.preload #trendSvg, body.preload #sourceSvg, body.preload .map-wrap svg, body.preload .map-wrap #globeMap { opacity: .12; filter: grayscale(1); }
@@ -399,7 +397,17 @@
   .brief-modal { background:var(--color-neutral-900); border:1px solid var(--color-divider); border-top:2px solid var(--color-accent); border-radius:var(--radius-md); box-shadow:var(--shadow-lg); width:min(980px,96vw); max-height:94vh; display:flex; flex-direction:column; }
   .brief-modal-head { display:flex; align-items:flex-start; justify-content:space-between; gap:var(--space-4); padding:var(--space-4) var(--space-4) var(--space-3); border-bottom:1px solid var(--color-divider); }
   .brief-modal-eyebrow { font-size:var(--fs-1); text-transform:uppercase; letter-spacing:.1em; color:var(--color-accent-200); margin:0 0 5px; font-weight:600; }
-  .brief-modal-title { font-family:var(--font-heading); font-weight:var(--font-heading-weight); font-size:var(--fs-4); line-height:1.25; margin:0; color:var(--color-text); }
+  .brief-modal-title { font-family:var(--font-heading); font-weight:var(--font-heading-weight); font-size:var(--fs-5); line-height:1.2; margin:0; color:var(--color-text); }
+  .brief-modal-sub { font-size:var(--fs-2); color:var(--ink-3); margin:7px 0 0; }
+  .brief-doc-meta { display:grid; grid-template-columns:auto 1fr; gap:8px 18px; margin:0 0 var(--space-4); padding:var(--space-3) var(--space-4); border:1px solid var(--color-divider); border-radius:var(--radius-sm); background:color-mix(in srgb,var(--color-neutral-800) 22%,transparent); }
+  .brief-doc-meta .bdm-label { font-size:var(--fs-1); text-transform:uppercase; letter-spacing:.06em; color:var(--ink-label); font-weight:600; align-self:start; padding-top:3px; }
+  .brief-doc-meta .bdm-val { font-size:var(--fs-2); color:var(--ink-2); line-height:1.55; }
+  /* Report body headings: the injected Status Report uses <h2>/<h3> + <details><summary>. Snap them
+     so the section title (Epidemiological Summary) matches the expandable section titles below it,
+     and both sit below the report's main headline/title. */
+  #briefContent h2, #briefModalBody h2, #briefContent summary, #briefModalBody summary { font-size:var(--fs-4); font-weight:600; line-height:1.3; }
+  #briefContent h2, #briefModalBody h2 { margin:16px 0 8px; }
+  #briefContent h3, #briefModalBody h3 { font-size:var(--fs-3); font-weight:600; margin:12px 0 6px; }
   .brief-modal-actions { display:flex; gap:8px; flex:none; }
   .brief-modal-body { overflow-y:auto; padding:var(--space-4); }
   @media print {
@@ -511,11 +519,6 @@
     </div>
   </div>
 
-  <div class="data-banner" id="dataBanner">
-    <span>⚠ Showing cached sample data — the live sheet is unreachable; figures may be outdated.</span>
-    <button type="button" id="bannerRetry">Retry now</button>
-  </div>
-
   <p class="section-label"><span class="sl-num">01</span> Situation<span class="sl-rule"></span></p>
   <div class="lead-strip" id="leadStrip" style="display:none">
     <div class="lead-main">
@@ -625,11 +628,10 @@
           <div class="card-head-row" style="align-items:flex-start;gap:10px;margin-bottom:8px">
             <div style="min-width:0">
               <p id="briefMeta" style="margin:0;line-height:1.35"></p>
-              <p id="briefFileLine" class="brief-file-line" style="margin:4px 0 0"></p>
             </div>
-            <button type="button" class="btn btn-secondary" id="briefExpandBtn" style="flex:none;font-size:10px;padding:3px 10px" title="Open the full outbreak brief with export">⤡ Full report</button>
+            <button type="button" class="btn btn-secondary" id="briefExpandBtn" style="flex:none;font-size:10px;padding:3px 10px" title="Open the full outbreak brief with export">⤡ Expand report</button>
           </div>
-          <p style="font-size:11px;color:color-mix(in srgb, var(--color-text) 50%, transparent);margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--color-divider)">AI-generated from open-source reports — verify claims via the linked references before citing.</p>
+          <p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 50%, transparent);margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--color-divider)">AI-generated from open-source reports — verify claims via the linked references before citing.</p>
           <div class="brief-body"><div id="briefContent" class="brief-content" aria-busy="true"><div class="skeleton tall w45"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton w70"></div><div class="skeleton"></div><div class="skeleton w45"></div></div></div>
         </div>
       </div>
@@ -644,7 +646,6 @@
       <span style="display:flex;align-items:center;gap:10px">
         <div class="seg" role="tablist" aria-label="Statistical screening" id="screenSeg" title="Lone article values are treated as a sampling distribution: each figure is screened by a chi-square outlier test and a cumulative-monotonicity check, then accepted or rejected. Separate from ‘vettings’, which count independent-domain articles corroborating a fact.">
           <button type="button" class="seg-opt" aria-selected="true" data-screen="accepted">Accepted</button>
-          <button type="button" class="seg-opt" data-screen="all">All</button>
           <button type="button" class="seg-opt" data-screen="rejected">Rejected</button>
         </div>
         <div class="seg" role="tablist" aria-label="Table view" id="tableModeSeg">
@@ -719,6 +720,7 @@
       <div style="min-width:0">
         <p class="brief-modal-eyebrow" id="briefModalEyebrow">Outbreak brief</p>
         <p class="brief-modal-title" id="briefModalTitle">—</p>
+        <p class="brief-modal-sub" id="briefModalSub"></p>
         <p class="brief-file-line" id="briefModalFile" style="margin:6px 0 0"></p>
       </div>
       <div class="brief-modal-actions">
@@ -1562,6 +1564,54 @@ document.getElementById('tableBack').addEventListener('click', () => {
 });
 document.getElementById('drillClose').addEventListener('click', () => { hideChartTip(); document.getElementById('drillBackdrop').style.display = 'none'; restoreDialogFocus(); });
 document.getElementById('drillBackdrop').addEventListener('click', (e) => { if (e.target.id === 'drillBackdrop') { hideChartTip(); e.target.style.display = 'none'; restoreDialogFocus(); } });
+
+// --- Full-page outbreak brief modal (per-report view + PDF export) ---
+function openBriefModal() {
+  const r = reports[selectedIdx];
+  if (!r) return;
+  const pName = PATHOGEN_LABELS[r.pathogen] || r.pathogen || '';
+  // The article title is the ONE large title, at the top; identity + provenance sit beneath it.
+  document.getElementById('briefModalTitle').textContent = r.title || pName;
+  const sub = document.getElementById('briefModalSub');
+  if (sub) sub.textContent = [pName, r.country, r.date].filter(Boolean).join('  ·  ');
+  const mf = document.getElementById('briefModalFile');
+  if (mf) mf.innerHTML = r.reportFile ? 'Source record <code>' + esc(r.reportFile) + '</code>' : '';
+  // Clone the rendered brief body (which already carries the risk/rationale block); drop only the
+  // headline, since it becomes the modal's large title.
+  const tmp = document.createElement('div');
+  tmp.innerHTML = briefContentEl.innerHTML;
+  const hl = tmp.querySelector('.brief-headline'); if (hl) hl.remove();
+  const mb = document.getElementById('briefModalBody');
+  mb.innerHTML = tmp.innerHTML;
+  const mTg = mb.querySelector('#evToggle');
+  const mSec = mb.querySelector('#reportEvidence');
+  if (mTg && mSec) {
+    mTg.addEventListener('click', () => {
+      const open = mSec.hasAttribute('hidden');
+      if (open) mSec.removeAttribute('hidden'); else mSec.setAttribute('hidden','');
+      mTg.setAttribute('aria-expanded', String(open));
+      mTg.textContent = open ? 'Evidence ▴' : 'Evidence ▾';
+    });
+  }
+  briefModalOpener = document.activeElement;
+  document.getElementById('briefBackdrop').style.display = 'flex';
+  document.getElementById('briefModalClose').focus();
+}
+function closeBriefModal() {
+  document.getElementById('briefBackdrop').style.display = 'none';
+  if (briefModalOpener && briefModalOpener.focus) briefModalOpener.focus();
+}
+let briefModalOpener = null;
+document.getElementById('briefExpandBtn').addEventListener('click', openBriefModal);
+document.getElementById('briefModalClose').addEventListener('click', closeBriefModal);
+document.getElementById('briefBackdrop').addEventListener('click', (e) => { if (e.target.id === 'briefBackdrop') closeBriefModal(); });
+document.getElementById('briefExportBtn').addEventListener('click', () => {
+  document.body.classList.add('printing-brief');
+  const done = () => { document.body.classList.remove('printing-brief'); window.removeEventListener('afterprint', done); };
+  window.addEventListener('afterprint', done);
+  setTimeout(() => window.print(), 60);
+});
+
 
 // --- Map (zoomable world map; every reporting country rendered) ---
 const svg = d3.select('#mapSvg');
@@ -2536,6 +2586,15 @@ function stripNan(html) {
 }
 function stripBriefDisclaimers(html) {
   let h = String(html || '');
+  // Strip the report's own leading title + score preamble: the panel header already carries the
+  // pathogen · country · date, the .brief-headline repeats the title, and the lead/scorecard carry
+  // the risk score — so the injected <h1> and the Risk Score / Date Generated lines are pure
+  // duplication here. The Rationale line is kept (it explains the score and appears nowhere else).
+  h = h.replace(/^\s*<h1[^>]*>[\s\S]*?<\/h1>\s*/i, '');
+  h = h.replace(/<p[^>]*>\s*<strong>\s*Risk Score\s*:?\s*<\/strong>[\s\S]*?<\/p>\s*/i, '');
+  h = h.replace(/<p[^>]*>\s*<strong>\s*Date Generated\s*:?\s*<\/strong>[\s\S]*?<\/p>\s*/i, '');
+  // Rationale is rendered as a labelled row in the expanded report header; drop it from the body.
+  h = h.replace(/<p[^>]*>\s*<strong>\s*Rationale\s*:?\s*<\/strong>[\s\S]*?<\/p>\s*/i, '');
   // Some upstream reports leave literal Markdown syntax un-rendered inside the HTML body
   // (e.g. "## Epidemiological Summary", "**Rationale:**") instead of real tags. Convert what
   // we recognize so it reads as prose instead of raw syntax.
@@ -3982,7 +4041,13 @@ function renderBrief() {
   // Newspaper-style headline: the report's own title leads the article body, pathogen mention
   // linked. The meta row above stays the byline; the evidence banner follows the headline.
   const headline = `<div class="brief-headline">${highlightEventTitle(r, true)}</div>`;
-  briefContentEl.innerHTML = headline + banner + developmentsBlockHtml(r) + (r.crossover ? `<div style="background:color-mix(in srgb, var(--color-accent) 12%, transparent);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;margin:0 0 12px"><p style="margin:0"><strong>Zoonotic link reported:</strong></p>${briefMarkup(r.crossoverDetail)}</div>` : '') + stripBriefDisclaimers(stripNan(r.html));
+  // Risk severity + rationale as labelled rows — rendered into the shared body so the panel and the
+  // expanded report carry the same block.
+  const sev = (typeof sevColor === 'function') ? sevColor(r.risk || 1) : 'var(--color-accent)';
+  const riskBlock = `<div class="brief-doc-meta"><span class="bdm-label">Risk severity</span>` +
+    `<span class="bdm-val" style="color:${sev};font-weight:600">${r.risk == null ? '—' : r.risk + ' / 9'}</span>` +
+    (r.riskRationale ? `<span class="bdm-label">Rationale</span><span class="bdm-val">${esc(r.riskRationale)}</span>` : '') + `</div>`;
+  briefContentEl.innerHTML = headline + riskBlock + banner + developmentsBlockHtml(r) + (r.crossover ? `<div style="background:color-mix(in srgb, var(--color-accent) 12%, transparent);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;margin:0 0 12px"><p style="margin:0"><strong>Zoonotic link reported:</strong></p>${briefMarkup(r.crossoverDetail)}</div>` : '') + stripBriefDisclaimers(stripNan(r.html));
   const tg = document.getElementById('evToggle');
   if (tg) tg.addEventListener('click', () => {
     const sec = document.getElementById('reportEvidence');
@@ -4496,6 +4561,7 @@ function fetchReports() {
       devCount: devs.length,
       devHtml: devHtml,
       urls: extractUrls((r['Urls']||'') + ' ' + (r['Reference List']||'')),
+      reportFile: cleanText(r['Report File'] || ''),
     };
   }).filter(r => r.title && r.html)
     .sort((a,b) => b.risk - a.risk || changeRank(b) - changeRank(a) || (b.date>a.date?1:-1));
@@ -4560,9 +4626,8 @@ function loadLiveData(manual) {
       setTimeout(() => loadLiveData(manual), sheetRetries === 1 ? 2000 : 5000);
     } else {
       document.body.classList.remove('preload');
-      document.body.classList.add('fallback');
       const why = sheet.reason && (sheet.reason.message || String(sheet.reason)) || 'unknown error';
-      setSync('<span class="sync-dot" style="background:var(--color-neutral-500);box-shadow:none"></span>Sample data · live sheet unreachable — Retry', why);
+      setSync('<span class="sync-dot" style="background:var(--color-neutral-500);box-shadow:none"></span>Live sheet unreachable — Retry', why);
       console.warn('[data] live sheet unreachable:', why);
       renderPageSub();
     }
@@ -4570,8 +4635,7 @@ function loadLiveData(manual) {
 }
 loadLiveData();
 document.getElementById('syncBtn').addEventListener('click', () => loadLiveData(true));
-document.getElementById('bannerRetry').addEventListener('click', () => { document.body.classList.remove('fallback'); loadLiveData(true); });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const d = document.getElementById('drillBackdrop'); if (d && d.style.display === 'flex') { hideChartTip(); d.style.display = 'none'; restoreDialogFocus(); } } });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const bb = document.getElementById('briefBackdrop'); if (bb && bb.style.display === 'flex') { closeBriefModal(); return; } const d = document.getElementById('drillBackdrop'); if (d && d.style.display === 'flex') { hideChartTip(); d.style.display = 'none'; restoreDialogFocus(); } } });
 
 
 
@@ -4737,7 +4801,12 @@ function citeCard(u, rel) {
     isFinite(cb) ? 'combined ' + cb.toFixed(1) : '',
   ].filter(Boolean).join(' · ');
   const chip = rel ? `<span class="tag ${rel==='direct'?'tag-accent':rel==='related'?'tag-outline':'tag-neutral'}" style="font-size:10px" title="${REL_TIP[rel]}">${REL_LABEL[rel]}</span> ` : '';
+  const fact = raw ? rawFactOf(raw) : null;
+  const factHtml = fact && fact.label
+    ? `<div class="ev-fact" style="font-size:12px;color:var(--ink-2);margin:3px 0 0"><span style="color:var(--color-accent-200);font-weight:600">Reported:</span> ${esc(fact.text)}</div>`
+    : (raw ? '' : `<div class="ev-fact" style="font-size:10px;color:var(--ink-4);margin:3px 0 0">Figures not resolvable to the records corpus</div>`);
   return `<div class="ev-card"><div class="ev-card-title">${chip}${t ? esc(t) : esc(h || 'Article')}</div>` +
+    factHtml +
     `<div class="art-meta">${meta}${u ? `${meta ? ' · ' : ''}<a class="art-link" style="font-size:12px;font-weight:400;margin-bottom:0" href="${esc(u)}" target="_blank" rel="noopener">Open ↗</a>` : ''}</div></div>`;
 }
 
