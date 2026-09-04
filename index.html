@@ -55,7 +55,7 @@
   .src-cell[disabled] { color: var(--ink-4); border-bottom: 0; cursor: default; }
   .seg-opt { font-weight: 500; }
   /* Compact seg buttons in the plots header — default button styling is too tall and crowded. */
-  #chartTypeSeg .seg-opt, #granularitySeg .seg-opt, #reportTypeSeg .seg-opt { font-size: 10.5px; padding: 2px 9px; }
+  #chartTypeSeg .seg-opt, #granularitySeg .seg-opt, #reportTypeSeg .seg-opt { font-size: 10px; padding: 2px 9px; }
   .seg-opt[aria-selected="true"] {
     background: color-mix(in srgb, var(--color-accent) 20%, transparent);
     border: 1px solid var(--color-accent);
@@ -63,9 +63,9 @@
     position: relative; z-index: 2; box-shadow: 0 0 0 1px var(--color-accent);
   }
   .th-hint { font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 10px; color: var(--ink-4); }
-  .src-vet { display: block; font-size: 10.5px; color: var(--ink-4); border: 0; }
+  .src-vet { display: block; font-size: 10px; color: var(--ink-4); border: 0; }
   /* Unvetted figures: reuse hollow/muted language from the time-series (hollow dots) — de-emphasized badge + row wash */
-  .vet-unvetted { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 600; color: var(--ink-4); border: 1px dashed color-mix(in srgb, var(--color-text) 22%, transparent); background: transparent; border-radius: 999px; padding: 2px 8px; line-height: 1; white-space: nowrap; }
+  .vet-unvetted { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 600; color: var(--ink-4); border: 1px dashed color-mix(in srgb, var(--color-text) 22%, transparent); background: transparent; border-radius: 999px; padding: 2px 8px; line-height: 1; white-space: nowrap; }
   .src-cell.vet-unvetted { color: var(--ink-4); border-bottom: 0; cursor: pointer; opacity: .88; }
   .src-cell.vet-unvetted:hover { color: var(--ink-3); border-bottom: 0; }
   tr.row-unvetted { opacity: .92; }
@@ -81,8 +81,8 @@
   a:hover { color: var(--color-accent); text-decoration: underline; }
   .wrap { max-width: 1560px; margin: 0 auto; padding: 6px var(--space-6) var(--space-8); }
   .page-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); margin-bottom: 8px; flex-wrap: wrap; }
-  .page-title { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 25px; margin: 0; letter-spacing: -0.01em; }
-  .page-sub { font-size: 13.5px; color: var(--ink-3); margin: 4px 0 0; }
+  .page-title { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 24px; margin: 0; letter-spacing: -0.01em; }
+  .page-sub { font-size: 14px; color: var(--ink-3); margin: 4px 0 0; }
   /* Vector wordmark — two-tone italic heavy type, offset shadow, background-bar scan-slices per OSINfluenza */
   .brand-logo { display: block; height: 40.8px; width: auto; margin-right: auto; margin-top: 2px; }
   .nav { padding: 4px var(--space-4); }
@@ -90,7 +90,7 @@
   .toolbar { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; padding: var(--space-3) 0; margin-bottom: var(--space-4); border-bottom: 1px solid var(--color-divider); }
   .toolbar .spacer { flex: 1; }
   .field-inline { display: flex; align-items: center; gap: 8px; }
-  .field-inline label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); }
+  .field-inline label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); }
   .sync-tag { display: inline-flex; align-items: center; gap: 6px; flex: none; white-space: nowrap; }
   .sync-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); box-shadow: 0 0 6px var(--color-accent); }
   .grid-main { display: grid; grid-template-columns: minmax(0,1fr) 320px; gap: var(--space-4); align-items: stretch; }
@@ -104,19 +104,19 @@
      themselves live in .event-meta. Declared BEFORE the hover/selected rules so those still win. */
   .event-item.has-dev { background: color-mix(in srgb, var(--warn) 6%, transparent); }
   .ev-flags { display: flex; gap: 4px; align-items: center; flex: none; }
-  .ev-flag { font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1.5px 5px; border-radius: 999px; white-space: nowrap; display: inline-flex; align-items: center; gap: 3px; }
+  .ev-flag { font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1.5px 5px; border-radius: 999px; white-space: nowrap; display: inline-flex; align-items: center; gap: 3px; }
   .ev-flag-dev { background: color-mix(in srgb, var(--warn) 24%, transparent); color: var(--warn-ink); }
   .ev-flag-new { border: 1px solid color-mix(in srgb, var(--color-accent-300) 45%, transparent); color: var(--color-accent-300); }
   .dev-flash { border: 1px solid color-mix(in srgb, var(--warn) 30%, transparent); background: color-mix(in srgb, var(--warn) 8%, transparent); border-radius: var(--radius-sm); padding: 9px 11px; margin: 0 0 12px; }
   .dev-flash-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
   .dev-flash-head .dev-count { flex: 1 1 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .dev-flash-head .dev-count { font-size: 10.5px; color: var(--ink-4); }
+  .dev-flash-head .dev-count { font-size: 10px; color: var(--ink-4); }
   .dev-flash-body { font-size: 12px; line-height: 1.55; color: var(--ink-2); }
   .dev-flash-body p, .dev-flash-body ul, .dev-flash-body ol { margin: 0 0 6px; }
   .dev-flash-body ul, .dev-flash-body ol { padding-left: 16px; }
   .dev-flash-body > *:last-child { margin-bottom: 0; }
   .dev-item { display: flex; gap: 7px; padding: 2px 0; }
-  .dev-item .dev-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--warn-ink); white-space: nowrap; padding-top: 1px; }
+  .dev-item .dev-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--warn-ink); white-space: nowrap; padding-top: 1px; }
   .event-item:hover { background: color-mix(in srgb, var(--color-accent) 6%, transparent); }
   .event-item.selected { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
   .event-title { font-size: 12px; line-height: 1.35; margin: 0 0 6px; color: var(--color-text); }
@@ -127,20 +127,20 @@
   .event-title .ev-loc { color: var(--color-neutral-300); }
   .meta-ref { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
   .meta-ref:hover { color: var(--color-text); border-bottom-style: solid; }
-  .event-meta { display: flex; justify-content: space-between; align-items: center; gap: 6px; font-size: 10.5px; color: var(--ink-4); flex-wrap: nowrap; min-width: 0; }
+  .event-meta { display: flex; justify-content: space-between; align-items: center; gap: 6px; font-size: 10px; color: var(--ink-4); flex-wrap: nowrap; min-width: 0; }
   .event-meta > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .event-meta .tag { flex: none; white-space: nowrap; }
   .stat-stack { display: flex; flex-direction: column; gap: var(--space-3); }
-  .cell-range { display: block; font-size: 10.5px; color: var(--ink-4); margin-top: 2px; }
+  .cell-range { display: block; font-size: 10px; color: var(--ink-4); margin-top: 2px; }
   .src-link { color: var(--color-accent-300); font-size: 12px; }
   .status-tag { cursor: help; }
-  .qbadge { font-size: 9.5px; font-weight: 600; padding: 1px 7px; border-radius: 999px; white-space: nowrap; }
+  .qbadge { font-size: 10px; font-weight: 600; padding: 1px 7px; border-radius: 999px; white-space: nowrap; }
   .q-high { background: color-mix(in srgb, var(--color-accent-500) 24%, transparent); color: var(--color-accent-200); }
   .q-mod { background: color-mix(in srgb, var(--warn) 22%, transparent); color: var(--warn-ink); }
   .q-low { background: color-mix(in srgb, var(--sev-hi) 24%, transparent); color: var(--danger-ink); }
-  .art-meta { font-size: 10.5px; color: var(--ink-4); margin-top: 4px; }
-  .art-src-h { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-label); margin: 16px 0 6px; }
-  .doc-badge { font-size: 9.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px; letter-spacing: .02em; }
+  .art-meta { font-size: 10px; color: var(--ink-4); margin-top: 4px; }
+  .art-src-h { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-label); margin: 16px 0 6px; }
+  .doc-badge { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 999px; letter-spacing: .02em; }
   .doc-well { background: color-mix(in srgb, var(--color-accent-500) 22%, transparent); color: var(--color-accent-200); }
   .doc-less { background: color-mix(in srgb, var(--color-neutral-500) 26%, transparent); color: var(--color-neutral-200); }
   .doc-sparse { background: color-mix(in srgb, var(--sev-hi) 20%, transparent); color: var(--danger-ink); }
@@ -149,8 +149,8 @@
   .table td .tag { border-width: 1px; }
   .table td .status-tag { font-size: 10px; }
   .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
-  .stat-num { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 28px; line-height: 1.1; margin: 0; letter-spacing: -0.015em; }
-  .stat-label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); margin: 6px 0 0; }
+  .stat-num { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 30px; line-height: 1.1; margin: 0; letter-spacing: -0.015em; }
+  .stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); margin: 6px 0 0; }
   .map-card { padding: var(--space-4); }
   .map-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-3); gap: var(--space-3); flex-wrap: wrap; }
   .map-legend { display: flex; align-items: center; gap: 14px; font-size: 12px; color: var(--ink-3); flex-wrap: wrap; }
@@ -169,7 +169,7 @@
   /* Hovering an event report lifts its map glyph (CSS overrides the per-zoom attributes). */
   .marker-g.marker-hi .marker { stroke-width: 3px; }
   .marker-g.marker-hi .marker-hit { stroke: var(--color-accent-300); stroke-width: 1.5px; }
-  .tooltip { position: absolute; pointer-events: none; background: var(--color-neutral-800); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); padding: 8px 10px; font-size: 12.5px; box-shadow: var(--shadow-md); max-width: 230px; opacity: 0; transform: translate(-50%, -100%); transition: opacity .1s; z-index: 5; display: block; }
+  .tooltip { position: absolute; pointer-events: none; background: var(--color-neutral-800); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); padding: 8px 10px; font-size: 12px; box-shadow: var(--shadow-md); max-width: 230px; opacity: 0; transform: translate(-50%, -100%); transition: opacity .1s; z-index: 5; display: block; }
   .tooltip.show { opacity: 1; display: block; }
   body > .tooltip { max-width: 420px; transform: none; display: block; }
   body > .tooltip .t-row { gap: 20px; }
@@ -177,9 +177,9 @@
   body > .tooltip .t-foot { white-space: normal; }
   .tooltip .t-title { font-weight: 600; margin: 0 0 3px; }
   .tooltip .t-row { display: flex; justify-content: space-between; gap: 10px; color: var(--ink-2); }
-  .forecast-card p.f-line { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; border-top: 1px solid var(--color-divider); margin: 0; }
+  .forecast-card p.f-line { display: flex; justify-content: space-between; font-size: 14px; padding: 6px 0; border-top: 1px solid var(--color-divider); margin: 0; }
   .forecast-card p.f-line:first-of-type { border-top: 0; }
-  .forecast-card .f-range { color: var(--ink-4); font-size: 11.5px; }
+  .forecast-card .f-range { color: var(--ink-4); font-size: 12px; }
   .row-2col { display: grid; grid-template-columns: 1.5fr 1fr; gap: var(--space-4); margin-top: var(--space-4); align-items: stretch; }
   /* Events + reports lead the row; the plots panel reads as the right-hand analysis column. */
   .row-2col > .briefs-card { order: -1; }
@@ -189,15 +189,15 @@
   .plots-card > * { flex-shrink: 0; }
   .summary-card { display: flex; flex-direction: column; padding: var(--space-4); height: auto; min-height: 560px; align-self: stretch; gap: var(--space-4); }
   .stat-band { display: flex; flex-direction: column; min-width: 0; }
-  .stat-scope { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-label); margin: 0 0 18px; }
+  .stat-scope { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-label); margin: 0 0 18px; }
   .stat-scope span { color: var(--color-accent-300); font-weight: 600; }
   .stat-grid { display: grid; grid-template-columns: minmax(0,1fr); grid-auto-rows: 1fr; gap: var(--space-3); align-items: stretch; }
   .stat-grid .stat-cell { min-width: 0; background: color-mix(in srgb, var(--color-neutral-800) 40%, transparent); border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: var(--space-3); }
-  .stat-grid .stat-num { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 31px; line-height: 1.05; margin: 0; letter-spacing: -0.015em; }
-  .stat-grid .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); margin: 8px 0 0; }
+  .stat-grid .stat-num { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 30px; line-height: 1.05; margin: 0; letter-spacing: -0.015em; }
+  .stat-grid .stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); margin: 8px 0 0; }
   .forecast-box { margin-top: 0; flex: 1 1 auto; display: flex; flex-direction: column;
     justify-content: flex-start; padding-top: 18px; border-top: 1px solid var(--color-divider); font-size: 12px; color: var(--ink-2); line-height: 1.5; }
-  .forecast-box .fc-title { font-size: 10.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-label); margin: 0 0 12px; }
+  .forecast-box .fc-title { font-size: 10px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-label); margin: 0 0 12px; }
   .forecast-box .fc-title span.fc-strain { color: var(--color-accent-300); font-weight: 700; text-transform: uppercase; }
   .forecast-box .fc-title button.fc-strain.fc-link { background:none; border:0; padding:0; font:inherit; color:var(--color-accent-300); font-weight:700; text-transform: uppercase; letter-spacing: .02em; cursor:pointer; border-bottom:1px dotted color-mix(in srgb,var(--color-accent-300) 55%,transparent); }
   .forecast-box .fc-title button.fc-strain.fc-link:hover { color:var(--color-accent); border-bottom-color:var(--color-accent); }
@@ -205,30 +205,28 @@
   .forecast-box .fc-sub { text-transform: none; letter-spacing: 0; color: var(--ink-4); }
   .forecast-box .fc-grid { display: grid; grid-template-columns: minmax(0,1fr); grid-auto-rows: 1fr; gap: var(--space-3); }
   .forecast-box .fc-cell { min-width: 0; background: color-mix(in srgb, var(--color-neutral-800) 40%, transparent); border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: var(--space-3); }
-  .forecast-box .fc-num { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 31px; line-height: 1.05; margin: 0; letter-spacing: -0.015em; color: var(--color-text); }
-  .forecast-box .fc-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); margin: 8px 0 4px; }
-  .forecast-box .fc-range { font-size: 10.5px; color: var(--ink-3); margin: 0; line-height: 1.35; overflow-wrap: break-word; }
+  .forecast-box .fc-num { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 30px; line-height: 1.05; margin: 0; letter-spacing: -0.015em; color: var(--color-text); }
+  .forecast-box .fc-lbl { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); margin: 8px 0 4px; }
+  .forecast-box .fc-range { font-size: 10px; color: var(--ink-3); margin: 0; line-height: 1.35; overflow-wrap: break-word; }
   .forecast-box .fc-none { font-size: 12px; line-height: 1.55; color: var(--ink-4); margin: 0; }
   .forecast-box strong { color: var(--color-text); font-weight: 600; }
   .forecast-box span.mut { color: var(--ink-4); }
   .briefs-split { display: grid; grid-template-columns: 244px minmax(0,1fr); gap: var(--space-4); height: 100%; min-height: 0; }
   .events-col { min-height: 0; overflow-y: auto; border-right: 1px solid var(--color-divider); padding-right: var(--space-3); }
-  .events-hint { font-size: 10.5px; color: var(--color-accent-300); margin: 0 0 10px; }
-  .rf-bar { font-size: 10.5px; color: var(--color-accent-200); background: color-mix(in srgb, var(--color-accent-500) 14%, transparent); border-radius: var(--radius-sm); padding: 5px 8px; margin: 0 0 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-  .rf-bar button { background: none; border: 0; color: var(--color-accent-200); cursor: pointer; font-size: 10.5px; padding: 0; }
+  .events-hint { font-size: 10px; color: var(--color-accent-300); margin: 0 0 10px; }
+  .rf-bar { font-size: 10px; color: var(--color-accent-200); background: color-mix(in srgb, var(--color-accent-500) 14%, transparent); border-radius: var(--radius-sm); padding: 5px 8px; margin: 0 0 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .rf-bar button { background: none; border: 0; color: var(--color-accent-200); cursor: pointer; font-size: 10px; padding: 0; }
   .event-doc { margin-top: 6px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .event-doc .ev-flags { margin-left: auto; }
-  .event-doc .doc-meta { font-size: 9.5px; color: var(--ink-4); }
+  .event-doc .doc-meta { font-size: 10px; color: var(--ink-4); }
   .brief-quality { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 0 12px; padding-bottom: 10px; border-bottom: 1px solid var(--color-divider); }
-  .brief-headline { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; color: var(--color-text); margin: 2px 0 12px; }
+  .brief-headline { font-size: 18px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; color: var(--color-text); margin: 2px 0 12px; }
   .brief-headline .meta-ref { border-bottom: 0; }
   .brief-headline .ev-path { color: var(--color-accent-200); }
-  .brief-quality .bq-meta { font-size: 11px; color: var(--ink-4); }
-  .sub-swatch { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; font-size: 10.5px; max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
+  .brief-quality .bq-meta { font-size: 12px; color: var(--ink-4); }
+  .sub-swatch { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; font-size: 10px; max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
   #subLegend { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; align-content: flex-start; flex: 1 1 220px; min-width: 200px; max-height: 46px; overflow-y: auto; overscroll-behavior: contain; }
   #subLegend .sub-swatch:nth-child(n+6) { opacity: 0.95; }
-  #subToggleWrap { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--ink-3); margin-bottom: 8px; }
-  #subToggleWrap label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
   .brief-col { display: flex; flex-direction: column; min-height: 0; }
   .plots-card { gap: 10px; }
   .plots-card .card-head-row { margin-bottom: 4px; }
@@ -237,16 +235,16 @@
   .source-chart-wrap { width: 100%; height: 140px; margin-top: 0; }
   .plots-card .chart-wrap svg, .plots-card .source-chart-wrap svg { width: 100%; height: 100%; display: block; }
   .chart-divider { border-top: 1px solid var(--color-divider); margin: 6px 0 8px; }
-  .methodology-note { font-size: 11px; line-height: 1.5; color: var(--ink-4); margin: 12px 0 0; padding-top: 10px; }
-  .plot-subtitle { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-label); margin: 0 0 8px; font-weight: 600; }
+  .methodology-note { font-size: 12px; line-height: 1.5; color: var(--ink-4); margin: 12px 0 0; padding-top: 10px; }
+  .plot-subtitle { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-label); margin: 0 0 8px; font-weight: 600; }
   .plot-block + .plot-block { margin-top: 0; }
   .glyph-hit { transition: filter .1s ease, opacity .1s ease; }
   .glyph-hit:hover { filter: brightness(1.4) saturate(1.15); }
   .brief-body { flex: 1; min-height: 0; overflow-y: auto; padding-right: 4px; }
   .brief-content h1 { display: none; }
-  .brief-content h2 { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 14.5px; margin: 16px 0 8px; color: var(--color-text); }
+  .brief-content h2 { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 14px; margin: 16px 0 8px; color: var(--color-text); }
   .brief-content h2:first-of-type { margin-top: 0; }
-  .brief-content p { font-size: 12.5px; line-height: 1.55; color: var(--ink-2); margin: 0 0 10px; }
+  .brief-content p { font-size: 12px; line-height: 1.55; color: var(--ink-2); margin: 0 0 10px; }
   .brief-content ul, .brief-content ol { margin: 0 0 10px; padding-left: 18px; font-size: 12px; line-height: 1.5; color: var(--ink-2); }
   .brief-content li { margin-bottom: 4px; }
   /* Status Report HTML arrives with <details> sections carrying inline 24px headings — normalize
@@ -254,11 +252,11 @@
      and kill the trailing whitespace before the disclaimer. */
   .brief-content details { margin: 0 !important; padding: 0 !important; border-top: 1px solid var(--color-divider); }
   .brief-content details:first-of-type { border-top: 0; }
-  .brief-content summary { list-style: none; display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 9px 0; font-size: 12.5px !important; color: var(--color-text); }
+  .brief-content summary { list-style: none; display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 9px 0; font-size: 12px !important; color: var(--color-text); }
   .brief-content summary::-webkit-details-marker { display: none; }
-  .brief-content summary::before { content: '+'; flex: 0 0 auto; width: 14px; height: 14px; line-height: 12px; text-align: center; font-size: 11px; font-weight: 700; color: var(--color-accent-300); border: 1px solid color-mix(in srgb, var(--color-accent-300) 45%, transparent); border-radius: 3px; }
+  .brief-content summary::before { content: '+'; flex: 0 0 auto; width: 14px; height: 14px; line-height: 12px; text-align: center; font-size: 12px; font-weight: 700; color: var(--color-accent-300); border: 1px solid color-mix(in srgb, var(--color-accent-300) 45%, transparent); border-radius: 3px; }
   .brief-content details[open] summary::before { content: '\2212'; }
-  .brief-content summary span { font-size: 12.5px !important; font-weight: 600 !important; color: var(--color-text) !important; letter-spacing: .02em; }
+  .brief-content summary span { font-size: 12px !important; font-weight: 600 !important; color: var(--color-text) !important; letter-spacing: .02em; }
   .brief-content details > *:last-child { margin-bottom: 10px; }
   .brief-content > *:last-child { margin-bottom: 0 !important; }
   .brief-content hr { border: 0; border-top: 1px solid var(--color-divider); margin: 10px 0; }
@@ -277,7 +275,7 @@
   .card-head-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--space-3); flex-wrap: wrap; gap: 8px; }
   th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
   th.sortable:hover { color: var(--color-text); }
-  th.sortable .sort-arrow { font-size: 9px; opacity: 0.6; margin-left: 3px; }
+  th.sortable .sort-arrow { font-size: 10px; opacity: 0.6; margin-left: 3px; }
   .table thead th { position: sticky; top: 0; background: var(--color-bg); z-index: 2; }
   .cfr-flag { cursor: help; border-bottom: 1px dotted var(--ink-4); }
   #reportRows tr[data-drill] { cursor: pointer; }
@@ -290,19 +288,19 @@
   .map-wrap svg { cursor: grab; }
   .map-wrap svg:active { cursor: grabbing; }
   .zoom-controls { position: absolute; right: 10px; bottom: 10px; display: flex; flex-direction: column; gap: 5px; z-index: 4; }
-  .zoom-controls button { width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; line-height: 1; padding: 0; }
-  .map-hint { position: absolute; left: 10px; bottom: 10px; font-size: 10.5px; color: var(--ink-label); background: color-mix(in srgb, var(--color-neutral-900) 78%, transparent); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); padding: 4px 8px; z-index: 4; pointer-events: none; }
-  .tooltip .t-sub { font-size: 11px; color: var(--ink-3); margin: 0 0 6px; }
+  .zoom-controls button { width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; line-height: 1; padding: 0; }
+  .map-hint { position: absolute; left: 10px; bottom: 10px; font-size: 10px; color: var(--ink-label); background: color-mix(in srgb, var(--color-neutral-900) 78%, transparent); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); padding: 4px 8px; z-index: 4; pointer-events: none; }
+  .tooltip .t-sub { font-size: 12px; color: var(--ink-3); margin: 0 0 6px; }
   #globeMap { border-radius: var(--radius-md); }
   #globeMap canvas { outline: none; }
   /* Globe popups share the exact tooltip language (bg, border, type scale, row layout) so the
      two maps read as one product — and .t-row spans get real spacing via flex gap. */
-  .globe-pop .maplibregl-popup-content { background: var(--color-neutral-800); color: var(--color-text); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 12.5px; box-shadow: var(--shadow-md); padding: 8px 10px; max-width: 260px; }
+  .globe-pop .maplibregl-popup-content { background: var(--color-neutral-800); color: var(--color-text); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 12px; box-shadow: var(--shadow-md); padding: 8px 10px; max-width: 260px; }
   .globe-pop .maplibregl-popup-tip { display: none; }
   .globe-pop .t-title { font-weight: 600; margin: 0 0 3px; }
-  .globe-pop .t-sub { font-size: 11px; color: var(--ink-3); margin: 0 0 6px; }
+  .globe-pop .t-sub { font-size: 12px; color: var(--ink-3); margin: 0 0 6px; }
   .globe-pop .t-row { display: flex; justify-content: space-between; gap: 10px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-  .globe-pop .t-foot { margin-top: 6px; padding-top: 5px; border-top: 1px solid var(--color-divider); font-size: 10.5px; color: var(--color-accent-300); }
+  .globe-pop .t-foot { margin-top: 6px; padding-top: 5px; border-top: 1px solid var(--color-divider); font-size: 10px; color: var(--color-accent-300); }
   /* Dialogs must sit above every in-page layer (sticky table header z2, map tooltip z5). */
   .dialog-backdrop { z-index: 60; }
   #globeMap .maplibregl-ctrl-group { background: var(--color-neutral-900); border: 1px solid var(--color-divider); }
@@ -310,8 +308,8 @@
   #globeMap .maplibregl-ctrl-group button span { filter: invert(1); }
   #globeMap .maplibregl-ctrl-attrib { background: color-mix(in srgb, var(--color-neutral-900) 82%, transparent); }
   #globeMap .maplibregl-ctrl-attrib a { color: var(--ink-4); }
-  .tooltip .t-cols { font-size: 9.5px; text-transform: uppercase; letter-spacing: .04em; text-align: right; color: var(--ink-label); margin-bottom: 2px; }
-  .tooltip .t-foot { margin-top: 6px; padding-top: 5px; border-top: 1px solid var(--color-divider); font-size: 10.5px; color: var(--color-accent-300); }
+  .tooltip .t-cols { font-size: 10px; text-transform: uppercase; letter-spacing: .04em; text-align: right; color: var(--ink-label); margin-bottom: 2px; }
+  .tooltip .t-foot { margin-top: 6px; padding-top: 5px; border-top: 1px solid var(--color-divider); font-size: 10px; color: var(--color-accent-300); }
   .stat-inline { display: grid; grid-template-columns: 1fr 1fr; gap: 16px var(--space-3); margin-bottom: var(--space-3); }
   .stat-inline .stat-cell { padding-left: 12px; border-left: 1px solid var(--color-divider); }
   .stat-inline .stat-cell:nth-child(odd) { border-left: 0; padding-left: 0; }
@@ -321,28 +319,28 @@
   .forecast-inline span { color: var(--ink-4); }
   .art-row { border-top: 1px solid var(--color-divider); padding: 10px 2px; }
   .art-row:first-child { border-top: 0; }
-  .art-link { display: inline-block; font-size: 12.5px; font-weight: 600; margin-bottom: 5px; word-break: break-word; }
-  .art-extract { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 11.5px; color: var(--ink-2); padding: 2px 0; flex-wrap: wrap; }
+  .art-link { display: inline-block; font-size: 12px; font-weight: 600; margin-bottom: 5px; word-break: break-word; }
+  .art-extract { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--ink-2); padding: 2px 0; flex-wrap: wrap; }
   .art-extract > span:first-child { min-width: 0; word-break: break-word; }
   .art-extract .qbadge, .art-extract .tag { flex-shrink: 0; }
   /* Evidence cards: cited articles enriched from the raw extraction corpus */
   .ev-cards { margin: 6px 0 2px 12px; border-left: 2px solid var(--color-divider); padding-left: 10px; display: flex; flex-direction: column; gap: 8px; }
-  .ev-card { font-size: 11.5px; }
+  .ev-card { font-size: 12px; }
   .ev-card-title { font-weight: 600; color: var(--color-text); word-break: break-word; line-height: 1.35; }
-  .ev-note { font-size: 11px; color: var(--ink-3); margin-top: 4px; }
+  .ev-note { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
   .filter-banner { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: color-mix(in srgb, var(--color-accent-500) 14%, transparent); border: 1px solid color-mix(in srgb, var(--color-accent-300) 35%, transparent); border-radius: var(--radius-sm); padding: 8px 10px; margin: 0 0 12px; }
   .fb-pathogen { font-size: 14px; font-weight: 700; color: var(--color-accent-200); margin: 0; letter-spacing: .2px; line-height: 1.25; }
-  .fb-sub { font-size: 11px; color: var(--ink-3); margin: 2px 0 0; }
-  .filter-banner button { background: none; border: 1px solid color-mix(in srgb, var(--color-accent-300) 45%, transparent); color: var(--color-accent-200); border-radius: 999px; font-size: 11px; font-weight: 600; padding: 4px 10px; cursor: pointer; white-space: nowrap; }
+  .fb-sub { font-size: 12px; color: var(--ink-3); margin: 2px 0 0; }
+  .filter-banner button { background: none; border: 1px solid color-mix(in srgb, var(--color-accent-300) 45%, transparent); color: var(--color-accent-200); border-radius: 999px; font-size: 12px; font-weight: 600; padding: 4px 10px; cursor: pointer; white-space: nowrap; }
   .filter-banner button:hover { background: color-mix(in srgb, var(--color-accent-300) 18%, transparent); }
   /* Live-data states: skeleton shimmer before first load, sample-data banner on failure. */
   .data-banner { display: none; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 var(--space-3); padding: 8px 12px; border: 1px solid color-mix(in srgb, #d29a5a 45%, transparent); background: color-mix(in srgb, #d29a5a 12%, transparent); border-radius: var(--radius-sm); font-size: 12px; color: var(--ink-1); }
   body.fallback .data-banner { display: flex; }
-  .data-banner button { background: none; border: 1px solid color-mix(in srgb, #d29a5a 55%, transparent); color: var(--ink-1); border-radius: 999px; font-size: 11px; font-weight: 600; padding: 3px 10px; cursor: pointer; white-space: nowrap; }
+  .data-banner button { background: none; border: 1px solid color-mix(in srgb, #d29a5a 55%, transparent); color: var(--ink-1); border-radius: 999px; font-size: 12px; font-weight: 600; padding: 3px 10px; cursor: pointer; white-space: nowrap; }
   @keyframes skshine { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
   body.preload .stat-num { color: transparent; border-radius: 6px; background: linear-gradient(90deg, rgba(255,255,255,.05), rgba(255,255,255,.16), rgba(255,255,255,.05)); background-size: 200% 100%; animation: skshine 1.2s infinite linear; }
   body.preload #trendSvg, body.preload #sourceSvg, body.preload .map-wrap svg, body.preload .map-wrap #globeMap { opacity: .12; filter: grayscale(1); }
-  body.preload .map-wrap::after { content: 'Loading live data…'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12.5px; color: var(--color-neutral-400); z-index: 3; }
+  body.preload .map-wrap::after { content: 'Loading live data…'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--color-neutral-400); z-index: 3; }
   @media (prefers-reduced-motion: reduce) { body.preload .stat-num { animation: none; } }
   .art-extract strong { color: var(--color-text); }
   .table-scroll { overflow-x: auto; min-width: 0; max-width: 100%; }
@@ -351,12 +349,68 @@
   /* Article screening column hosts badge + vettings button (collapsed, like outbreak doc) */
   .table-scroll th:nth-child(5), .table-scroll td:nth-child(5) { min-width: 160px; }
   #tablePager { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin-top: 12px; flex-wrap: wrap; }
-  #tablePager .pager-info { font-size: 11.5px; color: var(--ink-4); }
-  .footer-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--color-accent-300); border: 1px solid var(--color-divider); border-radius: 999px; padding: 3px 10px; }
+  #tablePager .pager-info { font-size: 12px; color: var(--ink-4); }
+  .footer-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: var(--color-accent-300); border: 1px solid var(--color-divider); border-radius: 999px; padding: 3px 10px; }
   .footer-badge:hover { color: var(--color-accent-200); border-color: var(--color-accent-300); text-decoration: none; }
   /* Raw-articles table (figures card's alternate view): compact article-level rows. */
   .raw-row-title { font-size: 12px; font-weight: 600; word-break: break-word; }
-  .raw-row-trans { font-size: 10.5px; color: var(--ink-4); font-style: italic; word-break: break-word; }
+  .raw-row-trans { font-size: 10px; color: var(--ink-4); font-style: italic; word-break: break-word; }
+  /* ============ REDESIGN v2 — type scale, hierarchy, lead ============ */
+  /* One deliberate type scale. Every font-size in the page is snapped to a step of this ramp. */
+  :root { --fs-1:10px; --fs-2:12px; --fs-3:14px; --fs-4:18px; --fs-5:24px; --fs-6:30px; }
+  /* Section labels — the page now reads as a numbered sequence rather than a pile of panels. */
+  .section-label { display:flex; align-items:center; gap:12px; margin:var(--space-6) 0 var(--space-3); font-size:var(--fs-1); text-transform:uppercase; letter-spacing:.14em; color:var(--ink-4); font-weight:600; }
+  .section-label:first-of-type { margin-top:var(--space-4); }
+  .section-label .sl-num { color:var(--color-accent-300); font-variant-numeric:tabular-nums; }
+  .section-label .sl-rule { flex:1; height:1px; background:linear-gradient(90deg, var(--color-divider), transparent); }
+  /* Hierarchy: the lead answer + map is the clear primary; the analysis and table read as quieter. */
+  .map-card { border-top:2px solid var(--color-accent); box-shadow:var(--shadow-md); }
+  .plots-card, .briefs-card, .table-card, .summary-card { box-shadow:none; background:color-mix(in srgb, var(--color-neutral-900) 55%, transparent); border:1px solid var(--color-divider); }
+  /* Lead situation strip — states the current answer before the user meets the data (#1 user journey). */
+  .lead-strip { display:flex; align-items:stretch; gap:var(--space-4); background:linear-gradient(100deg, color-mix(in srgb,var(--color-accent-900) 62%,transparent), color-mix(in srgb,var(--color-neutral-900) 72%,transparent)); border:1px solid color-mix(in srgb,var(--color-accent-300) 30%,transparent); border-radius:var(--radius-md); padding:var(--space-4); margin-bottom:var(--space-3); }
+  .lead-strip .lead-main { flex:1 1 auto; min-width:0; display:flex; flex-direction:column; justify-content:center; }
+  .lead-kicker { font-size:var(--fs-1); text-transform:uppercase; letter-spacing:.12em; color:var(--color-accent-200); margin:0 0 7px; font-weight:600; }
+  .lead-kicker .lead-live { display:inline-flex; align-items:center; gap:6px; }
+  .lead-headline { font-family:var(--font-heading); font-weight:var(--font-heading-weight); font-size:var(--fs-5); line-height:1.1; letter-spacing:-.01em; color:var(--color-text); margin:0; }
+  .lead-headline .lead-loc { color:var(--color-neutral-300); font-weight:500; }
+  .lead-sub { font-size:var(--fs-2); color:var(--ink-3); margin:7px 0 0; line-height:1.45; text-wrap:pretty; }
+  .lead-metrics { display:flex; gap:var(--space-4); align-items:center; flex:none; border-left:1px solid color-mix(in srgb,var(--color-accent-300) 22%,transparent); padding-left:var(--space-4); }
+  .lead-metric { text-align:right; }
+  .lead-metric .lm-num { font-family:var(--font-heading); font-weight:var(--font-heading-weight); font-size:var(--fs-4); line-height:1; margin:0; font-variant-numeric:tabular-nums; color:var(--color-text); }
+  .lead-metric .lm-lbl { font-size:var(--fs-1); text-transform:uppercase; letter-spacing:.05em; color:var(--ink-label); margin:6px 0 0; }
+  .lead-cta { align-self:center; flex:none; white-space:nowrap; }
+  @media (max-width:820px){ .lead-strip{ flex-wrap:wrap; } .lead-metrics{ border-left:0; padding-left:0; border-top:1px solid color-mix(in srgb,var(--color-accent-300) 22%,transparent); padding-top:var(--space-3); width:100%; justify-content:space-between; } .lead-cta{ align-self:flex-start; } }
+  /* Quiet the filter toolbar so it stops competing with the content it filters. */
+  .toolbar { border-bottom:0; padding:var(--space-2) 0 0; margin-bottom:0; }
+  .toolbar label { color:var(--ink-4); }
+  .toolbar .input { background:color-mix(in srgb,var(--color-neutral-900) 55%, transparent); }
+  .toolbar #clustersTag { color:var(--ink-3); }
+  /* Scorecard is the pathogen-wide aggregate (complements the single-event lead) — cases/deaths
+     move to a compact caption so they no longer duplicate the lead's hero numbers. */
+  .stat-aggline { font-size:var(--fs-2); color:var(--ink-2); margin:0 0 18px; line-height:1.5; }
+  .stat-aggline strong { color:var(--color-text); font-weight:600; font-variant-numeric:tabular-nums; }
+  .stat-aggline .agg-caveat { display:block; font-size:var(--fs-1); color:var(--ink-4); margin-top:4px; letter-spacing:0; text-transform:none; }
+  /* Report file reference (hash / PDF filename) kept visible for records requests. */
+  .brief-file-line { font-size:var(--fs-1); color:var(--ink-4); }
+  .brief-file-line:empty { display:none; }
+  .brief-file-line code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:10px; color:var(--ink-3); background:color-mix(in srgb,var(--color-text) 7%,transparent); padding:1px 6px; border-radius:4px; }
+  /* Full-page outbreak brief modal + its per-report PDF export. */
+  .brief-modal-backdrop { position:fixed; inset:0; z-index:70; background:color-mix(in srgb, var(--color-bg) 84%, transparent); display:flex; align-items:flex-start; justify-content:center; padding:3vh 2vw; }
+  .brief-modal { background:var(--color-neutral-900); border:1px solid var(--color-divider); border-top:2px solid var(--color-accent); border-radius:var(--radius-md); box-shadow:var(--shadow-lg); width:min(980px,96vw); max-height:94vh; display:flex; flex-direction:column; }
+  .brief-modal-head { display:flex; align-items:flex-start; justify-content:space-between; gap:var(--space-4); padding:var(--space-4) var(--space-4) var(--space-3); border-bottom:1px solid var(--color-divider); }
+  .brief-modal-eyebrow { font-size:var(--fs-1); text-transform:uppercase; letter-spacing:.1em; color:var(--color-accent-200); margin:0 0 5px; font-weight:600; }
+  .brief-modal-title { font-family:var(--font-heading); font-weight:var(--font-heading-weight); font-size:var(--fs-4); line-height:1.25; margin:0; color:var(--color-text); }
+  .brief-modal-actions { display:flex; gap:8px; flex:none; }
+  .brief-modal-body { overflow-y:auto; padding:var(--space-4); }
+  @media print {
+    body.printing-brief { background:#fff !important; }
+    body.printing-brief > *:not(#briefBackdrop) { display:none !important; }
+    body.printing-brief #briefBackdrop { position:static; display:block !important; padding:0; background:#fff; }
+    body.printing-brief #briefModal { box-shadow:none; border:0; max-height:none; width:100%; }
+    body.printing-brief .brief-modal-actions { display:none !important; }
+    body.printing-brief .brief-modal-body { overflow:visible; }
+  }
+
   /* Print / PDF: light theme, expanded panels, controls hidden, and every link prints its URL
      so the ephemeral AI briefs and event reports keep their sources as an audit trail. */
   @media print {
@@ -367,7 +421,7 @@
     .grid-main, .row-2col, .briefs-split { display:block !important; }
     .map-wrap { height:420px; }
     .events-col, .brief-body, .briefs-card, .plots-card, .summary-card, .table-scroll { height:auto !important; max-height:none !important; overflow:visible !important; }
-    .brief-content a[href]:after, .event-title a[href]:after { content:' (' attr(href) ')'; font-size:9px; color:#555; word-break:break-all; }
+    .brief-content a[href]:after, .event-title a[href]:after { content:' (' attr(href) ')'; font-size:10px; color:#555; word-break:break-all; }
     /* Logo must survive the light print theme: base wordmark only, dark ink */
     .brand-logo { height: 34px; }
     .brand-logo text { display: none; }
@@ -383,8 +437,8 @@
     .stat-inline, .stat-grid { grid-template-columns: 1fr; gap: 16px; }
     .forecast-box .fc-grid { grid-template-columns: 1fr; gap: var(--space-3); }
     .map-wrap { height: 320px; }
-    .page-title { font-size: 21px; }
-    .table { font-size: 11.5px; }
+    .page-title { font-size: 24px; }
+    .table { font-size: 12px; }
     #subLegend { grid-template-columns: repeat(2, minmax(0,1fr)); }
   }
 </style>
@@ -455,8 +509,6 @@
       <label for="species" title="Scopes every data element — summary stats, map, plots and the figures table">Host species</label>
       <select id="species" class="input" style="min-width:150px"><option>All species</option></select>
     </div>
-    <span class="spacer"></span>
-    <span class="tag tag-accent" id="clustersTag">clusters tracked</span>
   </div>
 
   <div class="data-banner" id="dataBanner">
@@ -464,9 +516,20 @@
     <button type="button" id="bannerRetry">Retry now</button>
   </div>
 
+  <p class="section-label"><span class="sl-num">01</span> Situation<span class="sl-rule"></span></p>
+  <div class="lead-strip" id="leadStrip" style="display:none">
+    <div class="lead-main">
+      <p class="lead-kicker"><span class="lead-live"><span class="sync-dot"></span>Highest-priority active outbreak</span></p>
+      <p class="lead-headline"><span class="lead-path" id="leadPathogen">—</span> <span class="lead-loc" id="leadLoc"></span></p>
+      <p class="lead-sub" id="leadSub"></p>
+    </div>
+    <div class="lead-metrics" id="leadMetrics"></div>
+    <button type="button" class="btn btn-primary lead-cta" id="leadCta">Open brief →</button>
+  </div>
+
   <div class="grid-main">
     <div class="card map-card elev-sm">
-      <p class="card-title" style="margin:0 0 10px">Outbreak map <span style="font-weight:400;color:var(--ink-4);font-size:11.5px">— vetted events sized by risk &amp; case load</span></p>
+      <p class="card-title" style="margin:0 0 10px">Outbreak map <span style="font-weight:400;color:var(--ink-4);font-size:12px">— vetted events sized by risk &amp; case load</span></p>
       <div class="map-head">
         <div class="seg" role="tablist" aria-label="Marker size" id="mapMetricSeg">
           <button type="button" class="seg-opt" aria-selected="true" data-metric="risk">Risk score</button>
@@ -485,7 +548,7 @@
       <div class="map-wrap" id="mapWrap">
         <svg id="mapSvg" viewBox="0 0 960 520"></svg>
         <div id="globeMap" style="position:absolute;inset:0;display:none"></div>
-        <button type="button" class="btn btn-secondary" id="satToggle" style="position:absolute;left:10px;top:10px;z-index:5;display:none;font-size:11px;padding:4px 10px">Satellite</button>
+        <button type="button" class="btn btn-secondary" id="satToggle" style="position:absolute;left:10px;top:10px;z-index:5;display:none;font-size:12px;padding:3px 10px">Satellite</button>
         <div class="map-hint">Scroll to zoom · drag to pan · click an event to open its brief</div>
         <div class="zoom-controls">
           <button type="button" class="btn btn-secondary btn-icon" id="zoomIn" aria-label="Zoom in">+</button>
@@ -498,18 +561,19 @@
 
     <div class="card summary-card elev-sm">
       <div class="stat-band">
-        <p class="stat-scope">Selected pathogen — <span id="statScope">…</span></p>
+        <p class="stat-scope">Pathogen total — <span id="statScope">…</span></p>
+        <p class="stat-aggline" id="statAggLine"></p>
         <div class="stat-grid">
-          <div class="stat-cell"><p class="stat-num" id="statCases">–</p><p class="stat-label">Confirmed cases</p></div>
-          <div class="stat-cell"><p class="stat-num" id="statDeaths">–</p><p class="stat-label">Confirmed deaths</p></div>
-          <div class="stat-cell" id="statActiveCell" title="Active = ≤14 days since last vetted figure (Reporting ≤4d + Slowing ≤14d) · one per country×pathogen · includes subnational proxy where no national figure exists"><p class="stat-num" id="statActive">–</p><p class="stat-label">Active outbreaks</p><p class="cell-range" id="statActiveBreakdown" style="margin:4px 0 0;font-size:10.5px"></p></div>
-          <div class="stat-cell"><p class="stat-num" id="statCountries">–</p><p class="stat-label">Countries reporting</p></div>
+          <div class="stat-cell" id="statActiveCell"><p class="stat-num" id="statActive">–</p><p class="stat-label">Outbreaks tracked</p><p class="cell-range" id="statActiveBreakdown" style="margin:4px 0 0;font-size:10px"></p></div>
+          <div class="stat-cell"><p class="stat-num" id="statCountries">–</p><p class="stat-label">Countries reporting</p><p class="cell-range" id="statVetLine" style="margin:4px 0 0;font-size:10px"></p></div>
+          <div class="stat-cell"><p class="stat-num" id="statLevel">–</p><p class="stat-label">Source reports</p><p class="cell-range" id="statLevelSub" style="margin:4px 0 0;font-size:10px"></p></div>
         </div>
       </div>
       <div class="forecast-box" id="forecastBox"></div>
     </div>
   </div>
 
+  <p class="section-label"><span class="sl-num">02</span> Trend &amp; evidence<span class="sl-rule"></span></p>
   <div class="row-2col">
     <div class="card plots-card elev-sm">
       <div class="card-head-row">
@@ -533,10 +597,6 @@
       <div id="subTrendBar" style="display:none;align-items:center;gap:10px;margin:0 0 10px;flex-wrap:wrap">
         <span class="card-meta" id="subLegend" style="flex:1 1 220px;min-width:200px"></span>
       </div>
-      <div id="subToggleWrap" style="display:none;margin:0 0 10px">
-        <label><input type="checkbox" id="subToggle"> Show subnational breakdown (<span id="subToggleCount">0</span> locations)</label>
-        <span class="card-meta" style="margin-left:6px">National view by default — toggle when available</span>
-      </div>
       <div class="plot-block">
         <p class="plot-subtitle" id="trendSubtitle">Confirmed cases &amp; deaths</p>
         <div class="chart-wrap" id="chartWrap"><svg id="trendSvg" width="100%" height="190"></svg></div>
@@ -545,7 +605,7 @@
         <p class="plot-subtitle" id="sourceSubtitle">Sources per day</p>
         <div class="source-chart-wrap" id="sourceChartWrap"><svg id="sourceSvg" width="100%" height="92"></svg></div>
       </div>
-      <p class="card-meta" id="outlierNote" style="margin:6px 0 0;font-size:10.5px;color:var(--ink-4)"></p>
+      <p class="card-meta" id="outlierNote" style="margin:6px 0 0;font-size:10px;color:var(--ink-4)"></p>
     </div>
 
     <div class="card briefs-card elev-sm">
@@ -554,29 +614,33 @@
           <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
             <p class="card-title" style="margin:0 0 4px">Event reports</p>
             <span style="display:flex;gap:6px">
-              <button type="button" class="btn btn-secondary" id="exportEventsBtn" style="font-size:10.5px;padding:2px 8px" title="Export the event reports matching the current filters, with source URLs, as an audit trail">Events CSV</button>
-              <button type="button" class="btn btn-secondary" id="printBtn" style="font-size:10.5px;padding:2px 8px" title="Print / save the briefs, event list and figures table as PDF — source links included">Print / PDF</button>
+              <button type="button" class="btn btn-secondary" id="exportEventsBtn" style="font-size:10px;padding:3px 10px" title="Export the event reports matching the current filters, with source URLs, as an audit trail">Events CSV</button>
+              <button type="button" class="btn btn-secondary" id="printBtn" style="font-size:10px;padding:3px 10px" title="Print / save the briefs, event list and figures table as PDF — source links included">Print / PDF</button>
             </span>
           </div>
           <p class="events-hint">Select an event to load its brief →</p>
           <div id="eventList" aria-busy="true"><div class="skeleton w70"></div><div class="skeleton"></div><div class="skeleton w45"></div><div class="skeleton w70"></div><div class="skeleton"></div><div class="skeleton w45"></div></div>
         </div>
         <div class="brief-col">
-          <div class="card-head-row">
-            <p class="card-title" style="margin:0">AI outbreak brief</p>
-            <span class="card-meta" id="briefMeta"></span>
+          <div class="card-head-row" style="align-items:flex-start;gap:10px;margin-bottom:8px">
+            <div style="min-width:0">
+              <p id="briefMeta" style="margin:0;line-height:1.35"></p>
+              <p id="briefFileLine" class="brief-file-line" style="margin:4px 0 0"></p>
+            </div>
+            <button type="button" class="btn btn-secondary" id="briefExpandBtn" style="flex:none;font-size:10px;padding:3px 10px" title="Open the full outbreak brief with export">⤡ Full report</button>
           </div>
-          <p style="font-size:11px;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--color-divider)">AI-generated summary from open-source reports — may contain inaccuracies; verify claims via the linked references before citing.</p>
+          <p style="font-size:11px;color:color-mix(in srgb, var(--color-text) 50%, transparent);margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--color-divider)">AI-generated from open-source reports — verify claims via the linked references before citing.</p>
           <div class="brief-body"><div id="briefContent" class="brief-content" aria-busy="true"><div class="skeleton tall w45"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton w70"></div><div class="skeleton"></div><div class="skeleton w45"></div></div></div>
         </div>
       </div>
     </div>
   </div>
 
+  <p class="section-label"><span class="sl-num">03</span> All reported figures<span class="sl-rule"></span></p>
   <div class="card table-card elev-sm">
     <div class="card-head-row">
       <p class="card-title" style="margin:0" id="tableTitle">Latest figures by location — national events</p>
-      <button type="button" class="btn btn-secondary" id="tableBack" style="display:none;font-size:11px;padding:4px 10px">← Back to national</button>
+      <button type="button" class="btn btn-secondary" id="tableBack" style="display:none;font-size:12px;padding:3px 10px">← Back to national</button>
       <span style="display:flex;align-items:center;gap:10px">
         <div class="seg" role="tablist" aria-label="Statistical screening" id="screenSeg" title="Lone article values are treated as a sampling distribution: each figure is screened by a chi-square outlier test and a cumulative-monotonicity check, then accepted or rejected. Separate from ‘vettings’, which count independent-domain articles corroborating a fact.">
           <button type="button" class="seg-opt" aria-selected="true" data-screen="accepted">Accepted</button>
@@ -587,13 +651,13 @@
           <button type="button" class="seg-opt" aria-selected="true" data-mode="figures">Figures</button>
           <button type="button" class="seg-opt" data-mode="raw" title="The raw article–fact extraction table behind both the statistical figures and the event reports">Raw articles</button>
         </div>
-        <button type="button" class="btn btn-secondary" id="exportCsvBtn" style="padding:4px 10px;font-size:12px">Export CSV</button>
+        <button type="button" class="btn btn-secondary" id="exportCsvBtn" style="padding:3px 10px;font-size:12px">Export CSV</button>
         <span class="card-meta"><a href="https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8#gid=881754490" target="_blank" rel="noopener">data output (Sheet) ↗</a></span>
       </span>
     </div>
-     <p id="tableIntro" style="font-size:11.5px;color:color-mix(in srgb, var(--color-text) 68%, transparent);margin:-6px 0 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">All figures shown; plots/map/scorecard vetted-only.
-       <button type="button" id="tableHelpBtn" aria-label="About this table" title="Show table documentation" style="width:18px;height:18px;border-radius:999px;border:1px solid var(--color-divider);background:transparent;color:var(--ink-4);font-size:11px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;flex:none">?</button>
-       <span style="font-size:10.5px;color:var(--ink-4)">Range = spread · click sources to list articles</span>
+     <p id="tableIntro" style="font-size:12px;color:color-mix(in srgb, var(--color-text) 68%, transparent);margin:-6px 0 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">All figures shown; plots/map/scorecard vetted-only.
+       <button type="button" id="tableHelpBtn" aria-label="About this table" title="Show table documentation" style="width:18px;height:18px;border-radius:999px;border:1px solid var(--color-divider);background:transparent;color:var(--ink-4);font-size:12px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;flex:none">?</button>
+       <span style="font-size:10px;color:var(--ink-4)">Range = spread · click sources to list articles</span>
      </p>
     <div class="table-scroll">
     <table class="table">
@@ -622,7 +686,7 @@
       </span>
     </div>
      <p class="card-meta" id="tableMore" style="display:none;margin:8px 0 0"></p>
-     <p id="tableFoot" style="font-size:10.5px;color:var(--ink-4);margin:10px 0 0;line-height:1.4;border-top:1px solid var(--color-divider);padding-top:8px">Range = spread across sources for that date. Status = reporting recency (≤4d Reporting · ≤14d Slowing · Quiet). Documentation = event-history (all dates/measures, Well documented = long + many vettings); Sources/Article screening = latest figure only — unvetted = 1 source (paler) · N sources = vetted (N−1 vettings) — click to list articles.</p>
+     <p id="tableFoot" style="font-size:10px;color:var(--ink-4);margin:10px 0 0;line-height:1.4;border-top:1px solid var(--color-divider);padding-top:8px">Range = spread across sources for that date. Status = reporting recency (≤4d Reporting · ≤14d Slowing · Quiet). Documentation = event-history (all dates/measures, Well documented = long + many vettings); Sources/Article screening = latest figure only — unvetted = 1 source (paler) · N sources = vetted (N−1 vettings) — click to list articles.</p>
    </div>
 
   <footer class="note" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
@@ -636,7 +700,7 @@
         <svg class="icon" viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;stroke:none"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.55V9h3.57v11.45Z"/></svg>
         LinkedIn
       </a>
-      <span style="font-size:11px;color:var(--ink-4)">© James Schlitt, PhD, MPH 2026</span>
+      <span style="font-size:12px;color:var(--ink-4)">© James Schlitt, PhD, MPH 2026</span>
     </span>
   </footer>
 </div>
@@ -646,6 +710,23 @@
     <p class="dialog-title" id="drillTitle">Location breakdown</p>
     <div class="dialog-body" id="drillBody"></div>
     <div class="dialog-actions"><button type="button" class="btn btn-secondary" id="drillClose">Close</button></div>
+  </div>
+</div>
+
+<div class="brief-modal-backdrop" id="briefBackdrop" style="display:none">
+  <div class="brief-modal" id="briefModal" role="dialog" aria-modal="true" aria-labelledby="briefModalTitle">
+    <div class="brief-modal-head">
+      <div style="min-width:0">
+        <p class="brief-modal-eyebrow" id="briefModalEyebrow">Outbreak brief</p>
+        <p class="brief-modal-title" id="briefModalTitle">—</p>
+        <p class="brief-file-line" id="briefModalFile" style="margin:6px 0 0"></p>
+      </div>
+      <div class="brief-modal-actions">
+        <button type="button" class="btn btn-secondary" id="briefExportBtn">Export PDF</button>
+        <button type="button" class="btn btn-secondary btn-icon" id="briefModalClose" aria-label="Close full report">✕</button>
+      </div>
+    </div>
+    <div class="brief-modal-body" id="briefModalBody"></div>
   </div>
 </div>
 
@@ -662,21 +743,10 @@ let dataLoaded = false, sheetRetries = 0;
 // The PLOTS / MAP / SCORECARD show only VETTED figures (n>=2) to avoid
 // single-report noise and cross-geography duplication. The FIGURES TABLE shows
 // ALL figures but visually distinguishes vetted vs unvetted (hollow/muted +
-// "unvetted" badge + tooltip) — see formatSourceCount() / isVetted().
-const VETTING_MIN = 2;
+// "unvetted" badge + tooltip) — see vettingLabel() / isVetted().
 function vettingsOf(n) { return Math.max(0, (+n || 1) - 1); }
 function isVetted(r) { return vettingsOf(r.n_sources) >= 1; }
-function formatSourceCount(n) {
-  const src = (+n || 1);
-  const v = vettingsOf(src);
-  if (v === 0) return 'unvetted';
-  return `${src} sources`;
-}
-function formatSourceCountShort(n) { // for compact pills: "2 sources" or "unvetted"
-  const src = (+n || 1);
-  return vettingsOf(src) === 0 ? 'unvetted' : `${src} sources`;
-}
-function vettingLabel(n) { // verbose tooltip helper: "2 sources · 1 vetting"
+function vettingLabel(n) { // source-count label: verbose tooltip form "2 sources · 1 vetting"
   const src = (+n || 1);
   const v = vettingsOf(src);
   if (v === 0) return '1 source · unvetted — single report, lower reliability';
@@ -724,7 +794,6 @@ const PATHOGEN_WHO = {
   'Rift Valley Fever Virus': 'https://www.who.int/health-topics/rift-valley-fever'
 };
 function pathogenWhoUrl(p) { return PATHOGEN_WHO[p] || null; }
-function speciesLabel(pathogens) { return pathogens.map(p => PATHOGEN_LABELS[p] || p).join(' / '); }
 
 // Fallback snapshot (used until/unless the live sheet loads)
 let records = [
@@ -776,9 +845,9 @@ function applyEmptyQueryState() {
   const box = document.getElementById('forecastBox');
   if (noMatch) {
     _queryEmpty = true;
-    const esc = String(q).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const escQ = esc(q);
     if (typeof briefMetaEl!=='undefined' && briefMetaEl) briefMetaEl.innerHTML = '';
-    if (typeof briefContentEl!=='undefined' && briefContentEl) briefContentEl.innerHTML = '<p style="font-size:12.5px;line-height:1.6;color:var(--ink-3);margin:0">No events match \u201c<strong style="color:var(--color-text)">'+esc+'</strong>\u201d in the current pathogen / region. Clear the filter to return to the outbreak briefs.</p>';
+    if (typeof briefContentEl!=='undefined' && briefContentEl) briefContentEl.innerHTML = '<p style="font-size:12px;line-height:1.6;color:var(--ink-3);margin:0">No events match \u201c<strong style="color:var(--color-text)">'+escQ+'</strong>\u201d in the current pathogen / region. Clear the filter to return to the outbreak briefs.</p>';
     const tt=document.getElementById('trendTitle'); if(tt) tt.textContent='No data for the current filter';
     const tm=document.getElementById('trendMeta'); if(tm) tm.textContent='';
     try { tsvg.selectAll('*').remove(); shsvg.selectAll('*').remove(); } catch(e){}
@@ -851,26 +920,52 @@ function renderStats() {
   // Use vettedShown so single-source figures don't inflate national totals.
   const baseFiltered = vettedShown.filter(r => !isFlu(r.pathogenRaw));
   const filtered = all ? baseFiltered : baseFiltered.filter(r => r.pathogenRaw === selectedPathogen);
-  const sumCases = filtered.reduce((s,r) => s + (r.cases || 0), 0);
-  const sumDeaths = filtered.reduce((s,r) => s + (r.deaths || 0), 0);
-  document.getElementById('statCases').textContent = sumCases ? sumCases.toLocaleString() : '—';
-  document.getElementById('statDeaths').textContent = sumDeaths ? sumDeaths.toLocaleString() : '—';
-  // Active = ≤14 days since last vetted figure (Reporting ≤4d + Slowing ≤14d) — one hit per country×pathogen with vettings,
-  // including subnational proxy where no independent national figure is tracked (proxy already baked into `filtered` via liveRecords/refineRecord).
-  const activeAll = filtered.filter(r => r.date && statusOf(r.date) !== 'Quiet');
-  const reporting = activeAll.filter(r => statusOf(r.date) === 'Reporting').length;
-  const slowing = activeAll.length - reporting;
-  const quiet = filtered.length - activeAll.length;
-  document.getElementById('statActive').textContent = activeAll.length;
+  // The scorecard is the GLOBAL picture for the selected pathogen (or all pathogens) — it is NEVER
+  // narrowed by the region filter or the clicked country. Counts cover every tracked country×pathogen
+  // outbreak; vetting and recency are shown as differentiators in the sub-lines, not as filters.
+  const _setTxt = (id,v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+  const isVettedOutbreak = r => isRecordVetted(r) || (r.subVetted || 0) > 0;
+  const scoped = displayRecords().filter(r => !isFlu(r.pathogenRaw)).filter(r => all || r.pathogenRaw === selectedPathogen);
+  const vettedScoped = scoped.filter(isVettedOutbreak);
+  const totalOutbreaks = scoped.length;
+  const active = scoped.filter(r => r.date && statusOf(r.date) !== 'Quiet');
+  const reporting = active.filter(r => statusOf(r.date) === 'Reporting').length;
+  const slowing = active.length - reporting;
+  const quiet = totalOutbreaks - active.length;
+  const nCountries = new Set(scoped.map(r => r.country)).size;
+  const nVetCountries = new Set(vettedScoped.map(r => r.country)).size;
+  const sumCases = scoped.reduce((s,r) => s + (r.cases || 0), 0);
+  const sumDeaths = scoped.reduce((s,r) => s + (r.deaths || 0), 0);
+  // National vs subnational reports in scope — speaks to the nature of the evidence (global, pathogen-scoped).
+  const scopeReports = (typeof reports !== 'undefined' ? reports : []).filter(r => !isFlu(r.pathogen)).filter(r => all || r.pathogen === selectedPathogen);
+  const natReports = scopeReports.filter(r => isNational(r.place)).length;
+  const subReports = scopeReports.length - natReports;
+  const aggEl = document.getElementById('statAggLine');
+  if (aggEl) {
+    aggEl.innerHTML = scoped.length
+      ? `<strong>${sumCases.toLocaleString()}</strong> confirmed cases · <strong>${sumDeaths.toLocaleString()}</strong> deaths` +
+        `<span class="agg-caveat">Global total across ${totalOutbreaks} tracked outbreak${totalOutbreaks===1?'':'s'} · ${vettedScoped.length} vetted, ${totalOutbreaks-vettedScoped.length} single-source</span>`
+      : `<span class="agg-caveat">No tracked figures for this scope.</span>`;
+  }
+  _setTxt('statActive', totalOutbreaks);
   const breakdownEl = document.getElementById('statActiveBreakdown');
-  if (breakdownEl) breakdownEl.textContent = filtered.length ? `${reporting} reporting · ${slowing} slowing · ${quiet} quiet (>14d)` : '';
+  if (breakdownEl) breakdownEl.textContent = totalOutbreaks ? `${active.length} active · ${quiet} quiet (>14d)` : '';
   const activeCell = document.getElementById('statActiveCell');
-  if (activeCell) activeCell.title = `Active (≤14d) = ${activeAll.length} outbreaks — ${reporting} Reporting (≤4d) + ${slowing} Slowing (≤14d); ${quiet} Quiet (>14d) excluded. One per country×pathogen, vetted only, subnational proxy where no national figure.`;
-  document.getElementById('statCountries').textContent = new Set(filtered.map(r => r.country)).size;
-  // Forecast: when All selected show worst outbreak (hardest-hit country) instead of summing all pathogens*countries
+  if (activeCell) activeCell.title = `${totalOutbreaks} tracked outbreaks (one per country×pathogen). ${active.length} active — ${reporting} Reporting (≤4d) + ${slowing} Slowing (≤14d); ${quiet} Quiet (>14d). ${vettedScoped.length} vetted (incl. vetted subnational proxies), ${totalOutbreaks-vettedScoped.length} single-source.`;
+  _setTxt('statCountries', nCountries);
+  const vetLineEl = document.getElementById('statVetLine');
+  if (vetLineEl) vetLineEl.textContent = nCountries ? `${nVetCountries} with vetted figures` : '';
+  _setTxt('statLevel', scopeReports.length ? scopeReports.length.toLocaleString() : '—');
+  const levelSub = document.getElementById('statLevelSub');
+  if (levelSub) levelSub.textContent = scopeReports.length ? `${natReports} national · ${subReports} subnational` : '';
+  // Forecast: follow the SAME country the trend plot resolves to (selected event or highlighted
+  // country) so the scorecard projection matches the plot, instead of snapping to the dominant
+  // outbreak every time (was leaving the panel stuck on the hardest-hit country, e.g. Italy for WNV).
   let forecastSeries, fcPathogen;
   fcPathogen = activePathogen();
-  forecastSeries = aggregatePathogenSeries(viewRows(), fcPathogen);
+  const _fcCountry = (typeof highlightedCountry !== 'undefined' && highlightedCountry)
+    || ((typeof trendMode !== 'undefined' && trendMode) ? trendMode.country : null) || null;
+  forecastSeries = aggregatePathogenSeries(viewRows(), fcPathogen, _fcCountry);
   renderForecastCard(forecastSeries, fcPathogen);
 }
 function renderForecastCard(series, fcPathogenOverride) {
@@ -910,7 +1005,6 @@ function renderForecastCard(series, fcPathogenOverride) {
     const best = (typeof worstCombo === 'function') ? worstCombo() : null;
     const tgt = best || (loc && fcPathogen ? { country: (typeof geoCountry==='function' ? geoCountry(loc) : null) || loc.split(',').pop().trim() || loc, pathogenRaw: fcPathogen, lonlat: null } : null);
     if (tgt && tgt.country && tgt.pathogenRaw) {
-      const esc = s => String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
       fcLink = `<button type="button" class="fc-strain fc-link" data-fc-country="${esc(tgt.country)}" data-fc-pathogen="${esc(tgt.pathogenRaw)}" aria-label="Go to primary outbreak — ${esc(tgt.country)} · ${esc(label)}" title="Go to ${esc(label)} in ${esc(tgt.country)} — resets region filter">` + label + `</button>`;
     }
   } catch(e) {}
@@ -936,8 +1030,7 @@ function renderForecastCard(series, fcPathogenOverride) {
     tableView = { mode:'national', id: null };
     // Clear subnational report filter so visibleReports shows national events for the pathogen
     if (typeof reportFilter!=='undefined') reportFilter = null;
-    chartPref='auto'; plotViewSel='auto'; granPref='national'; trendMode={ mode:'national' };
-    const cb=document.getElementById('subToggle'); if(cb) cb.checked=false;
+    chartPref='auto'; granPref='national'; trendMode={ mode:'national' };
     refreshPathogenSelector();
     renderStats(); renderTable(); renderTrendSection(); renderMap();
     // Prefer the national report for this outbreak so the brief + plot are national
@@ -1050,14 +1143,12 @@ function hostFor(r) {
 }
 // Clears every subnational/filtered scope so a new selection starts from the national view.
 function resetDrilldowns() {
-  trendMode = { mode: 'national' }; granPref='national'; chartPref='auto'; plotViewSel='auto';
+  trendMode = { mode: 'national' }; granPref='national'; chartPref='auto';
   tableView = { mode: 'national', id: null };
   tablePage = 0;
   highlightSubLoc = null;
   if (typeof reportFilter !== 'undefined') reportFilter = null;
   showSubnational = false;
-  const cb = document.getElementById('subToggle');
-  if (cb) cb.checked = false;
   if (typeof renderEventList === 'function') renderEventList();
 }
 function populateSpeciesSelect() {
@@ -1155,8 +1246,8 @@ function openFigureSourcePopup(rowId) {
       return `<div class="art-row">
       <div class="art-extract"><span><strong>${a.value.toLocaleString()}</strong> ${a.measure} · ${esc(a.location)}${a.species?' · '+esc(a.species):''}</span><span class="qbadge ${q.cls}">${q.label} quality</span></div>
       <div class="art-meta">${a.canonical
-        ? `<span class="tag tag-accent" style="font-size:9px">canonical · ${canonReasonLabel(a.reason)}</span>`
-        : `<span class="tag tag-neutral" style="font-size:9px">not canonical</span>${a.quality&&a.quality!=='good'?` <span class="tag tag-neutral" style="font-size:9px" title="statistical screening flag">${esc(a.quality)} screen</span>`:''}`}<span title="${VETTING_TIP.replace(/"/g,'&quot;')}"> · ${a.n===1 ? 'unvetted' : `${a.n} sources`}</span></div>
+        ? `<span class="tag tag-accent" style="font-size:10px">canonical · ${canonReasonLabel(a.reason)}</span>`
+        : `<span class="tag tag-neutral" style="font-size:10px">not canonical</span>${a.quality&&a.quality!=='good'?` <span class="tag tag-neutral" style="font-size:10px" title="statistical screening flag">${esc(a.quality)} screen</span>`:''}`}<span title="${VETTING_TIP.replace(/"/g,'&quot;')}"> · ${a.n===1 ? 'unvetted' : `${a.n} sources`}</span></div>
       ${sup?`<div class="ev-note">Superseded by the canonical figure: <strong>${sup.value.toLocaleString()}</strong> ${sup.measure}</div>`:''}
       ${a.urls.length?`<div class="ev-cards">${a.urls.map(u => citeCard(u)).join('')}</div>`:'<div class="art-meta">No article link recorded.</div>'}
     </div>`;
@@ -1242,7 +1333,7 @@ function renderTable() {
     const rangeHtml = r.casesRange && r.casesRange[1] > r.casesRange[0] ? `<span class="cell-range">range ${r.casesRange[0].toLocaleString()}–${r.casesRange[1].toLocaleString()}</span>` : '';
     const src = r.sources || 1;
     const vetted = isRecordVetted(r);
-    const srcHtml = `<button type="button" class="src-cell ${vetted ? '' : 'vet-unvetted'}" data-src="${r.id.replace(/"/g,'&quot;')}" title="${vettingLabel(src)} — ${VETTING_TIP} — click to list articles">${vetted ? `${src} sources` : 'unvetted'}</button>`;
+    const srcHtml = `<button type="button" class="src-cell ${vetted ? '' : 'vet-unvetted'}" data-src="${r.id.replace(/"/g,'&quot;')}" title="${vettingLabel(src)} — click to list articles"rticles">${vetted ? `${src} sources` : 'unvetted'}</button>`;
     const hostHtml = hostFor(r) || '<span class="src-vet">—</span>';
     const screenHtml = figureAcceptance(r);
     const doc = subnational ? locDocumentation(r.pathogen, r.country) : eventDocumentation(r.pathogenRaw, r.country);
@@ -1254,7 +1345,7 @@ function renderTable() {
     let nameExtra = '';
     if (!subnational) {
       if (r.scope==='subnational') {
-        nameExtra = `<span class="cell-range" style="margin-top:2px"><span class="tag tag-outline" style="font-size:9px" title="No national figure reported — showing the largest subnational event: ${r.proxyLoc}">subnational proxy</span></span>`;
+        nameExtra = `<span class="cell-range" style="margin-top:2px"><span class="tag tag-outline" style="font-size:10px" title="No national figure reported — showing the largest subnational event: ${r.proxyLoc}">subnational proxy</span></span>`;
       } else if (drillable) {
         const vt = r.subVetted ?? 0, uv = r.subUnvetted ?? 0;
         const tot = r.subCount;
@@ -1428,7 +1519,6 @@ document.getElementById('reportRows').addEventListener('click', (e) => {
       const sel = document.getElementById('disease');
       if (sel && [...sel.options].some(o=>o.value===rec.pathogenRaw)) { sel.value=rec.pathogenRaw; selectedPathogen=rec.pathogenRaw; }
       renderStats();
-      updateSubToggleVisibility(rec.country, rec.pathogenRaw);
       renderTrendSection();
     }
     renderTable();
@@ -1451,7 +1541,6 @@ document.getElementById('reportRows').addEventListener('click', (e) => {
     highlightedCountry = country;
     highlightSubLoc = loc;
     showSubnational = true;
-    const cb = document.getElementById('subToggle'); if (cb) cb.checked = true;
     trendMode = { mode:'subnational', country, pathogen };
     const sel = document.getElementById('disease');
     if (sel && [...sel.options].some(o=>o.value===pathogen)) { sel.value=pathogen; selectedPathogen=pathogen; }
@@ -1461,7 +1550,7 @@ document.getElementById('reportRows').addEventListener('click', (e) => {
   }
 });
 document.getElementById('tableBack').addEventListener('click', () => {
-  tableView = { mode:'national', id:null }; highlightedCountry=null; highlightSubLoc=null; granPref='national'; chartPref='auto'; plotViewSel='auto';
+  tableView = { mode:'national', id:null }; highlightedCountry=null; highlightSubLoc=null; granPref='national'; chartPref='auto';
   if (tablePrevPathogen != null) {
     const prev = tablePrevPathogen; tablePrevPathogen = null;
     const sel = document.getElementById('disease');
@@ -1469,7 +1558,7 @@ document.getElementById('tableBack').addEventListener('click', () => {
     else { selectedPathogen=prev; }
     renderStats();
   }
-  renderTrendSection(); renderTable(); flyToFilteredMarkers(); updateSubToggleVisibility(null,null);
+  renderTrendSection(); renderTable(); flyToFilteredMarkers();
 });
 document.getElementById('drillClose').addEventListener('click', () => { hideChartTip(); document.getElementById('drillBackdrop').style.display = 'none'; restoreDialogFocus(); });
 document.getElementById('drillBackdrop').addEventListener('click', (e) => { if (e.target.id === 'drillBackdrop') { hideChartTip(); e.target.style.display = 'none'; restoreDialogFocus(); } });
@@ -1619,12 +1708,18 @@ const eventRadius = d3.scaleSqrt().domain([1,9]).range([5,20]).clamp(true);
 let eventMarkers = [];
 function visibleEventMarkers() {
   if (records.length) eventMarkers.forEach(m => { if (m.cases==null) { const rec = records.find(x => x.country===m.country && x.pathogenRaw===m.pathogen); if (rec) { const ref = refineRecord(rec); if (ref) { m.cases = ref.cases; m.deaths = ref.deaths; } } } });
+  let speciesCombos = null;
+  if (activeSpecies !== ALL_SPECIES) {
+    speciesCombos = new Set();
+    allRows.forEach(r => { if (cleanText(r.species) === activeSpecies) { const c = geoCountry(r.location); if (c) speciesCombos.add(c + '||' + r.pathogen); } });
+  }
   return eventMarkers.filter(m => {
     const pathOk = isAll() || !selectedPathogen || m.pathogen === selectedPathogen;
     const regionOk = activeRegion === 'All regions' || m.region === activeRegion;
+    const speciesOk = !speciesCombos || speciesCombos.has(m.country + '||' + m.pathogen);
     const q = locationQuery;
     const locOk = !q || m.country.toLowerCase().includes(q) || (m.place||'').toLowerCase().includes(q) || (m.title||'').toLowerCase().includes(q) || (m.disease||'').toLowerCase().includes(q);
-    return pathOk && regionOk && locOk;
+    return pathOk && regionOk && speciesOk && locOk;
   });
 }
 let highlightedCountry = null;
@@ -1836,7 +1931,7 @@ function tooltipHTML(m) {
   // Evidence density: the articles/domains/facts behind this event's current figures.
   const evd = (allRows.length && typeof comboEvidence==='function') ? comboEvidence(m.pathogen, m.country) : null;
   const evHtml = evd ? `<div class="t-cols" style="text-align:left;margin-top:6px">Evidence</div>
-    <div class="t-row"><span>${evd.art} article${evd.art!==1?'s':''} · ${evd.dom||'\u2014'} domain${evd.dom!==1?'s':''}</span><span title="${VETTING_TIP.replace(/"/g,'&quot;')}">${evd.vet===1 ? 'unvetted' : `${evd.vet} sources`}</span></div>
+    <div class="t-row"><span>${evd.art} article${evd.art!==1?'s':''} · ${evd.dom||'\u2014'} domain${evd.dom!==1?'s':''}</span><span>${evd.vet===1 ? 'unvetted' : `${evd.vet} sources`}</span></div>
     <div class="t-row"><span>Corroborated facts</span><span>${evd.facts}</span></div>` : '';
   return `<p class="t-title">${m.title||m.country}</p>
     <div class="t-sub">${m.disease||''}${m.place?' \u00b7 '+m.place:''}</div>
@@ -1917,7 +2012,7 @@ function openArticlePopup(dateStr, caseRows) {
     `<p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${articles.length} distinct figure${articles.length>1?'s':''} reported this date, backed by <strong>${totalVet===1 ? 'unvetted (1 source)' : `${totalVet} sources · ${Math.max(0,totalVet - articles.length)} vetting${Math.max(0,totalVet - articles.length)!==1?'s':''}`}</strong> across ${dateUrls.length} distinct article${dateUrls.length===1?'':'s'} — admitted articles from independent domains matching one discrete fact. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the plotted point.</p>` +
     articles.map(a => { const q=qualityBand(a.score); return `<div class="art-row">
       <div class="art-extract"><span><strong>${a.value.toLocaleString()}</strong> ${a.measure} · ${a.location} · ${a.species}</span><span class="qbadge ${q.cls}">${q.label} quality</span></div>
-      <div class="art-meta">${a.canonical?`<span class="tag tag-accent" style="font-size:9px">canonical · ${canonReasonLabel(a.reason)}</span> `:''}<span title="${VETTING_TIP.replace(/"/g,'&quot;')}">${a.n===1 ? 'unvetted' : `${a.n} sources`}</span>${a.quality&&a.quality!=='good'?` · <span title="statistical screening flag">${a.quality} flag</span>`:''}</div>
+      <div class="art-meta">${a.canonical?`<span class="tag tag-accent" style="font-size:10px">canonical · ${canonReasonLabel(a.reason)}</span> `:''}<span>${a.n===1 ? 'unvetted' : `${a.n} sources`}</span>${a.quality&&a.quality!=='good'?` · <span title="statistical screening flag">${a.quality} flag</span>`:''}</div>
     </div>`; }).join('')
   ) : '<p style="font-size:12px">No source detail recorded for this date.</p>';
   if (dateUrls.length) {
@@ -2013,7 +2108,6 @@ let trendSeriesKey = '';
 let chartPref = 'auto';
 let granPref = 'national';
 const TIMESERIES_MIN_OBS = 5;
-let subMeasure = 'cases';
 let showSubnational = false;
 const SUB_PALETTE = ['#9184d9','#b45c64','#5aa6b0','#c9a24a','#7f9c5a','#c07fb0','#6f78c9','#cf8a5a','#8a8f99'];
 const SUB_SYMBOLS = [d3.symbolCircle,d3.symbolDiamond,d3.symbolSquare,d3.symbolTriangle,d3.symbolStar,d3.symbolWye,d3.symbolCross];
@@ -2078,7 +2172,6 @@ document.getElementById('chartTypeSeg')?.addEventListener('click', (e) => {
   const btn = e.target.closest('.seg-opt');
   if (!btn || btn.disabled) return;
   chartPref = btn.dataset.chart;
-  plotViewSel = chartPref;
   document.querySelectorAll('#chartTypeSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
   renderTrendSection();
 });
@@ -2446,7 +2539,7 @@ function stripBriefDisclaimers(html) {
   // Some upstream reports leave literal Markdown syntax un-rendered inside the HTML body
   // (e.g. "## Epidemiological Summary", "**Rationale:**") instead of real tags. Convert what
   // we recognize so it reads as prose instead of raw syntax.
-  h = h.replace(/##\s+([^<\n]+)/g, '<strong style="font-size:14.5px">$1</strong>')
+  h = h.replace(/##\s+([^<\n]+)/g, '<strong style="font-size:14px">$1</strong>')
        .replace(/\*\*([^*<]+)\*\*/g, '<strong>$1</strong>');
   // Remove trailing disclaimer paragraphs that duplicate the site footer / plots disclaimer.
   // These appear as the last <p> or <em> in the Status Report HTML (e.g. "National totals only…",
@@ -2559,8 +2652,6 @@ let tw = 620; const th = 320, margin = {top:28,right:12,bottom:40,left:44};
 let trendTransform = d3.zoomIdentity;
 let lastChartArgs = null;
 let subTransform = d3.zoomIdentity;
-// Plot-view switcher: 'auto' selects comparison bars for time-series-poor geographies.
-let plotViewSel = 'auto';
 const BAR_MAX_OBS = 5;
 let placeCoords = new Map(); // normalized place string -> [lon,lat] from the reports tab
 // Comparison-bar zoom state (band range + linear y under one transform).
@@ -2620,7 +2711,7 @@ function renderTrendSection() {
   const chart = chartPref;
   let nextTrendMode = {...trendMode};
   // Effective view from explicit chart+gran, or auto
-  if (chartPref === 'auto' && plotViewSel === 'auto') {
+  if (chartPref === 'auto') {
     const nationalEnough = !!(series.length && series.loc &&
       Math.max(canonicalDatesFor(series.loc, effectiveTp, reportType+'_cases'), canonicalDatesFor(series.loc, effectiveTp, reportType+'_deaths')) >= TIMESERIES_MIN_OBS);
     let subEnough = false;
@@ -2651,10 +2742,9 @@ function renderTrendSection() {
     }
     // Also handle case where national not enough but subnational has enough and gran is national: still prefer national bars per user pick
   } else {
-    // Explicit user choices via chartPref/granPref (or legacy plotViewSel)
-    const explicitChart = chartPref !== 'auto' ? chartPref : (plotViewSel === 'bars' ? 'bars' : plotViewSel === 'national' || plotViewSel === 'subnational' ? 'timeseries' : 'timeseries');
-    const explicitGran = granPref !== 'national' ? granPref : (plotViewSel === 'subnational' ? 'subnational' : 'national');
-    // Map to legacy view values
+    // Explicit user choices via chartPref/granPref.
+    const explicitChart = chartPref !== 'auto' ? chartPref : 'timeseries';
+    const explicitGran = granPref;
     if (explicitGran === 'subnational') view = explicitChart === 'bars' ? 'bars' : 'subnational';
     else view = explicitChart === 'bars' ? 'bars' : 'national';
     if (view === 'bars' && explicitGran === 'subnational') nextTrendMode.barsSubnational = true;
@@ -2679,7 +2769,6 @@ function renderTrendSection() {
   });
   // report type always visible now (fixes buried suspected/confirmed)
   document.getElementById('reportTypeSeg').style.display = '';
-  const smSeg = document.getElementById('subMeasureSeg'); if (smSeg) smSeg.style.display = 'none';
   document.getElementById('subTrendBar').style.display = view === 'subnational' ? 'flex' : 'none';
   document.getElementById('subLegend').textContent = '';
   if (view === 'subnational') {
@@ -3223,7 +3312,7 @@ function srcHistTip(dateStr, vet, art, dom) {
   // vettings = sources - facts, but facts not passed here; derive tip with sources and vetted state
   const label = vet === 1 ? 'unvetted — single source' : `${vet} sources · ${Math.max(0, vet - 1)} vetting${vet-1>1?'s':''} (per fact)`;
   return `<p class="t-title">${new Date(dateStr).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'})}</p>` +
-    `<div class="t-row"><span title="${VETTING_TIP.replace(/"/g,'&quot;')}">Sources</span><span title="${label}">${vet}</span></div>` +
+    `<div class="t-row"><span>Sources</span><span title="${label}">${vet}</span></div>` +
     `<div class="t-row"><span>Distinct articles</span><span>${art}</span></div>` +
     `<div class="t-row"><span>Independent domains</span><span>${dom!=null?dom:'\u2014'}</span></div>` +
     `<div class="t-foot">Click to list these articles ↗</div>`;
@@ -3299,25 +3388,6 @@ function renderSourceChart(series) {
   });
 }
 
-document.getElementById('trendBack')?.addEventListener('click', () => { trendMode = { mode:'national' }; plotViewSel='auto'; highlightSubLoc=null; showSubnational=false; const cb=document.getElementById('subToggle'); if(cb) cb.checked=false; renderTrendSection(); });
-// Retired: the subnational checkbox was superseded by the Bars/National/Subnational switcher.
-// Kept as a no-op so existing callers stay valid; availability now drives the switcher button.
-function updateSubToggleVisibility(country, pathogen) {
-  const wrap = document.getElementById('subToggleWrap');
-  if (wrap) wrap.style.display = 'none';
-}
-document.getElementById('subToggle')?.addEventListener('change', (e) => {
-  showSubnational = e.target.checked;
-  if (showSubnational) {
-    const c = highlightedCountry || (trendMode.country) || (worstCombo()?.country);
-    const p = selectedPathogen;
-    if (c && p) { trendMode = { mode:'subnational', country: c, pathogen: p }; }
-  } else {
-    trendMode = { mode:'national' };
-    highlightSubLoc=null;
-  }
-  renderTrendSection();
-});
 function renderSubnationalTrend() {
   const { country, pathogen } = trendMode;
   const casesMeasure = reportType + '_cases';
@@ -3358,11 +3428,10 @@ function renderSubnationalTrend() {
       .map(e => ({ date: e.date, cases: e.cases, deaths: e.deaths, value: e.cases != null ? e.cases : e.deaths, rows: [...e.rowsC, ...e.rowsD] }))
       .sort((a, b) => a.date < b.date ? -1 : 1);
   }
-  const esc = s => String(s).replace(/"/g, '&quot;');
   document.getElementById('subLegend').innerHTML = locs.map(l=>{
     const isHi = highlightSubLoc && l===highlightSubLoc;
     const short = l.split(',')[0].trim();
-    return `<span class="sub-swatch" data-loc="${esc(l)}" title="${l.replace(/"/g,'&quot;')} — click to highlight" style="cursor:pointer;${isHi?'font-weight:600;opacity:1':''}"><span style="width:9px;height:9px;border-radius:2px;background:${style[l].color};display:inline-block;${isHi?'box-shadow:0 0 0 1px '+style[l].color:''}"></span>${short}${isHi?' ★':''}</span>`;
+    return `<span class="sub-swatch" data-loc="${esc(l)}" title="${esc(l)} — click to highlight" style="cursor:pointer;${isHi?'font-weight:600;opacity:1':''}"><span style="width:9px;height:9px;border-radius:2px;background:${style[l].color};display:inline-block;${isHi?'box-shadow:0 0 0 1px '+style[l].color:''}"></span>${short}${isHi?' ★':''}</span>`;
   }).join('')
     + (OTHER ? `<span class="sub-swatch" title="${esc(rest.join(' · '))}"><span style="width:9px;height:9px;border-radius:2px;background:${style[OTHER].color};display:inline-block"></span>${OTHER}</span>` : '')
     + (aggregateExcluded.length ? `<span class="sub-swatch" style="opacity:.6" title="Not point-located: ${esc(aggregateExcluded.join(' · '))}">${aggregateExcluded.length} unlocated aggregate${aggregateExcluded.length>1?'s':''}</span>` : '');
@@ -3565,7 +3634,35 @@ function renderSubSourceChart(perLoc, style) {
     });
   });
 }
-function renderAll() { renderPageSub(); renderStats(); renderTable(); renderMap(); renderTrendSection(); }
+function relDays(dateStr){ if(!dateStr) return ''; const d=new Date(dateStr); if(isNaN(d)) return ''; const base=DATASET_MAX?new Date(DATASET_MAX):new Date(); const days=Math.round((base-d)/86400000); if(days<=0) return 'today'; if(days===1) return 'yesterday'; return days+' days ago'; }
+function renderLead(){
+  const el=document.getElementById('leadStrip'); if(!el) return;
+  if(!dataLoaded || !reports || !reports.length){ el.style.display='none'; return; }
+  let idx=-1;
+  if(typeof visibleReports==='function'){ const vis=visibleReports(); if(vis&&vis.length) idx=vis[0].i; }
+  if(idx<0) idx=0;
+  const r=reports[idx]; if(!r){ el.style.display='none'; return; }
+  const rec=records.find(x=>x.country===r.geoCountry && x.pathogenRaw===r.pathogen);
+  const cases=rec&&rec.cases!=null?rec.cases:(r.cases!=null?r.cases:null);
+  const deaths=rec&&rec.deaths!=null?rec.deaths:(r.deaths!=null?r.deaths:null);
+  const fmt=n=>n==null?'\u2014':Number(n).toLocaleString('en-GB');
+  document.getElementById('leadPathogen').textContent=r.disease||r.pathogen||'\u2014';
+  document.getElementById('leadLoc').textContent=r.place?('\u00b7 '+r.place):(r.geoCountry?('\u00b7 '+r.geoCountry):'');
+  const rel=relDays(r.date);
+  document.getElementById('leadSub').textContent=(r.title||'')+(rel?('  \u00b7  updated '+rel):'');
+  const sev=(typeof sevColor==='function')?sevColor(r.risk||1):'var(--color-accent)';
+  document.getElementById('leadMetrics').innerHTML=
+    `<div class="lead-metric"><p class="lm-num" style="color:${sev}">${r.risk==null?'\u2014':r.risk}<span style="font-size:var(--fs-1);color:var(--ink-4)"> / 9</span></p><p class="lm-lbl">Risk severity</p></div>`+
+    `<div class="lead-metric"><p class="lm-num">${fmt(cases)}</p><p class="lm-lbl">Confirmed cases</p></div>`+
+    `<div class="lead-metric"><p class="lm-num">${fmt(deaths)}</p><p class="lm-lbl">Confirmed deaths</p></div>`;
+  const cta=document.getElementById('leadCta');
+  cta.onclick=()=>{ selectEvent(idx); const b=document.querySelector('.briefs-card'); if(b) window.scrollTo({top:window.scrollY+b.getBoundingClientRect().top-70,behavior:'smooth'}); };
+  el.style.display='';
+}
+// Keep the lead strip in sync with every state change without touching dozens of call sites.
+const _rs_lead = renderStats;
+renderStats = function(){ const out=_rs_lead.apply(this, arguments); try{ renderLead(); }catch(e){} return out; };
+function renderAll() { renderPageSub(); renderStats(); renderTable(); renderMap(); renderTrendSection(); renderLead(); }
 // Fresh load: no hash or localStorage persistence — defaults on every page load.
 renderAll();
 
@@ -3725,7 +3822,6 @@ function highlightEventTitle(r, linked) {
 const DEV_LABEL_KEYS = ['category','type','change_type','kind','heading','title','area','topic'];
 const DEV_TEXT_KEYS = ['description','summary','detail','details','development','change','text','note'];
 const DEV_SEV_KEYS = ['severity','significance','priority','magnitude','importance'];
-const devEsc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 function devPick(o, keys) { for (const k of keys) { const v = o[k]; if (v != null && typeof v !== 'object' && String(v).trim()) return String(v).trim(); } return ''; }
 function parseDevelopments(raw) {
   const s = String(raw == null ? '' : raw).trim();
@@ -3785,7 +3881,7 @@ function developmentsBlockHtml(r) {
   if (!hasDevelopments(r)) return '';
   const n = r.devCount;
   const body = !r.devCount ? sanitizeDevHtml(r.devHtml)
-    : r.developments.map(d => `<div class="dev-item">${d.label ? `<span class="dev-label">${devEsc(d.label)}</span>` : ''}<span>${devEsc(d.text)}${d.sev ? ` <span style="color:var(--ink-4)">(${devEsc(d.sev)})</span>` : ''}</span></div>`).join('');
+    : r.developments.map(d => `<div class="dev-item">${d.label ? `<span class="dev-label">${esc(d.label)}</span>` : ''}<span>${esc(d.text)}${d.sev ? ` <span style="color:var(--ink-4)">(${esc(d.sev)})</span>` : ''}</span></div>`).join('');
   return `<div class="dev-flash"><div class="dev-flash-head"><span class="ev-flag ev-flag-dev">▲ Situational developments</span>` +
     `<span class="dev-count">${n ? n + ' change' + (n===1?'':'s') + ' since the prior report' : 'Changes since the prior report'}</span></div>` +
     `<div class="dev-flash-body">${body}</div></div>`;
@@ -3811,11 +3907,9 @@ function resetFilters() {
   highlightedCountry = null;
   highlightSubLoc = null;
   showSubnational = false;
-  const cb = document.getElementById('subToggle'); if (cb) cb.checked = false;
   trendMode = { mode: 'national' };
   tableView = { mode: 'national', id: null };
   tablePage = 0;
-  plotViewSel = 'auto';
   selectedPathogen = ALL;
   const sel = document.getElementById('disease');
   if (sel && [...sel.options].some(o => o.value === ALL)) sel.value = ALL;
@@ -3851,7 +3945,7 @@ function renderEventList() {
     return `<div class="event-item${i===selectedIdx?' selected':''}${hasDevelopments(r)?' has-dev':''}" data-idx="${i}">
       <p class="event-title">${highlightEventTitle(r, false)}</p>
       <div class="event-meta"><span>${r.date} · ${scope}${r.crossover?' · zoonotic':''}</span><span class="tag ${riskTagClass(r.risk)}" title="${r.riskRationale||''}">Risk ${r.risk}</span></div>
-      <div class="event-doc"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="doc-meta" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${doc.vettings} vettings · ${doc.days}d reporting</span>${eventFlagsHtml(r)}</div>
+      <div class="event-doc"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="doc-meta">${doc.vettings} vettings · ${doc.days}d reporting</span>${eventFlagsHtml(r)}</div>
     </div>`;
   }).join('') : '<p style="font-size:12px;color:var(--color-neutral-400);padding:8px 4px">No reports match the current pathogen / region / filter.</p>');
   const rfBtn = document.getElementById('resetFilters'); if (rfBtn) rfBtn.addEventListener('click', resetFilters);
@@ -3873,9 +3967,9 @@ function renderBrief() {
   const pHtml = who
     ? `<a class="meta-ref" href="${who}" target="_blank" rel="noopener" title="WHO — ${pName}">${pName} ↗</a>`
     : pName;
-  briefMetaEl.innerHTML = '<span style="font-size:13px;font-weight:600;color:var(--color-accent-200)">' + pHtml + '</span>' +
-    '<span style="font-size:13px;font-weight:700;color:#fff"> · ' + r.country + '</span>' +
-    '<span style="font-size:13px;font-weight:400;color:var(--ink-3)"> · ' + r.date + '</span>';
+  briefMetaEl.innerHTML = '<span style="font-size:14px;font-weight:600;color:var(--color-accent-200)">' + pHtml + '</span>' +
+    '<span style="font-size:14px;font-weight:700;color:#fff"> · ' + r.country + '</span>' +
+    '<span style="font-size:14px;font-weight:400;color:var(--ink-3)"> · ' + r.date + '</span>';
   const scope = isNational(r.place) ? 'National report' : 'Subnational report';
   // Citation-derived evidence profile replaces the measurement-derived documentation badge here:
   // this banner describes the REPORTING the brief was built from; figure-level corroboration
@@ -3883,7 +3977,7 @@ function renderBrief() {
   const ev = reportEvidence(r);
   const banner = `<div class="brief-quality"><span class="doc-badge ${ev.strength.cls}">${ev.strength.label}</span>${eventFlagsHtml(r)}` +
     `<span class="bq-meta" title="${REL_SUMMARY}">${scope} · ${ev.articles} article${ev.articles!==1?'s':''} · ${ev.domains} domain${ev.domains!==1?'s':''} · ${ev.facts} corroborated fact${ev.facts!==1?'s':''}${ev.articles?` · ${ev.coverage}% contributed figures`:''}</span>` +
-    `<button type="button" id="evToggle" aria-expanded="false" style="margin-left:auto;font-size:10.5px;padding:2px 9px">Evidence ▾</button></div>` +
+    `<button type="button" id="evToggle" aria-expanded="false" style="margin-left:auto;font-size:10px;padding:3px 10px">Evidence ▾</button></div>` +
     `<div id="reportEvidence" hidden>${reportEvidenceHtml(r, ev)}</div>`;
   // Newspaper-style headline: the report's own title leads the article body, pathogen mention
   // linked. The meta row above stays the byline; the evidence banner follows the headline.
@@ -4300,12 +4394,12 @@ function reportEvidenceHtml(rep, ev) {
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
           <span style="font-size:12px;font-weight:600;flex:0 0 124px;min-width:124px">${v.toLocaleString()} ${label}</span>
           <span style="flex:1 1 90px;min-width:80px;display:flex">${d.html}</span>
-          <span style="font-size:10.5px;color:var(--ink-3);flex:0 1 auto;white-space:nowrap;text-align:right" title="${d.tip.replace(/"/g,'&quot;')}">${vet===1 ? 'unvetted' : `${vet} sources`} · ${vetPeerNote}</span>
+          <span style="font-size:10px;color:var(--ink-3);flex:0 1 auto;white-space:nowrap;text-align:right" title="${d.tip.replace(/"/g,'&quot;')}">${vet===1 ? 'unvetted' : `${vet} sources`} · ${vetPeerNote}</span>
         </div>
         ${proxStrip ? `<div style="display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap">
-          <span style="font-size:10.5px;color:var(--ink-4);flex:0 0 124px;min-width:124px">Functional proximity</span>
+          <span style="font-size:10px;color:var(--ink-4);flex:0 0 124px;min-width:124px">Functional proximity</span>
           <span style="flex:1 1 90px;min-width:80px;display:flex">${proxStrip.html}</span>
-          <span style="font-size:10.5px;color:var(--ink-4);white-space:nowrap;flex:0 1 auto;text-align:right">${mr.prox.toFixed(2)} · ${proxNote}</span>
+          <span style="font-size:10px;color:var(--ink-4);white-space:nowrap;flex:0 1 auto;text-align:right">${mr.prox.toFixed(2)} · ${proxNote}</span>
         </div>` : ''}
       </div>`;
     }).join('') + `</div>`;
@@ -4323,7 +4417,7 @@ function reportEvidenceHtml(rep, ev) {
 function selectEvent(idx) {
   const r = reports[idx]; if (!r) return;
   selectedIdx = idx;
-  chartPref = 'auto'; plotViewSel = 'auto';
+  chartPref = 'auto';
   if (r.pathogen && r.pathogen !== selectedPathogen) {
     const sel = document.getElementById('disease');
     if (sel && [...sel.options].some(o=>o.value===r.pathogen)) { sel.value=r.pathogen; selectedPathogen=r.pathogen; }
@@ -4339,14 +4433,12 @@ function selectEvent(idx) {
     if (!isNational(r.place)) {
       highlightSubLoc = r.place;
       showSubnational = true;
-      const cb = document.getElementById('subToggle'); if (cb) cb.checked = true;
       trendMode = { mode:'subnational', country: r.geoCountry, pathogen: r.pathogen };
       granPref = 'subnational';
     } else {
       // Align to country: show toggle if subnational data exists, keep national view until toggled
       highlightedCountry = r.geoCountry;
       highlightSubLoc = null;
-      updateSubToggleVisibility(r.geoCountry, r.pathogen);
       // keep current showSubnational state; if already enabled keep overlay, else national
       if (!showSubnational) { trendMode = { mode:'national' }; granPref = 'national'; }
       else { trendMode = { mode:'subnational', country: r.geoCountry, pathogen: r.pathogen }; granPref = 'subnational'; }
@@ -4369,10 +4461,9 @@ function drillNational(country, pathogen) {
   highlightedCountry = country;
   reportFilter = { country, pathogen };
   selectedPathogen = pathogen;
-  chartPref = 'auto'; plotViewSel='auto'; granPref = 'national';
+  chartPref = 'auto'; granPref = 'national';
   const sel = document.getElementById('disease'); if (sel && [...sel.options].some(o=>o.value===pathogen)) sel.value=pathogen;
   renderStats(); renderTable();
-  updateSubToggleVisibility(country, pathogen);
   if (showSubnational) trendMode = { mode:'subnational', country, pathogen }; else trendMode = { mode:'national' };
   renderTrendSection();
 }
@@ -4645,9 +4736,9 @@ function citeCard(u, rel) {
     isFinite(px) ? 'proximity ' + px.toFixed(2) : '',
     isFinite(cb) ? 'combined ' + cb.toFixed(1) : '',
   ].filter(Boolean).join(' · ');
-  const chip = rel ? `<span class="tag ${rel==='direct'?'tag-accent':rel==='related'?'tag-outline':'tag-neutral'}" style="font-size:9px" title="${REL_TIP[rel]}">${REL_LABEL[rel]}</span> ` : '';
+  const chip = rel ? `<span class="tag ${rel==='direct'?'tag-accent':rel==='related'?'tag-outline':'tag-neutral'}" style="font-size:10px" title="${REL_TIP[rel]}">${REL_LABEL[rel]}</span> ` : '';
   return `<div class="ev-card"><div class="ev-card-title">${chip}${t ? esc(t) : esc(h || 'Article')}</div>` +
-    `<div class="art-meta">${meta}${u ? `${meta ? ' · ' : ''}<a class="art-link" style="font-size:11px;font-weight:400;margin-bottom:0" href="${esc(u)}" target="_blank" rel="noopener">Open ↗</a>` : ''}</div></div>`;
+    `<div class="art-meta">${meta}${u ? `${meta ? ' · ' : ''}<a class="art-link" style="font-size:12px;font-weight:400;margin-bottom:0" href="${esc(u)}" target="_blank" rel="noopener">Open ↗</a>` : ''}</div></div>`;
 }
 
 function ensureRawArticles() {
@@ -4773,7 +4864,7 @@ function renderRawTable() {
       <td>${cleanText(r.host_species) || '—'}</td>
       <td>${fact.text}</td>
       <td title="Pipeline article_vetting_score ${isFinite(vetRaw) ? vetRaw.toFixed(1) : '—'}, log-normalised here to a 0–100 scale">${normVetScore(r).toFixed(1)}</td>
-      <td title="${VETTING_TIP.replace(/"/g,'&quot;')} Counted here as the distinct articles reporting this exact fact (pathogen, location, measure and value).">${factVetCount(r) || '—'}</td>
+      <td title="Distinct articles reporting this exact fact (pathogen, location, measure and value).">${factVetCount(r) || '—'}</td>
       <td title="Functional proximity score (0–1)${isFinite(combRaw) ? ` · pipeline combined score ${combRaw.toFixed(1)}` : ''}">${isFinite(proxRaw) ? proxRaw.toFixed(2) : '—'}</td>
       <td style="white-space:nowrap">${rawPublishedOf(r)}</td>
       <td style="white-space:nowrap">${(r.date || '').replace('Report_', '')}</td>
@@ -4807,14 +4898,14 @@ document.addEventListener('rawarticles', () => {
 });
 document.getElementById('navDashboard')?.addEventListener('click', (e) => { e.preventDefault(); if (typeof resetFilters==='function') resetFilters(); const sq=document.getElementById('search'); if(sq){ sq.value=''; locationQuery=''; } window.scrollTo({ top: 0, behavior: 'smooth' }); });
 document.getElementById('navSources').addEventListener('click', (e) => { e.preventDefault();
-  openDialog('Data sources', `<p style="font-size:12.5px;line-height:1.6;color:color-mix(in srgb,var(--color-text) 75%,transparent)">Three published Google Sheet feeds, refreshed on load and via <strong>Sync now</strong>.</p>
+  openDialog('Data sources', `<p style="font-size:12px;line-height:1.6;color:color-mix(in srgb,var(--color-text) 75%,transparent)">Three published Google Sheet feeds, refreshed on load and via <strong>Sync now</strong>.</p>
     <table class="table"><thead><tr><th>Feed</th><th>Records</th><th>Content</th><th>Open</th></tr></thead><tbody>
     <tr><td>Outcome measurements</td><td>${(allRows.length||0).toLocaleString()}</td><td>Per-date case/death figures with screening + canonical selection</td><td><a href="${GSHEET_CSV_URL}" target="_blank" rel="noopener">CSV ↗</a></td></tr>
     <tr><td>Event reports</td><td>${reports.length||0}</td><td>AI outbreak briefs, risk scores, coordinates, references</td><td><a href="${GSHEET_REPORTS_URL}" target="_blank" rel="noopener">CSV ↗</a></td></tr>
     <tr><td>Forecasts</td><td>${forecastIndex.size||0} series</td><td>p25/p50/p75 projections where reporting history suffices</td><td><a href="${GSHEET_FORECAST_URL}" target="_blank" rel="noopener">CSV ↗</a></td></tr>
     <tr><td>Source workbook</td><td>—</td><td>The Google Sheet all three tabs are published from</td><td><a href="https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8" target="_blank" rel="noopener">Sheet ↗</a></td></tr>
     </tbody></table>
-    <p style="font-size:11px;color:color-mix(in srgb,var(--color-text) 50%,transparent);margin-top:12px">Extracted from open-source press reporting, not official WHO/IHR notifications. Internal extraction endpoints are not exposed; publisher article links appear in the source popups.</p>`);
+    <p style="font-size:12px;color:color-mix(in srgb,var(--color-text) 50%,transparent);margin-top:12px">Extracted from open-source press reporting, not official WHO/IHR notifications. Internal extraction endpoints are not exposed; publisher article links appear in the source popups.</p>`);
 });
 document.getElementById('navReports').addEventListener('click', (e) => { e.preventDefault(); const el = document.querySelector('.briefs-card'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70, behavior:'smooth' }); });
 document.getElementById('navAlerts').addEventListener('click', (e) => { e.preventDefault();
