@@ -9,6 +9,7 @@
 <script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css">
 <script src="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.js"></script>
+<script src="starfield-layer.js"></script>
 <!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-8MT04P2KGQ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -278,6 +279,10 @@
   th.sortable .sort-arrow { font-size: 10px; opacity: 0.6; margin-left: 3px; }
   .table thead th { position: sticky; top: 0; background: var(--color-bg); z-index: 2; }
   .cfr-flag { cursor: help; border-bottom: 1px dotted var(--ink-4); }
+  /* Suspected bleed-through: a gentle amber note (not the red danger register) — a sub-location
+     figure that may have inherited its parent location's total. */
+  .bleed-note { display: flex; width: fit-content; align-items: center; gap: 5px; margin-top: 3px; font-size: 10px; color: var(--warn-ink); cursor: help; }
+  .bleed-note::before { content: ""; width: 5px; height: 5px; border-radius: 50%; flex: none; background: var(--warn); box-shadow: 0 0 4px color-mix(in srgb, var(--warn) 60%, transparent); }
   #reportRows tr[data-drill] { cursor: pointer; }
   #reportRows tr[data-drill]:hover { background: color-mix(in srgb, var(--color-accent) 6%, transparent); }
   .drill-hint { opacity: 0.5; font-size: 10px; margin-left: 6px; }
@@ -291,8 +296,8 @@
   .zoom-controls button { width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; line-height: 1; padding: 0; }
   .map-hint { position: absolute; left: 10px; bottom: 10px; font-size: 10px; color: var(--ink-label); background: color-mix(in srgb, var(--color-neutral-900) 78%, transparent); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); padding: 4px 8px; z-index: 4; pointer-events: none; }
   .tooltip .t-sub { font-size: 12px; color: var(--ink-3); margin: 0 0 6px; }
-  #globeMap { border-radius: var(--radius-md); }
-  #globeMap canvas { outline: none; }
+  #globeMap { border-radius: var(--radius-md); background: radial-gradient(120% 120% at 50% 42%, #10122a 0%, #0a0b18 46%, #06060d 100%); }
+  #globeMap canvas { outline: none; background: transparent; }
   /* Globe popups share the exact tooltip language (bg, border, type scale, row layout) so the
      two maps read as one product — and .t-row spans get real spacing via flex gap. */
   .globe-pop .maplibregl-popup-content { background: var(--color-neutral-800); color: var(--color-text); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 12px; box-shadow: var(--shadow-md); padding: 8px 10px; max-width: 260px; }
@@ -333,6 +338,8 @@
   .fb-sub { font-size: 12px; color: var(--ink-3); margin: 2px 0 0; }
   .filter-banner button { background: none; border: 1px solid color-mix(in srgb, var(--color-accent-300) 45%, transparent); color: var(--color-accent-200); border-radius: 999px; font-size: 12px; font-weight: 600; padding: 4px 10px; cursor: pointer; white-space: nowrap; }
   .filter-banner button:hover { background: color-mix(in srgb, var(--color-accent-300) 18%, transparent); }
+  .dr-cell { background:none; border:0; color:var(--color-accent-300); font:inherit; font-weight:600; cursor:pointer; padding:2px 6px; border-radius:4px; }
+  .dr-cell:hover, .dr-cell:focus-visible { background: color-mix(in srgb, var(--color-accent) 16%, transparent); color: var(--color-accent-200); outline:none; }
   /* Live-data states: skeleton shimmer before first load, sample-data banner on failure. */
   /* Live-data states: skeleton shimmer before first load. */
   @keyframes skshine { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
@@ -517,6 +524,7 @@
       <label for="species" title="Scopes every data element — summary stats, map, plots and the figures table">Host species</label>
       <select id="species" class="input" style="min-width:150px"><option>All species</option></select>
     </div>
+    <button type="button" class="btn btn-primary" id="dataReportBtn" style="margin-left:auto;gap:7px" title="Per-pathogen data availability — mapped events, event reports, plot days, sources, figures and raw rows"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M9.5 20V4M15 20v-7M20.5 20V8"></path></svg>Data report</button>
   </div>
 
   <p class="section-label"><span class="sl-num">01</span> Situation<span class="sl-rule"></span></p>
@@ -688,7 +696,7 @@
       </span>
     </div>
      <p class="card-meta" id="tableMore" style="display:none;margin:8px 0 0"></p>
-     <p id="tableFoot" style="font-size:10px;color:var(--ink-4);margin:10px 0 0;line-height:1.4;border-top:1px solid var(--color-divider);padding-top:8px">Range = spread across sources for that date. Status = reporting recency (≤4d Reporting · ≤14d Slowing · Quiet). Documentation = event-history (all dates/measures, Well documented = long + many vettings); Sources/Article screening = latest figure only — unvetted = 1 source (paler) · N sources = vetted (N−1 vettings) — click to list articles. CFR = deaths ÷ cases for the row; * = small sample (n&lt;30, interpret cautiously); n/a = deaths and cases drawn from different articles (not a true rate).</p>
+     <p id="tableFoot" style="font-size:10px;color:var(--ink-4);margin:10px 0 0;line-height:1.4;border-top:1px solid var(--color-divider);padding-top:8px">Range = spread across sources for that date. Status = reporting recency (≤4d Reporting · ≤14d Slowing · Quiet). Documentation = event-history (all dates/measures, Well documented = long + many vettings); Sources/Article screening = latest figure only — unvetted = 1 source (paler) · N sources = vetted (N−1 vettings) — click to list articles. CFR = deaths ÷ cases for the row; * = small sample (n&lt;30, interpret cautiously); n/a = deaths and cases drawn from different articles (not a true rate). Amber dot = suspected bleed-through (a sub-location may carry its parent location’s total; flagged upstream, shown uncorrected).</p>
    </div>
 
   <footer class="note" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
@@ -712,6 +720,14 @@
     <p class="dialog-title" id="drillTitle">Location breakdown</p>
     <div class="dialog-body" id="drillBody"></div>
     <div class="dialog-actions"><button type="button" class="btn btn-secondary" id="drillClose">Close</button></div>
+  </div>
+</div>
+
+<div class="dialog-backdrop" id="dataReportBackdrop" style="display:none">
+  <div class="dialog" id="dataReportDialog" style="max-width:720px;width:92%">
+    <p class="dialog-title" id="dataReportTitle">Data availability by pathogen</p>
+    <div class="dialog-body" id="dataReportBody"></div>
+    <div class="dialog-actions"><button type="button" class="btn btn-secondary" id="dataReportClose">Close</button></div>
   </div>
 </div>
 
@@ -779,7 +795,21 @@ const PATHOGEN_LABELS = {
 // into the single 'Ebola Virus' pathogen at ingestion so each country carries ONE ebola figure.
 // Marburg is a distinct (non-ebola) filovirus and is intentionally NOT folded.
 const EBOLA_SPECIES_RE = /ebola|bundibugyo|sudan\s*virus|ta[iï]\s*forest|zaire|reston|bombali/i;
-function foldPathogen(p) { p = (p || '').trim(); return EBOLA_SPECIES_RE.test(p) ? 'Ebola Virus' : p; }
+// Hantaviruses: the figures sheet fragments one outbreak across species names (Andes, Sin Nombre,
+// Puumala, Dobrava, Seoul, Hantaan…) while the event reports carry the umbrella "Hantavirus".
+// Left unfolded, a species-tagged figure and an umbrella-tagged report never match, so selecting
+// e.g. "Andes Virus" hides the Spain "Hantavirus" report marker (and the same Chile outbreak
+// double-lists under five species). Fold every hantavirus species to the single 'Hantavirus'
+// pathogen at ingestion — mirroring the ebola fold — so figures, map, reports and the selector
+// all key on one pathogen. (This matches the data owner's priority model, which lists one
+// "Hantavirus".) \bseoul\b/\bandes\b are word-bounded so only the pathogen field matches.
+const HANTAVIRUS_SPECIES_RE = /hantavirus|hantaan|\bandes\b|sin[\s-]?nombre|puumala|dobrava|\bseoul\b/i;
+function foldPathogen(p) {
+  p = (p || '').trim();
+  if (EBOLA_SPECIES_RE.test(p)) return 'Ebola Virus';
+  if (HANTAVIRUS_SPECIES_RE.test(p)) return 'Hantavirus';
+  return p;
+}
 // Surveillance priority (data owner, Sep 2026): 1) Ebola virus (all ebolavirus species folded to
 // one — see foldPathogen), 2) West Nile virus (not a true VHF — retained for completeness),
 // 3) Hantavirus. priorityTier() LEADS every "which pathogen should the dashboard feature"
@@ -1124,6 +1154,19 @@ function refineRecord(r) {
     deaths: d ? d.value : null });
 }
 function isRecordVetted(r) { return vettingsOf(r.sources) >= 1; }
+// Suspected "bleed-through": a sub-location figure that inherited its parent location's total,
+// detected & labelled upstream after several US West Nile virus sub-locations carried the
+// state/national count. The value is kept as delivered (the upstream correction may not be
+// applied retrospectively here) but flagged as a gentle note wherever it is shown. Matched
+// loosely on the quality_flag so any spelling the pipeline emits (bleed-through / bleedthrough
+// / bleed_through) is caught.
+function isBleedRow(r) { return !!r && /bleed/i.test(String(r.quality_flag || '')); }
+const BLEED_TIP = 'Suspected bleed-through: this figure may have inherited a parent location\u2019s total (a known issue with some US West Nile virus sub-locations). Flagged upstream and shown here uncorrected.';
+function bleedNote(rows) {
+  return (rows || []).some(isBleedRow)
+    ? `<span class="bleed-note" title="${BLEED_TIP}">possible bleed-through</span>`
+    : '';
+}
 const HUMAN_HOST = /^(humans?|children|people|persons?)$/i;
 function isHumanHost(s) { return HUMAN_HOST.test(cleanText(s)); }
 // A row counts as an animal outbreak when every recorded host for it is non-human — in which
@@ -1393,7 +1436,7 @@ function renderTable() {
       <td>${hostHtml}</td>
       <td title="Event-history: sum n_sources across all dates/measures for this outbreak (includes unvetted)"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="cell-range">${doc.vettings} vettings · ${doc.days}d · history</span></td>
       <td title="Latest figure only: Accepted/Rejected = statistical screen; unvetted/vetted = corroboration for this row" style="min-width:160px">${screenHtml}<span class="cell-range">${srcHtml}</span></td>
-      <td>${r.cases!=null ? r.cases.toLocaleString() : '—'}${rangeHtml}</td>
+      <td>${r.cases!=null ? r.cases.toLocaleString() : '—'}${rangeHtml}${bleedNote(r.rowsAt)}</td>
       <td>${r.deaths!=null ? r.deaths.toLocaleString() : '—'}${(r.deaths!=null && (animalView || isAnimalRow(r))) ? '<span class="cell-range">animals culled / died</span>' : ''}</td>
       <td>${cfrHtml}</td>
       <td>${formatUKDate(r.date)}</td>
@@ -1487,7 +1530,7 @@ function openDrilldown(record) {
     <div class="table-scroll">
     <table class="table">
       <thead><tr><th>Location string (as scraped)</th><th>Measure</th><th>Latest value</th><th>Date</th><th>Screening</th></tr></thead>
-      <tbody>${items.map(r => `<tr><td>${r.location}</td><td>${r.measure.replace('confirmed_','')}</td><td>${(+r.value).toLocaleString()}</td><td>${r.report_date}</td><td>${r.outlier==='True' ? `<span class="tag tag-outline" title="Rejected by the statistical screen (${r.quality_flag})">rejected</span>` : '<span class="tag tag-neutral">accepted</span>'}</td></tr>`).join('')}</tbody>
+      <tbody>${items.map(r => `<tr><td>${r.location}</td><td>${r.measure.replace('confirmed_','')}</td><td>${(+r.value).toLocaleString()}</td><td>${r.report_date}</td><td>${r.outlier==='True' ? `<span class="tag tag-outline" title="Rejected by the statistical screen (${r.quality_flag})">rejected</span>` : '<span class="tag tag-neutral">accepted</span>'}${bleedNote([r])}</td></tr>`).join('')}</tbody>
     </table>` : '<p style="font-size:12px">No location-level detail available (showing the cached fallback snapshot, not the live sheet).</p>';
   dialogOpener = document.activeElement;
   document.getElementById('drillBackdrop').style.display = 'flex';
@@ -1694,6 +1737,10 @@ const GEO = {
   "United Kingdom": { lonlat:[-1.5,52.5], atlas:"United Kingdom", region:"Europe" },
   "Australia":{ lonlat:[134,-25],    atlas:"Australia",region:"Oceania" },
   "New Zealand": { lonlat:[173,-41], atlas:"New Zealand", region:"Oceania" },
+  // Added after audit: real outbreaks in the feed whose country was missing from GEO, so every
+  // figure for them was silently dropped from records/table/scorecard/map (unresolved geoCountry).
+  "Bangladesh": { lonlat:[90.36,23.68], atlas:"Bangladesh", region:"Asia" },
+  "Rwanda": { lonlat:[29.87,-1.94], atlas:"Rwanda", region:"Africa" },
 };
 Object.entries(GEO).forEach(([k,v]) => { REGION_BY_COUNTRY[k] = v.region; });
 
@@ -1721,14 +1768,14 @@ function geoCountry(loc) {
   return GEO[c] ? c : null;
 }
 function latestMeasure(rows, measure) {
-  // Corroboration gate: consider only vetted (>1 source) rows, then take the latest canonical
-  // figure among them (falling back to the latest vetted figure if none is flagged canonical).
+  // Vetting-driven selection (map data element): keep the corroboration gate (vetted, n_sources>=2)
+  // but take the latest figure among ALL vetted rows. is_canonical is the PLOTS' strict-match dedup
+  // and must NOT choose the date here — keying on it hid newer vetted figures whose canonical row
+  // lagged behind, suppressing live map data.
   const rs = rows.filter(r => r.measure === measure && r.outlier === 'False' && isVetted(r));
   if (!rs.length) return null;
-  const canon = rs.filter(r => r.is_canonical === 'True');
-  const pool = canon.length ? canon : rs;
-  const maxDate = pool.reduce((m,r) => r.report_date > m ? r.report_date : m, '');
-  const at = pool.filter(r => r.report_date === maxDate);
+  const maxDate = rs.reduce((m,r) => r.report_date > m ? r.report_date : m, '');
+  const at = rs.filter(r => r.report_date === maxDate);
   const vals = at.map(r => +r.value).filter(v => !isNaN(v));
   if (!vals.length) return null;
   return { value: Math.max(...vals), date: maxDate, sources: at.reduce((s,r) => s + (+r.n_sources || 1), 0) };
@@ -1795,15 +1842,21 @@ const eventRadius = d3.scaleSqrt().domain([1,9]).range([5,20]).clamp(true);
 let eventMarkers = [];
 function visibleEventMarkers() {
   if (records.length) eventMarkers.forEach(m => { if (m.cases==null) { const rec = records.find(x => x.country===m.country && x.pathogenRaw===m.pathogen); if (rec) { const ref = refineRecord(rec); if (ref) { m.cases = ref.cases; m.deaths = ref.deaths; } } } });
-  let speciesCombos = null;
+  let speciesCombos = null, figuredCombos = null;
   if (activeSpecies !== ALL_SPECIES) {
-    speciesCombos = new Set();
-    allRows.forEach(r => { if (cleanText(r.species) === activeSpecies) { const c = geoCountry(r.location); if (c) speciesCombos.add(c + '||' + r.pathogen); } });
+    speciesCombos = new Set();  // country||pathogen combos with a figure row for the SELECTED species
+    figuredCombos = new Set();  // country||pathogen combos with ANY figure row (any species)
+    allRows.forEach(r => { const c = geoCountry(r.location); if (!c) return; const key = c + '||' + r.pathogen; figuredCombos.add(key); if (cleanText(r.species) === activeSpecies) speciesCombos.add(key); });
   }
   return eventMarkers.filter(m => {
+    const key = m.country + '||' + m.pathogen;
     const pathOk = isAll() || !selectedPathogen || m.pathogen === selectedPathogen;
     const regionOk = activeRegion === 'All regions' || m.region === activeRegion;
-    const speciesOk = !speciesCombos || speciesCombos.has(m.country + '||' + m.pathogen);
+    // Species scoping applies only to outbreaks that HAVE figure rows to type as human/animal. An
+    // event-only outbreak (a report with no case-figure rows — e.g. an imported single Hantavirus
+    // case in Spain) has nothing to classify, so it is kept rather than silently dropped under a
+    // specific-species view. Figured combos that lack the selected species are still hidden.
+    const speciesOk = !speciesCombos || speciesCombos.has(key) || !figuredCombos.has(key);
     const q = locationQuery;
     const locOk = !q || m.country.toLowerCase().includes(q) || (m.place||'').toLowerCase().includes(q) || (m.title||'').toLowerCase().includes(q) || (m.disease||'').toLowerCase().includes(q);
     return pathOk && regionOk && speciesOk && locOk;
@@ -1881,7 +1934,14 @@ function renderMap() {
       .on('keydown', (event, d) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); zoomToMarker(d); if (typeof focusEvent==='function') focusEvent(d.reportIdx); } });
     applyZoomScaling();
     const el = document.getElementById('mapCount');
-    if (el) el.textContent = `${currentMarkers.length} reported events`;
+    if (el) {
+      // Surface figures at locations that can't be placed (regional aggregates like "West Africa",
+      // or country strings not in GEO) so map omissions are VISIBLE rather than silently dropped.
+      const off = [...new Set((allRows||[]).filter(r => !geoCountry(r.location)).map(r => (r.location||'').split(',').pop().trim()).filter(Boolean))];
+      el.textContent = `${currentMarkers.length} reported events` + (off.length ? ` \u00b7 ${off.length} off-map` : '');
+      el.title = off.length ? ('Figures not placed on the map (regional aggregate or unrecognised location): ' + off.join(', ')) : '';
+      el.style.cursor = off.length ? 'help' : '';
+    }
     syncGlobeIfActive();
   };
   if (countryFeatures) { draw(); return; }
@@ -1950,7 +2010,16 @@ function initGlobe() {
   try {
     globe = new maplibregl.Map({ container:'globeMap', style:globeStyle(false), center:[18,4], zoom:1.4, attributionControl:{ compact:true }, preserveDrawingBuffer:true });
     globe.addControl(new maplibregl.NavigationControl({ showCompass:true, visualizePitch:true }), 'bottom-right');
-    globe.on('style.load', () => { try { globe.setProjection({ type:'globe' }); } catch(e){} addGlobeMarkers(); });
+    globe.on('style.load', () => {
+      try { globe.setProjection({ type:'globe' }); } catch(e){}
+      // Starfield skybox: point stars at infinity that rotate WITH the globe.
+      // Added below 'base' so the Earth raster draws over them (stars sit behind).
+      if (window.StarfieldLayer && !globe.getLayer('starfield')) {
+        try { globe.addLayer(new StarfieldLayer({ starCount: 4500 }), 'base'); }
+        catch(e){ console.warn('[starfield] add failed:', e && (e.message||e)); }
+      }
+      addGlobeMarkers();
+    });
     // WebGL/tile failures: degrade honestly instead of showing a blank globe.
     let globeFailed = false;
     globe.on('error', (e) => {
@@ -2523,21 +2592,27 @@ function projectionFor(pathogen, loc, measure, lastObserved) {
 function latestOf(subset, requireVetted = true) {
   if (!subset.length) return null;
   const vetFilter = requireVetted ? (r => isVetted(r)) : (() => true);
-  const canonRows = subset.filter(r => r.is_canonical === 'True' && vetFilter(r) && !isNaN(+r.value));
-  const pool = canonRows.length ? canonRows : subset.filter(r => vetFilter(r) && !isNaN(+r.value));
+  // Vetting-driven selection: the map, figures table and scorecard pick the LATEST corroborated
+  // (fuzzily-matched, vetted) figure. is_canonical is the PLOTS' strict-match dedup and must not
+  // gate these surfaces — keying on it here picked an older canonical figure and suppressed a newer
+  // vetted one. The canonical row is still preferred for the reason/source label at the chosen
+  // date, never for which date/figure is shown.
+  const pool = subset.filter(r => vetFilter(r) && !isNaN(+r.value));
   if (!pool.length) return null;
   const maxDate = pool.reduce((m,r)=>r.report_date>m?r.report_date:m,'');
   const at = pool.filter(r=>r.report_date===maxDate);
   const vals = at.map(r=>+r.value).filter(v=>!isNaN(v));
   if (!vals.length) return null;
   const value = Math.max(...vals);
-  const pick = at.find(r=>+r.value===value) || at[0];
+  const valPick = at.find(r=>+r.value===value) || at[0];
+  // Label metadata (reason/source URL) comes from the canonical row when one exists on this date.
+  const meta = at.find(r=>r.is_canonical==='True') || valPick;
   // "Articles" counts DISTINCT source URLs behind the figure — a single canonical row often
   // carries several vetting article links in its `sources` cell, all backing the same figure.
   const urlSet = new Set(at.flatMap(r => extractUrls(r.sources)));
   return { value, min: Math.min(...vals), max: Math.max(...vals),
-    date: maxDate, sources: at.reduce((s,r)=>s+(+r.n_sources||1),0), articles: urlSet.size || at.length, rowsAt: at, url: (pick.sources||'').split(';')[0].trim(),
-    reason: pick.canonical_reason, loc: pick.location };
+    date: maxDate, sources: at.reduce((s,r)=>s+(+r.n_sources||1),0), articles: urlSet.size || at.length, rowsAt: at, url: (meta.sources||'').split(';')[0].trim(),
+    reason: meta.canonical_reason, loc: valPick.location };
 }
 function latestOfAll(subset) { return latestOf(subset, false); }
 // Peak canonical figure for a location+measure: the HIGHEST value across the whole canonical
@@ -2681,7 +2756,15 @@ function availablePathogenRaws() {
   const locOk = r => !locationQuery || r.country.toLowerCase().includes(locationQuery) || (r.disease||'').toLowerCase().includes(locationQuery);
   const base = records.map(refineRecord).filter(Boolean)
     .filter(r => regionOk(r) && locOk(r) && !isFlu(r.pathogenRaw));
-  return [...new Set(base.map(r => r.pathogenRaw).filter(Boolean))];
+  const set = new Set(base.map(r => r.pathogenRaw).filter(Boolean));
+  // Also surface pathogens that have figure ROWS but no clean confirmed-cases record (e.g. Machupo,
+  // Yellow Fever, and CCHF once it lands) — otherwise a pathogen with real data is hidden from the
+  // selector entirely. Selecting one at least filters the raw table, event reports and data report.
+  const rLocOk = loc => !locationQuery || (loc||'').toLowerCase().includes(locationQuery);
+  (allRows||[]).forEach(r => { if(!r.pathogen || isFlu(r.pathogen)) return; const c=geoCountry(r.location);
+    const rRegionOk = activeRegion==='All regions' || !c || REGION_BY_COUNTRY[c]===activeRegion;
+    if(rRegionOk && rLocOk(r.location)) set.add(r.pathogen); });
+  return [...set];
 }
 function refreshPathogenSelector() {
   const sel = document.getElementById('disease');
@@ -5045,6 +5128,50 @@ document.getElementById('screenSeg').addEventListener('click', (e) => {
 });
 document.getElementById('pagerPrev').addEventListener('click', () => { if (tableMode === 'raw') { if (rawPage > 0) { rawPage--; renderTable(); } } else if (tablePage > 0) { tablePage--; renderTable(); } });
 document.getElementById('pagerNext').addEventListener('click', () => { if (tableMode === 'raw') { rawPage++; renderTable(); } else { tablePage++; renderTable(); } });
+// --- Pathogen data-availability report (audit surface) -----------------------------------------
+function pathogenDataCounts(P){
+  const rows=(allRows||[]).filter(r=>r.pathogen===P);
+  const canon=rows.filter(r=>r.is_canonical==='True');
+  const src=new Set(); rows.forEach(r=>extractUrls(r.sources||'').forEach(u=>src.add(typeof normUrl==='function'?normUrl(u):u)));
+  const days=new Set(canon.filter(r=>r.measure==='confirmed_cases'||r.measure==='confirmed_deaths').map(r=>r.report_date));
+  return { mapped:(eventMarkers||[]).filter(m=>m.pathogen===P).length,
+    reports:(reports||[]).filter(r=>r.pathogen===P).length,
+    plotDays:days.size, sources:src.size, figures:canon.length, raw:rows.length };
+}
+function openDataReport(){
+  const body=document.getElementById('dataReportBody'); if(!body) return;
+  const uni=[...new Set([...(allRows||[]).map(r=>r.pathogen), ...(reports||[]).map(r=>r.pathogen)])].filter(p=>p && !isFlu(p));
+  uni.sort((a,b)=>(priorityTier(b)-priorityTier(a))||a.localeCompare(b,undefined,{sensitivity:'base'}));
+  const cell=(p,key,v)=> v>0 ? `<button type="button" class="dr-cell" data-p="${esc(p)}" data-sec="${key}">${v.toLocaleString()}</button>` : `<span style="color:var(--ink-4)">0</span>`;
+  const trs=uni.map(p=>{ const c=pathogenDataCounts(p); const sel=(!isAll()&&selectedPathogen===p);
+    return `<tr${sel?' style="background:color-mix(in srgb,var(--color-accent) 10%,transparent)"':''}><td style="font-weight:600;white-space:nowrap">${esc(PATHOGEN_LABELS[p]||p)}</td>`
+      +`<td style="text-align:right">${cell(p,'mapped',c.mapped)}</td><td style="text-align:right">${cell(p,'reports',c.reports)}</td><td style="text-align:right">${cell(p,'plotDays',c.plotDays)}</td><td style="text-align:right">${cell(p,'sources',c.sources)}</td><td style="text-align:right">${cell(p,'figures',c.figures)}</td><td style="text-align:right">${cell(p,'raw',c.raw)}</td></tr>`;
+  }).join('');
+  body.innerHTML=`<p style="font-size:12px;color:var(--ink-3);margin:0 0 10px;line-height:1.5">Live data available for each pathogen, across every panel. Click any count to filter to that pathogen and jump to its panel. Counts span the whole feed (they ignore the region / host / location filters).</p>`
+    +`<div style="overflow:auto;max-height:min(60vh,460px)"><table class="table" style="min-width:560px"><thead><tr><th>Pathogen</th><th style="text-align:right">Mapped<br>events</th><th style="text-align:right">Event<br>reports</th><th style="text-align:right">Plot<br>days</th><th style="text-align:right">Sources</th><th style="text-align:right">Figures</th><th style="text-align:right">Raw<br>rows</th></tr></thead><tbody>${trs}</tbody></table></div>`;
+  dialogOpener=document.activeElement;
+  document.getElementById('dataReportBackdrop').style.display='grid';
+  const c=document.getElementById('dataReportClose'); if(c) c.focus();
+}
+function closeDataReport(){ const b=document.getElementById('dataReportBackdrop'); if(b) b.style.display='none'; if(typeof restoreDialogFocus==='function') restoreDialogFocus(); }
+function drJump(p, sec){
+  const sel=document.getElementById('disease');
+  if(p && sel){
+    if([...sel.options].some(o=>o.value===p)){ sel.value=p; sel.dispatchEvent(new Event('change')); }
+    else { selectedPathogen=p; userChangedPathogen=true; try{refreshPathogenSelector();}catch(e){} try{renderStats();renderTable();renderTrendSection();renderMap();if(typeof renderEventList==='function')renderEventList();if(typeof renderBrief==='function')renderBrief();}catch(e){} }
+  }
+  if(sec==='raw'){ const b=[...document.querySelectorAll('#tableModeSeg .seg-opt')].find(x=>x.dataset.mode==='raw'); if(b && tableMode!=='raw') b.click(); }
+  else if(sec==='figures'||sec==='sources'){ const b=[...document.querySelectorAll('#tableModeSeg .seg-opt')].find(x=>x.dataset.mode==='figures'); if(b && tableMode!=='figures') b.click(); }
+  closeDataReport();
+  const secMap={mapped:'.map-card',reports:'.briefs-card',plotDays:'.plots-card',sources:'.table-card',figures:'.table-card',raw:'.table-card'};
+  const el=document.querySelector(secMap[sec]||'.table-card');
+  if(el) requestAnimationFrame(()=>window.scrollTo({top:window.scrollY+el.getBoundingClientRect().top-70,behavior:'smooth'}));
+}
+document.getElementById('dataReportBtn').addEventListener('click', openDataReport);
+document.getElementById('dataReportClose').addEventListener('click', closeDataReport);
+document.getElementById('dataReportBackdrop').addEventListener('click', (e)=>{ if(e.target.id==='dataReportBackdrop') closeDataReport(); });
+document.getElementById('dataReportBody').addEventListener('click', (e)=>{ const b=e.target.closest('.dr-cell'); if(b) drJump(b.dataset.p, b.dataset.sec); });
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ const bk=document.getElementById('dataReportBackdrop'); if(bk && bk.style.display!=='none') closeDataReport(); } });
 requestAnimationFrame(() => { const gb = [...document.querySelectorAll('#mapViewSeg .seg-opt')].find(b=>b.dataset.view==='globe'); if (gb && typeof maplibregl !== 'undefined') gb.click(); });
 </script>
 </body>
