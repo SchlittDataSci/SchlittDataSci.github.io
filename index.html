@@ -347,6 +347,11 @@
   body.preload #trendSvg, body.preload #sourceSvg, body.preload .map-wrap svg, body.preload .map-wrap #globeMap { opacity: .12; filter: grayscale(1); }
   body.preload .map-wrap::after { content: 'Loading live data…'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--color-neutral-400); z-index: 3; }
   @media (prefers-reduced-motion: reduce) { body.preload .stat-num { animation: none; } }
+  /* Terminal error state: live sheet unreachable. No cached data is ever shown — the panels
+     dim and the map states it plainly, rather than presenting stale figures as current. */
+  body.dataerror #trendSvg, body.dataerror #sourceSvg, body.dataerror .map-wrap svg, body.dataerror .map-wrap #globeMap { opacity: .12; filter: grayscale(1); }
+  body.dataerror .stat-num { opacity: .25; }
+  body.dataerror .map-wrap::after { content: 'Live sheet unreachable — click Retry'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--color-neutral-400); text-align: center; padding: 0 16px; }
   .art-extract strong { color: var(--color-text); }
   .table-scroll { overflow-x: auto; min-width: 0; max-width: 100%; }
   .table-scroll .table { min-width: 920px; }
@@ -379,11 +384,11 @@
   .lead-headline { font-family:var(--font-heading); font-weight:var(--font-heading-weight); font-size:var(--fs-5); line-height:1.1; letter-spacing:-.01em; color:var(--color-text); margin:0; }
   .lead-headline .lead-loc { color:var(--color-neutral-300); font-weight:500; }
   .lead-sub { font-size:var(--fs-2); color:var(--ink-3); margin:7px 0 0; line-height:1.45; text-wrap:pretty; }
-  .lead-metrics { display:flex; gap:var(--space-4); align-items:center; flex:none; border-left:1px solid color-mix(in srgb,var(--color-accent-300) 22%,transparent); padding-left:var(--space-4); }
+  .lead-metrics { display:flex; gap:var(--space-6); align-items:center; flex:none; border-left:1px solid color-mix(in srgb,var(--color-accent-300) 22%,transparent); padding-left:var(--space-6); }
   .lead-metric { text-align:right; }
   .lead-metric .lm-num { font-family:var(--font-heading); font-weight:var(--font-heading-weight); font-size:var(--fs-4); line-height:1; margin:0; font-variant-numeric:tabular-nums; color:var(--color-text); }
   .lead-metric .lm-lbl { font-size:var(--fs-1); text-transform:uppercase; letter-spacing:.05em; color:var(--ink-label); margin:6px 0 0; }
-  .lead-cta { align-self:center; flex:none; white-space:nowrap; }
+  .lead-cta { align-self:center; flex:none; white-space:nowrap; margin-left:var(--space-2); }
   @media (max-width:820px){ .lead-strip{ flex-wrap:wrap; } .lead-metrics{ border-left:0; padding-left:0; border-top:1px solid color-mix(in srgb,var(--color-accent-300) 22%,transparent); padding-top:var(--space-3); width:100%; justify-content:space-between; } .lead-cta{ align-self:flex-start; } }
   /* Quiet the filter toolbar so it stops competing with the content it filters. */
   .toolbar { border-bottom:0; padding:var(--space-2) 0 0; margin-bottom:0; }
@@ -494,7 +499,7 @@
   <div class="page-head">
     <div>
       <h1 class="page-title">Viral Hemorrhagic Fever &amp; Selected Pathogens Surveillance</h1>
-      <p class="page-sub" id="pageSub">Case figures extracted from open-source news reporting, aggregated per country and pathogen — last updated 18 August 2026</p>
+      <p class="page-sub" id="pageSub">Case figures extracted from open-source news reporting, aggregated per country and pathogen</p>
     </div>
   </div>
 
@@ -524,7 +529,7 @@
       <label for="species" title="Scopes every data element — summary stats, map, plots and the figures table">Host species</label>
       <select id="species" class="input" style="min-width:150px"><option>All species</option></select>
     </div>
-    <button type="button" class="btn btn-primary" id="dataReportBtn" style="margin-left:auto;gap:7px" title="Per-pathogen data availability — mapped events, event reports, plot days, sources, figures and raw rows"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M9.5 20V4M15 20v-7M20.5 20V8"></path></svg>Data report</button>
+    <button type="button" class="btn btn-primary" id="dataReportBtn" style="margin-left:auto;margin-right:calc(var(--space-4) + 1px);gap:7px" title="Per-pathogen data availability — mapped events, event reports, plot days, sources, figures and raw rows"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M9.5 20V4M15 20v-7M20.5 20V8"></path></svg>Data report</button>
   </div>
 
   <p class="section-label"><span class="sl-num">01</span> Situation<span class="sl-rule"></span></p>
@@ -834,25 +839,11 @@ const PATHOGEN_WHO = {
 };
 function pathogenWhoUrl(p) { return PATHOGEN_WHO[p] || null; }
 
-// Fallback snapshot (used until/unless the live sheet loads)
-let records = [
-  { country: "Democratic Republic of the Congo", alias: ["Dem. Rep. Congo","Democratic Republic of the Congo"], disease: "Ebola virus disease", cases: 4945, deaths: 2325, date: "2026-08-18", sources: 6, status: "Active", lonlat: [23.6, -2.9] },
-  { country: "Nigeria", alias: ["Nigeria"], disease: "Lassa fever", cases: 1000, deaths: 237, date: "2026-08-11", sources: 8, status: "Active", lonlat: [8.7, 9.1] },
-  { country: "Brazil", alias: ["Brazil"], disease: "Yellow fever", cases: 740, deaths: null, date: "2026-08-18", sources: 1, status: "Monitoring", lonlat: [-51.9, -14.2] },
-  { country: "Chile", alias: ["Chile"], disease: "Hantavirus (unspecified)", cases: 46, deaths: null, date: "2026-08-01", sources: 1, status: "Monitoring", lonlat: [-71.5, -35.7] },
-  { country: "Indonesia", alias: ["Indonesia"], disease: "Dengue HF", cases: 41, deaths: null, date: "2026-08-18", sources: 1, status: "Monitoring", lonlat: [113.9, -0.2] },
-  { country: "Uganda", alias: ["Uganda"], disease: "Ebola virus disease", cases: 20, deaths: 2, date: "2026-08-17", sources: 6, status: "Monitoring", lonlat: [32.3, 1.4] },
-  { country: "Spain", alias: ["Spain"], disease: "Crimean-Congo HF", cases: 3, deaths: 1, date: "2026-08-16", sources: 2, status: "Monitoring", lonlat: [-3.7, 40.4] },
-];
-let trend = [
-  {date:"2026-07-30",cases:3442,deaths:1521},{date:"2026-07-31",cases:3553,deaths:1558},{date:"2026-08-01",cases:3626,deaths:1587},
-  {date:"2026-08-02",cases:3674,deaths:1621},{date:"2026-08-03",cases:3748,deaths:1657},{date:"2026-08-04",cases:3802,deaths:1707},
-  {date:"2026-08-05",cases:3874,deaths:1751},{date:"2026-08-06",cases:4000,deaths:1801},{date:"2026-08-07",cases:4072,deaths:1853},
-  {date:"2026-08-08",cases:4053,deaths:1850},{date:"2026-08-09",cases:4209,deaths:1916},{date:"2026-08-10",cases:4209,deaths:1916},
-  {date:"2026-08-11",cases:4381,deaths:2011},{date:"2026-08-12",cases:4500,deaths:2061},{date:"2026-08-13",cases:4500,deaths:2061},
-  {date:"2026-08-14",cases:4665,deaths:2184},{date:"2026-08-15",cases:4727,deaths:2214},{date:"2026-08-16",cases:4945,deaths:2325},
-  {date:"2026-08-17",cases:4945,deaths:2325},{date:"2026-08-18",cases:4945,deaths:2325},
-];
+// No hard-coded snapshot: the dashboard shows ONLY live sheet data. If the live sheet is
+// unreachable it says so (see the unreachable branch in loadLiveData) rather than EVER
+// presenting stale figures as current. Outdated fallback data was removed by request.
+let records = [];
+let trend = [];
 
 const cs = getComputedStyle(document.documentElement);
 const col = (name) => cs.getPropertyValue(name).trim();
@@ -1029,7 +1020,7 @@ function renderForecastCard(series, fcPathogenOverride) {
       : forecastState === 'pending'
         ? 'Loading the forecast feed…'
         : `No projection — the trend model needs more reporting history than ${loc||'this series'} currently has.`;
-    box.innerHTML = `<p class="fc-title">Forecast · ${label} · ${loc||'—'}${forecastState==='snapshot'?' <span class="fc-sub">· bundled snapshot</span>':''}</p><p class="fc-none">${why}</p>`;
+    box.innerHTML = `<p class="fc-title">Forecast · ${label} · ${loc||'—'}</p><p class="fc-none">${why}</p>`;
     return;
   }
   const ref = pc || pd;
@@ -1531,7 +1522,7 @@ function openDrilldown(record) {
     <table class="table">
       <thead><tr><th>Location string (as scraped)</th><th>Measure</th><th>Latest value</th><th>Date</th><th>Screening</th></tr></thead>
       <tbody>${items.map(r => `<tr><td>${r.location}</td><td>${r.measure.replace('confirmed_','')}</td><td>${(+r.value).toLocaleString()}</td><td>${r.report_date}</td><td>${r.outlier==='True' ? `<span class="tag tag-outline" title="Rejected by the statistical screen (${r.quality_flag})">rejected</span>` : '<span class="tag tag-neutral">accepted</span>'}${bleedNote([r])}</td></tr>`).join('')}</tbody>
-    </table>` : '<p style="font-size:12px">No location-level detail available (showing the cached fallback snapshot, not the live sheet).</p>';
+    </table>` : '<p style="font-size:12px">No location-level detail available for this figure.</p>';
   dialogOpener = document.activeElement;
   document.getElementById('drillBackdrop').style.display = 'flex';
   document.getElementById('drillClose').focus();
@@ -2517,7 +2508,7 @@ const forecastIndex = new Map(); // `${pathogen}||${location}||${measure}` -> [{
 // the Congo") while every lookup here uses the bare national location. Without this alias layer
 // every national projection misses its key and is silently reported as "no reporting history".
 const forecastAliases = new Map();
-let forecastState = 'pending'; // pending | live | snapshot | unavailable
+let forecastState = 'pending'; // pending | live | unavailable
 function ingestForecast(rows) {
   forecastIndex.clear();
   rows.forEach(r => {
@@ -3921,7 +3912,7 @@ function fetchSheet() {
     // Flip the flag BEFORE rendering — the render guards key off it. Render errors are caught
     // separately: a rendering bug must never masquerade as "live sheet unreachable".
     dataLoaded = true;
-    document.body.classList.remove('preload');
+    document.body.classList.remove('preload', 'dataerror');
     try { renderAll(); } catch (err) { console.error('[render] post-load render failed:', err); }
     rebuildEvidenceIndex();
     // Reports may already be on screen with placeholder relationship states — refresh them now
@@ -3936,7 +3927,8 @@ function fetchSheet() {
   });
 }
 
-// Forecast tab (published CSV); falls back to the bundled snapshot if the live tab is unreachable.
+// Forecast tab (published CSV). If the live tab is unreachable the forecast is marked
+// unavailable — no bundled snapshot is ever loaded.
 function afterForecast() { if (allRows.length) { renderStats(); renderTrendSection(); refreshDefaultPathogen(); } }
 function fetchForecast() {
   return withTimeout(d3.csv(GSHEET_FORECAST_URL), 20000, 'forecasts').then(rows => {
@@ -3944,11 +3936,9 @@ function fetchForecast() {
   forecastState = 'live';
   ingestForecast(rows); afterForecast();
 }).catch(() => {
-  d3.csv('outcome_forecasts.csv').then(rows => {
-    if (!rows || !rows.length || !('p50' in rows[0])) throw new Error('bad snapshot');
-    forecastState = 'snapshot';
-    ingestForecast(rows); afterForecast();
-  }).catch(() => { forecastState = 'unavailable'; afterForecast(); });
+  // No bundled snapshot fallback — a failed live forecast fetch is reported as unavailable,
+  // never backfilled with stale data.
+  forecastState = 'unavailable'; afterForecast();
   });
 }
 
@@ -4732,12 +4722,14 @@ function fetchReports() {
 function setSync(html, title) { syncTagEl.innerHTML = html; if (title) syncTagEl.setAttribute('title', title); else syncTagEl.removeAttribute('title'); }
 function loadLiveData(manual) {
   if (manual) sheetRetries = 0;
+  // On a retry before any data has loaded, restore the loading shimmer and clear the error state.
+  if (!dataLoaded) { document.body.classList.add('preload'); document.body.classList.remove('dataerror'); }
   setSync('<span class="sync-dot"></span>' + (dataLoaded ? 'Refreshing live data…' : 'Loading live sheet…'));
   return Promise.allSettled([fetchSheet(), fetchReports(), fetchForecast()]).then(results => {
     const sheet = results[0];
     if (sheet.status === 'fulfilled') {
       dataLoaded = true;
-      document.body.classList.remove('preload', 'fallback');
+      document.body.classList.remove('preload', 'fallback', 'dataerror');
       setSync('<span class="sync-dot"></span>Live from Google Sheets · loaded ' + new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }));
       // Raw table is large — fetch it lazily once the primary views have painted.
       setTimeout(ensureRawArticles, 2500);
@@ -4747,10 +4739,12 @@ function loadLiveData(manual) {
       setTimeout(() => loadLiveData(manual), sheetRetries === 1 ? 2000 : 5000);
     } else {
       document.body.classList.remove('preload');
+      document.body.classList.add('dataerror');
       const why = sheet.reason && (sheet.reason.message || String(sheet.reason)) || 'unknown error';
       setSync('<span class="sync-dot" style="background:var(--color-neutral-500);box-shadow:none"></span>Live sheet unreachable — Retry', why);
       console.warn('[data] live sheet unreachable:', why);
-      renderPageSub();
+      const ps = document.getElementById('pageSub');
+      if (ps) ps.textContent = 'Live sheet unreachable — no figures loaded. No cached data is shown; click Retry in the header to reload.';
     }
   });
 }
