@@ -278,6 +278,22 @@
   th.sortable:hover { color: var(--color-text); }
   th.sortable .sort-arrow { font-size: 10px; opacity: 0.6; margin-left: 3px; }
   .table thead th { position: sticky; top: 0; background: var(--color-bg); z-index: 2; }
+  /* Data-availability report table: opaque accent-tinted raw-rows column that keeps scrolled cells
+     from bleeding through the sticky header, plus a buffer between the last column and the scrollbar
+     so numbers don't kiss the track. */
+  #dataReportBody .dr-table th, #dataReportBody .dr-table td { background-clip: padding-box; }
+  #dataReportBody .dr-table thead th { background: var(--color-neutral-900); z-index: 3; box-shadow: 0 1px 0 var(--color-divider); }
+  #dataReportBody .dr-table th.raw-col { background: color-mix(in srgb, var(--color-accent) 14%, var(--color-neutral-900)); }
+  #dataReportBody .dr-table td.raw-col { background: color-mix(in srgb, var(--color-accent) 8%, transparent); }
+  #dataReportBody .dr-table th:last-child, #dataReportBody .dr-table td:last-child { padding-right: 14px; }
+  #dataReportBody .dr-table th.sortable { cursor: pointer; user-select: none; }
+  #dataReportBody .dr-table th.sortable:hover { color: var(--color-text); }
+  #dataReportBody .dr-table th.sortable { position: relative; padding-right: 18px; }
+  #dataReportBody .dr-table th.sortable[style*="text-align:left"], #dataReportBody .dr-table th.sortable[style*="text-align: left"] { padding-right: 18px; padding-left: 0; }
+  #dataReportBody .dr-table th:last-child.sortable { padding-right: 28px; }
+  #dataReportBody .dr-table th .sort-arrow { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); font-size: 9px; line-height: 1; opacity: 0.45; }
+  #dataReportBody .dr-table th:last-child .sort-arrow { right: 14px; }
+  #dataReportBody .dr-table th.sort-active .sort-arrow { opacity: 1; color: var(--color-accent-300); }
   .cfr-flag { cursor: help; border-bottom: 1px dotted var(--ink-4); }
   /* Suspected bleed-through: a gentle amber note (not the red danger register) — a sub-location
      figure that may have inherited its parent location's total. */
@@ -670,9 +686,8 @@
         <span class="card-meta"><a href="https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8#gid=881754490" target="_blank" rel="noopener">data output (Sheet) ↗</a></span>
       </span>
     </div>
-     <p id="tableIntro" style="font-size:12px;color:color-mix(in srgb, var(--color-text) 68%, transparent);margin:-6px 0 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span id="tableIntroLead">All figures shown; unvetted signals stay visible and labelled. Plots use canonical figures; map/scorecard use vetted evidence.</span>
-       <button type="button" id="tableHelpBtn" aria-label="About this table" title="Show table documentation" style="width:18px;height:18px;border-radius:999px;border:1px solid var(--color-divider);background:transparent;color:var(--ink-4);font-size:12px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;flex:none">?</button>
-       <span style="font-size:10px;color:var(--ink-4)">Range = spread · click sources to list articles</span>
+     <p id="tableIntro" style="font-size:12px;color:color-mix(in srgb, var(--color-text) 68%, transparent);margin:-6px 0 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span id="tableIntroLead"></span>
+       <button type="button" id="tableHelpBtn" aria-label="About this table" title="How to read this table&#10;&#10;Range = spread across sources for that date.&#10;Status = reporting recency (≤4d Reporting · ≤14d Slowing · Quiet).&#10;Documentation = event-history (all dates/measures; Well documented = long + many vettings).&#10;Sources / Article screening = latest figure only — unvetted = 1 source (paler); N sources = vetted (N−1 vettings). Click to list articles.&#10;CFR = deaths ÷ cases for the row; * = small sample (n<30, interpret cautiously); n/a = deaths and cases drawn from different articles (not a true rate).&#10;Amber dot = suspected bleed-through (a sub-location may carry its parent location's total; flagged upstream, shown uncorrected).&#10;Range = spread · click sources to list articles." style="width:18px;height:18px;border-radius:999px;border:1px solid var(--color-divider);background:transparent;color:var(--ink-4);font-size:12px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;flex:none">?</button>
      </p>
     <div class="table-scroll">
     <table class="table">
@@ -701,11 +716,10 @@
       </span>
     </div>
      <p class="card-meta" id="tableMore" style="display:none;margin:8px 0 0"></p>
-     <p id="tableFoot" style="font-size:10px;color:var(--ink-4);margin:10px 0 0;line-height:1.4;border-top:1px solid var(--color-divider);padding-top:8px">Range = spread across sources for that date. Status = reporting recency (≤4d Reporting · ≤14d Slowing · Quiet). Documentation = event-history (all dates/measures, Well documented = long + many vettings); Sources/Article screening = latest figure only — unvetted = 1 source (paler) · N sources = vetted (N−1 vettings) — click to list articles. CFR = deaths ÷ cases for the row; * = small sample (n&lt;30, interpret cautiously); n/a = deaths and cases drawn from different articles (not a true rate). Amber dot = suspected bleed-through (a sub-location may carry its parent location’s total; flagged upstream, shown uncorrected).</p>
    </div>
 
   <footer class="note" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-    <span>Data aggregated from open-source reporting; not a substitute for official WHO / national ministry of health situation reports. West Nile virus and mpox are not viral hemorrhagic fevers — they are tracked here for completeness alongside the VHF pathogens.</span>
+    <span>Data aggregated from open-source reporting; not a substitute for official WHO / national ministry of health situation reports.</span>
     <span style="display:flex;align-items:center;gap:8px;flex:none">
       <a class="footer-badge" href="https://github.com/schlittdatasci" target="_blank" rel="noopener" title="github.com/schlittdatasci">
         <svg class="icon" viewBox="0 0 16 16" style="width:13px;height:13px;fill:currentColor;stroke:none"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
@@ -729,7 +743,7 @@
 </div>
 
 <div class="dialog-backdrop" id="dataReportBackdrop" style="display:none">
-  <div class="dialog" id="dataReportDialog" style="max-width:720px;width:92%">
+  <div class="dialog" id="dataReportDialog" style="max-width:900px;width:94%">
     <p class="dialog-title" id="dataReportTitle">Data availability by pathogen</p>
     <div class="dialog-body" id="dataReportBody"></div>
     <div class="dialog-actions"><button type="button" class="btn btn-secondary" id="dataReportClose">Close</button></div>
@@ -1350,8 +1364,8 @@ function renderTable() {
   // Table-intro scope line: reflect the active filter instead of always claiming "All figures".
   (function(){
     const el = document.getElementById('tableIntroLead'); if (!el) return;
-    const tail = ' Plots use canonical screened figures; map/scorecard use vetted evidence.';
-    if (subnational && rec) { el.textContent = `Subnational figures for ${rec.country} · ${rec.disease} — ${rows.length} location${rows.length===1?'':'s'}.` + tail; return; }
+    const tail = '';
+    if (subnational && rec) { el.textContent = `Subnational figures for ${rec.country} · ${rec.disease} — ${rows.length} location${rows.length===1?'':'s'}.`; return; }
     const parts = [];
     if (!isAll()) parts.push(PATHOGEN_LABELS[selectedPathogen] || selectedPathogen);
     if (activeRegion && activeRegion !== 'All regions') parts.push(activeRegion);
@@ -1359,8 +1373,8 @@ function renderTable() {
     if (activeSpecies && activeSpecies !== 'humans' && activeSpecies !== ALL_SPECIES) parts.push(activeSpecies + ' host');
     const total = records.length;
     el.textContent = parts.length
-      ? `Filtered to ${parts.join(' · ')} — showing ${rows.length} of ${total} tracked outbreaks.` + tail
-      : `All ${total} tracked outbreaks shown.` + tail;
+      ? `Filtered to ${parts.join(' · ')} — showing ${rows.length} of ${total} tracked outbreaks.`
+      : `All ${total} tracked outbreaks shown.`;
   })();
   const pageCount = Math.max(1, Math.ceil(rows.length / TABLE_MAX));
   if (tablePage >= pageCount) tablePage = 0;
@@ -1732,6 +1746,7 @@ const GEO = {
   // figure for them was silently dropped from records/table/scorecard/map (unresolved geoCountry).
   "Bangladesh": { lonlat:[90.36,23.68], atlas:"Bangladesh", region:"Asia" },
   "Rwanda": { lonlat:[29.87,-1.94], atlas:"Rwanda", region:"Africa" },
+  "Zambia": { lonlat:[27.85,-13.13], atlas:"Zambia", region:"Africa" },
 };
 Object.entries(GEO).forEach(([k,v]) => { REGION_BY_COUNTRY[k] = v.region; });
 
@@ -2756,6 +2771,25 @@ function availablePathogenRaws() {
   (allRows||[]).forEach(r => { if(!r.pathogen || isFlu(r.pathogen)) return; const c=geoCountry(r.location);
     const rRegionOk = activeRegion==='All regions' || !c || REGION_BY_COUNTRY[c]===activeRegion;
     if(rRegionOk && rLocOk(r.location)) set.add(r.pathogen); });
+  // And surface REPORT-ONLY pathogens from the raw report rows, captured UPSTREAM of the map's
+  // coordinate filter and the Status-Report/title filter (reportPathoLocs). Keying off eventMarkers
+  // (the old approach) missed any report with no coordinate or no generated narrative — e.g. an
+  // imported CCHF case in Spain — so it never reached the selector. Selecting one shows its event
+  // report + data-report entry; the figures table/plots show an honest empty state.
+  (reportPathoLocs||[]).forEach(m => { if(!m.pathogen || isFlu(m.pathogen)) return;
+    const evRegionOk = activeRegion==='All regions' || !m.country || REGION_BY_COUNTRY[m.country]===activeRegion;
+    const evLocOk = !locationQuery || (m.country||'').toLowerCase().includes(locationQuery) || (m.place||'').toLowerCase().includes(locationQuery);
+    if(evRegionOk && evLocOk) set.add(m.pathogen); });
+  // Finally surface RAW-EXTRACTION-ONLY pathogens — present only in the raw article corpus, never in
+  // the figures/report feeds (e.g. Crimean-Congo Hemorrhagic Fever). Without this an unmapped pathogen
+  // that nonetheless has real raw rows + articles is hidden from the selector entirely. Selecting one
+  // filters the raw table (and data report) to it; the other panels show an honest empty state. The raw
+  // feed loads lazily, so this only takes effect after the 'rawarticles' refresh below re-runs it.
+  (rawArticles||[]).forEach(r => { if(!r.pathogen || isFlu(r.pathogen) || set.has(r.pathogen)) return;
+    const c = geoCountry(r.location);
+    const rawRegionOk = activeRegion==='All regions' || !c || REGION_BY_COUNTRY[c]===activeRegion;
+    const rawLocOk = !locationQuery || (r.location||'').toLowerCase().includes(locationQuery);
+    if(rawRegionOk && rawLocOk) set.add(r.pathogen); });
   return [...set];
 }
 function refreshPathogenSelector() {
@@ -3869,8 +3903,18 @@ function fetchSheet() {
     return { status: statusOf(dateStr), note: statusNoteOf(dateStr) };
   }
   const combos = new Map();
+  // Supranational / unlocatable location tails that must NEVER be salvaged into a country name.
+  // Anything else — even a country GEO doesn't know about yet — is kept: dropping records because
+  // the globe atlas is missing a country silently poisoned the figures table and scorecard, so
+  // record-building is now decoupled from map coverage. buildMarkers still guards on GEO[c] and
+  // simply won't plot a marker for the missing country until it's added to GEO.
+  const SUPRA_TAIL = /^(europe|european union|southern europe|southeastern europe|world|global|africa|asia|americas?|oceania|multiple.*)$/;
   rows.forEach(r => {
-    const c = geoCountry(r.location);
+    let c = geoCountry(r.location);
+    if (!c) {
+      const raw = (r.location||'').split(',').pop().trim().replace(/^the\s+/i,'');
+      if (raw && !SUPRA_TAIL.test(raw.toLowerCase())) c = raw;
+    }
     if (!c || !r.pathogen) return;
     combos.set(c + '||' + r.pathogen, { country: c, pathogen: r.pathogen });
   });
@@ -3950,6 +3994,10 @@ const eventListEl = document.getElementById('eventList');
 const briefContentEl = document.getElementById('briefContent');
 const briefMetaEl = document.getElementById('briefMeta');
 let reports = [];
+// Every raw report row's pathogen + place, captured BEFORE the title/Status-Report and
+// coordinate filters below. Report-only pathogens (an imported CCHF case with no figure rows,
+// no coordinate, or no generated narrative) must still populate the pathogen universe.
+let reportPathoLocs = [];
 let selectedIdx = 0;
 function extractUrls(s) { if (!s) return []; const m = (s.match(/https?:\/\/[^\s'"<>\)\]]+/g)||[]).map(u=>u.replace(/[.,;]+$/,'')); return [...new Set(m)]; }
 
@@ -4160,7 +4208,7 @@ function renderBrief() {
   const riskBlock = `<div class="brief-doc-meta"><span class="bdm-label">Risk severity</span>` +
     `<span class="bdm-val" style="color:${sev};font-weight:600">${r.risk == null ? '—' : r.risk + ' / 9'}</span>` +
     (r.riskRationale ? `<span class="bdm-label">Rationale</span><span class="bdm-val">${esc(r.riskRationale)}</span>` : '') + `</div>`;
-  briefContentEl.innerHTML = headline + riskBlock + banner + developmentsBlockHtml(r) + (r.crossover ? `<div style="background:color-mix(in srgb, var(--color-accent) 12%, transparent);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;margin:0 0 12px"><p style="margin:0"><strong>Zoonotic link reported:</strong></p>${briefMarkup(r.crossoverDetail)}</div>` : '') + stripBriefDisclaimers(stripNan(r.html));
+  briefContentEl.innerHTML = headline + riskBlock + banner + developmentsBlockHtml(r) + (r.crossover ? `<div style="background:color-mix(in srgb, var(--color-accent) 12%, transparent);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;margin:0 0 12px"><p style="margin:0"><strong>Zoonotic link reported:</strong></p>${briefMarkup(r.crossoverDetail)}</div>` : '') + (r.html ? stripBriefDisclaimers(stripNan(r.html)) : '<p style="font-size:12px;line-height:1.6;color:var(--ink-3);margin:0">No narrative report has been generated for this event yet. The risk rating above and any source links reflect what is currently available.</p>');
   const tg = document.getElementById('evToggle');
   if (tg) tg.addEventListener('click', () => {
     const sec = document.getElementById('reportEvidence');
@@ -4537,6 +4585,15 @@ function medianRawScores(rows) {
 // Evidence density behind an event's current figures: vettings/articles/domains/facts across
 // BOTH outcome measures on the latest reporting date for that pathogen+country.
 function comboEvidence(pathogen, country) {
+  // Sync map tooltip's evidence readout with the figures TABLE's row: use the record's rowsAt (the
+  // exact rows that back the shown figure) instead of re-filtering allRows here. The old path
+  // grabbed a different row slice on the latest date across BOTH measures, so a country whose
+  // scorecard/table row is corroborated (2+ sources) could still render as "unvetted · 1 article"
+  // on the globe when the strict same-date filter caught only one row.
+  const rec = (typeof records !== 'undefined' ? records : []).find(r => r.country === country && r.pathogenRaw === pathogen);
+  if (rec && rec.rowsAt && rec.rowsAt.length) {
+    return Object.assign(vettingsAndArticles(rec.rowsAt), { facts: new Set(rec.rowsAt.map(measureFactKey)).size });
+  }
   const rows = viewRows().filter(r => r.pathogen === pathogen && geoCountry(r.location) === country &&
     (r.measure === 'confirmed_cases' || r.measure === 'confirmed_deaths') && r.outlier === 'False');
   if (!rows.length) return null;
@@ -4650,11 +4707,18 @@ function focusEvent(idx) { selectEvent(idx); }
 function fetchReports() {
   return withTimeout(d3.csv(GSHEET_REPORTS_URL), 20000, 'event reports').then(rows => {
   function parseCoord(raw){ if(!raw||raw==='None'||!/\[/.test(raw)) return null; const n=raw.match(/-?\d+\.?\d*/g); if(!n||n.length<2) return null; return [parseFloat(n[1]), parseFloat(n[0])]; }
-  reports = rows.map(r => {
+  const _mappedReports = rows.map(r => {
     const loc = (r['Outbreak Location'] || r['Outbreak Country'] || '').trim();
     const devs = parseDevelopments(r['Situational Developments']);
     const devHtml = cleanText(r['Developments Formatted']) ? String(r['Developments Formatted']).trim() : '';
-    const gc = geoCountry(loc) || geoCountry((r['Outbreak Country']||'').replace('United States of America','United States'));
+    const _gc = geoCountry(loc) || geoCountry((r['Outbreak Country']||'').replace('United States of America','United States'));
+    // Same anti-poisoning fallback as the figures path: if the strict lookup fails, accept the raw
+    // country tail so a report for a GEO-unknown country still cross-links to its record.
+    let gc = _gc;
+    if (!gc) {
+      const raw = ((r['Outbreak Country']||'').replace('United States of America','United States') || loc || '').split(',').pop().trim().replace(/^the\s+/i,'');
+      if (raw && !/^(europe|european union|southern europe|southeastern europe|world|global|africa|asia|americas?|oceania|multiple.*)$/.test(raw.toLowerCase())) gc = raw;
+    }
     return {
       title: (r['Event Title'] || '').trim() || [PATHOGEN_LABELS[r['Pathogen']] || r['Pathogen'], (r['Outbreak Location'] || r['Outbreak Country'] || '').trim()].filter(Boolean).join(' — '),
       risk: +r['Risk Severity Score'] || 0,
@@ -4676,7 +4740,15 @@ function fetchReports() {
       urls: extractUrls((r['Urls']||'') + ' ' + (r['Reference List']||'')),
       reportFile: cleanText(r['Report File'] || ''),
     };
-  }).filter(r => r.title && r.html)
+  });
+  // Capture the pathogen universe upstream of every drop below, so a report that lacks a
+  // coordinate or a Status Report still shows in the data report and the pathogen selector.
+  reportPathoLocs = _mappedReports.filter(r => r.pathogen).map(r => ({ pathogen: r.pathogen, country: r.geoCountry, place: r.place }));
+  // Keep a report as long as it has a title (which always resolves from pathogen + location).
+  // The former extra `&& r.html` silently dropped any event whose Status-Report narrative had not
+  // been generated yet — hiding the whole outbreak (e.g. an imported CCHF case) from the list,
+  // brief, map, data report AND selector. Such rows now surface with an honest "no narrative" brief.
+  reports = _mappedReports.filter(r => r.title)
     .sort((a,b) => b.risk - a.risk || changeRank(b) - changeRank(a) || (b.date>a.date?1:-1));
   if (!reports.length) throw new Error('empty reports');
   // Place-level coordinates power geographic-proximity ranking in the comparison bar view.
@@ -4706,7 +4778,9 @@ function fetchReports() {
   // trend section must re-resolve too — otherwise the plots keep the pre-reports pick (highest
   // raw case count) while the scorecards show the risk-weighted one, and the two disagree.
   populateSpeciesSelect();
-  if (records.length) { renderStats(); renderTable(); renderTrendSection(); }
+  // The reports feed can resolve after the figures feed — refresh the pathogen selector now so
+  // report-only pathogens (event markers with no figure rows yet, e.g. CCHF) get their option.
+  if (records.length) { refreshPathogenSelector(); renderStats(); renderTable(); renderTrendSection(); }
 
   rebuildEvidenceIndex();
   selectedIdx = 0;
@@ -4951,6 +5025,24 @@ function ensureRawArticles() {
     document.dispatchEvent(new CustomEvent('rawarticles'));
   });
 }
+// The raw corpus re-reports the SAME extracted fact under a country AND each of its nested
+// sub-locations, and repeats fact-less rows per host — so one article can spawn a dozen near-identical
+// rows (a single anthrax story became 15). Collapse rows sharing the same article URL, host and
+// extracted fact to one representative, preferring a national-scope location. Distinct facts, distinct
+// hosts and independent articles are all preserved — this removes only genuine duplicate re-reports.
+function rawFactSig(r){ const f = rawFactOf(r); return f.label ? (f.label + '=' + (f.num!=null ? f.num : f.text)) : ''; }
+function rawDedupe(rows){
+  const groups = new Map();
+  (rows||[]).forEach((r,i) => {
+    const u = (typeof normUrl==='function' ? normUrl(r.url||'') : (r.url||''));
+    const key = u ? (u + '\u00a6' + (cleanText(r.host_species)||'') + '\u00a6' + rawFactSig(r)) : ('\u00a6uniq' + i);
+    const prev = groups.get(key);
+    if (!prev) { groups.set(key, r); return; }
+    const isNat = x => { const c = geoCountry(x.location); return c && cleanText(x.location) === c; };
+    if (isNat(r) && !isNat(prev)) groups.set(key, r);
+  });
+  return [...groups.values()];
+}
 // Toolbar filters apply to the raw table too (pathogen, host, location search).
 function rawFiltered() {
   let rows = rawArticles || [];
@@ -4958,7 +5050,7 @@ function rawFiltered() {
   if (activeSpecies !== ALL_SPECIES) rows = rows.filter(r => cleanText(r.host_species) === activeSpecies);
   const q = locationQuery.toLowerCase();
   if (q) rows = rows.filter(r => ((r.title||'') + ' ' + (r.title_translated||'') + ' ' + (r.location||'') + ' ' + (r.pathogen||'') + ' ' + (r.domain||'')).toLowerCase().includes(q));
-  return rows;
+  return rawDedupe(rows);
 }
 // Minimal figure-aligned columns only — the pipeline's QA/agent columns stay out to prevent crowding.
 const RAW_MEASURES = [['confirmed cases','confirmed_cases'],['confirmed deaths','confirmed_deaths'],['suspected cases','suspected_cases'],['suspected deaths','suspected_deaths'],['mortality','mortality'],['prevalence','prevalence']];
@@ -5081,6 +5173,11 @@ document.addEventListener('rawarticles', () => {
   rebuildEvidenceIndex();
   if (tableMode === 'raw') renderTable();
   if (reports.length) { renderEventList(); renderBrief(); }
+  // Raw-extraction-only pathogens (e.g. CCHF) can now enter the pathogen selector, and the
+  // data-availability report's Raw-rows counts can resolve — refresh both if they're live.
+  if (records.length) refreshPathogenSelector();
+  const drb = document.getElementById('dataReportBackdrop');
+  if (drb && drb.style.display !== 'none') renderDataReportBody();
 });
 document.getElementById('navDashboard')?.addEventListener('click', (e) => { e.preventDefault(); if (typeof resetFilters==='function') resetFilters(); const sq=document.getElementById('search'); if(sq){ sq.value=''; locationQuery=''; } window.scrollTo({ top: 0, behavior: 'smooth' }); });
 document.getElementById('navSources').addEventListener('click', (e) => { e.preventDefault();
@@ -5130,27 +5227,93 @@ function pathogenDataCounts(P){
   const canon=rows.filter(r=>r.is_canonical==='True');
   const src=new Set(); rows.forEach(r=>extractUrls(r.sources||'').forEach(u=>src.add(typeof normUrl==='function'?normUrl(u):u)));
   const days=new Set(canon.filter(r=>r.measure==='confirmed_cases'||r.measure==='confirmed_deaths').map(r=>r.report_date));
+  // Raw rows come from the RAW EXTRACTION CORPUS (rawArticles) — the dataset this cell actually drills
+  // into — NOT the measurements feed. The old `rows.length` reported measurement rows here (e.g. 49 for
+  // anthrax, identical to Figures) while the drill-down opened a handful of duplicate raw articles; the
+  // number and the panel it linked to never agreed. Deduped so repeated re-reports of one article/fact
+  // aren't counted. null while the lazy raw feed is still loading -> rendered as "…".
+  const raw = rawArticlesState==='ready' ? rawDedupe((rawArticles||[]).filter(r=>r.pathogen===P)).length : null;
+  // Figures = rows the figures TABLE can actually render (one aggregated record per country+pathogen),
+  // NOT canonical measurement rows. canon.length reported 49 measurement rows for anthrax while the
+  // table rendered nothing — its confirmed-cases locations (Zambia) resolve to no mapped country, so no
+  // record is built. Counting records keeps the number honest with what the drill-down shows.
+  const figs = (records||[]).filter(r=>r.pathogenRaw===P).length;
   return { mapped:(eventMarkers||[]).filter(m=>m.pathogen===P).length,
     reports:(reports||[]).filter(r=>r.pathogen===P).length,
-    plotDays:days.size, sources:src.size, figures:canon.length, raw:rows.length };
+    plotDays:days.size, sources:src.size, figures:figs, raw:raw };
+}
+// Column sort state for the data-availability report. Default primary = Mapped events, with a
+// tiered tie-break Raw rows → Sources (all descending); clicking a header pins that column and
+// toggles asc/desc, and the tie-break chain still applies underneath.
+let dataReportSort = { key: 'mapped', dir: 'desc' };
+const DATA_REPORT_TIEBREAK = ['mapped', 'raw', 'sources'];
+function renderDataReportBody(){
+  const body=document.getElementById('dataReportBody'); if(!body) return;
+  // Universe now includes raw-extraction-only pathogens (e.g. CCHF), so a pathogen that exists only in
+  // the raw corpus still gets a row here with a clickable Raw-rows count into its articles.
+  const uni=[...new Set([...(allRows||[]).map(r=>r.pathogen), ...(reports||[]).map(r=>r.pathogen), ...(reportPathoLocs||[]).map(r=>r.pathogen), ...(rawArticles||[]).map(r=>r.pathogen)])].filter(p=>p && !isFlu(p));
+  const rows = uni.map(p => ({ p, label: PATHOGEN_LABELS[p]||p, c: pathogenDataCounts(p) }));
+  const { key, dir } = dataReportSort;
+  const cmpNum = (a,b)=>{ const av=a==null?-1:a, bv=b==null?-1:b; return av-bv; };
+  const cmpStr = (a,b)=>a.localeCompare(b,undefined,{sensitivity:'base'});
+  rows.sort((A,B)=>{
+    let d;
+    if (key==='priority') d = (priorityTier(B.p)-priorityTier(A.p)) || cmpStr(A.label,B.label);
+    else if (key==='pathogen') d = cmpStr(A.label, B.label);
+    else d = cmpNum(A.c[key], B.c[key]);
+    if (d===0 && key!=='priority' && key!=='pathogen') {
+      // Compound tie-break: fall through the mapped → raw → sources chain (all descending),
+      // skipping the active column so its direction still wins. Keeps a stable, meaningful order
+      // when the primary column has many rows tied at zero.
+      for (const k of DATA_REPORT_TIEBREAK) {
+        if (k===key) continue;
+        const td = cmpNum(A.c[k], B.c[k]);
+        if (td !== 0) { d = td; break; }
+      }
+    }
+    if (key!=='priority' && d===0) d = cmpStr(A.label, B.label);
+    return dir==='asc' ? d : -d;
+  });
+  const cell=(p,key,v)=> v==null ? `<span style="color:var(--ink-4)" title="Raw extraction corpus still loading…">…</span>` : (v>0 ? `<button type="button" class="dr-cell" data-p="${esc(p)}" data-sec="${key}">${v.toLocaleString()}</button>` : `<span style="color:var(--ink-4)">0</span>`);
+  const trs=rows.map(({p,c})=>{ const sel=(!isAll()&&selectedPathogen===p);
+    return `<tr${sel?' style="background:color-mix(in srgb,var(--color-accent) 10%,transparent)"':''}><td style="font-weight:600;white-space:nowrap">${esc(PATHOGEN_LABELS[p]||p)}</td>`
+      +`<td class="raw-col" style="text-align:right;font-weight:600">${cell(p,'raw',c.raw)}</td><td style="text-align:right">${cell(p,'mapped',c.mapped)}</td><td style="text-align:right">${cell(p,'reports',c.reports)}</td><td style="text-align:right">${cell(p,'plotDays',c.plotDays)}</td><td style="text-align:right">${cell(p,'sources',c.sources)}</td><td style="text-align:right">${cell(p,'figures',c.figures)}</td></tr>`;
+  }).join('');
+  const cols = [
+    { key:'pathogen', label:'Pathogen', align:'left' },
+    { key:'raw',      label:'Raw<br>rows', align:'right', cls:'raw-col', title:'Distinct rows in the raw extraction corpus (same-article, same-fact duplicates removed)' },
+    { key:'mapped',   label:'Mapped<br>events', align:'right' },
+    { key:'reports',  label:'Event<br>reports', align:'right' },
+    { key:'plotDays', label:'Plot<br>days', align:'right' },
+    { key:'sources',  label:'Sources', align:'right' },
+    { key:'figures',  label:'Figures', align:'right', title:'Rows the figures table renders for this pathogen (aggregated per country)' },
+  ];
+  const ths = cols.map(col=>{
+    const active = key===col.key;
+    const arrow = active ? (dir==='asc' ? '▲' : '▼') : '↕';
+    const cls = ['sortable', col.cls||'', active?'sort-active':''].filter(Boolean).join(' ');
+    const t = col.title ? ` title="${esc(col.title)}"` : '';
+    return `<th class="${cls}" data-sort-key="${col.key}" style="text-align:${col.align}"${t}>${col.label}<span class="sort-arrow">${arrow}</span></th>`;
+  }).join('');
+  body.innerHTML=`<p style="font-size:12px;color:var(--ink-3);margin:0 0 10px;line-height:1.5" title="Counts span the whole feed (they ignore the region / host / location filters). Raw rows = distinct rows in the raw extraction corpus (duplicate re-reports of the same article and fact removed). Figures = rows the figures table actually renders (aggregated per country) — a pathogen whose locations resolve to no mapped country shows 0.">Live data available for each pathogen. Click a count to filter and jump; click a column header to sort.</p>`
+    +`<div style="overflow:auto;max-height:min(60vh,460px)"><table class="table dr-table" style="min-width:640px"><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table></div>`;
 }
 function openDataReport(){
-  const body=document.getElementById('dataReportBody'); if(!body) return;
-  const uni=[...new Set([...(allRows||[]).map(r=>r.pathogen), ...(reports||[]).map(r=>r.pathogen)])].filter(p=>p && !isFlu(p));
-  uni.sort((a,b)=>(priorityTier(b)-priorityTier(a))||a.localeCompare(b,undefined,{sensitivity:'base'}));
-  const cell=(p,key,v)=> v>0 ? `<button type="button" class="dr-cell" data-p="${esc(p)}" data-sec="${key}">${v.toLocaleString()}</button>` : `<span style="color:var(--ink-4)">0</span>`;
-  const trs=uni.map(p=>{ const c=pathogenDataCounts(p); const sel=(!isAll()&&selectedPathogen===p);
-    return `<tr${sel?' style="background:color-mix(in srgb,var(--color-accent) 10%,transparent)"':''}><td style="font-weight:600;white-space:nowrap">${esc(PATHOGEN_LABELS[p]||p)}</td>`
-      +`<td style="text-align:right">${cell(p,'mapped',c.mapped)}</td><td style="text-align:right">${cell(p,'reports',c.reports)}</td><td style="text-align:right">${cell(p,'plotDays',c.plotDays)}</td><td style="text-align:right">${cell(p,'sources',c.sources)}</td><td style="text-align:right">${cell(p,'figures',c.figures)}</td><td style="text-align:right">${cell(p,'raw',c.raw)}</td></tr>`;
-  }).join('');
-  body.innerHTML=`<p style="font-size:12px;color:var(--ink-3);margin:0 0 10px;line-height:1.5">Live data available for each pathogen, across every panel. Click any count to filter to that pathogen and jump to its panel. Counts span the whole feed (they ignore the region / host / location filters).</p>`
-    +`<div style="overflow:auto;max-height:min(60vh,460px)"><table class="table" style="min-width:560px"><thead><tr><th>Pathogen</th><th style="text-align:right">Mapped<br>events</th><th style="text-align:right">Event<br>reports</th><th style="text-align:right">Plot<br>days</th><th style="text-align:right">Sources</th><th style="text-align:right">Figures</th><th style="text-align:right">Raw<br>rows</th></tr></thead><tbody>${trs}</tbody></table></div>`;
+  // The raw corpus is lazy — kick off its load so the Raw-rows column (and any raw-only pathogen
+  // like CCHF) fills in shortly; the 'rawarticles' handler re-renders this body when it lands.
+  if (rawArticlesState==='idle' || rawArticlesState==='loading') ensureRawArticles();
+  renderDataReportBody();
   dialogOpener=document.activeElement;
   document.getElementById('dataReportBackdrop').style.display='grid';
   const c=document.getElementById('dataReportClose'); if(c) c.focus();
 }
 function closeDataReport(){ const b=document.getElementById('dataReportBackdrop'); if(b) b.style.display='none'; if(typeof restoreDialogFocus==='function') restoreDialogFocus(); }
 function drJump(p, sec){
+  // Show every host at the destination so the pathogen's data is fully visible — raw extractions are
+  // frequently animal-host (e.g. anthrax in buffaloes/crocodiles) and would otherwise stay hidden
+  // behind the default "humans" filter, defeating the point of jumping there to inspect the raw data.
+  const spSel=document.getElementById('species');
+  if(spSel && activeSpecies!==ALL_SPECIES){ activeSpecies=ALL_SPECIES; if([...spSel.options].some(o=>o.value===ALL_SPECIES)) spSel.value=ALL_SPECIES; }
   const sel=document.getElementById('disease');
   if(p && sel){
     if([...sel.options].some(o=>o.value===p)){ sel.value=p; sel.dispatchEvent(new Event('change')); }
@@ -5167,6 +5330,14 @@ document.getElementById('dataReportBtn').addEventListener('click', openDataRepor
 document.getElementById('dataReportClose').addEventListener('click', closeDataReport);
 document.getElementById('dataReportBackdrop').addEventListener('click', (e)=>{ if(e.target.id==='dataReportBackdrop') closeDataReport(); });
 document.getElementById('dataReportBody').addEventListener('click', (e)=>{ const b=e.target.closest('.dr-cell'); if(b) drJump(b.dataset.p, b.dataset.sec); });
+document.getElementById('dataReportBody').addEventListener('click', (e)=>{
+  const th=e.target.closest('th.sortable'); if(!th) return;
+  const k=th.dataset.sortKey; if(!k) return;
+  // Numeric columns start descending (largest counts first); the Pathogen name column starts ascending.
+  if (dataReportSort.key===k) dataReportSort.dir = dataReportSort.dir==='asc' ? 'desc' : 'asc';
+  else dataReportSort = { key: k, dir: k==='pathogen' ? 'asc' : 'desc' };
+  renderDataReportBody();
+});
 document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ const bk=document.getElementById('dataReportBackdrop'); if(bk && bk.style.display!=='none') closeDataReport(); } });
 requestAnimationFrame(() => { const gb = [...document.querySelectorAll('#mapViewSeg .seg-opt')].find(b=>b.dataset.view==='globe'); if (gb && typeof maplibregl !== 'undefined') gb.click(); });
 </script>
