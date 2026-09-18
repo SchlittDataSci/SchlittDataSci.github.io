@@ -2118,10 +2118,11 @@ function renderMap() {
     renderUnvettedLayer(projection);
     const el = document.getElementById('mapCount');
     if (el) {
-      // Off-map = event reports that cannot be placed on the map (no coordinate, or a coordinate
-      // whose country isn't in GEO). The map represents event reports, not figures — a raw-figures
-      // location that doesn't resolve is a data-availability concern, not a map omission.
-      const offReports = (reports||[]).filter(r => !r.lonlat || !r.geoCountry || !GEO[r.geoCountry]);
+      // Off-map = event reports that lack a coordinate entirely. Reports with a coordinate render
+      // from `r.lonlat` directly regardless of whether their country appears in GEO, so keying the
+      // count off GEO[r.geoCountry] misclassifies Ireland/Kenya/Portugal-style reports that DO
+      // place on the map via their coordinate.
+      const offReports = (reports||[]).filter(r => !r.lonlat);
       const offTokens = [...new Set(offReports.map(r => r.place || r.country || (r.geoCountry||'')).filter(Boolean))];
       el.textContent = `${currentMarkers.length} reported events` + (offReports.length ? ` \u00b7 ${offReports.length} off-map` : '');
       el.title = offReports.length ? ('Event reports not placed on the map (missing coordinate or unrecognised country): ' + offTokens.join(', ')) : '';
