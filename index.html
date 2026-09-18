@@ -2284,10 +2284,18 @@ function tooltipHTML(m) {
   const scope = m.scope==='national' ? 'National report' : 'Subnational report';
   const doc = (typeof eventDocumentation==='function' && allRows.length) ? eventDocumentation(m.pathogen, m.country) : null;
   const cd = (m.cases!=null || m.deaths!=null) ? `<div class="t-row"><span>Cases / deaths</span><span>${m.cases!=null?m.cases.toLocaleString():'\u2014'} / ${m.deaths!=null?m.deaths.toLocaleString():'\u2014'}</span></div>` : '';
-  // Evidence density: the articles/domains/facts behind this event's current figures.
-  const evd = (allRows.length && typeof comboEvidence==='function') ? comboEvidence(m.pathogen, m.country) : null;
+  // Evidence behind THIS event report — sourced from the report's own citations (same source as
+  // the affiliated brief) so the counts always agree. A mapped event is vetted, so ≥2 articles;
+  // the old (country,pathogen) rollup could under-report a subnational event as "1 article ·
+  // unvetted" because it keyed off the national figure's backing rows, not this report's sources.
+  const rep = (typeof reports !== 'undefined' && m.reportIdx != null) ? reports[m.reportIdx] : null;
+  const evd = (rep && typeof reportEvidence === 'function') ? reportEvidence(rep)
+            : (allRows.length && typeof comboEvidence === 'function') ? comboEvidence(m.pathogen, m.country) : null;
+  const evArt = evd ? (evd.articles != null ? evd.articles : evd.art) : 0;
+  const evDom = evd ? (evd.domains != null ? evd.domains : evd.dom) : 0;
+  const evRight = evd ? (evd.strength ? evd.strength.label.replace(/ evidence$/i, '') : (evd.vet === 1 ? 'unvetted' : `${evd.vet} sources`)) : '';
   const evHtml = evd ? `<div class="t-cols" style="text-align:left;margin-top:6px">Evidence</div>
-    <div class="t-row"><span>${evd.art} article${evd.art!==1?'s':''} · ${evd.dom||'\u2014'} domain${evd.dom!==1?'s':''}</span><span>${evd.vet===1 ? 'unvetted' : `${evd.vet} sources`}</span></div>
+    <div class="t-row"><span>${evArt} article${evArt!==1?'s':''} · ${evDom||'\u2014'} domain${evDom!==1?'s':''}</span><span>${evRight}</span></div>
     <div class="t-row"><span>Corroborated facts</span><span>${evd.facts}</span></div>` : '';
   return `<p class="t-title">${m.title||m.country}</p>
     <div class="t-sub">${m.disease||''}${m.place?' \u00b7 '+m.place:''}</div>
@@ -4904,8 +4912,11 @@ function selectEvent(idx) {
     renderStats(); renderTrendSection(); renderTable();
   }
   renderEventList(); renderBrief(); renderMap();
+  // Scroll the selected report into view. The scroll container is `.events-col` (overflow-y:auto);
+  // #eventList itself never scrolls, so measure the item against the container, not #eventList.
   const li = eventListEl.querySelector('[data-idx="' + idx + '"]');
-  if (li) eventListEl.scrollTop = Math.max(0, li.offsetTop - eventListEl.offsetTop - 8);
+  const scroller = eventListEl.closest('.events-col') || eventListEl;
+  if (li && scroller) scroller.scrollTop += li.getBoundingClientRect().top - scroller.getBoundingClientRect().top - 8;
   if (r.lonlat) flyToLonlat(r.lonlat);
 }
 function drillNational(country, pathogen) {
@@ -4921,7 +4932,20 @@ function drillNational(country, pathogen) {
   if (showSubnational) trendMode = { mode:'subnational', country, pathogen }; else trendMode = { mode:'national' };
   renderTrendSection();
 }
-function focusEvent(idx) { selectEvent(idx); }
+function focusEvent(idx) {
+  selectEvent(idx);
+  // A marker can point at a report the event list de-dupes away — e.g. one of several national
+  // reports for a country×pathogen, where the list surfaces a single row. selectEvent has already
+  // switched to this pathogen and re-rendered, so if the clicked report isn't in the list, redirect
+  // to the visible report for the same country×pathogen (prefer national) so the click lands on a
+  // row the user can see and scroll to, instead of selecting an invisible one.
+  const rep = reports[idx];
+  if (rep && eventListEl && !eventListEl.querySelector('[data-idx="' + idx + '"]')) {
+    const cand = visibleReports().filter(({ r }) => r.geoCountry === rep.geoCountry && r.pathogen === rep.pathogen);
+    const pick = cand.find(({ r }) => isNational(r.place)) || cand[0];
+    if (pick && pick.i !== idx) selectEvent(pick.i);
+  }
+}
 
 function fetchReports() {
   return withTimeout(d3.csv(GSHEET_REPORTS_URL), 20000, 'event reports').then(rows => {
