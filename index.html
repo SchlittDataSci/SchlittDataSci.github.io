@@ -80,17 +80,18 @@
   body { margin: 0; background: var(--color-bg); font-family: var(--font-body); color: var(--color-text); }
   a { color: var(--color-accent-300); text-decoration: none; }
   a:hover { color: var(--color-accent); text-decoration: underline; }
-  .wrap { max-width: 1560px; margin: 0 auto; padding: 6px var(--space-6) var(--space-8); }
-  .page-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); margin-bottom: 8px; flex-wrap: wrap; }
+  .wrap { max-width: 1560px; margin: 0 auto; padding: var(--space-4) var(--space-6) var(--space-8); }
+  .page-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-3); flex-wrap: wrap; }
   .page-title { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 24px; margin: 0; letter-spacing: -0.01em; }
   .page-sub { font-size: 14px; color: var(--ink-3); margin: 4px 0 0; }
   /* Vector wordmark — two-tone italic heavy type, offset shadow, background-bar scan-slices per OSINfluenza */
   .brand-logo { display: block; height: 40.8px; width: auto; margin-right: auto; margin-top: 2px; }
   .nav { padding: 4px var(--space-4); }
   .brand-logo .t { font-family: var(--font-heading); font-weight: 800; font-style: italic; font-size: 30px; letter-spacing: .5px; }
-  .toolbar { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; padding: var(--space-3) 0; margin-bottom: var(--space-4); border-bottom: 1px solid var(--color-divider); }
+  .toolbar { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; padding: var(--space-3) 0 var(--space-4); margin-bottom: var(--space-4); border-bottom: 1px solid var(--color-divider); }
   .toolbar .spacer { flex: 1; }
-  .field-inline { display: flex; align-items: center; gap: 8px; }
+  .toolbar > .btn { margin-left: auto; }
+  .field-inline { display: flex; align-items: center; gap: var(--space-2); }
   .field-inline label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); }
   .sync-tag { display: inline-flex; align-items: center; gap: 6px; flex: none; white-space: nowrap; }
   .sync-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); box-shadow: 0 0 6px var(--color-accent); }
@@ -214,7 +215,7 @@
   .forecast-box span.mut { color: var(--ink-4); }
   .briefs-split { display: grid; grid-template-columns: 244px minmax(0,1fr); gap: var(--space-4); height: 100%; min-height: 0; }
   .events-col { min-height: 0; overflow-y: auto; border-right: 1px solid var(--color-divider); padding-right: var(--space-3); }
-  .events-hint { font-size: 10px; color: var(--color-accent-300); margin: 0 0 10px; }
+  .events-hint { font-size: 10px; color: var(--color-accent-300); margin: 0 0 var(--space-3); }
   .rf-bar { font-size: 10px; color: var(--color-accent-200); background: color-mix(in srgb, var(--color-accent-500) 14%, transparent); border-radius: var(--radius-sm); padding: 5px 8px; margin: 0 0 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
   .rf-bar button { background: none; border: 0; color: var(--color-accent-200); cursor: pointer; font-size: 10px; padding: 0; }
   .event-doc { margin-top: 6px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
@@ -229,14 +230,14 @@
   #subLegend { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; align-content: flex-start; flex: 1 1 220px; min-width: 200px; max-height: 46px; overflow-y: auto; overscroll-behavior: contain; }
   #subLegend .sub-swatch:nth-child(n+6) { opacity: 0.95; }
   .brief-col { display: flex; flex-direction: column; min-height: 0; }
-  .plots-card { gap: 10px; }
-  .plots-card .card-head-row { margin-bottom: 4px; }
+  .plots-card { gap: var(--space-3); }
+  .plots-card .card-head-row { margin-bottom: var(--space-2); }
   .plots-card .plot-block { display: block; }
   .chart-wrap { width: 100%; height: 320px; }
   .source-chart-wrap { width: 100%; height: 140px; margin-top: 0; }
   .plots-card .chart-wrap svg, .plots-card .source-chart-wrap svg { width: 100%; height: 100%; display: block; }
-  .chart-divider { border-top: 1px solid var(--color-divider); margin: 6px 0 8px; }
-  .methodology-note { font-size: 12px; line-height: 1.5; color: var(--ink-4); margin: 12px 0 0; padding-top: 10px; }
+  .chart-divider { border-top: 1px solid var(--color-divider); margin: var(--space-2) 0 var(--space-3); }
+  .methodology-note { font-size: 12px; line-height: 1.5; color: var(--ink-4); margin: var(--space-3) 0 0; padding-top: var(--space-3); }
   .plot-subtitle { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-label); margin: 0 0 8px; font-weight: 600; }
   .plot-block + .plot-block { margin-top: 0; }
   .glyph-hit { transition: filter .1s ease, opacity .1s ease; }
@@ -385,8 +386,8 @@
   /* One deliberate type scale. Every font-size in the page is snapped to a step of this ramp. */
   :root { --fs-1:10px; --fs-2:12px; --fs-3:14px; --fs-4:18px; --fs-5:24px; --fs-6:30px; }
   /* Section labels — the page now reads as a numbered sequence rather than a pile of panels. */
-  .section-label { display:flex; align-items:center; gap:12px; margin:var(--space-6) 0 var(--space-3); font-size:var(--fs-1); text-transform:uppercase; letter-spacing:.14em; color:var(--ink-4); font-weight:600; }
-  .section-label:first-of-type { margin-top:var(--space-4); }
+  .section-label { display:flex; align-items:center; gap:var(--space-3); margin:var(--space-6) 0 var(--space-3); font-size:var(--fs-1); text-transform:uppercase; letter-spacing:.14em; color:var(--ink-4); font-weight:600; }
+  .section-label:first-of-type { margin-top:var(--space-5); }
   .section-label .sl-num { color:var(--color-accent-300); font-variant-numeric:tabular-nums; }
   .section-label .sl-rule { flex:1; height:1px; background:linear-gradient(90deg, var(--color-divider), transparent); }
   /* Hierarchy: the lead answer + map is the clear primary; the analysis and table read as quieter. */
@@ -405,6 +406,9 @@
   .lead-metric .lm-num { font-family:var(--font-heading); font-weight:var(--font-heading-weight); font-size:var(--fs-4); line-height:1; margin:0; font-variant-numeric:tabular-nums; color:var(--color-text); }
   .lead-metric .lm-lbl { font-size:var(--fs-1); text-transform:uppercase; letter-spacing:.05em; color:var(--ink-label); margin:6px 0 0; }
   .lead-cta { align-self:center; flex:none; white-space:nowrap; margin-left:var(--space-2); }
+  /* Data-report and Open-brief primary actions are peer CTAs — match their box exactly so they
+     read as one control language, and right-align both against their container edges. */
+  #dataReportBtn, #leadCta { min-width: 148px; height: 38px; padding: 0 var(--space-4); font-size: 13px; gap: var(--space-2); justify-content: center; }
   @media (max-width:820px){ .lead-strip{ flex-wrap:wrap; } .lead-metrics{ border-left:0; padding-left:0; border-top:1px solid color-mix(in srgb,var(--color-accent-300) 22%,transparent); padding-top:var(--space-3); width:100%; justify-content:space-between; } .lead-cta{ align-self:flex-start; } }
   /* Quiet the filter toolbar so it stops competing with the content it filters. */
   .toolbar { border-bottom:0; padding:var(--space-2) 0 0; margin-bottom:0; }
@@ -499,10 +503,10 @@
     <rect x="-2" y="19.2" width="212" height="2.8" fill="var(--color-bg)"/>
     <rect x="9" y="13.2" width="176" height="2.2" fill="var(--color-bg)"/>
   </svg>
-  <a href="#" id="navDashboard" aria-current="page">Dashboard</a>
   <a href="#" id="navSources">Data sources</a>
   <a href="#" id="navReports">Reports</a>
   <a href="#" id="navAlerts">Alerts</a>
+  <a href="https://datastudio.google.com/u/1/reporting/3bee84bd-27c1-4f86-89f5-9a1bdb7ec2dd/page/RFLmF" id="navFlu" target="_blank" rel="noopener" title="OSINfluenza — companion influenza surveillance dashboard">Influenza tracker ↗</a>
   <span id="syncTag" class="tag tag-outline sync-tag"><span class="sync-dot"></span>Loading live sheet…</span>
   <button type="button" class="btn btn-secondary" id="syncBtn">
     <svg class="icon" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.3-6.4M21 12a9 9 0 0 1-15.3 6.4M17 3v5h-5M7 21v-5h5"/></svg>
@@ -527,14 +531,15 @@
       </select>
     </div>
     <div class="field-inline">
-      <label for="region">Region</label>
-      <select id="region" class="input" style="min-width:150px">
-        <option>All regions</option>
-        <option>Africa</option>
-        <option>Americas</option>
-        <option>Asia</option>
-        <option>Europe</option>
-        <option>Oceania</option>
+      <label for="pathoGroup" title="Scopes the pathogen selector, figures table, map, event list and plots to a pathogen family. Groups overlap by design (e.g. Yellow Fever is both a VHF and an arbovirus).">Pathogen group</label>
+      <select id="pathoGroup" class="input" style="min-width:180px">
+        <option>All</option>
+        <option>Viral Hemorrhagic Fevers</option>
+        <option>Select Agents</option>
+        <option>Arboviruses</option>
+        <option>Vector Borne Diseases</option>
+        <option>Livestock</option>
+        <option>Other</option>
       </select>
     </div>
     <div class="field-inline">
@@ -545,7 +550,7 @@
       <label for="species" title="Scopes every data element — summary stats, map, plots and the figures table">Host species</label>
       <select id="species" class="input" style="min-width:150px"><option>All species</option></select>
     </div>
-    <button type="button" class="btn btn-primary" id="dataReportBtn" style="margin-left:auto;margin-right:calc(var(--space-4) + 1px);gap:7px" title="Per-pathogen data availability — mapped events, event reports, plot days, sources, figures and raw rows"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M9.5 20V4M15 20v-7M20.5 20V8"></path></svg>Data report</button>
+    <button type="button" class="btn btn-primary" id="dataReportBtn" style="gap:var(--space-2)" title="Per-pathogen data availability — mapped events, event reports, plot days, sources, figures and raw rows"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M9.5 20V4M15 20v-7M20.5 20V8"></path></svg>Data report</button>
   </div>
 
   <p class="section-label"><span class="sl-num">01</span> Situation<span class="sl-rule"></span></p>
@@ -561,7 +566,7 @@
 
   <div class="grid-main">
     <div class="card map-card elev-sm">
-      <p class="card-title" style="margin:0 0 10px">Outbreak map <span style="font-weight:400;color:var(--ink-4);font-size:12px">— vetted events sized by risk &amp; case load</span></p>
+      <p class="card-title" style="margin:0 0 var(--space-3)">Outbreak map <span style="font-weight:400;color:var(--ink-4);font-size:12px">— vetted events sized by risk &amp; case load</span></p>
       <div class="map-head">
         <div class="seg" role="tablist" aria-label="Marker size" id="mapMetricSeg">
           <button type="button" class="seg-opt" aria-selected="true" data-metric="risk">Risk score</button>
@@ -573,7 +578,8 @@
         </div>
         <div class="map-legend">
           <span class="legend-swatch">Risk<span style="display:inline-block;width:92px;height:9px;border-radius:5px;margin:0 7px;background:linear-gradient(90deg,var(--sev-lo),var(--sev-mid),var(--sev-hi))"></span>1 → 9</span>
-          <span class="legend-swatch"><svg width="46" height="16" style="overflow:visible"><circle cx="7" cy="8" r="3" fill="#b45c64" fill-opacity="0.7" stroke="var(--color-neutral-100)"></circle><circle cx="30" cy="8" r="7" fill="#b45c64" fill-opacity="0.7" stroke="var(--color-neutral-100)"></circle></svg><span id="mapSizeLabel">size ∝ score</span></span>
+          <span class="legend-swatch" title="Vetted event report — filled circle sized by risk/case load"><svg width="46" height="16" style="overflow:visible"><circle cx="7" cy="8" r="3" fill="#b45c64" fill-opacity="0.7" stroke="var(--color-neutral-100)"></circle><circle cx="30" cy="8" r="7" fill="#b45c64" fill-opacity="0.7" stroke="var(--color-neutral-100)"></circle></svg><span id="mapSizeLabel">size ∝ score</span></span>
+          <span class="legend-swatch" id="rawGlyphLegend" title="Unvetted raw-article cluster — hollow downward triangle at country centroid; click a glyph to open its source article data" style="cursor:pointer;user-select:none"><svg width="16" height="14" style="overflow:visible"><path d="M2 4 L14 4 L8 12 Z" fill="none" stroke="var(--color-accent-300)" stroke-width="1.4" opacity="0.85"></path></svg><span id="rawGlyphLabel">Unvetted raw</span></span>
           <span class="legend-swatch" id="mapCount"></span>
         </div>
       </div>
@@ -645,7 +651,7 @@
       <div class="briefs-split">
         <div class="events-col">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
-            <p class="card-title" style="margin:0 0 4px">Event reports</p>
+            <p class="card-title" style="margin:0 0 var(--space-1)">Event reports</p>
             <span style="display:flex;gap:6px">
               <button type="button" class="btn btn-secondary" id="exportEventsBtn" style="font-size:10px;padding:3px 10px" title="Export the event reports matching the current filters, with source URLs, as an audit trail">Events CSV</button>
               <button type="button" class="btn btn-secondary" id="printBtn" style="font-size:10px;padding:3px 10px" title="Print / save the briefs, event list and figures table as PDF — source links included">Print / PDF</button>
@@ -661,7 +667,7 @@
             </div>
             <button type="button" class="btn btn-secondary" id="briefExpandBtn" style="flex:none;font-size:10px;padding:3px 10px" title="Open the full outbreak brief with export">⤡ Expand report</button>
           </div>
-          <p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 50%, transparent);margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--color-divider)">AI-generated from open-source reports — verify claims via the linked references before citing.</p>
+          <p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 50%, transparent);margin:0 0 var(--space-3);padding-bottom:var(--space-2);border-bottom:1px solid var(--color-divider)">AI-generated from open-source reports — verify claims via the linked references before citing.</p>
           <div class="brief-body"><div id="briefContent" class="brief-content" aria-busy="true"><div class="skeleton tall w45"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton w70"></div><div class="skeleton"></div><div class="skeleton w45"></div></div></div>
         </div>
       </div>
@@ -680,7 +686,7 @@
         </div>
         <div class="seg" role="tablist" aria-label="Table view" id="tableModeSeg">
           <button type="button" class="seg-opt" aria-selected="true" data-mode="figures">Figures</button>
-          <button type="button" class="seg-opt" data-mode="raw" title="The raw article–fact extraction table behind both the statistical figures and the event reports">Raw articles</button>
+          <button type="button" class="seg-opt" data-mode="raw" title="The source article–fact extraction table behind both the statistical figures and the event reports">Source articles</button>
         </div>
         <button type="button" class="btn btn-secondary" id="exportCsvBtn" style="padding:3px 10px;font-size:12px">Export CSV</button>
         <span class="card-meta"><a href="https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8#gid=881754490" target="_blank" rel="noopener">data output (Sheet) ↗</a></span>
@@ -872,13 +878,55 @@ let locationQuery = '';
 function visibleRecords() {
   return records.filter(r => {
     const regionOk = activeRegion === 'All regions' || REGION_BY_COUNTRY[r.country] === activeRegion;
+    const groupOk = inPathoGroup(r.pathogenRaw);
     const locOk = !locationQuery || r.country.toLowerCase().includes(locationQuery) || (r.disease||'').toLowerCase().includes(locationQuery);
     // The figures table honours the pathogen selector like the stats, map and plots do.
     const pathOk = isAll() || !selectedPathogen || r.pathogenRaw === selectedPathogen;
-    return regionOk && locOk && pathOk;
+    return regionOk && groupOk && locOk && pathOk;
   });
 }
-document.getElementById('region').addEventListener('change', (e) => { activeRegion = e.target.value; tablePage = 0; refreshPathogenSelector(); renderStats(); renderTable(); renderMap(); renderEventList(); flyToFilteredMarkers(); applyEmptyQueryState(); });
+// Pathogen groups — non-exclusive families (a pathogen may sit in several); toggle scopes the
+// pathogen selector, figures table, map, event list and plots to the pathogens in the chosen
+// group. Chosen for the actual pathogen universe in this dataset; overlap is intentional so a
+// toggle like "Arboviruses" surfaces Yellow Fever/RVF/CCHF even though they also read as VHF.
+const PATHO_GROUPS = {
+  'All': null,
+  'Viral Hemorrhagic Fevers': new Set(['Ebola Virus','Bundibugyo Virus','Sudan Virus','Tai Forest Virus','Marburg Virus','Lassa Virus','Junin Virus','Machupo Virus','Crimean-Congo Hemorrhagic Fever Virus','Dengue Virus (Hemorrhagic)','Yellow Fever Virus','Rift Valley Fever Virus','Alkhurma Hemorrhagic Fever Virus','Kyasanur Forest Disease Virus','Omsk Hemorrhagic Fever Virus','Hantavirus','Andes Virus','Dobrava Virus','Puumala Virus','Seoul Virus','Sin Nombre Virus']),
+  'Select Agents': new Set(['Bacillus anthracis','Francisella tularensis','Ebola Virus','Bundibugyo Virus','Sudan Virus','Tai Forest Virus','Marburg Virus','Junin Virus','Machupo Virus','Rift Valley Fever Virus','Crimean-Congo Hemorrhagic Fever Virus','Nipah','Hendra','Yellow Fever Virus','Foot-and-mouth disease virus','African swine fever virus','Lumpy skin disease virus','Sheep pox virus','Goat pox virus','Peste des petits ruminants virus']),
+  'Arboviruses': new Set(['West Nile Virus','Eastern equine encephalitis virus','Yellow Fever Virus','Dengue Virus (Hemorrhagic)','Rift Valley Fever Virus','Crimean-Congo Hemorrhagic Fever Virus','Alkhurma Hemorrhagic Fever Virus','Kyasanur Forest Disease Virus','Omsk Hemorrhagic Fever Virus']),
+  'Vector Borne Diseases': new Set(['West Nile Virus','Eastern equine encephalitis virus','Yellow Fever Virus','Dengue Virus (Hemorrhagic)','Rift Valley Fever Virus','Crimean-Congo Hemorrhagic Fever Virus','Alkhurma Hemorrhagic Fever Virus','Kyasanur Forest Disease Virus','Omsk Hemorrhagic Fever Virus']),
+  'Livestock': new Set(['African swine fever virus','Foot-and-mouth disease virus','Lumpy skin disease virus','Sheep pox virus','Goat pox virus','Peste des petits ruminants virus']),
+  'Other': new Set(['Mpox','Illness of Unknown Etiology','Nipah','Hendra']),
+};
+let activePathoGroup = 'All';
+function inPathoGroup(p) { const g = PATHO_GROUPS[activePathoGroup]; return !g || (p && g.has(p)); }
+document.getElementById('pathoGroup').addEventListener('change', (e) => {
+  activePathoGroup = e.target.value; tablePage = 0;
+  // If the current pathogen falls outside the new group, drop back to All so the plots/tables
+  // don't render an out-of-scope selection.
+  if (!isAll() && !inPathoGroup(selectedPathogen)) {
+    selectedPathogen = ALL; userChangedPathogen = false;
+    const ds = document.getElementById('disease'); if (ds && [...ds.options].some(o=>o.value===ALL)) ds.value = ALL;
+    resetDrilldowns();
+  }
+  refreshPathogenSelector();
+  renderStats(); renderTable(); renderMap(); renderTrendSection();
+  renderEventList();
+  const visEvents = visibleReports();
+  if (visEvents.length) {
+    if (!visEvents.some(({i}) => i === selectedIdx)) selectEvent(visEvents[0].i);
+    else renderBrief();
+  } else {
+    selectedIdx = -1;
+    if (briefContentEl) briefContentEl.innerHTML = `<p style="font-size:12px;color:var(--ink-3);margin:0">No event reports in the <strong>${activePathoGroup}</strong> group under the current filters.</p>`;
+    if (briefMetaEl) briefMetaEl.innerHTML = '';
+  }
+  if (typeof flyToFilteredMarkers === 'function') flyToFilteredMarkers();
+  applyEmptyQueryState();
+  // Data report is scoped by the pathogen group too; refresh it if the dialog is open.
+  const drb=document.getElementById('dataReportBackdrop');
+  if (drb && drb.style.display !== 'none') renderDataReportBody();
+});
 document.getElementById('search').addEventListener('input', (e) => { locationQuery = e.target.value.trim().toLowerCase(); tablePage = 0; refreshPathogenSelector(); renderStats(); renderTable(); renderMap(); renderEventList(); flyToFilteredMarkers(); applyEmptyQueryState(); });
 // When a location search (or region) excludes every event, the brief, trend and forecast panels
 // must not keep showing the previously-selected outbreak — clear them to an explicit empty state
@@ -946,7 +994,7 @@ function renderStats() {
   }
   // The region filter scopes the scorecard like it scopes the map, table and event list.
   const regionOk = r => activeRegion === 'All regions' || REGION_BY_COUNTRY[r.country] === activeRegion;
-  const shown = displayRecords().filter(regionOk);
+  const shown = displayRecords().filter(regionOk).filter(r => inPathoGroup(r.pathogenRaw));
   // Scorecard counts only VETTED outbreaks — unvetted (single-source) figures are excluded
   // to prevent duplication noise; the figures TABLE shows all with muted styling.
   const vettedShown = shown.filter(isRecordVetted);
@@ -1352,6 +1400,8 @@ function renderTable() {
   if (figuresTheadHtml != null && theadEl.innerHTML !== figuresTheadHtml) theadEl.innerHTML = figuresTheadHtml;
   const intro = document.getElementById('tableIntro');
   if (intro) intro.style.display = '';
+  // Unvetted-scope banner (renders above both figures and source-articles tables).
+  syncUnvettedBanner();
   const backBtn = document.getElementById('tableBack');
   const titleEl = document.getElementById('tableTitle');
   const thFirst = document.getElementById('thFirst');
@@ -1359,6 +1409,11 @@ function renderTable() {
   if (tableView.mode === 'subnational') { rec = records.find(r => r.id === tableView.id); if (rec) { rows = subnationalRowsFor(rec); subnational = true; } }
   if (!subnational) { tableView.mode = 'national'; rows = visibleRecords(); }
   rows = rows.map(refineRecord).filter(Boolean);
+  // Unvetted-scope drills the figures view to the same (country, pathogen) combo without
+  // touching the global filters, so screened-in/out toggles still apply within that combo.
+  if (unvettedScope && !subnational) {
+    rows = rows.filter(r => r.country === unvettedScope.country && r.pathogenRaw === unvettedScope.pathogen);
+  }
   rows = sortRecords(rows, tableSort);
   lastTableRows = rows;
   // Table-intro scope line: reflect the active filter instead of always claiming "All figures".
@@ -1369,6 +1424,7 @@ function renderTable() {
     const parts = [];
     if (!isAll()) parts.push(PATHOGEN_LABELS[selectedPathogen] || selectedPathogen);
     if (activeRegion && activeRegion !== 'All regions') parts.push(activeRegion);
+    if (activePathoGroup && activePathoGroup !== 'All') parts.push(activePathoGroup);
     if (typeof locationQuery !== 'undefined' && locationQuery) parts.push('“' + locationQuery + '”');
     if (activeSpecies && activeSpecies !== 'humans' && activeSpecies !== ALL_SPECIES) parts.push(activeSpecies + ' host');
     const total = records.length;
@@ -1792,6 +1848,7 @@ function latestMeasure(rows, measure) {
 function choroplethDomain() {
   return (isAll() ? displayRecords() : displayRecords().filter(r => r.pathogenRaw === selectedPathogen))
     .filter(r => !isFlu(r.pathogenRaw))
+    .filter(r => inPathoGroup(r.pathogenRaw))
     .filter(r => activeRegion === 'All regions' || REGION_BY_COUNTRY[r.country] === activeRegion)
     .reduce((m, r) => Math.max(m, r.cases || 0), 0);
 }
@@ -1858,6 +1915,7 @@ function visibleEventMarkers() {
     const key = m.country + '||' + m.pathogen;
     const pathOk = isAll() || !selectedPathogen || m.pathogen === selectedPathogen;
     const regionOk = activeRegion === 'All regions' || m.region === activeRegion;
+    const groupOk = inPathoGroup(m.pathogen);
     // Species scoping applies only to outbreaks that HAVE figure rows to type as human/animal. An
     // event-only outbreak (a report with no case-figure rows — e.g. an imported single Hantavirus
     // case in Spain) has nothing to classify, so it is kept rather than silently dropped under a
@@ -1865,12 +1923,124 @@ function visibleEventMarkers() {
     const speciesOk = !speciesCombos || speciesCombos.has(key) || !figuredCombos.has(key);
     const q = locationQuery;
     const locOk = !q || m.country.toLowerCase().includes(q) || (m.place||'').toLowerCase().includes(q) || (m.title||'').toLowerCase().includes(q) || (m.disease||'').toLowerCase().includes(q);
-    return pathOk && regionOk && speciesOk && locOk;
+    return pathOk && regionOk && groupOk && speciesOk && locOk;
   });
 }
 let highlightedCountry = null;
 
 let mapGroup = null, baseGroup = null, countryFeatures = null, zoomBehavior = null, currentK = 1, currentMarkers = [];
+let showUnvettedRaw = true; // Third-glyph layer: unvetted raw-article clusters
+let unvettedRawGroup = null;
+// Fold the raw-article feed into per-(country, pathogen) clusters at country centroid, EXCLUDING
+// combos already surfaced by a vetted event report (those are the filled circles). Respects the
+// active pathogen-group, region, species, location and pathogen selectors so the layer stays
+// coherent with everything else on the page.
+function buildUnvettedClusters() {
+  if (!Array.isArray(rawArticles) || rawArticlesState !== 'ready') return [];
+  const vettedCountries = new Set((reports||[]).filter(r=>r.geoCountry).map(r=>r.geoCountry));
+  const q = (locationQuery||'').toLowerCase();
+  const clusters = new Map();
+  rawArticles.forEach(r => {
+    if (!r.pathogen || isFlu(r.pathogen)) return;
+    if (!inPathoGroup(r.pathogen)) return;
+    if (!isAll() && selectedPathogen && r.pathogen !== selectedPathogen) return;
+    if (activeSpecies !== ALL_SPECIES && cleanText(r.host_species) !== activeSpecies) return;
+    const c = geoCountry(r.location); if (!c || !GEO[c]) return;
+    // Any event report at this country already visually "contains" raw chatter at the country
+    // centroid — hide unvetted glyphs there, regardless of pathogen, so vetted markers always win.
+    if (vettedCountries.has(c)) return;
+    if (activeRegion !== 'All regions' && REGION_BY_COUNTRY[c] !== activeRegion) return;
+    if (q && !(r.location||'').toLowerCase().includes(q) && !c.toLowerCase().includes(q) && !(r.pathogen||'').toLowerCase().includes(q)) return;
+    const key = c + '||' + r.pathogen;
+    let cl = clusters.get(key);
+    if (!cl) { cl = { country: c, pathogen: r.pathogen, count: 0, domains: new Set(), minDate: '', maxDate: '', rows: [] }; clusters.set(key, cl); }
+    cl.count++; cl.rows.push(r);
+    if (r.domain) cl.domains.add(r.domain);
+    const d = r.published || r.report_date || '';
+    if (d) { if (!cl.minDate || d < cl.minDate) cl.minDate = d; if (!cl.maxDate || d > cl.maxDate) cl.maxDate = d; }
+  });
+  return [...clusters.values()].map(cl => ({ ...cl, lonlat: GEO[cl.country].lonlat, id: 'uv-' + cl.country + '-' + cl.pathogen, domains: [...cl.domains] }));
+}
+function renderUnvettedLayer(projection) {
+  if (!mapGroup) return;
+  if (!unvettedRawGroup) unvettedRawGroup = mapGroup.insert('g', ':first-child').attr('class', 'unvetted-layer').attr('pointer-events', 'all');
+  // Draw BEFORE main markers (via insert(:first-child)) so filled event circles overlay these hollow triangles.
+  const clusters = showUnvettedRaw ? buildUnvettedClusters() : [];
+  // Downward-pointing triangle path centred on (0,0) — sized via `size` (area) mapped from count.
+  const triD = size => { const r = Math.sqrt(size); return `M${-r},${-r*0.55} L${r},${-r*0.55} L0,${r*0.9} Z`; };
+  const triSize = d => Math.max(28, Math.min(120, 28 + d.count * 6));
+  unvettedRawGroup.selectAll('path.uv-glyph').data(clusters, d => d.id).join(
+    enter => enter.append('path').attr('class', 'uv-glyph')
+      .attr('fill', 'none').attr('stroke', col('--color-accent-300')).attr('stroke-width', 1.3).attr('opacity', 0.85)
+      .style('cursor', 'pointer').classed('glyph-hit', true)
+      .attr('d', d => triD(triSize(d)))
+      .attr('transform', d => `translate(${projection(d.lonlat)[0]},${projection(d.lonlat)[1]})`)
+      .on('mousemove', (ev, d) => showTooltip(ev, unvettedTooltipHTML(d)))
+      .on('mouseleave', hideTooltip)
+      .on('click', (ev, d) => { hideTooltip(); openUnvettedCluster(d); }),
+    update => update
+      .attr('d', d => triD(triSize(d)))
+      .attr('transform', d => `translate(${projection(d.lonlat)[0]},${projection(d.lonlat)[1]})`),
+    exit => exit.remove()
+  );
+  const leg = document.getElementById('rawGlyphLegend');
+  if (leg) leg.style.opacity = showUnvettedRaw ? '1' : '0.4';
+  const lab = document.getElementById('rawGlyphLabel');
+  if (lab) lab.textContent = showUnvettedRaw ? `Unvetted raw · ${clusters.length}` : 'Unvetted raw · hidden';
+}
+function unvettedTooltipHTML(d) {
+  const label = PATHOGEN_LABELS[d.pathogen] || d.pathogen;
+  const range = d.minDate && d.maxDate ? (d.minDate === d.maxDate ? d.maxDate : `${d.minDate} → ${d.maxDate}`) : '—';
+  const topDoms = d.domains.slice(0, 3).join(', ') + (d.domains.length > 3 ? ` +${d.domains.length - 3}` : '');
+  // Singular-report path: distinct kicker at the very top, then a compact source/date pair.
+  if (d.count === 1) {
+    const r = d.rows[0] || {};
+    const pub = r.published ? String(r.published).slice(0, 10) : '';
+    return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:10px;margin:0 0 4px">Unvetted Reports</p>`
+      + `<p class="t-title" style="margin:0 0 6px">${label} · ${d.country}</p>`
+      + (r.domain ? `<div class="t-row"><span>Source</span><span>${esc(r.domain)}</span></div>` : '')
+      + (pub ? `<div class="t-row"><span>Published</span><span>${pub}</span></div>` : '')
+      + `<div class="t-row" style="margin-top:6px;color:var(--color-accent-300)"><span>Click to open source article data</span><span></span></div>`;
+  }
+  return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:10px;margin:0 0 4px">Unvetted Reports</p>`
+    + `<p class="t-title" style="margin:0 0 6px">${label} · ${d.country}</p>`
+    + `<div class="t-row"><span>Source articles</span><span>${d.count}</span></div>`
+    + `<div class="t-row"><span>Independent domains</span><span>${d.domains.length}</span></div>`
+    + `<div class="t-row"><span>Date range</span><span>${range}</span></div>`
+    + (topDoms ? `<div class="t-row" style="opacity:0.75"><span>Sources</span><span>${esc(topDoms)}</span></div>` : '')
+    + `<div class="t-row" style="margin-top:6px;color:var(--color-accent-300)"><span>Click to open source article data</span><span></span></div>`;
+}
+function openUnvettedCluster(d) {
+  // Special-case scope: source-articles table ONLY, not the map or event reports. This gives the
+  // user a transparent, reversible way to review the source articles behind an unvetted cluster.
+  unvettedScope = { country: d.country, pathogen: d.pathogen };
+  rawPage = 0;
+  const btn = [...document.querySelectorAll('#tableModeSeg .seg-opt')].find(x => x.dataset.mode === 'raw');
+  if (btn && tableMode !== 'raw') btn.click(); else renderTable();
+  const el = document.querySelector('.table-card');
+  if (el) requestAnimationFrame(() => window.scrollTo({ top: window.scrollY + el.getBoundingClientRect().top - 70, behavior: 'smooth' }));
+}
+function clearUnvettedScope() { if (!unvettedScope) return; unvettedScope = null; rawPage = 0; tablePage = 0; renderTable(); }
+function syncUnvettedBanner() {
+  let banner = document.getElementById('unvettedScopeBanner');
+  if (unvettedScope) {
+    if (!banner) {
+      banner = document.createElement('div');
+      banner.id = 'unvettedScopeBanner';
+      banner.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px;padding:6px 12px;border-radius:var(--radius-sm);background:color-mix(in srgb,var(--color-accent-500) 14%, transparent);border:1px solid color-mix(in srgb,var(--color-accent-300) 30%, transparent);font-size:12px';
+      const scroll = document.querySelector('.table-card .table-scroll');
+      scroll?.parentNode?.insertBefore(banner, scroll);
+    }
+    const lbl = PATHOGEN_LABELS[unvettedScope.pathogen] || unvettedScope.pathogen;
+    banner.innerHTML = `<span>Filtered to unvetted reports for <strong>${esc(lbl)}</strong> in <strong>${esc(unvettedScope.country)}</strong> — applies to both figures and source articles</span><button type="button" class="btn btn-secondary" id="unvettedScopeClear" style="font-size:11px;padding:2px 10px">Clear filter</button>`;
+    banner.querySelector('#unvettedScopeClear').onclick = clearUnvettedScope;
+    banner.style.display = '';
+  } else if (banner) {
+    banner.style.display = 'none';
+  }
+}
+document.getElementById('rawGlyphLegend')?.addEventListener('click', () => { showUnvettedRaw = !showUnvettedRaw; renderMap(); });
+document.addEventListener('rawarticles', () => { if (mapGroup) renderMap(); });
 let mapMode = 'risk';
 document.getElementById('mapMetricSeg').addEventListener('click', (e) => {
   const btn = e.target.closest('.seg-opt');
@@ -1882,6 +2052,8 @@ document.getElementById('mapMetricSeg').addEventListener('click', (e) => {
 });
 function renderMap() {
   if (!dataLoaded) { const el = document.getElementById('mapCount'); if (el) el.textContent = 'Loading live data…'; return; }
+  // Third-glyph layer depends on the raw-article feed — kick off its lazy load if we're going to use it.
+  if (showUnvettedRaw && (rawArticlesState === 'idle')) ensureRawArticles();
   const draw = () => {
     if (!zoomBehavior) {
       svg.attr('viewBox', `0 0 ${width} ${height}`);
@@ -1900,6 +2072,7 @@ function renderMap() {
     const casesByAtlas = new Map();
     (isAll() ? displayRecords() : displayRecords().filter(r => r.pathogenRaw === selectedPathogen))
       .filter(r => !isFlu(r.pathogenRaw))
+      .filter(r => inPathoGroup(r.pathogenRaw))
       .filter(r => activeRegion === 'All regions' || REGION_BY_COUNTRY[r.country] === activeRegion)
       .forEach(r => {
         const atlas = GEO[r.country]?.atlas;
@@ -1939,14 +2112,20 @@ function renderMap() {
       .on('click', (event, d) => { hideTooltip(); zoomToMarker(d); if (typeof focusEvent==='function') focusEvent(d.reportIdx); })
       .on('keydown', (event, d) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); zoomToMarker(d); if (typeof focusEvent==='function') focusEvent(d.reportIdx); } });
     applyZoomScaling();
+    // Unvetted raw-article clusters (a third glyph type): hollow triangles at country centroid,
+    // grouped by (country, pathogen), for combos that DON'T already have a vetted event marker.
+    // These represent chatter in the raw feed that hasn't been corroborated into an event report yet.
+    renderUnvettedLayer(projection);
     const el = document.getElementById('mapCount');
     if (el) {
-      // Surface figures at locations that can't be placed (regional aggregates like "West Africa",
-      // or country strings not in GEO) so map omissions are VISIBLE rather than silently dropped.
-      const off = [...new Set((allRows||[]).filter(r => !geoCountry(r.location)).map(r => (r.location||'').split(',').pop().trim()).filter(Boolean))];
-      el.textContent = `${currentMarkers.length} reported events` + (off.length ? ` \u00b7 ${off.length} off-map` : '');
-      el.title = off.length ? ('Figures not placed on the map (regional aggregate or unrecognised location): ' + off.join(', ')) : '';
-      el.style.cursor = off.length ? 'help' : '';
+      // Off-map = event reports that cannot be placed on the map (no coordinate, or a coordinate
+      // whose country isn't in GEO). The map represents event reports, not figures — a raw-figures
+      // location that doesn't resolve is a data-availability concern, not a map omission.
+      const offReports = (reports||[]).filter(r => !r.lonlat || !r.geoCountry || !GEO[r.geoCountry]);
+      const offTokens = [...new Set(offReports.map(r => r.place || r.country || (r.geoCountry||'')).filter(Boolean))];
+      el.textContent = `${currentMarkers.length} reported events` + (offReports.length ? ` \u00b7 ${offReports.length} off-map` : '');
+      el.title = offReports.length ? ('Event reports not placed on the map (missing coordinate or unrecognised country): ' + offTokens.join(', ')) : '';
+      el.style.cursor = offReports.length ? 'help' : '';
     }
     syncGlobeIfActive();
   };
@@ -2064,6 +2243,20 @@ function addGlobeMarkers() {
     el.addEventListener('mouseenter', () => { if (!popup.isOpen()) mk.togglePopup(); });
     el.addEventListener('mouseleave', () => popup.remove());
     el.addEventListener('click', (ev) => { ev.stopPropagation(); popup.remove(); globe.flyTo({ center:m.lonlat, zoom:3.6, duration:800 }); if (typeof focusEvent==='function') focusEvent(m.reportIdx); });
+    globeMarkers.push(mk);
+  });
+  // Third-glyph layer on the globe — mirrors the flat map's unvetted raw-article clusters.
+  if (showUnvettedRaw) buildUnvettedClusters().forEach(d => {
+    // Hollow downward-triangle glyph rendered as inline SVG so it matches the flat-map shape.
+    const size = Math.max(14, Math.min(30, 14 + d.count * 1.6));
+    const el = document.createElement('div');
+    el.style.cssText = `width:${size}px;height:${size}px;cursor:pointer;pointer-events:auto`;
+    el.innerHTML = `<svg viewBox="0 0 20 20" width="${size}" height="${size}" style="overflow:visible"><path d="M2 5 L18 5 L10 17 Z" fill="none" stroke="var(--color-accent-300)" stroke-width="1.5" opacity="0.9"></path></svg>`;
+    const popup = new maplibregl.Popup({ offset:10, closeButton:false, className:'globe-pop' }).setHTML(unvettedTooltipHTML(d));
+    const mk = new maplibregl.Marker({ element:el }).setLngLat(d.lonlat).setPopup(popup).addTo(globe);
+    el.addEventListener('mouseenter', () => { if (!popup.isOpen()) mk.togglePopup(); });
+    el.addEventListener('mouseleave', () => popup.remove());
+    el.addEventListener('click', (ev) => { ev.stopPropagation(); popup.remove(); openUnvettedCluster(d); });
     globeMarkers.push(mk);
   });
 }
@@ -2762,30 +2955,37 @@ function availablePathogenRaws() {
   const regionOk = r => activeRegion === 'All regions' || REGION_BY_COUNTRY[r.country] === activeRegion;
   const locOk = r => !locationQuery || r.country.toLowerCase().includes(locationQuery) || (r.disease||'').toLowerCase().includes(locationQuery);
   const base = records.map(refineRecord).filter(Boolean)
-    .filter(r => regionOk(r) && locOk(r) && !isFlu(r.pathogenRaw));
+    .filter(r => regionOk(r) && locOk(r) && !isFlu(r.pathogenRaw) && inPathoGroup(r.pathogenRaw));
   const set = new Set(base.map(r => r.pathogenRaw).filter(Boolean));
   // Also surface pathogens that have figure ROWS but no clean confirmed-cases record (e.g. Machupo,
   // Yellow Fever, and CCHF once it lands) — otherwise a pathogen with real data is hidden from the
   // selector entirely. Selecting one at least filters the raw table, event reports and data report.
   const rLocOk = loc => !locationQuery || (loc||'').toLowerCase().includes(locationQuery);
-  (allRows||[]).forEach(r => { if(!r.pathogen || isFlu(r.pathogen)) return; const c=geoCountry(r.location);
+  const rSpeciesOk = r => activeSpecies === ALL_SPECIES || cleanText(r.species) === activeSpecies;
+  (allRows||[]).forEach(r => { if(!r.pathogen || isFlu(r.pathogen) || !inPathoGroup(r.pathogen)) return; const c=geoCountry(r.location);
     const rRegionOk = activeRegion==='All regions' || !c || REGION_BY_COUNTRY[c]===activeRegion;
-    if(rRegionOk && rLocOk(r.location)) set.add(r.pathogen); });
+    if(rRegionOk && rLocOk(r.location) && rSpeciesOk(r)) set.add(r.pathogen); });
   // And surface REPORT-ONLY pathogens from the raw report rows, captured UPSTREAM of the map's
   // coordinate filter and the Status-Report/title filter (reportPathoLocs). Keying off eventMarkers
   // (the old approach) missed any report with no coordinate or no generated narrative — e.g. an
   // imported CCHF case in Spain — so it never reached the selector. Selecting one shows its event
   // report + data-report entry; the figures table/plots show an honest empty state.
-  (reportPathoLocs||[]).forEach(m => { if(!m.pathogen || isFlu(m.pathogen)) return;
+  // Report-only pathogens: reports have no species field, so under a specific animal-species
+  // filter (e.g. hippos) they cannot be shown to be relevant and would leak human-only pathogens
+  // like "Illness of Unknown Etiology" into the pathogen selector. Only expand this fallback
+  // when the species view is unscoped or human — the two contexts where reports apply.
+  const reportsScopeOk = activeSpecies === ALL_SPECIES || isHumanHost(activeSpecies);
+  (reportsScopeOk ? (reportPathoLocs||[]) : []).forEach(m => { if(!m.pathogen || isFlu(m.pathogen) || !inPathoGroup(m.pathogen)) return;
     const evRegionOk = activeRegion==='All regions' || !m.country || REGION_BY_COUNTRY[m.country]===activeRegion;
     const evLocOk = !locationQuery || (m.country||'').toLowerCase().includes(locationQuery) || (m.place||'').toLowerCase().includes(locationQuery);
     if(evRegionOk && evLocOk) set.add(m.pathogen); });
-  // Finally surface RAW-EXTRACTION-ONLY pathogens — present only in the raw article corpus, never in
+  // Finally surface RAW-EXTRACTION-ONLY pathogens — present only in the source article corpus, never in
   // the figures/report feeds (e.g. Crimean-Congo Hemorrhagic Fever). Without this an unmapped pathogen
   // that nonetheless has real raw rows + articles is hidden from the selector entirely. Selecting one
   // filters the raw table (and data report) to it; the other panels show an honest empty state. The raw
   // feed loads lazily, so this only takes effect after the 'rawarticles' refresh below re-runs it.
-  (rawArticles||[]).forEach(r => { if(!r.pathogen || isFlu(r.pathogen) || set.has(r.pathogen)) return;
+  (rawArticles||[]).forEach(r => { if(!r.pathogen || isFlu(r.pathogen) || set.has(r.pathogen) || !inPathoGroup(r.pathogen)) return;
+    if (activeSpecies !== ALL_SPECIES && cleanText(r.host_species) !== activeSpecies) return;
     const c = geoCountry(r.location);
     const rawRegionOk = activeRegion==='All regions' || !c || REGION_BY_COUNTRY[c]===activeRegion;
     const rawLocOk = !locationQuery || (r.location||'').toLowerCase().includes(locationQuery);
@@ -4113,13 +4313,31 @@ function visibleReports() {
   // Region is a global filter — the event list honours it like the map, stats and table do.
   // Reports with no resolvable country are always kept (they cannot be region-classified).
   const regionOk = ({r}) => !r.geoCountry || activeRegion === 'All regions' || REGION_BY_COUNTRY[r.geoCountry] === activeRegion;
+  const groupOk = ({r}) => inPathoGroup(r.pathogen);
   // Location search scopes the event list too, mirroring the map markers, so the panels agree.
   const q = locationQuery;
   const locOk = ({r}) => !q || (r.country||'').toLowerCase().includes(q) || (r.place||'').toLowerCase().includes(q) || (r.title||'').toLowerCase().includes(q) || (r.pathogen||'').toLowerCase().includes(q) || (PATHOGEN_LABELS[r.pathogen]||'').toLowerCase().includes(q);
+  // Species scoping mirrors the map: an event whose (country, pathogen) combo has figure rows
+  // in some other species but not the selected one is out of scope; combos with no figure rows
+  // at all are kept (report-only events can't be typed by host and shouldn't silently drop out).
+  let speciesCombos = null, figuredCombos = null;
+  if (activeSpecies !== ALL_SPECIES) {
+    speciesCombos = new Set(); figuredCombos = new Set();
+    (allRows||[]).forEach(r => { const c = geoCountry(r.location); if (!c) return; const key = c + '||' + r.pathogen; figuredCombos.add(key); if (cleanText(r.species) === activeSpecies) speciesCombos.add(key); });
+  }
+  const speciesOk = ({r}) => {
+    if (!speciesCombos) return true;
+    const key = (r.geoCountry||'') + '||' + (r.pathogen||'');
+    // Stricter than the map's marker rule: for the event list/brief we want events that are
+    // actually attested for the selected species. Report-only combos (no figure rows anywhere)
+    // are treated as out-of-scope under a specific species, otherwise unrelated human-only
+    // reports (e.g. a US "Illness of Unknown Etiology" cluster) leak into an animal-species view.
+    return speciesCombos.has(key);
+  };
   // No drill-down filter: still scope the list to the selected pathogen so the selector
   // refreshes every data element, including the event reports panel.
-  if (!isAll() && selectedPathogen) return idx.filter(({r}) => r.pathogen===selectedPathogen && regionOk({r}) && locOk({r}));
-  return idx.filter(({r}) => regionOk({r}) && locOk({r}));
+  if (!isAll() && selectedPathogen) return idx.filter(x => x.r.pathogen===selectedPathogen && regionOk(x) && groupOk(x) && locOk(x) && speciesOk(x));
+  return idx.filter(x => regionOk(x) && groupOk(x) && locOk(x) && speciesOk(x));
 }
 // Full filter reset: back to All pathogens, national overview, unfiltered event list.
 function resetFilters() {
@@ -4833,7 +5051,7 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const bb
 // Default the map to the globe view once everything is wired.
 function openDialog(title, html) { hideChartTip(); dialogOpener = document.activeElement; document.getElementById('drillTitle').textContent = title; document.getElementById('drillBody').innerHTML = html; document.getElementById('drillBackdrop').style.display = 'flex'; document.getElementById('drillClose').focus(); }
 
-// --- Raw article–fact table: the figures card's ALTERNATE, swappable table ---
+// --- Source article–fact table: the figures card's ALTERNATE, swappable table ---
 // Fetched lazily — it is large (~8 MB) — so it never blocks first paint. The raw tab and the
 // aggregated tab are parallel views sharing only ~31% of URLs, so NO screening or admission
 // semantics are projected onto raw rows; the Screened in/All/Screened out toggle belongs to figures only.
@@ -5004,7 +5222,7 @@ function citeCard(u, rel) {
 function ensureRawArticles() {
   if (rawArticlesState !== 'idle') return;
   rawArticlesState = 'loading';
-  withTimeout(d3.csv(GSHEET_RAW_URL), 45000, 'raw articles').then(rows => {
+  withTimeout(d3.csv(GSHEET_RAW_URL), 45000, 'source articles').then(rows => {
     rawArticles = rows || [];
     rawArticles.forEach(r => {
       const t = cleanText(r.title) || cleanText(r.title_translated);
@@ -5020,7 +5238,7 @@ function ensureRawArticles() {
     rawArticlesState = 'ready';
     document.dispatchEvent(new CustomEvent('rawarticles'));
   }).catch(err => {
-    console.warn('[data] raw article table unreachable:', err && (err.message || err));
+    console.warn('[data] source article table unreachable:', err && (err.message || err));
     rawArticlesState = 'unavailable';
     document.dispatchEvent(new CustomEvent('rawarticles'));
   });
@@ -5044,8 +5262,17 @@ function rawDedupe(rows){
   return [...groups.values()];
 }
 // Toolbar filters apply to the raw table too (pathogen, host, location search).
+// Unvetted-glyph click scope: an isolated override that scopes ONLY the source-articles table
+// to a (country, pathogen) combo, without touching the map's global filters (locationQuery,
+// pathogen selector, region). Clears when the user leaves source-articles mode or dismisses.
+let unvettedScope = null;
 function rawFiltered() {
   let rows = rawArticles || [];
+  if (unvettedScope) {
+    const gc = window.geoCountry || (typeof geoCountry === 'function' ? geoCountry : null);
+    rows = rows.filter(r => r.pathogen === unvettedScope.pathogen && gc && gc(r.location) === unvettedScope.country);
+    return rawDedupe(rows);
+  }
   if (!isAll() && selectedPathogen) rows = rows.filter(r => r.pathogen === selectedPathogen);
   if (activeSpecies !== ALL_SPECIES) rows = rows.filter(r => cleanText(r.host_species) === activeSpecies);
   const q = locationQuery.toLowerCase();
@@ -5099,10 +5326,11 @@ function renderRawTable() {
   if (figuresTheadHtml == null) figuresTheadHtml = thead.innerHTML;
   backBtn.style.display = 'none';
   if (intro) intro.style.display = 'none';
-  titleEl.textContent = 'Raw articles — one row per article and extracted fact';
+  titleEl.textContent = 'Source articles — one row per article and extracted fact';
+  syncUnvettedBanner();
   if (rawArticlesState !== 'ready') {
     thead.innerHTML = '<tr><th>Article (original title)</th><th>Domain</th><th>Pathogen</th><th>Location</th><th>Host</th><th>Extracted fact</th><th>Vetting score</th><th>Vettings</th><th>Proximity</th><th>Published</th><th>Run</th></tr>';
-    body.innerHTML = `<tr><td colspan="11" style="text-align:center;color:var(--ink-3);padding:20px">${rawArticlesState === 'unavailable' ? 'The raw article table is unreachable right now — the figures table remains available above.' : 'Loading the raw article–fact table…'}</td></tr>`;
+    body.innerHTML = `<tr><td colspan="11" style="text-align:center;color:var(--ink-3);padding:20px">${rawArticlesState === 'unavailable' ? 'The source article table is unreachable right now — the figures table remains available above.' : 'Loading the source article–fact table…'}</td></tr>`;
     pager.style.display = 'none';
     if (rawArticlesState === 'idle' || rawArticlesState === 'loading') ensureRawArticles();
     return;
@@ -5158,6 +5386,8 @@ function renderRawTable() {
 document.getElementById('tableModeSeg').addEventListener('click', (e) => {
   const btn = e.target.closest('.seg-opt'); if (!btn) return;
   tableMode = btn.dataset.mode;
+  // Leaving source-articles mode drops any unvetted-glyph scope so figures mode isn't confused.
+  if (tableMode !== 'raw' && unvettedScope) unvettedScope = null;
   document.querySelectorAll('#tableModeSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
   document.getElementById('screenSeg').style.display = tableMode === 'figures' ? '' : 'none';
   // The CSV export serialises the FIGURES table — it would silently export stale rows in raw mode.
@@ -5208,8 +5438,26 @@ document.getElementById('exportEventsBtn').addEventListener('click', exportEvent
 document.getElementById('printBtn').addEventListener('click', () => window.print());
 document.getElementById('species').addEventListener('change', (e) => {
   activeSpecies = e.target.value; tablePage = 0;
+  // A carried-over drill-down (subnational scope, reportFilter) belongs to the previous species view;
+  // clear it so the new species starts from the national/unfiltered overview.
+  resetDrilldowns();
   refreshPathogenSelector();
   renderStats(); renderTable(); renderMap(); renderTrendSection();
+  // Brief + event list must reflect the new species scope. If the previously-selected event
+  // no longer matches (e.g. picking hippos while a US "Illness of Unknown Etiology" report
+  // was open), jump to a species-relevant event; if nothing matches, blank the brief rather
+  // than stranding an unrelated report open.
+  renderEventList();
+  const visEvents = visibleReports();
+  if (visEvents.length) {
+    if (!visEvents.some(({i}) => i === selectedIdx)) selectEvent(visEvents[0].i);
+    else renderBrief();
+  } else {
+    selectedIdx = -1;
+    if (briefContentEl) briefContentEl.innerHTML = `<p style="font-size:12px;color:var(--ink-3);margin:0">No event reports match host <strong>${activeSpecies}</strong> under the current filters.</p>`;
+    if (briefMetaEl) briefMetaEl.innerHTML = '';
+  }
+  if (typeof flyToFilteredMarkers === 'function') flyToFilteredMarkers();
 });
 document.getElementById('screenSeg').addEventListener('click', (e) => {
   const btn = e.target.closest('.seg-opt'); if (!btn) return;
@@ -5229,7 +5477,7 @@ function pathogenDataCounts(P){
   const days=new Set(canon.filter(r=>r.measure==='confirmed_cases'||r.measure==='confirmed_deaths').map(r=>r.report_date));
   // Raw rows come from the RAW EXTRACTION CORPUS (rawArticles) — the dataset this cell actually drills
   // into — NOT the measurements feed. The old `rows.length` reported measurement rows here (e.g. 49 for
-  // anthrax, identical to Figures) while the drill-down opened a handful of duplicate raw articles; the
+  // anthrax, identical to Figures) while the drill-down opened a handful of duplicate source articles; the
   // number and the panel it linked to never agreed. Deduped so repeated re-reports of one article/fact
   // aren't counted. null while the lazy raw feed is still loading -> rendered as "…".
   const raw = rawArticlesState==='ready' ? rawDedupe((rawArticles||[]).filter(r=>r.pathogen===P)).length : null;
@@ -5251,7 +5499,12 @@ function renderDataReportBody(){
   const body=document.getElementById('dataReportBody'); if(!body) return;
   // Universe now includes raw-extraction-only pathogens (e.g. CCHF), so a pathogen that exists only in
   // the raw corpus still gets a row here with a clickable Raw-rows count into its articles.
-  const uni=[...new Set([...(allRows||[]).map(r=>r.pathogen), ...(reports||[]).map(r=>r.pathogen), ...(reportPathoLocs||[]).map(r=>r.pathogen), ...(rawArticles||[]).map(r=>r.pathogen)])].filter(p=>p && !isFlu(p));
+  const uni=[...new Set([...(allRows||[]).map(r=>r.pathogen), ...(reports||[]).map(r=>r.pathogen), ...(reportPathoLocs||[]).map(r=>r.pathogen), ...(rawArticles||[]).map(r=>r.pathogen)])].filter(p=>p && !isFlu(p) && inPathoGroup(p));
+  // Reflect the active pathogen-group filter in the dialog title so it's clear the table is scoped.
+  const titleEl=document.getElementById('dataReportTitle');
+  if (titleEl) titleEl.textContent = activePathoGroup && activePathoGroup!=='All'
+    ? `Data availability by pathogen — ${activePathoGroup}`
+    : 'Data availability by pathogen';
   const rows = uni.map(p => ({ p, label: PATHOGEN_LABELS[p]||p, c: pathogenDataCounts(p) }));
   const { key, dir } = dataReportSort;
   const cmpNum = (a,b)=>{ const av=a==null?-1:a, bv=b==null?-1:b; return av-bv; };
