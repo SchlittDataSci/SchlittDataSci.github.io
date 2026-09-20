@@ -387,7 +387,7 @@
   :root { --fs-1:10px; --fs-2:12px; --fs-3:14px; --fs-4:18px; --fs-5:24px; --fs-6:30px; }
   /* Section labels — the page now reads as a numbered sequence rather than a pile of panels. */
   .section-label { display:flex; align-items:center; gap:var(--space-3); margin:var(--space-6) 0 var(--space-3); font-size:var(--fs-1); text-transform:uppercase; letter-spacing:.14em; color:var(--ink-4); font-weight:600; }
-  .section-label:first-of-type { margin-top:var(--space-5); }
+  .section-label:first-of-type { margin-top:var(--space-6); }
   .section-label .sl-num { color:var(--color-accent-300); font-variant-numeric:tabular-nums; }
   .section-label .sl-rule { flex:1; height:1px; background:linear-gradient(90deg, var(--color-divider), transparent); }
   /* Hierarchy: the lead answer + map is the clear primary; the analysis and table read as quieter. */
@@ -406,12 +406,25 @@
   .lead-metric .lm-num { font-family:var(--font-heading); font-weight:var(--font-heading-weight); font-size:var(--fs-4); line-height:1; margin:0; font-variant-numeric:tabular-nums; color:var(--color-text); }
   .lead-metric .lm-lbl { font-size:var(--fs-1); text-transform:uppercase; letter-spacing:.05em; color:var(--ink-label); margin:6px 0 0; }
   .lead-cta { align-self:center; flex:none; white-space:nowrap; margin-left:var(--space-2); }
-  /* Data-report and Open-brief primary actions are peer CTAs — match their box exactly so they
-     read as one control language, and right-align both against their container edges. */
-  #dataReportBtn, #leadCta { min-width: 148px; height: 38px; padding: 0 var(--space-4); font-size: 13px; gap: var(--space-2); justify-content: center; }
+  /* Data-report and Open-brief primary actions are peer CTAs — identical fixed box, and the toolbar
+     button carries a right margin equal to the lead strip's padding+border so its right edge (and,
+     at equal width, its left edge) lines up with Open brief directly below. */
+  #dataReportBtn, #leadCta { width: 168px; min-width: 168px; height: 38px; padding: 0 var(--space-4); font-size: 13px; gap: var(--space-2); justify-content: center; }
+  /* One-time attention: after load the Data-report CTA rakes three shines — gold, red, purple, 5s
+     apart. Each is a fan of varied-width bands moving at different speeds (WAAPI, see script), like
+     light glancing across a moving mirror sphere. Bands live inside .dr-sheen (clipped there, so the
+     button's own hover glow is never clipped); the label rides above on .dr-label. */
+  #dataReportBtn { position: relative; margin-right: calc(var(--space-4) + 1px); }
+  .dr-label { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: var(--space-2); }
+  .dr-sheen { position: absolute; inset: 0; z-index: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
+  .dr-sheen i { position: absolute; top: -30%; bottom: -30%; left: 0; display: block; width: 16px; opacity: 0; transform: translateX(-70px) skewX(-18deg); filter: blur(0.6px); }
+  .dr-sheen i:nth-child(1) { width: 9px; }
+  .dr-sheen i:nth-child(2) { width: 24px; }
+  .dr-sheen i:nth-child(3) { width: 13px; }
+  .dr-sheen i:nth-child(4) { width: 32px; }
   @media (max-width:820px){ .lead-strip{ flex-wrap:wrap; } .lead-metrics{ border-left:0; padding-left:0; border-top:1px solid color-mix(in srgb,var(--color-accent-300) 22%,transparent); padding-top:var(--space-3); width:100%; justify-content:space-between; } .lead-cta{ align-self:flex-start; } }
   /* Quiet the filter toolbar so it stops competing with the content it filters. */
-  .toolbar { border-bottom:0; padding:var(--space-2) 0 0; margin-bottom:0; }
+  .toolbar { border-bottom:0; padding:var(--space-3) 0 var(--space-2); margin-bottom:0; }
   .toolbar label { color:var(--ink-4); }
   .toolbar .input { background:color-mix(in srgb,var(--color-neutral-900) 55%, transparent); }
   .toolbar #clustersTag { color:var(--ink-3); }
@@ -531,7 +544,7 @@
       </select>
     </div>
     <div class="field-inline">
-      <label for="pathoGroup" title="Scopes the pathogen selector, figures table, map, event list and plots to a pathogen family. Groups overlap by design (e.g. Yellow Fever is both a VHF and an arbovirus).">Pathogen group</label>
+      <label for="pathoGroup" title="Scopes the pathogen selector, figures table, map, event list and plots to a pathogen family. Groups overlap by design (e.g. Yellow Fever is both a VHF and an arbovirus).">GROUP</label>
       <select id="pathoGroup" class="input" style="min-width:180px">
         <option>All</option>
         <option>Viral Hemorrhagic Fevers</option>
@@ -543,14 +556,14 @@
       </select>
     </div>
     <div class="field-inline">
-      <label for="search">Location</label>
-      <input id="search" class="input" type="text" placeholder="Filter by country, pathogen…" style="min-width:180px">
-    </div>
-    <div class="field-inline">
-      <label for="species" title="Scopes every data element — summary stats, map, plots and the figures table">Host species</label>
+      <label for="species" title="Scopes every data element — summary stats, map, plots and the figures table">HOST</label>
       <select id="species" class="input" style="min-width:150px"><option>All species</option></select>
     </div>
-    <button type="button" class="btn btn-primary" id="dataReportBtn" style="gap:var(--space-2)" title="Per-pathogen data availability — mapped events, event reports, plot days, sources, figures and raw rows"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M9.5 20V4M15 20v-7M20.5 20V8"></path></svg>Data report</button>
+    <div class="field-inline">
+      <label for="search">SEARCH</label>
+      <input id="search" class="input" type="text" placeholder="Filter by country, pathogen…" style="min-width:180px">
+    </div>
+    <button type="button" class="btn btn-primary" id="dataReportBtn" title="Per-pathogen data availability — mapped events, event reports, plot days, sources, figures and raw rows"><span class="dr-sheen" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="dr-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M9.5 20V4M15 20v-7M20.5 20V8"></path></svg>Data report</span></button>
   </div>
 
   <p class="section-label"><span class="sl-num">01</span> Situation<span class="sl-rule"></span></p>
@@ -1931,6 +1944,51 @@ let highlightedCountry = null;
 let mapGroup = null, baseGroup = null, countryFeatures = null, zoomBehavior = null, currentK = 1, currentMarkers = [];
 let showUnvettedRaw = true; // Third-glyph layer: unvetted raw-article clusters
 let unvettedRawGroup = null;
+// --- Marker de-collision --------------------------------------------------------------------
+// Several markers can resolve to the exact same map point: multiple national event reports at a
+// country centroid, or several unvetted pathogen clusters sharing that centroid. Stacked, they hide
+// each other and silently suppress data. These helpers fan any colliding group out around the shared
+// point on a small ring (rank-sorted, biggest first) so every glyph stays visible and clickable.
+// A point with only one occupant — the common case — is returned unchanged, so nothing moves unless
+// it genuinely collides.
+function collisionGroups(items, keyFn, rankFn) {
+  const m = new Map();
+  items.forEach(it => { const k = keyFn(it); let a = m.get(k); if (!a) { a = []; m.set(k, a); } a.push(it); });
+  const groups = [...m.values()];
+  if (rankFn) groups.forEach(a => { if (a.length > 1) a.sort(rankFn); });
+  return groups;
+}
+function fanVec(i, n, radius) {
+  if (n < 2) return [0, 0];
+  const ang = -Math.PI / 2 + (i / n) * Math.PI * 2;
+  return [Math.cos(ang) * radius, Math.sin(ang) * radius];
+}
+// Flat map: fan offsets keyed by projected pixel. Returns Map<item,[dx,dy]px>.
+function fanPx(items, xyFn, rankFn, baseR) {
+  const out = new Map();
+  collisionGroups(items, it => { const p = xyFn(it); return Math.round(p[0]) + ',' + Math.round(p[1]); }, rankFn)
+    .forEach(g => g.forEach((it, i) => out.set(it, fanVec(i, g.length, (baseR || 4) + g.length * 0.8))));
+  return out;
+}
+// Globe: fan offsets in lon/lat (deg ring radius, longitude corrected for latitude). Returns
+// Map<item,[lon,lat]> already offset.
+function fanLL(items, llFn, rankFn, deg) {
+  const out = new Map();
+  collisionGroups(items, it => llFn(it).map(v => v.toFixed(3)).join(','), rankFn)
+    .forEach(g => g.forEach((it, i) => {
+      const ll = llFn(it); const v = fanVec(i, g.length, deg || 1.3);
+      const lat = ll[1] + v[1];
+      out.set(it, [ll[0] + v[0] / Math.max(0.3, Math.cos(lat * Math.PI / 180)), lat]);
+    }));
+  return out;
+}
+// Flat-map transform for an unvetted glyph at zoom k: base projected point plus its screen-px fan
+// offset (o/k), and scale(1/k) so the glyph itself is a constant screen size at every zoom — a
+// fixed, small fan that stays put through zoom reads as "these clusters share one point".
+function uvGlyphTransform(d, k) {
+  const p = projection(d.lonlat), o = d._fan || [0, 0];
+  return `translate(${p[0] + o[0] / k},${p[1] + o[1] / k}) scale(${1 / k})`;
+}
 // Fold the raw-article feed into per-(country, pathogen) clusters at country centroid, EXCLUDING
 // combos already surfaced by a vetted event report (those are the filled circles). Respects the
 // active pathogen-group, region, species, location and pathogen selectors so the layer stays
@@ -1966,6 +2024,11 @@ function renderUnvettedLayer(projection) {
   if (!unvettedRawGroup) unvettedRawGroup = mapGroup.insert('g', ':first-child').attr('class', 'unvetted-layer').attr('pointer-events', 'all');
   // Draw BEFORE main markers (via insert(:first-child)) so filled event circles overlay these hollow triangles.
   const clusters = showUnvettedRaw ? buildUnvettedClusters() : [];
+  // Fan out unvetted pathogen clusters that share a country centroid so one pathogen's glyph never
+  // hides another's (this is what stacked the Sri Lanka triangles). Offsets are SCREEN px, applied
+  // via uvGlyphTransform as o/k so the fan reads the same at every zoom.
+  const uvFan = fanPx(clusters, d => projection(d.lonlat), (a,b)=>(b.count||0)-(a.count||0), 3);
+  clusters.forEach(c => { c._fan = uvFan.get(c) || null; });
   // Downward-pointing triangle path centred on (0,0) — sized via `size` (area) mapped from count.
   const triD = size => { const r = Math.sqrt(size); return `M${-r},${-r*0.55} L${r},${-r*0.55} L0,${r*0.9} Z`; };
   const triSize = d => Math.max(28, Math.min(120, 28 + d.count * 6));
@@ -1974,13 +2037,13 @@ function renderUnvettedLayer(projection) {
       .attr('fill', 'none').attr('stroke', col('--color-accent-300')).attr('stroke-width', 1.3).attr('opacity', 0.85)
       .style('cursor', 'pointer').classed('glyph-hit', true)
       .attr('d', d => triD(triSize(d)))
-      .attr('transform', d => `translate(${projection(d.lonlat)[0]},${projection(d.lonlat)[1]})`)
+      .attr('transform', d => uvGlyphTransform(d, currentK))
       .on('mousemove', (ev, d) => showTooltip(ev, unvettedTooltipHTML(d)))
       .on('mouseleave', hideTooltip)
       .on('click', (ev, d) => { hideTooltip(); openUnvettedCluster(d); }),
     update => update
       .attr('d', d => triD(triSize(d)))
-      .attr('transform', d => `translate(${projection(d.lonlat)[0]},${projection(d.lonlat)[1]})`),
+      .attr('transform', d => uvGlyphTransform(d, currentK)),
     exit => exit.remove()
   );
   const leg = document.getElementById('rawGlyphLegend');
@@ -2090,6 +2153,11 @@ function renderMap() {
         if (v == null) return noDataColor;
         return choroplethColor(v, maxCases);
       });
+    // Fan out any vetted markers landing on the same projected point (e.g. two national reports at
+    // one country centroid) so neither is hidden. Offsets are SCREEN px, applied as o/k (see the
+    // marker transform + applyZoomScaling) so the fan stays a constant small size at every zoom.
+    const vFan = fanPx(currentMarkers, m => projection(m.lonlat), (a,b)=>(b.risk||0)-(a.risk||0), 3.5);
+    currentMarkers.forEach(m => { m._fan = vFan.get(m) || null; });
     mapGroup.selectAll('g.marker-g')
       .data(currentMarkers, d => d.id)
       .join(enter => {
@@ -2100,14 +2168,14 @@ function renderMap() {
         g.append('circle').attr('class', 'marker').attr('fill-opacity', 0.6).attr('stroke', col('--color-neutral-100'));
         return g;
       })
-      .attr('transform', d => `translate(${projection(d.lonlat)[0]},${projection(d.lonlat)[1]})`)
+      .attr('transform', d => { const p = projection(d.lonlat), o = d._fan || [0,0]; return `translate(${p[0]+o[0]/currentK},${p[1]+o[1]/currentK})`; })
       .style('cursor', 'pointer').attr('tabindex', 0).attr('role', 'button')
       .attr('aria-label', d => `${d.title}. Risk ${d.risk} of 9. ${d.place}. Activate to open the brief.`)
       .attr('opacity', d => highlightedCountry && d.country !== highlightedCountry ? 0.28 : 1)
       .each(function(d){ const fill = sevColor(d.risk||1); const g = d3.select(this); g.select('.marker').attr('fill', fill).attr('fill-opacity', d.scope==='national'?0.82:0.42).attr('stroke', d.scope==='national'?col('--color-neutral-100'):col('--color-neutral-400')).style('filter', 'drop-shadow(0 0 2px '+fill+')'); g.select('.marker-pulse').attr('fill', fill); })
       .on('mousemove', (event, d) => showTooltip(event, tooltipHTML(d)))
       .on('mouseleave', hideTooltip)
-      .on('focus', function(event, d) { const r = mapWrap.getBoundingClientRect(); showTooltip({clientX: r.left + projection(d.lonlat)[0]*(r.width/width), clientY: r.top + projection(d.lonlat)[1]*(r.height/height)}, tooltipHTML(d)); })
+      .on('focus', function(event, d) { const r = mapWrap.getBoundingClientRect(), o = vFan.get(d) || [0,0]; showTooltip({clientX: r.left + (projection(d.lonlat)[0]+o[0])*(r.width/width), clientY: r.top + (projection(d.lonlat)[1]+o[1])*(r.height/height)}, tooltipHTML(d)); })
       .on('blur', hideTooltip)
       .on('click', (event, d) => { hideTooltip(); zoomToMarker(d); if (typeof focusEvent==='function') focusEvent(d.reportIdx); })
       .on('keydown', (event, d) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); zoomToMarker(d); if (typeof focusEvent==='function') focusEvent(d.reportIdx); } });
@@ -2146,7 +2214,11 @@ function applyZoomScaling() {
     g.select('.marker-hit').attr('r', Math.max(12 / k, r * 1.7));
     g.select('.marker').attr('r', r).attr('stroke-width', (d.scope==='national'?2.2:0.9) / k);
     g.select('.marker-pulse').attr('r', r).style('display', (d.risk||0) >= 8 ? null : 'none');
+    // A de-collided marker's fan offset is screen px — divide by k so the fan stays constant size.
+    if (d._fan) { const p = projection(d.lonlat); g.attr('transform', `translate(${p[0]+d._fan[0]/k},${p[1]+d._fan[1]/k})`); }
   });
+  // Unvetted glyphs share the zoom group; counter-scale them (glyph + fan) to a constant screen size.
+  if (unvettedRawGroup) unvettedRawGroup.selectAll('path.uv-glyph').attr('transform', d => uvGlyphTransform(d, k));
 }
 function zoomToMarker(d) {
   if (!zoomBehavior) return;
@@ -2236,25 +2308,28 @@ function globeMarkerEl(m) {
 function addGlobeMarkers() {
   if (!globe) return;
   globeMarkers.forEach(mk => mk.remove()); globeMarkers = [];
+  const gFan = fanLL(currentMarkers.filter(m=>m.lonlat), m => m.lonlat, (a,b)=>(b.risk||0)-(a.risk||0), 0.35);
   currentMarkers.forEach(m => {
     if (!m.lonlat) return;
     const el = globeMarkerEl(m);
-    const popup = new maplibregl.Popup({ offset:12, closeButton:false, className:'globe-pop' }).setHTML(tooltipHTML(m));
-    const mk = new maplibregl.Marker({ element:el }).setLngLat(m.lonlat).setPopup(popup).addTo(globe);
+    const popup = new maplibregl.Popup({ offset:12, closeButton:false, anchor:'bottom', className:'globe-pop' }).setHTML(tooltipHTML(m));
+    const mk = new maplibregl.Marker({ element:el }).setLngLat(gFan.get(m) || m.lonlat).setPopup(popup).addTo(globe);
     el.addEventListener('mouseenter', () => { if (!popup.isOpen()) mk.togglePopup(); });
     el.addEventListener('mouseleave', () => popup.remove());
     el.addEventListener('click', (ev) => { ev.stopPropagation(); popup.remove(); globe.flyTo({ center:m.lonlat, zoom:3.6, duration:800 }); if (typeof focusEvent==='function') focusEvent(m.reportIdx); });
     globeMarkers.push(mk);
   });
   // Third-glyph layer on the globe — mirrors the flat map's unvetted raw-article clusters.
-  if (showUnvettedRaw) buildUnvettedClusters().forEach(d => {
+  const uvClusters = showUnvettedRaw ? buildUnvettedClusters() : [];
+  const guvFan = fanLL(uvClusters, d => d.lonlat, (a,b)=>(b.count||0)-(a.count||0), 0.35);
+  uvClusters.forEach(d => {
     // Hollow downward-triangle glyph rendered as inline SVG so it matches the flat-map shape.
     const size = Math.max(14, Math.min(30, 14 + d.count * 1.6));
     const el = document.createElement('div');
     el.style.cssText = `width:${size}px;height:${size}px;cursor:pointer;pointer-events:auto`;
     el.innerHTML = `<svg viewBox="0 0 20 20" width="${size}" height="${size}" style="overflow:visible"><path d="M2 5 L18 5 L10 17 Z" fill="none" stroke="var(--color-accent-300)" stroke-width="1.5" opacity="0.9"></path></svg>`;
-    const popup = new maplibregl.Popup({ offset:10, closeButton:false, className:'globe-pop' }).setHTML(unvettedTooltipHTML(d));
-    const mk = new maplibregl.Marker({ element:el }).setLngLat(d.lonlat).setPopup(popup).addTo(globe);
+    const popup = new maplibregl.Popup({ offset:10, closeButton:false, anchor:'bottom', className:'globe-pop' }).setHTML(unvettedTooltipHTML(d));
+    const mk = new maplibregl.Marker({ element:el }).setLngLat(guvFan.get(d) || d.lonlat).setPopup(popup).addTo(globe);
     el.addEventListener('mouseenter', () => { if (!popup.isOpen()) mk.togglePopup(); });
     el.addEventListener('mouseleave', () => popup.remove());
     el.addEventListener('click', (ev) => { ev.stopPropagation(); popup.remove(); openUnvettedCluster(d); });
@@ -2284,10 +2359,18 @@ function tooltipHTML(m) {
   const scope = m.scope==='national' ? 'National report' : 'Subnational report';
   const doc = (typeof eventDocumentation==='function' && allRows.length) ? eventDocumentation(m.pathogen, m.country) : null;
   const cd = (m.cases!=null || m.deaths!=null) ? `<div class="t-row"><span>Cases / deaths</span><span>${m.cases!=null?m.cases.toLocaleString():'\u2014'} / ${m.deaths!=null?m.deaths.toLocaleString():'\u2014'}</span></div>` : '';
-  // Evidence density: the articles/domains/facts behind this event's current figures.
-  const evd = (allRows.length && typeof comboEvidence==='function') ? comboEvidence(m.pathogen, m.country) : null;
+  // Evidence behind THIS event report — sourced from the report's own citations (same source as
+  // the affiliated brief) so the counts always agree. A mapped event is vetted, so ≥2 articles;
+  // the old (country,pathogen) rollup could under-report a subnational event as "1 article ·
+  // unvetted" because it keyed off the national figure's backing rows, not this report's sources.
+  const rep = (typeof reports !== 'undefined' && m.reportIdx != null) ? reports[m.reportIdx] : null;
+  const evd = (rep && typeof reportEvidence === 'function') ? reportEvidence(rep)
+            : (allRows.length && typeof comboEvidence === 'function') ? comboEvidence(m.pathogen, m.country) : null;
+  const evArt = evd ? (evd.articles != null ? evd.articles : evd.art) : 0;
+  const evDom = evd ? (evd.domains != null ? evd.domains : evd.dom) : 0;
+  const evRight = evd ? (evd.strength ? evd.strength.label.replace(/ evidence$/i, '') : (evd.vet === 1 ? 'unvetted' : `${evd.vet} sources`)) : '';
   const evHtml = evd ? `<div class="t-cols" style="text-align:left;margin-top:6px">Evidence</div>
-    <div class="t-row"><span>${evd.art} article${evd.art!==1?'s':''} · ${evd.dom||'\u2014'} domain${evd.dom!==1?'s':''}</span><span>${evd.vet===1 ? 'unvetted' : `${evd.vet} sources`}</span></div>
+    <div class="t-row"><span>${evArt} article${evArt!==1?'s':''} · ${evDom||'\u2014'} domain${evDom!==1?'s':''}</span><span>${evRight}</span></div>
     <div class="t-row"><span>Corroborated facts</span><span>${evd.facts}</span></div>` : '';
   return `<p class="t-title">${m.title||m.country}</p>
     <div class="t-sub">${m.disease||''}${m.place?' \u00b7 '+m.place:''}</div>
@@ -2318,9 +2401,14 @@ const mapWrap = document.getElementById('mapWrap');
 function showTooltip(event, html) {
   const rect = mapWrap.getBoundingClientRect();
   tooltip.innerHTML = html;
-  tooltip.style.left = (event.clientX - rect.left) + 'px';
-  tooltip.style.top = (event.clientY - rect.top - 10) + 'px';
   tooltip.classList.add('show');
+  // Centered above the point (CSS translate(-50%,-100%)); clamp the centre so the box stays inside
+  // the map pane instead of spilling off a narrow (mobile) viewport.
+  const pad = 8, half = tooltip.offsetWidth / 2;
+  let cx = event.clientX - rect.left;
+  if (rect.width > 2 * (half + pad)) cx = Math.max(half + pad, Math.min(rect.width - half - pad, cx));
+  tooltip.style.left = cx + 'px';
+  tooltip.style.top = (event.clientY - rect.top - 10) + 'px';
 }
 function hideTooltip() { tooltip.classList.remove('show'); }
 
@@ -4904,8 +4992,11 @@ function selectEvent(idx) {
     renderStats(); renderTrendSection(); renderTable();
   }
   renderEventList(); renderBrief(); renderMap();
+  // Scroll the selected report into view. The scroll container is `.events-col` (overflow-y:auto);
+  // #eventList itself never scrolls, so measure the item against the container, not #eventList.
   const li = eventListEl.querySelector('[data-idx="' + idx + '"]');
-  if (li) eventListEl.scrollTop = Math.max(0, li.offsetTop - eventListEl.offsetTop - 8);
+  const scroller = eventListEl.closest('.events-col') || eventListEl;
+  if (li && scroller) scroller.scrollTop += li.getBoundingClientRect().top - scroller.getBoundingClientRect().top - 8;
   if (r.lonlat) flyToLonlat(r.lonlat);
 }
 function drillNational(country, pathogen) {
@@ -4921,7 +5012,20 @@ function drillNational(country, pathogen) {
   if (showSubnational) trendMode = { mode:'subnational', country, pathogen }; else trendMode = { mode:'national' };
   renderTrendSection();
 }
-function focusEvent(idx) { selectEvent(idx); }
+function focusEvent(idx) {
+  selectEvent(idx);
+  // A marker can point at a report the event list de-dupes away — e.g. one of several national
+  // reports for a country×pathogen, where the list surfaces a single row. selectEvent has already
+  // switched to this pathogen and re-rendered, so if the clicked report isn't in the list, redirect
+  // to the visible report for the same country×pathogen (prefer national) so the click lands on a
+  // row the user can see and scroll to, instead of selecting an invisible one.
+  const rep = reports[idx];
+  if (rep && eventListEl && !eventListEl.querySelector('[data-idx="' + idx + '"]')) {
+    const cand = visibleReports().filter(({ r }) => r.geoCountry === rep.geoCountry && r.pathogen === rep.pathogen);
+    const pick = cand.find(({ r }) => isNational(r.place)) || cand[0];
+    if (pick && pick.i !== idx) selectEvent(pick.i);
+  }
+}
 
 function fetchReports() {
   return withTimeout(d3.csv(GSHEET_REPORTS_URL), 20000, 'event reports').then(rows => {
@@ -5581,6 +5685,29 @@ function drJump(p, sec){
   if(el) requestAnimationFrame(()=>window.scrollTo({top:window.scrollY+el.getBoundingClientRect().top-70,behavior:'smooth'}));
 }
 document.getElementById('dataReportBtn').addEventListener('click', openDataReport);
+// Draw the eye to the Data-report CTA once after load: three raking shines — gold, red, purple, 5s
+// apart. Each shine fans a set of varied-width bands across the button at DIFFERENT speeds (varied
+// durations), so they separate as they travel — light glancing across a moving mirror sphere.
+(function(){
+  const btn = document.getElementById('dataReportBtn'); if (!btn) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const bands = [...btn.querySelectorAll('.dr-sheen i')];
+  if (!bands.length || typeof bands[0].animate !== 'function') return;
+  const DUR = [980, 1240, 1080, 1400], DELAY = [0, 45, 90, 25]; // slower, tighter spread
+  const shine = (color) => bands.forEach((el, i) => {
+    el.style.background = 'linear-gradient(105deg, transparent, ' + color + ' 50%, transparent)';
+    el.animate(
+      [ { transform: 'translateX(-70px) skewX(-18deg)', opacity: 0 },
+        { opacity: 0.92, offset: 0.16 },
+        { opacity: 0.92, offset: 0.72 },
+        { transform: 'translateX(210px) skewX(-18deg)', opacity: 0 } ],
+      { duration: DUR[i], delay: DELAY[i], easing: 'cubic-bezier(.42,0,.28,1)' }
+    );
+  });
+  setTimeout(() => shine('#f0d488'), 2700);                  // gold
+  setTimeout(() => shine('#cf7b82'), 7700);                  // red
+  setTimeout(() => shine('var(--color-accent-100)'), 12700); // purple
+})();
 document.getElementById('dataReportClose').addEventListener('click', closeDataReport);
 document.getElementById('dataReportBackdrop').addEventListener('click', (e)=>{ if(e.target.id==='dataReportBackdrop') closeDataReport(); });
 document.getElementById('dataReportBody').addEventListener('click', (e)=>{ const b=e.target.closest('.dr-cell'); if(b) drJump(b.dataset.p, b.dataset.sec); });
