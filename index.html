@@ -324,7 +324,11 @@
   .globe-pop .t-row { display: flex; justify-content: space-between; gap: 10px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
   .globe-pop .t-foot { margin-top: 6px; padding-top: 5px; border-top: 1px solid var(--color-divider); font-size: 10px; color: var(--color-accent-300); }
   /* Dialogs must sit above every in-page layer (sticky table header z2, map tooltip z5). */
-  .dialog-backdrop { z-index: 60; }
+  /* JS reveals these with an inline `display:flex`, which overrides the design-system's
+     `display:grid; place-items:center` — so re-assert centering for the flex axis here (a bare
+     flex row otherwise pins the dialog to the left). `safe` falls back to start if a dialog is
+     taller/wider than the viewport, so long evidence lists never clip. */
+  .dialog-backdrop { z-index: 60; justify-content: safe center; align-items: safe center; }
   #globeMap .maplibregl-ctrl-group { background: var(--color-neutral-900); border: 1px solid var(--color-divider); }
   #globeMap .maplibregl-ctrl-group button + button { border-top: 1px solid var(--color-divider); }
   #globeMap .maplibregl-ctrl-group button span { filter: invert(1); }
@@ -703,6 +707,7 @@
         </div>
         <button type="button" class="btn btn-secondary" id="exportCsvBtn" style="padding:3px 10px;font-size:12px">Export CSV</button>
         <span class="card-meta"><a href="https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8#gid=881754490" target="_blank" rel="noopener">data output (Sheet) ↗</a></span>
+        <span class="card-meta" id="censorTag" style="display:none"></span>
       </span>
     </div>
      <p id="tableIntro" style="font-size:12px;color:color-mix(in srgb, var(--color-text) 68%, transparent);margin:-6px 0 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span id="tableIntroLead"></span>
@@ -792,6 +797,80 @@ const GSHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDX
 // Live-data state — declared at the top because the render guards read it on the very first
 // renderAll() pass, long before the fetch orchestration below is defined.
 let dataLoaded = false, sheetRetries = 0;
+// --- Data quarantine (censoring bad reads) ---
+// A published sheet lists pathogen × country × date windows flagged as bad reads at report
+// generation (misclassified pathogen, historical article misread as current, impossible
+// figures). The dashboard applies the SAME quarantine on load so nothing the pipeline already
+// rejected resurfaces here. Fail-open: if the list is unreachable, all data is shown and a
+// visible warning is raised — a quarantine-list outage must never blank the dashboard.
+const GSHEET_CENSOR_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQYokxQmIi1W5-dpxCFDoow_jRgLFcqR0A11Hz2S93Zj9XJNRb5tm5m0VEjBGpgz21xlyoorPRHEZmc/pub?gid=2086665852&single=true&output=csv";
+let censorRules = [];        // enabled rules: [{pathogen, country, dmin, dmax, reason, label}]
+let censorState = 'idle';    // 'idle' | 'live' | 'unavailable'
+const censorStats = { figures: 0, reports: 0 };
+function censorKey(s) { return String(s == null ? '' : s).trim().toLowerCase().replace(/^the\s+/, ''); }
+function toISODate(s) {
+  s = String(s == null ? '' : s).trim();
+  let m = s.match(/(\d{4})-(\d{2})-(\d{2})/); if (m) return m[1] + '-' + m[2] + '-' + m[3];
+  m = s.match(/(?:report_)?(\d{2})-(\d{2})-(\d{2})/i); if (m) return '20' + m[1] + '-' + m[2] + '-' + m[3];
+  const d = new Date(s); return isNaN(d) ? '' : d.toISOString().slice(0, 10);
+}
+// True when (pathogen, country, date) falls inside an enabled quarantine window. Pathogen is
+// folded to match the figures feed; a missing/unparseable date never matches (we don't
+// over-censor when a row carries no usable date).
+function isCensored(pathogen, country, dateStr) {
+  if (!censorRules.length) return false;
+  const p = censorKey(foldPathogen(pathogen || ''));
+  const c = censorKey(country || '');
+  if (!p || !c) return false;
+  const d = toISODate(dateStr);
+  if (!d) return false;
+  return censorRules.some(r => r.pathogen === p && r.country === c && d >= r.dmin && d <= r.dmax);
+}
+function fetchCensor() {
+  return withTimeout(d3.csv(GSHEET_CENSOR_URL), 15000, 'quarantine list').then(rows => {
+    censorRules = (rows || [])
+      .filter(r => String(r.enabled || '').trim().toLowerCase() === 'yes')
+      .map(r => ({
+        pathogen: censorKey(foldPathogen((r.pathogen || '').trim())),
+        country: censorKey(r.country),
+        dmin: toISODate(r.date_min),
+        dmax: toISODate(r.date_max),
+        reason: (r.reason || '').trim(),
+        label: (r.pathogen || '').trim() + ' · ' + (r.country || '').trim()
+      }))
+      .filter(r => r.pathogen && r.country && r.dmin && r.dmax);
+    censorState = 'live';
+  }).catch(err => {
+    censorRules = []; censorState = 'unavailable';
+    console.warn('[censor] quarantine list unreachable — showing unfiltered:', err && (err.message || err));
+  });
+}
+function censorSyncSuffix() {
+  if (censorState === 'unavailable') return ' · <span style="color:var(--sev-hi)">⚠ quarantine list offline</span>';
+  const n = censorStats.figures + censorStats.reports;
+  return (censorState === 'live' && n) ? (' · ' + n + ' quarantined') : '';
+}
+function updateCensorTag() {
+  const el = document.getElementById('censorTag');
+  if (!el) return;
+  if (censorState === 'unavailable') {
+    el.style.display = '';
+    el.innerHTML = '<span style="color:var(--sev-hi)">⚠ Quarantine list unavailable — figures shown unfiltered</span>';
+    el.setAttribute('title', 'The bad-read quarantine sheet could not be loaded, so no rows were removed. Click Retry in the header to reapply.');
+    return;
+  }
+  if (censorState === 'live' && censorRules.length) {
+    el.style.display = '';
+    const parts = [];
+    if (censorStats.figures) parts.push(censorStats.figures + ' figure row' + (censorStats.figures === 1 ? '' : 's'));
+    if (censorStats.reports) parts.push(censorStats.reports + ' report' + (censorStats.reports === 1 ? '' : 's'));
+    const txt = parts.length ? (parts.join(' + ') + ' quarantined') : ('quarantine active · ' + censorRules.length + ' rule' + (censorRules.length === 1 ? '' : 's'));
+    el.innerHTML = '<span style="color:var(--color-accent)">◆</span> ' + txt;
+    el.setAttribute('title', 'Bad reads removed at load per the quarantine sheet:\n\n' + censorRules.map(r => '• ' + r.label + ' (' + r.dmin + (r.dmax !== r.dmin ? '…' + r.dmax : '') + ') — ' + r.reason).join('\n'));
+  } else {
+    el.style.display = 'none';
+  }
+}
 // --- Corroboration gate ("vetting") ---
 // A figure's reliability is tied to INDEPENDENT CORROBORATION. n_sources counts
 // independent proximal sources (distinct domains) backing a row.
@@ -1220,6 +1299,26 @@ function refineRecord(r) {
     deaths: d ? d.value : null, deathSources: d ? d.sources : 0 });
 }
 function isRecordVetted(r) { return vettingsOf(r.sources) >= 1; }
+// Corroboration counts DISTINCT INDEPENDENT DOMAINS backing a fact, across the confirmed+suspected
+// pair at one location & date. A fact split across measures by different publishers (one files
+// 'confirmed', a repost files 'suspected') previously left a single-measure figure looking
+// single-sourced; counting the family's distinct domains fixes that. This is NOT syndication dedup
+// (each distinct domain the backend kept is one source) — source independence stays a backend concern.
+function famMeasures(measure){ return /death/.test(measure||'') ? ['confirmed_deaths','suspected_deaths'] : ['confirmed_cases','suspected_cases']; }
+function familyRowsFor(rowsArr, locKeys, dateStr, measure){
+  const fam = famMeasures(measure);
+  const keys = locKeys instanceof Set ? locKeys : new Set([String(locKeys||'').trim().toLowerCase()]);
+  return (rowsArr||[]).filter(r => r.outlier!=='True' && r.report_date===dateStr && fam.indexOf(r.measure)>=0 && keys.has((r.location||'').trim().toLowerCase()));
+}
+function domainsOf(rowsArr){ const d=new Set(); (rowsArr||[]).forEach(r => extractUrls(r.sources).forEach(u => { const h=urlHost(u); if(h) d.add(h); })); return d.size; }
+function famDomainsAt(rowsArr, locKeys, dateStr, measure){ return domainsOf(familyRowsFor(rowsArr, locKeys, dateStr, measure||'confirmed_cases')); }
+function recordFamilyRows(r){
+  const at = r.rowsAt || []; const measure = at[0] ? at[0].measure : 'confirmed_cases';
+  const locs = new Set(at.map(x => (x.location||'').trim().toLowerCase()));
+  if (!locs.size && r.figureLoc) locs.add(String(r.figureLoc).trim().toLowerCase());
+  return familyRowsFor(typeof allRows!=='undefined'?allRows:[], locs, r.date, measure);
+}
+function recordFamilyDomains(r){ return domainsOf(recordFamilyRows(r)); }
 // Suspected "bleed-through": a sub-location figure that inherited its parent location's total,
 // detected & labelled upstream after several US West Nile virus sub-locations carried the
 // state/national count. The value is kept as delivered (the upstream correction may not be
@@ -1345,7 +1444,8 @@ function openFigureSourcePopup(rowId) {
     : visibleRecords();
   const row = all.find(r => r.id === rowId);
   if (!row) return;
-  const rows = row.rowsAt || [];
+  const famRows = recordFamilyRows(row);
+  const rows = famRows.length ? famRows : (row.rowsAt || []);
   const ev = vettingsAndArticles(rows);
   const arts = rows.map(r => {
     const nn = +r.n_sources || 1;
@@ -1356,7 +1456,7 @@ function openFigureSourcePopup(rowId) {
   }).sort((a,b) => (b.canonical?1:0)-(a.canonical?1:0) || b.n-a.n || b.value-a.value);
   document.getElementById('drillTitle').textContent = `${row.country} · ${row.disease} — evidence for ${formatUKDate(row.date)}`;
   document.getElementById('drillBody').innerHTML = arts.length ? (
-    `<p style="font-size:12px;color:var(--ink-3);margin:0 0 12px;line-height:1.5" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${arts.length} distinct figure${arts.length>1?'s':''} reported for <strong>${esc(row.figureLoc||row.country)}</strong> on this date, backed by <strong>${ev.vet===1 ? 'unvetted (1 source)' : `${ev.vet} sources · ${ev.vettings} vetting${ev.vettings!==1?'s':''}`}</strong> across <strong>${ev.art}</strong> distinct article${ev.art!==1?'s':''} from <strong>${ev.dom}</strong> independent domain${ev.dom!==1?'s':''}. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the one shown in the table.</p>` +
+    `<p style="font-size:12px;color:var(--ink-3);margin:0 0 12px;line-height:1.5" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${arts.length} distinct figure${arts.length>1?'s':''} reported for <strong>${esc(row.figureLoc||row.country)}</strong> on this date, backed by <strong>${ev.dom<=1 ? 'a single independent domain — unvetted' : `${ev.dom} independent domains — vetted`}</strong> across <strong>${ev.art}</strong> distinct article${ev.art!==1?'s':''} from <strong>${ev.dom}</strong> independent domain${ev.dom!==1?'s':''}. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the one shown in the table.</p>` +
     arts.map(a => {
       const q = qualityBand(a.score);
       // Noncanonical observations say WHAT displaced them: the canonical figure for the same measure.
@@ -1472,8 +1572,8 @@ function renderTable() {
   }
   body.innerHTML = displayRows.map(r => {
     const rangeHtml = r.casesRange && r.casesRange[1] > r.casesRange[0] ? `<span class="cell-range">range ${r.casesRange[0].toLocaleString()}–${r.casesRange[1].toLocaleString()}</span>` : '';
-    const src = r.sources || 1;
-    const vetted = isRecordVetted(r);
+    const src = Math.max(recordFamilyDomains(r), r.sources || 1);
+    const vetted = vettingsOf(src) >= 1;
     const srcHtml = `<button type="button" class="src-cell ${vetted ? '' : 'vet-unvetted'}" data-src="${r.id.replace(/"/g,'&quot;')}" title="${vettingLabel(src)} — click to list articles"rticles">${vetted ? `${src} sources` : 'unvetted'}</button>`;
     const hostHtml = hostFor(r) || '<span class="src-vet">—</span>';
     const screenHtml = figureAcceptance(r);
@@ -3670,9 +3770,11 @@ function renderChart(series, effectiveTp) {
   }
   drawBand(projCases, lastCase, lastCase?lastCase.cases:null, col('--color-accent-300'));
   drawBand(projDeaths, lastDeath, lastDeath?lastDeath.deaths:null, '#b45c64');
-  // Boundary between observed and forecast
+  // Boundary between observed and forecast — anchored at the dataset's CURRENT date (DATASET_MAX),
+  // not this series' last observation. A given series can lag the dataset by a couple of days, so the
+  // divider should mark where live data currently ends, not where this one series happens to stop.
   if ((projCases || projDeaths) && lastCase) {
-    const bx = x(new Date(lastCase.date));
+    const bx = x(new Date(DATASET_MAX || lastCase.date));
     plotG.append('line').attr('x1',bx).attr('x2',bx).attr('y1',margin.top).attr('y2',th-margin.bottom).attr('stroke',col('--color-neutral-500')).attr('stroke-width',1).attr('stroke-dasharray','2 3').attr('opacity',0.6);
     plotG.append('text').attr('x',bx+4).attr('y',margin.top+9).attr('font-size','9px').attr('fill',col('--color-neutral-400')).text('forecast →');
   }
@@ -4185,6 +4287,15 @@ function fetchSheet() {
   return withTimeout(d3.csv(GSHEET_CSV_URL), 20000, 'figures sheet').then(rows => {
   rows = rows.filter(r => !isFlu(r.pathogen));
   rows.forEach(r => { r.pathogen = foldPathogen(r.pathogen); }); // collapse ebolavirus species → 'Ebola Virus'
+  // QUARANTINE: drop bad reads (misclassified pathogen, misdated historical article, impossible
+  // figures) per the published censor sheet BEFORE aggregation — so records, scorecard, maps,
+  // plots and the figures table all inherit the removal. Country is derived exactly as the combos
+  // loop derives it below (geoCountry, else the raw location tail).
+  if (censorRules.length) {
+    const before = rows.length;
+    rows = rows.filter(r => !isCensored(r.pathogen, geoCountry(r.location) || (r.location || '').split(',').pop().trim(), r.report_date));
+    censorStats.figures = before - rows.length;
+  } else { censorStats.figures = 0; }
   const datasetMaxDate = rows.reduce((m,r)=>r.report_date>m?r.report_date:m, '');
   DATASET_MAX = datasetMaxDate;
   function deriveStatus(dateStr) {
@@ -4225,7 +4336,8 @@ function fetchSheet() {
     subLocs.forEach(loc => {
       const s = latestOfAll(rows.filter(r=>r.pathogen===pathogen && r.location===loc && r.measure==='confirmed_cases' && r.outlier==='False'));
       if (!s) return;
-      if (vettingsOf(s.sources) > 0) subVetted++; else subUnvetted++;
+      const sFam = Math.max(famDomainsAt(rows, loc, s.date), s.sources || 1);
+      if (vettingsOf(sFam) > 0) subVetted++; else subUnvetted++;
     });
     return { id: country + '||' + pathogen, country, pathogenRaw: pathogen,
       disease: PATHOGEN_LABELS[pathogen] || pathogen, speciesLabel: speciesForCombo(rows, country, pathogen),
@@ -5066,12 +5178,18 @@ function fetchReports() {
   });
   // Capture the pathogen universe upstream of every drop below, so a report that lacks a
   // coordinate or a Status Report still shows in the data report and the pathogen selector.
-  reportPathoLocs = _mappedReports.filter(r => r.pathogen).map(r => ({ pathogen: r.pathogen, country: r.geoCountry, place: r.place }));
+  // QUARANTINE reports the same way, keyed on the event's country + Latest Report date, BEFORE the
+  // pathogen universe / markers / risk index are built from them.
+  const _keptReports = censorRules.length
+    ? _mappedReports.filter(r => !isCensored(r.pathogen, r.geoCountry || r.country, r.date))
+    : _mappedReports;
+  censorStats.reports = _mappedReports.length - _keptReports.length;
+  reportPathoLocs = _keptReports.filter(r => r.pathogen).map(r => ({ pathogen: r.pathogen, country: r.geoCountry, place: r.place }));
   // Keep a report as long as it has a title (which always resolves from pathogen + location).
   // The former extra `&& r.html` silently dropped any event whose Status-Report narrative had not
   // been generated yet — hiding the whole outbreak (e.g. an imported CCHF case) from the list,
   // brief, map, data report AND selector. Such rows now surface with an honest "no narrative" brief.
-  reports = _mappedReports.filter(r => r.title)
+  reports = _keptReports.filter(r => r.title)
     .sort((a,b) => b.risk - a.risk || changeRank(b) - changeRank(a) || (b.date>a.date?1:-1));
   if (!reports.length) throw new Error('empty reports');
   // Place-level coordinates power geographic-proximity ranking in the comparison bar view.
@@ -5124,12 +5242,13 @@ function loadLiveData(manual) {
   // On a retry before any data has loaded, restore the loading shimmer and clear the error state.
   if (!dataLoaded) { document.body.classList.add('preload'); document.body.classList.remove('dataerror'); }
   setSync('<span class="sync-dot"></span>' + (dataLoaded ? 'Refreshing live data…' : 'Loading live sheet…'));
-  return Promise.allSettled([fetchSheet(), fetchReports(), fetchForecast()]).then(results => {
+  return fetchCensor().then(() => Promise.allSettled([fetchSheet(), fetchReports(), fetchForecast()])).then(results => {
+    updateCensorTag();
     const sheet = results[0];
     if (sheet.status === 'fulfilled') {
       dataLoaded = true;
       document.body.classList.remove('preload', 'fallback', 'dataerror');
-      setSync('<span class="sync-dot"></span>Live from Google Sheets · loaded ' + new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }));
+      setSync('<span class="sync-dot"></span>Live from Google Sheets · loaded ' + new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) + censorSyncSuffix());
       // Raw table is large — fetch it lazily once the primary views have painted.
       setTimeout(ensureRawArticles, 2500);
     } else if (sheetRetries < 2) {
@@ -5706,7 +5825,7 @@ document.getElementById('dataReportBtn').addEventListener('click', openDataRepor
   });
   setTimeout(() => shine('#f0d488'), 2700);                  // gold
   setTimeout(() => shine('#cf7b82'), 7700);                  // red
-  setTimeout(() => shine('var(--color-accent-100)'), 12700); // purple
+  setTimeout(() => shine('#9184d9'), 12700); // purple (accent)
 })();
 document.getElementById('dataReportClose').addEventListener('click', closeDataReport);
 document.getElementById('dataReportBackdrop').addEventListener('click', (e)=>{ if(e.target.id==='dataReportBackdrop') closeDataReport(); });
