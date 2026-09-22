@@ -817,19 +817,20 @@ function toISODate(s) {
 // True when (pathogen, country, date) falls inside an enabled quarantine window. Pathogen is
 // folded to match the figures feed; a missing/unparseable date never matches (we don't
 // over-censor when a row carries no usable date).
-function isCensored(pathogen, country, dateStr) {
+function isCensored(pathogen, country, dateStr, trackerPathogen) {
   if (!censorRules.length) return false;
   const p = censorKey(foldPathogen(pathogen || ''));
+  const tracker = censorKey(foldPathogen(trackerPathogen || ''));
   const c = censorKey(country || '');
   if (!p || !c) return false;
   const d = toISODate(dateStr);
   if (!d) return false;
-  return censorRules.some(r => r.pathogen === p && r.country === c && d >= r.dmin && d <= r.dmax);
+  return censorRules.some(r => (r.pathogen === p || (tracker && r.pathogen === tracker)) && r.country === c && d >= r.dmin && d <= r.dmax);
 }
 function fetchCensor() {
   return withTimeout(d3.csv(GSHEET_CENSOR_URL), 15000, 'quarantine list').then(rows => {
     censorRules = (rows || [])
-      .filter(r => String(r.enabled || '').trim().toLowerCase() === 'yes')
+      .filter(r => !['no', 'false', '0', 'off', 'disabled'].includes(String(r.enabled || '').trim().toLowerCase()))
       .map(r => ({
         pathogen: censorKey(foldPathogen((r.pathogen || '').trim())),
         country: censorKey(r.country),
@@ -907,34 +908,59 @@ const PATHOGEN_LABELS = {
   // The sheet's non-specific Ebola category is a mixed-strain catch-all; label it as what it is.
   'Ebola Virus': 'Ebola Virus (general)'
 };
-// Ebola-species fold (data owner, Sep 2026): the OSINT stream splits one ebolavirus outbreak
-// across species labels (Bundibugyo / Sudan / Tai Forest / Zaire), yielding near-identical
-// duplicate rows per country that inflated the global total ~3x. Fold every ebolavirus species
-// into the single 'Ebola Virus' pathogen at ingestion so each country carries ONE ebola figure.
-// Marburg is a distinct (non-ebola) filovirus and is intentionally NOT folded.
+// Family membership controls display priority only, never biological identity.
 const EBOLA_SPECIES_RE = /ebola|bundibugyo|sudan\s*virus|ta[iï]\s*forest|zaire|reston|bombali/i;
-// Hantaviruses: the figures sheet fragments one outbreak across species names (Andes, Sin Nombre,
-// Puumala, Dobrava, Seoul, Hantaan…) while the event reports carry the umbrella "Hantavirus".
-// Left unfolded, a species-tagged figure and an umbrella-tagged report never match, so selecting
-// e.g. "Andes Virus" hides the Spain "Hantavirus" report marker (and the same Chile outbreak
-// double-lists under five species). Fold every hantavirus species to the single 'Hantavirus'
-// pathogen at ingestion — mirroring the ebola fold — so figures, map, reports and the selector
-// all key on one pathogen. (This matches the data owner's priority model, which lists one
-// "Hantavirus".) \bseoul\b/\bandes\b are word-bounded so only the pathogen field matches.
 const HANTAVIRUS_SPECIES_RE = /hantavirus|hantaan|\bandes\b|sin[\s-]?nombre|puumala|dobrava|\bseoul\b/i;
+// Exact spelling aliases only. Unrecognized specific names remain intact.
+const PATHOGEN_ALIASES = {
+  'ebola': 'Ebola Virus',
+  'bundibugyo ebolavirus': 'Bundibugyo Virus',
+  'bundibugyo virus': 'Bundibugyo Virus',
+  'ebola virus bundibugyo': 'Bundibugyo Virus',
+  'sudan ebolavirus': 'Sudan Virus',
+  'sudan virus': 'Sudan Virus',
+  'tai forest ebolavirus': 'Tai Forest Virus',
+  'taï forest ebolavirus': 'Tai Forest Virus',
+  'zaire ebolavirus': 'Zaire ebolavirus',
+  'zaire ebola virus': 'Zaire ebolavirus',
+  'andes hantavirus': 'Andes Virus',
+  'andes virus': 'Andes Virus'
+};
 function foldPathogen(p) {
   p = (p || '').trim();
-  if (EBOLA_SPECIES_RE.test(p)) return 'Ebola Virus';
-  if (HANTAVIRUS_SPECIES_RE.test(p)) return 'Hantavirus';
+  return PATHOGEN_ALIASES[p.toLowerCase()] || p;
+}
+// Taxonomy comes from pathogen_profiles.csv via the published feeds. The
+// configured tracker is the selectable identity; extracted pathogen JSON is
+// audit metadata and never enters this map or the selector.
+const pathogenFamilyByName = new Map();
+function rememberPathogenFamily(pathogen, family) {
+  const p = foldPathogen(pathogen);
+  const f = String(family || '').trim();
+  if (p && f) pathogenFamilyByName.set(p, f);
   return p;
 }
-// Surveillance priority (data owner, Sep 2026): 1) Ebola virus (all ebolavirus species folded to
-// one — see foldPathogen), 2) West Nile virus (not a true VHF — retained for completeness),
+function pathogenSelectHtml(pathogens) {
+  const groups = new Map();
+  pathogens.forEach(p => {
+    const family = pathogenFamilyByName.get(p) || 'Other';
+    if (!groups.has(family)) groups.set(family, []);
+    groups.get(family).push(p);
+  });
+  const all = `<option value="${ALL}"${isAll()?' selected':''}>All pathogens</option>`;
+  const grouped = [...groups.entries()]
+    .sort(([a],[b]) => a.localeCompare(b, undefined, {sensitivity:'base'}))
+    .map(([family, members]) => `<optgroup label="${esc(family)}">` + members.map(p =>
+      `<option value="${esc(p)}"${p===selectedPathogen?' selected':''}>${esc(PATHOGEN_LABELS[p] || p)}</option>`
+    ).join('') + `</optgroup>`).join('');
+  return all + grouped;
+}
+// Surveillance priority: 1) Ebola virus and its named species, 2) West Nile virus,
 // 3) Hantavirus. priorityTier() LEADS every "which pathogen should the dashboard feature"
 // decision (default selection, All-pathogens outbreak pick, selector order), data depth / case
 // load as tie-breaker.
 const PATHOGEN_PRIORITY = { 'Ebola Virus': 3, 'West Nile Virus': 2, 'Hantavirus': 1 };
-function priorityTier(p) { return PATHOGEN_PRIORITY[p] || 0; }
+function priorityTier(p) { return PATHOGEN_PRIORITY[p] || (EBOLA_SPECIES_RE.test(p) ? 3 : HANTAVIRUS_SPECIES_RE.test(p) ? 1 : 0); }
 // Curated WHO topic / fact-sheet pages for the pathogens that appear in the data (URLs verified
 // live). Authoritative source beats Wikipedia for a health-surveillance surface. Pathogens with
 // no WHO page (hantaviruses: Andes, Dobrava, Puumala, Seoul) simply get no link.
@@ -1127,7 +1153,7 @@ function renderStats() {
   const aggEl = document.getElementById('statAggLine');
   if (aggEl) {
     aggEl.innerHTML = vettedScoped.length
-      ? `<strong>${sumCases.toLocaleString()}</strong> confirmed cases · <strong>${sumDeaths.toLocaleString()}</strong> deaths` +
+      ? (all ? `Select a pathogen for case and death totals; general and species-specific series can overlap.` : `<strong>${sumCases.toLocaleString()}</strong> confirmed cases · <strong>${sumDeaths.toLocaleString()}</strong> deaths`) +
         `<span class="agg-caveat">Vetted totals across ${totalOutbreaks} outbreak${totalOutbreaks===1?'':'s'}${unvettedSignals ? ` · ${unvettedSignals} additional single-source signal${unvettedSignals===1?'':'s'} in Figures` : ''}</span>`
       : `<span class="agg-caveat">No vetted figures for this scope${unvettedSignals ? ` · ${unvettedSignals} single-source signal${unvettedSignals===1?'':'s'} available in Figures` : ''}.</span>`;
   }
@@ -1305,18 +1331,18 @@ function isRecordVetted(r) { return vettingsOf(r.sources) >= 1; }
 // single-sourced; counting the family's distinct domains fixes that. This is NOT syndication dedup
 // (each distinct domain the backend kept is one source) — source independence stays a backend concern.
 function famMeasures(measure){ return /death/.test(measure||'') ? ['confirmed_deaths','suspected_deaths'] : ['confirmed_cases','suspected_cases']; }
-function familyRowsFor(rowsArr, locKeys, dateStr, measure){
+function familyRowsFor(rowsArr, locKeys, dateStr, measure, pathogen){
   const fam = famMeasures(measure);
   const keys = locKeys instanceof Set ? locKeys : new Set([String(locKeys||'').trim().toLowerCase()]);
-  return (rowsArr||[]).filter(r => r.outlier!=='True' && r.report_date===dateStr && fam.indexOf(r.measure)>=0 && keys.has((r.location||'').trim().toLowerCase()));
+  return (rowsArr||[]).filter(r => r.pathogen===pathogen && r.outlier!=='True' && r.report_date===dateStr && fam.indexOf(r.measure)>=0 && keys.has((r.location||'').trim().toLowerCase()));
 }
 function domainsOf(rowsArr){ const d=new Set(); (rowsArr||[]).forEach(r => extractUrls(r.sources).forEach(u => { const h=urlHost(u); if(h) d.add(h); })); return d.size; }
-function famDomainsAt(rowsArr, locKeys, dateStr, measure){ return domainsOf(familyRowsFor(rowsArr, locKeys, dateStr, measure||'confirmed_cases')); }
+function famDomainsAt(rowsArr, locKeys, dateStr, measure, pathogen){ return domainsOf(familyRowsFor(rowsArr, locKeys, dateStr, measure||'confirmed_cases', pathogen)); }
 function recordFamilyRows(r){
   const at = r.rowsAt || []; const measure = at[0] ? at[0].measure : 'confirmed_cases';
   const locs = new Set(at.map(x => (x.location||'').trim().toLowerCase()));
   if (!locs.size && r.figureLoc) locs.add(String(r.figureLoc).trim().toLowerCase());
-  return familyRowsFor(typeof allRows!=='undefined'?allRows:[], locs, r.date, measure);
+  return familyRowsFor(typeof allRows!=='undefined'?allRows:[], locs, r.date, measure, r.pathogenRaw || r.pathogen || (at[0] && at[0].pathogen));
 }
 function recordFamilyDomains(r){ return domainsOf(recordFamilyRows(r)); }
 // Suspected "bleed-through": a sub-location figure that inherited its parent location's total,
@@ -2909,7 +2935,9 @@ let forecastState = 'pending'; // pending | live | unavailable
 function ingestForecast(rows) {
   forecastIndex.clear();
   rows.forEach(r => {
-    const key = r.pathogen + '||' + r.location + '||' + r.measure;
+    const pathogen = rememberPathogenFamily(
+      r.tracker_pathogen || r.pathogen, r.pathogen_family);
+    const key = pathogen + '||' + r.location + '||' + r.measure;
     if (!forecastIndex.has(key)) forecastIndex.set(key, []);
     forecastIndex.get(key).push({ date: r.horizon_date, p25:+r.p25, p50:+r.p50, p75:+r.p75, nObs:+r.n_obs||0 });
   });
@@ -3201,7 +3229,7 @@ function refreshPathogenSelector() {
     const def = dataDepthPathogen() || computeDefaultPathogen();
     if (def && ordered.includes(def)) defaultPathogen = def;
   }
-  sel.innerHTML = [ALL, ...ordered].map(p => `<option value="${p}"${p===selectedPathogen?' selected':''}>${p===ALL ? 'All pathogens' : (PATHOGEN_LABELS[p] || p)}</option>`).join('');
+  sel.innerHTML = pathogenSelectHtml(ordered);
 }
 function populatePathogenSelect(rows) {
   const present = [...new Set(rows.map(r => r.pathogen).filter(Boolean))];
@@ -3216,7 +3244,7 @@ function populatePathogenSelect(rows) {
   }
   const orderedInit = [...withCases].sort((a,b) => (priorityTier(b) - priorityTier(a)) || a.localeCompare(b, undefined, {sensitivity:'base'}));
   if (!isAll() && !orderedInit.includes(selectedPathogen) && selectedPathogen !== ALL) { selectedPathogen = ALL; }
-  sel.innerHTML = [ALL, ...orderedInit].map(p => `<option value="${p}"${p===selectedPathogen?' selected':''}>${p===ALL ? 'All pathogens' : (PATHOGEN_LABELS[p] || p)}</option>`).join('');
+  sel.innerHTML = pathogenSelectHtml(orderedInit);
   // Immediately narrow to the current filter state (region/host/search) so the
   // selector never shows pathogens with no visible data.
   refreshPathogenSelector();
@@ -4285,15 +4313,18 @@ function latestFor(rows, country, pathogens, measure) {
 
 function fetchSheet() {
   return withTimeout(d3.csv(GSHEET_CSV_URL), 20000, 'figures sheet').then(rows => {
+  rows.forEach(r => {
+    r.pathogen = rememberPathogenFamily(
+      r.tracker_pathogen || r.pathogen, r.pathogen_family);
+  });
   rows = rows.filter(r => !isFlu(r.pathogen));
-  rows.forEach(r => { r.pathogen = foldPathogen(r.pathogen); }); // collapse ebolavirus species → 'Ebola Virus'
   // QUARANTINE: drop bad reads (misclassified pathogen, misdated historical article, impossible
   // figures) per the published censor sheet BEFORE aggregation — so records, scorecard, maps,
   // plots and the figures table all inherit the removal. Country is derived exactly as the combos
   // loop derives it below (geoCountry, else the raw location tail).
   if (censorRules.length) {
     const before = rows.length;
-    rows = rows.filter(r => !isCensored(r.pathogen, geoCountry(r.location) || (r.location || '').split(',').pop().trim(), r.report_date));
+    rows = rows.filter(r => !isCensored(r.pathogen, geoCountry(r.location) || (r.location || '').split(',').pop().trim(), r.report_date, r.tracker_pathogen));
     censorStats.figures = before - rows.length;
   } else { censorStats.figures = 0; }
   const datasetMaxDate = rows.reduce((m,r)=>r.report_date>m?r.report_date:m, '');
@@ -4336,7 +4367,7 @@ function fetchSheet() {
     subLocs.forEach(loc => {
       const s = latestOfAll(rows.filter(r=>r.pathogen===pathogen && r.location===loc && r.measure==='confirmed_cases' && r.outlier==='False'));
       if (!s) return;
-      const sFam = Math.max(famDomainsAt(rows, loc, s.date), s.sources || 1);
+      const sFam = Math.max(famDomainsAt(rows, loc, s.date, 'confirmed_cases', pathogen), s.sources || 1);
       if (vettingsOf(sFam) > 0) subVetted++; else subUnvetted++;
     });
     return { id: country + '||' + pathogen, country, pathogenRaw: pathogen,
@@ -5026,6 +5057,9 @@ function reportEvidenceHtml(rep, ev) {
   if (!ev.cites.length) return '<p class="ev-note" style="margin:8px 0">This brief lists no machine-readable citations.</p><hr style="border:0;border-top:1px solid var(--color-divider);margin:14px 0 2px">';
   const order = { direct:0, related:1, cited:2 };
   const cites = [...ev.cites].sort((a,b) => order[a.rel] - order[b.rel] || (b.vetting||0) - (a.vetting||0));
+  const strainHtml = ev.strains && ev.strains.length
+    ? `<p class="ev-note" style="margin:6px 0 8px"><strong>Extracted strains:</strong> ${ev.strains.map(esc).join(', ')} <span style="color:var(--ink-4)">(source metadata; not the event identity)</span></p>`
+    : '';
   let bars = '';
   const rec = records.find(x => x.country === rep.geoCountry && x.pathogenRaw === rep.pathogen);
   if (rec && rec.cases != null) {
@@ -5059,6 +5093,7 @@ function reportEvidenceHtml(rep, ev) {
     }).join('') + `</div>`;
   }
   return `<p class="ev-note" style="margin:2px 0 6px">${ev.direct} of ${ev.articles} citation${ev.articles!==1?'s':''} contributed structured figures (${ev.coverage}%)${ev.medianProx!=null?` · median proximity ${ev.medianProx.toFixed(2)}`:''}.</p>` +
+    strainHtml +
     ((ev.related || ev.citedOnly) ? `<ul class="brief-bullets" style="margin:4px 0 10px">` +
       (ev.related ? `<li>${ev.related} citation${ev.related>1?'s':''} contributed context only — e.g. zoonotic linkage or response reporting.</li>` : '') +
       (ev.citedOnly ? `<li>${ev.citedOnly} citation${ev.citedOnly>1?'s are':' is'} outside the current records${EVIDENCE.windowLabel?` (${EVIDENCE.windowLabel})`:''} — archived or out-of-window.</li>` : '') +
@@ -5154,6 +5189,8 @@ function fetchReports() {
       const raw = ((r['Outbreak Country']||'').replace('United States of America','United States') || loc || '').split(',').pop().trim().replace(/^the\s+/i,'');
       if (raw && !/^(europe|european union|southern europe|southeastern europe|world|global|africa|asia|americas?|oceania|multiple.*)$/.test(raw.toLowerCase())) gc = raw;
     }
+    const configuredPathogen = rememberPathogenFamily(
+      r['Tracker Pathogen'] || r['Pathogen'] || '', r['Pathogen Family']);
     return {
       title: (r['Event Title'] || '').trim() || [PATHOGEN_LABELS[r['Pathogen']] || r['Pathogen'], (r['Outbreak Location'] || r['Outbreak Country'] || '').trim()].filter(Boolean).join(' — '),
       risk: +r['Risk Severity Score'] || 0,
@@ -5161,8 +5198,9 @@ function fetchReports() {
       date: r['Latest Report'],
       country: r['Outbreak Country'] || r['Outbreak Location'] || '',
       geoCountry: gc,
-      pathogen: foldPathogen(r['Pathogen'] || ''),
-      disease: PATHOGEN_LABELS[foldPathogen(r['Pathogen'] || '')] || foldPathogen(r['Pathogen'] || '') || '',
+      pathogen: configuredPathogen,
+      pathogenFamily: String(r['Pathogen Family'] || '').trim(),
+      disease: PATHOGEN_LABELS[configuredPathogen] || configuredPathogen || '',
       place: loc,
       lonlat: parseCoord(r['Coordinate']),
       html: r['Status Report'] || '',
@@ -5313,8 +5351,45 @@ function measureUrlSet(cell) { const out = new Set(); extractUrls(String(cell||'
 // One discrete observed fact within the measurements feed (internal key — location verbatim).
 function measureFactKey(r) { return (r.pathogen||'')+'|'+(r.location||'')+'|'+(r.measure||'')+'|'+String(r.value)+'|'+(r.report_date||''); }
 
+// Extracted pathogen/strain labels are evidence metadata only. They are
+// deliberately parsed from the raw CDEN output here and never used as the
+// event's pathogen key, selector value, or aggregation key.
+function rawExtractedStrains(row) {
+  const out = [], seen = new Set();
+  const add = value => {
+    const text = cleanText(value);
+    if (!text || /^(none|null|n\/?a|unknown|unspecified|not specified)$/i.test(text)) return;
+    const key = text.toLowerCase();
+    if (!seen.has(key)) { seen.add(key); out.push(text); }
+  };
+  const list = raw => {
+    if (Array.isArray(raw)) return raw;
+    const text = String(raw == null ? '' : raw).trim();
+    if (!text) return [];
+    try { const value = JSON.parse(text); return Array.isArray(value) ? value : [value]; }
+    catch (e) {
+      try {
+        const value = JSON.parse(text.replace(/'/g,'"').replace(/\bTrue\b/g,'true').replace(/\bFalse\b/g,'false').replace(/\bNone\b/g,'null'));
+        return Array.isArray(value) ? value : [value];
+      } catch (e2) { return []; }
+    }
+  };
+  list(row && row.cleaned_pathogens).forEach(item => {
+    if (typeof item === 'string') add(item);
+  });
+  list(row && row.identify_pathogen).forEach(item => {
+    if (typeof item === 'string') { add(item); return; }
+    if (!item || typeof item !== 'object') return;
+    const pathogen = cleanText(item.pathogen);
+    const strain = cleanText(item.strain);
+    if (strain && pathogen && !pathogen.toLowerCase().includes(strain.toLowerCase()) && !strain.toLowerCase().includes(pathogen.toLowerCase())) add(pathogen + ' — ' + strain);
+    else add(strain || pathogen);
+  });
+  return out.sort((a,b) => a.localeCompare(b));
+}
+
 const EVIDENCE = {
-  byUrl: new Map(),     // normUrl -> { raw: representative raw row, n: raw rows seen }
+  byUrl: new Map(),     // normUrl -> { raw: representative row, n, strains: Set }
   comboUrls: new Map(), // pathogen||geoCountry -> Set(normUrl) cited by that event's measurement rows
   windowLabel: null,    // raw corpus run-date span, e.g. '30 Jul – 22 Aug 26' (null while unknown)
 };
@@ -5328,7 +5403,13 @@ function rebuildEvidenceIndex() {
       if (!r.url) return;
       const k = normUrl(r.url);
       const e = EVIDENCE.byUrl.get(k);
-      if (e) e.n++; else EVIDENCE.byUrl.set(k, { raw: r, n: 1 });
+      const strains = rawExtractedStrains(r);
+      if (e) {
+        e.n++;
+        strains.forEach(name => e.strains.add(name));
+      } else {
+        EVIDENCE.byUrl.set(k, { raw: r, n: 1, strains: new Set(strains) });
+      }
       // Run-date window ("Report_26-08-22") — the concrete span "current records" refers to.
       const m = (r.date || '').replace('Report_', '').match(/^(\d{2})-(\d{2})-(\d{2})$/);
       if (m) {
@@ -5351,6 +5432,7 @@ function rebuildEvidenceIndex() {
   });
 }
 function rawForUrl(u) { const e = EVIDENCE.byUrl.get(normUrl(u)); return e ? e.raw : null; }
+function evidenceEntryForUrl(u) { return EVIDENCE.byUrl.get(normUrl(u)) || null; }
 
 // Citation-derived evidence profile for one report. Three honest relationship states:
 // DIRECT — the citation URL appears in the sources of a measurement row for the same
@@ -5367,7 +5449,8 @@ function reportEvidence(rep) {
   const combo = EVIDENCE.comboUrls.get((rep.pathogen || '') + '||' + (rep.geoCountry || ''));
   const cites = urls.map(u => {
     const nu = normUrl(u);
-    const raw = rawForUrl(nu);
+    const entry = evidenceEntryForUrl(nu);
+    const raw = entry ? entry.raw : null;
     let rel = 'cited';
     if (combo && combo.has(nu)) rel = 'direct';
     else if (raw && raw.pathogen === rep.pathogen && (!rep.geoCountry || geoCountry(raw.location) === rep.geoCountry)) rel = 'related';
@@ -5378,7 +5461,8 @@ function reportEvidence(rep) {
       title: titleFor(u),
       published: raw ? rawPublishedOf(raw) : null,
       vetting: isFinite(vs) ? vs : null,
-      prox: isFinite(px) ? px : null };
+      prox: isFinite(px) ? px : null,
+      strains: entry ? [...entry.strains] : [] };
   });
   const domains = new Set(cites.map(c => c.domain).filter(Boolean));
   const directs = cites.filter(c => c.rel === 'direct');
@@ -5391,8 +5475,11 @@ function reportEvidence(rep) {
     if (directs.some(c => s.has(normUrl(c.url)))) factKeys.add(measureFactKey(r));
   });
   const proxVals = cites.map(c => c.prox).filter(v => v != null).sort((a,b) => a-b);
+  const strains = [...new Set(cites.flatMap(c => c.strains || []))]
+    .sort((a,b) => a.localeCompare(b));
   return {
     cites,
+    strains,
     articles: cites.length,
     domains: domains.size,
     direct: directs.length,
@@ -5449,6 +5536,8 @@ function ensureRawArticles() {
   withTimeout(d3.csv(GSHEET_RAW_URL), 45000, 'source articles').then(rows => {
     rawArticles = rows || [];
     rawArticles.forEach(r => {
+      r.pathogen = rememberPathogenFamily(
+        r.tracker_pathogen || r.pathogen, r.pathogen_family);
       const t = cleanText(r.title) || cleanText(r.title_translated);
       if (t && r.url) articleTitles.set(normUrl(r.url), t);
       const v = parseFloat(r.article_vetting_score);
