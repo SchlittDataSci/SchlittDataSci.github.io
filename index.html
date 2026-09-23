@@ -282,8 +282,15 @@
   /* Data-availability report table: opaque accent-tinted raw-rows column that keeps scrolled cells
      from bleeding through the sticky header, plus a buffer between the last column and the scrollbar
      so numbers don't kiss the track. */
+  #dataReportBody.dialog-body { max-height:min(68vh,560px); overflow:hidden; display:flex; flex-direction:column; }
+  #dataReportBody .dr-scroll { overflow:auto; min-height:0; flex:1 1 auto; position:relative; }
+  #dataReportBody .dr-table { border-collapse:separate; border-spacing:0; }
   #dataReportBody .dr-table th, #dataReportBody .dr-table td { background-clip: padding-box; }
   #dataReportBody .dr-table thead th { background: var(--color-neutral-900); z-index: 3; box-shadow: 0 1px 0 var(--color-divider); }
+  #dataReportBody .dr-table th:first-child, #dataReportBody .dr-table td:first-child { position:sticky; left:0; background:var(--color-neutral-900); }
+  #dataReportBody .dr-table td:first-child { z-index:2; }
+  #dataReportBody .dr-table thead th:first-child { z-index:5; }
+  #dataReportBody .dr-table tr.dr-selected td:first-child { background:color-mix(in srgb,var(--color-accent) 10%,var(--color-neutral-900)); }
   #dataReportBody .dr-table th.raw-col { background: color-mix(in srgb, var(--color-accent) 14%, var(--color-neutral-900)); }
   #dataReportBody .dr-table td.raw-col { background: color-mix(in srgb, var(--color-accent) 8%, transparent); }
   #dataReportBody .dr-table th:last-child, #dataReportBody .dr-table td:last-child { padding-right: 14px; }
@@ -328,7 +335,8 @@
      `display:grid; place-items:center` — so re-assert centering for the flex axis here (a bare
      flex row otherwise pins the dialog to the left). `safe` falls back to start if a dialog is
      taller/wider than the viewport, so long evidence lists never clip. */
-  .dialog-backdrop { z-index: 60; justify-content: safe center; align-items: safe center; }
+  .dialog-backdrop { position:fixed !important; inset:0 !important; z-index:60; padding:3vh 2vw; box-sizing:border-box; justify-content:center !important; align-items:center !important; place-items:center !important; }
+  .dialog-backdrop > .dialog { margin:auto !important; max-height:94vh; }
   #globeMap .maplibregl-ctrl-group { background: var(--color-neutral-900); border: 1px solid var(--color-divider); }
   #globeMap .maplibregl-ctrl-group button + button { border-top: 1px solid var(--color-divider); }
   #globeMap .maplibregl-ctrl-group button span { filter: invert(1); }
@@ -442,7 +450,7 @@
   .brief-file-line:empty { display:none; }
   .brief-file-line code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:10px; color:var(--ink-3); background:color-mix(in srgb,var(--color-text) 7%,transparent); padding:1px 6px; border-radius:4px; }
   /* Full-page outbreak brief modal + its per-report PDF export. */
-  .brief-modal-backdrop { position:fixed; inset:0; z-index:70; background:color-mix(in srgb, var(--color-bg) 84%, transparent); display:flex; align-items:flex-start; justify-content:center; padding:3vh 2vw; }
+  .brief-modal-backdrop { position:fixed; inset:0; z-index:70; background:color-mix(in srgb, var(--color-bg) 84%, transparent); display:flex; align-items:center; justify-content:center; padding:3vh 2vw; box-sizing:border-box; }
   .brief-modal { background:var(--color-neutral-900); border:1px solid var(--color-divider); border-top:2px solid var(--color-accent); border-radius:var(--radius-md); box-shadow:var(--shadow-lg); width:min(980px,96vw); max-height:94vh; display:flex; flex-direction:column; }
   .brief-modal-head { display:flex; align-items:flex-start; justify-content:space-between; gap:var(--space-4); padding:var(--space-4) var(--space-4) var(--space-3); border-bottom:1px solid var(--color-divider); }
   .brief-modal-eyebrow { font-size:var(--fs-1); text-transform:uppercase; letter-spacing:.1em; color:var(--color-accent-200); margin:0 0 5px; font-weight:600; }
@@ -548,15 +556,9 @@
       </select>
     </div>
     <div class="field-inline">
-      <label for="pathoGroup" title="Scopes the pathogen selector, figures table, map, event list and plots to a pathogen family. Groups overlap by design (e.g. Yellow Fever is both a VHF and an arbovirus).">GROUP</label>
+      <label for="pathoGroup" title="Scopes the pathogen selector and every dashboard view to a configured pathogen family that currently has data.">FAMILY</label>
       <select id="pathoGroup" class="input" style="min-width:180px">
-        <option>All</option>
-        <option>Viral Hemorrhagic Fevers</option>
-        <option>Select Agents</option>
-        <option>Arboviruses</option>
-        <option>Vector Borne Diseases</option>
-        <option>Livestock</option>
-        <option>Other</option>
+        <option value="All">All families</option>
       </select>
     </div>
     <div class="field-inline">
@@ -806,7 +808,7 @@ let dataLoaded = false, sheetRetries = 0;
 const GSHEET_CENSOR_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQYokxQmIi1W5-dpxCFDoow_jRgLFcqR0A11Hz2S93Zj9XJNRb5tm5m0VEjBGpgz21xlyoorPRHEZmc/pub?gid=2086665852&single=true&output=csv";
 let censorRules = [];        // enabled rules: [{pathogen, country, dmin, dmax, reason, label}]
 let censorState = 'idle';    // 'idle' | 'live' | 'unavailable'
-const censorStats = { figures: 0, reports: 0 };
+const censorStats = { figures: 0, reports: 0, raw: 0 };
 function censorKey(s) { return String(s == null ? '' : s).trim().toLowerCase().replace(/^the\s+/, ''); }
 function toISODate(s) {
   s = String(s == null ? '' : s).trim();
@@ -841,14 +843,16 @@ function fetchCensor() {
       }))
       .filter(r => r.pathogen && r.country && r.dmin && r.dmax);
     censorState = 'live';
+    if (typeof rawArticlesSource !== 'undefined' && rawArticlesSource) reapplyRawCensor();
   }).catch(err => {
     censorRules = []; censorState = 'unavailable';
+    if (typeof rawArticlesSource !== 'undefined' && rawArticlesSource) reapplyRawCensor();
     console.warn('[censor] quarantine list unreachable — showing unfiltered:', err && (err.message || err));
   });
 }
 function censorSyncSuffix() {
   if (censorState === 'unavailable') return ' · <span style="color:var(--sev-hi)">⚠ quarantine list offline</span>';
-  const n = censorStats.figures + censorStats.reports;
+  const n = censorStats.figures + censorStats.reports + censorStats.raw;
   return (censorState === 'live' && n) ? (' · ' + n + ' quarantined') : '';
 }
 function updateCensorTag() {
@@ -856,8 +860,8 @@ function updateCensorTag() {
   if (!el) return;
   if (censorState === 'unavailable') {
     el.style.display = '';
-    el.innerHTML = '<span style="color:var(--sev-hi)">⚠ Quarantine list unavailable — figures shown unfiltered</span>';
-    el.setAttribute('title', 'The bad-read quarantine sheet could not be loaded, so no rows were removed. Click Retry in the header to reapply.');
+    el.innerHTML = '<span style="color:var(--sev-hi)">⚠ Quarantine list unavailable — live data shown unfiltered</span>';
+    el.setAttribute('title', 'The bad-read quarantine sheet could not be loaded, so no live dashboard rows were removed. Click Retry in the header to reapply.');
     return;
   }
   if (censorState === 'live' && censorRules.length) {
@@ -865,6 +869,7 @@ function updateCensorTag() {
     const parts = [];
     if (censorStats.figures) parts.push(censorStats.figures + ' figure row' + (censorStats.figures === 1 ? '' : 's'));
     if (censorStats.reports) parts.push(censorStats.reports + ' report' + (censorStats.reports === 1 ? '' : 's'));
+    if (censorStats.raw) parts.push(censorStats.raw + ' raw row' + (censorStats.raw === 1 ? '' : 's'));
     const txt = parts.length ? (parts.join(' + ') + ' quarantined') : ('quarantine active · ' + censorRules.length + ' rule' + (censorRules.length === 1 ? '' : 's'));
     el.innerHTML = '<span style="color:var(--color-accent)">◆</span> ' + txt;
     el.setAttribute('title', 'Bad reads removed at load per the quarantine sheet:\n\n' + censorRules.map(r => '• ' + r.label + ' (' + r.dmin + (r.dmax !== r.dmin ? '…' + r.dmax : '') + ') — ' + r.reason).join('\n'));
@@ -1003,21 +1008,31 @@ function visibleRecords() {
     return regionOk && groupOk && locOk && pathOk;
   });
 }
-// Pathogen groups — non-exclusive families (a pathogen may sit in several); toggle scopes the
-// pathogen selector, figures table, map, event list and plots to the pathogens in the chosen
-// group. Chosen for the actual pathogen universe in this dataset; overlap is intentional so a
-// toggle like "Arboviruses" surfaces Yellow Fever/RVF/CCHF even though they also read as VHF.
-const PATHO_GROUPS = {
-  'All': null,
-  'Viral Hemorrhagic Fevers': new Set(['Ebola Virus','Bundibugyo Virus','Sudan Virus','Tai Forest Virus','Marburg Virus','Lassa Virus','Junin Virus','Machupo Virus','Crimean-Congo Hemorrhagic Fever Virus','Dengue Virus (Hemorrhagic)','Yellow Fever Virus','Rift Valley Fever Virus','Alkhurma Hemorrhagic Fever Virus','Kyasanur Forest Disease Virus','Omsk Hemorrhagic Fever Virus','Hantavirus','Andes Virus','Dobrava Virus','Puumala Virus','Seoul Virus','Sin Nombre Virus']),
-  'Select Agents': new Set(['Bacillus anthracis','Francisella tularensis','Ebola Virus','Bundibugyo Virus','Sudan Virus','Tai Forest Virus','Marburg Virus','Junin Virus','Machupo Virus','Rift Valley Fever Virus','Crimean-Congo Hemorrhagic Fever Virus','Nipah','Hendra','Yellow Fever Virus','Foot-and-mouth disease virus','African swine fever virus','Lumpy skin disease virus','Sheep pox virus','Goat pox virus','Peste des petits ruminants virus']),
-  'Arboviruses': new Set(['West Nile Virus','Eastern equine encephalitis virus','Yellow Fever Virus','Dengue Virus (Hemorrhagic)','Rift Valley Fever Virus','Crimean-Congo Hemorrhagic Fever Virus','Alkhurma Hemorrhagic Fever Virus','Kyasanur Forest Disease Virus','Omsk Hemorrhagic Fever Virus']),
-  'Vector Borne Diseases': new Set(['West Nile Virus','Eastern equine encephalitis virus','Yellow Fever Virus','Dengue Virus (Hemorrhagic)','Rift Valley Fever Virus','Crimean-Congo Hemorrhagic Fever Virus','Alkhurma Hemorrhagic Fever Virus','Kyasanur Forest Disease Virus','Omsk Hemorrhagic Fever Virus']),
-  'Livestock': new Set(['African swine fever virus','Foot-and-mouth disease virus','Lumpy skin disease virus','Sheep pox virus','Goat pox virus','Peste des petits ruminants virus']),
-  'Other': new Set(['Mpox','Illness of Unknown Etiology','Nipah','Hendra']),
-};
+// Families come from pathogen_profiles.csv through the published feeds. Only
+// families attached to a pathogen with live data are offered; no parallel,
+// hand-maintained taxonomy is allowed to drift away from the backend.
 let activePathoGroup = 'All';
-function inPathoGroup(p) { const g = PATHO_GROUPS[activePathoGroup]; return !g || (p && g.has(p)); }
+function pathogenFamily(p) { return pathogenFamilyByName.get(foldPathogen(p)) || 'Other'; }
+function dataBearingPathogens() {
+  const found = new Set();
+  (allRows||[]).forEach(r => { if (r.pathogen && !isFlu(r.pathogen)) found.add(r.pathogen); });
+  (reports||[]).forEach(r => { if (r.pathogen && !isFlu(r.pathogen)) found.add(r.pathogen); });
+  (reportPathoLocs||[]).forEach(r => { if (r.pathogen && !isFlu(r.pathogen)) found.add(r.pathogen); });
+  (rawArticles||[]).forEach(r => { if (r.pathogen && !isFlu(r.pathogen)) found.add(r.pathogen); });
+  if (typeof forecastIndex !== 'undefined') forecastIndex.forEach((_, key) => {
+    const p = String(key||'').split('||')[0]; if (p && !isFlu(p)) found.add(p);
+  });
+  return [...found];
+}
+function refreshFamilySelector() {
+  const sel = document.getElementById('pathoGroup'); if (!sel) return;
+  const families = [...new Set(dataBearingPathogens().map(pathogenFamily).filter(Boolean))]
+    .sort((a,b) => a.localeCompare(b, undefined, {sensitivity:'base'}));
+  if (activePathoGroup !== 'All' && !families.includes(activePathoGroup)) activePathoGroup = 'All';
+  sel.innerHTML = `<option value="All"${activePathoGroup==='All'?' selected':''}>All families</option>` +
+    families.map(f => `<option value="${esc(f)}"${activePathoGroup===f?' selected':''}>${esc(f)}</option>`).join('');
+}
+function inPathoGroup(p) { return activePathoGroup === 'All' || (!!p && pathogenFamily(p) === activePathoGroup); }
 document.getElementById('pathoGroup').addEventListener('change', (e) => {
   activePathoGroup = e.target.value; tablePage = 0;
   // If the current pathogen falls outside the new group, drop back to All so the plots/tables
@@ -1041,7 +1056,7 @@ document.getElementById('pathoGroup').addEventListener('change', (e) => {
   }
   if (typeof flyToFilteredMarkers === 'function') flyToFilteredMarkers();
   applyEmptyQueryState();
-  // Data report is scoped by the pathogen group too; refresh it if the dialog is open.
+  // Data report is scoped by the configured family too; refresh it if the dialog is open.
   const drb=document.getElementById('dataReportBackdrop');
   if (drb && drb.style.display !== 'none') renderDataReportBody();
 });
@@ -3168,7 +3183,6 @@ function availablePathogenRaws() {
   // (region + location search + host species + screen state), ignoring the
   // pathogen selector itself. Backed by refined records, not raw rows, so the
   // list matches what the table/map/plots can actually render.
-  if (!records.length) return [];
   const regionOk = r => activeRegion === 'All regions' || REGION_BY_COUNTRY[r.country] === activeRegion;
   const locOk = r => !locationQuery || r.country.toLowerCase().includes(locationQuery) || (r.disease||'').toLowerCase().includes(locationQuery);
   const base = records.map(refineRecord).filter(Boolean)
@@ -3207,11 +3221,22 @@ function availablePathogenRaws() {
     const rawRegionOk = activeRegion==='All regions' || !c || REGION_BY_COUNTRY[c]===activeRegion;
     const rawLocOk = !locationQuery || (r.location||'').toLowerCase().includes(locationQuery);
     if(rawRegionOk && rawLocOk) set.add(r.pathogen); });
+  // Forecast-only series are still real plot data. Keep them reachable even
+  // when their historical measurement rows are temporarily unavailable.
+  if (reportsScopeOk && typeof forecastIndex !== 'undefined') forecastIndex.forEach((_, key) => {
+    const [p, loc] = String(key||'').split('||');
+    if (!p || isFlu(p) || !inPathoGroup(p)) return;
+    const c = geoCountry(loc);
+    const fcRegionOk = activeRegion==='All regions' || !c || REGION_BY_COUNTRY[c]===activeRegion;
+    const fcLocOk = !locationQuery || String(loc||'').toLowerCase().includes(locationQuery);
+    if (fcRegionOk && fcLocOk) set.add(p);
+  });
   return [...set];
 }
 function refreshPathogenSelector() {
   const sel = document.getElementById('disease');
-  if (!sel || !records.length) return;
+  if (!sel) return;
+  refreshFamilySelector();
   const avail = availablePathogenRaws();
   if (!avail.length) {
     // No pathogen matches the current filters — keep only "All pathogens" and fall back.
@@ -3237,18 +3262,48 @@ function populatePathogenSelect(rows) {
   // Initial guard: only pathogens that can actually render somewhere (national location exists)
   const withCases = present.filter(p => rows.some(r => r.pathogen === p
     && r.measure === 'confirmed_cases' && r.outlier === 'False' && geoCountry(r.location)));
-  if (!withCases.length) return;
-  if (!userChangedPathogen) {
+  if (withCases.length && !userChangedPathogen) {
     const def = dataDepthPathogen() || computeDefaultPathogen();
     if (def) defaultPathogen = def;
   }
   const orderedInit = [...withCases].sort((a,b) => (priorityTier(b) - priorityTier(a)) || a.localeCompare(b, undefined, {sensitivity:'base'}));
-  if (!isAll() && !orderedInit.includes(selectedPathogen) && selectedPathogen !== ALL) { selectedPathogen = ALL; }
-  sel.innerHTML = pathogenSelectHtml(orderedInit);
+  if (orderedInit.length) {
+    if (!isAll() && !orderedInit.includes(selectedPathogen) && selectedPathogen !== ALL) { selectedPathogen = ALL; }
+    sel.innerHTML = pathogenSelectHtml(orderedInit);
+  }
   // Immediately narrow to the current filter state (region/host/search) so the
   // selector never shows pathogens with no visible data.
   refreshPathogenSelector();
-}document.getElementById('disease').addEventListener('change', (e) => {
+}
+let suppressPathogenAutoJump = false;
+function setDashboardTableMode(mode) {
+  const button = [...document.querySelectorAll('#tableModeSeg .seg-opt')]
+    .find(b => b.dataset.mode === mode);
+  if (button && tableMode !== mode) button.click();
+}
+function bestPathogenDestination(pathogen) {
+  if (!pathogen || pathogen === ALL) return null;
+  const mapped = (typeof visibleEventMarkers === 'function' ? visibleEventMarkers() : eventMarkers)
+    .some(m => m.pathogen === pathogen);
+  if (mapped) return { section:'.map-card', mode:null };
+  if (visibleReports().some(({r}) => r.pathogen === pathogen)) return { section:'.briefs-card', mode:null };
+  const hasPlot = (allRows||[]).some(r => r.pathogen === pathogen &&
+    (r.measure === 'confirmed_cases' || r.measure === 'confirmed_deaths') && r.outlier === 'False') ||
+    [...forecastIndex.keys()].some(key => String(key).startsWith(pathogen + '||'));
+  if (hasPlot) return { section:'.plots-card', mode:null };
+  if ((records||[]).some(r => r.pathogenRaw === pathogen)) return { section:'.table-card', mode:'figures' };
+  if ((rawArticles||[]).some(r => r.pathogen === pathogen)) return { section:'.table-card', mode:'raw' };
+  return null;
+}
+function navigateToBestPathogenData(pathogen) {
+  const target = bestPathogenDestination(pathogen); if (!target) return;
+  if (target.mode) setDashboardTableMode(target.mode);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const el = document.querySelector(target.section); if (!el) return;
+    window.scrollTo({ top:window.scrollY + el.getBoundingClientRect().top - 70, behavior:'smooth' });
+  }));
+}
+document.getElementById('disease').addEventListener('change', (e) => {
   selectedPathogen = e.target.value;
   userChangedPathogen = true;
   highlightedCountry = null;
@@ -3266,6 +3321,7 @@ function populatePathogenSelect(rows) {
   const visEvents = visibleReports();
   if (visEvents.length && !visEvents.some(({i}) => i === selectedIdx)) selectEvent(visEvents[0].i);
   if (selectedPathogen !== ALL) { const t = topRiskSizeMarker(); if (t) flyToLonlat(t.lonlat); } else { flyToFilteredMarkers(); }
+  if (!suppressPathogenAutoJump && selectedPathogen !== ALL) navigateToBestPathogenData(selectedPathogen);
 });
 
 let tw = 620; const th = 320, margin = {top:28,right:12,bottom:40,left:44};
@@ -4407,7 +4463,7 @@ function fetchSheet() {
 
 // Forecast tab (published CSV). If the live tab is unreachable the forecast is marked
 // unavailable — no bundled snapshot is ever loaded.
-function afterForecast() { if (allRows.length) { renderStats(); renderTrendSection(); refreshDefaultPathogen(); } }
+function afterForecast() { refreshFamilySelector(); refreshPathogenSelector(); if (allRows.length) { renderStats(); renderTrendSection(); refreshDefaultPathogen(); } }
 function fetchForecast() {
   return withTimeout(d3.csv(GSHEET_FORECAST_URL), 20000, 'forecasts').then(rows => {
   if (!rows || !rows.length || !('p50' in rows[0])) throw new Error('bad forecast');
@@ -4431,6 +4487,7 @@ let reports = [];
 // no coordinate, or no generated narrative) must still populate the pathogen universe.
 let reportPathoLocs = [];
 let selectedIdx = 0;
+let evidenceExpanded = false;
 function extractUrls(s) { if (!s) return []; const m = (s.match(/https?:\/\/[^\s'"<>\)\]]+/g)||[]).map(u=>u.replace(/[.,;]+$/,'')); return [...new Set(m)]; }
 
 function riskTagClass(score) {
@@ -4647,8 +4704,8 @@ function renderBrief() {
   const ev = reportEvidence(r);
   const banner = `<div class="brief-quality"><span class="doc-badge ${ev.strength.cls}">${ev.strength.label}</span>${eventFlagsHtml(r)}` +
     `<span class="bq-meta" title="${REL_SUMMARY}">${scope} · ${ev.articles} article${ev.articles!==1?'s':''} · ${ev.domains} domain${ev.domains!==1?'s':''} · ${ev.facts} corroborated fact${ev.facts!==1?'s':''}${ev.articles?` · ${ev.coverage}% contributed figures`:''}</span>` +
-    `<button type="button" id="evToggle" aria-expanded="false" style="margin-left:auto;font-size:10px;padding:3px 10px">Evidence ▾</button></div>` +
-    `<div id="reportEvidence" hidden>${reportEvidenceHtml(r, ev)}</div>`;
+    `<button type="button" id="evToggle" aria-expanded="${evidenceExpanded?'true':'false'}" style="margin-left:auto;font-size:10px;padding:3px 10px">Evidence ${evidenceExpanded?'▴':'▾'}</button></div>` +
+    `<div id="reportEvidence"${evidenceExpanded?'':' hidden'}>${reportEvidenceHtml(r, ev)}</div>`;
   // Newspaper-style headline: the report's own title leads the article body, pathogen mention
   // linked. The meta row above stays the byline; the evidence banner follows the headline.
   const headline = `<div class="brief-headline">${highlightEventTitle(r, true)}</div>`;
@@ -4664,9 +4721,11 @@ function renderBrief() {
     const sec = document.getElementById('reportEvidence');
     if (!sec) return;
     const open = sec.hasAttribute('hidden');
+    evidenceExpanded = open;
     if (open) sec.removeAttribute('hidden'); else sec.setAttribute('hidden','');
     tg.setAttribute('aria-expanded', String(open));
     tg.textContent = open ? 'Evidence ▴' : 'Evidence ▾';
+    if (open && rawArticlesState === 'idle') ensureRawArticles();
   });
   // The upstream Status Report HTML occasionally leaves an unfilled section placeholder, e.g.
   // <details>[response_efforts]</details> with no <summary> — the browser falls back to a bare
@@ -5059,7 +5118,9 @@ function reportEvidenceHtml(rep, ev) {
   const cites = [...ev.cites].sort((a,b) => order[a.rel] - order[b.rel] || (b.vetting||0) - (a.vetting||0));
   const strainHtml = ev.strains && ev.strains.length
     ? `<p class="ev-note" style="margin:6px 0 8px"><strong>Extracted strains:</strong> ${ev.strains.map(esc).join(', ')} <span style="color:var(--ink-4)">(source metadata; not the event identity)</span></p>`
-    : '';
+    : (rawArticlesState === 'ready'
+      ? `<p class="ev-note" style="margin:6px 0 8px"><strong>Extracted strains:</strong> none recorded in the cited extraction rows.</p>`
+      : `<p class="ev-note" style="margin:6px 0 8px"><strong>Extracted strains:</strong> ${rawArticlesState === 'unavailable' ? 'source metadata unavailable.' : 'loading source metadata…'}</p>`);
   let bars = '';
   const rec = records.find(x => x.country === rep.geoCountry && x.pathogenRaw === rep.pathogen);
   if (rec && rec.cases != null) {
@@ -5105,6 +5166,7 @@ function reportEvidenceHtml(rep, ev) {
 }
 function selectEvent(idx) {
   const r = reports[idx]; if (!r) return;
+  if (idx !== selectedIdx) evidenceExpanded = false;
   selectedIdx = idx;
   chartPref = 'auto';
   if (r.pathogen && r.pathogen !== selectedPathogen) {
@@ -5259,7 +5321,9 @@ function fetchReports() {
   populateSpeciesSelect();
   // The reports feed can resolve after the figures feed — refresh the pathogen selector now so
   // report-only pathogens (event markers with no figure rows yet, e.g. CCHF) get their option.
-  if (records.length) { refreshPathogenSelector(); renderStats(); renderTable(); renderTrendSection(); }
+  refreshFamilySelector();
+  refreshPathogenSelector();
+  if (records.length) { renderStats(); renderTable(); renderTrendSection(); }
 
   rebuildEvidenceIndex();
   selectedIdx = 0;
@@ -5318,7 +5382,7 @@ function openDialog(title, html) { hideChartTip(); dialogOpener = document.activ
 // aggregated tab are parallel views sharing only ~31% of URLs, so NO screening or admission
 // semantics are projected onto raw rows; the Screened in/All/Screened out toggle belongs to figures only.
 const GSHEET_RAW_URL = "https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8/export?format=csv&gid=361501048";
-let rawArticles = null, rawArticlesState = 'idle', rawPage = 0;
+let rawArticles = null, rawArticlesSource = null, rawArticlesState = 'idle', rawPage = 0;
 const articleTitles = new Map(); // normalized URL -> original-language title
 const VETTING_TIP = "Sources = independent publisher domains reporting the same fact. Unvetted = 1 independent domain (no corroboration, lower reliability). Vetted = 2+ independent domains; vettings = sources − 1 (e.g. 3 domains = 2 vettings). Article URLs are retained separately for audit and do not by themselves create source independence.";
 function normUrl(u) {
@@ -5530,24 +5594,42 @@ function citeCard(u, rel) {
     `<div class="art-meta">${meta}${u ? `${meta ? ' · ' : ''}<a class="art-link" style="font-size:12px;font-weight:400;margin-bottom:0" href="${esc(u)}" target="_blank" rel="noopener">Open ↗</a>` : ''}</div></div>`;
 }
 
+function rawRowIsCensored(r) {
+  const location = r.location || r.event_location || r.extract_country || '';
+  const country = geoCountry(location) || geoCountry(r.extract_country || '') ||
+    cleanText(r.extract_country) || String(location).split(',').pop().trim();
+  const reportDate = r.report_date || r.date || r.published || r['Report Generated'] || '';
+  return isCensored(r.tracker_pathogen || r.pathogen, country, reportDate, r.tracker_pathogen);
+}
+function reapplyRawCensor() {
+  if (!rawArticlesSource) return;
+  rawArticles = censorRules.length ? rawArticlesSource.filter(r => !rawRowIsCensored(r)) : [...rawArticlesSource];
+  censorStats.raw = rawArticlesSource.length - rawArticles.length;
+  articleTitles.clear(); factVettings.clear(); rawMaxVettingScore = 0;
+  rawArticles.forEach(r => {
+    const t = cleanText(r.title) || cleanText(r.title_translated);
+    if (t && r.url) articleTitles.set(normUrl(r.url), t);
+    const v = parseFloat(r.article_vetting_score);
+    if (isFinite(v) && v > rawMaxVettingScore) rawMaxVettingScore = v;
+    const key = factVetKey(r);
+    if (key) {
+      if (!factVettings.has(key)) factVettings.set(key, new Set());
+      factVettings.get(key).add(normUrl(r.url));
+    }
+  });
+  updateCensorTag();
+  if (rawArticlesState === 'ready') document.dispatchEvent(new CustomEvent('rawarticles'));
+}
 function ensureRawArticles() {
   if (rawArticlesState !== 'idle') return;
   rawArticlesState = 'loading';
   withTimeout(d3.csv(GSHEET_RAW_URL), 45000, 'source articles').then(rows => {
-    rawArticles = rows || [];
-    rawArticles.forEach(r => {
+    rawArticlesSource = rows || [];
+    rawArticlesSource.forEach(r => {
       r.pathogen = rememberPathogenFamily(
         r.tracker_pathogen || r.pathogen, r.pathogen_family);
-      const t = cleanText(r.title) || cleanText(r.title_translated);
-      if (t && r.url) articleTitles.set(normUrl(r.url), t);
-      const v = parseFloat(r.article_vetting_score);
-      if (isFinite(v) && v > rawMaxVettingScore) rawMaxVettingScore = v;
-      const key = factVetKey(r);
-      if (key) {
-        if (!factVettings.has(key)) factVettings.set(key, new Set());
-        factVettings.get(key).add(normUrl(r.url));
-      }
     });
+    reapplyRawCensor();
     rawArticlesState = 'ready';
     document.dispatchEvent(new CustomEvent('rawarticles'));
   }).catch(err => {
@@ -5718,7 +5800,8 @@ document.addEventListener('rawarticles', () => {
   if (reports.length) { renderEventList(); renderBrief(); }
   // Raw-extraction-only pathogens (e.g. CCHF) can now enter the pathogen selector, and the
   // data-availability report's Raw-rows counts can resolve — refresh both if they're live.
-  if (records.length) refreshPathogenSelector();
+  refreshFamilySelector();
+  refreshPathogenSelector();
   const drb = document.getElementById('dataReportBackdrop');
   if (drb && drb.style.display !== 'none') renderDataReportBody();
 });
@@ -5842,7 +5925,7 @@ function renderDataReportBody(){
   });
   const cell=(p,key,v)=> v==null ? `<span style="color:var(--ink-4)" title="Raw extraction corpus still loading…">…</span>` : (v>0 ? `<button type="button" class="dr-cell" data-p="${esc(p)}" data-sec="${key}">${v.toLocaleString()}</button>` : `<span style="color:var(--ink-4)">0</span>`);
   const trs=rows.map(({p,c})=>{ const sel=(!isAll()&&selectedPathogen===p);
-    return `<tr${sel?' style="background:color-mix(in srgb,var(--color-accent) 10%,transparent)"':''}><td style="font-weight:600;white-space:nowrap">${esc(PATHOGEN_LABELS[p]||p)}</td>`
+    return `<tr${sel?' class="dr-selected" style="background:color-mix(in srgb,var(--color-accent) 10%,transparent)"':''}><td style="font-weight:600;white-space:nowrap">${esc(PATHOGEN_LABELS[p]||p)}</td>`
       +`<td class="raw-col" style="text-align:right;font-weight:600">${cell(p,'raw',c.raw)}</td><td style="text-align:right">${cell(p,'mapped',c.mapped)}</td><td style="text-align:right">${cell(p,'reports',c.reports)}</td><td style="text-align:right">${cell(p,'plotDays',c.plotDays)}</td><td style="text-align:right">${cell(p,'sources',c.sources)}</td><td style="text-align:right">${cell(p,'figures',c.figures)}</td></tr>`;
   }).join('');
   const cols = [
@@ -5862,7 +5945,7 @@ function renderDataReportBody(){
     return `<th class="${cls}" data-sort-key="${col.key}" style="text-align:${col.align}"${t}>${col.label}<span class="sort-arrow">${arrow}</span></th>`;
   }).join('');
   body.innerHTML=`<p style="font-size:12px;color:var(--ink-3);margin:0 0 10px;line-height:1.5" title="Counts span the whole feed (they ignore the region / host / location filters). Raw rows = distinct rows in the raw extraction corpus (duplicate re-reports of the same article and fact removed). Figures = rows the figures table actually renders (aggregated per country) — a pathogen whose locations resolve to no mapped country shows 0.">Live data available for each pathogen. Click a count to filter and jump; click a column header to sort.</p>`
-    +`<div style="overflow:auto;max-height:min(60vh,460px)"><table class="table dr-table" style="min-width:640px"><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table></div>`;
+    +`<div class="dr-scroll"><table class="table dr-table" style="min-width:640px"><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table></div>`;
 }
 function openDataReport(){
   // The raw corpus is lazy — kick off its load so the Raw-rows column (and any raw-only pathogen
@@ -5882,7 +5965,11 @@ function drJump(p, sec){
   if(spSel && activeSpecies!==ALL_SPECIES){ activeSpecies=ALL_SPECIES; if([...spSel.options].some(o=>o.value===ALL_SPECIES)) spSel.value=ALL_SPECIES; }
   const sel=document.getElementById('disease');
   if(p && sel){
-    if([...sel.options].some(o=>o.value===p)){ sel.value=p; sel.dispatchEvent(new Event('change')); }
+    if([...sel.options].some(o=>o.value===p)){
+      suppressPathogenAutoJump=true;
+      sel.value=p; sel.dispatchEvent(new Event('change'));
+      suppressPathogenAutoJump=false;
+    }
     else { selectedPathogen=p; userChangedPathogen=true; try{refreshPathogenSelector();}catch(e){} try{renderStats();renderTable();renderTrendSection();renderMap();if(typeof renderEventList==='function')renderEventList();if(typeof renderBrief==='function')renderBrief();}catch(e){} }
   }
   if(sec==='raw'){ const b=[...document.querySelectorAll('#tableModeSeg .seg-opt')].find(x=>x.dataset.mode==='raw'); if(b && tableMode!=='raw') b.click(); }
