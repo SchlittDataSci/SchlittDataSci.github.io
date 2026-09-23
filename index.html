@@ -282,6 +282,7 @@
   /* Data-availability report table: opaque accent-tinted raw-rows column that keeps scrolled cells
      from bleeding through the sticky header, plus a buffer between the last column and the scrollbar
      so numbers don't kiss the track. */
+  #dataReportDialog { width:96vw; max-width:1440px; box-sizing:border-box; }
   #dataReportBody.dialog-body { max-height:min(68vh,560px); overflow:hidden; display:flex; flex-direction:column; }
   #dataReportBody .dr-scroll { overflow:auto; min-height:0; flex:1 1 auto; position:relative; }
   #dataReportBody .dr-table { border-collapse:separate; border-spacing:0; }
@@ -289,6 +290,7 @@
   #dataReportBody .dr-table thead th { background: var(--color-neutral-900); z-index: 3; box-shadow: 0 1px 0 var(--color-divider); }
   #dataReportBody .dr-table th:first-child, #dataReportBody .dr-table td:first-child { position:sticky; left:0; background:var(--color-neutral-900); }
   #dataReportBody .dr-table td:first-child { z-index:2; }
+  #dataReportBody .dr-table th:first-child { width:32%; }
   #dataReportBody .dr-table thead th:first-child { z-index:5; }
   #dataReportBody .dr-table tr.dr-selected td:first-child { background:color-mix(in srgb,var(--color-accent) 10%,var(--color-neutral-900)); }
   #dataReportBody .dr-table th.raw-col { background: color-mix(in srgb, var(--color-accent) 14%, var(--color-neutral-900)); }
@@ -296,7 +298,7 @@
   #dataReportBody .dr-table th:last-child, #dataReportBody .dr-table td:last-child { padding-right: 14px; }
   #dataReportBody .dr-table th.sortable { cursor: pointer; user-select: none; }
   #dataReportBody .dr-table th.sortable:hover { color: var(--color-text); }
-  #dataReportBody .dr-table th.sortable { position: relative; padding-right: 18px; }
+  #dataReportBody .dr-table th.sortable { position: sticky; top: 0; padding-right: 18px; }
   #dataReportBody .dr-table th.sortable[style*="text-align:left"], #dataReportBody .dr-table th.sortable[style*="text-align: left"] { padding-right: 18px; padding-left: 0; }
   #dataReportBody .dr-table th:last-child.sortable { padding-right: 28px; }
   #dataReportBody .dr-table th .sort-arrow { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); font-size: 9px; line-height: 1; opacity: 0.45; }
@@ -546,6 +548,10 @@
       <h1 class="page-title">Viral Hemorrhagic Fever &amp; Selected Pathogens Surveillance</h1>
       <p class="page-sub" id="pageSub">Case figures extracted from open-source news reporting, aggregated per country and pathogen</p>
     </div>
+    <div class="field-inline">
+      <label for="search">SEARCH</label>
+      <input id="search" class="input" type="search" placeholder="Filter by country, pathogen…" style="min-width:180px">
+    </div>
   </div>
 
   <div class="toolbar">
@@ -566,8 +572,13 @@
       <select id="species" class="input" style="min-width:150px"><option>All species</option></select>
     </div>
     <div class="field-inline">
-      <label for="search">SEARCH</label>
-      <input id="search" class="input" type="text" placeholder="Filter by country, pathogen…" style="min-width:180px">
+      <label for="investigatorGroup" title="Investigator groupings can overlap and are independent of pathogen families.">GROUP</label>
+      <select id="investigatorGroup" class="input" style="min-width:180px">
+        <option value="All">All groups</option>
+        <option>Viral Hemorrhagic Fever</option><option>Select Agents</option>
+        <option>Arboviruses</option><option>Vector Borne Diseases</option>
+        <option>Livestock</option><option>Other</option>
+      </select>
     </div>
     <button type="button" class="btn btn-primary" id="dataReportBtn" title="Per-pathogen data availability — mapped events, event reports, plot days, sources, figures and raw rows"><span class="dr-sheen" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="dr-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M9.5 20V4M15 20v-7M20.5 20V8"></path></svg>Data report</span></button>
   </div>
@@ -598,7 +609,7 @@
         <div class="map-legend">
           <span class="legend-swatch">Risk<span style="display:inline-block;width:92px;height:9px;border-radius:5px;margin:0 7px;background:linear-gradient(90deg,var(--sev-lo),var(--sev-mid),var(--sev-hi))"></span>1 → 9</span>
           <span class="legend-swatch" title="Vetted event report — filled circle sized by risk/case load"><svg width="46" height="16" style="overflow:visible"><circle cx="7" cy="8" r="3" fill="#b45c64" fill-opacity="0.7" stroke="var(--color-neutral-100)"></circle><circle cx="30" cy="8" r="7" fill="#b45c64" fill-opacity="0.7" stroke="var(--color-neutral-100)"></circle></svg><span id="mapSizeLabel">size ∝ score</span></span>
-          <span class="legend-swatch" id="rawGlyphLegend" title="Unvetted raw-article cluster — hollow downward triangle at country centroid; click a glyph to open its source article data" style="cursor:pointer;user-select:none"><svg width="16" height="14" style="overflow:visible"><path d="M2 4 L14 4 L8 12 Z" fill="none" stroke="var(--color-accent-300)" stroke-width="1.4" opacity="0.85"></path></svg><span id="rawGlyphLabel">Unvetted raw</span></span>
+          <span class="legend-swatch" id="rawGlyphLegend" title="Unvetted extractions — hollow downward triangle at country centroid; click a glyph to open its source article data" style="cursor:pointer;user-select:none"><svg width="16" height="14" style="overflow:visible"><path d="M2 4 L14 4 L8 12 Z" fill="none" stroke="var(--color-accent-300)" stroke-width="1.4" opacity="0.85"></path></svg><span id="rawGlyphLabel">Unvetted extractions</span></span>
           <span class="legend-swatch" id="mapCount"></span>
         </div>
       </div>
@@ -769,7 +780,7 @@
 </div>
 
 <div class="dialog-backdrop" id="dataReportBackdrop" style="display:none">
-  <div class="dialog" id="dataReportDialog" style="max-width:900px;width:94%">
+  <div class="dialog" id="dataReportDialog">
     <p class="dialog-title" id="dataReportTitle">Data availability by pathogen</p>
     <div class="dialog-body" id="dataReportBody"></div>
     <div class="dialog-actions"><button type="button" class="btn btn-secondary" id="dataReportClose">Close</button></div>
@@ -892,7 +903,7 @@ function isVetted(r) { return vettingsOf(r.n_sources) >= 1; }
 function vettingLabel(n) { // source-count label: verbose tooltip form "2 sources · 1 vetting"
   const src = (+n || 1);
   const v = vettingsOf(src);
-  if (v === 0) return '1 source · unvetted — single report, lower reliability';
+  if (v === 0) return '1 source · unvetted extraction — no independent corroboration';
   return `${src} sources · ${v} vetting${v>1?'s':''} · corroborated`;
 }
 function withTimeout(p, ms, label) {
@@ -1012,6 +1023,21 @@ function visibleRecords() {
 // families attached to a pathogen with live data are offered; no parallel,
 // hand-maintained taxonomy is allowed to drift away from the backend.
 let activePathoGroup = 'All';
+let activeInvestigatorGroup = 'All';
+// Investigator watchlists are overlapping research filters, not a replacement
+// for the configured family taxonomy or a statement of regulatory status.
+const INVESTIGATOR_GROUPS = {
+  'Viral Hemorrhagic Fever': ['Ebola Virus','Bundibugyo Virus','Sudan Virus','Tai Forest Virus','Marburg Virus','Lassa Virus','Junin Virus','Machupo Virus','Guanarito Virus','Sabia Virus','Lujo Virus','Chapare Virus','Crimean-Congo Hemorrhagic Fever Virus','Rift Valley Fever Virus','Yellow Fever Virus','Dengue Virus (Hemorrhagic)','Kyasanur Forest Disease Virus','Omsk Hemorrhagic Fever Virus','Alkhurma Hemorrhagic Fever Virus','Hantavirus Unspecified','Andes Virus','Dobrava Virus','Puumala Virus','Seoul Virus','Sin Nombre Virus'],
+  'Select Agents': ['Bacillus anthracis','Francisella tularensis','Ebola Virus','Bundibugyo Virus','Sudan Virus','Tai Forest Virus','Marburg Virus','Lassa Virus','Junin Virus','Machupo Virus','Guanarito Virus','Sabia Virus','Lujo Virus','Chapare Virus','Crimean-Congo Hemorrhagic Fever Virus','Rift Valley Fever Virus','Kyasanur Forest Disease Virus','Omsk Hemorrhagic Fever Virus','Nipah','Nipah Virus','Hendra','Hendra Virus','African Swine Fever','African Swine Fever Virus','Foot and Mouth Disease','Foot-and-Mouth Disease Virus','Lumpy Skin Disease','Lumpy Skin Disease Virus','Sheep Pox','Sheep Pox Virus','Goat Pox','Goat Pox Virus','Peste des Petits Ruminants','Peste des Petits Ruminants Virus'],
+  'Arboviruses': ['West Nile Virus','Eastern Equine Encephalitis Virus','Yellow Fever Virus','Dengue Virus (Hemorrhagic)','Rift Valley Fever Virus','Crimean-Congo Hemorrhagic Fever Virus','Alkhurma Hemorrhagic Fever Virus','Kyasanur Forest Disease Virus','Omsk Hemorrhagic Fever Virus'],
+  'Vector Borne Diseases': ['West Nile Virus','Eastern Equine Encephalitis Virus','Yellow Fever Virus','Dengue Virus (Hemorrhagic)','Rift Valley Fever Virus','Crimean-Congo Hemorrhagic Fever Virus','Alkhurma Hemorrhagic Fever Virus','Kyasanur Forest Disease Virus','Omsk Hemorrhagic Fever Virus'],
+  'Livestock': ['African Swine Fever','African Swine Fever Virus','Foot and Mouth Disease','Foot-and-Mouth Disease Virus','Lumpy Skin Disease','Lumpy Skin Disease Virus','Sheep Pox','Sheep Pox Virus','Goat Pox','Goat Pox Virus','Peste des Petits Ruminants','Peste des Petits Ruminants Virus'],
+  'Other': ['Mpox','Unknown Etiology','Illness of Unknown Etiology','Nipah','Nipah Virus','Hendra','Hendra Virus']
+};
+function inInvestigatorGroup(p) {
+  return activeInvestigatorGroup === 'All' || (INVESTIGATOR_GROUPS[activeInvestigatorGroup] || [])
+    .some(name => foldPathogen(name).toLowerCase() === foldPathogen(p).toLowerCase());
+}
 function pathogenFamily(p) { return pathogenFamilyByName.get(foldPathogen(p)) || 'Other'; }
 function dataBearingPathogens() {
   const found = new Set();
@@ -1032,26 +1058,24 @@ function refreshFamilySelector() {
   sel.innerHTML = `<option value="All"${activePathoGroup==='All'?' selected':''}>All families</option>` +
     families.map(f => `<option value="${esc(f)}"${activePathoGroup===f?' selected':''}>${esc(f)}</option>`).join('');
 }
-function inPathoGroup(p) { return activePathoGroup === 'All' || (!!p && pathogenFamily(p) === activePathoGroup); }
-document.getElementById('pathoGroup').addEventListener('change', (e) => {
-  activePathoGroup = e.target.value; tablePage = 0;
-  // If the current pathogen falls outside the new group, drop back to All so the plots/tables
-  // don't render an out-of-scope selection.
-  if (!isAll() && !inPathoGroup(selectedPathogen)) {
-    selectedPathogen = ALL; userChangedPathogen = false;
-    const ds = document.getElementById('disease'); if (ds && [...ds.options].some(o=>o.value===ALL)) ds.value = ALL;
-    resetDrilldowns();
-  }
+function inPathoGroup(p) { return (activePathoGroup === 'All' || (!!p && pathogenFamily(p) === activePathoGroup)) && inInvestigatorGroup(p); }
+function applyGroupFilters() {
+  tablePage = 0;
+  // A group/family selection opens its whole scope. Selecting an event below
+  // must not silently narrow that scope back to a single pathogen.
+  selectedPathogen = ALL; userChangedPathogen = true;
+  const ds = document.getElementById('disease'); if (ds) ds.value = ALL;
+  resetDrilldowns();
   refreshPathogenSelector();
   renderStats(); renderTable(); renderMap(); renderTrendSection();
   renderEventList();
   const visEvents = visibleReports();
   if (visEvents.length) {
-    if (!visEvents.some(({i}) => i === selectedIdx)) selectEvent(visEvents[0].i);
-    else renderBrief();
+    if (!visEvents.some(({i}) => i === selectedIdx)) selectedIdx = visEvents[0].i;
+    renderBrief();
   } else {
     selectedIdx = -1;
-    if (briefContentEl) briefContentEl.innerHTML = `<p style="font-size:12px;color:var(--ink-3);margin:0">No event reports in the <strong>${activePathoGroup}</strong> group under the current filters.</p>`;
+    if (briefContentEl) briefContentEl.innerHTML = `<p style="font-size:12px;color:var(--ink-3);margin:0">No event reports under the current filters.</p>`;
     if (briefMetaEl) briefMetaEl.innerHTML = '';
   }
   if (typeof flyToFilteredMarkers === 'function') flyToFilteredMarkers();
@@ -1059,6 +1083,14 @@ document.getElementById('pathoGroup').addEventListener('change', (e) => {
   // Data report is scoped by the configured family too; refresh it if the dialog is open.
   const drb=document.getElementById('dataReportBackdrop');
   if (drb && drb.style.display !== 'none') renderDataReportBody();
+}
+document.getElementById('pathoGroup').addEventListener('change', (e) => {
+  activePathoGroup = e.target.value;
+  applyGroupFilters();
+});
+document.getElementById('investigatorGroup').addEventListener('change', (e) => {
+  activeInvestigatorGroup = e.target.value;
+  applyGroupFilters();
 });
 document.getElementById('search').addEventListener('input', (e) => { locationQuery = e.target.value.trim().toLowerCase(); tablePage = 0; refreshPathogenSelector(); renderStats(); renderTable(); renderMap(); renderEventList(); flyToFilteredMarkers(); applyEmptyQueryState(); });
 // When a location search (or region) excludes every event, the brief, trend and forecast panels
@@ -1366,7 +1398,7 @@ function recordFamilyDomains(r){ return domainsOf(recordFamilyRows(r)); }
 // applied retrospectively here) but flagged as a gentle note wherever it is shown. Matched
 // loosely on the quality_flag so any spelling the pipeline emits (bleed-through / bleedthrough
 // / bleed_through) is caught.
-function isBleedRow(r) { return !!r && /bleed/i.test(String(r.quality_flag || '')); }
+function isBleedRow(r) { return !!r && /bleed/i.test(String(r.quality_flag || '') + ' ' + String(r.canonical_reason || '')); }
 const BLEED_TIP = 'Suspected bleed-through: this figure may have inherited a parent location\u2019s total (a known issue with some US West Nile virus sub-locations). Flagged upstream and shown here uncorrected.';
 function bleedNote(rows) {
   return (rows || []).some(isBleedRow)
@@ -1386,6 +1418,9 @@ function isAnimalRow(r) {
 function figureAcceptance(r) {
   const at = r.rowsAt || [];
   if (!at.length) return '<span class="src-vet">—</span>';
+  const unresolved = at.find(x => /^(local_conflict_unresolved|multiple_locations_unresolved|possible_national_bleed)$/.test(x.canonical_reason || ''));
+  if (unresolved) return `<span class="doc-badge doc-less" title="${esc(canonReasonLabel(unresolved.canonical_reason))}">Scope unresolved</span>`;
+  if (at.every(x => x.quality_flag === 'local_unscreened')) return '<span class="doc-badge doc-less" title="Local counts bypass national trend and monotonicity screening">Local extraction</span>';
   const accepted = at.some(x => x.outlier === 'False');
   if (accepted) return '<span class="doc-badge doc-well">Screened in</span>';
   const flag = at[0].quality_flag;
@@ -2190,7 +2225,7 @@ function renderUnvettedLayer(projection) {
   const leg = document.getElementById('rawGlyphLegend');
   if (leg) leg.style.opacity = showUnvettedRaw ? '1' : '0.4';
   const lab = document.getElementById('rawGlyphLabel');
-  if (lab) lab.textContent = showUnvettedRaw ? `Unvetted raw · ${clusters.length}` : 'Unvetted raw · hidden';
+  if (lab) lab.textContent = showUnvettedRaw ? `Unvetted extractions · ${clusters.length}` : 'Unvetted extractions · hidden';
 }
 function unvettedTooltipHTML(d) {
   const label = PATHOGEN_LABELS[d.pathogen] || d.pathogen;
@@ -2200,13 +2235,13 @@ function unvettedTooltipHTML(d) {
   if (d.count === 1) {
     const r = d.rows[0] || {};
     const pub = r.published ? String(r.published).slice(0, 10) : '';
-    return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:10px;margin:0 0 4px">Unvetted Reports</p>`
+    return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:10px;margin:0 0 4px">Unvetted extractions</p>`
       + `<p class="t-title" style="margin:0 0 6px">${label} · ${d.country}</p>`
       + (r.domain ? `<div class="t-row"><span>Source</span><span>${esc(r.domain)}</span></div>` : '')
       + (pub ? `<div class="t-row"><span>Published</span><span>${pub}</span></div>` : '')
       + `<div class="t-row" style="margin-top:6px;color:var(--color-accent-300)"><span>Click to open source article data</span><span></span></div>`;
   }
-  return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:10px;margin:0 0 4px">Unvetted Reports</p>`
+  return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:10px;margin:0 0 4px">Unvetted extractions</p>`
     + `<p class="t-title" style="margin:0 0 6px">${label} · ${d.country}</p>`
     + `<div class="t-row"><span>Source articles</span><span>${d.count}</span></div>`
     + `<div class="t-row"><span>Independent domains</span><span>${d.domains.length}</span></div>`
@@ -2236,7 +2271,7 @@ function syncUnvettedBanner() {
       scroll?.parentNode?.insertBefore(banner, scroll);
     }
     const lbl = PATHOGEN_LABELS[unvettedScope.pathogen] || unvettedScope.pathogen;
-    banner.innerHTML = `<span>Filtered to unvetted reports for <strong>${esc(lbl)}</strong> in <strong>${esc(unvettedScope.country)}</strong> — applies to both figures and source articles</span><button type="button" class="btn btn-secondary" id="unvettedScopeClear" style="font-size:11px;padding:2px 10px">Clear filter</button>`;
+    banner.innerHTML = `<span>Filtered to unvetted extractions for <strong>${esc(lbl)}</strong> in <strong>${esc(unvettedScope.country)}</strong> — applies to both figures and source articles</span><button type="button" class="btn btn-secondary" id="unvettedScopeClear" style="font-size:11px;padding:2px 10px">Clear filter</button>`;
     banner.querySelector('#unvettedScopeClear').onclick = clearUnvettedScope;
     banner.style.display = '';
   } else if (banner) {
@@ -3172,7 +3207,7 @@ function briefMarkup(s) {
   return '<ul class="brief-bullets">' + chunks.map(c => '<li>' + bold(c) + '</li>').join('') + '</ul>';
 }
 function canonReasonLabel(r) {
-  return ({ sole_report:'sole report', median_choice:'median of sources', sole_survivor:'sole surviving figure', plurality_sources:'plurality of sources' })[r] || (r || 'selected');
+  return ({ sole_report:'sole report', median_choice:'median of sources', sole_survivor:'sole surviving figure', plurality_sources:'plurality of sources', local_conflict_unresolved:'conflicting local counts — no canonical figure', multiple_locations_unresolved:'combined locations — coverage unresolved', possible_national_bleed:'possible national total assigned locally' })[r] || (r || 'selected');
 }
 function speciesForCombo(rows, country, pathogen) {
   const sp = [...new Set(rows.filter(r => geoCountry(r.location)===country && r.pathogen===pathogen).map(r => (r.species||'').trim()).filter(s => s && s.toLowerCase()!=='humans'))];
@@ -3884,7 +3919,7 @@ function renderChart(series, effectiveTp) {
         const jx = cx0 + (i - (alts.length - 1) / 2) * 3.6;
         const vy = y(+r.value);
         if (!isFinite(vy)) return;
-        const tipRej = () => `<p class="t-title">${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · not canonical</p><div class="t-row"><span>${label}</span><span>${(+r.value).toLocaleString()}</span></div><div class="t-row"><span>${r.location}</span><span>${(+r.n_sources||1)===1 ? 'unvetted' : `${+r.n_sources||1} sources`}</span></div>` + ((rowsKey==='caseRows'&&d.cases!=null)||(rowsKey==='deathRows'&&d.deaths!=null) ? `<div class="t-row"><span>Canonical figure</span><span>${(rowsKey==='caseRows'?d.cases:d.deaths).toLocaleString()}</span></div>` : '') + `<div class="t-foot">${r.canonical_reason?canonReasonLabel(r.canonical_reason)+' — ':''}Superseded by the canonical figure · click for detail</div>`;
+        const tipRej = () => `<p class="t-title">${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · not canonical</p><div class="t-row"><span>${label}</span><span>${(+r.value).toLocaleString()}</span></div><div class="t-row"><span>${r.location}</span><span>${(+r.n_sources||1)===1 ? 'unvetted' : `${+r.n_sources||1} sources`}</span></div>` + ((rowsKey==='caseRows'&&d.cases!=null)||(rowsKey==='deathRows'&&d.deaths!=null) ? `<div class="t-row"><span>Canonical figure</span><span>${(rowsKey==='caseRows'?d.cases:d.deaths).toLocaleString()}</span></div>` : '') + `<div class="t-foot">${r.canonical_reason?canonReasonLabel(r.canonical_reason)+' — ':''}Reported alternative · click for detail</div>`;
         addHollowHit(dotsG, jx, vy, tipRej, () => { hideChartTip(); openArticlePopup(d.date, d[rowsKey] || []); });
         dotsG.append('circle').attr('cx', jx).attr('cy', vy).attr('r', 2.9)
           .attr('fill', 'none').attr('stroke', baseColor).attr('stroke-width', 1.1).attr('opacity', 0.65)
@@ -5112,8 +5147,17 @@ function comboEvidence(pathogen, country) {
 }
 // Expandable per-report evidence section: transparent coverage summary, corroboration bars for
 // the event's latest figures, then every citation as an evidence card grouped by relationship.
+function locationEvidenceHtml(raw) {
+  let labels;
+  try { labels = typeof raw === 'string' ? JSON.parse(raw) : raw; } catch (_) { return ''; }
+  if (!Array.isArray(labels)) return '';
+  labels = [...new Set(labels.filter(x => typeof x === 'string' && x.trim()))];
+  if (!labels.length) return '';
+  return `<p class="ev-note" title="${esc(labels.join('; '))}"><strong>Reported location labels:</strong> ${labels.map(esc).join('; ')} <span style="color:var(--ink-4)">(original extraction labels; combined reports may cover different places)</span></p>`;
+}
 function reportEvidenceHtml(rep, ev) {
-  if (!ev.cites.length) return '<p class="ev-note" style="margin:8px 0">This brief lists no machine-readable citations.</p><hr style="border:0;border-top:1px solid var(--color-divider);margin:14px 0 2px">';
+  const locationHtml = locationEvidenceHtml(rep.locationAliases);
+  if (!ev.cites.length) return locationHtml + '<p class="ev-note" style="margin:8px 0">This brief lists no machine-readable citations.</p><hr style="border:0;border-top:1px solid var(--color-divider);margin:14px 0 2px">';
   const order = { direct:0, related:1, cited:2 };
   const cites = [...ev.cites].sort((a,b) => order[a.rel] - order[b.rel] || (b.vetting||0) - (a.vetting||0));
   const strainHtml = ev.strains && ev.strains.length
@@ -5154,7 +5198,7 @@ function reportEvidenceHtml(rep, ev) {
     }).join('') + `</div>`;
   }
   return `<p class="ev-note" style="margin:2px 0 6px">${ev.direct} of ${ev.articles} citation${ev.articles!==1?'s':''} contributed structured figures (${ev.coverage}%)${ev.medianProx!=null?` · median proximity ${ev.medianProx.toFixed(2)}`:''}.</p>` +
-    strainHtml +
+    strainHtml + locationHtml +
     ((ev.related || ev.citedOnly) ? `<ul class="brief-bullets" style="margin:4px 0 10px">` +
       (ev.related ? `<li>${ev.related} citation${ev.related>1?'s':''} contributed context only — e.g. zoonotic linkage or response reporting.</li>` : '') +
       (ev.citedOnly ? `<li>${ev.citedOnly} citation${ev.citedOnly>1?'s are':' is'} outside the current records${EVIDENCE.windowLabel?` (${EVIDENCE.windowLabel})`:''} — archived or out-of-window.</li>` : '') +
@@ -5264,6 +5308,7 @@ function fetchReports() {
       pathogenFamily: String(r['Pathogen Family'] || '').trim(),
       disease: PATHOGEN_LABELS[configuredPathogen] || configuredPathogen || '',
       place: loc,
+      locationAliases: r['Location Aliases'] || r['location_aliases'] || '[]',
       lonlat: parseCoord(r['Coordinate']),
       html: r['Status Report'] || '',
       crossover: cleanText(r['Crossover Events']).length > 0,
@@ -5898,9 +5943,8 @@ function renderDataReportBody(){
   const uni=[...new Set([...(allRows||[]).map(r=>r.pathogen), ...(reports||[]).map(r=>r.pathogen), ...(reportPathoLocs||[]).map(r=>r.pathogen), ...(rawArticles||[]).map(r=>r.pathogen)])].filter(p=>p && !isFlu(p) && inPathoGroup(p));
   // Reflect the active pathogen-group filter in the dialog title so it's clear the table is scoped.
   const titleEl=document.getElementById('dataReportTitle');
-  if (titleEl) titleEl.textContent = activePathoGroup && activePathoGroup!=='All'
-    ? `Data availability by pathogen — ${activePathoGroup}`
-    : 'Data availability by pathogen';
+  const scopes = [activePathoGroup, activeInvestigatorGroup].filter(x => x && x !== 'All');
+  if (titleEl) titleEl.textContent = 'Data availability by pathogen' + (scopes.length ? ' — ' + scopes.join(' / ') : '');
   const rows = uni.map(p => ({ p, label: PATHOGEN_LABELS[p]||p, c: pathogenDataCounts(p) }));
   const { key, dir } = dataReportSort;
   const cmpNum = (a,b)=>{ const av=a==null?-1:a, bv=b==null?-1:b; return av-bv; };
@@ -5925,7 +5969,7 @@ function renderDataReportBody(){
   });
   const cell=(p,key,v)=> v==null ? `<span style="color:var(--ink-4)" title="Raw extraction corpus still loading…">…</span>` : (v>0 ? `<button type="button" class="dr-cell" data-p="${esc(p)}" data-sec="${key}">${v.toLocaleString()}</button>` : `<span style="color:var(--ink-4)">0</span>`);
   const trs=rows.map(({p,c})=>{ const sel=(!isAll()&&selectedPathogen===p);
-    return `<tr${sel?' class="dr-selected" style="background:color-mix(in srgb,var(--color-accent) 10%,transparent)"':''}><td style="font-weight:600;white-space:nowrap">${esc(PATHOGEN_LABELS[p]||p)}</td>`
+    return `<tr${sel?' class="dr-selected" style="background:color-mix(in srgb,var(--color-accent) 10%,transparent)"':''}><td style="font-weight:600;white-space:normal;overflow-wrap:anywhere">${esc(PATHOGEN_LABELS[p]||p)}</td>`
       +`<td class="raw-col" style="text-align:right;font-weight:600">${cell(p,'raw',c.raw)}</td><td style="text-align:right">${cell(p,'mapped',c.mapped)}</td><td style="text-align:right">${cell(p,'reports',c.reports)}</td><td style="text-align:right">${cell(p,'plotDays',c.plotDays)}</td><td style="text-align:right">${cell(p,'sources',c.sources)}</td><td style="text-align:right">${cell(p,'figures',c.figures)}</td></tr>`;
   }).join('');
   const cols = [
