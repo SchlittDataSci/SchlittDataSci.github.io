@@ -274,6 +274,13 @@
   .plain-ref:hover, .plain-ref:focus { background: color-mix(in srgb, var(--color-accent) 6%, transparent); outline: none; }
   .plain-ref.ref-hi { background: color-mix(in srgb, var(--color-accent) 12%, transparent); outline: 1px solid var(--color-accent); }
   .table-card { margin-top: var(--space-4); }
+  .section-help { display:inline-flex; align-items:center; justify-content:center; width:17px; height:17px; margin-left:6px; border:1px solid var(--color-divider); border-radius:50%; background:transparent; color:var(--ink-4); font-size:11px; cursor:help; }
+  .development-list { margin:5px 0; padding-left:22px; font-size:11px; line-height:1.5; }
+  .development-list time { color:var(--ink-4); font-variant-numeric:tabular-nums; margin-right:6px; }
+  .event-timeline { margin:12px 0; border-top:1px solid var(--color-divider); padding-top:9px; }
+  .event-timeline summary { cursor:pointer; font-size:12px; font-weight:600; }
+  .bar-key { font-size:10px; color:var(--ink-4); }
+  #outlierNote { display:none; }
   .card-head-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--space-3); flex-wrap: wrap; gap: 8px; }
   th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
   th.sortable:hover { color: var(--color-text); }
@@ -546,7 +553,7 @@
   <div class="page-head">
     <div>
       <h1 class="page-title">Viral Hemorrhagic Fever &amp; Selected Pathogens Surveillance</h1>
-      <p class="page-sub" id="pageSub">Case figures extracted from open-source news reporting, aggregated per country and pathogen</p>
+      <p class="page-sub" id="pageSub">Open-source outbreak surveillance</p>
     </div>
     <div class="field-inline">
       <label for="search">SEARCH</label>
@@ -596,7 +603,7 @@
 
   <div class="grid-main">
     <div class="card map-card elev-sm">
-      <p class="card-title" style="margin:0 0 var(--space-3)">Outbreak map <span style="font-weight:400;color:var(--ink-4);font-size:12px">— vetted events sized by risk &amp; case load</span></p>
+      <p class="card-title" style="margin:0 0 var(--space-3)">Outbreak map<button type="button" class="section-help" aria-label="About the map" title="Corroborated events are sized by risk or case load. Hollow triangles represent unvetted extractions. Select a marker to inspect its evidence.">?</button></p>
       <div class="map-head">
         <div class="seg" role="tablist" aria-label="Marker size" id="mapMetricSeg">
           <button type="button" class="seg-opt" aria-selected="true" data-metric="risk">Risk score</button>
@@ -646,7 +653,7 @@
   <div class="row-2col">
     <div class="card plots-card elev-sm">
       <div class="card-head-row">
-        <p class="card-title" id="trendTitle" style="margin:0">Bundibugyo ebolavirus</p>
+        <div style="display:flex;align-items:center"><p class="card-title" id="trendTitle" style="margin:0">Bundibugyo ebolavirus</p><button type="button" class="section-help" id="trendHelp" aria-label="About the plots" title="Solid bars: corroborated extractions. Diagonal bars: unvetted extractions. Amber cross-hatching: suspected geographic bleed or unresolved scope. Numbers retain their reported scale. Development dates indicate when the report identified the change, not its occurrence date. Hover numbered markers for details.">?</button></div>
         <span class="card-meta" id="trendMeta">Observed to Aug 18</span>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px">
@@ -669,6 +676,8 @@
       <div class="plot-block">
         <p class="plot-subtitle" id="trendSubtitle">Confirmed cases &amp; deaths</p>
         <div class="chart-wrap" id="chartWrap"><svg id="trendSvg" width="100%" height="190"></svg></div>
+        <div id="plotDevelopments"></div>
+        <div id="barEvidenceLegend" class="bar-key" hidden>Solid · corroborated　／ · unvetted　╳ · suspected bleed / scope unresolved</div>
       </div>
       <div class="plot-block">
         <p class="plot-subtitle" id="sourceSubtitle">Sources per day</p>
@@ -681,13 +690,12 @@
       <div class="briefs-split">
         <div class="events-col">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
-            <p class="card-title" style="margin:0 0 var(--space-1)">Event reports</p>
+            <p class="card-title" style="margin:0 0 var(--space-1)">Event reports<button type="button" class="section-help" aria-label="About event reports" title="Select an event to open its brief. Reports are generated from extracted evidence; linked sources and extracted strains are in Evidence. Event timelines retain dated developments across report cycles; dates describe reporting, not necessarily occurrence.">?</button></p>
             <span style="display:flex;gap:6px">
               <button type="button" class="btn btn-secondary" id="exportEventsBtn" style="font-size:10px;padding:3px 10px" title="Export the event reports matching the current filters, with source URLs, as an audit trail">Events CSV</button>
               <button type="button" class="btn btn-secondary" id="printBtn" style="font-size:10px;padding:3px 10px" title="Print / save the briefs, event list and figures table as PDF — source links included">Print / PDF</button>
             </span>
           </div>
-          <p class="events-hint">Select an event to load its brief →</p>
           <div id="eventList" aria-busy="true"><div class="skeleton w70"></div><div class="skeleton"></div><div class="skeleton w45"></div><div class="skeleton w70"></div><div class="skeleton"></div><div class="skeleton w45"></div></div>
         </div>
         <div class="brief-col">
@@ -697,7 +705,6 @@
             </div>
             <button type="button" class="btn btn-secondary" id="briefExpandBtn" style="flex:none;font-size:10px;padding:3px 10px" title="Open the full outbreak brief with export">⤡ Expand report</button>
           </div>
-          <p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 50%, transparent);margin:0 0 var(--space-3);padding-bottom:var(--space-2);border-bottom:1px solid var(--color-divider)">AI-generated from open-source reports — verify claims via the linked references before citing.</p>
           <div class="brief-body"><div id="briefContent" class="brief-content" aria-busy="true"><div class="skeleton tall w45"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton w70"></div><div class="skeleton"></div><div class="skeleton w45"></div></div></div>
         </div>
       </div>
@@ -781,7 +788,7 @@
 
 <div class="dialog-backdrop" id="dataReportBackdrop" style="display:none">
   <div class="dialog" id="dataReportDialog">
-    <p class="dialog-title" id="dataReportTitle">Data availability by pathogen</p>
+    <div style="display:flex;align-items:baseline"><p class="dialog-title" id="dataReportTitle">Data availability by pathogen</p><button type="button" class="section-help" aria-label="About data availability" title="Click a count to open that data; click a column heading to sort. Counts cover the selected family and investigator group, across regions and hosts. Raw rows are deduplicated extractions; figures are country-level table rows.">?</button></div>
     <div class="dialog-body" id="dataReportBody"></div>
     <div class="dialog-actions"><button type="button" class="btn btn-secondary" id="dataReportClose">Close</button></div>
   </div>
@@ -807,6 +814,9 @@
 
 <script>
 const GSHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8/export?format=csv&gid=881754490";
+const GSHEET_DEVELOPMENTS_URL = GSHEET_CSV_URL.split('/export')[0] + '/gviz/tq?tqx=out:csv&sheet=Situational%20Developments';
+let developmentRows = [], developmentState = 'pending';
+const rawBleedIndex = new Set();
 // Live-data state — declared at the top because the render guards read it on the very first
 // renderAll() pass, long before the fetch orchestration below is defined.
 let dataLoaded = false, sheetRetries = 0;
@@ -1398,8 +1408,36 @@ function recordFamilyDomains(r){ return domainsOf(recordFamilyRows(r)); }
 // applied retrospectively here) but flagged as a gentle note wherever it is shown. Matched
 // loosely on the quality_flag so any spelling the pipeline emits (bleed-through / bleedthrough
 // / bleed_through) is caught.
-function isBleedRow(r) { return !!r && /bleed/i.test(String(r.quality_flag || '') + ' ' + String(r.canonical_reason || '')); }
-const BLEED_TIP = 'Suspected bleed-through: this figure may have inherited a parent location\u2019s total (a known issue with some US West Nile virus sub-locations). Flagged upstream and shown here uncorrected.';
+function bleedKey(pathogen, location, species, url, day) {
+  return [foldPathogen(pathogen), cleanText(location).toLowerCase(), cleanText(species).toLowerCase(), String(url || '').trim().split('#')[0], toISODate(day)].join('||');
+}
+function isBleedRow(r) {
+  return !!r && (/bleed/i.test([r.quality_flag, r.canonical_reason, r.location_flag].join(' ')) ||
+    extractUrls(r.sources || '').some(url => rawBleedIndex.has(bleedKey(r.pathogen, r.location, r.species, url, r.report_date))));
+}
+function barEvidenceStatus(data) {
+  const rows = (data && data.rowsAt || []).filter(r => +r.value === +data.value);
+  if (rows.some(isBleedRow)) return 'bleed';
+  if (rows.some(r => /unresolved/.test(r.canonical_reason || ''))) return 'unresolved';
+  return rows.some(isVetted) ? 'vetted' : 'unvetted';
+}
+function barEvidenceLabel(data) {
+  return {bleed:'Suspected geographic bleed', unresolved:'Geographic scope unresolved', vetted:'Corroborated extraction', unvetted:'Unvetted extraction'}[barEvidenceStatus(data)];
+}
+function installEvidencePatterns(svg) {
+  const defs = svg.append('defs');
+  ['cases','deaths'].forEach(kind => ['unvetted','bleed','unresolved'].forEach(status => {
+    const color = status === 'unvetted' ? (kind === 'cases' ? col('--color-accent-300') : '#b45c64') : '#e0b361';
+    const p = defs.append('pattern').attr('id', `evidence-${kind}-${status}`).attr('patternUnits','userSpaceOnUse').attr('width',7).attr('height',7);
+    p.append('rect').attr('width',7).attr('height',7).attr('fill',color).attr('fill-opacity',0.07);
+    p.append('path').attr('d', status === 'unvetted' ? 'M-1,1 L1,-1 M0,7 L7,0 M6,8 L8,6' : 'M0,0 L7,7 M0,7 L7,0').attr('stroke',color).attr('stroke-width',1.1);
+  }));
+}
+function evidenceBarFill(data, kind) {
+  const status = barEvidenceStatus(data);
+  return status === 'vetted' ? (kind === 'cases' ? col('--color-accent-300') : '#b45c64') : `url(#evidence-${kind}-${status})`;
+}
+const BLEED_TIP = 'Suspected geographic bleed: this extraction may share another location’s total or exceed its parent total. Values are shown unchanged.';
 function bleedNote(rows) {
   return (rows || []).some(isBleedRow)
     ? `<span class="bleed-note" title="${BLEED_TIP}">possible bleed-through</span>`
@@ -1776,7 +1814,7 @@ function openDrilldown(record) {
   const items = [...byLocMeasure.values()].sort((a,b) => a.location.localeCompare(b.location) || a.measure.localeCompare(b.measure));
   document.getElementById('drillTitle').textContent = record.country + ' — reported location strings';
   document.getElementById('drillBody').innerHTML = items.length ? `
-    <p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5">Every location string scraped for this country's ${(record.disease||'').toLowerCase()} reporting, with its latest value. Comma-free strings are national totals — matching values are duplicate re-phrasings of one report, not additive. Smaller values against named places are genuine subnational figures.</p>
+    <p>Location extractions<button type="button" class="section-help" aria-label="About location extractions" title="Latest extracted values by location. Overlapping locations and shared totals must not be added. A smaller local figure alone does not establish its geographic accuracy.">?</button></p>
     <div class="table-scroll">
     <table class="table">
       <thead><tr><th>Location string (as scraped)</th><th>Measure</th><th>Latest value</th><th>Date</th><th>Screening</th></tr></thead>
@@ -3121,7 +3159,7 @@ function renderPageSub() {
   const last = new Date(base); last.setDate(last.getDate()+1);
   const today = new Date(); today.setHours(0,0,0,0);
   const eff = new Date(Math.min(today.getTime(), last.getTime()));
-  el.textContent = `Case figures extracted from open-source news reporting, aggregated per country and pathogen — last updated ${eff.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`;
+  el.textContent = `Updated ${eff.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`;
 }
 function statusOf(dateStr) { const days = Math.round((new Date(DATASET_MAX||dateStr) - new Date(dateStr)) / 86400000); return days<=4 ? 'Reporting' : days<=14 ? 'Slowing' : 'Quiet'; }
 function statusNoteOf(dateStr) { const days = Math.round((new Date(DATASET_MAX||dateStr) - new Date(dateStr)) / 86400000); return `Most recent figure is ${days} day${days===1?'':'s'} old (dataset current to ${DATASET_MAX}). Reflects reporting recency, not outbreak control.`; }
@@ -3381,6 +3419,8 @@ let _chartResizeT;
 window.addEventListener('resize', () => { clearTimeout(_chartResizeT); _chartResizeT = setTimeout(renderTrendSection, 180); });
 
 function renderTrendSection() {
+  const dev = document.getElementById('plotDevelopments'); if (dev) dev.innerHTML = '';
+  const key = document.getElementById('barEvidenceLegend'); if (key) key.hidden = true;
   if (!dataLoaded) {
     document.getElementById('trendTitle').textContent = 'Loading live data…';
     document.getElementById('trendMeta').textContent = '';
@@ -3560,6 +3600,7 @@ function haversineKm(a, b) {
 // the same-measure figures of the nearest same-granularity locations, with ghost glyphs for
 // the target's other observations and a note explaining why bars were chosen.
 function renderComparisonBars(effectiveTp, series) {
+  document.getElementById('barEvidenceLegend').hidden = false;
   const isSubnationalBars = !!(trendMode && trendMode.barsSubnational && trendMode.country);
   let targetLoc = series.loc;
   const casesMeasure = reportType + '_cases';
@@ -3664,12 +3705,12 @@ function renderComparisonBars(effectiveTp, series) {
   // Subtitle mirrors the other bar plots: location context + quality cue (opacity encodes vetting/screen flag)
   if (isSubnationalBars) {
     document.getElementById('trendTitle').textContent = `${label} · ${trendMode.country}`;
-    document.getElementById('trendSubtitle').textContent = `${targetLoc.split(',')[0]} — ${reportType} cases & deaths vs nearest subnational areas · bars shaded by data quality`;
+    document.getElementById('trendSubtitle').textContent = `${targetLoc.split(',')[0]} — ${reportType} cases & deaths vs nearest subnational areas`;
     const _histLabel = (targetLoc.split(',')[0] || trendMode.country || targetLoc).trim();
     document.getElementById('sourceSubtitle').textContent = 'Sources per day — ' + _histLabel;
   } else {
     document.getElementById('trendTitle').textContent = `${label} · ${targetLoc.split(',')[0]}`;
-    document.getElementById('trendSubtitle').textContent = `${reportType} cases & deaths vs nearest regions · bars shaded by data quality`;
+    document.getElementById('trendSubtitle').textContent = `${reportType} cases & deaths vs nearest regions`;
     document.getElementById('sourceSubtitle').textContent = 'Sources per day';
   }
   document.getElementById('trendMeta').textContent = `Observed to ${formatUKDate(chosen.date)}`;
@@ -3704,6 +3745,7 @@ function renderComparisonBars(effectiveTp, series) {
     .attr('x', margin.left - 8).attr('y', margin.top - 8)
     .attr('width', Math.max(0, tw - margin.left - margin.right) + 16).attr('height', th - margin.top - margin.bottom + 16);
   const plotG = tsvg.append('g').attr('clip-path', 'url(#barsClip)');
+  installEvidencePatterns(tsvg);
   installTrendZoom(tsvg, () => { barTransform = d3.zoomIdentity; }, t => { barTransform = t; if (lastBarsArgs) renderComparisonBars.apply(null, lastBarsArgs); });
   drawable.forEach(e => {
     const baseX = x0(e.loc);
@@ -3717,10 +3759,10 @@ function renderComparisonBars(effectiveTp, series) {
       const oC = qC ? (qC.score>=0.66?1 : qC.score>=0.4?0.58:0.36) : 0.72;
       const qLabC = qC ? qualityBand(qC.score).label : null;
       plotG.append('rect').attr('x', baseX + x1('cases')).attr('width', bw1).attr('y', y(vC)).attr('height', (th-margin.bottom)-y(vC))
-        .attr('rx',2).attr('fill', col('--color-accent-300')).attr('opacity', oC)
+        .attr('rx',2).attr('fill', evidenceBarFill(e.casesData, 'cases')).attr('opacity', barEvidenceStatus(e.casesData)==='vetted' ? oC : 1)
         .attr('stroke', e.isTarget ? col('--color-accent-300') : 'none').attr('stroke-width', e.isTarget ? 1.2 : 0)
         .style('cursor','pointer').classed('glyph-hit',true)
-        .on('mousemove', ev => showChartTip(ev, `<p class="t-title">${e.loc}</p><div class="t-row"><span>${new Date(e.casesData.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span><span>${vC.toLocaleString()} cases</span></div><div class="t-row"><span>${e.casesData.sources===1 ? 'unvetted' : `${e.casesData.sources} sources`}${qLabC?` · ${qLabC} quality`:''}</span><span>${e.dist?Math.round(e.dist).toLocaleString()+' km away':'target'}</span></div><div class="t-foot">${e.isTarget ? 'Latest observation' : 'Nearest region'} — cases · click for detail</div>`))
+        .on('mousemove', ev => showChartTip(ev, `<p class="t-title">${e.loc}</p><div class="t-row"><span>${new Date(e.casesData.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span><span>${vC.toLocaleString()} cases</span></div><div class="t-row"><span>${e.casesData.sources===1 ? 'unvetted' : `${e.casesData.sources} sources`} · ${barEvidenceLabel(e.casesData)}</span><span>${e.dist?Math.round(e.dist).toLocaleString()+' km away':'target'}</span></div><div class="t-foot">${e.isTarget ? 'Latest observation' : 'Nearest region'} — cases · click for detail</div>`))
         .on('mouseleave', hideChartTip)
         .on('click', () => { hideChartTip(); openArticlePopup(e.casesData.date, e.casesData.rowsAt || []); });
       plotG.append('text').attr('x', baseX + x1('cases') + bw1/2).attr('y', Math.max(margin.top+10, Math.min(y(vC)-9, (th-margin.bottom)-14))).attr('text-anchor','middle').attr('font-size','10px').attr('fill', e.isTarget ? col('--color-text') : col('--ink-3')).text(vC.toLocaleString());
@@ -3731,10 +3773,10 @@ function renderComparisonBars(effectiveTp, series) {
       const oD = qD ? (qD.score>=0.66?1 : qD.score>=0.4?0.58:0.36) : 0.72;
       const qLabD = qD ? qualityBand(qD.score).label : null;
       plotG.append('rect').attr('x', baseX + x1('deaths')).attr('width', bw1).attr('y', y(vD)).attr('height', (th-margin.bottom)-y(vD))
-        .attr('rx',2).attr('fill', '#b45c64').attr('opacity', oD)
+        .attr('rx',2).attr('fill', evidenceBarFill(e.deathsData, 'deaths')).attr('opacity', barEvidenceStatus(e.deathsData)==='vetted' ? oD : 1)
         .attr('stroke', e.isTarget ? col('--color-accent-300') : 'none').attr('stroke-width', e.isTarget ? 1.2 : 0)
         .style('cursor','pointer').classed('glyph-hit',true)
-        .on('mousemove', ev => showChartTip(ev, `<p class="t-title">${e.loc}</p><div class="t-row"><span>${new Date(e.deathsData.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span><span>${vD.toLocaleString()} deaths</span></div><div class="t-row"><span>${e.deathsData.sources===1 ? 'unvetted' : `${e.deathsData.sources} sources`}${qLabD?` · ${qLabD} quality`:''}</span><span>${e.dist?Math.round(e.dist).toLocaleString()+' km away':'target'}</span></div><div class="t-foot">${e.isTarget ? 'Latest observation' : 'Nearest region'} — deaths · click for detail</div>`))
+        .on('mousemove', ev => showChartTip(ev, `<p class="t-title">${e.loc}</p><div class="t-row"><span>${new Date(e.deathsData.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span><span>${vD.toLocaleString()} deaths</span></div><div class="t-row"><span>${e.deathsData.sources===1 ? 'unvetted' : `${e.deathsData.sources} sources`} · ${barEvidenceLabel(e.deathsData)}</span><span>${e.dist?Math.round(e.dist).toLocaleString()+' km away':'target'}</span></div><div class="t-foot">${e.isTarget ? 'Latest observation' : 'Nearest region'} — deaths · click for detail</div>`))
         .on('mouseleave', hideChartTip)
         .on('click', () => { hideChartTip(); openArticlePopup(e.deathsData.date, e.deathsData.rowsAt || []); });
       plotG.append('text').attr('x', baseX + x1('deaths') + bw1/2).attr('y', Math.max(margin.top+10, Math.min(y(vD)-9, (th-margin.bottom)-14))).attr('text-anchor','middle').attr('font-size','10px').attr('fill', e.isTarget ? col('--color-text') : col('--ink-3')).text(vD.toLocaleString());
@@ -3852,6 +3894,7 @@ function renderChart(series, effectiveTp) {
   if (projCases) projCases = cappedToMultipleOf5(projCases, lastCase ? lastCase.date : null);
   if (projDeaths) projDeaths = cappedToMultipleOf5(projDeaths, lastDeath ? lastDeath.date : null);
   const allDates = series.map(d => new Date(d.date));
+  scopedDevelopments(effectiveTp, geoCountry(series.loc) || series.loc).slice(0,3).forEach(d => allDates.push(new Date(d.report_date)));
   [projCases, projDeaths].forEach(p => { if (p) p.forEach(pt => allDates.push(new Date(pt.date))); });
   lastChartArgs = [series, effectiveTp];
   const xBase = d3.scaleUtc().domain(d3.extent(allDates)).range([margin.left, tw-margin.right]);
@@ -3987,6 +4030,7 @@ function renderChart(series, effectiveTp) {
   }
   drawExcluded(col('--color-accent-200'), 'Reported cases', reportType+'_cases');
   drawExcluded('#cf7b82', 'Reported deaths', reportType+'_deaths');
+  drawDevelopmentMarkers(tsvg, x, effectiveTp, geoCountry(series.loc) || series.loc);
   // Hand the forecast horizon back so the sources strip can share this chart's x-domain.
   return (projCases && projCases.length ? projCases[projCases.length-1].date : (projDeaths && projDeaths.length ? projDeaths[projDeaths.length-1].date : null));
 }
@@ -4192,7 +4236,8 @@ function renderSubnationalTrend() {
     }
   }
   if (!allPts.length) { tsvg.append('text').attr('x',tw/2).attr('y',th/2).attr('text-anchor','middle').attr('font-size','12px').attr('fill',col('--color-neutral-400')).text('No subnational '+reportType+' series for '+country); renderSubSourceChart(perLoc, style); return; }
-  const xBase = d3.scaleUtc().domain(d3.extent(allPts, p=>new Date(p.date))).range([margin.left, tw-margin.right]);
+  const developmentDates = scopedDevelopments(pathogen,country,highlightSubLoc || '').slice(0,3).map(d => new Date(d.report_date));
+  const xBase = d3.scaleUtc().domain(d3.extent([...allPts.map(p=>new Date(p.date)), ...developmentDates])).range([margin.left, tw-margin.right]);
   const x = subTransform.rescaleX(xBase);
   // Plot area box
   tsvg.append('rect').attr('x',margin.left).attr('y',margin.top).attr('width',tw-margin.left-margin.right).attr('height',th-margin.top-margin.bottom).attr('fill',col('--color-neutral-800')).attr('fill-opacity',0.35).attr('stroke',col('--color-divider')).attr('stroke-width',1);
@@ -4257,6 +4302,7 @@ function renderSubnationalTrend() {
   const ds = [...new Set(allPts.map(p=>p.date))].sort();
   [ds[0], ds[ds.length-1]].forEach((d,i)=>{ if(!d) return; plotG.append('text').attr('x',x(new Date(d))).attr('y',th-4).attr('text-anchor',i===0?'start':'end').attr('font-size','10px').attr('fill',col('--color-neutral-400')).text(new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short'})); });
   renderSubSourceChart(perLoc, style);
+  drawDevelopmentMarkers(tsvg, x, pathogen, country, highlightSubLoc || '');
 }
 // Stacked variant of the sources histogram — same geometry, hover and tooltip language as the
 // national strip (SRC_HIST); segments keep the colour of the series they belong to so the
@@ -4567,6 +4613,68 @@ const DEV_LABEL_KEYS = ['category','type','change_type','kind','heading','title'
 const DEV_TEXT_KEYS = ['description','summary','detail','details','development','change','text','note'];
 const DEV_SEV_KEYS = ['severity','significance','priority','magnitude','importance'];
 function devPick(o, keys) { for (const k of keys) { const v = o[k]; if (v != null && typeof v !== 'object' && String(v).trim()) return String(v).trim(); } return ''; }
+function scopedDevelopments(pathogen, country, place = '') {
+  const fallback = (reports || []).flatMap(r => (r.developments || []).map(d => ({
+    pathogen:r.pathogen, location:r.place, country:r.geoCountry || r.country,
+    report_date:r.generated || r.date, category:d.label, headline:d.headline || d.text,
+    detail:d.headline && d.text !== d.headline ? d.text : '', sources:(r.urls || []).join('; '), species:r.species || '',
+    date_basis:'report_generated'
+  })));
+  const seen = new Set();
+  return [...developmentRows, ...fallback].filter(d => {
+    const p = foldPathogen(d.tracker_pathogen || d.pathogen);
+    const c = geoCountry(d.location) || geoCountry(d.country) || d.country;
+    const day = toISODate(d.report_date);
+    if (!day || p !== pathogen || c !== country || !inPathoGroup(p)) return false;
+    if (place && cleanText(d.location).toLowerCase() !== cleanText(place).toLowerCase()) return false;
+    if (activeSpecies !== ALL_SPECIES && !(cleanText(d.species).toLowerCase().includes(activeSpecies.toLowerCase()))) return false;
+    if (isCensored(p, c, day, d.tracker_pathogen)) return false;
+    if (locationQuery && ![d.location,c,p].join(' ').toLowerCase().includes(locationQuery)) return false;
+    const age = (Date.now() - new Date(day+'T00:00:00Z')) / 86400000;
+    if (age > 90 || age < -1) return false;
+    const key = [p,d.location,d.category,d.headline,d.detail].join('||');
+    if (seen.has(key)) return false;
+    seen.add(key); return true;
+  }).sort((a,b) => String(b.report_date).localeCompare(String(a.report_date)) || String(a.headline).localeCompare(String(b.headline)));
+}
+function developmentItemsHtml(items, details = false) {
+  return '<ol class="development-list">' + items.map(d => {
+    const links = details ? extractUrls(d.sources || '').filter(u => /^https?:\/\//i.test(u)).map((u,i) => `<a href="${esc(u)}" target="_blank" rel="noopener">[${i+1}]</a>`).join(' ') : '';
+    return `<li title="${esc([d.location,d.category,d.detail].filter(Boolean).join(' · '))}"><time>${esc(toISODate(d.report_date))}</time>${esc(d.headline)}${details && d.detail ? `<div>${esc(d.detail)}</div>` : ''}${links ? ' '+links : ''}</li>`;
+  }).join('') + '</ol>';
+}
+function eventTimelineHtml(report) {
+  const items = scopedDevelopments(report.pathogen, report.geoCountry || report.country, report.place);
+  return `<details class="event-timeline"><summary>Event timeline · ${items.length}<span class="section-help" tabindex="0" title="Dates identify the report that first recorded a development, not necessarily when it occurred. Linked sources support the parent report. History covers 90 days.">?</span></summary>${items.length ? developmentItemsHtml(items, true) : `<p class="card-meta">${developmentState === 'unavailable' ? 'Development history unavailable.' : 'No recorded developments.'}</p>`}</details>`;
+}
+function drawDevelopmentMarkers(svg, x, pathogen, country, place = '') {
+  const domain = x.domain().map(Number);
+  const items = scopedDevelopments(pathogen,country,place).filter(d => {
+    const t = +new Date(toISODate(d.report_date)+'T00:00:00Z'); return t >= domain[0] && t <= domain[1];
+  }).slice(0,3);
+  const box = document.getElementById('plotDevelopments');
+  if (box) box.innerHTML = items.length ? developmentItemsHtml(items) : '';
+  const layer = svg.append('g').attr('class','development-markers');
+  items.forEach((d,i) => {
+    const px = x(new Date(toISODate(d.report_date)+'T00:00:00Z'));
+    const py = margin.top + 9 + i*17;
+    const mark = layer.append('g').attr('tabindex',0).attr('role','img').attr('aria-label',`${d.report_date}: ${d.headline}`);
+    mark.append('line').attr('x1',px).attr('x2',px).attr('y1',py+7).attr('y2',th-margin.bottom).attr('stroke',col('--ink-4')).attr('stroke-dasharray','2 4').attr('opacity',0.4);
+    mark.append('circle').attr('cx',px).attr('cy',py).attr('r',7).attr('fill',col('--color-neutral-900')).attr('stroke',col('--color-accent-300'));
+    mark.append('text').attr('x',px).attr('y',py+3).attr('text-anchor','middle').attr('font-size',9).attr('fill',col('--color-text')).text(i+1);
+    mark.append('title').text(`${d.report_date} · ${d.location}\n${d.headline}\n${d.detail || ''}`);
+  });
+}
+function fetchDevelopments() {
+  return withTimeout(d3.csv(GSHEET_DEVELOPMENTS_URL),20000,'situational developments').then(rows => {
+    if (!rows.columns || !['pathogen','report_date','headline','location'].every(k => rows.columns.includes(k))) throw Error('Development sheet schema unavailable');
+    developmentRows = rows;
+    developmentState = 'live';
+  }).catch(error => {
+    developmentState = 'unavailable';
+    console.warn('[developments]',error.message);
+  }).finally(() => { if (dataLoaded) renderTrendSection(); if (reports.length) renderBrief(); });
+}
 function parseDevelopments(raw) {
   const s = String(raw == null ? '' : raw).trim();
   if (!s || /^(none|nan|null|\[\]|\{\})$/i.test(s)) return [];
@@ -4582,11 +4690,11 @@ function parseDevelopments(raw) {
     if (typeof d === 'string') return d.trim() ? { label: '', text: d.trim(), sev: '' } : null;
     if (!d || typeof d !== 'object') return null;
     const label = devPick(d, DEV_LABEL_KEYS);
-    let text = devPick(d, DEV_TEXT_KEYS);
+    let text = devPick(d, DEV_TEXT_KEYS) || cleanText(d.headline);
     if (!text) text = Object.entries(d)
       .filter(([k,v]) => v != null && typeof v !== 'object' && String(v).trim() && !DEV_LABEL_KEYS.includes(k) && !DEV_SEV_KEYS.includes(k))
       .map(([k,v]) => k.replace(/_/g,' ') + ': ' + v).join(' · ');
-    return (label || text) ? { label, text, sev: devPick(d, DEV_SEV_KEYS) } : null;
+    return (label || text) ? { label, text, headline:cleanText(d.headline), sev: devPick(d, DEV_SEV_KEYS) } : null;
   }).filter(Boolean);
 }
 function isNewEvent(r) { return /^new/i.test(r && r.status || ''); }
@@ -4750,7 +4858,7 @@ function renderBrief() {
   const riskBlock = `<div class="brief-doc-meta"><span class="bdm-label">Risk severity</span>` +
     `<span class="bdm-val" style="color:${sev};font-weight:600">${r.risk == null ? '—' : r.risk + ' / 9'}</span>` +
     (r.riskRationale ? `<span class="bdm-label">Rationale</span><span class="bdm-val">${esc(r.riskRationale)}</span>` : '') + `</div>`;
-  briefContentEl.innerHTML = headline + riskBlock + banner + developmentsBlockHtml(r) + (r.crossover ? `<div style="background:color-mix(in srgb, var(--color-accent) 12%, transparent);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;margin:0 0 12px"><p style="margin:0"><strong>Zoonotic link reported:</strong></p>${briefMarkup(r.crossoverDetail)}</div>` : '') + (r.html ? stripBriefDisclaimers(stripNan(r.html)) : '<p style="font-size:12px;line-height:1.6;color:var(--ink-3);margin:0">No narrative report has been generated for this event yet. The risk rating above and any source links reflect what is currently available.</p>');
+  briefContentEl.innerHTML = headline + riskBlock + banner + eventTimelineHtml(r) + developmentsBlockHtml(r) + (r.crossover ? `<div style="background:color-mix(in srgb, var(--color-accent) 12%, transparent);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;margin:0 0 12px"><p style="margin:0"><strong>Zoonotic link reported:</strong></p>${briefMarkup(r.crossoverDetail)}</div>` : '') + (r.html ? stripBriefDisclaimers(stripNan(r.html)) : '<p style="font-size:12px;line-height:1.6;color:var(--ink-3);margin:0">No narrative report available.</p>');
   const tg = document.getElementById('evToggle');
   if (tg) tg.addEventListener('click', () => {
     const sec = document.getElementById('reportEvidence');
@@ -5153,7 +5261,7 @@ function locationEvidenceHtml(raw) {
   if (!Array.isArray(labels)) return '';
   labels = [...new Set(labels.filter(x => typeof x === 'string' && x.trim()))];
   if (!labels.length) return '';
-  return `<p class="ev-note" title="${esc(labels.join('; '))}"><strong>Reported location labels:</strong> ${labels.map(esc).join('; ')} <span style="color:var(--ink-4)">(original extraction labels; combined reports may cover different places)</span></p>`;
+  return `<p class="ev-note" title="${esc(labels.join('; '))}"><strong>Reported location labels:</strong> ${labels.map(esc).join('; ')}</p>`;
 }
 function reportEvidenceHtml(rep, ev) {
   const locationHtml = locationEvidenceHtml(rep.locationAliases);
@@ -5161,7 +5269,7 @@ function reportEvidenceHtml(rep, ev) {
   const order = { direct:0, related:1, cited:2 };
   const cites = [...ev.cites].sort((a,b) => order[a.rel] - order[b.rel] || (b.vetting||0) - (a.vetting||0));
   const strainHtml = ev.strains && ev.strains.length
-    ? `<p class="ev-note" style="margin:6px 0 8px"><strong>Extracted strains:</strong> ${ev.strains.map(esc).join(', ')} <span style="color:var(--ink-4)">(source metadata; not the event identity)</span></p>`
+    ? `<p class="ev-note" style="margin:6px 0 8px"><strong>Extracted strains:</strong> ${ev.strains.map(esc).join(', ')}</p>`
     : (rawArticlesState === 'ready'
       ? `<p class="ev-note" style="margin:6px 0 8px"><strong>Extracted strains:</strong> none recorded in the cited extraction rows.</p>`
       : `<p class="ev-note" style="margin:6px 0 8px"><strong>Extracted strains:</strong> ${rawArticlesState === 'unavailable' ? 'source metadata unavailable.' : 'loading source metadata…'}</p>`);
@@ -5308,6 +5416,8 @@ function fetchReports() {
       pathogenFamily: String(r['Pathogen Family'] || '').trim(),
       disease: PATHOGEN_LABELS[configuredPathogen] || configuredPathogen || '',
       place: loc,
+      generated: toISODate(r['Current Date'] || r['Latest Report']),
+      species: cleanText(r['Species Affected']),
       locationAliases: r['Location Aliases'] || r['location_aliases'] || '[]',
       lonlat: parseCoord(r['Coordinate']),
       html: r['Status Report'] || '',
@@ -5389,7 +5499,7 @@ function loadLiveData(manual) {
   // On a retry before any data has loaded, restore the loading shimmer and clear the error state.
   if (!dataLoaded) { document.body.classList.add('preload'); document.body.classList.remove('dataerror'); }
   setSync('<span class="sync-dot"></span>' + (dataLoaded ? 'Refreshing live data…' : 'Loading live sheet…'));
-  return fetchCensor().then(() => Promise.allSettled([fetchSheet(), fetchReports(), fetchForecast()])).then(results => {
+  return fetchCensor().then(() => Promise.allSettled([fetchSheet(), fetchReports(), fetchForecast(), fetchDevelopments()])).then(results => {
     updateCensorTag();
     const sheet = results[0];
     if (sheet.status === 'fulfilled') {
@@ -5503,6 +5613,13 @@ const EVIDENCE = {
   windowLabel: null,    // raw corpus run-date span, e.g. '30 Jul – 22 Aug 26' (null while unknown)
 };
 function rebuildEvidenceIndex() {
+  rawBleedIndex.clear();
+  (rawArticles || []).filter(r => /bleed/i.test(r.location_flag || '')).forEach(r => {
+    const country = geoCountry(r.event_location || r.location) || geoCountry(r.country) || cleanText(r.country);
+    let location = cleanText(r.event_location || r.location);
+    if (country && !geoCountry(location) && !location.includes(',')) location += ', ' + country;
+    rawBleedIndex.add(bleedKey(r.pathogen,location,r.host_species,r.url,r.report_date || r.date));
+  });
   EVIDENCE.byUrl = new Map();
   EVIDENCE.comboUrls = new Map();
   EVIDENCE.windowLabel = null;
@@ -5841,7 +5958,8 @@ document.addEventListener('rawarticles', () => {
   // The evidence index gains its raw side once this lands — refresh every citation-derived
   // surface that may already be on screen, not just the raw table swap.
   rebuildEvidenceIndex();
-  if (tableMode === 'raw') renderTable();
+  renderTable();
+  if (dataLoaded) renderTrendSection();
   if (reports.length) { renderEventList(); renderBrief(); }
   // Raw-extraction-only pathogens (e.g. CCHF) can now enter the pathogen selector, and the
   // data-availability report's Raw-rows counts can resolve — refresh both if they're live.
@@ -5852,14 +5970,15 @@ document.addEventListener('rawarticles', () => {
 });
 document.getElementById('navDashboard')?.addEventListener('click', (e) => { e.preventDefault(); if (typeof resetFilters==='function') resetFilters(); const sq=document.getElementById('search'); if(sq){ sq.value=''; locationQuery=''; } window.scrollTo({ top: 0, behavior: 'smooth' }); });
 document.getElementById('navSources').addEventListener('click', (e) => { e.preventDefault();
-  openDialog('Data sources', `<p style="font-size:12px;line-height:1.6;color:color-mix(in srgb,var(--color-text) 75%,transparent)">Three published Google Sheet feeds, refreshed on load and via <strong>Sync now</strong>.</p>
+  openDialog('Data sources', `<p>Dashboard feeds<button type="button" class="section-help" aria-label="About sources" title="Open-source press extractions. Publisher links are available in each evidence panel. Use Sync now to refresh the feeds.">?</button></p>
     <table class="table"><thead><tr><th>Feed</th><th>Records</th><th>Content</th><th>Open</th></tr></thead><tbody>
     <tr><td>Outcome measurements</td><td>${(allRows.length||0).toLocaleString()}</td><td>Per-date case/death figures with screening + canonical selection</td><td><a href="${GSHEET_CSV_URL}" target="_blank" rel="noopener">CSV ↗</a></td></tr>
     <tr><td>Event reports</td><td>${reports.length||0}</td><td>AI outbreak briefs, risk scores, coordinates, references</td><td><a href="${GSHEET_REPORTS_URL}" target="_blank" rel="noopener">CSV ↗</a></td></tr>
     <tr><td>Forecasts</td><td>${forecastIndex.size||0} series</td><td>p25/p50/p75 projections where reporting history suffices</td><td><a href="${GSHEET_FORECAST_URL}" target="_blank" rel="noopener">CSV ↗</a></td></tr>
-    <tr><td>Source workbook</td><td>—</td><td>The Google Sheet all three tabs are published from</td><td><a href="https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8" target="_blank" rel="noopener">Sheet ↗</a></td></tr>
+    <tr><td>Situational developments</td><td>${developmentRows.length}</td><td>Dated changes from event reports</td><td><a href="${GSHEET_DEVELOPMENTS_URL}" target="_blank" rel="noopener">CSV ↗</a></td></tr>
+    <tr><td>Source workbook</td><td>—</td><td>Shared publication workbook</td><td><a href="https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8" target="_blank" rel="noopener">Sheet ↗</a></td></tr>
     </tbody></table>
-    <p style="font-size:12px;color:color-mix(in srgb,var(--color-text) 50%,transparent);margin-top:12px">Extracted from open-source press reporting, not official WHO/IHR notifications. Internal extraction endpoints are not exposed; publisher article links appear in the source popups.</p>`);
+    `);
 });
 document.getElementById('navReports').addEventListener('click', (e) => { e.preventDefault(); const el = document.querySelector('.briefs-card'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70, behavior:'smooth' }); });
 document.getElementById('navAlerts').addEventListener('click', (e) => { e.preventDefault();
@@ -5988,8 +6107,7 @@ function renderDataReportBody(){
     const t = col.title ? ` title="${esc(col.title)}"` : '';
     return `<th class="${cls}" data-sort-key="${col.key}" style="text-align:${col.align}"${t}>${col.label}<span class="sort-arrow">${arrow}</span></th>`;
   }).join('');
-  body.innerHTML=`<p style="font-size:12px;color:var(--ink-3);margin:0 0 10px;line-height:1.5" title="Counts span the whole feed (they ignore the region / host / location filters). Raw rows = distinct rows in the raw extraction corpus (duplicate re-reports of the same article and fact removed). Figures = rows the figures table actually renders (aggregated per country) — a pathogen whose locations resolve to no mapped country shows 0.">Live data available for each pathogen. Click a count to filter and jump; click a column header to sort.</p>`
-    +`<div class="dr-scroll"><table class="table dr-table" style="min-width:640px"><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table></div>`;
+  body.innerHTML=`<div class="dr-scroll"><table class="table dr-table" style="min-width:640px"><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table></div>`;
 }
 function openDataReport(){
   // The raw corpus is lazy — kick off its load so the Raw-rows column (and any raw-only pathogen
