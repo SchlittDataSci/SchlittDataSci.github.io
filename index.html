@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OSINT-VHF — Viral Hemorrhagic Fever & Selected Pathogens Surveillance</title>
 <link rel="stylesheet" href="_ds/nocturne-c236f95b-6f2d-4f5b-9bdc-974f09e4a112/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap">
 <script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css">
@@ -21,6 +24,12 @@
 </script>
 <style>
   :root {
+    /* Direction 1c — Humanist: Bricolage Grotesque display over Hanken Grotesk text, Spline Sans Mono
+       for every figure. Roomy and legible, not the generic Inter default. */
+    --font-heading: "Bricolage Grotesque", system-ui, sans-serif;
+    --font-body: "Hanken Grotesk", system-ui, sans-serif;
+    --font-mono: "Spline Sans Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --font-heading-weight: 600;
     --ink-1: var(--color-text);
     --ink-2: color-mix(in srgb, var(--color-text) 78%, transparent);
     --ink-3: color-mix(in srgb, var(--color-text) 64%, transparent);
@@ -56,17 +65,17 @@
   .src-cell[disabled] { color: var(--ink-4); border-bottom: 0; cursor: default; }
   .seg-opt { font-weight: 500; }
   /* Compact seg buttons in the plots header — default button styling is too tall and crowded. */
-  #chartTypeSeg .seg-opt, #granularitySeg .seg-opt, #reportTypeSeg .seg-opt { font-size: 10px; padding: 2px 9px; }
+  #chartTypeSeg .seg-opt, #granularitySeg .seg-opt, #reportTypeSeg .seg-opt { font-size: 13px; padding: 2px 9px; }
   .seg-opt[aria-selected="true"] {
     background: color-mix(in srgb, var(--color-accent) 20%, transparent);
     border: 1px solid var(--color-accent);
     color: var(--color-text); font-weight: 700;
     position: relative; z-index: 2; box-shadow: 0 0 0 1px var(--color-accent);
   }
-  .th-hint { font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 10px; color: var(--ink-4); }
-  .src-vet { display: block; font-size: 10px; color: var(--ink-4); border: 0; }
+  .th-hint { font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 13px; color: var(--ink-4); }
+  .src-vet { display: block; font-size: 13px; color: var(--ink-4); border: 0; }
   /* Unvetted figures: reuse hollow/muted language from the time-series (hollow dots) — de-emphasized badge + row wash */
-  .vet-unvetted { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 600; color: var(--ink-4); border: 1px dashed color-mix(in srgb, var(--color-text) 22%, transparent); background: transparent; border-radius: 999px; padding: 2px 8px; line-height: 1; white-space: nowrap; }
+  .vet-unvetted { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: var(--ink-4); border: 1px dashed color-mix(in srgb, var(--color-text) 22%, transparent); background: transparent; border-radius: 999px; padding: 2px 8px; line-height: 1; white-space: nowrap; }
   .src-cell.vet-unvetted { color: var(--ink-4); border-bottom: 0; cursor: pointer; opacity: .88; }
   .src-cell.vet-unvetted:hover { color: var(--ink-3); border-bottom: 0; }
   tr.row-unvetted { opacity: .92; }
@@ -83,7 +92,7 @@
   .wrap { max-width: 1560px; margin: 0 auto; padding: var(--space-4) var(--space-6) var(--space-8); }
   .page-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-3); flex-wrap: wrap; }
   .page-title { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 24px; margin: 0; letter-spacing: -0.01em; }
-  .page-sub { font-size: 14px; color: var(--ink-3); margin: 4px 0 0; }
+  .page-sub { font-size: 15px; color: var(--ink-3); margin: 4px 0 0; }
   /* Vector wordmark — two-tone italic heavy type, offset shadow, background-bar scan-slices per OSINfluenza */
   .brand-logo { display: block; height: 40.8px; width: auto; margin-right: auto; margin-top: 2px; }
   .nav { padding: 4px var(--space-4); }
@@ -92,7 +101,7 @@
   .toolbar .spacer { flex: 1; }
   .toolbar > .btn { margin-left: auto; }
   .field-inline { display: flex; align-items: center; gap: var(--space-2); }
-  .field-inline label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); }
+  .field-inline label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); }
   .sync-tag { display: inline-flex; align-items: center; gap: 6px; flex: none; white-space: nowrap; }
   .sync-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); box-shadow: 0 0 6px var(--color-accent); }
   .grid-main { display: grid; grid-template-columns: minmax(0,1fr) 320px; gap: var(--space-4); align-items: stretch; }
@@ -106,22 +115,22 @@
      themselves live in .event-meta. Declared BEFORE the hover/selected rules so those still win. */
   .event-item.has-dev { background: color-mix(in srgb, var(--warn) 6%, transparent); }
   .ev-flags { display: flex; gap: 4px; align-items: center; flex: none; }
-  .ev-flag { font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1.5px 5px; border-radius: 999px; white-space: nowrap; display: inline-flex; align-items: center; gap: 3px; }
+  .ev-flag { font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1.5px 5px; border-radius: 999px; white-space: nowrap; display: inline-flex; align-items: center; gap: 3px; }
   .ev-flag-dev { background: color-mix(in srgb, var(--warn) 24%, transparent); color: var(--warn-ink); }
   .ev-flag-new { border: 1px solid color-mix(in srgb, var(--color-accent-300) 45%, transparent); color: var(--color-accent-300); }
   .dev-flash { border: 1px solid color-mix(in srgb, var(--warn) 30%, transparent); background: color-mix(in srgb, var(--warn) 8%, transparent); border-radius: var(--radius-sm); padding: 9px 11px; margin: 0 0 12px; }
   .dev-flash-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
   .dev-flash-head .dev-count { flex: 1 1 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .dev-flash-head .dev-count { font-size: 10px; color: var(--ink-4); }
-  .dev-flash-body { font-size: 12px; line-height: 1.55; color: var(--ink-2); }
+  .dev-flash-head .dev-count { font-size: 13px; color: var(--ink-4); }
+  .dev-flash-body { font-size: 13px; line-height: 1.55; color: var(--ink-2); }
   .dev-flash-body p, .dev-flash-body ul, .dev-flash-body ol { margin: 0 0 6px; }
   .dev-flash-body ul, .dev-flash-body ol { padding-left: 16px; }
   .dev-flash-body > *:last-child { margin-bottom: 0; }
   .dev-item { display: flex; gap: 7px; padding: 2px 0; }
-  .dev-item .dev-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--warn-ink); white-space: nowrap; padding-top: 1px; }
+  .dev-item .dev-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--warn-ink); white-space: nowrap; padding-top: 1px; }
   .event-item:hover { background: color-mix(in srgb, var(--color-accent) 6%, transparent); }
   .event-item.selected { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
-  .event-title { font-size: 12px; line-height: 1.35; margin: 0 0 6px; color: var(--color-text); }
+  .event-title { font-size: 13px; line-height: 1.35; margin: 0 0 6px; color: var(--color-text); }
   .event-title .ev-path { color: var(--color-accent-200); font-weight: 600; }
   /* Weight transition (600→400) optically swallows the space after a tinted segment at 12px —
      restore it. Data verified: the sheet titles carry normal spaces. */
@@ -129,35 +138,35 @@
   .event-title .ev-loc { color: var(--color-neutral-300); }
   .meta-ref { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
   .meta-ref:hover { color: var(--color-text); border-bottom-style: solid; }
-  .event-meta { display: flex; justify-content: space-between; align-items: center; gap: 6px; font-size: 10px; color: var(--ink-4); flex-wrap: nowrap; min-width: 0; }
+  .event-meta { display: flex; justify-content: space-between; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-4); flex-wrap: nowrap; min-width: 0; }
   .event-meta > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .event-meta .tag { flex: none; white-space: nowrap; }
   .stat-stack { display: flex; flex-direction: column; gap: var(--space-3); }
-  .cell-range { display: block; font-size: 10px; color: var(--ink-4); margin-top: 2px; }
-  .src-link { color: var(--color-accent-300); font-size: 12px; }
+  .cell-range { display: block; font-size: 13px; color: var(--ink-4); margin-top: 2px; }
+  .src-link { color: var(--color-accent-300); font-size: 13px; }
   .status-tag { cursor: help; }
-  .qbadge { font-size: 10px; font-weight: 600; padding: 1px 7px; border-radius: 999px; white-space: nowrap; }
+  .qbadge { font-size: 13px; font-weight: 600; padding: 1px 7px; border-radius: 999px; white-space: nowrap; }
   .q-high { background: color-mix(in srgb, var(--color-accent-500) 24%, transparent); color: var(--color-accent-200); }
   .q-mod { background: color-mix(in srgb, var(--warn) 22%, transparent); color: var(--warn-ink); }
   .q-low { background: color-mix(in srgb, var(--sev-hi) 24%, transparent); color: var(--danger-ink); }
-  .art-meta { font-size: 10px; color: var(--ink-4); margin-top: 4px; }
-  .art-src-h { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-label); margin: 16px 0 6px; }
-  .doc-badge { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 999px; letter-spacing: .02em; }
+  .art-meta { font-size: 13px; color: var(--ink-4); margin-top: 4px; }
+  .art-src-h { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-2); margin: 16px 0 6px; }
+  .doc-badge { font-size: 13px; font-weight: 600; padding: 2px 8px; border-radius: 999px; letter-spacing: .02em; }
   .doc-well { background: color-mix(in srgb, var(--color-accent-500) 22%, transparent); color: var(--color-accent-200); }
   .doc-less { background: color-mix(in srgb, var(--color-neutral-500) 26%, transparent); color: var(--color-neutral-200); }
   .doc-sparse { background: color-mix(in srgb, var(--sev-hi) 20%, transparent); color: var(--danger-ink); }
   /* Standardize the three pill columns in the figures table — Outbreak documentation / Article screening / Status */
-  .table td .doc-badge, .table td .tag { font-size: 10px; font-weight: 600; padding: 3px 9px; line-height: 1; border-radius: 999px; letter-spacing: .02em; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; min-height: 18px; box-sizing: border-box; vertical-align: middle; }
+  .table td .doc-badge, .table td .tag { font-size: 13px; font-weight: 600; padding: 3px 9px; line-height: 1; border-radius: 999px; letter-spacing: .02em; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; min-height: 18px; box-sizing: border-box; vertical-align: middle; }
   .table td .tag { border-width: 1px; }
-  .table td .status-tag { font-size: 10px; }
+  .table td .status-tag { font-size: 13px; }
   .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
-  .stat-num { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 30px; line-height: 1.1; margin: 0; letter-spacing: -0.015em; }
-  .stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); margin: 6px 0 0; }
+  .stat-num { font-family: var(--font-mono); font-weight: 500; font-size: 30px; line-height: 1.1; margin: 0; letter-spacing: -0.015em; }
+  .stat-label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); margin: 6px 0 0; }
   .map-card { padding: var(--space-4); }
   .map-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-3); gap: var(--space-3); flex-wrap: wrap; }
-  .map-legend { display: flex; align-items: center; gap: 14px; font-size: 12px; color: var(--ink-3); flex-wrap: wrap; }
+  .map-legend { display: flex; align-items: center; gap: 14px; font-size: 13px; color: var(--ink-3); flex-wrap: wrap; }
   .legend-swatch { display: inline-flex; align-items: center; gap: 6px; }
-  .legend-chip { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+  .legend-chip { width: 11px; height: 11px; border-radius: var(--radius-sm); display: inline-block; }
   .map-wrap { position: relative; width: 100%; height: var(--panel-h); border-radius: var(--radius-md); overflow: hidden; background:
       radial-gradient(900px 500px at 15% -10%, color-mix(in srgb, var(--color-accent-900) 45%, transparent), transparent 60%),
       var(--color-neutral-900); }
@@ -171,7 +180,7 @@
   /* Hovering an event report lifts its map glyph (CSS overrides the per-zoom attributes). */
   .marker-g.marker-hi .marker { stroke-width: 3px; }
   .marker-g.marker-hi .marker-hit { stroke: var(--color-accent-300); stroke-width: 1.5px; }
-  .tooltip { position: absolute; pointer-events: none; background: var(--color-neutral-800); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); padding: 8px 10px; font-size: 12px; box-shadow: var(--shadow-md); max-width: 230px; opacity: 0; transform: translate(-50%, -100%); transition: opacity .1s; z-index: 5; display: block; }
+  .tooltip { position: absolute; pointer-events: none; background: var(--color-neutral-800); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); padding: 8px 10px; font-size: 13px; box-shadow: var(--shadow-md); max-width: 230px; opacity: 0; transform: translate(-50%, -100%); transition: opacity .1s; z-index: 5; display: block; }
   .tooltip.show { opacity: 1; display: block; }
   body > .tooltip { max-width: min(420px, calc(100vw - 16px)); transform: none; display: block; }
   body > .tooltip .t-row { gap: 20px; }
@@ -179,9 +188,9 @@
   body > .tooltip .t-foot { white-space: normal; }
   .tooltip .t-title { font-weight: 600; margin: 0 0 3px; }
   .tooltip .t-row { display: flex; justify-content: space-between; gap: 10px; color: var(--ink-2); }
-  .forecast-card p.f-line { display: flex; justify-content: space-between; font-size: 14px; padding: 6px 0; border-top: 1px solid var(--color-divider); margin: 0; }
+  .forecast-card p.f-line { display: flex; justify-content: space-between; font-size: 15px; padding: 6px 0; border-top: 1px solid var(--color-divider); margin: 0; }
   .forecast-card p.f-line:first-of-type { border-top: 0; }
-  .forecast-card .f-range { color: var(--ink-4); font-size: 12px; }
+  .forecast-card .f-range { color: var(--ink-4); font-size: 13px; }
   .row-2col { display: grid; grid-template-columns: 1.5fr 1fr; gap: var(--space-4); margin-top: var(--space-4); align-items: stretch; }
   /* Events + reports lead the row; the plots panel reads as the right-hand analysis column. */
   .row-2col > .briefs-card { order: -1; }
@@ -191,42 +200,42 @@
   .plots-card > * { flex-shrink: 0; }
   .summary-card { display: flex; flex-direction: column; padding: var(--space-4); height: auto; min-height: 560px; align-self: stretch; gap: var(--space-4); }
   .stat-band { display: flex; flex-direction: column; min-width: 0; }
-  .stat-scope { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-label); margin: 0 0 18px; }
+  .stat-scope { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-label); margin: 0 0 18px; }
   .stat-scope span { color: var(--color-accent-300); font-weight: 600; }
   .stat-grid { display: grid; grid-template-columns: minmax(0,1fr); grid-auto-rows: 1fr; gap: var(--space-3); align-items: stretch; }
   .stat-grid .stat-cell { min-width: 0; background: color-mix(in srgb, var(--color-neutral-800) 40%, transparent); border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: var(--space-3); }
-  .stat-grid .stat-num { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 30px; line-height: 1.05; margin: 0; letter-spacing: -0.015em; }
-  .stat-grid .stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); margin: 8px 0 0; }
+  .stat-grid .stat-num { font-family: var(--font-mono); font-weight: 500; font-size: 30px; line-height: 1.05; margin: 0; letter-spacing: -0.015em; }
+  .stat-grid .stat-label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); margin: 8px 0 0; }
   .forecast-box { margin-top: 0; flex: 1 1 auto; display: flex; flex-direction: column;
-    justify-content: flex-start; padding-top: 18px; border-top: 1px solid var(--color-divider); font-size: 12px; color: var(--ink-2); line-height: 1.5; }
-  .forecast-box .fc-title { font-size: 10px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-label); margin: 0 0 12px; }
+    justify-content: flex-start; padding-top: 18px; border-top: 1px solid var(--color-divider); font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+  .forecast-box .fc-title { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-label); margin: 0 0 12px; }
   .forecast-box .fc-title span.fc-strain { color: var(--color-accent-300); font-weight: 700; text-transform: uppercase; }
   .forecast-box .fc-title button.fc-strain.fc-link { background:none; border:0; padding:0; font:inherit; color:var(--color-accent-300); font-weight:700; text-transform: uppercase; letter-spacing: .02em; cursor:pointer; border-bottom:1px dotted color-mix(in srgb,var(--color-accent-300) 55%,transparent); }
   .forecast-box .fc-title button.fc-strain.fc-link:hover { color:var(--color-accent); border-bottom-color:var(--color-accent); }
-  .forecast-box .fc-title button.fc-strain.fc-link:focus-visible { outline:2px solid var(--color-accent); outline-offset:2px; border-radius:2px; }
+  .forecast-box .fc-title button.fc-strain.fc-link:focus-visible { outline:2px solid var(--color-accent); outline-offset:2px; border-radius:var(--radius-sm); }
   .forecast-box .fc-sub { text-transform: none; letter-spacing: 0; color: var(--ink-4); }
   .forecast-box .fc-grid { display: grid; grid-template-columns: minmax(0,1fr); grid-auto-rows: 1fr; gap: var(--space-3); }
   .forecast-box .fc-cell { min-width: 0; background: color-mix(in srgb, var(--color-neutral-800) 40%, transparent); border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: var(--space-3); }
-  .forecast-box .fc-num { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 30px; line-height: 1.05; margin: 0; letter-spacing: -0.015em; color: var(--color-text); }
-  .forecast-box .fc-lbl { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); margin: 8px 0 4px; }
-  .forecast-box .fc-range { font-size: 10px; color: var(--ink-3); margin: 0; line-height: 1.35; overflow-wrap: break-word; }
-  .forecast-box .fc-none { font-size: 12px; line-height: 1.55; color: var(--ink-4); margin: 0; }
+  .forecast-box .fc-num { font-family: var(--font-mono); font-weight: 500; font-size: 30px; line-height: 1.05; margin: 0; letter-spacing: -0.015em; color: var(--color-text); }
+  .forecast-box .fc-lbl { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); margin: 8px 0 4px; }
+  .forecast-box .fc-range { font-size: 13px; color: var(--ink-3); margin: 0; line-height: 1.35; overflow-wrap: break-word; }
+  .forecast-box .fc-none { font-size: 13px; line-height: 1.55; color: var(--ink-4); margin: 0; }
   .forecast-box strong { color: var(--color-text); font-weight: 600; }
   .forecast-box span.mut { color: var(--ink-4); }
   .briefs-split { display: grid; grid-template-columns: 244px minmax(0,1fr); gap: var(--space-4); height: 100%; min-height: 0; }
   .events-col { min-height: 0; overflow-y: auto; border-right: 1px solid var(--color-divider); padding-right: var(--space-3); }
-  .events-hint { font-size: 10px; color: var(--color-accent-300); margin: 0 0 var(--space-3); }
-  .rf-bar { font-size: 10px; color: var(--color-accent-200); background: color-mix(in srgb, var(--color-accent-500) 14%, transparent); border-radius: var(--radius-sm); padding: 5px 8px; margin: 0 0 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-  .rf-bar button { background: none; border: 0; color: var(--color-accent-200); cursor: pointer; font-size: 10px; padding: 0; }
+  .events-hint { font-size: 13px; color: var(--color-accent-300); margin: 0 0 var(--space-3); }
+  .rf-bar { font-size: 13px; color: var(--color-accent-200); background: color-mix(in srgb, var(--color-accent-500) 14%, transparent); border-radius: var(--radius-sm); padding: 5px 8px; margin: 0 0 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .rf-bar button { background: none; border: 0; color: var(--color-accent-200); cursor: pointer; font-size: 13px; padding: 0; }
   .event-doc { margin-top: 6px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .event-doc .ev-flags { margin-left: auto; }
-  .event-doc .doc-meta { font-size: 10px; color: var(--ink-4); }
+  .event-doc .doc-meta { font-size: 13px; color: var(--ink-4); }
   .brief-quality { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 0 12px; padding-bottom: 10px; border-bottom: 1px solid var(--color-divider); }
   .brief-headline { font-size: 18px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; color: var(--color-text); margin: 2px 0 12px; }
   .brief-headline .meta-ref { border-bottom: 0; }
   .brief-headline .ev-path { color: var(--color-accent-200); }
-  .brief-quality .bq-meta { font-size: 12px; color: var(--ink-4); }
-  .sub-swatch { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; font-size: 10px; max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
+  .brief-quality .bq-meta { font-size: 13px; color: var(--ink-4); }
+  .sub-swatch { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; font-size: 13px; max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
   #subLegend { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; align-content: flex-start; flex: 1 1 220px; min-width: 200px; max-height: 46px; overflow-y: auto; overscroll-behavior: contain; }
   #subLegend .sub-swatch:nth-child(n+6) { opacity: 0.95; }
   .brief-col { display: flex; flex-direction: column; min-height: 0; }
@@ -241,54 +250,65 @@
   .plots-card .plot-block-grow { flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0; }
   .plots-card .plot-block-grow .chart-wrap { flex: 1 1 auto; height: auto; min-height: 320px; }
   .chart-divider { border-top: 1px solid var(--color-divider); margin: var(--space-2) 0 var(--space-3); }
-  .methodology-note { font-size: 12px; line-height: 1.5; color: var(--ink-4); margin: var(--space-3) 0 0; padding-top: var(--space-3); }
-  .plot-subtitle { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-label); margin: 0 0 8px; font-weight: 600; }
+  .methodology-note { font-size: 13px; line-height: 1.5; color: var(--ink-4); margin: var(--space-3) 0 0; padding-top: var(--space-3); }
+  .plot-subtitle { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-label); margin: 0 0 8px; font-weight: 600; }
   .plot-block + .plot-block { margin-top: 0; }
   .glyph-hit { transition: filter .1s ease, opacity .1s ease; }
   .glyph-hit:hover { filter: brightness(1.4) saturate(1.15); }
   .brief-body { flex: 1; min-height: 0; overflow-y: auto; padding-right: 4px; }
   .brief-content h1 { display: none; }
-  .brief-content h2 { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 14px; margin: 16px 0 8px; color: var(--color-text); }
+  .brief-content h2 { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 15px; margin: 16px 0 8px; color: var(--color-text); }
   .brief-content h2:first-of-type { margin-top: 0; }
-  .brief-content p { font-size: 12px; line-height: 1.55; color: var(--ink-2); margin: 0 0 10px; }
-  .brief-content ul, .brief-content ol { margin: 0 0 10px; padding-left: 18px; font-size: 12px; line-height: 1.5; color: var(--ink-2); }
+  .brief-content p { font-size: 13px; line-height: 1.55; color: var(--ink-2); margin: 0 0 10px; }
+  .brief-content ul, .brief-content ol { margin: 0 0 10px; padding-left: 18px; font-size: 13px; line-height: 1.5; color: var(--ink-2); }
   .brief-content li { margin-bottom: 4px; }
   /* Status Report HTML arrives with <details> sections carrying inline 24px headings — normalize
      to the page hierarchy, replace the native disclosure marker with a Nocturne-styled toggle,
      and kill the trailing whitespace before the disclaimer. */
   .brief-content details { margin: 0 !important; padding: 0 !important; border-top: 1px solid var(--color-divider); }
   .brief-content details:first-of-type { border-top: 0; }
-  .brief-content summary { list-style: none; display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 9px 0; font-size: 12px !important; color: var(--color-text); }
+  .brief-content summary { list-style: none; display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 9px 0; font-size: 13px !important; color: var(--color-text); }
   .brief-content summary::-webkit-details-marker { display: none; }
-  .brief-content summary::before { content: '+'; flex: 0 0 auto; width: 14px; height: 14px; line-height: 12px; text-align: center; font-size: 12px; font-weight: 700; color: var(--color-accent-300); border: 1px solid color-mix(in srgb, var(--color-accent-300) 45%, transparent); border-radius: 3px; }
+  .brief-content summary::before { content: '+'; flex: 0 0 auto; width: 14px; height: 14px; line-height: 12px; text-align: center; font-size: 13px; font-weight: 700; color: var(--color-accent-300); border: 1px solid color-mix(in srgb, var(--color-accent-300) 45%, transparent); border-radius: var(--radius-sm); }
   .brief-content details[open] summary::before { content: '\2212'; }
-  .brief-content summary span { font-size: 12px !important; font-weight: 600 !important; color: var(--color-text) !important; letter-spacing: .02em; }
+  .brief-content summary span { font-size: 13px !important; font-weight: 600 !important; color: var(--color-text) !important; letter-spacing: .02em; }
   .brief-content details > *:last-child { margin-bottom: 10px; }
   .brief-content > *:last-child { margin-bottom: 0 !important; }
   .brief-content hr { border: 0; border-top: 1px solid var(--color-divider); margin: 10px 0; }
   .brief-content strong { color: var(--color-text); font-weight: 600; }
-  .brief-bullets { margin: 6px 0 0; padding-left: 18px; font-size: 12px; line-height: 1.5; color: var(--ink-2); }
+  .brief-bullets { margin: 6px 0 0; padding-left: 18px; font-size: 13px; line-height: 1.5; color: var(--ink-2); }
   .brief-bullets li { margin-bottom: 4px; }
   .brief-content em { color: var(--ink-4); }
   .brief-content a { word-break: break-word; }
-  .cite-ref { color: var(--color-accent-300); cursor: pointer; border-bottom: 1px dotted color-mix(in srgb, var(--color-accent-300) 55%, transparent); text-decoration: none; padding: 0 1px; border-radius: 2px; }
+  .cite-ref { color: var(--color-accent-300); cursor: pointer; border-bottom: 1px dotted color-mix(in srgb, var(--color-accent-300) 55%, transparent); text-decoration: none; padding: 0 1px; border-radius: var(--radius-sm); }
   .cite-ref:hover, .cite-ref:focus { color: var(--color-accent); border-bottom-color: var(--color-accent); background: color-mix(in srgb, var(--color-accent) 10%, transparent); outline: none; }
   .cite-ref.cite-hi { background: color-mix(in srgb, var(--color-accent) 18%, transparent); outline: 1px solid var(--color-accent); }
   .plain-ref { cursor: pointer; border-radius: var(--radius-sm); transition: background 0.15s; }
   .plain-ref:hover, .plain-ref:focus { background: color-mix(in srgb, var(--color-accent) 6%, transparent); outline: none; }
   .plain-ref.ref-hi { background: color-mix(in srgb, var(--color-accent) 12%, transparent); outline: 1px solid var(--color-accent); }
   .table-card { margin-top: var(--space-4); }
-  .section-help { display:inline-flex; align-items:center; justify-content:center; width:17px; height:17px; margin-left:6px; border:1px solid var(--color-divider); border-radius:50%; background:transparent; color:var(--ink-4); font-size:11px; cursor:help; }
-  .development-list { margin:5px 0; padding-left:22px; font-size:11px; line-height:1.5; }
-  .development-list time { color:var(--ink-4); font-variant-numeric:tabular-nums; margin-right:6px; }
+  .section-help { display:inline-flex; align-items:center; justify-content:center; width:17px; height:17px; margin-left:6px; border:1px solid var(--color-divider); border-radius:50%; background:transparent; color:var(--ink-4); font-size:var(--fs-2); cursor:help; }
+  .dev-timeline { margin:8px 0 2px; }
+  .dev-day { display:grid; grid-template-columns:58px 1fr; }
+  .dev-day > time { grid-column:1; font-size:12px; font-weight:600; color:var(--ink-3); text-align:right; padding:1px 12px 0 0; white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .dev-day-items { grid-column:2; position:relative; border-left:1px solid var(--color-divider); padding:0 0 14px 14px; display:flex; flex-direction:column; gap:9px; }
+  .dev-day-items::before { content:''; position:absolute; left:-4px; top:4px; width:7px; height:7px; border-radius:50%; background:var(--color-accent-300); box-shadow:0 0 0 2px var(--color-bg); }
+  .dev-day:last-child .dev-day-items { border-left-color:transparent; }
+  .dev-entry .dev-text { margin:0; font-size:var(--fs-2); line-height:1.45; color:var(--color-text); text-wrap:pretty; }
+  .dev-entry .dev-meta { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-top:4px; }
+  .dev-entry .dev-type { font-size:12px; font-weight:600; padding:0 7px; border:1px solid; border-radius:999px; line-height:1.55; }
+  .dev-entry .dev-geo { font-size:12px; color:var(--ink-4); }
+  .dev-details-link { background:none; border:0; padding:0; font:inherit; font-size:13px; font-weight:400; color:var(--color-accent-300); cursor:pointer; }
+  .dev-details-link:hover { color:var(--color-accent); text-decoration:underline; }
+  .dev-details-link:focus-visible { outline:2px solid var(--color-accent); outline-offset:2px; }
   .event-timeline { margin:12px 0; border-top:1px solid var(--color-divider); padding-top:9px; }
-  .event-timeline summary { cursor:pointer; font-size:12px; font-weight:600; }
-  .bar-key { font-size:10px; color:var(--ink-4); }
+  .event-timeline summary { cursor:pointer; font-size:13px; font-weight:600; }
+  .bar-key { font-size:13px; color:var(--ink-4); }
   #outlierNote { display:none; }
   .card-head-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--space-3); flex-wrap: wrap; gap: 8px; }
   th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
   th.sortable:hover { color: var(--color-text); }
-  th.sortable .sort-arrow { font-size: 10px; opacity: 0.6; margin-left: 3px; }
+  th.sortable .sort-arrow { font-size: 13px; opacity: 0.6; margin-left: 3px; }
   .table thead th { position: sticky; top: 0; background: var(--color-bg); z-index: 2; }
   /* Data-availability report table: opaque accent-tinted raw-rows column that keeps scrolled cells
      from bleeding through the sticky header, plus a buffer between the last column and the scrollbar
@@ -312,37 +332,38 @@
   #dataReportBody .dr-table th.sortable { position: sticky; top: 0; padding-right: 18px; }
   #dataReportBody .dr-table th.sortable[style*="text-align:left"], #dataReportBody .dr-table th.sortable[style*="text-align: left"] { padding-right: 18px; padding-left: 0; }
   #dataReportBody .dr-table th:last-child.sortable { padding-right: 28px; }
-  #dataReportBody .dr-table th .sort-arrow { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); font-size: 9px; line-height: 1; opacity: 0.45; }
+  #dataReportBody .dr-table th .sort-arrow { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); font-size: 13px; line-height: 1; opacity: 0.45; }
   #dataReportBody .dr-table th:last-child .sort-arrow { right: 14px; }
   #dataReportBody .dr-table th.sort-active .sort-arrow { opacity: 1; color: var(--color-accent-300); }
+  .geo-name { font-weight: 600; }
   .cfr-flag { cursor: help; border-bottom: 1px dotted var(--ink-4); }
   /* Suspected bleed-through: a gentle amber note (not the red danger register) — a sub-location
      figure that may have inherited its parent location's total. */
-  .bleed-note { display: flex; width: fit-content; align-items: center; gap: 5px; margin-top: 3px; font-size: 10px; color: var(--warn-ink); cursor: help; }
+  .bleed-note { display: flex; width: fit-content; align-items: center; gap: 5px; margin-top: 3px; font-size: 13px; color: var(--warn-ink); cursor: help; }
   .bleed-note::before { content: ""; width: 5px; height: 5px; border-radius: 50%; flex: none; background: var(--warn); box-shadow: 0 0 4px color-mix(in srgb, var(--warn) 60%, transparent); }
   #reportRows tr[data-drill] { cursor: pointer; }
   #reportRows tr[data-drill]:hover { background: color-mix(in srgb, var(--color-accent) 6%, transparent); }
-  .drill-hint { opacity: 0.5; font-size: 10px; margin-left: 6px; }
+  .drill-hint { opacity: 0.5; font-size: 13px; margin-left: 6px; }
   .dialog-body { max-height: 60vh; overflow-y: auto; }
-  .dialog-body .table { font-size: 12px; }
+  .dialog-body .table { font-size: 13px; }
   .icon { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-  footer.note { margin-top: var(--space-4); font-size: 12px; color: var(--ink-4); border-top: 1px solid var(--color-divider); padding-top: var(--space-3); }
+  footer.note { margin-top: var(--space-4); font-size: 13px; color: var(--ink-4); border-top: 1px solid var(--color-divider); padding-top: var(--space-3); }
   .map-wrap svg { cursor: grab; }
   .map-wrap svg:active { cursor: grabbing; }
   .zoom-controls { position: absolute; right: 10px; bottom: 10px; display: flex; flex-direction: column; gap: 5px; z-index: 4; }
-  .zoom-controls button { width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; line-height: 1; padding: 0; }
-  .map-hint { position: absolute; left: 10px; bottom: 10px; font-size: 10px; color: var(--ink-label); background: color-mix(in srgb, var(--color-neutral-900) 78%, transparent); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); padding: 4px 8px; z-index: 4; pointer-events: none; }
-  .tooltip .t-sub { font-size: 12px; color: var(--ink-3); margin: 0 0 6px; }
+  .zoom-controls button { width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; line-height: 1; padding: 0; }
+  .map-hint { position: absolute; left: 10px; bottom: 10px; font-size: 13px; color: var(--ink-label); background: color-mix(in srgb, var(--color-neutral-900) 78%, transparent); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); padding: 4px 8px; z-index: 4; pointer-events: none; }
+  .tooltip .t-sub { font-size: 13px; color: var(--ink-3); margin: 0 0 6px; }
   #globeMap { border-radius: var(--radius-md); background: radial-gradient(120% 120% at 50% 42%, #10122a 0%, #0a0b18 46%, #06060d 100%); }
   #globeMap canvas { outline: none; background: transparent; }
   /* Globe popups share the exact tooltip language (bg, border, type scale, row layout) so the
      two maps read as one product — and .t-row spans get real spacing via flex gap. */
-  .globe-pop .maplibregl-popup-content { background: var(--color-neutral-800); color: var(--color-text); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 12px; box-shadow: var(--shadow-md); padding: 8px 10px; max-width: 260px; }
+  .globe-pop .maplibregl-popup-content { background: var(--color-neutral-800); color: var(--color-text); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 13px; box-shadow: var(--shadow-md); padding: 8px 10px; max-width: 260px; }
   .globe-pop .maplibregl-popup-tip { display: none; }
   .globe-pop .t-title { font-weight: 600; margin: 0 0 3px; }
-  .globe-pop .t-sub { font-size: 12px; color: var(--ink-3); margin: 0 0 6px; }
+  .globe-pop .t-sub { font-size: 13px; color: var(--ink-3); margin: 0 0 6px; }
   .globe-pop .t-row { display: flex; justify-content: space-between; gap: 10px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-  .globe-pop .t-foot { margin-top: 6px; padding-top: 5px; border-top: 1px solid var(--color-divider); font-size: 10px; color: var(--color-accent-300); }
+  .globe-pop .t-foot { margin-top: 6px; padding-top: 5px; border-top: 1px solid var(--color-divider); font-size: 13px; color: var(--color-accent-300); }
   /* Dialogs must sit above every in-page layer (sticky table header z2, map tooltip z5). */
   /* JS reveals these with an inline `display:flex`, which overrides the design-system's
      `display:grid; place-items:center` — so re-assert centering for the flex axis here (a bare
@@ -355,45 +376,45 @@
   #globeMap .maplibregl-ctrl-group button span { filter: invert(1); }
   #globeMap .maplibregl-ctrl-attrib { background: color-mix(in srgb, var(--color-neutral-900) 82%, transparent); }
   #globeMap .maplibregl-ctrl-attrib a { color: var(--ink-4); }
-  .tooltip .t-cols { font-size: 10px; text-transform: uppercase; letter-spacing: .04em; text-align: right; color: var(--ink-label); margin-bottom: 2px; }
-  .tooltip .t-foot { margin-top: 6px; padding-top: 5px; border-top: 1px solid var(--color-divider); font-size: 10px; color: var(--color-accent-300); }
+  .tooltip .t-cols { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; text-align: right; color: var(--ink-label); margin-bottom: 2px; }
+  .tooltip .t-foot { margin-top: 6px; padding-top: 5px; border-top: 1px solid var(--color-divider); font-size: 13px; color: var(--color-accent-300); }
   .stat-inline { display: grid; grid-template-columns: 1fr 1fr; gap: 16px var(--space-3); margin-bottom: var(--space-3); }
   .stat-inline .stat-cell { padding-left: 12px; border-left: 1px solid var(--color-divider); }
   .stat-inline .stat-cell:nth-child(odd) { border-left: 0; padding-left: 0; }
   .stat-inline .stat-num { font-size: 24px; }
-  .forecast-inline { font-size: 12px; color: var(--ink-2); margin: 0 0 14px; padding-bottom: 12px; border-bottom: 1px solid var(--color-divider); line-height: 1.55; }
+  .forecast-inline { font-size: 13px; color: var(--ink-2); margin: 0 0 14px; padding-bottom: 12px; border-bottom: 1px solid var(--color-divider); line-height: 1.55; }
   .forecast-inline strong { color: var(--color-text); font-weight: 600; }
   .forecast-inline span { color: var(--ink-4); }
   .art-row { border-top: 1px solid var(--color-divider); padding: 10px 2px; }
   .art-row:first-child { border-top: 0; }
-  .art-link { display: inline-block; font-size: 12px; font-weight: 600; margin-bottom: 5px; word-break: break-word; }
-  .art-extract { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--ink-2); padding: 2px 0; flex-wrap: wrap; }
+  .art-link { display: inline-block; font-size: 13px; font-weight: 600; margin-bottom: 5px; word-break: break-word; }
+  .art-extract { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--ink-2); padding: 2px 0; flex-wrap: wrap; }
   .art-extract > span:first-child { min-width: 0; word-break: break-word; }
   .art-extract .qbadge, .art-extract .tag { flex-shrink: 0; }
   /* Evidence cards: cited articles enriched from the raw extraction corpus */
   .ev-cards { margin: 6px 0 2px 12px; border-left: 2px solid var(--color-divider); padding-left: 10px; display: flex; flex-direction: column; gap: 8px; }
-  .ev-card { font-size: 12px; }
+  .ev-card { font-size: 13px; }
   .ev-card-title { font-weight: 600; color: var(--color-text); word-break: break-word; line-height: 1.35; }
-  .ev-note { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+  .ev-note { font-size: 13px; color: var(--ink-3); margin-top: 4px; }
   .filter-banner { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: color-mix(in srgb, var(--color-accent-500) 14%, transparent); border: 1px solid color-mix(in srgb, var(--color-accent-300) 35%, transparent); border-radius: var(--radius-sm); padding: 8px 10px; margin: 0 0 12px; }
-  .fb-pathogen { font-size: 14px; font-weight: 700; color: var(--color-accent-200); margin: 0; letter-spacing: .2px; line-height: 1.25; }
-  .fb-sub { font-size: 12px; color: var(--ink-3); margin: 2px 0 0; }
-  .filter-banner button { background: none; border: 1px solid color-mix(in srgb, var(--color-accent-300) 45%, transparent); color: var(--color-accent-200); border-radius: 999px; font-size: 12px; font-weight: 600; padding: 4px 10px; cursor: pointer; white-space: nowrap; }
+  .fb-pathogen { font-size: 15px; font-weight: 700; color: var(--color-accent-200); margin: 0; letter-spacing: .2px; line-height: 1.25; }
+  .fb-sub { font-size: 13px; color: var(--ink-3); margin: 2px 0 0; }
+  .filter-banner button { background: none; border: 1px solid color-mix(in srgb, var(--color-accent-300) 45%, transparent); color: var(--color-accent-200); border-radius: 999px; font-size: 13px; font-weight: 600; padding: 4px 10px; cursor: pointer; white-space: nowrap; }
   .filter-banner button:hover { background: color-mix(in srgb, var(--color-accent-300) 18%, transparent); }
-  .dr-cell { background:none; border:0; color:var(--color-accent-300); font:inherit; font-weight:600; cursor:pointer; padding:2px 6px; border-radius:4px; }
+  .dr-cell { background:none; border:0; color:var(--color-accent-300); font:inherit; font-weight:600; cursor:pointer; padding:2px 6px; border-radius:var(--radius-sm); }
   .dr-cell:hover, .dr-cell:focus-visible { background: color-mix(in srgb, var(--color-accent) 16%, transparent); color: var(--color-accent-200); outline:none; }
   /* Live-data states: skeleton shimmer before first load, sample-data banner on failure. */
   /* Live-data states: skeleton shimmer before first load. */
   @keyframes skshine { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-  body.preload .stat-num { color: transparent; border-radius: 6px; background: linear-gradient(90deg, rgba(255,255,255,.05), rgba(255,255,255,.16), rgba(255,255,255,.05)); background-size: 200% 100%; animation: skshine 1.2s infinite linear; }
+  body.preload .stat-num { color: transparent; border-radius: var(--radius-sm); background: linear-gradient(90deg, rgba(255,255,255,.05), rgba(255,255,255,.16), rgba(255,255,255,.05)); background-size: 200% 100%; animation: skshine 1.2s infinite linear; }
   body.preload #trendSvg, body.preload #sourceSvg, body.preload .map-wrap svg, body.preload .map-wrap #globeMap { opacity: .12; filter: grayscale(1); }
-  body.preload .map-wrap::after { content: 'Loading live data…'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--color-neutral-400); z-index: 3; }
+  body.preload .map-wrap::after { content: 'Loading live data…'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--color-neutral-400); z-index: 3; }
   @media (prefers-reduced-motion: reduce) { body.preload .stat-num { animation: none; } }
   /* Terminal error state: live sheet unreachable. No cached data is ever shown — the panels
      dim and the map states it plainly, rather than presenting stale figures as current. */
   body.dataerror #trendSvg, body.dataerror #sourceSvg, body.dataerror .map-wrap svg, body.dataerror .map-wrap #globeMap { opacity: .12; filter: grayscale(1); }
   body.dataerror .stat-num { opacity: .25; }
-  body.dataerror .map-wrap::after { content: 'Live sheet unreachable — click Retry'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--color-neutral-400); text-align: center; padding: 0 16px; }
+  body.dataerror .map-wrap::after { content: 'Live sheet unreachable — click Retry'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--color-neutral-400); text-align: center; padding: 0 16px; }
   .art-extract strong { color: var(--color-text); }
   .table-scroll { overflow-x: auto; min-width: 0; max-width: 100%; }
   .table-scroll .table { min-width: 920px; }
@@ -401,15 +422,20 @@
   /* Article screening column hosts badge + vettings button (collapsed, like outbreak doc) */
   .table-scroll th:nth-child(5), .table-scroll td:nth-child(5) { min-width: 160px; }
   #tablePager { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin-top: 12px; flex-wrap: wrap; }
-  #tablePager .pager-info { font-size: 12px; color: var(--ink-4); }
-  .footer-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: var(--color-accent-300); border: 1px solid var(--color-divider); border-radius: 999px; padding: 3px 10px; }
+  #tablePager .pager-info { font-size: 13px; color: var(--ink-4); }
+  .footer-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 600; color: var(--color-accent-300); border: 1px solid var(--color-divider); border-radius: 999px; padding: 3px 10px; }
   .footer-badge:hover { color: var(--color-accent-200); border-color: var(--color-accent-300); text-decoration: none; }
   /* Raw-articles table (figures card's alternate view): compact article-level rows. */
-  .raw-row-title { font-size: 12px; font-weight: 600; word-break: break-word; }
-  .raw-row-trans { font-size: 10px; color: var(--ink-4); font-style: italic; word-break: break-word; }
+  .raw-row-title { font-size: 13px; font-weight: 600; word-break: break-word; }
+  .raw-row-trans { font-size: 13px; color: var(--ink-4); font-style: italic; word-break: break-word; }
   /* ============ REDESIGN v2 — type scale, hierarchy, lead ============ */
   /* One deliberate type scale. Every font-size in the page is snapped to a step of this ramp. */
-  :root { --fs-1:10px; --fs-2:12px; --fs-3:14px; --fs-4:18px; --fs-5:24px; --fs-6:30px; }
+  :root { --fs-1:13px; --fs-2:13px; --fs-3:15px; --fs-4:19px; --fs-5:24px; --fs-6:30px; }
+  /* Legibility floor: lift the design system's smallest chrome (tags, card meta, kickers) to 12px
+     so no readable UI text falls below the ramp minimum. */
+  .tag, .card-meta, .card-kicker, .table th, .table thead th { font-size: 13px; }
+  /* Humanist direction reads roomier: a touch more line-height on the reading text. */
+  .event-title, .page-sub, .brief-content p, .brief-content li, .fc-range, .card-meta { line-height: 1.6; }
   /* Section labels — the page now reads as a numbered sequence rather than a pile of panels. */
   .section-label { display:flex; align-items:center; gap:var(--space-3); margin:var(--space-6) 0 var(--space-3); font-size:var(--fs-1); text-transform:uppercase; letter-spacing:.14em; color:var(--ink-4); font-weight:600; }
   .section-label:first-of-type { margin-top:var(--space-6); }
@@ -434,7 +460,7 @@
   /* Data-report and Open-brief primary actions are peer CTAs — identical fixed box, and the toolbar
      button carries a right margin equal to the lead strip's padding+border so its right edge (and,
      at equal width, its left edge) lines up with Open brief directly below. */
-  #dataReportBtn, #leadCta { width: 168px; min-width: 168px; height: 38px; padding: 0 var(--space-4); font-size: 13px; gap: var(--space-2); justify-content: center; }
+  #dataReportBtn, #leadCta { width: 168px; min-width: 168px; height: 38px; padding: 0 var(--space-4); font-size: var(--fs-2); gap: var(--space-2); justify-content: center; }
   /* One-time attention: after load the Data-report CTA rakes three shines — gold, red, purple, 5s
      apart. Each is a fan of varied-width bands moving at different speeds (WAAPI, see script), like
      light glancing across a moving mirror sphere. Bands live inside .dr-sheen (clipped there, so the
@@ -461,7 +487,7 @@
   /* Report file reference (hash / PDF filename) kept visible for records requests. */
   .brief-file-line { font-size:var(--fs-1); color:var(--ink-4); }
   .brief-file-line:empty { display:none; }
-  .brief-file-line code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:10px; color:var(--ink-3); background:color-mix(in srgb,var(--color-text) 7%,transparent); padding:1px 6px; border-radius:4px; }
+  .brief-file-line code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px; color:var(--ink-3); background:color-mix(in srgb,var(--color-text) 7%,transparent); padding:1px 6px; border-radius:var(--radius-sm); }
   /* Full-page outbreak brief modal + its per-report PDF export. */
   .brief-modal-backdrop { position:fixed; inset:0; z-index:70; background:color-mix(in srgb, var(--color-bg) 84%, transparent); display:flex; align-items:center; justify-content:center; padding:3vh 2vw; box-sizing:border-box; }
   .brief-modal { background:var(--color-neutral-900); border:1px solid var(--color-divider); border-top:2px solid var(--color-accent); border-radius:var(--radius-md); box-shadow:var(--shadow-lg); width:min(980px,96vw); max-height:94vh; display:flex; flex-direction:column; }
@@ -499,7 +525,7 @@
     .grid-main, .row-2col, .briefs-split { display:block !important; }
     .map-wrap { height:420px; }
     .events-col, .brief-body, .briefs-card, .plots-card, .summary-card, .table-scroll { height:auto !important; max-height:none !important; overflow:visible !important; }
-    .brief-content a[href]:after, .event-title a[href]:after { content:' (' attr(href) ')'; font-size:10px; color:#555; word-break:break-all; }
+    .brief-content a[href]:after, .event-title a[href]:after { content:' (' attr(href) ')'; font-size:13px; color:#555; word-break:break-all; }
     /* Logo must survive the light print theme: base wordmark only, dark ink */
     .brand-logo { height: 34px; }
     .brand-logo text { display: none; }
@@ -516,7 +542,7 @@
     .forecast-box .fc-grid { grid-template-columns: 1fr; gap: var(--space-3); }
     .map-wrap { height: 320px; }
     .page-title { font-size: 24px; }
-    .table { font-size: 12px; }
+    .table { font-size: 13px; }
     #subLegend { grid-template-columns: repeat(2, minmax(0,1fr)); }
   }
 </style>
@@ -618,7 +644,7 @@
           <button type="button" class="seg-opt" data-view="globe">Globe</button>
         </div>
         <div class="map-legend">
-          <span class="legend-swatch">Risk<span style="display:inline-block;width:92px;height:9px;border-radius:5px;margin:0 7px;background:linear-gradient(90deg,var(--sev-lo),var(--sev-mid),var(--sev-hi))"></span>1 → 9</span>
+          <span class="legend-swatch">Risk<span style="display:inline-block;width:92px;height:9px;border-radius:var(--radius-sm);margin:0 7px;background:linear-gradient(90deg,var(--sev-lo),var(--sev-mid),var(--sev-hi))"></span>1 → 9</span>
           <span class="legend-swatch" title="Vetted event report — filled circle sized by risk/case load"><svg width="46" height="16" style="overflow:visible"><circle cx="7" cy="8" r="3" fill="#b45c64" fill-opacity="0.7" stroke="var(--color-neutral-100)"></circle><circle cx="30" cy="8" r="7" fill="#b45c64" fill-opacity="0.7" stroke="var(--color-neutral-100)"></circle></svg><span id="mapSizeLabel">size ∝ score</span></span>
           <span class="legend-swatch" id="rawGlyphLegend" title="Unvetted extractions — hollow downward triangle at country centroid; click a glyph to open its source article data" style="cursor:pointer;user-select:none"><svg width="16" height="14" style="overflow:visible"><path d="M2 4 L14 4 L8 12 Z" fill="none" stroke="var(--color-accent-300)" stroke-width="1.4" opacity="0.85"></path></svg><span id="rawGlyphLabel">Unvetted extractions</span></span>
           <span class="legend-swatch" id="mapCount"></span>
@@ -627,7 +653,7 @@
       <div class="map-wrap" id="mapWrap">
         <svg id="mapSvg" viewBox="0 0 960 520"></svg>
         <div id="globeMap" style="position:absolute;inset:0;display:none"></div>
-        <button type="button" class="btn btn-secondary" id="satToggle" style="position:absolute;left:10px;top:10px;z-index:5;display:none;font-size:12px;padding:3px 10px">Satellite</button>
+        <button type="button" class="btn btn-secondary" id="satToggle" style="position:absolute;left:10px;top:10px;z-index:5;display:none;font-size:13px;padding:3px 10px">Satellite</button>
         <div class="map-hint">Scroll to zoom · drag to pan · click an event to open its brief</div>
         <div class="zoom-controls">
           <button type="button" class="btn btn-secondary btn-icon" id="zoomIn" aria-label="Zoom in">+</button>
@@ -643,11 +669,11 @@
         <p class="stat-scope">Pathogen total — <span id="statScope">…</span></p>
         <p class="stat-aggline" id="statAggLine"></p>
         <div class="stat-grid">
-          <div class="stat-cell" id="statActiveCell"><p class="stat-num" id="statActive">–</p><p class="stat-label">Vetted outbreaks</p><p class="cell-range" id="statActiveBreakdown" style="margin:4px 0 0;font-size:10px"></p></div>
-          <div class="stat-cell"><p class="stat-num" id="statCountries">–</p><p class="stat-label">Countries with vetted evidence</p><p class="cell-range" id="statVetLine" style="margin:4px 0 0;font-size:10px"></p></div>
-          <div class="stat-cell"><p class="stat-num" id="statLevel">–</p><p class="stat-label">Source reports</p><p class="cell-range" id="statLevelSub" style="margin:4px 0 0;font-size:10px"></p></div>
+          <div class="stat-cell" id="statActiveCell"><p class="stat-num" id="statActive">–</p><p class="stat-label">Vetted outbreaks</p><p class="cell-range" id="statActiveBreakdown" style="margin:4px 0 0;font-size:13px"></p></div>
+          <div class="stat-cell"><p class="stat-num" id="statCountries">–</p><p class="stat-label">Countries with vetted evidence</p><p class="cell-range" id="statVetLine" style="margin:4px 0 0;font-size:13px"></p></div>
+          <div class="stat-cell"><p class="stat-num" id="statLevel">–</p><p class="stat-label">Source reports</p><p class="cell-range" id="statLevelSub" style="margin:4px 0 0;font-size:13px"></p></div>
         </div>
-        <p class="agg-note" style="margin:12px 0 0;font-size:10px;color:var(--ink-4);line-height:1.45"><b style="color:var(--ink-3);font-weight:500">Vetted</b> ≥2 sources · <b style="color:var(--ink-3);font-weight:500">single-source</b> shown, lower confidence</p>
+        <p class="agg-note" style="margin:12px 0 0;font-size:13px;color:var(--ink-4);line-height:1.45"><b style="color:var(--ink-3);font-weight:500">Vetted</b> ≥2 sources · <b style="color:var(--ink-3);font-weight:500">single-source</b> shown, lower confidence</p>
       </div>
       <div class="forecast-box" id="forecastBox"></div>
     </div>
@@ -686,7 +712,7 @@
         <p class="plot-subtitle" id="sourceSubtitle">Sources per day</p>
         <div class="source-chart-wrap" id="sourceChartWrap"><svg id="sourceSvg" width="100%" height="92"></svg></div>
       </div>
-      <p class="card-meta" id="outlierNote" style="margin:6px 0 0;font-size:10px;color:var(--ink-4)"></p>
+      <p class="card-meta" id="outlierNote" style="margin:6px 0 0;font-size:13px;color:var(--ink-4)"></p>
     </div>
 
     <div class="card briefs-card elev-sm">
@@ -695,8 +721,8 @@
           <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
             <p class="card-title" style="margin:0 0 var(--space-1)">Event reports<button type="button" class="section-help" aria-label="About event reports" title="Select an event to open its brief. Reports are generated from extracted evidence; linked sources and extracted strains are in Evidence. Event timelines retain dated developments across report cycles; dates describe reporting, not necessarily occurrence.">?</button></p>
             <span style="display:flex;gap:6px">
-              <button type="button" class="btn btn-secondary" id="exportEventsBtn" style="font-size:10px;padding:3px 10px" title="Export the event reports matching the current filters, with source URLs, as an audit trail">Events CSV</button>
-              <button type="button" class="btn btn-secondary" id="printBtn" style="font-size:10px;padding:3px 10px" title="Print / save the briefs, event list and figures table as PDF — source links included">Print / PDF</button>
+              <button type="button" class="btn btn-secondary" id="exportEventsBtn" style="font-size:13px;padding:3px 10px" title="Export the event reports matching the current filters, with source URLs, as an audit trail">Events CSV</button>
+              <button type="button" class="btn btn-secondary" id="printBtn" style="font-size:13px;padding:3px 10px" title="Print / save the briefs, event list and figures table as PDF — source links included">Print / PDF</button>
             </span>
           </div>
           <div id="eventList" aria-busy="true"><div class="skeleton w70"></div><div class="skeleton"></div><div class="skeleton w45"></div><div class="skeleton w70"></div><div class="skeleton"></div><div class="skeleton w45"></div></div>
@@ -706,7 +732,7 @@
             <div style="min-width:0">
               <p id="briefMeta" style="margin:0;line-height:1.35"></p>
             </div>
-            <button type="button" class="btn btn-secondary" id="briefExpandBtn" style="flex:none;font-size:10px;padding:3px 10px" title="Open the full outbreak brief with export">⤡ Expand report</button>
+            <button type="button" class="btn btn-secondary" id="briefExpandBtn" style="flex:none;font-size:13px;padding:3px 10px" title="Open the full outbreak brief with export">⤡ Expand report</button>
           </div>
           <div class="brief-body"><div id="briefContent" class="brief-content" aria-busy="true"><div class="skeleton tall w45"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton w70"></div><div class="skeleton"></div><div class="skeleton w45"></div></div></div>
         </div>
@@ -718,7 +744,7 @@
   <div class="card table-card elev-sm">
     <div class="card-head-row">
       <p class="card-title" style="margin:0" id="tableTitle">Latest figures by location — national events</p>
-      <button type="button" class="btn btn-secondary" id="tableBack" style="display:none;font-size:12px;padding:3px 10px">← Back to national</button>
+      <button type="button" class="btn btn-secondary" id="tableBack" style="display:none;font-size:13px;padding:3px 10px">← Back to national</button>
       <span style="display:flex;align-items:center;gap:10px">
         <div class="seg" role="tablist" aria-label="Statistical screening" id="screenSeg" title="Each figure is screened for statistical consistency (trend outliers and cumulative monotonicity). This is separate from vetting, which requires independent-source corroboration.">
           <button type="button" class="seg-opt" aria-selected="true" data-screen="accepted">Screened in</button>
@@ -728,13 +754,13 @@
           <button type="button" class="seg-opt" aria-selected="true" data-mode="figures">Figures</button>
           <button type="button" class="seg-opt" data-mode="raw" title="The source article–fact extraction table behind both the statistical figures and the event reports">Source articles</button>
         </div>
-        <button type="button" class="btn btn-secondary" id="exportCsvBtn" style="padding:3px 10px;font-size:12px">Export CSV</button>
+        <button type="button" class="btn btn-secondary" id="exportCsvBtn" style="padding:3px 10px;font-size:13px">Export CSV</button>
         <span class="card-meta"><a href="https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8#gid=881754490" target="_blank" rel="noopener">data output (Sheet) ↗</a></span>
         <span class="card-meta" id="censorTag" style="display:none"></span>
       </span>
     </div>
-     <p id="tableIntro" style="font-size:12px;color:color-mix(in srgb, var(--color-text) 68%, transparent);margin:-6px 0 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span id="tableIntroLead"></span>
-       <button type="button" id="tableHelpBtn" aria-label="About this table" title="How to read this table&#10;&#10;Range = spread across sources for that date.&#10;Status = reporting recency (≤4d Reporting · ≤14d Slowing · Quiet).&#10;Documentation = event-history (all dates/measures; Well documented = long + many vettings).&#10;Sources / Article screening = latest figure only — unvetted = 1 source (paler); N sources = vetted (N−1 vettings). Click to list articles.&#10;CFR = deaths ÷ cases for the row; * = small sample (n<30, interpret cautiously); n/a = deaths and cases drawn from different articles (not a true rate).&#10;Amber dot = suspected bleed-through (a sub-location may carry its parent location's total; flagged upstream, shown uncorrected).&#10;Range = spread · click sources to list articles." style="width:18px;height:18px;border-radius:999px;border:1px solid var(--color-divider);background:transparent;color:var(--ink-4);font-size:12px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;flex:none">?</button>
+     <p id="tableIntro" style="font-size:13px;color:color-mix(in srgb, var(--color-text) 68%, transparent);margin:-6px 0 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span id="tableIntroLead"></span>
+       <button type="button" id="tableHelpBtn" aria-label="About this table" title="How to read this table&#10;&#10;Range = spread across sources for that date.&#10;Status = reporting recency (≤4d Reporting · ≤14d Slowing · Quiet).&#10;Documentation = event-history (all dates/measures; Well documented = long + many vettings).&#10;Sources / Article screening = latest figure only — unvetted = 1 source (paler); N sources = vetted (N−1 vettings). Click to list articles.&#10;CFR = deaths ÷ cases for the row; * = small sample (n<30, interpret cautiously); n/a = deaths and cases drawn from different articles (not a true rate).&#10;Amber dot = suspected bleed-through (a sub-location may carry its parent location's total; flagged upstream, shown uncorrected).&#10;Range = spread · click sources to list articles." style="width:18px;height:18px;border-radius:999px;border:1px solid var(--color-divider);background:transparent;color:var(--ink-4);font-size:13px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;flex:none">?</button>
      </p>
     <div class="table-scroll">
     <table class="table">
@@ -758,8 +784,8 @@
     <div id="tablePager" style="display:none">
       <span class="pager-info" id="pagerInfo"></span>
       <span style="display:flex;align-items:center;gap:8px">
-        <button type="button" class="btn btn-secondary" id="pagerPrev" style="padding:3px 10px;font-size:12px">← Prev</button>
-        <button type="button" class="btn btn-secondary" id="pagerNext" style="padding:3px 10px;font-size:12px">Next →</button>
+        <button type="button" class="btn btn-secondary" id="pagerPrev" style="padding:3px 10px;font-size:13px">← Prev</button>
+        <button type="button" class="btn btn-secondary" id="pagerNext" style="padding:3px 10px;font-size:13px">Next →</button>
       </span>
     </div>
      <p class="card-meta" id="tableMore" style="display:none;margin:8px 0 0"></p>
@@ -776,7 +802,7 @@
         <svg class="icon" viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;stroke:none"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.55V9h3.57v11.45Z"/></svg>
         LinkedIn
       </a>
-      <span style="font-size:12px;color:var(--ink-4)">© James Schlitt, PhD, MPH 2026</span>
+      <span style="font-size:13px;color:var(--ink-4)">© James Schlitt, PhD, MPH 2026</span>
     </span>
   </footer>
 </div>
@@ -1088,7 +1114,7 @@ function applyGroupFilters() {
     renderBrief();
   } else {
     selectedIdx = -1;
-    if (briefContentEl) briefContentEl.innerHTML = `<p style="font-size:12px;color:var(--ink-3);margin:0">No event reports under the current filters.</p>`;
+    if (briefContentEl) briefContentEl.innerHTML = `<p style="font-size:13px;color:var(--ink-3);margin:0">No event reports under the current filters.</p>`;
     if (briefMetaEl) briefMetaEl.innerHTML = '';
   }
   if (typeof flyToFilteredMarkers === 'function') flyToFilteredMarkers();
@@ -1118,7 +1144,7 @@ function applyEmptyQueryState() {
     _queryEmpty = true;
     const escQ = esc(q);
     if (typeof briefMetaEl!=='undefined' && briefMetaEl) briefMetaEl.innerHTML = '';
-    if (typeof briefContentEl!=='undefined' && briefContentEl) briefContentEl.innerHTML = '<p style="font-size:12px;line-height:1.6;color:var(--ink-3);margin:0">No events match \u201c<strong style="color:var(--color-text)">'+escQ+'</strong>\u201d in the current pathogen / region. Clear the filter to return to the outbreak briefs.</p>';
+    if (typeof briefContentEl!=='undefined' && briefContentEl) briefContentEl.innerHTML = '<p style="font-size:13px;line-height:1.6;color:var(--ink-3);margin:0">No events match \u201c<strong style="color:var(--color-text)">'+escQ+'</strong>\u201d in the current pathogen / region. Clear the filter to return to the outbreak briefs.</p>';
     const tt=document.getElementById('trendTitle'); if(tt) tt.textContent='No data for the current filter';
     const tm=document.getElementById('trendMeta'); if(tm) tm.textContent='';
     try { tsvg.selectAll('*').remove(); shsvg.selectAll('*').remove(); } catch(e){}
@@ -1594,21 +1620,23 @@ function openFigureSourcePopup(rowId) {
   }).sort((a,b) => (b.canonical?1:0)-(a.canonical?1:0) || b.n-a.n || b.value-a.value);
   document.getElementById('drillTitle').textContent = `${row.country} · ${row.disease} — evidence for ${formatUKDate(row.date)}`;
   document.getElementById('drillBody').innerHTML = arts.length ? (
-    `<p style="font-size:12px;color:var(--ink-3);margin:0 0 12px;line-height:1.5" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${arts.length} distinct figure${arts.length>1?'s':''} reported for <strong>${esc(row.figureLoc||row.country)}</strong> on this date, backed by <strong>${ev.dom<=1 ? 'a single independent domain — unvetted' : `${ev.dom} independent domains — vetted`}</strong> across <strong>${ev.art}</strong> distinct article${ev.art!==1?'s':''} from <strong>${ev.dom}</strong> independent domain${ev.dom!==1?'s':''}. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the one shown in the table.</p>` +
+    `<p style="font-size:13px;color:var(--ink-3);margin:0 0 12px;line-height:1.5" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${arts.length} distinct figure${arts.length>1?'s':''} reported for <strong>${esc(row.figureLoc||row.country)}</strong> on this date, backed by <strong>${ev.dom<=1 ? 'a single independent domain — unvetted' : `${ev.dom} independent domains — vetted`}</strong> across <strong>${ev.art}</strong> distinct article${ev.art!==1?'s':''} from <strong>${ev.dom}</strong> independent domain${ev.dom!==1?'s':''}. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the one shown in the table.</p>` +
     arts.map(a => {
       const q = qualityBand(a.score);
       // Noncanonical observations say WHAT displaced them: the canonical figure for the same measure.
       const sup = a.canonical ? null : arts.find(x => x.canonical && x.measure === a.measure);
+      const ql = qualityFlagLabel(a.quality);
+      const qlTag = ql ? ` <span class="tag tag-neutral" style="font-size:13px" title="${ql.tip.replace(/"/g,'&quot;')}">${esc(ql.label)}</span>` : '';
       return `<div class="art-row">
       <div class="art-extract"><span><strong>${a.value.toLocaleString()}</strong> ${a.measure} · ${esc(a.location)}${a.species?' · '+esc(a.species):''}</span><span class="qbadge ${q.cls}">${q.label} quality</span></div>
       <div class="art-meta">${a.canonical
-        ? `<span class="tag tag-accent" style="font-size:10px">canonical · ${canonReasonLabel(a.reason)}</span>`
-        : `<span class="tag tag-neutral" style="font-size:10px">not canonical</span>${a.quality&&a.quality!=='good'?` <span class="tag tag-neutral" style="font-size:10px" title="statistical screening flag">${esc(a.quality)} screen</span>`:''}`}<span title="${VETTING_TIP.replace(/"/g,'&quot;')}"> · ${a.n===1 ? 'unvetted' : `${a.n} sources`}</span></div>
+        ? `<span class="tag tag-accent" style="font-size:13px">canonical · ${canonReasonLabel(a.reason)}</span>`
+        : `<span class="tag tag-neutral" style="font-size:13px">not canonical</span>${qlTag}`}<span title="${VETTING_TIP.replace(/"/g,'&quot;')}"> · ${a.n===1 ? 'unvetted' : `${a.n} sources`}</span></div>
       ${sup?`<div class="ev-note">Superseded by the canonical figure: <strong>${sup.value.toLocaleString()}</strong> ${sup.measure}</div>`:''}
       ${a.urls.length?`<div class="ev-cards">${a.urls.map(u => citeCard(u)).join('')}</div>`:'<div class="art-meta">No article link recorded.</div>'}
     </div>`;
     }).join('')
-  ) : '<p style="font-size:12px">No per-article detail recorded for this figure.</p>';
+  ) : '<p style="font-size:13px">No per-article detail recorded for this figure.</p>';
   dialogOpener = document.activeElement;
   document.getElementById('drillBackdrop').style.display = 'flex';
   document.getElementById('drillClose').focus();
@@ -1736,7 +1764,7 @@ function renderTable() {
     let nameExtra = '';
     if (!subnational) {
       if (r.scope==='subnational') {
-        nameExtra = `<span class="cell-range" style="margin-top:2px"><span class="tag tag-outline" style="font-size:10px" title="No national figure reported — showing the largest subnational event: ${r.proxyLoc}">subnational proxy</span></span>`;
+        nameExtra = `<span class="cell-range" style="margin-top:2px"><span class="tag tag-outline" style="font-size:13px" title="No national figure reported — showing the largest subnational event: ${r.proxyLoc}">subnational proxy</span></span>`;
       } else if (drillable) {
         const vt = r.subVetted ?? 0, uv = r.subUnvetted ?? 0;
         const tot = r.subCount;
@@ -1755,7 +1783,7 @@ function renderTable() {
     const rowCls = ` class="${clsList.join(' ')}"`;
     return `
     <tr data-id="${r.id}"${rowCls}${drillable?' data-drill="1" tabindex="0" role="button" aria-label="Show subnational reports"':''}${subAttr}>
-      <td>${r.country}${nameExtra}</td>
+      <td><span class="geo-name">${r.country}</span>${nameExtra}</td>
       <td>${r.disease}</td>
       <td>${hostHtml}</td>
       <td title="Event-history: sum n_sources across all dates/measures for this outbreak (includes unvetted)"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="cell-range">${doc.vettings} vettings · ${doc.days}d · history</span></td>
@@ -1855,7 +1883,7 @@ function openDrilldown(record) {
     <table class="table">
       <thead><tr><th>Location string (as scraped)</th><th>Measure</th><th>Latest value</th><th>Date</th><th>Screening</th></tr></thead>
       <tbody>${items.map(r => `<tr><td>${r.location}</td><td>${r.measure.replace('confirmed_','')}</td><td>${(+r.value).toLocaleString()}</td><td>${r.report_date}</td><td>${r.outlier==='True' ? `<span class="tag tag-outline" title="Screened out by the statistical consistency check (${r.quality_flag})">screened out</span>` : '<span class="tag tag-neutral">screened in</span>'}${bleedNote([r])}</td></tr>`).join('')}</tbody>
-    </table>` : '<p style="font-size:12px">No location-level detail available for this figure.</p>';
+    </table>` : '<p style="font-size:13px">No location-level detail available for this figure.</p>';
   dialogOpener = document.activeElement;
   document.getElementById('drillBackdrop').style.display = 'flex';
   document.getElementById('drillClose').focus();
@@ -2309,13 +2337,13 @@ function unvettedTooltipHTML(d) {
   if (d.count === 1) {
     const r = d.rows[0] || {};
     const pub = r.published ? String(r.published).slice(0, 10) : '';
-    return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:10px;margin:0 0 4px">Unvetted extractions</p>`
+    return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:13px;margin:0 0 4px">Unvetted extractions</p>`
       + `<p class="t-title" style="margin:0 0 6px">${label} · ${d.country}</p>`
       + (r.domain ? `<div class="t-row"><span>Source</span><span>${esc(r.domain)}</span></div>` : '')
       + (pub ? `<div class="t-row"><span>Published</span><span>${pub}</span></div>` : '')
       + `<div class="t-row" style="margin-top:6px;color:var(--color-accent-300)"><span>Click to open source article data</span><span></span></div>`;
   }
-  return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:10px;margin:0 0 4px">Unvetted extractions</p>`
+  return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:13px;margin:0 0 4px">Unvetted extractions</p>`
     + `<p class="t-title" style="margin:0 0 6px">${label} · ${d.country}</p>`
     + `<div class="t-row"><span>Source articles</span><span>${d.count}</span></div>`
     + `<div class="t-row"><span>Independent domains</span><span>${d.domains.length}</span></div>`
@@ -2340,12 +2368,12 @@ function syncUnvettedBanner() {
     if (!banner) {
       banner = document.createElement('div');
       banner.id = 'unvettedScopeBanner';
-      banner.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px;padding:6px 12px;border-radius:var(--radius-sm);background:color-mix(in srgb,var(--color-accent-500) 14%, transparent);border:1px solid color-mix(in srgb,var(--color-accent-300) 30%, transparent);font-size:12px';
+      banner.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px;padding:6px 12px;border-radius:var(--radius-sm);background:color-mix(in srgb,var(--color-accent-500) 14%, transparent);border:1px solid color-mix(in srgb,var(--color-accent-300) 30%, transparent);font-size:13px';
       const scroll = document.querySelector('.table-card .table-scroll');
       scroll?.parentNode?.insertBefore(banner, scroll);
     }
     const lbl = PATHOGEN_LABELS[unvettedScope.pathogen] || unvettedScope.pathogen;
-    banner.innerHTML = `<span>Filtered to unvetted extractions for <strong>${esc(lbl)}</strong> in <strong>${esc(unvettedScope.country)}</strong> — applies to both figures and source articles</span><button type="button" class="btn btn-secondary" id="unvettedScopeClear" style="font-size:11px;padding:2px 10px">Clear filter</button>`;
+    banner.innerHTML = `<span>Filtered to unvetted extractions for <strong>${esc(lbl)}</strong> in <strong>${esc(unvettedScope.country)}</strong> — applies to both figures and source articles</span><button type="button" class="btn btn-secondary" id="unvettedScopeClear" style="font-size:var(--fs-2);padding:2px 10px">Clear filter</button>`;
     banner.querySelector('#unvettedScopeClear').onclick = clearUnvettedScope;
     banner.style.display = '';
   } else if (banner) {
@@ -2496,9 +2524,11 @@ function topRiskSizeMarker() {
 function flyToFilteredMarkers() {
   const markers = (typeof visibleEventMarkers === 'function' ? visibleEventMarkers() : currentMarkers) || [];
   if (!markers.length) return;
-  const cx = markers.reduce((s,m)=>s+m.lonlat[0],0)/markers.length;
-  const cy = markers.reduce((s,m)=>s+m.lonlat[1],0)/markers.length;
-  flyToLonlat([cx, cy]);
+  // Fly to the WORST outbreak in view (risk × case load), never the arithmetic mean of all markers —
+  // averaging locations scattered across continents drops the camera into open ocean.
+  const worst = (typeof topRiskSizeMarker === 'function' && topRiskSizeMarker())
+    || markers.slice().sort((a,b) => ((b.risk||0)-(a.risk||0)) || ((b.cases||0)-(a.cases||0)))[0];
+  if (worst) flyToLonlat(worst.lonlat);
 }
 
 document.getElementById('zoomIn').addEventListener('click', () => { if (zoomBehavior) svg.transition().duration(250).call(zoomBehavior.scaleBy, 1.6); });
@@ -2536,7 +2566,7 @@ function initGlobe() {
       if (!/webgl|context/i.test(msg) && !e && !e.errorStatus) return;
       globeFailed = true;
       const gm = document.getElementById('globeMap');
-      if (gm) gm.innerHTML = '<p style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:12px;color:var(--color-neutral-400)">The globe view needs WebGL and map-tile access, which are unavailable here. The flat map remains fully functional.</p>';
+      if (gm) gm.innerHTML = '<p style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:13px;color:var(--color-neutral-400)">The globe view needs WebGL and map-tile access, which are unavailable here. The flat map remains fully functional.</p>';
       const fb = [...document.querySelectorAll('#mapViewSeg .seg-opt')].find(b => b.dataset.view === 'flat');
       if (fb) fb.click();
     });
@@ -2640,7 +2670,7 @@ function openMarkerDetail(m) {
   }).join('');
   const statusLine = allRows.length ? `Status <strong>${m.status}</strong> — most recent report ${m.days}d before the dataset's latest entry.` : '';
   document.getElementById('drillBody').innerHTML = `
-    <p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5">Latest confirmed figures for each pathogen reported in ${m.country}, aggregated from open-source reporting (highest screened-in value on the most recent reporting date). ${statusLine}</p>
+    <p style="font-size:13px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5">Latest confirmed figures for each pathogen reported in ${m.country}, aggregated from open-source reporting (highest screened-in value on the most recent reporting date). ${statusLine}</p>
     <table class="table"><thead><tr><th>Pathogen</th><th>Confirmed cases</th><th>Confirmed deaths</th><th>CFR</th><th>Latest</th></tr></thead><tbody>${trs}</tbody></table>`;
   dialogOpener = document.activeElement;
   document.getElementById('drillBackdrop').style.display = 'flex';
@@ -2703,12 +2733,12 @@ function openArticlePopup(dateStr, caseRows) {
   const _host = (u) => { try { return new URL(u).hostname.replace(/^www\./,''); } catch(e){ return u; } };
   document.getElementById('drillTitle').textContent = `${label} — source quality for ${new Date(dateStr).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`;
   document.getElementById('drillBody').innerHTML = articles.length ? (
-    `<p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${articles.length} distinct figure${articles.length>1?'s':''} reported this date, backed by <strong>${totalVet===1 ? 'unvetted (1 source)' : `${totalVet} sources · ${Math.max(0,totalVet - articles.length)} vetting${Math.max(0,totalVet - articles.length)!==1?'s':''}`}</strong> across ${dateUrls.length} distinct article${dateUrls.length===1?'':'s'} — admitted articles from independent domains matching one discrete fact. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the plotted point.</p>` +
+    `<p style="font-size:13px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${articles.length} distinct figure${articles.length>1?'s':''} reported this date, backed by <strong>${totalVet===1 ? 'unvetted (1 source)' : `${totalVet} sources · ${Math.max(0,totalVet - articles.length)} vetting${Math.max(0,totalVet - articles.length)!==1?'s':''}`}</strong> across ${dateUrls.length} distinct article${dateUrls.length===1?'':'s'} — admitted articles from independent domains matching one discrete fact. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the plotted point.</p>` +
     articles.map(a => { const q=qualityBand(a.score); return `<div class="art-row">
       <div class="art-extract"><span><strong>${a.value.toLocaleString()}</strong> ${a.measure} · ${a.location} · ${a.species}</span><span class="qbadge ${q.cls}">${q.label} quality</span></div>
-      <div class="art-meta">${a.canonical?`<span class="tag tag-accent" style="font-size:10px">canonical · ${canonReasonLabel(a.reason)}</span> `:''}<span>${a.n===1 ? 'unvetted' : `${a.n} sources`}</span>${a.quality&&a.quality!=='good'?` · <span title="statistical screening flag">${a.quality} flag</span>`:''}</div>
+      <div class="art-meta">${a.canonical?`<span class="tag tag-accent" style="font-size:13px">canonical · ${canonReasonLabel(a.reason)}</span> `:''}<span>${a.n===1 ? 'unvetted' : `${a.n} sources`}</span>${a.quality&&a.quality!=='good'?` · <span title="statistical screening flag">${a.quality} flag</span>`:''}</div>
     </div>`; }).join('')
-  ) : '<p style="font-size:12px">No source detail recorded for this date.</p>';
+  ) : '<p style="font-size:13px">No source detail recorded for this date.</p>';
   if (dateUrls.length) {
     document.getElementById('drillBody').innerHTML += `<p class="art-src-h">Source articles (${dateUrls.length})</p>` +
       dateUrls.slice(0,20).map(u => { const t = titleFor(u); const h = _host(u); return `<div class="art-row"><a class="art-link" href="${u}" target="_blank" rel="noopener" title="${t ? String(t).replace(/"/g,'&quot;') : String(h).replace(/"/g,'&quot;')}">${t ? t + ' — ' + h : h} ↗</a></div>`; }).join('') +
@@ -3251,7 +3281,7 @@ function stripBriefDisclaimers(html) {
   // Some upstream reports leave literal Markdown syntax un-rendered inside the HTML body
   // (e.g. "## Epidemiological Summary", "**Rationale:**") instead of real tags. Convert what
   // we recognize so it reads as prose instead of raw syntax.
-  h = h.replace(/##\s+([^<\n]+)/g, '<strong style="font-size:14px">$1</strong>')
+  h = h.replace(/##\s+([^<\n]+)/g, '<strong style="font-size:15px">$1</strong>')
        .replace(/\*\*([^*<]+)\*\*/g, '<strong>$1</strong>');
   // Remove trailing disclaimer paragraphs that duplicate the site footer / plots disclaimer.
   // These appear as the last <p> or <em> in the Status Report HTML (e.g. "National totals only…",
@@ -3298,6 +3328,18 @@ function dedupeCrossover(raw) {
 }
 function canonReasonLabel(r) {
   return ({ sole_report:'sole report', median_choice:'median of sources', sole_survivor:'sole surviving figure', plurality_sources:'plurality of sources', local_conflict_unresolved:'conflicting local counts — no canonical figure', multiple_locations_unresolved:'combined locations — coverage unresolved', possible_national_bleed:'possible national total assigned locally' })[r] || (r || 'selected');
+}
+// A raw quality_flag → human label + explanation. These are SCREENING statuses (did the figure pass
+// the statistical checks), distinct from vetting/corroboration (how many independent sources back it).
+function qualityFlagLabel(flag) {
+  const f = String(flag || '').toLowerCase();
+  if (!f || f === 'good') return null;
+  const map = {
+    local_unscreened: { label: 'local — not screened', tip: 'A local/subnational count taken at face value from its source(s). National country totals are auto-checked for outliers (chi-square) and for cumulative counts that implausibly drop (monotonicity); a lone local figure has no national series to check against, so it skips those checks. Implication: it has not been statistically validated — a typo or a bad drop would not have been caught — so its reliability rests on source corroboration (vetting), not on screening. Trust it in proportion to how many independent sources back it.' },
+    'chi-sq': { label: 'chi-square outlier', tip: 'Flagged by chi-square screening against other figures reported the same day.' },
+    monotonicity: { label: 'monotonicity flag', tip: 'Fell below an earlier cumulative figure (cumulative counts should not decrease).' },
+  };
+  return map[f] || { label: f.replace(/_/g, ' '), tip: 'Statistical screening flag.' };
 }
 function speciesForCombo(rows, country, pathogen) {
   const sp = [...new Set(rows.filter(r => geoCountry(r.location)===country && r.pathogen===pathogen).map(r => (r.species||'').trim()).filter(s => s && s.toLowerCase()!=='humans'))];
@@ -3800,10 +3842,10 @@ function renderComparisonBars(effectiveTp, series) {
   const x = x0;
   tsvg.append('rect').attr('x',margin.left).attr('y',margin.top).attr('width',tw-margin.left-margin.right).attr('height',th-margin.top-margin.bottom).attr('fill',col('--color-neutral-800')).attr('fill-opacity',0.35).attr('stroke',col('--color-divider')).attr('stroke-width',1);
   const yAxisG = tsvg.append('g').attr('transform',`translate(${margin.left},0)`).call(d3.axisLeft(y).ticks(3).tickSize(-(tw-margin.left-margin.right)).tickPadding(8).tickFormat(d=>d>=1000?(d/1000)+'k':d));
-  yAxisG.selectAll('text').attr('font-size','10px').attr('fill',col('--color-neutral-400'));
+  yAxisG.selectAll('text').attr('font-size','13px').attr('fill',col('--color-neutral-400'));
   yAxisG.selectAll('line').attr('stroke',col('--color-divider')).attr('stroke-opacity',0.85);
   yAxisG.selectAll('path').attr('stroke',col('--color-divider'));
-  tsvg.append('text').attr('x',margin.left-32).attr('y',margin.top+(th-margin.top-margin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${margin.left-32},${margin.top+(th-margin.top-margin.bottom)/2})`).attr('font-size','10px').attr('fill',col('--color-neutral-400')).text('Cases / deaths');
+  tsvg.append('text').attr('x',margin.left-32).attr('y',margin.top+(th-margin.top-margin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${margin.left-32},${margin.top+(th-margin.top-margin.bottom)/2})`).attr('font-size','13px').attr('fill',col('--color-neutral-400')).text('Cases / deaths');
   tsvg.append('defs').append('clipPath').attr('id', 'barsClip').append('rect')
     .attr('x', margin.left - 8).attr('y', margin.top - 8)
     .attr('width', Math.max(0, tw - margin.left - margin.right) + 16).attr('height', th - margin.top - margin.bottom + 16);
@@ -3828,7 +3870,7 @@ function renderComparisonBars(effectiveTp, series) {
         .on('mousemove', ev => showChartTip(ev, `<p class="t-title">${e.loc}</p><div class="t-row"><span>${new Date(e.casesData.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span><span>${vC.toLocaleString()} cases</span></div><div class="t-row"><span>${barMetaText(e.casesData)}</span><span>${e.dist?Math.round(e.dist).toLocaleString()+' km away':'target'}</span></div><div class="t-foot">${e.isTarget ? 'Latest observation' : 'Nearest region'} — cases · click for detail</div>`))
         .on('mouseleave', hideChartTip)
         .on('click', () => { hideChartTip(); openArticlePopup(e.casesData.date, e.casesData.rowsAt || []); });
-      plotG.append('text').attr('x', baseX + x1('cases') + bw1/2).attr('y', Math.max(margin.top+10, Math.min(y(vC)-9, (th-margin.bottom)-14))).attr('text-anchor','middle').attr('font-size','10px').attr('fill', e.isTarget ? col('--color-text') : col('--ink-3')).text(vC.toLocaleString());
+      plotG.append('text').attr('x', baseX + x1('cases') + bw1/2).attr('y', Math.max(margin.top+10, Math.min(y(vC)-9, (th-margin.bottom)-14))).attr('text-anchor','middle').attr('font-size','13px').attr('fill', e.isTarget ? col('--color-text') : col('--ink-3')).text(vC.toLocaleString());
     }
     // Deaths bar (right) — shaded by data quality
     if (vD != null && isFinite(vD)) {
@@ -3842,7 +3884,7 @@ function renderComparisonBars(effectiveTp, series) {
         .on('mousemove', ev => showChartTip(ev, `<p class="t-title">${e.loc}</p><div class="t-row"><span>${new Date(e.deathsData.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span><span>${vD.toLocaleString()} deaths</span></div><div class="t-row"><span>${barMetaText(e.deathsData)}</span><span>${e.dist?Math.round(e.dist).toLocaleString()+' km away':'target'}</span></div><div class="t-foot">${e.isTarget ? 'Latest observation' : 'Nearest region'} — deaths · click for detail</div>`))
         .on('mouseleave', hideChartTip)
         .on('click', () => { hideChartTip(); openArticlePopup(e.deathsData.date, e.deathsData.rowsAt || []); });
-      plotG.append('text').attr('x', baseX + x1('deaths') + bw1/2).attr('y', Math.max(margin.top+10, Math.min(y(vD)-9, (th-margin.bottom)-14))).attr('text-anchor','middle').attr('font-size','10px').attr('fill', e.isTarget ? col('--color-text') : col('--ink-3')).text(vD.toLocaleString());
+      plotG.append('text').attr('x', baseX + x1('deaths') + bw1/2).attr('y', Math.max(margin.top+10, Math.min(y(vD)-9, (th-margin.bottom)-14))).attr('text-anchor','middle').attr('font-size','13px').attr('fill', e.isTarget ? col('--color-text') : col('--ink-3')).text(vD.toLocaleString());
     }
     // Ghost diamonds: this geography's OTHER observations in the record window. Thick strokes
     // keep them readable over the map-coloured bar fill.
@@ -3896,10 +3938,10 @@ function renderComparisonBars(effectiveTp, series) {
     const short = e.loc.split(',')[0];
     const maxChars = Math.max(6, Math.floor(x.step() / 7));
     const name = short.length > maxChars ? short.slice(0, maxChars-1)+'…' : short;
-    tsvg.append('text').attr('x',cx).attr('y',th-24).attr('text-anchor','middle').attr('font-size','12px')
+    tsvg.append('text').attr('x',cx).attr('y',th-24).attr('text-anchor','middle').attr('font-size','13px')
       .attr('fill', e.isTarget ? col('--color-text') : col('--color-neutral-400')).text(name);
     if (e.isTarget) tsvg.append('text').attr('x',cx).attr('y',th-9).attr('text-anchor','middle')
-      .attr('font-size','11px').attr('fill',col('--color-accent-200'))
+      .attr('font-size','13px').attr('fill',col('--color-accent-200'))
       .text('as of ' + new Date(chosen.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'}));
   });
   // Source-per-day strip still makes sense for the target itself — include target-only
@@ -3949,7 +3991,7 @@ function renderChart(series, effectiveTp) {
   tw = Math.max(340, Math.round((document.getElementById('chartWrap')||{}).clientWidth || 620));
   th = Math.max(240, Math.round((document.getElementById('chartWrap')||{}).clientHeight || 320));
   tsvg.attr('viewBox', `0 0 ${tw} ${th}`);
-  if (!series.length) { tsvg.append('text').attr('x',tw/2).attr('y',th/2).attr('text-anchor','middle').attr('font-size','12px').attr('fill',col('--color-neutral-400')).text('No national series reported for this pathogen'); return null; }
+  if (!series.length) { tsvg.append('text').attr('x',tw/2).attr('y',th/2).attr('text-anchor','middle').attr('font-size','13px').attr('fill',col('--color-neutral-400')).text('No national series reported for this pathogen'); return null; }
   const lastCase = [...series].reverse().find(d => d.cases != null);
   const lastDeath = [...series].reverse().find(d => d.deaths != null);
   const projPathogen = effectiveTp || trendPathogen();
@@ -3958,7 +4000,7 @@ function renderChart(series, effectiveTp) {
   if (projCases) projCases = cappedToMultipleOf5(projCases, lastCase ? lastCase.date : null);
   if (projDeaths) projDeaths = cappedToMultipleOf5(projDeaths, lastDeath ? lastDeath.date : null);
   const allDates = series.map(d => new Date(d.date));
-  scopedDevelopments(effectiveTp, geoCountry(series.loc) || series.loc).slice(0,3).forEach(d => allDates.push(new Date(d.report_date)));
+  scopedDevelopments(effectiveTp, geoCountry(series.loc) || series.loc).slice(0,20).forEach(d => allDates.push(new Date(d.report_date)));
   [projCases, projDeaths].forEach(p => { if (p) p.forEach(pt => allDates.push(new Date(pt.date))); });
   lastChartArgs = [series, effectiveTp];
   const xBase = d3.scaleUtc().domain(d3.extent(allDates)).range([margin.left, tw-margin.right]);
@@ -3969,13 +4011,13 @@ function renderChart(series, effectiveTp) {
   // Plot area box + axes (before clipped content so grid stays behind data)
   tsvg.append('rect').attr('x',margin.left).attr('y',margin.top).attr('width',tw-margin.left-margin.right).attr('height',th-margin.top-margin.bottom).attr('fill',col('--color-neutral-800')).attr('fill-opacity',0.35).attr('stroke',col('--color-divider')).attr('stroke-width',1);
   const yAxisG = tsvg.append('g').attr('transform',`translate(${margin.left},0)`).call(d3.axisLeft(y).ticks(4).tickSize(-(tw-margin.left-margin.right)).tickPadding(8).tickFormat(d=>d>=1000?(d/1000)+'k':d));
-  yAxisG.selectAll('text').attr('font-size','10px').attr('fill',col('--color-neutral-400'));
+  yAxisG.selectAll('text').attr('font-size','13px').attr('fill',col('--color-neutral-400'));
   yAxisG.selectAll('line').attr('stroke',col('--color-divider')).attr('stroke-opacity',0.85);
   yAxisG.selectAll('path').attr('stroke',col('--color-divider'));
   const xAxisG = tsvg.append('g').attr('transform',`translate(0,${th-margin.bottom})`).call(d3.axisBottom(x).ticks(timeTicksArg(x)).tickSize(4).tickPadding(4).tickFormat(d3.timeFormat('%-d %b')));
-  xAxisG.selectAll('text').attr('font-size','10px').attr('fill',col('--color-neutral-400'));
+  xAxisG.selectAll('text').attr('font-size','13px').attr('fill',col('--color-neutral-400'));
   xAxisG.selectAll('path,line').attr('stroke',col('--color-divider'));
-  tsvg.append('text').attr('x',margin.left-32).attr('y',margin.top+(th-margin.top-margin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${margin.left-32},${margin.top+(th-margin.top-margin.bottom)/2})`).attr('font-size','10px').attr('fill',col('--color-neutral-400')).text('Cases / deaths');
+  tsvg.append('text').attr('x',margin.left-32).attr('y',margin.top+(th-margin.top-margin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${margin.left-32},${margin.top+(th-margin.top-margin.bottom)/2})`).attr('font-size','13px').attr('fill',col('--color-neutral-400')).text('Cases / deaths');
   installTrendZoom(tsvg, () => { trendTransform = d3.zoomIdentity; }, t => { trendTransform = t; if (lastChartArgs) renderChart.apply(null, lastChartArgs); });
   // Clip all zoomable content to the plot interior
   tsvg.append('defs').append('clipPath').attr('id', 'trendClip').append('rect')
@@ -4008,10 +4050,10 @@ function renderChart(series, effectiveTp) {
   plotG.append('path').datum(series).attr('d', lineCases).attr('fill','none').attr('stroke', col('--color-accent-300')).attr('stroke-width',2);
   plotG.append('path').datum(series).attr('d', lineDeaths).attr('fill','none').attr('stroke', '#b45c64').attr('stroke-width',2);
   tsvg.append('circle').attr('cx',margin.left).attr('cy',margin.top-12).attr('r',3).attr('fill',col('--color-accent-300'));
-  tsvg.append('text').attr('x',margin.left+8).attr('y',margin.top-8).attr('font-size','10.5px').attr('fill',col('--color-text')).text('Cases');
+  tsvg.append('text').attr('x',margin.left+8).attr('y',margin.top-8).attr('font-size','13px').attr('fill',col('--color-text')).text('Cases');
   tsvg.append('path').attr('transform',`translate(${margin.left+58},${margin.top-12})`).attr('d', d3.symbol().type(d3.symbolDiamond).size(42)()).attr('fill','#b45c64');
-  tsvg.append('text').attr('x',margin.left+66).attr('y',margin.top-8).attr('font-size','10.5px').attr('fill',col('--color-text')).text('Deaths');
-  tsvg.append('text').attr('x',tw-margin.right).attr('y',margin.top-8).attr('text-anchor','end').attr('font-size','9.5px').attr('fill',col('--color-neutral-400')).text('shaded = forecast p25–p75 · dashed = p50');
+  tsvg.append('text').attr('x',margin.left+66).attr('y',margin.top-8).attr('font-size','13px').attr('fill',col('--color-text')).text('Deaths');
+  tsvg.append('text').attr('x',tw-margin.right).attr('y',margin.top-8).attr('text-anchor','end').attr('font-size','13px').attr('fill',col('--color-neutral-400')).text('shaded = forecast p25–p75 · dashed = p50');
   // Quality-coded, clickable points for BOTH cases (circles) and deaths (diamonds).
   const dotsG = plotG.append('g');
   // Every figure the pipeline did NOT pick, drawn hollow and jittered off the canonical
@@ -4145,7 +4187,7 @@ function renderSourceChart(series) {
   shTw = Math.max(340, Math.round((document.getElementById('sourceChartWrap')||{}).clientWidth || 620));
   shTh = Math.max(110, Math.round((document.getElementById('sourceChartWrap')||{}).clientHeight || 140));
   shsvg.attr('viewBox', `0 0 ${shTw} ${shTh}`);
-  if (!series.length || series.every(d => !d.sources)) { shsvg.append('text').attr('x',shTw/2).attr('y',shTh/2).attr('text-anchor','middle').attr('font-size','11px').attr('fill',col('--color-neutral-400')).text('Source counts unavailable'); return; }
+  if (!series.length || series.every(d => !d.sources)) { shsvg.append('text').attr('x',shTw/2).attr('y',shTh/2).attr('text-anchor','middle').attr('font-size','13px').attr('fill',col('--color-neutral-400')).text('Source counts unavailable'); return; }
   const dates = series.map(d=>d.date);
   // Domain = the span that actually contributed data. Sharing the trend chart's forecast-extended
   // axis crushed these bars; the plots read as aligned without sharing x-extents.
@@ -4174,13 +4216,13 @@ function renderSourceChart(series) {
   // Plot area box + y-axis with ticks, and x-axis
   shsvg.append('rect').attr('x',shMargin.left).attr('y',shMargin.top).attr('width',shTw-shMargin.left-shMargin.right).attr('height',shTh-shMargin.top-shMargin.bottom).attr('fill',col('--color-neutral-800')).attr('fill-opacity',0.35).attr('stroke',col('--color-divider')).attr('stroke-width',1);
   const syAxisG = shsvg.append('g').attr('transform',`translate(${shMargin.left},0)`).call(d3.axisLeft(y).ticks(2).tickSize(-(shTw-shMargin.left-shMargin.right)).tickPadding(6).tickFormat(d=>d));
-  syAxisG.selectAll('text').attr('font-size','9.5px').attr('fill',col('--color-neutral-400'));
+  syAxisG.selectAll('text').attr('font-size','13px').attr('fill',col('--color-neutral-400'));
   syAxisG.selectAll('line').attr('stroke',col('--color-divider')).attr('stroke-opacity',0.85);
   syAxisG.selectAll('path').attr('stroke',col('--color-divider'));
   const sxAxisG = shsvg.append('g').attr('transform',`translate(0,${shTh-shMargin.bottom})`).call(d3.axisBottom(x).ticks(timeTicksArg(x)).tickSize(4).tickPadding(4).tickFormat(d3.timeFormat('%-d %b')));
-  sxAxisG.selectAll('text').attr('font-size','9.5px').attr('fill',col('--color-neutral-400'));
+  sxAxisG.selectAll('text').attr('font-size','13px').attr('fill',col('--color-neutral-400'));
   sxAxisG.selectAll('path,line').attr('stroke',col('--color-divider'));
-  shsvg.append('text').attr('x',shMargin.left-28).attr('y',shMargin.top+(shTh-shMargin.top-shMargin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${shMargin.left-28},${shMargin.top+(shTh-shMargin.top-shMargin.bottom)/2})`).attr('font-size','9.5px').attr('fill',col('--color-neutral-400')).text('Sources');
+  shsvg.append('text').attr('x',shMargin.left-28).attr('y',shMargin.top+(shTh-shMargin.top-shMargin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${shMargin.left-28},${shMargin.top+(shTh-shMargin.top-shMargin.bottom)/2})`).attr('font-size','13px').attr('fill',col('--color-neutral-400')).text('Sources');
   shsvg.append('defs').append('clipPath').attr('id','sourceClip').append('rect').attr('x',shMargin.left-8).attr('y',shMargin.top-8).attr('width',shTw-shMargin.left-shMargin.right+16).attr('height',shTh-shMargin.top-shMargin.bottom+16);
   const plotGS = shsvg.append('g').attr('clip-path','url(#sourceClip)');
   const bw = srcBarWidth(bins, x);
@@ -4254,9 +4296,9 @@ function renderSubnationalTrend() {
   document.getElementById('subLegend').innerHTML = locs.map(l=>{
     const isHi = highlightSubLoc && l===highlightSubLoc;
     const short = l.split(',')[0].trim();
-    return `<span class="sub-swatch" data-loc="${esc(l)}" title="${esc(l)} — click to highlight" style="cursor:pointer;${isHi?'font-weight:600;opacity:1':''}"><span style="width:9px;height:9px;border-radius:2px;background:${style[l].color};display:inline-block;${isHi?'box-shadow:0 0 0 1px '+style[l].color:''}"></span>${short}${isHi?' ★':''}</span>`;
+    return `<span class="sub-swatch" data-loc="${esc(l)}" title="${esc(l)} — click to highlight" style="cursor:pointer;${isHi?'font-weight:600;opacity:1':''}"><span style="width:9px;height:9px;border-radius:var(--radius-sm);background:${style[l].color};display:inline-block;${isHi?'box-shadow:0 0 0 1px '+style[l].color:''}"></span>${short}${isHi?' ★':''}</span>`;
   }).join('')
-    + (OTHER ? `<span class="sub-swatch" title="${esc(rest.join(' · '))}"><span style="width:9px;height:9px;border-radius:2px;background:${style[OTHER].color};display:inline-block"></span>${OTHER}</span>` : '')
+    + (OTHER ? `<span class="sub-swatch" title="${esc(rest.join(' · '))}"><span style="width:9px;height:9px;border-radius:var(--radius-sm);background:${style[OTHER].color};display:inline-block"></span>${OTHER}</span>` : '')
     + (aggregateExcluded.length ? `<span class="sub-swatch" style="opacity:.6" title="Not point-located: ${esc(aggregateExcluded.join(' · '))}">${aggregateExcluded.length} unlocated aggregate${aggregateExcluded.length>1?'s':''}</span>` : '');
   // Legend swatches are clickable: toggle the highlighted location on the overlay.
   document.querySelectorAll('#subLegend .sub-swatch[data-loc]').forEach(sw => {
@@ -4300,8 +4342,8 @@ function renderSubnationalTrend() {
       } else metaEl2.textContent = '';
     }
   }
-  if (!allPts.length) { tsvg.append('text').attr('x',tw/2).attr('y',th/2).attr('text-anchor','middle').attr('font-size','12px').attr('fill',col('--color-neutral-400')).text('No subnational '+reportType+' series for '+country); renderSubSourceChart(perLoc, style); return; }
-  const developmentDates = scopedDevelopments(pathogen,country,highlightSubLoc || '').slice(0,3).map(d => new Date(d.report_date));
+  if (!allPts.length) { tsvg.append('text').attr('x',tw/2).attr('y',th/2).attr('text-anchor','middle').attr('font-size','13px').attr('fill',col('--color-neutral-400')).text('No subnational '+reportType+' series for '+country); renderSubSourceChart(perLoc, style); return; }
+  const developmentDates = scopedDevelopments(pathogen,country,highlightSubLoc || '').slice(0,20).map(d => new Date(d.report_date));
   const xBase = d3.scaleUtc().domain(d3.extent([...allPts.map(p=>new Date(p.date)), ...developmentDates])).range([margin.left, tw-margin.right]);
   const x = subTransform.rescaleX(xBase);
   // Plot area box
@@ -4316,13 +4358,13 @@ function renderSubnationalTrend() {
     .attr('x', margin.left - 8).attr('y', margin.top - 8)
     .attr('width', Math.max(0, tw - margin.left - margin.right) + 16).attr('height', th - margin.top - margin.bottom + 16);
   const plotG = tsvg.append('g').attr('clip-path', 'url(#subClip)');
-  yAxisG.selectAll('text').attr('font-size','10px').attr('fill',col('--color-neutral-400'));
+  yAxisG.selectAll('text').attr('font-size','13px').attr('fill',col('--color-neutral-400'));
   yAxisG.selectAll('line').attr('stroke',col('--color-divider')).attr('stroke-opacity',0.85);
   yAxisG.selectAll('path').attr('stroke',col('--color-divider'));
   const xAxisG = tsvg.append('g').attr('transform',`translate(0,${th-margin.bottom})`).call(d3.axisBottom(x).ticks(timeTicksArg(x)).tickSize(4).tickPadding(4).tickFormat(d3.timeFormat('%-d %b')));
-  xAxisG.selectAll('text').attr('font-size','10px').attr('fill',col('--color-neutral-400'));
+  xAxisG.selectAll('text').attr('font-size','13px').attr('fill',col('--color-neutral-400'));
   xAxisG.selectAll('path,line').attr('stroke',col('--color-divider'));
-  tsvg.append('text').attr('x',margin.left-32).attr('y',margin.top+(th-margin.top-margin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${margin.left-32},${margin.top+(th-margin.top-margin.bottom)/2})`).attr('font-size','10px').attr('fill',col('--color-neutral-400')).text('Cases / deaths');
+  tsvg.append('text').attr('x',margin.left-32).attr('y',margin.top+(th-margin.top-margin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${margin.left-32},${margin.top+(th-margin.top-margin.bottom)/2})`).attr('font-size','13px').attr('fill',col('--color-neutral-400')).text('Cases / deaths');
   perLoc.forEach(s => {
     const c = style[s.loc].color;
     const isHi = highlightSubLoc && s.loc===highlightSubLoc;
@@ -4365,9 +4407,9 @@ function renderSubnationalTrend() {
     });
   });
   const ds = [...new Set(allPts.map(p=>p.date))].sort();
-  [ds[0], ds[ds.length-1]].forEach((d,i)=>{ if(!d) return; plotG.append('text').attr('x',x(new Date(d))).attr('y',th-4).attr('text-anchor',i===0?'start':'end').attr('font-size','10px').attr('fill',col('--color-neutral-400')).text(new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short'})); });
+  [ds[0], ds[ds.length-1]].forEach((d,i)=>{ if(!d) return; plotG.append('text').attr('x',x(new Date(d))).attr('y',th-4).attr('text-anchor',i===0?'start':'end').attr('font-size','13px').attr('fill',col('--color-neutral-400')).text(new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short'})); });
   renderSubSourceChart(perLoc, style);
-  drawDevelopmentMarkers(tsvg, x, pathogen, country, highlightSubLoc || '');
+  drawDevelopmentMarkers(tsvg, x, pathogen, country, highlightSubLoc || '', 'subnational');
 }
 // Stacked variant of the sources histogram — same geometry, hover and tooltip language as the
 // national strip (SRC_HIST); segments keep the colour of the series they belong to so the
@@ -4390,7 +4432,7 @@ function renderSubSourceChart(perLoc, style) {
     cell.rej += rej; cell.rejRows.push(...rejRows);
   }));
   const dates = [...dateMap.keys()].sort();
-  if (!dates.length) { shsvg.append('text').attr('x',shTw/2).attr('y',shTh/2).attr('text-anchor','middle').attr('font-size','11px').attr('fill',col('--color-neutral-400')).text('No vetted sources within this observation window'); return; }
+  if (!dates.length) { shsvg.append('text').attr('x',shTw/2).attr('y',shTh/2).attr('text-anchor','middle').attr('font-size','13px').attr('fill',col('--color-neutral-400')).text('No vetted sources within this observation window'); return; }
   // Weekly binning under ~7px per bar — the shared anti-crush rule.
   const step = (shTw-shMargin.left-shMargin.right)/Math.max(1,dates.length);
   let binned = dates.map(d => ({ date: d, cells: dateMap.get(d) }));
@@ -4413,13 +4455,13 @@ function renderSubSourceChart(perLoc, style) {
   const y = d3.scaleLinear().domain([0, maxT*1.15]).range([shTh-shMargin.bottom, shMargin.top]);
   shsvg.append('rect').attr('x',shMargin.left).attr('y',shMargin.top).attr('width',shTw-shMargin.left-shMargin.right).attr('height',shTh-shMargin.top-shMargin.bottom).attr('fill',col('--color-neutral-800')).attr('fill-opacity',0.35).attr('stroke',col('--color-divider')).attr('stroke-width',1);
   const sy2 = shsvg.append('g').attr('transform',`translate(${shMargin.left},0)`).call(d3.axisLeft(y).ticks(2).tickSize(-(shTw-shMargin.left-shMargin.right)).tickPadding(6).tickFormat(d=>d));
-  sy2.selectAll('text').attr('font-size','9.5px').attr('fill',col('--color-neutral-400'));
+  sy2.selectAll('text').attr('font-size','13px').attr('fill',col('--color-neutral-400'));
   sy2.selectAll('line').attr('stroke',col('--color-divider')).attr('stroke-opacity',0.85);
   sy2.selectAll('path').attr('stroke',col('--color-divider'));
   const sx2 = shsvg.append('g').attr('transform',`translate(0,${shTh-shMargin.bottom})`).call(d3.axisBottom(x).ticks(timeTicksArg(x)).tickSize(4).tickPadding(4).tickFormat(d3.timeFormat('%-d %b')));
-  sx2.selectAll('text').attr('font-size','9.5px').attr('fill',col('--color-neutral-400'));
+  sx2.selectAll('text').attr('font-size','13px').attr('fill',col('--color-neutral-400'));
   sx2.selectAll('path,line').attr('stroke',col('--color-divider'));
-  shsvg.append('text').attr('x',shMargin.left-28).attr('y',shMargin.top+(shTh-shMargin.top-shMargin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${shMargin.left-28},${shMargin.top+(shTh-shMargin.top-shMargin.bottom)/2})`).attr('font-size','9.5px').attr('fill',col('--color-neutral-400')).text('Sources');
+  shsvg.append('text').attr('x',shMargin.left-28).attr('y',shMargin.top+(shTh-shMargin.top-shMargin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${shMargin.left-28},${shMargin.top+(shTh-shMargin.top-shMargin.bottom)/2})`).attr('font-size','13px').attr('fill',col('--color-neutral-400')).text('Sources');
   shsvg.append('defs').append('clipPath').attr('id','subSourceClip').append('rect').attr('x',shMargin.left-8).attr('y',shMargin.top-8).attr('width',shTw-shMargin.left-shMargin.right+16).attr('height',shTh-shMargin.top-shMargin.bottom+16);
   const plotGS2 = shsvg.append('g').attr('clip-path','url(#subSourceClip)');
   const usableH = (shTh-shMargin.bottom)-shMargin.top;
@@ -4703,17 +4745,73 @@ function scopedDevelopments(pathogen, country, place = '') {
     seen.add(key); return true;
   }).sort((a,b) => String(b.report_date).localeCompare(String(a.report_date)) || String(a.headline).localeCompare(String(b.headline)));
 }
-function developmentItemsHtml(items, details = false) {
-  return '<ol class="development-list">' + items.map(d => {
-    // Citations dropped from the timeline — the parent report already carries its sources.
-    return `<li title="${esc([d.location,d.category,d.detail].filter(Boolean).join(' · '))}"><time>${esc(toISODate(d.report_date))}</time>${esc(d.headline)}${details && d.detail ? `<div>${esc(d.detail)}</div>` : ''}</li>`;
-  }).join('') + '</ol>';
+let timelineDevRows = [];
+function developmentItemsHtml(items) {
+  // Grouped-by-date timeline. One text per entry (headline OR detail — they're redundant, so prefer
+  // the fuller of the two), tagged with its geography and event type, plus a Details button that opens
+  // the full situational-developments row. Items arrive newest-first.
+  timelineDevRows = items;
+  const order = [], byDay = new Map();
+  items.forEach((d, i) => {
+    d.__devIdx = i;
+    const day = toISODate(d.report_date);
+    if (!day) return;
+    if (!byDay.has(day)) { byDay.set(day, []); order.push(day); }
+    byDay.get(day).push(d);
+  });
+  const fmtDay = day => new Date(day + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  return '<div class="dev-timeline">' + order.map(day => {
+    const entries = byDay.get(day).map(d => {
+      const text = (d.headline && d.detail) ? (d.detail.length >= d.headline.length ? d.detail : d.headline) : (d.headline || d.detail || '');
+      const cat = devCategory(d.category);
+      const type = d.category ? `<span class="dev-type" style="color:${cat.color};border-color:color-mix(in srgb,${cat.color} 55%,transparent)">${esc(cat.full)}</span>` : '';
+      const geo = d.location ? `<span class="dev-geo">${esc(d.location)}</span>` : '';
+      const btn = `<button type="button" class="dev-details-link" onclick="openDevelopmentPopup(${d.__devIdx})">Details ↗</button>`;
+      return `<div class="dev-entry"><p class="dev-text">${esc(text)}</p><div class="dev-meta">${type}${geo}${btn}</div></div>`;
+    }).join('');
+    return `<div class="dev-day"><time>${esc(fmtDay(day))}</time><div class="dev-day-items">${entries}</div></div>`;
+  }).join('') + '</div>';
+}
+// Full situational-developments row for one timeline entry, in the shared drill modal. Shows the
+// meaningful columns (type, geography, dates, host species, provenance, why-new) and source links;
+// internal ids are omitted.
+function openDevelopmentPopup(idx) {
+  const d = timelineDevRows[idx]; if (!d) return;
+  hideChartTip && hideChartTip();
+  const cat = devCategory(d.category);
+  const fmt = s => { const iso = toISODate(s); return iso ? new Date(iso+'T00:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}) : ''; };
+  const urls = extractUrls(d.sources || '').filter(u => /^https?:\/\//i.test(u));
+  const field = (k, v) => v ? `<div class="art-meta" style="margin:0 0 5px"><strong style="color:var(--ink-3);font-weight:600">${k}</strong> ${esc(String(v))}</div>` : '';
+  const rows = [
+    field('Location', d.location),
+    field('Last seen', fmt(d.last_seen_date)),
+    field('Pathogen', d.tracker_pathogen || d.pathogen),
+    field('Family', d.pathogen_family),
+  ].join('');
+  const P = 'font-size:13px;line-height:1.55;color:var(--color-text);margin:0 0 10px;white-space:normal';
+  const detail = (d.detail && d.detail !== d.headline) ? `<p style="${P}">${esc(d.detail)}</p>` : '';
+  const why = d.why_new ? `<p class="art-src-h">Why flagged as new</p><p style="${P}">${esc(d.why_new)}</p>` : '';
+  const sources = urls.length
+    ? `<p class="art-src-h">Sources (${urls.length})</p>` + urls.slice(0,20).map(u => { const t = titleFor(u), h = urlHost(u); return `<div class="art-row"><a class="art-link" href="${esc(u)}" target="_blank" rel="noopener">${esc(t ? t + ' — ' + h : h)} ↗</a></div>`; }).join('') + (urls.length>20 ? `<p class="art-meta" style="margin-top:6px">+ ${urls.length-20} more</p>` : '')
+    : '';
+  const titleEl = document.getElementById('drillTitle');
+  titleEl.style.display = 'flex'; titleEl.style.alignItems = 'flex-start'; titleEl.style.gap = '14px';
+  titleEl.innerHTML = `<span style="flex:1 1 auto">${esc(d.headline || 'Development')}</span>` +
+    `<span style="flex:0 0 auto;color:${cat.color};border:1px solid color-mix(in srgb,${cat.color} 55%,transparent);border-radius:999px;padding:3px 13px;font-size:14px;font-weight:600;white-space:nowrap">${esc(cat.full)}</span>`;
+  document.getElementById('drillBody').innerHTML =
+    detail + `<p class="art-src-h">Details</p><div style="margin:0 0 4px">${rows}</div>` + why + sources;
+  dialogOpener = document.activeElement;
+  document.getElementById('drillBackdrop').style.display = 'flex';
+  document.getElementById('drillClose').focus();
 }
 function eventTimelineHtml(report) {
-  const items = scopedDevelopments(report.pathogen, report.geoCountry || report.country, report.place);
+  // Scope to the whole country (both national and subnational developments), not the report's exact
+  // sub-location — otherwise a subnational report (e.g. Oristano) shows nothing while the country plot
+  // overlays the national developments, which reads as an inconsistency. The section is collapsible.
+  const items = scopedDevelopments(report.pathogen, report.geoCountry || report.country, '');
   // Autohide the section entirely when this pathogen × location has no recorded developments.
   if (!items.length) return '';
-  return `<details class="event-timeline"><summary>Event timeline · ${items.length}<span class="section-help" tabindex="0" title="Dates identify the report that first recorded a development, not necessarily when it occurred. History covers 90 days.">?</span></summary>${developmentItemsHtml(items, true)}</details>`;
+  return `<details class="event-timeline"><summary>Event timeline · ${items.length}<span class="section-help" tabindex="0" title="Dates identify the report that first recorded a development, not necessarily when it occurred. History covers 90 days.">?</span></summary>${developmentItemsHtml(items)}</details>`;
 }
 // Development markers on the time-series: a three-letter category chip on a dropline, coloured by
 // category, with a hover tooltip carrying the actual development. The old numbered glyphs + the list
@@ -4732,43 +4830,99 @@ function devCategory(raw) {
   const abbr = label ? (label[0].toUpperCase() + label.slice(1,3).toLowerCase()) : '•';
   return { abbr, full: label || 'Development', color: col('--ink-3') };
 }
-function developmentTipHTML(d, cat) {
-  const date = new Date(toISODate(d.report_date)+'T00:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
-  return `<p class="t-title">${esc(cat.full)} · ${esc(date)}</p>`
-    + (d.location ? `<div class="t-row"><span>${esc(d.location)}</span></div>` : '')
-    + `<p style="margin:4px 0 0;max-width:300px;white-space:normal;line-height:1.4;color:var(--color-text)">${esc(d.headline)}</p>`
-    + (d.detail && d.detail !== d.headline ? `<p style="margin:3px 0 0;max-width:300px;white-space:normal;line-height:1.4;font-size:11px;color:var(--ink-3)">${esc(d.detail)}</p>` : '');
+function developmentGroupTipHTML(items, cat, day) {
+  const date = new Date(day+'T00:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+  const head = `<p class="t-title">${esc(cat.full)} · ${esc(date)}${items.length>1?` · ${items.length}`:''}</p>`;
+  const rows = items.map((d, i) => {
+    const text = (d.headline && d.detail) ? (d.detail.length >= d.headline.length ? d.detail : d.headline) : (d.headline || d.detail || '');
+    const loc = (d.location && !isNational(d.location)) ? `<span style="color:var(--ink-4)">${esc(d.location)} — </span>` : '';
+    // Separate concatenated developments with a spaced hairline so they don't run together.
+    const style = i > 0
+      ? 'margin:9px 0 0;padding-top:9px;border-top:1px solid color-mix(in srgb,var(--color-text) 15%,transparent)'
+      : 'margin:4px 0 0';
+    return `<p style="${style};max-width:300px;white-space:normal;line-height:1.4;color:var(--color-text)">${loc}${esc(text)}</p>`;
+  }).join('');
+  return head + rows;
 }
-function drawDevelopmentMarkers(svg, x, pathogen, country, place = '') {
+function drawDevelopmentMarkers(svg, x, pathogen, country, place = '', granularity = 'national') {
   const domain = x.domain().map(Number);
+  // Only overlay developments that match the plot's geographic granularity: a national trend shows
+  // country-level developments, a subnational trend shows sub-country ones (a specific place, when set,
+  // is already exact-matched by scopedDevelopments). This stops province/city developments crowding the
+  // national line and vice-versa.
+  const matchesGranularity = d => granularity === 'national' ? isNational(d.location) : !isNational(d.location);
   const items = scopedDevelopments(pathogen,country,place).filter(d => {
+    if (!place && !matchesGranularity(d)) return false;
     const t = +new Date(toISODate(d.report_date)+'T00:00:00Z'); return t >= domain[0] && t <= domain[1];
-  }).slice(0,3);
+  });
+  // Aggregate by (date × event type): one chip per group, labelled with a count (e.g. "3 Sci") and a
+  // tooltip that lists every development in it. Collapses same-day same-category clusters that
+  // otherwise stacked into an unreadable pile. Items arrive newest-first, so first-seen groups are the
+  // most recent; cap at 20 groups.
+  const groups = [], byKey = new Map();
+  items.forEach(d => {
+    const cat = devCategory(d.category);
+    const day = toISODate(d.report_date);
+    const key = day + '||' + cat.abbr;
+    if (!byKey.has(key)) { const g = { day, cat, items: [] }; byKey.set(key, g); groups.push(g); }
+    byKey.get(key).items.push(d);
+  });
+  const capped = groups.slice(0, 20);
   const layer = svg.append('g').attr('class','development-markers');
   const plotTop = margin.top, plotH = Math.max(1, (th - margin.bottom) - plotTop);
-  const maxY = plotTop + 0.85 * plotH;      // deepest a chip may sit — never past 85% of the plot
-  const startY = plotTop + 16, gap = 20;    // start below the raised legend, with breathing room
-  items.forEach((d,i) => {
-    const px = x(new Date(toISODate(d.report_date)+'T00:00:00Z'));
-    const py = Math.min(startY + i*gap, maxY);
-    const cat = devCategory(d.category);
-    const cw = 26, ch = 15;
+  const ch = 15, startY = plotTop + 16, gap = 28;        // lane pitch: chip height + ~one line of space
+  const maxLanes = Math.max(1, Math.floor((0.85 * plotH - 16) / gap) + 1);
+  capped.forEach(g => {
+    g.label = g.items.length > 1 ? `${g.items.length} ${g.cat.abbr}` : g.cat.abbr;
+    g.cw = Math.max(26, Math.round(13 + g.label.length * 6.3));
+    g.px = x(new Date(g.day + 'T00:00:00Z'));
+  });
+  // Lane packing: place each chip at its real date (px); drop it to the first vertical lane clear of the
+  // previous chip in that lane. Lanes wrap once the plot's 85% depth is used.
+  const laneRight = [];
+  capped.forEach(g => {
+    const left = g.px - g.cw / 2;
+    let lane = laneRight.findIndex(r => left - r >= 4);
+    if (lane === -1) lane = laneRight.length < maxLanes ? laneRight.length : (laneRight.length % maxLanes);
+    laneRight[lane] = g.px + g.cw / 2;
+    g.py = startY + lane * gap;
+  });
+  capped.forEach(g => {
+    const { cat, px, py, cw, label, items: gi } = g;
+    const summary = gi.length > 1 ? `${gi.length} ${cat.full} developments` : gi[0].headline;
     const mark = layer.append('g').attr('tabindex',0).attr('role','img')
-      .attr('aria-label',`${toISODate(d.report_date)} · ${cat.full}: ${d.headline}`)
+      .attr('aria-label',`${g.day} · ${summary}`)
       .style('cursor','pointer').classed('glyph-hit',true);
     mark.append('line').attr('x1',px).attr('x2',px).attr('y1',py+ch/2).attr('y2',th-margin.bottom)
       .attr('stroke',cat.color).attr('stroke-dasharray','2 4').attr('opacity',0.42);
     mark.append('rect').attr('x',px-cw/2).attr('y',py-ch/2).attr('width',cw).attr('height',ch).attr('rx',4)
       .attr('fill',col('--color-neutral-900')).attr('stroke',cat.color).attr('stroke-width',1);
     mark.append('text').attr('x',px).attr('y',py+3.3).attr('text-anchor','middle')
-      .attr('font-size',9).attr('font-weight',600).attr('letter-spacing',0.2).attr('fill',cat.color).text(cat.abbr);
-    mark.on('mousemove', ev => showChartTip(ev, developmentTipHTML(d, cat)))
+      .attr('font-size',13).attr('font-weight',600).attr('letter-spacing',0.2).attr('fill',cat.color).text(label);
+    mark.on('mousemove', ev => showChartTip(ev, developmentGroupTipHTML(gi, cat, g.day)))
       .on('mouseleave', hideChartTip);
   });
 }
 function fetchDevelopments() {
-  return withTimeout(d3.csv(GSHEET_DEVELOPMENTS_URL),20000,'situational developments').then(rows => {
-    if (!rows.columns || !['pathogen','report_date','headline','location'].every(k => rows.columns.includes(k))) throw Error('Development sheet schema unavailable');
+  const REQUIRED = ['pathogen','report_date','headline','location'];
+  const schemaOk = cols => cols && REQUIRED.every(k => cols.includes(k));
+  return withTimeout(fetch(GSHEET_DEVELOPMENTS_URL).then(r => r.text()), 20000, 'situational developments').then(text => {
+    let rows = d3.csvParse(text);
+    // Resilience for a malformed header row on the "Situational Developments" tab: a stray
+    // JOIN/ARRAYFORMULA there swells every header cell to "colname value value value…", so the real
+    // column names are unusable. Recover them from the first whitespace token of each header cell
+    // (all true columns are single-token snake_case) and re-key the clean data rows underneath.
+    if (!schemaOk(rows.columns)) {
+      const grid = d3.csvParseRows(text);            // respects quoted fields containing commas
+      if (grid.length > 1) {
+        const header = grid[0].map(h => String(h).trim().split(/\s+/)[0]);
+        if (schemaOk(header)) {
+          rows = grid.slice(1).map(cols => { const o = {}; header.forEach((k,i) => o[k] = cols[i]); return o; });
+          rows.columns = header;
+        }
+      }
+    }
+    if (!schemaOk(rows.columns)) throw Error('Development sheet schema unavailable');
     developmentRows = rows;
     developmentState = 'live';
   }).catch(error => {
@@ -4798,7 +4952,30 @@ function parseDevelopments(raw) {
     return (label || text) ? { label, text, headline:cleanText(d.headline), sev: devPick(d, DEV_SEV_KEYS) } : null;
   }).filter(Boolean);
 }
-function isNewEvent(r) { return /^new/i.test(r && r.status || ''); }
+// The feed's "Event Status: New" is unreliable — it also fires on outbreaks that already carry weeks of
+// figures (e.g. Italy WNV: 6 weeks of data still stamped "New"). Confirm genuine novelty from the data:
+// the earliest figure at the report's OWN scope (its sub-location if subnational, else its country) must
+// be recent. First-figure dates don't change without a data reload, so memoise per scope.
+const _firstFigAgeCache = new Map();
+function firstFigureAgeDays(pathogen, country, place) {
+  const scopeSub = place && !isNational(place);
+  const key = pathogen + '||' + (scopeSub ? cleanText(place).toLowerCase() : country);
+  if (_firstFigAgeCache.has(key)) return _firstFigAgeCache.get(key);
+  let min = '';
+  (allRows||[]).forEach(row => {
+    if (row.pathogen !== pathogen || !row.report_date) return;
+    const ok = scopeSub ? cleanText(row.location).toLowerCase() === cleanText(place).toLowerCase()
+                        : geoCountry(row.location) === country;
+    if (ok && (!min || row.report_date < min)) min = row.report_date;
+  });
+  const age = min ? Math.round((new Date(DATASET_MAX||min) - new Date(min)) / 86400000) : Infinity;
+  _firstFigAgeCache.set(key, age);
+  return age;
+}
+function isNewEvent(r) {
+  if (!/^new/i.test(r && r.status || '')) return false;
+  return firstFigureAgeDays(r.pathogen, r.geoCountry || r.country, r.place) <= 7;
+}
 function hasDevelopments(r) { return !!(r && (r.devCount || r.devHtml)); }
 // Risk stays the PRIMARY sort — the list still reads by severity. Within a risk band a report that
 // changed outranks a static one: developments first, then newly-logged events, then recency.
@@ -4809,7 +4986,7 @@ function eventFlagsHtml(r) {
     const n = r.devCount;
     h += `<span class="ev-flag ev-flag-dev" title="${n ? n + ' situational development' + (n===1?'':'s') : 'Situational developments'} reported since the prior report">▲${n ? ' ' + n : ''}</span>`;
   }
-  if (isNewEvent(r)) h += `<span class="ev-flag ev-flag-new" title="Not present in the previous day's data — newly logged pathogen × location">New</span>`;
+  if (isNewEvent(r)) h += `<span class="ev-flag ev-flag-new" title="First logged within the last week at this report's own scope — a newly appearing pathogen × location">New</span>`;
   return h ? `<span class="ev-flags">${h}</span>` : '';
 }
 // The feed's `Developments Formatted` cell carries its own hard-coded light-mode styling (white
@@ -4918,7 +5095,7 @@ function renderEventList() {
       <div class="event-meta"><span>${r.date} · ${scope}${r.crossover?' · zoonotic':''}</span><span class="tag ${riskTagClass(r.risk)}" title="${r.riskRationale||''}">Risk ${r.risk}</span></div>
       <div class="event-doc"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="doc-meta">${doc.vettings} vettings · ${doc.days}d reporting</span>${eventFlagsHtml(r)}</div>
     </div>`;
-  }).join('') : '<p style="font-size:12px;color:var(--color-neutral-400);padding:8px 4px">No reports match the current pathogen / region / filter.</p>');
+  }).join('') : '<p style="font-size:13px;color:var(--color-neutral-400);padding:8px 4px">No reports match the current pathogen / region / filter.</p>');
   const rfBtn = document.getElementById('resetFilters'); if (rfBtn) rfBtn.addEventListener('click', resetFilters);
   eventListEl.querySelectorAll('.event-item').forEach(el => {
     el.setAttribute('role','button'); el.setAttribute('tabindex','0');
@@ -4938,9 +5115,9 @@ function renderBrief() {
   const pHtml = who
     ? `<a class="meta-ref" href="${who}" target="_blank" rel="noopener" title="WHO — ${pName}">${pName} ↗</a>`
     : pName;
-  briefMetaEl.innerHTML = '<span style="font-size:14px;font-weight:600;color:var(--color-accent-200)">' + pHtml + '</span>' +
-    '<span style="font-size:14px;font-weight:700;color:#fff"> · ' + r.country + '</span>' +
-    '<span style="font-size:14px;font-weight:400;color:var(--ink-3)"> · ' + r.date + '</span>';
+  briefMetaEl.innerHTML = '<span style="font-size:15px;font-weight:600;color:var(--color-accent-200)">' + pHtml + '</span>' +
+    '<span style="font-size:15px;font-weight:700;color:#fff"> · ' + r.country + '</span>' +
+    '<span style="font-size:15px;font-weight:400;color:var(--ink-3)"> · ' + r.date + '</span>';
   const scope = isNational(r.place) ? 'National report' : 'Subnational report';
   // Citation-derived evidence profile replaces the measurement-derived documentation badge here:
   // this banner describes the REPORTING the brief was built from; figure-level corroboration
@@ -4948,7 +5125,7 @@ function renderBrief() {
   const ev = reportEvidence(r);
   const banner = `<div class="brief-quality"><span class="doc-badge ${ev.strength.cls}">${ev.strength.label}</span>${eventFlagsHtml(r)}` +
     `<span class="bq-meta" title="${REL_SUMMARY}">${scope} · ${ev.articles} article${ev.articles!==1?'s':''} · ${ev.domains} domain${ev.domains!==1?'s':''} · ${ev.facts} corroborated fact${ev.facts!==1?'s':''}${ev.articles?` · ${ev.coverage}% contributed figures`:''}</span>` +
-    `<button type="button" id="evToggle" aria-expanded="${evidenceExpanded?'true':'false'}" style="margin-left:auto;font-size:10px;padding:3px 10px">Evidence ${evidenceExpanded?'▴':'▾'}</button></div>` +
+    `<button type="button" id="evToggle" aria-expanded="${evidenceExpanded?'true':'false'}" style="margin-left:auto;font-size:13px;padding:3px 10px">Evidence ${evidenceExpanded?'▴':'▾'}</button></div>` +
     `<div id="reportEvidence"${evidenceExpanded?'':' hidden'}>${reportEvidenceHtml(r, ev)}</div>`;
   // Newspaper-style headline: the report's own title leads the article body, pathogen mention
   // linked. The meta row above stays the byline; the evidence banner follows the headline.
@@ -4959,7 +5136,7 @@ function renderBrief() {
   const riskBlock = `<div class="brief-doc-meta"><span class="bdm-label">Risk severity</span>` +
     `<span class="bdm-val" style="color:${sev};font-weight:600">${r.risk == null ? '—' : r.risk + ' / 9'}</span>` +
     (r.riskRationale ? `<span class="bdm-label">Rationale</span><span class="bdm-val">${esc(r.riskRationale)}</span>` : '') + `</div>`;
-  briefContentEl.innerHTML = headline + riskBlock + banner + developmentsBlockHtml(r) + eventTimelineHtml(r) + (r.crossover ? `<div style="background:color-mix(in srgb, var(--color-accent) 12%, transparent);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;margin:0 0 12px"><p style="margin:0"><strong>Zoonotic link reported:</strong></p>${briefMarkup(dedupeCrossover(r.crossoverDetail))}</div>` : '') + (r.html ? stripBriefDisclaimers(stripNan(r.html)) : '<p style="font-size:12px;line-height:1.6;color:var(--ink-3);margin:0">No narrative report available.</p>');
+  briefContentEl.innerHTML = headline + riskBlock + banner + developmentsBlockHtml(r) + eventTimelineHtml(r) + (r.crossover ? `<div style="background:color-mix(in srgb, var(--color-accent) 12%, transparent);border-radius:var(--radius-sm);padding:8px 10px;font-size:13px;margin:0 0 12px"><p style="margin:0"><strong>Zoonotic link reported:</strong></p>${briefMarkup(dedupeCrossover(r.crossoverDetail))}</div>` : '') + (r.html ? stripBriefDisclaimers(stripNan(r.html)) : '<p style="font-size:13px;line-height:1.6;color:var(--ink-3);margin:0">No narrative report available.</p>');
   const tg = document.getElementById('evToggle');
   if (tg) tg.addEventListener('click', () => {
     const sec = document.getElementById('reportEvidence');
@@ -5392,16 +5569,16 @@ function reportEvidenceHtml(rep, ev) {
       const proxStrip = mr.prox != null ? evDistStripGeneric(mr.prox, peersProx, v2 => v2.toFixed(2), { label: patLabel + ' · proximity', globalPeers: gPeersProx, kind: 'prox' }) : null;
       const vetPeerNote = `pathogen median ${d.med}${d.globalMed!=null && d.globalMed!==d.med ? ` · global median ${d.globalMed}` : ''}`;
       const proxNote = proxStrip ? `pathogen median ${proxStrip.med.toFixed(2)}${proxStrip.globalMed!=null && proxStrip.globalMed!==proxStrip.med ? ` · global ${proxStrip.globalMed.toFixed(2)}` : ''}` : '';
-      return `<div style="margin:10px 0;padding:6px 8px;border:1px solid var(--color-divider);border-radius:8px;background:color-mix(in srgb, var(--color-neutral-800) 22%, transparent)">
+      return `<div style="margin:10px 0;padding:6px 8px;border:1px solid var(--color-divider);border-radius:var(--radius-md);background:color-mix(in srgb, var(--color-neutral-800) 22%, transparent)">
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-          <span style="font-size:12px;font-weight:600;flex:0 0 124px;min-width:124px">${v.toLocaleString()} ${label}</span>
+          <span style="font-size:13px;font-weight:600;flex:0 0 124px;min-width:124px">${v.toLocaleString()} ${label}</span>
           <span style="flex:1 1 90px;min-width:80px;display:flex">${d.html}</span>
-          <span style="font-size:10px;color:var(--ink-3);flex:0 1 auto;white-space:nowrap;text-align:right" title="${d.tip.replace(/"/g,'&quot;')}">${vet===1 ? 'unvetted' : `${vet} sources`} · ${vetPeerNote}</span>
+          <span style="font-size:13px;color:var(--ink-3);flex:0 1 auto;white-space:nowrap;text-align:right" title="${d.tip.replace(/"/g,'&quot;')}">${vet===1 ? 'unvetted' : `${vet} sources`} · ${vetPeerNote}</span>
         </div>
         ${proxStrip ? `<div style="display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap">
-          <span style="font-size:10px;color:var(--ink-4);flex:0 0 124px;min-width:124px">Functional proximity</span>
+          <span style="font-size:13px;color:var(--ink-4);flex:0 0 124px;min-width:124px">Functional proximity</span>
           <span style="flex:1 1 90px;min-width:80px;display:flex">${proxStrip.html}</span>
-          <span style="font-size:10px;color:var(--ink-4);white-space:nowrap;flex:0 1 auto;text-align:right">${mr.prox.toFixed(2)} · ${proxNote}</span>
+          <span style="font-size:13px;color:var(--ink-4);white-space:nowrap;flex:0 1 auto;text-align:right">${mr.prox.toFixed(2)} · ${proxNote}</span>
         </div>` : ''}
       </div>`;
     }).join('') + `</div>`;
@@ -5413,7 +5590,7 @@ function reportEvidenceHtml(rep, ev) {
       (ev.citedOnly ? `<li>${ev.citedOnly} citation${ev.citedOnly>1?'s are':' is'} outside the current records${EVIDENCE.windowLabel?` (${EVIDENCE.windowLabel})`:''} — archived or out-of-window.</li>` : '') +
     `</ul>` : '') +
     bars +
-    `<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-label);margin:12px 0 6px">Citations</div>
+    `<div style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-label);margin:12px 0 6px">Citations</div>
      <div class="ev-cards" style="margin-left:0;border-left:0;padding-left:0">${cites.map(c => citeCard(c.url, c.rel)).join('')}</div>
      <hr style="border:0;border-top:1px solid var(--color-divider);margin:14px 0 2px">`;
 }
@@ -5587,7 +5764,7 @@ function fetchReports() {
   renderBrief();
   }).catch(err => {
     console.warn('[data] event reports unreachable:', err && (err.message || err));
-    eventListEl.innerHTML = '<p style="font-size:12px;color:var(--color-neutral-400);padding:8px 4px">Reports unavailable.</p>';
+    eventListEl.innerHTML = '<p style="font-size:13px;color:var(--color-neutral-400);padding:8px 4px">Reports unavailable.</p>';
     briefContentEl.innerHTML = '<p>Could not load the AI event-report tab from the published sheet.</p>';
     throw err;
   });
@@ -5847,14 +6024,14 @@ function citeCard(u, rel) {
     isFinite(px) ? 'proximity ' + px.toFixed(2) : '',
     isFinite(cb) ? 'combined ' + cb.toFixed(1) : '',
   ].filter(Boolean).join(' · ');
-  const chip = rel ? `<span class="tag ${rel==='direct'?'tag-accent':rel==='related'?'tag-outline':'tag-neutral'}" style="font-size:10px" title="${REL_TIP[rel]}">${REL_LABEL[rel]}</span> ` : '';
+  const chip = rel ? `<span class="tag ${rel==='direct'?'tag-accent':rel==='related'?'tag-outline':'tag-neutral'}" style="font-size:13px" title="${REL_TIP[rel]}">${REL_LABEL[rel]}</span> ` : '';
   const fact = raw ? rawFactOf(raw) : null;
   const factHtml = fact && fact.label
-    ? `<div class="ev-fact" style="font-size:12px;color:var(--ink-2);margin:3px 0 0"><span style="color:var(--color-accent-200);font-weight:600">Reported:</span> ${esc(fact.text)}</div>`
-    : (raw ? '' : `<div class="ev-fact" style="font-size:10px;color:var(--ink-4);margin:3px 0 0">No figure extracted from this article</div>`);
+    ? `<div class="ev-fact" style="font-size:13px;color:var(--ink-2);margin:3px 0 0"><span style="color:var(--color-accent-200);font-weight:600">Reported:</span> ${esc(fact.text)}</div>`
+    : (raw ? '' : `<div class="ev-fact" style="font-size:13px;color:var(--ink-4);margin:3px 0 0">Source link only — not in the extracted-article corpus</div>`);
   return `<div class="ev-card"><div class="ev-card-title">${chip}${t ? esc(t) : esc(h || 'Article')}</div>` +
     factHtml +
-    `<div class="art-meta">${meta}${u ? `${meta ? ' · ' : ''}<a class="art-link" style="font-size:12px;font-weight:400;margin-bottom:0" href="${esc(u)}" target="_blank" rel="noopener">Open ↗</a>` : ''}</div></div>`;
+    `<div class="art-meta">${meta}${u ? `${meta ? ' · ' : ''}<a class="art-link" style="font-size:13px;font-weight:400;margin-bottom:0" href="${esc(u)}" target="_blank" rel="noopener">Open ↗</a>` : ''}</div></div>`;
 }
 
 function rawRowIsCensored(r) {
@@ -6084,11 +6261,11 @@ document.getElementById('navSources').addEventListener('click', (e) => { e.preve
 document.getElementById('navReports').addEventListener('click', (e) => { e.preventDefault(); const el = document.querySelector('.briefs-card'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70, behavior:'smooth' }); });
 document.getElementById('navAlerts').addEventListener('click', (e) => { e.preventDefault();
   const hi = reports.map((r,i)=>({r,i})).filter(({r})=>r.risk>=7).sort((a,b)=>b.r.risk-a.r.risk);
-  openDialog('High-severity alerts', hi.length ? (`<p style="font-size:12px;color:color-mix(in srgb,var(--color-text) 62%,transparent);margin:0 0 12px">${hi.length} events at risk severity 7 or higher. Select one to open it.</p>` + hi.map(({r,i})=>`<div class="art-row" style="cursor:pointer" data-alert="${i}"><div class="art-extract"><span><strong>${r.title}</strong></span><span class="tag ${riskTagClass(r.risk)}">Risk ${r.risk}</span></div><div class="art-meta">${r.geoCountry||r.country} · ${r.date} · ${eventDocumentation(r.pathogen,r.geoCountry).label}</div></div>`).join('')) : '<p style="font-size:12px">No events currently at severity 7+.</p>');
+  openDialog('High-severity alerts', hi.length ? (`<p style="font-size:13px;color:color-mix(in srgb,var(--color-text) 62%,transparent);margin:0 0 12px">${hi.length} events at risk severity 7 or higher. Select one to open it.</p>` + hi.map(({r,i})=>`<div class="art-row" style="cursor:pointer" data-alert="${i}"><div class="art-extract"><span><strong>${r.title}</strong></span><span class="tag ${riskTagClass(r.risk)}">Risk ${r.risk}</span></div><div class="art-meta">${r.geoCountry||r.country} · ${r.date} · ${eventDocumentation(r.pathogen,r.geoCountry).label}</div></div>`).join('')) : '<p style="font-size:13px">No events currently at severity 7+.</p>');
   document.getElementById('drillBody').querySelectorAll('[data-alert]').forEach(el => el.addEventListener('click', () => { document.getElementById('drillBackdrop').style.display='none'; selectEvent(+el.dataset.alert); }));
 });
 document.getElementById('tableHelpBtn')?.addEventListener('click', () => openDialog('Figures table — how to read it',
-  `<div style="font-size:12px;line-height:1.6;color:color-mix(in srgb,var(--color-text) 78%,transparent)">
+  `<div style="font-size:13px;line-height:1.6;color:color-mix(in srgb,var(--color-text) 78%,transparent)">
      <p style="margin:0 0 8px"><strong>Range</strong> = spread across sources for that date. <strong>Status</strong> = reporting recency (≤4d Reporting · ≤14d Slowing · Quiet).</p>
      <p style="margin:0 0 8px"><strong>Outbreak documentation</strong> = event-history (all dates/measures for this outbreak). <em>Well documented</em> = long + many vettings across history; <em>Sparse</em> = short or few vettings. Includes unvetted rows — differentiates known outbreaks from small, uncertain events.</p>
      <p style="margin:0 0 8px"><strong>Sources / Article screening</strong> = latest figure only. Statistical screening determines <em>screened in/out</em>; corroboration is separate: <em>unvetted</em> = 1 independent source domain (paler row) · <em>N sources</em> = vetted (N−1 vettings). Click sources/unvetted to list every supporting article.</p>
@@ -6115,7 +6292,7 @@ document.getElementById('species').addEventListener('change', (e) => {
     else renderBrief();
   } else {
     selectedIdx = -1;
-    if (briefContentEl) briefContentEl.innerHTML = `<p style="font-size:12px;color:var(--ink-3);margin:0">No event reports match host <strong>${activeSpecies}</strong> under the current filters.</p>`;
+    if (briefContentEl) briefContentEl.innerHTML = `<p style="font-size:13px;color:var(--ink-3);margin:0">No event reports match host <strong>${activeSpecies}</strong> under the current filters.</p>`;
     if (briefMetaEl) briefMetaEl.innerHTML = '';
   }
   if (typeof flyToFilteredMarkers === 'function') flyToFilteredMarkers();
