@@ -136,6 +136,11 @@
      restore it. Data verified: the sheet titles carry normal spaces. */
   .event-title .ev-path, .event-title .ev-loc { padding-right: .14em; }
   .event-title .ev-loc { color: var(--color-neutral-300); }
+  /* The report's actual scraped location string, shown explicitly so the row is anchored to a place
+     even when the summary title never names it. Pin + string, ellipsis with the full value on hover. */
+  .event-loc { display: flex; align-items: center; gap: 5px; font-size: 13px; line-height: 1.35; color: var(--ink-3); margin: 0 0 6px; min-width: 0; }
+  .event-loc svg { flex: none; opacity: .68; }
+  .event-loc .el-txt { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .meta-ref { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
   .meta-ref:hover { color: var(--color-text); border-bottom-style: solid; }
   .event-meta { display: flex; justify-content: space-between; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-4); flex-wrap: nowrap; min-width: 0; }
@@ -162,12 +167,12 @@
   .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
   .stat-num { font-family: var(--font-mono); font-weight: 500; font-size: 30px; line-height: 1.1; margin: 0; letter-spacing: -0.015em; }
   .stat-label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); margin: 6px 0 0; }
-  .map-card { padding: var(--space-4); }
+  .map-card { padding: var(--space-4); display: flex; flex-direction: column; }
   .map-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-3); gap: var(--space-3); flex-wrap: wrap; }
   .map-legend { display: flex; align-items: center; gap: 14px; font-size: 13px; color: var(--ink-3); flex-wrap: wrap; }
   .legend-swatch { display: inline-flex; align-items: center; gap: 6px; }
   .legend-chip { width: 11px; height: 11px; border-radius: var(--radius-sm); display: inline-block; }
-  .map-wrap { position: relative; width: 100%; height: var(--panel-h); border-radius: var(--radius-md); overflow: hidden; background:
+  .map-wrap { position: relative; width: 100%; flex: 1 1 auto; height: var(--panel-h); border-radius: var(--radius-md); overflow: hidden; background:
       radial-gradient(900px 500px at 15% -10%, color-mix(in srgb, var(--color-accent-900) 45%, transparent), transparent 60%),
       var(--color-neutral-900); }
   .map-wrap svg { width: 100%; height: 100%; display: block; }
@@ -356,6 +361,14 @@
   .tooltip .t-sub { font-size: 13px; color: var(--ink-3); margin: 0 0 6px; }
   #globeMap { border-radius: var(--radius-md); background: radial-gradient(120% 120% at 50% 42%, #10122a 0%, #0a0b18 46%, #06060d 100%); }
   #globeMap canvas { outline: none; background: transparent; }
+  #timelineSvg { display:block; width:100%; height:100%; }
+  #timelineSvg text { font-family: var(--font-body); }
+  .tl-label { cursor:pointer; font-weight:600; }
+  .tl-label:hover { fill: var(--color-accent-200) !important; text-decoration: underline; }
+  .tl-band { transition: opacity .1s ease; }
+  .tl-band.tl-clickable { cursor:pointer; }
+  .tl-band.tl-clickable:hover { opacity:0.9; }
+  .tl-dot { cursor:pointer; }
   /* Globe popups share the exact tooltip language (bg, border, type scale, row layout) so the
      two maps read as one product — and .t-row spans get real spacing via flex gap. */
   .globe-pop .maplibregl-popup-content { background: var(--color-neutral-800); color: var(--color-text); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 13px; box-shadow: var(--shadow-md); padding: 8px 10px; max-width: 260px; }
@@ -460,7 +473,7 @@
   /* Data-report and Open-brief primary actions are peer CTAs — identical fixed box, and the toolbar
      button carries a right margin equal to the lead strip's padding+border so its right edge (and,
      at equal width, its left edge) lines up with Open brief directly below. */
-  #dataReportBtn, #leadCta { width: 168px; min-width: 168px; height: 38px; padding: 0 var(--space-4); font-size: var(--fs-2); gap: var(--space-2); justify-content: center; }
+  #dataReportBtn, #leadCta { width: 168px; min-width: 168px; height: 38px; padding: 0 var(--space-4); font-size: var(--fs-3); gap: var(--space-2); justify-content: center; }
   /* One-time attention: after load the Data-report CTA rakes three shines — gold, red, purple, 5s
      apart. Each is a fan of varied-width bands moving at different speeds (WAAPI, see script), like
      light glancing across a moving mirror sphere. Bands live inside .dr-sheen (clipped there, so the
@@ -605,10 +618,6 @@
       </select>
     </div>
     <div class="field-inline">
-      <label for="species" title="Scopes every data element — summary stats, map, plots and the figures table">HOST</label>
-      <select id="species" class="input" style="min-width:150px"><option>All species</option></select>
-    </div>
-    <div class="field-inline">
       <label for="investigatorGroup" title="Investigator groupings can overlap and are independent of pathogen families.">GROUP</label>
       <select id="investigatorGroup" class="input" style="min-width:180px">
         <option value="All">All groups</option>
@@ -616,6 +625,10 @@
         <option>Arboviruses</option><option>Vector Borne Diseases</option>
         <option>Livestock</option><option>Other</option>
       </select>
+    </div>
+    <div class="field-inline">
+      <label for="species" title="Scopes every data element — summary stats, map, plots and the figures table">HOST</label>
+      <select id="species" class="input" style="min-width:150px"><option>All species</option></select>
     </div>
     <button type="button" class="btn btn-primary" id="dataReportBtn" title="Per-pathogen data availability — mapped events, event reports, plot days, sources, figures and raw rows"><span class="dr-sheen" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="dr-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M9.5 20V4M15 20v-7M20.5 20V8"></path></svg>Data report</span></button>
   </div>
@@ -638,10 +651,12 @@
         <div class="seg" role="tablist" aria-label="Marker size" id="mapMetricSeg">
           <button type="button" class="seg-opt" aria-selected="true" data-metric="risk">Risk score</button>
           <button type="button" class="seg-opt" data-metric="cases">Cases</button>
+          <button type="button" class="seg-opt" data-metric="articles" title="Size markers by the count of unique source articles behind each outbreak">Articles</button>
         </div>
         <div class="seg" role="tablist" aria-label="Map view" id="mapViewSeg">
           <button type="button" class="seg-opt" aria-selected="true" data-view="flat">Flat</button>
           <button type="button" class="seg-opt" data-view="globe">Globe</button>
+          <button type="button" class="seg-opt" data-view="timeline">Timeline</button>
         </div>
         <div class="map-legend">
           <span class="legend-swatch">Risk<span style="display:inline-block;width:92px;height:9px;border-radius:var(--radius-sm);margin:0 7px;background:linear-gradient(90deg,var(--sev-lo),var(--sev-mid),var(--sev-hi))"></span>1 → 9</span>
@@ -653,6 +668,7 @@
       <div class="map-wrap" id="mapWrap">
         <svg id="mapSvg" viewBox="0 0 960 520"></svg>
         <div id="globeMap" style="position:absolute;inset:0;display:none"></div>
+        <div id="timelineWrap" style="position:absolute;inset:0;display:none;box-sizing:border-box;padding:2px 6px 4px"><svg id="timelineSvg" width="100%" height="100%"></svg></div>
         <button type="button" class="btn btn-secondary" id="satToggle" style="position:absolute;left:10px;top:10px;z-index:5;display:none;font-size:13px;padding:3px 10px">Satellite</button>
         <div class="map-hint">Scroll to zoom · drag to pan · click an event to open its brief</div>
         <div class="zoom-controls">
@@ -673,7 +689,6 @@
           <div class="stat-cell"><p class="stat-num" id="statCountries">–</p><p class="stat-label">Countries with vetted evidence</p><p class="cell-range" id="statVetLine" style="margin:4px 0 0;font-size:13px"></p></div>
           <div class="stat-cell"><p class="stat-num" id="statLevel">–</p><p class="stat-label">Source reports</p><p class="cell-range" id="statLevelSub" style="margin:4px 0 0;font-size:13px"></p></div>
         </div>
-        <p class="agg-note" style="margin:12px 0 0;font-size:13px;color:var(--ink-4);line-height:1.45"><b style="color:var(--ink-3);font-weight:500">Vetted</b> ≥2 sources · <b style="color:var(--ink-3);font-weight:500">single-source</b> shown, lower confidence</p>
       </div>
       <div class="forecast-box" id="forecastBox"></div>
     </div>
@@ -1294,8 +1309,6 @@ function renderForecastCard(series, fcPathogenOverride) {
   const ref = pc || pd;
   const anchor = lastCase || lastDeath;
   const days = Math.round((new Date(ref[ref.length-1].date) - new Date(anchor.date)) / 86400000);
-  const isAllSelected = isAll();
-  const scopeLabel = isAllSelected ? 'top pathogen' : 'selected pathogen';
   const cell = (label2, proj) => proj ? (function(){ const f = proj[proj.length-1]; return `<div class="fc-cell"><p class="fc-num">${Math.round(f.p50).toLocaleString()}</p><p class="fc-lbl">${label2}</p><p class="fc-range">50% Range: (${Math.round(f.p25).toLocaleString()}–${Math.round(f.p75).toLocaleString()})</p></div>`; })() : '';
   // Primary outbreak beacon — click the pathogen name to jump there (resets region, sets pathogen+location to worstCombo)
   let fcLink = `<span class="fc-strain">${label}</span>`;
@@ -1306,7 +1319,7 @@ function renderForecastCard(series, fcPathogenOverride) {
       fcLink = `<button type="button" class="fc-strain fc-link" data-fc-country="${esc(tgt.country)}" data-fc-pathogen="${esc(tgt.pathogenRaw)}" aria-label="Go to primary outbreak — ${esc(tgt.country)} · ${esc(label)}" title="Go to ${esc(label)} in ${esc(tgt.country)} — resets region filter">` + label + `</button>`;
     }
   } catch(e) {}
-  box.innerHTML = `<p class="fc-title">${days}-day forecast · median (p50) · ${loc} · ${scopeLabel} · ${fcLink}</p><div class="fc-grid">${cell('Proj. cases', pc)}${cell('Proj. deaths', pd)}</div>`;
+  box.innerHTML = `<p class="fc-title">${days}-day forecast · median (p50) · ${loc} · ${fcLink}</p><div class="fc-grid">${cell('Proj. cases', pc)}${cell('Proj. deaths', pd)}</div>`;
 }
 // Forecast primary-outbreak fast path — click the pathogen name to jump to worstCombo (resets region, sets pathogen+location)
 (function(){
@@ -2188,8 +2201,9 @@ function buildMarkers() {
   markers._unmapped = unmapped;
   return markers;
 }
-function markerValue(m) { return mapMode === 'cases' ? (m.cases||0) : (m.risk||0); }
-function markerR(m) { return mapMode === 'cases' ? radiusScale(m.cases||1) : eventRadius(m.risk||1); }
+const articleRadius = d3.scaleSqrt().domain([1, 40]).range([4, 22]).clamp(true);
+function markerValue(m) { return mapMode === 'cases' ? (m.cases||0) : mapMode === 'articles' ? (m.articles||0) : (m.risk||0); }
+function markerR(m) { return mapMode === 'cases' ? radiusScale(m.cases||1) : mapMode === 'articles' ? articleRadius(m.articles||1) : eventRadius(m.risk||1); }
 // Risk-severity scale (1 low → 9 critical): restrained slate→muted crimson, low chroma for a professional read.
 const sevColor = d3.scaleLinear().domain([1,5,9]).range([col('--sev-lo'),col('--sev-mid'),col('--sev-hi')]).interpolate(d3.interpolateHcl).clamp(true);
 const eventRadius = d3.scaleSqrt().domain([1,9]).range([5,20]).clamp(true);
@@ -2388,7 +2402,7 @@ document.getElementById('mapMetricSeg').addEventListener('click', (e) => {
   if (!btn) return;
   mapMode = btn.dataset.metric;
   document.querySelectorAll('#mapMetricSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
-  const sl = document.getElementById('mapSizeLabel'); if (sl) sl.textContent = 'size ∝ ' + (mapMode === 'cases' ? 'cases' : 'score');
+  const sl = document.getElementById('mapSizeLabel'); if (sl) sl.textContent = 'size ∝ ' + (mapMode === 'cases' ? 'cases' : mapMode === 'articles' ? 'articles' : 'score');
   renderMap();
 });
 function renderMap() {
@@ -2619,20 +2633,136 @@ function addGlobeMarkers() {
 function syncGlobeIfActive() { if (globe && document.getElementById('globeMap').style.display !== 'none') addGlobeMarkers(); }
 document.getElementById('mapViewSeg').addEventListener('click', (e) => {
   const btn = e.target.closest('.seg-opt'); if (!btn) return;
-  const flat = btn.dataset.view === 'flat';
+  const view = btn.dataset.view;
+  const flat = view === 'flat', globeV = view === 'globe', timeline = view === 'timeline';
   document.querySelectorAll('#mapViewSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
   document.getElementById('mapSvg').style.display = flat ? '' : 'none';
-  document.getElementById('globeMap').style.display = flat ? 'none' : 'block';
+  document.getElementById('globeMap').style.display = globeV ? 'block' : 'none';
+  const tlw = document.getElementById('timelineWrap'); if (tlw) tlw.style.display = timeline ? 'block' : 'none';
   document.querySelector('.zoom-controls').style.display = flat ? '' : 'none';
   document.querySelector('.map-hint').style.display = flat ? '' : 'none';
-  document.getElementById('satToggle').style.display = flat ? 'none' : '';
-  if (!flat) { initGlobe(); if (globe) { globe.resize(); addGlobeMarkers(); } }
+  document.getElementById('satToggle').style.display = globeV ? '' : 'none';
+  if (globeV) { initGlobe(); if (globe) { globe.resize(); addGlobeMarkers(); } }
+  if (timeline) { if (typeof ensureRawArticles === 'function' && rawArticlesState === 'idle') ensureRawArticles(); renderTimeline(); }
 });
 document.getElementById('satToggle').addEventListener('click', () => {
   if (!globe) return; globeSat = !globeSat;
   globe.setStyle(globeStyle(globeSat));
   document.getElementById('satToggle').textContent = globeSat ? 'Dark map' : 'Satellite';
 });
+
+// --- Timeline (ridgeline) view: top-5 pathogens by unique source URLs over the last 14 days ---
+// Emergency-scan companion to the flat/globe maps: a KDE-smoothed ridge per pathogen (highest
+// volume at the bottom, shared absolute height), split into hue-tinted sub-bands for the top-3
+// countries, with event dots riding each ridge. Zoned clicks: sub-band -> outbreak, label ->
+// pathogen, dot -> that report's brief. Window is 14d because the URL/report feed is a 2-week
+// emergency cut (figures reach further back, but 'the rest' does not).
+const TL_WINDOW_DAYS = 14, TL_BW = 1.4;
+function tlKde(samples, xs, bw){
+  if(!samples.length) return xs.map(()=>0);
+  const f = 1/(bw*Math.sqrt(2*Math.PI));
+  return xs.map(x=>{ let s=0; for(let i=0;i<samples.length;i++){ const z=(x-samples[i])/bw; s+=Math.exp(-0.5*z*z); } return s*f; });
+}
+function tlSelectPathogen(p){
+  const sel=document.getElementById('disease');
+  if(sel && [...sel.options].some(o=>o.value===p)){ sel.value=p; sel.dispatchEvent(new Event('change')); }
+  else { selectedPathogen=p; userChangedPathogen=true; renderStats(); renderTable(); renderTrendSection(); if(typeof renderEventList==='function') renderEventList(); if(typeof renderBrief==='function') renderBrief(); }
+  renderTimeline();
+}
+function tlSelectCombo(p, country){
+  let idx=-1;
+  if(country){ idx=reports.findIndex(r=>r.geoCountry===country && r.pathogen===p && isNational(r.place)); if(idx<0) idx=reports.findIndex(r=>r.geoCountry===country && r.pathogen===p); }
+  if(idx<0) idx=reports.findIndex(r=>r.pathogen===p);
+  if(idx>=0 && typeof selectEvent==='function') selectEvent(idx); else tlSelectPathogen(p);
+}
+function renderTimeline(){
+  const svg=d3.select('#timelineSvg'); if(svg.empty()) return;
+  const wrap=document.getElementById('timelineWrap'); if(!wrap) return;
+  const tw=Math.max(360, Math.round(wrap.clientWidth||900));
+  const th=Math.max(280, Math.round(wrap.clientHeight||480));
+  svg.attr('viewBox',`0 0 ${tw} ${th}`).attr('preserveAspectRatio','none');
+  svg.selectAll('*').remove();
+  if(!dataLoaded){ svg.append('text').attr('x',tw/2).attr('y',th/2).attr('text-anchor','middle').attr('fill',col('--color-neutral-400')).attr('font-size','13px').text('Loading live data…'); return; }
+  let maxDay=0; allRows.forEach(r=>{ const t=Date.parse(r.report_date); if(t>maxDay) maxDay=t; }); reports.forEach(r=>{ const t=Date.parse(r.date); if(t>maxDay) maxDay=t; });
+  if(!maxDay) maxDay=Date.now();
+  const endMs=maxDay, startMs=endMs - TL_WINDOW_DAYS*864e5;
+  const dayOf=t=>(t-startMs)/864e5;
+  const byP=new Map();
+  const getP=p=>{ let e=byP.get(p); if(!e){ e={urls:new Set(), samples:[], byC:new Map()}; byP.set(p,e); } return e; };
+  const add=(p,c,u,t)=>{ if(!p||isFlu(p)||!inPathoGroup(p)||!u) return; if(t<startMs||t>endMs) return; const e=getP(p); if(!e.urls.has(u)){ e.urls.add(u); e.samples.push(dayOf(t)); } if(c){ let ce=e.byC.get(c); if(!ce){ ce={urls:new Set(),samples:[]}; e.byC.set(c,ce); } if(!ce.urls.has(u)){ ce.urls.add(u); ce.samples.push(dayOf(t)); } } };
+  allRows.forEach(r=>{ const t=Date.parse(r.report_date); if(isNaN(t)) return; const c=geoCountry(r.location); extractUrls(r.sources).forEach(u=>add(r.pathogen,c,u,t)); });
+  reports.forEach(r=>{ const t=Date.parse(r.date); if(isNaN(t)) return; (r.urls||[]).forEach(u=>add(r.pathogen,r.geoCountry,u,t)); });
+  if(Array.isArray(rawArticles)) rawArticles.forEach(r=>{ const t=Date.parse(r.published||r.report_date||''); if(isNaN(t)) return; add(r.pathogen, geoCountry(r.location||r.event_location), r.url, t); });
+  let top=[...byP.entries()].map(([p,e])=>({p,e,n:e.urls.size})).filter(d=>d.n>0).sort((a,b)=>b.n-a.n).slice(0,5);
+  if(!top.length){ svg.append('text').attr('x',tw/2).attr('y',th/2).attr('text-anchor','middle').attr('fill',col('--color-neutral-400')).attr('font-size','13px').text('No source-URL activity in the last '+TL_WINDOW_DAYS+' days.'); return; }
+  const m={t:34,r:16,b:26,l:14};
+  const plotH=th-m.t-m.b;
+  const rowGap=plotH/top.length;
+  const x=d3.scaleLinear().domain([0,TL_WINDOW_DAYS]).range([m.l, tw-m.r]);
+  const xs=[]; for(let i=0;i<=120;i++) xs.push(i*TL_WINDOW_DAYS/120);
+  let gMax=0;
+  top.forEach(d=>{
+    d.total=tlKde(d.e.samples, xs, TL_BW);
+    const cs=[...d.e.byC.entries()].map(([c,ce])=>({c,ce,n:ce.urls.size})).sort((a,b)=>b.n-a.n);
+    d.top3=cs.slice(0,3);
+    d.top3.forEach(cc=>cc.dens=tlKde(cc.ce.samples, xs, TL_BW));
+    d.other=xs.map((_,i)=>Math.max(0, d.total[i]-d.top3.reduce((s,cc)=>s+cc.dens[i],0)));
+    const localMax=Math.max(...d.total); if(localMax>gMax) gMax=localMax;
+  });
+  if(gMax<=0) gMax=1;
+  const S=(rowGap*1.7)/gMax;
+  top.forEach((d,rank)=>{
+    const y0=m.t + plotH - rank*rowGap;
+    const base=SUB_PALETTE[rank%SUB_PALETTE.length];
+    const g=svg.append('g');
+    const layers=[...d.top3.map((cc,li)=>({name:cc.c, dens:cc.dens, op:[0.9,0.62,0.42][li]||0.4, kind:'country', cc})), {name:'Other', dens:d.other, op:0.2, kind:'other'}];
+    let cum=xs.map(()=>0);
+    layers.forEach(layer=>{
+      const lower=cum.slice(), upper=cum.map((v,i)=>v+layer.dens[i]);
+      let p='';
+      for(let i=0;i<xs.length;i++) p+=(i?'L':'M')+x(xs[i]).toFixed(1)+','+(y0-upper[i]*S).toFixed(1);
+      for(let i=xs.length-1;i>=0;i--) p+='L'+x(xs[i]).toFixed(1)+','+(y0-lower[i]*S).toFixed(1);
+      p+='Z';
+      const path=g.append('path').attr('d',p).attr('fill',base).attr('fill-opacity',layer.op).attr('stroke','none').classed('tl-band',true);
+      if(layer.kind==='country'){
+        path.classed('tl-clickable',true)
+          .on('mousemove',ev=>showChartTip(ev, `<p class="t-title">${esc(layer.name)}</p><div class="t-sub">${esc(PATHOGEN_LABELS[d.p]||d.p)} · last ${TL_WINDOW_DAYS} days</div><div class="t-row"><span>Unique articles</span><span>${layer.cc.n}</span></div><div class="t-foot">Click to open this outbreak →</div>`))
+          .on('mouseleave',hideChartTip)
+          .on('click',()=>{ hideChartTip(); tlSelectCombo(d.p, layer.name); });
+      } else {
+        path.on('mousemove',ev=>showChartTip(ev, `<p class="t-title">Other countries</p><div class="t-sub">${esc(PATHOGEN_LABELS[d.p]||d.p)}</div>`)).on('mouseleave',hideChartTip);
+      }
+      cum=upper;
+    });
+    let outline='';
+    for(let i=0;i<xs.length;i++) outline+=(i?'L':'M')+x(xs[i]).toFixed(1)+','+(y0-d.total[i]*S).toFixed(1);
+    g.append('path').attr('d',outline).attr('fill','none').attr('stroke',base).attr('stroke-width',1.4).attr('opacity',0.92).style('pointer-events','none');
+    g.append('line').attr('x1',m.l).attr('x2',tw-m.r).attr('y1',y0).attr('y2',y0).attr('stroke',col('--color-divider')).attr('stroke-width',0.6).attr('opacity',0.5);
+    const selHi = (!isAll() && selectedPathogen===d.p);
+    const lbl=g.append('text').attr('class','tl-label').attr('x',m.l+2).attr('y',y0-7).attr('font-size','13px').attr('fill', selHi?col('--color-accent-200'):col('--color-text')).text(PATHOGEN_LABELS[d.p]||d.p);
+    lbl.on('click',()=>tlSelectPathogen(d.p)).append('title').text('Select '+(PATHOGEN_LABELS[d.p]||d.p));
+    g.append('text').attr('x',m.l+2).attr('y',y0-21).attr('font-size','12px').attr('fill',col('--ink-4')).text(d.n+' unique article'+(d.n===1?'':'s'));
+    reports.map((r,i)=>({r,i})).filter(({r})=>r.pathogen===d.p && !isNaN(Date.parse(r.date)) && Date.parse(r.date)>=startMs && Date.parse(r.date)<=endMs).forEach(({r,i})=>{
+      const dx=dayOf(Date.parse(r.date)); const xi=Math.max(0,Math.min(xs.length-1,Math.round(dx/TL_WINDOW_DAYS*120)));
+      const yy=y0 - d.total[xi]*S - 4;
+      const dev=(typeof hasDevelopments==='function' && hasDevelopments(r));
+      if(dev) g.append('circle').attr('cx',x(dx)).attr('cy',yy).attr('r',6).attr('fill','none').attr('stroke',col('--warn')).attr('stroke-width',1).attr('opacity',0.85).style('pointer-events','none');
+      g.append('circle').attr('class','tl-dot').attr('cx',x(dx)).attr('cy',yy).attr('r',3.4).attr('fill',sevColor(r.risk||1)).attr('stroke',col('--color-bg')).attr('stroke-width',1)
+        .on('mousemove',ev=>showChartTip(ev, `<p class="t-title">${esc(r.title||r.country)}</p><div class="t-sub">${esc(r.place||r.country||'')} · ${esc(r.date||'')}</div><div class="t-row"><span>Risk severity</span><span style="color:${sevColor(r.risk||1)};font-weight:600">${r.risk} / 9</span></div>${dev?'<div class="t-row"><span>New developments</span><span>yes</span></div>':''}<div class="t-foot">Click to open the full brief →</div>`))
+        .on('mouseleave',hideChartTip)
+        .on('click',()=>{ hideChartTip(); if(typeof selectEvent==='function') selectEvent(i); });
+    });
+  });
+  const axis=svg.append('g').attr('class','tl-axis').attr('transform',`translate(0,${m.t+plotH})`);
+  const ticks=6;
+  for(let i=0;i<=ticks;i++){ const dv=i*TL_WINDOW_DAYS/ticks; const dt=new Date(startMs+dv*864e5); const xx=x(dv);
+    axis.append('line').attr('x1',xx).attr('x2',xx).attr('y1',0).attr('y2',5).attr('stroke',col('--color-divider'));
+    axis.append('text').attr('x',xx).attr('y',17).attr('text-anchor',i===0?'start':i===ticks?'end':'middle').attr('font-size','11px').attr('fill',col('--ink-4')).text(dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'}));
+  }
+  svg.append('text').attr('x',m.l).attr('y',16).attr('font-size','13px').attr('font-weight','600').attr('fill',col('--color-text')).text('Source activity · last '+TL_WINDOW_DAYS+' days');
+  svg.append('text').attr('x',tw-m.r).attr('y',16).attr('text-anchor','end').attr('font-size','12px').attr('fill',col('--ink-4')).text('top 5 by unique articles · shades = top countries · dot = event');
+}
+document.addEventListener('rawarticles', () => { const tlw=document.getElementById('timelineWrap'); if(tlw && tlw.style.display!=='none') renderTimeline(); });
 
 function tooltipHTML(m) {
   const fill = sevColor(m.risk||1);
@@ -5090,8 +5220,11 @@ function renderEventList() {
   eventListEl.innerHTML = header + (vis.length ? vis.map(({r,i}) => {
     const doc = eventDocumentation(r.pathogen, r.geoCountry);
     const scope = isNational(r.place) ? 'National' : 'Subnational';
+    const placeStr = r.place ? esc(r.place) : '';
+    const locLine = placeStr ? `<p class="event-loc" title="${placeStr}"><svg viewBox="0 0 256 256" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M128 16a88.1 88.1 0 0 0-88 88c0 75.3 80 132.17 83.41 134.55a8 8 0 0 0 9.18 0C136 236.17 216 179.3 216 104a88.1 88.1 0 0 0-88-88Zm0 56a32 32 0 1 1-32 32 32 32 0 0 1 32-32Z"/></svg><span class="el-txt">${placeStr}</span></p>` : '';
     return `<div class="event-item${i===selectedIdx?' selected':''}${hasDevelopments(r)?' has-dev':''}" data-idx="${i}">
       <p class="event-title">${highlightEventTitle(r, false)}</p>
+      ${locLine}
       <div class="event-meta"><span>${r.date} · ${scope}${r.crossover?' · zoonotic':''}</span><span class="tag ${riskTagClass(r.risk)}" title="${r.riskRationale||''}">Risk ${r.risk}</span></div>
       <div class="event-doc"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="doc-meta">${doc.vettings} vettings · ${doc.days}d reporting</span>${eventFlagsHtml(r)}</div>
     </div>`;
@@ -5735,7 +5868,7 @@ function fetchReports() {
     const geo = GEO[r.geoCountry] || {};
     const rec = records.find(x => x.country===r.geoCountry && x.pathogenRaw===r.pathogen);
     return { id:'ev'+i, reportIdx:i, title:r.title, risk:r.risk, country:r.geoCountry, region:geo.region||'',
-      pathogen:r.pathogen, disease:r.disease, place:r.place, date:r.date, lonlat:r.lonlat.slice(),
+      pathogen:r.pathogen, disease:r.disease, place:r.place, date:r.date, articles:(r.urls||[]).length, lonlat:r.lonlat.slice(),
       scope: isNational(r.place) ? 'national' : 'subnational',
       cases: rec?rec.cases:null, deaths: rec?rec.deaths:null };
   }).filter(Boolean);
