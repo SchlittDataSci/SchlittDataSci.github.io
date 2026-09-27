@@ -6,6 +6,9 @@
 
 /* ================= compact layout ================= */
 html.m-compact { --m-tab-h: 58px; scroll-padding-top: 64px; }
+html.m-compact, html.m-compact body { max-width: 100%; overflow-x: clip; }   /* nothing may widen the page — a wide page leaves phones zoomed out after rotation */
+html.m-compact :is(.grid-main, .row-2col, .briefs-split) { grid-template-columns: minmax(0, 1fr); }   /* 1fr = min-content floor; the plots header pushed it to ~460px */
+html.m-compact :is(.grid-main, .row-2col, .briefs-split) > *, html.m-compact .card { min-width: 0; max-width: 100%; box-sizing: border-box; }
 html.m-compact body { padding-bottom: calc(var(--m-tab-h) + env(safe-area-inset-bottom)); -webkit-text-size-adjust: 100%; }
 
 html.m-compact .nav { flex-wrap: wrap; gap: 2px 14px; padding: calc(6px + env(safe-area-inset-top)) var(--space-3) 6px; }
@@ -193,8 +196,18 @@ html.m-touch .table-card.m-full .table-scroll { flex: 1 1 auto; min-height: 0; o
   html.m-touch .table-card.m-full #tableIntro, html.m-touch .table-card.m-full .m-table-hint { display: none; }
 }
 @media (orientation: portrait) {
-  html.m-touch.m-full-open:not(.m-rotate-dismissed) .m-rotate { display: flex; }
+  html.m-touch.m-full-open:not(.m-rotate-dismissed):not(.m-pseudo-open) .m-rotate { display: flex; }
 }
+/* pseudo-landscape: the full-screen card turned 90° clockwise to fill a portrait screen (iPhone, or no orientation lock) */
+html.m-touch .m-full.m-pseudo-land { inset: auto; top: 0; left: 100vw; width: 100dvh !important; height: 100vw !important; max-width: none; transform: rotate(90deg); transform-origin: 0 0;
+  padding: var(--space-3) calc(var(--space-3) + env(safe-area-inset-bottom)) var(--space-3) calc(var(--space-3) + env(safe-area-inset-top)); }
+html.m-touch .m-pseudo-land .m-expand { top: 8px; }
+html.m-touch .map-card.m-pseudo-land > .card-title, html.m-touch .map-card.m-pseudo-land .map-legend { display: none; }
+html.m-touch .map-card.m-pseudo-land .map-head { padding-right: 96px; }
+html.m-touch .plots-card.m-pseudo-land .chart-wrap { height: auto; flex: 1 1 0; min-height: 120px; }
+html.m-touch .plots-card.m-pseudo-land .source-chart-wrap { height: 18vw; min-height: 0; }
+html.m-touch .plots-card.m-pseudo-land #outlierNote, html.m-touch .plots-card.m-pseudo-land #barEvidenceLegend { display: none; }
+html.m-touch .table-card.m-pseudo-land #tableIntro, html.m-touch .table-card.m-pseudo-land .m-table-hint { display: none; }
 html.m-touch .m-rotate { align-items: center; gap: 10px; position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 56;
   width: max-content; max-width: calc(100vw - 24px); box-sizing: border-box; padding: 8px 8px 8px 14px; font-size: var(--fs-2); color: var(--color-text);
   background: var(--color-neutral-800); border: 1px solid var(--color-accent-700); border-radius: 999px; box-shadow: var(--shadow-md); }

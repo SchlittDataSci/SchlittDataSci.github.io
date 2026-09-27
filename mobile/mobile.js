@@ -72,7 +72,16 @@
     };
     [mqC, mqT].forEach(function (m) { m.addEventListener ? m.addEventListener('change', onChange) : m.addListener(onChange); });
     d.addEventListener('keydown', function (e) { if (e.key === 'Escape') { exitFull(); closeSheet(); hidePeek(); } });
-    d.addEventListener('fullscreenchange', function () { if (!d.fullscreenElement && fsOwned) { fsOwned = false; exitFull(); } });
+    ['fullscreenchange', 'webkitfullscreenchange'].forEach(function (ev) {
+      d.addEventListener(ev, function () { if (!fsEl() && fsOwned) { fsOwned = false; exitFull(); } });
+    });
+    var onOrient = function () {
+      if (!active()) return;
+      if ($('.m-full')) applyPseudo();
+      resetViewport();
+      requestAnimationFrame(function () { W.dispatchEvent(new Event('resize')); });
+    };
+    mqPortrait.addEventListener ? mqPortrait.addEventListener('change', onOrient) : mqPortrait.addListener(onOrient);
     var rt = 0;
     W.addEventListener('resize', function () {
       if (!active()) return; clearTimeout(rt);
@@ -369,20 +378,52 @@
     r.querySelector('button').addEventListener('click', function () { root.classList.add('m-rotate-dismissed'); });
     d.body.appendChild(r);
   }
+  /* Android: real full screen + orientation lock. iPhone Safari exposes neither API to pages, so there
+     (and wherever the lock is refused) the card is rotated 90° in CSS — a "pseudo-landscape" that still
+     reads sideways with the phone turned. The MapLibre globe is excluded: its gestures don't survive a CSS rotation. */
+  var locked = false;
+  function fsEl() { return d.fullscreenElement || d.webkitFullscreenElement; }
+  function fsReq(n) {
+    var f = n.requestFullscreen || n.webkitRequestFullscreen; if (!f) return null;
+    try { var p = f.call(n, { navigationUI: 'hide' }); return p && p.then ? p : Promise.resolve(); } catch (e) { return null; }
+  }
+  function fsExit() {
+    var f = d.exitFullscreen || d.webkitExitFullscreen; if (!f) return;
+    try { var p = f.call(d); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+  }
+  function canPseudo(c) { var g = c.querySelector('.maplibregl-map'); return !(g && g.offsetParent); }
+  function applyPseudo() {
+    var c = $('.m-full');
+    d.querySelectorAll('.m-pseudo-land').forEach(function (x) { if (x !== c) x.classList.remove('m-pseudo-land'); });
+    if (c) c.classList.toggle('m-pseudo-land', mqPortrait.matches && !locked && canPseudo(c));
+    root.classList.toggle('m-pseudo-open', !!$('.m-pseudo-land'));
+  }
   function tryLandscape() {
+    locked = false;
     if (!mqPortrait.matches) return;
-    try {
-      if (!d.fullscreenElement && root.requestFullscreen) {
-        root.requestFullscreen({ navigationUI: 'hide' }).then(function () {
-          fsOwned = true;
-          if (screen.orientation && screen.orientation.lock) return screen.orientation.lock('landscape');
-        }).catch(function () {});   // iOS / desktop: no API — the rotate prompt covers it
-      }
-    } catch (e) {}
+    applyPseudo();   // immediate; dropped again if the real lock succeeds
+    var p = fsEl() ? Promise.resolve() : fsReq(root);   // must stay inside the tap's call stack
+    if (!p) return;
+    p.then(function () {
+      if (fsEl()) fsOwned = true;
+      if (screen.orientation && screen.orientation.lock) return screen.orientation.lock('landscape').then(function () { locked = true; applyPseudo(); });
+    }).catch(function () {});
   }
   function releaseLandscape() {
+    locked = false;
     try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch (e) {}
-    try { if (fsOwned && d.fullscreenElement && d.exitFullscreen) { fsOwned = false; d.exitFullscreen().catch(function () {}); } } catch (e) {}
+    if (fsOwned && fsEl()) { fsOwned = false; fsExit(); }
+    d.querySelectorAll('.m-pseudo-land').forEach(function (x) { x.classList.remove('m-pseudo-land'); });
+    root.classList.remove('m-pseudo-open');
+    resetViewport();
+  }
+  // Rotating (or leaving full screen) can leave mobile browsers at a stale zoom; pin scale 1 briefly to snap back.
+  function resetViewport() {
+    var vp = d.querySelector('meta[name="viewport"]'); if (!vp) return;
+    var base = vp.getAttribute('data-m-base') || vp.content;
+    vp.setAttribute('data-m-base', base);
+    vp.content = base + ', maximum-scale=1';
+    setTimeout(function () { vp.content = base; }, 400);
   }
   function setFull(card, on) {
     d.querySelectorAll('.m-full').forEach(function (c) { if (c !== card) c.classList.remove('m-full'); });
