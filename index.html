@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>OSINT-VHF — Viral Hemorrhagic Fever & Selected Pathogens Surveillance</title>
 <link rel="stylesheet" href="_ds/nocturne-c236f95b-6f2d-4f5b-9bdc-974f09e4a112/styles.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -648,7 +648,26 @@
     .table { font-size: 13px; }
     #subLegend { grid-template-columns: repeat(2, minmax(0,1fr)); }
   }
+
+  /* Tooltip flip (map pane): below-the-point placement when there's no room above. */
+  #tooltip.tip-below { transform: translate(-50%, 0); }
+  /* Event reports + brief — one type scale. Three sizes only: 19 headline (heading face) ·
+     15 section / context line · 13 everything else. Two weights: 400 and 600. */
+  .brief-headline { font-family: var(--font-heading); font-size: var(--fs-4); font-weight: var(--font-heading-weight); line-height: 1.25; letter-spacing: -0.005em; }
+  #briefContent h2, #briefModalBody h2, #briefContent summary, #briefModalBody summary,
+  .brief-content summary, .brief-content summary span { font-size: var(--fs-3) !important; font-weight: 600 !important; line-height: 1.35; }
+  .brief-content h2 strong, .brief-content h2 b { font: inherit; }
+  #briefContent h3, #briefModalBody h3 { font-size: var(--fs-2); font-weight: 600; }
+  .fb-pathogen { font-weight: 600; }
+  .ev-flag, .dev-item .dev-label, .brief-content summary::before { font-weight: 600; }
+  .dev-day > time, .dev-entry .dev-type, .dev-entry .dev-geo { font-size: var(--fs-2); }
+  :is(#eventList, #briefContent, #briefModalBody) :is(b, strong) { font-weight: 600; }
+  :is(#briefContent, #briefModalBody) :is(p, li, td, th, small, span, div, a):not(.brief-headline):not(.doc-badge):not(.tag):not([class*="dev-"]) { font-size: inherit; }
+  :is(#briefContent, #briefModalBody) { font-size: var(--fs-2); }
 </style>
+<!-- Mobile layer (additive; inert on mouse desktops) — see MOBILE.md -->
+<link rel="stylesheet" href="mobile/mobile.css">
+<script src="mobile/mobile.js"></script>
 </head>
 <body class="preload">
 
@@ -2788,7 +2807,7 @@ function addGlobeMarkers() {
     if (!m.lonlat) return;
     const o = gPX.get(m) || [0, 0];
     const el = globeMarkerEl(m, o[0].toFixed(1), o[1].toFixed(1));
-    const popup = new maplibregl.Popup({ offset:12, closeButton:false, anchor:'bottom', className:'globe-pop' }).setHTML(tooltipHTML(m));
+    const popup = new maplibregl.Popup({ offset:12, closeButton:false, className:'globe-pop', maxWidth:'280px' }).setHTML(tooltipHTML(m));
     const mk = new maplibregl.Marker({ element:el }).setLngLat(m.lonlat).setPopup(popup).addTo(globe);
     el.addEventListener('mouseenter', () => { if (!popup.isOpen()) mk.togglePopup(); });
     el.addEventListener('mouseleave', () => popup.remove());
@@ -2807,7 +2826,7 @@ function addGlobeMarkers() {
     const el = document.createElement('div');
     el.style.cssText = `width:0;height:0;overflow:visible;z-index:1`;
     el.innerHTML = `<div style="width:${size}px;height:${size}px;cursor:pointer;pointer-events:auto;transform:translate(calc(-50% + ${o[0].toFixed(1)}px),calc(-50% + ${o[1].toFixed(1)}px))"><svg viewBox="0 0 20 20" width="${size}" height="${size}" style="overflow:visible;display:block"><path d="M2 5 L18 5 L10 17 Z" fill="none" stroke="var(--color-accent-300)" stroke-width="1.5" opacity="0.9"></path></svg></div>`;
-    const popup = new maplibregl.Popup({ offset:10, closeButton:false, anchor:'bottom', className:'globe-pop' }).setHTML(unvettedTooltipHTML(d));
+    const popup = new maplibregl.Popup({ offset:10, closeButton:false, className:'globe-pop', maxWidth:'280px' }).setHTML(unvettedTooltipHTML(d));
     const mk = new maplibregl.Marker({ element:el }).setLngLat(d.lonlat).setPopup(popup).addTo(globe);
     el.addEventListener('mouseenter', () => { if (!popup.isOpen()) mk.togglePopup(); });
     el.addEventListener('mouseleave', () => popup.remove());
@@ -3080,6 +3099,9 @@ function tlRawOnly(pathogen, startMs, endMs, dayOf, metric){
   });
   return out;
 }
+// Mobile layer (mobile/mobile.js) sets these root classes on phones/touch only; on a mouse desktop this
+// is always false, so every tlMobile() branch below leaves the desktop timeline exactly as it was.
+function tlMobile(){ const c=document.documentElement.classList; return c.contains('m-touch')||c.contains('m-compact'); }
 function renderTimeline(){
   const svg=d3.select('#timelineSvg'); if(svg.empty()) return;
   const wrap=document.getElementById('timelineWrap'); if(!wrap) return;
@@ -3170,6 +3192,10 @@ function renderTimeline(){
   x=d3.zoomIdentity.translate(timelineTransform.x||0,0).scale(_zk).rescaleX(x);
   let S=(rowGap*1.7*0.8)/gMax*_zk;
   const yBase=y=>(y*_zk+_zy);
+  // Mobile: once panned/zoomed, glyphs whose date (or lane) leaves the frame are culled instead of
+  // being clamped to the frame edge, and per-date glyph caps are lower.
+  const tlCull=tlMobile()&&(_zk>1||(timelineTransform.x||0)!==0||_zy!==0);
+  const tlInX=dx=>{ const sx=x(dx); return sx>=m.l-2&&sx<=tw-m.r+2; };
   const tlUnit=metric==='risk'?'risk score':'articles';
   svg.append('text').attr('x',m.l).attr('y',18).attr('font-size','14px').attr('font-weight','600').attr('fill',col('--color-text'))
     .text(metric==='risk'?('Summed sublocation risk scores by date and country · last '+TL_WINDOW_DAYS+' days'):('Distribution of '+tlUnit+' by date and country · last '+TL_WINDOW_DAYS+' days'));
@@ -3295,7 +3321,8 @@ function renderTimeline(){
         if(!byKey.has(key)){ const gg={day,cat,items:[]}; byKey.set(key,gg); groups.push(gg); }
         byKey.get(key).items.push(dd);
       });
-      devGroups=groups.slice(0,10);
+      devGroups=(tlCull?groups.filter(gg=>tlInX(dayOf(Date.parse(gg.day)))):groups).slice(0,tlMobile()?6:10);
+      if(tlCull&&(y0<m.t||y0-6>m.t+plotH)) devGroups=[];   // lane baseline scrolled out of frame
       const packDev=()=>{
         const laneRight=[];
         [...devGroups].sort((a,b)=>a._px-b._px).forEach(gg=>{
@@ -3313,6 +3340,7 @@ function renderTimeline(){
         gg._dateX=Math.max(m.l+4,Math.min(tw-m.r-2,x(dayOf(Date.parse(gg.day)))));
         gg._px=Math.max(m.l+gg._cw/2,Math.min(tw-m.r-gg._cw/2,gg._dateX));
       });
+      if(tlCull) devGroups=devGroups.filter(gg=>{ const sx=x(dayOf(Date.parse(gg.day))); return sx-gg._cw/2>=m.l&&sx+gg._cw/2<=tw-m.r; });
       packDev();
       const chipPy=gg=>{ const xi=xiOf(dayOf(Date.parse(gg.day))); return Math.max(28,(y0-d.total[xi]*S)-16-gg._lane*24); };
       devGroups.forEach(gg=>{
@@ -3326,6 +3354,8 @@ function renderTimeline(){
         while(tlChipHitsLabel(gg._px,py,gg._cw,18)&&bump++<6) py=Math.max(28,py-24);
         gg._py=py;
       });
+      if(tlCull) devGroups=devGroups.filter(gg=>{ const xi=xiOf(dayOf(Date.parse(gg.day))); const top=(y0-d.total[xi]*S)-16-gg._lane*24;
+        return top>=m.t-24&&gg._py>=m.t-24&&gg._py<=m.t+plotH&&gg._px-gg._cw/2>=m.l&&gg._px+gg._cw/2<=tw-m.r; });
     } catch(e){ devGroups=[]; }
     const chipSpots=devGroups.map(gg=>({x:gg._px,y:gg._py,hw:gg._cw/2+3,hh:12}));
     // Already-placed glyphs this lane (events + unvetted, in draw order) for cross-group packing.
@@ -3350,7 +3380,7 @@ function renderTimeline(){
       const items=[...grp.vetted.map(v=>({...v,kind:'vetted'})),...grp.unvetted.map(u=>({...u,kind:'unvetted'}))];
       // Vetted first so they claim the centre, most readable slots.
       items.sort((a,b)=>(a.kind==='vetted'?0:1)-(b.kind==='vetted'?0:1));
-      const capTotal=22;
+      const capTotal=tlMobile()?8:22;
       const shown=items.slice(0,capTotal), overflow=items.length-shown.length;
       const maxR=Math.max(7,...shown.map(glyphR));
       const offs=scatterRings(shown.length, maxR*2+3);
@@ -3360,6 +3390,7 @@ function renderTimeline(){
         const ay=bandMid(band,xi);
         // Unified packing: route around development chips first, then already-placed glyphs.
         const desX=x(p.day)+p.ox, desY=laneClamp(ay+p.oy,xi);
+        if(tlCull&&(!tlInX(p.day)||ay+p.oy<m.t-8||ay+p.oy>m.t+plotH+4)) return;
         const urr=8.5;
         const ufp=tlPackGlyph(desX,desY,urr,chipSpots,lanePlaced,laneBounds());
         const px=ufp[0], py=ufp[1];
@@ -3386,6 +3417,7 @@ function renderTimeline(){
         const dev=(typeof hasDevelopments==='function' && hasDevelopments(r));
         const vrr=dev?10.5:8;
         const desX=x(p.dx)+p.ox, desY=laneClamp(ay+p.oy,xi);
+        if(tlCull&&(!tlInX(p.dx)||ay+p.oy<m.t-8||ay+p.oy>m.t+plotH+4)) return;
         const vfp=tlPackGlyph(desX,desY,vrr,chipSpots,lanePlaced,laneBounds());
         const px=vfp[0], py=vfp[1];
         lanePlaced.push({x:px,y:py,r:vrr});
@@ -3395,7 +3427,7 @@ function renderTimeline(){
           .on('mouseleave',hideChartTip)
           .on('click',()=>{ hideChartTip(); bringFront(); if(typeof selectEvent==='function') selectEvent(i); });
       });
-      if(overflow>0){
+      if(overflow>0&&!(tlCull&&!tlInX(shown[0].kind==='vetted'?shown[0].dx:shown[0].day))){
         const first=shown[0];
         const xi=xiOf(first.kind==='vetted'?first.dx:first.day), band=bandOf(first.kind==='vetted'?(first.cn==='Other'?null:first.cn):first.country);
         const ay=band?y0-band.upper[xi]*S:y0;
@@ -3472,7 +3504,9 @@ function renderTimeline(){
     axis.append('text').attr('x',sx).attr('y',17).attr('text-anchor',i===0?'start':i===ticks?'end':'middle').attr('font-size','11px').attr('fill',col('--ink-4')).text(dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'}));
   }
   const tlNode=svg.node();
-  const tlZoom=tlNode.__tlZoom||(tlNode.__tlZoom=d3.zoom().scaleExtent([1,8]).extent([[m.l,0],[Math.max(m.l+1,tw-m.r),th]]).translateExtent([[m.l-80,-th*8],[Math.max(m.l+1,tw-m.r)+80,th*9]]).filter(ev=>!ev.button&&(ev.type==='wheel'||ev.type==='mousedown'||ev.type.startsWith('touch'))).on('zoom',ev=>{ timelineTransform=ev.transform; renderTimeline(); }));
+  const tlZoom=tlNode.__tlZoom||(tlNode.__tlZoom=d3.zoom().scaleExtent([1,8]).extent([[m.l,0],[Math.max(m.l+1,tw-m.r),th]]).translateExtent([[m.l-80,-th*8],[Math.max(m.l+1,tw-m.r)+80,th*9]]).filter(ev=>!ev.button&&(ev.type==='wheel'||ev.type==='mousedown'||ev.type.startsWith('touch'))).on('zoom',ev=>{ timelineTransform=ev.transform;
+    // Mobile: coalesce zoom ticks to one render per frame (desktop renders every tick, unchanged).
+    if(tlMobile()){ if(!tlNode.__raf) tlNode.__raf=requestAnimationFrame(()=>{ tlNode.__raf=0; renderTimeline(); }); } else renderTimeline(); }));
   svg.call(tlZoom).style('cursor','move').on('dblclick.zoom',null).on('dblclick',()=>{ svg.call(tlZoom.transform,d3.zoomIdentity); });
   if(!tlNode.__tlTouch){
     tlNode.__tlTouch = true;
@@ -3559,7 +3593,12 @@ function showTooltip(event, html) {
   let cx = event.clientX - rect.left;
   if (rect.width > 2 * (half + pad)) cx = Math.max(half + pad, Math.min(rect.width - half - pad, cx));
   tooltip.style.left = cx + 'px';
-  tooltip.style.top = (event.clientY - rect.top - 10) + 'px';
+  // Flip below the point when the box would clip the top of the map pane, and keep it inside the
+  // pane's bottom edge either way (the pane is overflow:hidden, so anything outside is cropped).
+  const cy = event.clientY - rect.top, h = tooltip.offsetHeight;
+  const below = cy - 10 - h < pad;
+  tooltip.classList.toggle('tip-below', below);
+  tooltip.style.top = (below ? Math.min(cy + 14, Math.max(pad, rect.height - h - pad)) : (cy - 10)) + 'px';
 }
 function hideTooltip() { tooltip.classList.remove('show'); }
 
@@ -5751,17 +5790,21 @@ function drawDevelopmentMarkers(svg, x, pathogen, country, place = '', granulari
     g.cw = Math.max(26, Math.round(13 + g.label.length * 6.3));
     g.px = x(new Date(g.day + 'T00:00:00Z'));
   });
+  // Mobile (tlMobile): chips whose box would cross the plot frame on pan/zoom are culled, like the
+  // clipped series glyphs, rather than overhanging the axes. Desktop keeps every in-domain chip.
+  const shown = (typeof tlMobile === 'function' && tlMobile())
+    ? capped.filter(g => g.px - g.cw / 2 >= margin.left && g.px + g.cw / 2 <= tw - margin.right) : capped;
   // Lane packing: place each chip at its real date (px); drop it to the first vertical lane clear of the
   // previous chip in that lane. Lanes wrap once the plot's 85% depth is used.
   const laneRight = [];
-  capped.forEach(g => {
+  shown.forEach(g => {
     const left = g.px - g.cw / 2;
     let lane = laneRight.findIndex(r => left - r >= 4);
     if (lane === -1) lane = laneRight.length < maxLanes ? laneRight.length : (laneRight.length % maxLanes);
     laneRight[lane] = g.px + g.cw / 2;
     g.py = startY + lane * gap;
   });
-  capped.forEach(g => {
+  shown.forEach(g => {
     const { cat, px, py, cw, label, items: gi } = g;
     const summary = gi.length > 1 ? `${gi.length} ${cat.full} developments` : gi[0].headline;
     const mark = layer.append('g').attr('tabindex',0).attr('role','img')
@@ -5993,7 +6036,7 @@ function renderBrief() {
     ? `<a class="meta-ref" href="${who}" target="_blank" rel="noopener" title="WHO — ${pName}">${pName} ↗</a>`
     : pName;
   briefMetaEl.innerHTML = '<span style="font-size:15px;font-weight:600;color:var(--color-accent-200)">' + pHtml + '</span>' +
-    '<span style="font-size:15px;font-weight:700;color:#fff"> · ' + r.country + '</span>' +
+    '<span style="font-size:15px;font-weight:600;color:var(--color-text)"> · ' + r.country + '</span>' +
     '<span style="font-size:15px;font-weight:400;color:var(--ink-3)"> · ' + r.date + '</span>';
   const scope = isNational(r.place) ? 'National report' : 'Subnational report';
   // Citation-derived evidence profile replaces the measurement-derived documentation badge here:

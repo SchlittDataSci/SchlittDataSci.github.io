@@ -1,0 +1,205 @@
+/* OSINT-VHF mobile layer. Every rule is scoped to html.m-compact (viewport ≤ 760px) or html.m-touch
+   (touch-primary pointer). mobile.js never sets either class on a mouse-driven desktop, so nothing
+   in this file can apply there. Tokens only — no new colours. */
+
+.m-tabbar, .m-filterbar, .m-sheet-head, .m-peek, .m-expand, .m-backdrop, .m-view-link, .m-toast, .m-rotate, .m-table-hint { display: none; }
+
+/* ================= compact layout ================= */
+html.m-compact { --m-tab-h: 58px; scroll-padding-top: 64px; }
+html.m-compact body { padding-bottom: calc(var(--m-tab-h) + env(safe-area-inset-bottom)); -webkit-text-size-adjust: 100%; }
+
+html.m-compact .nav { flex-wrap: wrap; gap: 2px 14px; padding: calc(6px + env(safe-area-inset-top)) var(--space-3) 6px; }
+html.m-compact .nav .brand-logo { width: 140px; height: 26px; margin-right: auto; flex: none; }
+html.m-compact .nav::before { content: ""; order: 3; flex-basis: 100%; height: 0; }
+html.m-compact .nav a { order: 4; font-size: var(--fs-2); min-height: 32px; display: inline-flex; align-items: center; color: var(--ink-3); }
+html.m-compact .nav #syncTag { order: 1; flex: 0 1 auto; min-width: 0; max-width: calc(100% - 140px - 40px - 40px); font-size: var(--fs-1); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+html.m-compact .nav #syncBtn { order: 2; flex: none; font-size: 0; gap: 0; width: 40px; height: 40px; padding: 0; justify-content: center; }
+html.m-compact .nav #syncBtn .icon { width: 18px; height: 18px; margin: 0; }
+
+html.m-compact .wrap { padding: var(--space-2) var(--space-3) var(--space-6); }
+html.m-compact .page-head { flex-direction: column; align-items: stretch; gap: var(--space-2); }
+html.m-compact .page-title { font-size: var(--fs-5); line-height: 1.2; text-wrap: balance; }
+html.m-compact .page-head .field-inline { flex-direction: column; align-items: stretch; gap: 4px; }
+html.m-compact .page-head .input, html.m-compact .toolbar .input { width: 100%; min-width: 0 !important; min-height: 44px; font-size: 16px; } /* 16px stops iOS focus-zoom */
+
+/* filter bar + the real toolbar as a bottom sheet */
+html.m-compact .m-filterbar { display: flex; align-items: center; gap: var(--space-2); position: sticky; top: 0; z-index: 40;
+  margin: var(--space-2) calc(-1 * var(--space-3)) 0; padding: 8px var(--space-3);
+  background: color-mix(in srgb, var(--color-bg) 90%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+html.m-compact .m-filter-btn { flex: none; min-height: 40px; display: inline-flex; align-items: center; gap: 6px; }
+html.m-compact .m-filter-btn svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linejoin: round; }
+html.m-compact .m-filter-count:not(:empty) { min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; font-size: var(--fs-1); line-height: 18px; text-align: center;
+  background: var(--color-accent-800); color: var(--color-accent-100); }
+html.m-compact .m-filter-summary { min-width: 0; font-size: var(--fs-2); color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+html.m-compact .toolbar { display: none; }
+html.m-compact.m-sheet-open .toolbar { display: flex; flex-direction: column; align-items: stretch; gap: var(--space-3);
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 58; max-height: 84dvh; overflow-y: auto; margin: 0;
+  padding: var(--space-3) var(--space-4) calc(var(--space-4) + env(safe-area-inset-bottom));
+  background: var(--color-surface); border-radius: var(--radius-lg) var(--radius-lg) 0 0; box-shadow: var(--shadow-lg); }
+html.m-compact.m-sheet-open .toolbar .field-inline { flex-direction: column; align-items: stretch; gap: 4px; }
+html.m-compact.m-sheet-open .toolbar #dataReportBtn { width: 100%; min-height: 44px; justify-content: center; }
+html.m-compact.m-sheet-open .m-sheet-head { display: flex; align-items: center; justify-content: space-between; position: sticky; top: calc(-1 * var(--space-3));
+  margin: calc(-1 * var(--space-3)) calc(-1 * var(--space-4)) 0; padding: var(--space-3) var(--space-4); background: var(--color-surface); z-index: 1; }
+html.m-compact .m-sheet-title { margin: 0; font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: var(--fs-4); }
+html.m-compact .m-sheet-done { min-height: 40px; }
+html.m-compact.m-sheet-open .m-backdrop { display: block; position: fixed; inset: 0; z-index: 57; background: color-mix(in srgb, var(--color-bg) 72%, transparent); }
+html.m-compact.m-sheet-open { overflow: hidden; }
+
+/* sections */
+html.m-compact .section-label { margin-top: var(--space-6); }
+html.m-compact .seg { max-width: 100%; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; }
+html.m-compact .seg::-webkit-scrollbar { display: none; }
+html.m-compact .seg-opt { flex: none; white-space: nowrap; min-height: 36px; }
+html.m-compact #chartTypeSeg .seg-opt, html.m-compact #granularitySeg .seg-opt, html.m-compact #reportTypeSeg .seg-opt { padding: 4px 10px; }
+
+html.m-compact .map-card, html.m-compact .plots-card { position: relative; }
+html.m-compact .map-head { flex-wrap: wrap; gap: var(--space-2); }
+html.m-compact .map-legend { flex-wrap: wrap; gap: 6px 12px; font-size: var(--fs-1); }
+html.m-compact .map-wrap { height: max(280px, 74vw); }
+html.m-compact .zoom-controls button { width: 40px; height: 40px; }
+html.m-compact .summary-card { min-height: 0; }
+html.m-compact .stat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); }
+html.m-compact .stat-grid .stat-num { font-size: var(--fs-5); }
+html.m-compact .stat-grid .stat-label { font-size: var(--fs-1); }
+
+html.m-compact .briefs-card { min-height: 0; }
+html.m-compact .events-col { max-height: 52dvh; }
+html.m-compact .brief-col .card-head-row { flex-wrap: wrap; }
+html.m-compact .brief-body { overflow: visible; }
+
+html.m-compact .plots-card { min-height: 0; }
+html.m-compact .plots-card .card-head-row { flex-wrap: wrap; padding-right: 116px; }
+html.m-compact .chart-wrap { height: 260px; }
+html.m-compact .source-chart-wrap { height: 120px; }
+
+html.m-compact .table-card .card-head-row, html.m-compact .table-card .card-head-row > span { flex-wrap: wrap; gap: var(--space-2); }
+html.m-compact .table-scroll { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
+html.m-compact .table-scroll .table { border-collapse: separate; border-spacing: 0; min-width: 0; }   /* Safari: sticky cells misbehave under collapse */
+/* Headers break at every space (one word per line) so columns size to their widest word or cell,
+   not to the full header phrase. width:1px in auto table layout = min-content. */
+html.m-compact .table-scroll th { white-space: normal; width: 1px; line-height: 1.25; vertical-align: middle; hyphens: none; overflow-wrap: normal; }
+html.m-compact .table-scroll th:nth-child(5) { min-width: 0; }
+html.m-compact .m-table-hint { display: flex; align-items: center; gap: 6px; margin: 0 0 6px; font-size: var(--fs-1); color: var(--ink-3); transition: opacity .3s; }
+html.m-compact .m-table-hint.m-seen { opacity: 0; height: 0; margin: 0; overflow: hidden; }
+html.m-compact .table-card { position: relative; }
+html.m-compact .table-scroll:not(.m-at-end) { -webkit-mask-image: linear-gradient(90deg, rgb(0 0 0) calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, rgb(0 0 0) calc(100% - 28px), transparent); }
+html.m-compact .table-card .card-head-row { padding-right: 116px; }
+html.m-compact .table-scroll td:first-child, html.m-compact .table-scroll th:first-child { position: sticky; left: 0; z-index: 1; background: var(--color-surface);
+  box-shadow: 1px 0 0 var(--color-divider); max-width: 34vw; }
+html.m-compact .table-scroll thead th:first-child { z-index: 3; background: var(--color-bg); }
+html.m-compact #tablePager { flex-wrap: wrap; gap: var(--space-2); }
+html.m-compact #tablePager .btn { min-height: 40px; }
+
+html.m-compact footer.note { flex-direction: column; align-items: flex-start; }
+html.m-compact .m-view-link, html.m-forced-desktop .m-view-link { display: inline-flex; min-height: 40px; align-items: center; font-size: var(--fs-2); color: var(--color-accent-300); }
+
+/* dialogs → bottom sheets / full screen */
+html.m-compact .dialog-backdrop { padding: 0 !important; align-items: flex-end !important; }
+html.m-compact .dialog-backdrop .dialog { width: 100% !important; max-width: none !important; max-height: 92dvh; overflow-y: auto; box-sizing: border-box;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom)); }
+html.m-compact .dialog-actions .btn { min-height: 44px; }
+html.m-compact .brief-modal-backdrop { padding: 0 !important; }
+html.m-compact .brief-modal { width: 100% !important; max-width: none !important; height: 100dvh !important; max-height: none !important; border-radius: 0 !important;
+  padding-top: env(safe-area-inset-top); }
+html.m-compact .brief-modal-head { flex-wrap: wrap; }
+
+/* tab bar */
+html.m-compact .m-tabbar { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+  height: calc(var(--m-tab-h) + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom); box-sizing: border-box;
+  background: color-mix(in srgb, var(--color-bg) 90%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  border-top: 1px solid var(--color-divider); }
+html.m-compact .m-tab { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 44px;
+  background: none; border: 0; padding: 0; color: var(--ink-3); font: 400 var(--fs-1)/1 var(--font-body); cursor: pointer; -webkit-tap-highlight-color: transparent; }
+html.m-compact .m-tab svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+html.m-compact .m-tab[aria-current="true"] { color: var(--color-accent-200); font-weight: 600; }
+html.m-compact .m-tab[aria-current="true"]::before { content: ""; position: absolute; top: 0; left: 30%; right: 30%; height: 2px; border-radius: 0 0 2px 2px; background: var(--color-accent); }
+html.m-compact .m-tab:active { color: var(--color-accent-100); }
+html.m-compact .m-tab:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -4px; border-radius: var(--radius-md); }
+html.m-compact.m-full-open .m-tabbar, html.m-compact.m-sheet-open .m-tabbar { display: none; }
+html.m-compact .m-tab-ic { position: relative; display: inline-flex; border-radius: 999px; padding: 2px 10px; }
+html.m-compact .m-tab.m-news .m-tab-ic::after { content: ""; position: absolute; top: 0; right: 6px; width: 7px; height: 7px; border-radius: 999px;
+  background: var(--color-accent-300); box-shadow: 0 0 0 2px var(--color-bg); }
+html.m-compact .m-tab.m-news { color: var(--color-accent-200); }
+html.m-compact .m-tab.m-pulse .m-tab-ic { animation: m-tab-pulse 1s ease-out 3; }
+@keyframes m-tab-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 70%, transparent); background: color-mix(in srgb, var(--color-accent) 28%, transparent); }
+  100% { box-shadow: 0 0 0 12px transparent; background: transparent; }
+}
+html.m-compact .m-toast { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); position: fixed; left: 8px; right: 8px; z-index: 51;
+  bottom: calc(var(--m-tab-h) + 8px + env(safe-area-inset-bottom)); min-height: 44px; padding: 8px 14px; box-sizing: border-box;
+  font: 400 var(--fs-2)/1.35 var(--font-body); color: var(--color-text); text-align: left; cursor: pointer;
+  background: var(--color-neutral-800); border: 1px solid var(--color-accent-700); border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+  transform: translateY(12px); opacity: 0; visibility: hidden; transition: transform .2s ease, opacity .2s ease, visibility 0s linear .2s; }
+html.m-compact .m-toast.show { transform: none; opacity: 1; visibility: visible; transition: transform .2s ease, opacity .2s ease; }
+html.m-compact .m-toast-go { flex: none; font-weight: 600; color: var(--color-accent-200); }
+html.m-compact .m-peek.show ~ .m-toast.show { display: none; }
+@media (prefers-reduced-motion: reduce) { html.m-compact .m-tab.m-pulse .m-tab-ic { animation: none; background: color-mix(in srgb, var(--color-accent) 28%, transparent); } }
+
+/* ================= touch interaction ================= */
+html.m-touch .tooltip:not(.m-peek-body), html.m-touch .maplibregl-popup.globe-pop { display: none !important; }   /* shown in .m-peek instead — never cropped by the plot frame */
+html.m-touch .section-help, html.m-touch #tableHelpBtn { min-width: 28px; min-height: 28px; }
+
+html.m-touch .m-peek { display: flex; align-items: flex-start; gap: var(--space-2); position: fixed; left: 8px; right: 8px; z-index: 65;
+  bottom: calc(8px + env(safe-area-inset-bottom)); max-height: 46dvh; overflow-y: auto; box-sizing: border-box; padding: 12px 12px 12px 14px;
+  background: var(--color-neutral-800); border: 1px solid var(--color-divider); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+  transform: translateY(calc(100% + 32px)); visibility: hidden; transition: transform .2s ease, visibility 0s linear .2s; }
+html.m-compact .m-peek { bottom: calc(var(--m-tab-h) + 8px + env(safe-area-inset-bottom)); }
+html.m-compact.m-full-open .m-peek { bottom: calc(8px + env(safe-area-inset-bottom)); }
+html.m-touch .m-peek.show { transform: none; visibility: visible; transition: transform .2s ease; }
+html.m-touch .m-peek-body { position: static !important; transform: none !important; opacity: 1 !important; pointer-events: auto !important; flex: 1 1 0; min-width: 0;
+  max-width: none !important; margin: 0; padding: 0 !important; border: 0 !important; background: none !important; box-shadow: none !important; font-size: var(--fs-2); }
+html.m-touch .m-peek-note { white-space: pre-line; font-size: var(--fs-2); line-height: 1.45; color: var(--ink-2); }
+html.m-touch .m-peek { flex-wrap: wrap; }
+html.m-touch .m-peek-actions { display: contents; }
+html.m-touch .m-peek-close { order: 1; flex: none; margin: -4px -4px 0 0; }
+html.m-touch .m-peek-open { order: 2; flex: 1 0 100%; }
+html.m-touch .m-peek-open { min-height: 44px; white-space: normal; text-align: center; }
+html.m-touch .m-peek-close { width: 40px; height: 40px; }
+html.m-touch .m-peek-close svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+@media (prefers-reduced-motion: reduce) { html.m-touch .m-peek, html.m-touch .m-peek.show { transition: none; } }
+
+/* inline plots: one finger scrolls the page, taps still select */
+html.m-touch :is(#mapWrap, #chartWrap, #sourceChartWrap) :is(svg, canvas) { touch-action: pan-x pan-y; }
+html.m-touch .map-hint { font-size: 0 !important; }
+html.m-touch .map-hint::after { content: "Tap a marker to preview · Landscape to pan & zoom"; font-size: var(--fs-1); }
+html.m-touch .m-full .map-hint::after { content: "Pinch to zoom · drag to pan · tap a marker to preview"; }
+
+html.m-touch .map-card, html.m-touch .plots-card { position: relative; }
+html.m-touch .table-card { position: relative; }
+html.m-touch .m-expand { display: inline-flex; align-items: center; justify-content: center; gap: 6px; position: absolute; top: 8px; right: 8px; z-index: 6; min-height: 36px; padding: 4px 10px; font-size: var(--fs-2); }
+html.m-touch .m-expand-lbl { white-space: nowrap; }
+html.m-touch .m-expand svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+html.m-touch .m-expand.m-nudge { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 45%, transparent); }
+
+/* full screen (z 55: above the page and tab bar, below the app's own dialogs at 60/70) */
+html.m-full-open { overflow: hidden; }
+html.m-touch .m-full { position: fixed !important; inset: 0; z-index: 55; margin: 0; border-radius: 0; height: auto !important; max-height: none !important; min-height: 0 !important;
+  overflow-y: auto; box-sizing: border-box; padding: calc(var(--space-3) + env(safe-area-inset-top)) var(--space-3) calc(var(--space-3) + env(safe-area-inset-bottom)); background: var(--color-bg); }
+html.m-touch .m-full .m-expand { top: calc(8px + env(safe-area-inset-top)); }
+html.m-touch .map-card.m-full { display: flex; flex-direction: column; }
+html.m-touch .map-card.m-full .map-wrap { flex: 1 1 0; height: auto !important; min-height: 240px; }
+html.m-touch .plots-card.m-full .chart-wrap { height: 48dvh; }
+html.m-touch .plots-card.m-full .source-chart-wrap { height: 22dvh; }
+html.m-touch .m-full :is(#mapWrap, #chartWrap, #sourceChartWrap) :is(svg, canvas) { touch-action: none; }
+html.m-touch .table-card.m-full { display: flex; flex-direction: column; }
+html.m-touch .table-card.m-full .table-scroll { flex: 1 1 auto; min-height: 0; overflow: auto; }
+@media (orientation: landscape) {
+  html.m-touch .m-full { padding-left: calc(var(--space-3) + env(safe-area-inset-left)); padding-right: calc(var(--space-3) + env(safe-area-inset-right)); }
+  html.m-touch .map-card.m-full > .card-title, html.m-touch .map-card.m-full .map-legend { display: none; }
+  html.m-touch .map-card.m-full .map-head { padding-right: 96px; }
+  html.m-touch .plots-card.m-full .chart-wrap { height: 64dvh; }
+  html.m-touch .plots-card.m-full .source-chart-wrap { height: 30dvh; }
+  html.m-touch .table-card.m-full #tableIntro, html.m-touch .table-card.m-full .m-table-hint { display: none; }
+}
+@media (orientation: portrait) {
+  html.m-touch.m-full-open:not(.m-rotate-dismissed) .m-rotate { display: flex; }
+}
+html.m-touch .m-rotate { align-items: center; gap: 10px; position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 56;
+  width: max-content; max-width: calc(100vw - 24px); box-sizing: border-box; padding: 8px 8px 8px 14px; font-size: var(--fs-2); color: var(--color-text);
+  background: var(--color-neutral-800); border: 1px solid var(--color-accent-700); border-radius: 999px; box-shadow: var(--shadow-md); }
+html.m-touch .m-rotate > svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--color-accent-300); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; animation: m-rotate-hint 2.4s ease-in-out infinite; }
+html.m-touch .m-rotate .btn-icon { width: 36px; height: 36px; }
+html.m-touch .m-rotate .btn-icon svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+@keyframes m-rotate-hint { 0%, 30% { transform: rotate(0deg); } 55%, 80% { transform: rotate(-90deg); } 100% { transform: rotate(0deg); } }
+@media (prefers-reduced-motion: reduce) { html.m-touch .m-rotate > svg { animation: none; } }
