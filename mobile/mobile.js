@@ -266,10 +266,13 @@
     }
     return null;
   }
-  function hasClick(n) {
+  // Only the tapped node up to the mark that owns the tooltip counts — a click on some enclosing
+  // group (lane, plot) belongs to a different target and must not make this tip look actionable.
+  function hasClick(n, stop) {
+    stop = stop || hoverSrc(n);
     for (; n && n.nodeType === 1 && n !== d.body; n = n.parentNode) {
       if (n.__on && n.__on.some(function (o) { return o.type === 'click'; })) return true;
-      if (n.tagName === 'svg') break;
+      if (n === stop || n.tagName === 'svg') break;
     }
     return false;
   }
@@ -294,7 +297,8 @@
     if (t.closest(OWN_TAP)) {   // timeline: its own capture handler does inspect→open; mirror the result
       var g = t;
       if (armedNode === g && peek.classList.contains('show')) { armedNode = null; setTimeout(hidePeek, 0); return; }
-      setTimeout(function () { var tip = shownTip(); if (tip) { armedNode = g; showPeek(tip.innerHTML, g, true); } else hidePeek(); }, 0);
+      var act = hasClick(g);
+      setTimeout(function () { var tip = shownTip(); if (tip) { armedNode = g; showPeek(tip.innerHTML, g, act); } else hidePeek(); }, 0);
       return;
     }
 
@@ -339,14 +343,36 @@
 
     hidePeek(); armed = null; armedNode = null;
   }
+  /* Desktop tips carry their own "Click to …" hints (as .t-foot, a .t-row, or a trailing "· click for
+     detail"). On a phone the action lives on the button, so every hint is stripped from the copy —
+     and the button appears only when the tapped mark really has a click handler, never from wording. */
+  var CLICK_RE = /\s*(?:[·—–-]\s*)?\b(?:click|tap)\b\s*(?:to\s+|for\s+)?([^·—]*?)\s*[↗→]?\s*$/i;
+  var LABELS = [[/full brief|brief/i, 'Open brief'], [/subnational/i, 'Subnational detail'], [/source article/i, 'Source articles'],
+    [/list/i, 'List articles'], [/detail/i, 'Details'], [/front/i, 'Bring to front']];
+  function stripHints(box) {
+    var phrase = '';
+    [].slice.call(box.querySelectorAll('.t-foot, .t-row, p, div, span')).reverse().forEach(function (n) {   // leaves first
+      if (!n.isConnected) return;
+      if (n.children.length) {
+        // containers (incl. two-span .t-row): their spans were handled as leaves; drop a row left empty
+        if (n.classList.contains('t-row') && !n.textContent.trim()) n.remove();
+        return;
+      }
+      var txt = n.textContent; if (!/\b(click|tap)\b/i.test(txt)) return;
+      var m = txt.match(CLICK_RE); if (!m) return;
+      phrase = phrase || m[1] || m[0];
+      var rest = txt.slice(0, m.index).replace(/[\s·—–-]+$/, '').trim();
+      if (!rest) n.remove(); else n.textContent = rest;
+    });
+    return phrase;
+  }
+  function actionLabel(phrase) {
+    for (var i = 0; i < LABELS.length; i++) if (LABELS[i][0].test(phrase)) return LABELS[i][1];
+    return 'Open';
+  }
   function showPeek(html, target, actionable) {
     peekBody.innerHTML = html;
-    var foot = peekBody.querySelector('.t-foot'), label = 'Open';
-    if (foot && /^\s*(click|select|tap)\b/i.test(foot.textContent)) {
-      label = foot.textContent.replace(/^\s*(click|select|tap)\s*(to\s+)?/i, '').replace(/[↗→]\s*$/, '').trim();
-      label = label ? label.charAt(0).toUpperCase() + label.slice(1) : 'Open';
-      foot.hidden = true;
-    }
+    var label = actionLabel(stripHints(peekBody));
     peekOpen.hidden = !actionable; peekOpen.textContent = label;
     peek.classList.toggle('has-action', !!actionable);
     peek.classList.add('show');

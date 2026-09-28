@@ -94,7 +94,8 @@ html.m-compact .table-scroll thead th:first-child { z-index: 3; background: var(
 html.m-compact #tablePager { flex-wrap: wrap; gap: var(--space-2); }
 html.m-compact #tablePager .btn { min-height: 40px; }
 
-html.m-compact footer.note { flex-direction: column; align-items: flex-start; }
+html.m-compact footer.note { flex-direction: column; align-items: stretch; gap: var(--space-3); }
+html.m-compact footer.note .footer-badge { min-height: 36px; padding-inline: 12px; }
 html.m-compact .m-view-link, html.m-forced-desktop .m-view-link { display: inline-flex; min-height: 40px; align-items: center; font-size: var(--fs-2); color: var(--color-accent-300); }
 
 /* dialogs → bottom sheets / full screen */
@@ -158,6 +159,7 @@ html.m-touch .m-peek-actions { display: contents; }
 html.m-touch .m-peek-close { order: 1; flex: none; margin: -4px -4px 0 0; }
 html.m-touch .m-peek-open { order: 2; flex: 1 0 100%; }
 html.m-touch .m-peek-open { min-height: 44px; white-space: normal; text-align: center; }
+html.m-touch .m-peek-open[hidden], .m-peek [hidden] { display: none !important; }   /* .btn sets display, which beats the hidden attribute */
 html.m-touch .m-peek-close { width: 40px; height: 40px; }
 html.m-touch .m-peek-close svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
 @media (prefers-reduced-motion: reduce) { html.m-touch .m-peek, html.m-touch .m-peek.show { transition: none; } }
