@@ -79,3 +79,14 @@ States are built in: hovers and pressed states come from the accent ramp, keyboa
 - `theme.html` — the theme's parameters rendered as a reference sheet.
 - `templates/landing/` — a starter page consuming the system the intended way (`index.html`, its `ds-base.js` loader, and the vendored `image-slot.js` its photograph mounts).
 - `assets/photo.jpg` — the reference photograph the imagery page treats.
+
+
+## Third-party files (vendor/)
+
+Self-hosted so visitors' browsers don't contact Google Fonts, unpkg or jsDelivr. Each folder keeps its licence file.
+
+- d3 7.9.0 — ISC — `vendor/d3/`
+- topojson-client 3.1.0 — ISC — `vendor/topojson-client/`
+- MapLibre GL JS 5.6.0 — BSD-3-Clause — `vendor/maplibre-gl/`
+- world-atlas 2.0.2 (countries-110m) — ISC; Natural Earth data, public domain — `vendor/world-atlas/`
+- Inter, Bricolage Grotesque, Hanken Grotesk, Spline Sans Mono — SIL Open Font License 1.1 — `vendor/fonts/` (latin + latin-ext subsets)
