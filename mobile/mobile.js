@@ -382,11 +382,19 @@
 
   /* ---------- scroll-safe plots, full screen + landscape ---------- */
   var nudged = false, fsOwned = false;
+  /* Inline plots: one finger scrolls the page, two fingers pan / pinch-zoom (full screen: one finger too).
+     Only single-finger touchmoves are held back — d3.zoom needs every touchstart/touchend to track fingers,
+     and its touchstart doesn't cancel scrolling. The globe does the same via MapLibre's cooperativeGestures. */
+  var multi = false;
   function lock(e) {
     if (!isTouch()) return;
     var w = e.target.closest && e.target.closest(LOCKED);
-    if (!w || w.closest('.m-full') || e.target.closest('button, .zoom-controls')) return;
-    e.stopPropagation();   // keeps d3.zoom / MapLibre from capturing the page scroll; taps still click
+    if (!w || w.closest('.m-full') || w.querySelector('#globeMap') && e.target.closest('#globeMap') || e.target.closest('button, .zoom-controls')) return;
+    var n = e.touches ? e.touches.length : 1;
+    if (e.type === 'touchstart') { if (n >= 2) multi = true; return; }
+    if (e.type !== 'touchmove') { if (!n) multi = false; return; }
+    if (multi || n >= 2) return;
+    e.stopPropagation();   // single finger: the page scrolls, d3.zoom never pans
     if (e.type === 'touchmove' && !nudged) {
       nudged = true; var c = w.closest('.card'), b = c && c.querySelector('.m-expand');
       if (b) { b.classList.add('m-nudge'); setTimeout(function () { b.classList.remove('m-nudge'); }, 1800); }
@@ -400,7 +408,7 @@
       b.addEventListener('click', function () { setFull(card, !card.classList.contains('m-full')); });
       card.appendChild(b);
     });
-    var r = el('div', 'm-rotate', svg('rotate') + '<span>Pinch to zoom · rotate for a wider view</span><button type="button" class="btn btn-ghost btn-icon" aria-label="Dismiss">' + svg('close') + '</button>');
+    var r = el('div', 'm-rotate', svg('rotate') + '<span>Drag to pan · pinch to zoom</span><button type="button" class="btn btn-ghost btn-icon" aria-label="Dismiss">' + svg('close') + '</button>');
     r.querySelector('button').addEventListener('click', function () { root.classList.add('m-rotate-dismissed'); });
     d.body.appendChild(r);
   }
@@ -454,6 +462,7 @@
       b.setAttribute('aria-label', on ? 'Exit full screen' : 'Open full screen to pan and zoom');
     }
     root.classList.toggle('m-full-open', !!d.querySelector('.m-full'));
+    try { if (typeof globe !== 'undefined' && globe && globe.cooperativeGestures) globe.cooperativeGestures[on ? 'disable' : 'enable'](); } catch (e) {}
     root.classList.remove('m-rotate-dismissed');
     clearTimeout(setFull.t); if (on) setFull.t = setTimeout(function () { root.classList.add('m-rotate-dismissed'); }, 4000);
     if (on) tryLandscape(); else releaseLandscape();

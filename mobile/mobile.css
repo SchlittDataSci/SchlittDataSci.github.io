@@ -167,7 +167,7 @@ html.m-touch .m-peek-close svg { width: 18px; height: 18px; fill: none; stroke: 
 /* inline plots: one finger scrolls the page, taps still select */
 html.m-touch :is(#mapWrap, #chartWrap, #sourceChartWrap) :is(svg, canvas) { touch-action: pan-x pan-y; }
 html.m-touch .map-hint { font-size: 0 !important; }
-html.m-touch .map-hint::after { content: "Tap a marker to preview · Expand to pan & zoom"; font-size: var(--fs-1); }
+html.m-touch .map-hint::after { content: "Two fingers to pan & zoom · Expand for full screen"; font-size: var(--fs-1); }
 html.m-touch .m-full .map-hint::after { content: "Pinch to zoom · drag to pan · tap a marker to preview"; }
 
 html.m-touch .map-card, html.m-touch .plots-card { position: relative; }
@@ -197,7 +197,7 @@ html.m-touch .table-card.m-full .table-scroll { flex: 1 1 auto; min-height: 0; o
   html.m-touch .plots-card.m-full .source-chart-wrap { height: 30dvh; }
   html.m-touch .table-card.m-full #tableIntro, html.m-touch .table-card.m-full .m-table-hint { display: none; }
 }
-@media (orientation: portrait) {
+@media all {
   html.m-touch.m-full-open:not(.m-rotate-dismissed):not(.m-pseudo-open) .m-rotate { display: flex; }
 }
 /* pseudo-landscape: the full-screen card turned 90° clockwise to fill a portrait screen (iPhone, or no orientation lock) */

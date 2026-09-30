@@ -670,8 +670,9 @@
   :is(#briefContent, #briefModalBody) { font-size: var(--fs-2); }
 </style>
 <!-- Mobile layer (additive; inert on mouse desktops) — see MOBILE.md -->
-<link rel="stylesheet" href="mobile/mobile.css">
-<script src="mobile/mobile.js"></script>
+<!-- ?v= forces phones to fetch the new files after a deploy; bump it whenever mobile/ changes -->
+<link rel="stylesheet" href="mobile/mobile.css?v=20260930b">
+<script src="mobile/mobile.js?v=20260930b"></script>
 </head>
 <body class="preload">
 <!-- Terms gate: must be accepted before the dashboard is usable. Bump TERMS_VERSION when the text changes so everyone re-accepts. -->
@@ -2814,7 +2815,9 @@ function globeStyle(sat) { return { version:8, sources:{ base: sat ? ESRI_SAT : 
 function initGlobe() {
   if (globe || typeof maplibregl === 'undefined') return;
   try {
-    globe = new maplibregl.Map({ container:'globeMap', style:globeStyle(false), center:[18,4], zoom:1.4, attributionControl:{ compact:true }, preserveDrawingBuffer:true });
+    globe = new maplibregl.Map({ container:'globeMap', style:globeStyle(false), center:[18,4], zoom:1.4, attributionControl:{ compact:true }, preserveDrawingBuffer:true,
+      // Phones, inline: one finger scrolls the page, two fingers move/zoom the globe. Full screen turns this off (mobile.js).
+      cooperativeGestures: tlMobile() && !document.querySelector('.m-full') });
     globe.addControl(new maplibregl.NavigationControl({ showCompass:true, visualizePitch:true }), 'bottom-right');
     globe.on('style.load', () => {
       try { globe.setProjection({ type:'globe' }); } catch(e){}
@@ -3576,6 +3579,8 @@ function renderTimeline(){
   const tlZoom=tlNode.__tlZoom||(tlNode.__tlZoom=d3.zoom().scaleExtent([1,8]).extent([[m.l,0],[Math.max(m.l+1,tw-m.r),th]]).translateExtent([[m.l-80,-th*8],[Math.max(m.l+1,tw-m.r)+80,th*9]]).filter(ev=>!ev.button&&(ev.type==='wheel'||ev.type==='mousedown'||ev.type.startsWith('touch'))).on('zoom',ev=>{ timelineTransform=ev.transform;
     // Mobile: coalesce zoom ticks to one render per frame (desktop renders every tick, unchanged).
     if(tlMobile()){ if(!tlNode.__raf) tlNode.__raf=requestAnimationFrame(()=>{ tlNode.__raf=0; renderTimeline(); }); } else renderTimeline(); }));
+  // Keep the zoom box in step with the current size (inline vs full screen, portrait vs landscape).
+  tlZoom.extent([[m.l,0],[Math.max(m.l+1,tw-m.r),th]]).translateExtent([[m.l-80,-th*8],[Math.max(m.l+1,tw-m.r)+80,th*9]]);
   svg.call(tlZoom).style('cursor','move').on('dblclick.zoom',null).on('dblclick',()=>{ svg.call(tlZoom.transform,d3.zoomIdentity); });
   if(!tlNode.__tlTouch){
     tlNode.__tlTouch = true;
@@ -4962,6 +4967,7 @@ function installTrendZoom(sel, reset, onZoom) {
     .translateExtent([[margin.left, 0], [Math.max(margin.left + 1, tw - margin.right), th]])
     .filter(ev => !ev.button && (ev.type === 'wheel' || ev.type === 'mousedown' || ev.type.startsWith('touch')))
     .on('zoom', ev => { if (node.__onZoom && node.__gen === trendGen) node.__onZoom(ev.transform); }));
+  z.extent([[margin.left, 0], [Math.max(margin.left + 1, tw - margin.right), th]]).translateExtent([[margin.left, 0], [Math.max(margin.left + 1, tw - margin.right), th]]);
   sel.call(z).style('cursor', 'move')
     .on('dblclick.zoom', null)
     .on('dblclick', () => { reset(); sel.call(z.transform, d3.zoomIdentity); });
