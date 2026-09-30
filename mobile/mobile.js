@@ -395,18 +395,18 @@
   function buildExpand() {
     ['.map-card', '.plots-card', '.table-card'].forEach(function (sel) {
       var card = $(sel); if (!card) return;
-      var b = el('button', 'btn btn-secondary m-expand', svg('expand') + '<span class="m-expand-lbl">Landscape</span>');
-      b.type = 'button'; b.setAttribute('aria-label', 'Open full screen in landscape');
+      var b = el('button', 'btn btn-secondary m-expand', svg('expand') + '<span class="m-expand-lbl">Expand</span>');
+      b.type = 'button'; b.setAttribute('aria-label', 'Open full screen to pan and zoom');
       b.addEventListener('click', function () { setFull(card, !card.classList.contains('m-full')); });
       card.appendChild(b);
     });
-    var r = el('div', 'm-rotate', svg('rotate') + '<span>Rotate your phone for the full view</span><button type="button" class="btn btn-ghost btn-icon" aria-label="Dismiss">' + svg('close') + '</button>');
+    var r = el('div', 'm-rotate', svg('rotate') + '<span>Pinch to zoom · rotate for a wider view</span><button type="button" class="btn btn-ghost btn-icon" aria-label="Dismiss">' + svg('close') + '</button>');
     r.querySelector('button').addEventListener('click', function () { root.classList.add('m-rotate-dismissed'); });
     d.body.appendChild(r);
   }
-  /* Android: real full screen + orientation lock. iPhone Safari exposes neither API to pages, so there
-     (and wherever the lock is refused) the card is rotated 90° in CSS — a "pseudo-landscape" that still
-     reads sideways with the phone turned. The MapLibre globe is excluded: its gestures don't survive a CSS rotation. */
+  /* Full screen works in whichever way the phone is held. Android also gets the real Fullscreen API (hides the
+     browser bars). No orientation lock and no CSS rotation: a 90°-rotated card breaks d3.zoom / MapLibre touch
+     maths (iOS reports untransformed coordinates), which is why pan & zoom used to work only in true landscape. */
   var locked = false;
   function fsEl() { return d.fullscreenElement || d.webkitFullscreenElement; }
   function fsReq(n) {
@@ -419,21 +419,15 @@
   }
   function canPseudo(c) { var g = c.querySelector('.maplibregl-map'); return !(g && g.offsetParent); }
   function applyPseudo() {
-    var c = $('.m-full');
-    d.querySelectorAll('.m-pseudo-land').forEach(function (x) { if (x !== c) x.classList.remove('m-pseudo-land'); });
-    if (c) c.classList.toggle('m-pseudo-land', mqPortrait.matches && !locked && canPseudo(c));
-    root.classList.toggle('m-pseudo-open', !!$('.m-pseudo-land'));
+    d.querySelectorAll('.m-pseudo-land').forEach(function (x) { x.classList.remove('m-pseudo-land'); });
+    root.classList.remove('m-pseudo-open');
   }
   function tryLandscape() {
     locked = false;
-    if (!mqPortrait.matches) return;
-    applyPseudo();   // immediate; dropped again if the real lock succeeds
+    applyPseudo();
     var p = fsEl() ? Promise.resolve() : fsReq(root);   // must stay inside the tap's call stack
     if (!p) return;
-    p.then(function () {
-      if (fsEl()) fsOwned = true;
-      if (screen.orientation && screen.orientation.lock) return screen.orientation.lock('landscape').then(function () { locked = true; applyPseudo(); });
-    }).catch(function () {});
+    p.then(function () { if (fsEl()) fsOwned = true; }).catch(function () {});
   }
   function releaseLandscape() {
     locked = false;
@@ -456,11 +450,12 @@
     card.classList.toggle('m-full', on);
     var b = card.querySelector('.m-expand');
     if (b) {
-      b.innerHTML = on ? svg('close') + '<span class="m-expand-lbl">Close</span>' : svg('expand') + '<span class="m-expand-lbl">Landscape</span>';
-      b.setAttribute('aria-label', on ? 'Exit full screen' : 'Open full screen in landscape');
+      b.innerHTML = on ? svg('close') + '<span class="m-expand-lbl">Close</span>' : svg('expand') + '<span class="m-expand-lbl">Expand</span>';
+      b.setAttribute('aria-label', on ? 'Exit full screen' : 'Open full screen to pan and zoom');
     }
     root.classList.toggle('m-full-open', !!d.querySelector('.m-full'));
     root.classList.remove('m-rotate-dismissed');
+    clearTimeout(setFull.t); if (on) setFull.t = setTimeout(function () { root.classList.add('m-rotate-dismissed'); }, 4000);
     if (on) tryLandscape(); else releaseLandscape();
     dismissTips();
     requestAnimationFrame(function () {

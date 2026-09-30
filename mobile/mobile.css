@@ -167,7 +167,7 @@ html.m-touch .m-peek-close svg { width: 18px; height: 18px; fill: none; stroke: 
 /* inline plots: one finger scrolls the page, taps still select */
 html.m-touch :is(#mapWrap, #chartWrap, #sourceChartWrap) :is(svg, canvas) { touch-action: pan-x pan-y; }
 html.m-touch .map-hint { font-size: 0 !important; }
-html.m-touch .map-hint::after { content: "Tap a marker to preview · Landscape to pan & zoom"; font-size: var(--fs-1); }
+html.m-touch .map-hint::after { content: "Tap a marker to preview · Expand to pan & zoom"; font-size: var(--fs-1); }
 html.m-touch .m-full .map-hint::after { content: "Pinch to zoom · drag to pan · tap a marker to preview"; }
 
 html.m-touch .map-card, html.m-touch .plots-card { position: relative; }
