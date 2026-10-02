@@ -272,6 +272,8 @@
   body > .tooltip { max-width: min(420px, calc(100vw - 16px)); transform: none; display: block; }
   body > .tooltip .t-row { gap: 20px; }
   body > .tooltip .t-row span { white-space: nowrap; }
+  /* Values may wrap (long domain lists, date ranges); labels stay on one line. */
+  body > .tooltip .t-row span:last-child:not(:first-child) { white-space: normal; text-align: right; min-width: 0; overflow-wrap: anywhere; }
   body > .tooltip .t-title { white-space: normal; overflow-wrap: break-word; }
   body > .tooltip .t-foot { white-space: normal; }
   .tooltip .t-title { font-weight: 600; margin: 0 0 3px; }
@@ -834,9 +836,16 @@
           <button type="button" class="seg-opt" data-view="globe">Globe</button>
           <button type="button" class="seg-opt" data-view="timeline">Timeline</button>
         </div>
+        <div class="seg" role="tablist" aria-label="Unvetted extractions" id="uvSeg">
+          <button type="button" class="seg-opt" aria-selected="true" data-uv="show" title="Show single-source extractions not yet collected into any vetted report (hollow triangles)">All signals</button>
+          <button type="button" class="seg-opt" data-uv="hide" title="Hide unvetted extractions on the flat map, globe and timeline">Vetted only</button>
+        </div>
+        <div id="mapFilterSummary" aria-live="polite" style="display:none;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px;color:var(--ink-3);min-width:0"></div>
+        <button type="button" class="btn btn-secondary" id="mapResetBtn" hidden style="display:none;height:32px;padding:0 var(--space-3);font-size:13px;gap:6px"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path></svg><span id="mapResetLabel">Reset filters</span></button>
         <div class="map-legend">
           <span class="legend-swatch">Risk<span style="display:inline-block;width:92px;height:9px;border-radius:var(--radius-sm);margin:0 7px;background:linear-gradient(90deg,var(--sev-lo),var(--sev-mid),var(--sev-hi))"></span>1 → 9</span>
           <span class="legend-swatch" title="Vetted event report — filled circle sized by risk/case load"><svg width="46" height="16" style="overflow:visible"><circle cx="7" cy="8" r="3" fill="#b45c64" fill-opacity="0.7" stroke="var(--color-neutral-100)"></circle><circle cx="30" cy="8" r="7" fill="#b45c64" fill-opacity="0.7" stroke="var(--color-neutral-100)"></circle></svg><span id="mapSizeLabel">size ∝ score</span></span>
+          <span class="legend-swatch" title="Gold ring — this vetted report carries situational developments; they are listed in its tooltip"><svg width="18" height="16" style="overflow:visible"><circle cx="9" cy="8" r="4" fill="#b45c64" fill-opacity="0.7"></circle><circle cx="9" cy="8" r="7" fill="none" stroke="var(--warn)" stroke-width="1.4"></circle></svg>Developments</span>
           <span class="legend-swatch" id="rawGlyphLegend" title="Unvetted extractions — hollow downward triangle at country centroid; click a glyph to open its source article data" style="cursor:pointer;user-select:none"><svg width="16" height="14" style="overflow:visible"><path d="M2 4 L14 4 L8 12 Z" fill="none" stroke="var(--color-accent-300)" stroke-width="1.4" opacity="0.85"></path></svg><span id="rawGlyphLabel">Unvetted extractions</span></span>
           <span class="legend-swatch" id="mapCount"></span>
         </div>
@@ -1371,9 +1380,39 @@ function worstCombo() {
 // displayRecords() is the record view behind the stats, map and scorecard. refineRecord()
 // recomputes each record from the species- and screening-filtered subset, so the selector
 // scopes ALL data elements — not just the figures table.
+// Load-time indexes: the feeds are fixed after load, so per-click work looks rows up by key
+// instead of rescanning every row. Rebuilt only when the feed or the species filter changes.
+let _vrCache = { key: null, rows: null, byPC: null, byPL: null };
+// Data epoch bumps whenever the feed arrays are replaced (initial load, sync, censor reapply),
+// so caches can never serve rows from a previous load even when the row count is unchanged.
+let _dataEpoch = 0, _epochRows = null, _epochRecs = null;
+function dataEpoch() { if (allRows !== _epochRows || records !== _epochRecs) { _epochRows = allRows; _epochRecs = records; _dataEpoch++; } return _dataEpoch; }
+function _vrKey() { return dataEpoch() + '|' + activeSpecies + '|' + allRows.length; }
 function viewRows() {
-  if (activeSpecies === ALL_SPECIES) return allRows;
-  return allRows.filter(r => cleanText(r.species) === activeSpecies);
+  const k = _vrKey();
+  if (_vrCache.key === k && _vrCache.rows) return _vrCache.rows;
+  _vrCache = { key: k, rows: activeSpecies === ALL_SPECIES ? allRows : allRows.filter(r => cleanText(r.species) === activeSpecies), byPC: null, byPL: null };
+  return _vrCache.rows;
+}
+// viewRows grouped by pathogen||country and pathogen||location.
+function vrIndex(kind) {
+  viewRows();
+  if (!_vrCache.byPC) {
+    const pc = new Map(), pl = new Map();
+    const push = (m, k, r) => { let a = m.get(k); if (!a) { a = []; m.set(k, a); } a.push(r); };
+    _vrCache.rows.forEach(r => { push(pc, r.pathogen + '||' + (geoCountry(r.location) || ''), r); push(pl, r.pathogen + '||' + r.location, r); });
+    _vrCache.byPC = pc; _vrCache.byPL = pl;
+  }
+  return kind === 'pl' ? _vrCache.byPL : _vrCache.byPC;
+}
+function vrRowsPC(pathogen, country) { return vrIndex('pc').get(pathogen + '||' + (country || '')) || []; }
+function vrRowsPL(pathogen, loc) { return vrIndex('pl').get(pathogen + '||' + loc) || []; }
+// allRows grouped by pathogen||measure (species/screen filters still apply per call, on the small slice).
+let _pmIdx = { key: null, map: null };
+function rowsByPM(pathogen, measure) {
+  const k = dataEpoch() + '|' + allRows.length;
+  if (_pmIdx.key !== k) { const m = new Map(); allRows.forEach(r => { const kk = r.pathogen + '||' + r.measure; let a = m.get(kk); if (!a) { a = []; m.set(kk, a); } a.push(r); }); _pmIdx = { key: k, map: m }; }
+  return _pmIdx.map.get(pathogen + '||' + measure) || [];
 }
 function displayRecords() {
   if (activeSpecies === ALL_SPECIES && screenState === 'accepted') return records;
@@ -1416,14 +1455,28 @@ function renderStats() {
   const vettedScoped = scopedAll.filter(isVettedOutbreak);
   const vettedCaseScoped = scopedAll.filter(isRecordVetted);
   const vettedDeathScoped = scopedAll.filter(r => vettingsOf(r.deathSources) >= 1);
-  const totalOutbreaks = vettedScoped.length;
-  const active = vettedScoped.filter(r => r.date && statusOf(r.date) !== 'Quiet');
+  // Event reports are vetted by corroboration (2+ independent domains) even when they carry no
+  // case/death figures (e.g. ASF culling reports). Count those outbreaks too, so the scorecard
+  // agrees with the map; case/death TOTALS stay figure-only.
+  const figKeys = new Set(vettedScoped.map(r => r.country + '||' + r.pathogenRaw));
+  const evOnly = [], evSeen = new Set();
+  try {
+    (typeof visibleEventMarkers === 'function' ? visibleEventMarkers() : eventMarkers).forEach(m => {
+      if (!m || isFlu(m.pathogen) || !(all || m.pathogen === selectedPathogen)) return;
+      const k = m.country + '||' + m.pathogen;
+      if (figKeys.has(k) || evSeen.has(k)) return;
+      evSeen.add(k); evOnly.push({ country: m.country, date: m.date });
+    });
+  } catch (e) {}
+  const outbreakUnits = [...vettedScoped.map(r => ({ country: r.country, date: r.date })), ...evOnly];
+  const totalOutbreaks = outbreakUnits.length;
+  const active = outbreakUnits.filter(r => r.date && statusOf(r.date) !== 'Quiet');
   const reporting = active.filter(r => statusOf(r.date) === 'Reporting').length;
   const slowing = active.length - reporting;
   const quiet = totalOutbreaks - active.length;
-  const nCountries = new Set(vettedScoped.map(r => r.country)).size;
+  const nCountries = new Set(outbreakUnits.map(r => r.country)).size;
   // Countries that appear in scope but have no vetted outbreak — the corroboration gap.
-  const nAllCountries = new Set(scopedAll.map(r => r.country)).size;
+  const nAllCountries = new Set([...scopedAll.map(r => r.country), ...evOnly.map(r => r.country)]).size;
   const nUnvetOnlyCountries = Math.max(0, nAllCountries - nCountries);
   const sumCases = vettedCaseScoped.reduce((s,r) => s + (r.cases || 0), 0);
   const sumDeaths = vettedDeathScoped.reduce((s,r) => s + (r.deaths || 0), 0);
@@ -1437,13 +1490,14 @@ function renderStats() {
     aggEl.innerHTML = vettedScoped.length
       ? (all ? `Select a pathogen for case and death totals; general and species-specific series can overlap.` : `<strong>${sumCases.toLocaleString()}</strong> confirmed cases · <strong>${sumDeaths.toLocaleString()}</strong> deaths`) +
         `<span class="agg-caveat">Vetted totals across ${totalOutbreaks} outbreak${totalOutbreaks===1?'':'s'}${unvettedSignals ? ` · ${unvettedSignals} additional single-source signal${unvettedSignals===1?'':'s'} in Figures` : ''}</span>`
+      : evOnly.length ? `<span class="agg-caveat">No vetted case/death figures for this scope · ${evOnly.length} outbreak${evOnly.length===1?'':'s'} corroborated by event reports only${unvettedSignals ? ` · ${unvettedSignals} single-source signal${unvettedSignals===1?'':'s'} in Figures` : ''}.</span>`
       : `<span class="agg-caveat">No vetted figures for this scope${unvettedSignals ? ` · ${unvettedSignals} single-source signal${unvettedSignals===1?'':'s'} available in Figures` : ''}.</span>`;
   }
   _setTxt('statActive', totalOutbreaks);
   const breakdownEl = document.getElementById('statActiveBreakdown');
   if (breakdownEl) breakdownEl.textContent = totalOutbreaks ? `${active.length} active (Reporting/Slowing) · ${quiet} quiet (>14d)` : '';
   const activeCell = document.getElementById('statActiveCell');
-  if (activeCell) activeCell.title = `${totalOutbreaks} vetted outbreaks (one per country×pathogen, including vetted subnational proxies). ${active.length} active — ${reporting} Reporting (≤4d) + ${slowing} Slowing (≤14d); ${quiet} Quiet (>14d). ${unvettedSignals} additional single-source signal${unvettedSignals===1?'':'s'} remain visible in Figures.`;
+  if (activeCell) activeCell.title = `${totalOutbreaks} vetted outbreaks (one per country×pathogen, including vetted subnational proxies${evOnly.length ? ` and ${evOnly.length} corroborated by event reports without vetted figures` : ''}). ${active.length} active — ${reporting} Reporting (≤4d) + ${slowing} Slowing (≤14d); ${quiet} Quiet (>14d). ${unvettedSignals} additional single-source signal${unvettedSignals===1?'':'s'} remain visible in Figures.`;
   _setTxt('statCountries', nCountries);
   const vetLineEl = document.getElementById('statVetLine');
   if (vetLineEl) vetLineEl.textContent = nCountries ? (nUnvetOnlyCountries ? `${nUnvetOnlyCountries} more with single-source signals only` : 'every reporting country corroborated') : '';
@@ -1579,8 +1633,7 @@ function passesScreen(r) {
 }
 // Rows behind one figure, honouring the species filter and the statistical-screen view.
 function rowsForFigure(pathogen, country, measure, preferLoc, strictLoc) {
-  const base = allRows.filter(r => r.pathogen === pathogen && r.measure === measure
-    && passesScreen(r)
+  const base = rowsByPM(pathogen, measure).filter(r => passesScreen(r)
     && (activeSpecies === ALL_SPECIES || cleanText(r.species) === activeSpecies));
   // the record's own location string first, then any national row for the country, then anything
   // in-country — otherwise a species that was only ever reported subnationally drops the row
@@ -2294,7 +2347,15 @@ const COORD_INDEX = { byCombo: new Map(), byCountry: new Map() };
 function coordFor(country, pathogen) { return COORD_INDEX.byCombo.get(country + '||' + pathogen) || COORD_INDEX.byCountry.get(country) || null; }
 
 // Fold a raw location string to a mappable country, or null if supranational / unlocatable.
+const _gcMemo = new Map();
 function geoCountry(loc) {
+  const key = loc || '';
+  const hit = _gcMemo.get(key); if (hit) return hit;
+  const out = _geoCountry(loc);
+  if (out) _gcMemo.set(key, out);   // only hits are cached, so a later GEO addition can still resolve a miss
+  return out;
+}
+function _geoCountry(loc) {
   const l = (loc || '').toLowerCase().trim();
   if (!l) return null;
   if (l.startsWith('multiple -')) return null;
@@ -2413,7 +2474,7 @@ function visibleEventMarkers() {
 let highlightedCountry = null;
 
 let mapGroup = null, baseGroup = null, countryFeatures = null, zoomBehavior = null, currentK = 1, currentMarkers = [];
-let showUnvettedRaw = true; // Third-glyph layer: unvetted raw-article clusters
+let showUnvettedRaw = (() => { try { return localStorage.getItem('osint.showUnvetted') !== '0'; } catch (e) { return true; } })(); // Third-glyph layer: unvetted raw-article clusters (all three views)
 let unvettedRawGroup = null;
 // --- Marker de-collision --------------------------------------------------------------------
 // Several markers can resolve to the exact same map point: multiple national event reports at a
@@ -2458,12 +2519,12 @@ function fanPx(items, xyFn, rankFn, baseR, radFn) {
   const out = new Map();
   collisionGroups(items, it => { const p = xyFn(it); return Math.round(p[0]) + ',' + Math.round(p[1]); }, rankFn)
     .forEach(g => {
-      let R = (baseR || 4) + g.length * 0.8;
-      if (radFn && g.length > 1) {
-        const mr = Math.max(...g.map(radFn));
-        R = Math.max(R, (mr * 2 + 3) / (2 * Math.sin(Math.PI / g.length)));
-      }
-      g.forEach((it, i) => out.set(it, fanVec(i, g.length, R)));
+      // Same circular scatter as the globe and timeline (scatterRings): the top-ranked glyph keeps
+      // the true point, the rest fill concentric rings at chord >= one glyph diameter.
+      if (g.length < 2) { g.forEach(it => out.set(it, [0, 0])); return; }
+      const sep = radFn ? Math.max(...g.map(radFn)) * 2 + 3 : (baseR || 4) * 2 + 4;
+      const pts = scatterRings(g.length, sep);
+      g.forEach((it, i) => out.set(it, pts[i]));
     });
   return out;
 }
@@ -2481,16 +2542,27 @@ function uvGlyphTransform(d, k) {
 // country- or combo-level proxy. Cached against the reports array identity (reports
 // are assigned wholesale on load, once).
 let _aggUrls = null, _aggUrlsRef = null;
+// Tolerant article key: the same story is often cited as m./amp./www. or …/amp variants.
+function aggKey(u) {
+  return normUrl(u).replace(/^(m|amp|mobile)\./, '').replace(/(\/amp|\.amp|\/index\.html?)$/, '');
+}
+// An article counts as collected into vetted reporting when ANY of these cite it: an event
+// report (Urls / Reference List), a vetted figure row (2+ independent domains), or a
+// situational development. Rebuilt when any of those feeds change.
 function aggregatedUrlSet() {
-  if (_aggUrls && _aggUrlsRef === reports) return _aggUrls;
+  const sig = (reports || []).length + '|' + (typeof allRows !== 'undefined' ? allRows.length : 0) + '|' + (typeof developmentRows !== 'undefined' ? (developmentRows || []).length : 0);
+  if (_aggUrls && _aggUrlsRef === reports && _aggUrls._sig === sig) return _aggUrls;
   const s = new Set();
-  (reports || []).forEach(r => (r.urls || []).forEach(u => { const t = String(u || '').trim(); if (t) s.add(normUrl(t)); }));
-  _aggUrls = s; _aggUrlsRef = reports;
+  const addU = u => { const t = String(u || '').trim(); if (t) s.add(aggKey(t)); };
+  (reports || []).forEach(r => (r.urls || []).forEach(addU));
+  try { (allRows || []).forEach(r => { if (isVetted(r)) extractUrls(r.sources || '').forEach(addU); }); } catch (e) {}
+  try { (developmentRows || []).forEach(d => extractUrls(d.sources || '').forEach(addU)); } catch (e) {}
+  s._sig = sig; _aggUrls = s; _aggUrlsRef = reports;
   return s;
 }
 function rawRowIsAggregated(r) {
   const u = String((r && r.url) || '').trim();
-  return !!u && aggregatedUrlSet().has(normUrl(u));
+  return !!u && aggregatedUrlSet().has(aggKey(u));
 }
 // Fold the raw-article feed into per-(country, pathogen) clusters at country centroid,
 // EXCLUDING articles aggregated into an event report (those live behind the filled
@@ -2561,8 +2633,9 @@ function renderUnvettedLayer(projection) {
 }
 function unvettedTooltipHTML(d) {
   const label = PATHOGEN_LABELS[d.pathogen] || d.pathogen;
-  const range = d.minDate && d.maxDate ? (d.minDate === d.maxDate ? d.maxDate : `${d.minDate} → ${d.maxDate}`) : '—';
-  const topDoms = d.domains.slice(0, 3).join(', ') + (d.domains.length > 3 ? ` +${d.domains.length - 3}` : '');
+  const dd = v => { const t = Date.parse(v); return isNaN(t) ? String(v).slice(0, 10) : new Date(t).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }); };
+  const range = d.minDate && d.maxDate ? (dd(d.minDate) === dd(d.maxDate) ? dd(d.maxDate) : `${dd(d.minDate)} → ${dd(d.maxDate)}`) : '—';
+  const topDoms = d.domains.slice(0, 3).map(x => String(x).replace(/^www\./, '')).join(', ') + (d.domains.length > 3 ? ` +${d.domains.length - 3}` : '');
   // Singular-report path: distinct kicker at the very top, then a compact source/date pair.
   if (d.count === 1) {
     const r = d.rows[0] || {};
@@ -2636,7 +2709,19 @@ function syncUnvettedBanner() {
     banner.style.display = 'none';
   }
 }
-document.getElementById('rawGlyphLegend')?.addEventListener('click', () => { showUnvettedRaw = !showUnvettedRaw; renderMap(); });
+function setShowUnvetted(on) {
+  showUnvettedRaw = !!on;
+  try { localStorage.setItem('osint.showUnvetted', on ? '1' : '0'); } catch (e) {}
+  document.querySelectorAll('#uvSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String((b.dataset.uv === 'show') === showUnvettedRaw)));
+  if (showUnvettedRaw && rawArticlesState === 'idle' && typeof ensureRawArticles === 'function') ensureRawArticles();
+  renderMap();
+  if (typeof syncGlobeIfActive === 'function') syncGlobeIfActive();
+  const tlw = document.getElementById('timelineWrap');
+  if (tlw && tlw.style.display !== 'none') renderTimeline();
+}
+document.getElementById('rawGlyphLegend')?.addEventListener('click', () => setShowUnvetted(!showUnvettedRaw));
+document.getElementById('uvSeg')?.addEventListener('click', e => { const b = e.target.closest('.seg-opt'); if (b) setShowUnvetted(b.dataset.uv === 'show'); });
+document.querySelectorAll('#uvSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String((b.dataset.uv === 'show') === showUnvettedRaw)));
 document.addEventListener('rawarticles', () => { if (mapGroup) renderMap(); });
 let mapMode = 'risk';
 // Cases/deaths weighting is deprecated on the timeline (two weeks move cumulative totals too
@@ -2711,6 +2796,7 @@ function renderMap() {
         // Invisible enlarged hit area so small glyphs are easy to click/tap.
         g.append('circle').attr('class', 'marker-hit').attr('fill', 'transparent');
         g.append('circle').attr('class', 'marker-pulse');
+        g.append('circle').attr('class', 'marker-dev').attr('fill', 'none').attr('stroke', col('--warn')).attr('opacity', 0.95).style('pointer-events', 'none');
         g.append('circle').attr('class', 'marker').attr('fill-opacity', 0.6).attr('stroke', col('--color-neutral-100'));
         return g;
       })
@@ -2743,6 +2829,7 @@ function renderMap() {
       el.style.cursor = offReports.length ? 'help' : '';
     }
     syncGlobeIfActive();
+    syncMapResetBtn();
   };
   if (countryFeatures) { draw(); return; }
   d3.json("vendor/world-atlas/countries-110m.json").then(topology => {
@@ -2760,6 +2847,8 @@ function applyZoomScaling() {
     g.select('.marker-hit').attr('r', Math.max(12 / k, r * 1.7));
     g.select('.marker').attr('r', r).attr('stroke-width', (d.scope==='national'?2.2:0.9) / k);
     g.select('.marker-pulse').attr('r', r).style('display', (d.risk||0) >= 8 ? null : 'none');
+    const rep = (d.reportIdx != null && typeof reports !== 'undefined') ? reports[d.reportIdx] : null;
+    g.select('.marker-dev').attr('r', r + 3 / k).attr('stroke-width', 1.4 / k).style('display', hasDevelopments(rep) ? null : 'none');
     // A de-collided marker's fan offset is screen px — divide by k so the fan stays constant size.
     if (d._fan) { const p = projection(d.lonlat); g.attr('transform', `translate(${p[0]+d._fan[0]/k},${p[1]+d._fan[1]/k})`); }
   });
@@ -2815,8 +2904,8 @@ function initGlobe() {
   if (globe || typeof maplibregl === 'undefined') return;
   try {
     globe = new maplibregl.Map({ container:'globeMap', style:globeStyle(false), center:[18,4], zoom:1.4, attributionControl:{ compact:true }, preserveDrawingBuffer:true,
-      // Phones, inline: one finger scrolls the page, two fingers move/zoom the globe. Full screen turns this off (mobile.js).
-      cooperativeGestures: tlMobile() && !document.querySelector('.m-full') });
+      // One finger spins the globe, two fingers pan / pinch-zoom — inline and full screen alike.
+      cooperativeGestures: false });
     globe.addControl(new maplibregl.NavigationControl({ showCompass:true, visualizePitch:true }), 'bottom-right');
     globe.on('style.load', () => {
       try { globe.setProjection({ type:'globe' }); } catch(e){}
@@ -2866,9 +2955,17 @@ function globeMarkerEl(m, dx, dy) {
   const op = highlightedCountry && m.country !== highlightedCountry ? 0.28 : 0.82;
   const radius = m.scope==='national' ? '25%' : '50%';
   const border = m.scope==='national' ? `2px solid ${col('--color-neutral-100')}` : `1px solid ${col('--color-neutral-400')}`;
+  const rep = (m.reportIdx != null && typeof reports !== 'undefined') ? reports[m.reportIdx] : null;
+  const devRing = hasDevelopments(rep) ? `0 0 0 2px ${col('--color-bg')}, 0 0 0 3.5px ${col('--warn')}, ` : '';
   el.style.cssText = `width:0;height:0;overflow:visible;z-index:2`;
-  el.innerHTML = `<div style="width:${r}px;height:${r}px;border-radius:${radius};background:${fill};opacity:${op};border:${border};box-shadow:0 0 4px ${fill};cursor:pointer;transform:translate(calc(-50% + ${dx || 0}px),calc(-50% + ${dy || 0}px))"></div>`;
+  el.innerHTML = `<div style="width:${r}px;height:${r}px;border-radius:${radius};background:${fill};opacity:${op};border:${border};box-shadow:${devRing}0 0 4px ${fill};cursor:pointer;transform:translate(calc(-50% + ${dx || 0}px),calc(-50% + ${dy || 0}px))"></div>`;
   return el;
+}
+// Desktop: floating body-level tip (not clipped by the globe frame). Touch: MapLibre popup, which mobile.js reads into its peek sheet.
+function bindGlobeTip(el, mk, popup, htmlFn) {
+  el.addEventListener('mouseenter', (ev) => { if (tipsFloat()) showChartTip(ev, htmlFn()); else if (!popup.isOpen()) mk.togglePopup(); });
+  el.addEventListener('mousemove', (ev) => { if (tipsFloat()) showChartTip(ev, htmlFn()); });
+  el.addEventListener('mouseleave', () => { if (tipsFloat()) hideChartTip(); popup.remove(); });
 }
 function addGlobeMarkers() {
   if (!globe) return;
@@ -2880,9 +2977,8 @@ function addGlobeMarkers() {
     const el = globeMarkerEl(m, o[0].toFixed(1), o[1].toFixed(1));
     const popup = new maplibregl.Popup({ offset:12, closeButton:false, className:'globe-pop', maxWidth:'280px' }).setHTML(tooltipHTML(m));
     const mk = new maplibregl.Marker({ element:el }).setLngLat(m.lonlat).setPopup(popup).addTo(globe);
-    el.addEventListener('mouseenter', () => { if (!popup.isOpen()) mk.togglePopup(); });
-    el.addEventListener('mouseleave', () => popup.remove());
-    el.addEventListener('click', (ev) => { ev.stopPropagation(); popup.remove(); globe.flyTo({ center:m.lonlat, zoom:3.6, duration:800 }); if (typeof focusEvent==='function') focusEvent(m.reportIdx); });
+    bindGlobeTip(el, mk, popup, () => tooltipHTML(m));
+    el.addEventListener('click', (ev) => { ev.stopPropagation(); popup.remove(); forceHideChartTip(); globe.flyTo({ center:m.lonlat, zoom:3.6, duration:800 }); if (typeof focusEvent==='function') focusEvent(m.reportIdx); });
     globeMarkers.push(mk);
   });
   // Third-glyph layer on the globe — mirrors the flat map's unvetted raw-article clusters.
@@ -2896,12 +2992,12 @@ function addGlobeMarkers() {
     const o = guvPX.get(d) || [0, 0];
     const el = document.createElement('div');
     el.style.cssText = `width:0;height:0;overflow:visible;z-index:1`;
-    el.innerHTML = `<div style="width:${size}px;height:${size}px;cursor:pointer;pointer-events:auto;transform:translate(calc(-50% + ${o[0].toFixed(1)}px),calc(-50% + ${o[1].toFixed(1)}px))"><svg viewBox="0 0 20 20" width="${size}" height="${size}" style="overflow:visible;display:block"><path d="M2 5 L18 5 L10 17 Z" fill="none" stroke="var(--color-accent-300)" stroke-width="1.5" opacity="0.9"></path></svg></div>`;
+    // Transparent (not none) fill + pointer-events:all so the whole triangle is the hit area, not just its outline.
+    el.innerHTML = `<div style="width:${size}px;height:${size}px;cursor:pointer;pointer-events:auto;transform:translate(calc(-50% + ${o[0].toFixed(1)}px),calc(-50% + ${o[1].toFixed(1)}px))"><svg viewBox="0 0 20 20" width="${size}" height="${size}" style="overflow:visible;display:block;pointer-events:all"><path d="M2 5 L18 5 L10 17 Z" fill="transparent" pointer-events="all" stroke="var(--color-accent-300)" stroke-width="1.5" opacity="0.9"></path></svg></div>`;
     const popup = new maplibregl.Popup({ offset:10, closeButton:false, className:'globe-pop', maxWidth:'280px' }).setHTML(unvettedTooltipHTML(d));
     const mk = new maplibregl.Marker({ element:el }).setLngLat(d.lonlat).setPopup(popup).addTo(globe);
-    el.addEventListener('mouseenter', () => { if (!popup.isOpen()) mk.togglePopup(); });
-    el.addEventListener('mouseleave', () => popup.remove());
-    el.addEventListener('click', (ev) => { ev.stopPropagation(); popup.remove(); openUnvettedCluster(d); });
+    bindGlobeTip(el, mk, popup, () => unvettedTooltipHTML(d));
+    el.addEventListener('click', (ev) => { ev.stopPropagation(); popup.remove(); forceHideChartTip(); openUnvettedCluster(d); });
     globeMarkers.push(mk);
   });
 }
@@ -3127,6 +3223,7 @@ function tlUnvettedTipHTML(row, country, lanePathogen, factHTML){
   const label = PATHOGEN_LABELS[lanePathogen] || lanePathogen || '';
   return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:13px;margin:0 0 4px">Unvetted extractions</p>`
     + `<p class="t-title" style="margin:0 0 6px">${esc(label)} · ${esc(country || '')}</p>`
+    + (() => { let t = ''; try { t = row.title || articleTitles.get(normUrl(row.url)) || slugTitle(row.url) || ''; } catch (e) {} return t ? `<p class="t-sub" style="white-space:normal">“${esc(t)}”</p>` : ''; })()
     + `<div class="t-row"><span>Pathogen</span><span>${esc(label)}</span></div>`
     + `<div class="t-row"><span>Country</span><span>${esc(country || '—')}</span></div>`
     + `<div class="t-row"><span>Source</span><span>${esc(row.domain || urlHost(row.url) || '')}</span></div>`
@@ -3299,7 +3396,7 @@ function renderTimeline(){
   // upper bounds; overestimating only pushes chips a few px further right.
   const tlLabelW=d=>{ const nm=PATHOGEN_LABELS[d.p]||d.p;
     const wl=metric==='risk'?tlFmtMed(d.w)+' summed sublocation risk':d.nFilt+' unique article'+(d.nFilt===1?'':'s');
-    return Math.max(nm.length*10, wl.length*7.5)+18; };
+    return Math.max(nm.length*10, (wl.length+(showUnvettedRaw&&(d._rawOnly||[]).length?32:0))*7.5)+18; };
   const tlLabelBoxes=[...top].map(d=>{ const y0=newY.get(d.p);
     return {x0:m.l-4, x1:m.l+4+tlLabelW(d), y0:y0-48, y1:y0}; });
   const tlChipHitsLabel=(px,py,cw,ch)=>tlLabelBoxes.some(b=>px-cw/2-3<b.x1&&px+cw/2+3>b.x0&&py-ch/2-3<b.y1&&py+ch/2+3>b.y0);
@@ -3362,7 +3459,7 @@ function renderTimeline(){
     const bandMid=(band,xi)=>band?y0-((band.lower[xi]+band.upper[xi])/2)*S:y0;
     const laneClamp=(py,xi)=>{ const rt=y0-d.total[xi]*S; return Math.max(rt+5,Math.min(y0-6,py)); };
     const dots=reports.map((r,i)=>({r,i})).filter(({r})=>{ if(r.pathogen!==d.p||isNaN(Date.parse(r.date))) return false; const t=Date.parse(r.date); if(t<startMs||t>endMs) return false; try{ if(typeof isCensored==='function'&&censorRules.length&&isCensored(r.pathogen,r.geoCountry||r.country,r.date)) return false; }catch(e){} return true; });
-    const rawOnly=d._rawOnly||[];
+    const rawOnly=showUnvettedRaw?(d._rawOnly||[]):[];
     // Development chips place FIRST (highest priority): compute their spots up front so the
     // dot/triangle packing below routes around them instead of stacking underneath them.
     // Same grouping + lane-pack + label dodge as the draw pass, just computed early.
@@ -3392,6 +3489,9 @@ function renderTimeline(){
         if(!byKey.has(key)){ const gg={day,cat,items:[]}; byKey.set(key,gg); groups.push(gg); }
         byKey.get(key).items.push(dd);
       });
+      // Recent-first before capping: the feed lists developments oldest-first, so a plain
+      // slice kept the earliest groups and starved the recent end of the window.
+      groups.sort((a,b)=>(b.day||'').localeCompare(a.day||''));
       devGroups=(tlCull?groups.filter(gg=>tlInX(dayOf(Date.parse(gg.day)))):groups).slice(0,tlMobile()?6:10);
       if(tlCull&&(y0<m.t||y0-6>m.t+plotH)) devGroups=[];   // lane baseline scrolled out of frame
       const packDev=()=>{
@@ -3447,24 +3547,29 @@ function renderTimeline(){
     // ring their shared date instead of piling on it. Visual radii cover the vetted
     // dot (6.5), its development halo ring (9) and the unvetted triangle (~7).
     const glyphR=it=>it.kind==='vetted'?((typeof hasDevelopments==='function'&&it.r&&hasDevelopments(it.r))?9:6.5):7;
+    let laneSuppressed=0;
     fanGroups.forEach(grp=>{
       const items=[...grp.vetted.map(v=>({...v,kind:'vetted'})),...grp.unvetted.map(u=>({...u,kind:'unvetted'}))];
       // Vetted first so they claim the centre, most readable slots.
       items.sort((a,b)=>(a.kind==='vetted'?0:1)-(b.kind==='vetted'?0:1));
       const capTotal=tlMobile()?8:22;
-      const shown=items.slice(0,capTotal), overflow=items.length-shown.length;
+      const shown=items.slice(0,capTotal); let overflow=items.length-shown.length;
       const maxR=Math.max(7,...shown.map(glyphR));
       const offs=scatterRings(shown.length, maxR*2+3);
       const placed=shown.map((it,i)=>({...it,ox:offs[i][0],oy:offs[i][1]}));
-      placed.filter(p=>p.kind==='unvetted').forEach(p=>{
+      const drawUnvetted=p=>{
         const xi=xiOf(p.day), band=bandOf(p.country);
         const ay=bandMid(band,xi);
-        // Unified packing: route around development chips first, then already-placed glyphs.
+        // Unified packing: route around chips and vetted dots (placed first), then other triangles.
         const desX=x(p.day)+p.ox, desY=laneClamp(ay+p.oy,xi);
         if(tlCull&&(!tlInX(p.day)||ay+p.oy<m.t-8||ay+p.oy>m.t+plotH+4)) return;
         const urr=8.5;
         const ufp=tlPackGlyph(desX,desY,urr,chipSpots,lanePlaced,laneBounds());
         const px=ufp[0], py=ufp[1];
+        // Overlap suppression: a triangle that can't sit near its own date without covering
+        // something is dropped into the group's "+N more" count rather than drifting away.
+        const stillHit=lanePlaced.some(q=>Math.hypot(q.x-px,q.y-py)<q.r+urr-1);
+        if(stillHit||Math.hypot(px-desX,py-desY)>urr*2.2){ laneSuppressed++; return; }
         lanePlaced.push({x:px,y:py,r:urr});
         const row=p.row;
         // Portrait tip shared with the globe/time-series language (kicker, title,
@@ -3480,7 +3585,7 @@ function renderTimeline(){
           .style('cursor','pointer').style('pointer-events','all')
           .on('mousemove',ev=>showChartTip(ev,tip())).on('mouseleave',hideChartTip)
           .on('click',()=>{ hideChartTip(); if(typeof openUnvettedCluster==='function') openUnvettedCluster({country:p.country,pathogen:d.p}); });
-      });
+      };
       placed.filter(p=>p.kind==='vetted').forEach(p=>{
         const {r,i}=p;
         const xi=xiOf(p.dx), band=bandOf(p.cn==='Other'?null:p.cn);
@@ -3492,12 +3597,14 @@ function renderTimeline(){
         const vfp=tlPackGlyph(desX,desY,vrr,chipSpots,lanePlaced,laneBounds());
         const px=vfp[0], py=vfp[1];
         lanePlaced.push({x:px,y:py,r:vrr});
-        if(dev) gEv.append('circle').attr('cx',px).attr('cy',py).attr('r',8).attr('fill','none').attr('stroke',col('--warn')).attr('stroke-width',1.2).attr('opacity',0.9).style('pointer-events','none');
+        // Gold ring = this vetted report carries situational developments (listed in its tooltip).
+        if(dev) gEv.append('circle').attr('cx',px).attr('cy',py).attr('r',8).attr('fill','none').attr('stroke',col('--warn')).attr('stroke-width',1.4).attr('opacity',0.95).style('pointer-events','none');
         gEv.append('circle').attr('class','tl-dot').attr('cx',px).attr('cy',py).attr('r',5).attr('fill',sevColor(r.risk||1)).attr('stroke',col('--color-bg')).attr('stroke-width',1.5)
-          .on('mousemove',ev=>showChartTip(ev, tlEventTipHTML(r, i, d.p)))
+          .on('mousemove',ev=>showChartTip(ev, withDevs(tlEventTipHTML(r, i, d.p), r)))
           .on('mouseleave',hideChartTip)
           .on('click',()=>{ hideChartTip(); bringFront(); if(typeof selectEvent==='function') selectEvent(i); });
       });
+      placed.filter(p=>p.kind==='unvetted').forEach(drawUnvetted);
       if(overflow>0&&!(tlCull&&!tlInX(shown[0].kind==='vetted'?shown[0].dx:shown[0].day))){
         const first=shown[0];
         const xi=xiOf(first.kind==='vetted'?first.dx:first.day), band=bandOf(first.kind==='vetted'?(first.cn==='Other'?null:first.cn):first.country);
@@ -3505,6 +3612,8 @@ function renderTimeline(){
         gEv.append('text').attr('x',x(first.kind==='vetted'?first.dx:first.day)).attr('y',Math.max(y0-d.total[xi]*S+12,ay-8)).attr('text-anchor','middle').attr('font-size','11px').attr('fill',col('--ink-4')).text('+'+overflow+' more');
       }
     });
+    // Suppressed triangles are reported once per lane, in the lane's count line — never as per-date labels.
+    if(laneSuppressed>0){ const li=labelInfos[labelInfos.length-1]; if(li&&li.p===d.p) li.wLabel+=' · '+laneSuppressed+' unvetted hidden (overlap)'; }
     // Situational developments, time-series chip style (Sci/Pth/Org/Pol), grouped by day × type.
     // Spots were computed in the pre-pass above (highest priority — dots already routed around
     // them); here they just paint, with leaders drawn from their final positions.
@@ -3613,6 +3722,31 @@ function renderTimeline(){
 document.addEventListener('rawarticles', () => { const tlw=document.getElementById('timelineWrap'); if(tlw && tlw.style.display!=='none') renderTimeline(); });
 
 function tooltipHTML(m) {
+  const rep0 = (typeof reports !== 'undefined' && m.reportIdx != null) ? reports[m.reportIdx] : null;
+  return withDevs(tooltipHTMLBase(m), rep0);
+}
+// Combined tooltip: an event report carrying situational developments (the gold ring) lists
+// them inside the same tooltip, above the action footer.
+function devTipBlock(rep) {
+  if (!rep || !hasDevelopments(rep)) return '';
+  const list = rep.developments || [];
+  if (!list.length) return '';
+  const shown = list.slice(0, 2);
+  const rows = shown.map(dv => {
+    const cat = devCategory(dv.label);
+    // Compact: prefer the short headline, clamp to two lines — the full text lives in the brief.
+    const txt = dv.headline || dv.text || '';
+    return `<p style="margin:3px 0 0;max-width:280px;white-space:normal;line-height:1.35;color:var(--color-text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden"><span style="color:${cat.color};font-weight:600">${esc(cat.full)}:</span> ${esc(txt)}</p>`;
+  }).join('');
+  return `<div class="t-cols" style="text-align:left;margin-top:6px;padding-top:5px;border-top:1px solid var(--color-divider);color:var(--warn)">Developments · ${list.length}</div>${rows}`
+    + (list.length > shown.length ? `<p style="margin:4px 0 0;font-size:12px;color:var(--ink-4)">+${list.length - shown.length} more in the brief</p>` : '');
+}
+function withDevs(html, rep) {
+  const blk = devTipBlock(rep); if (!blk) return html;
+  const i = html.lastIndexOf('<div class="t-foot"');
+  return i >= 0 ? html.slice(0, i) + blk + html.slice(i) : html + blk;
+}
+function tooltipHTMLBase(m) {
   const fill = sevColor(m.risk||1);
   const scope = m.scope==='national' ? 'National report' : 'Subnational report';
   const doc = (typeof eventDocumentation==='function' && allRows.length) ? eventDocumentation(m.pathogen, m.country) : null;
@@ -3656,7 +3790,11 @@ function openMarkerDetail(m) {
 }
 const tooltip = document.getElementById('tooltip');
 const mapWrap = document.getElementById('mapWrap');
+// Desktop: map/globe tips use the same body-level fixed tooltip as the charts, so they can
+// extend past the map frame. Touch keeps the in-pane tooltip (mobile.js shows it in its peek sheet).
+function tipsFloat() { return !document.documentElement.classList.contains('m-touch'); }
 function showTooltip(event, html) {
+  if (tipsFloat()) { tooltip.classList.remove('show'); showChartTip(event, html); return; }
   const rect = mapWrap.getBoundingClientRect();
   tooltip.innerHTML = html;
   tooltip.classList.add('show');
@@ -3669,11 +3807,11 @@ function showTooltip(event, html) {
   // Flip below the point when the box would clip the top of the map pane, and keep it inside the
   // pane's bottom edge either way (the pane is overflow:hidden, so anything outside is cropped).
   const cy = event.clientY - rect.top, h = tooltip.offsetHeight;
-  const below = cy - 10 - h < pad;
+  const below = cy - 10 - h < pad && (rect.height - cy) > cy;
   tooltip.classList.toggle('tip-below', below);
-  tooltip.style.top = (below ? Math.min(cy + 14, Math.max(pad, rect.height - h - pad)) : (cy - 10)) + 'px';
+  tooltip.style.top = (below ? Math.min(cy + 14, Math.max(pad, rect.height - h - pad)) : Math.max(cy - 10, Math.min(h + pad, rect.height - pad))) + 'px';
 }
-function hideTooltip() { tooltip.classList.remove('show'); }
+function hideTooltip() { tooltip.classList.remove('show'); if (tipsFloat() && typeof hideChartTip === 'function') hideChartTip(); }
 
 // Fixed-position tooltip for the charts (the map tooltip is anchored to the map pane)
 let _chartTip, _chartTipPinned = false;
@@ -4233,14 +4371,23 @@ function docFromRows(rows) {
   return { tier, label:['Sparse / developing','Less documented','Well documented'][tier], vettings, days };
 }
 function eventDocumentation(pathogen, country) {
-  return docFromRows(viewRows().filter(r=>r.pathogen===pathogen && geoCountry(r.location)===country && (r.measure==='confirmed_cases'||r.measure==='confirmed_deaths') && r.outlier==='False'));
+  return docFromRows(vrRowsPC(pathogen, country).filter(r=>(r.measure==='confirmed_cases'||r.measure==='confirmed_deaths') && r.outlier==='False'));
 }
 function locDocumentation(pathogen, loc) {
-  return docFromRows(viewRows().filter(r=>r.pathogen===pathogen && r.location===loc && (r.measure==='confirmed_cases'||r.measure==='confirmed_deaths') && r.outlier==='False'));
+  return docFromRows(vrRowsPL(pathogen, loc).filter(r=>(r.measure==='confirmed_cases'||r.measure==='confirmed_deaths') && r.outlier==='False'));
 }
 const DOC_CLASS = ['doc-sparse','doc-less','doc-well'];
 // Sheet cells arrive as pandas exports, so empty values surface as the string "nan".
+const _ctMemo = new Map();
 function cleanText(s) {
+  if (s == null) return '';
+  const hit = _ctMemo.get(s); if (hit !== undefined) return hit;
+  const out = _cleanText(s);
+  if (_ctMemo.size > 300000) _ctMemo.clear();
+  _ctMemo.set(s, out);
+  return out;
+}
+function _cleanText(s) {
   let t = String(s == null ? '' : s).trim();
   if (!t || /^(nan|none|null|n\/a|undefined|-)$/i.test(t)) return '';
   return t.replace(/(^|[\s(;,])nan([\s).;,]|$)/gi, '$1$2').replace(/\s{2,}/g, ' ').trim();
@@ -6041,6 +6188,48 @@ function visibleReports() {
   return idx.filter(x => regionOk(x) && groupOk(x) && locOk(x) && speciesOk(x));
 }
 // Full filter reset: back to All pathogens, national overview, unfiltered event list.
+// Map-card reset: one control that clears every toolbar filter AND the drill-down state,
+// shown only while something is narrowing the view. Its tooltip names what's active.
+function activeFilterList() {
+  const out = [];
+  if (typeof activePathoGroup !== 'undefined' && activePathoGroup !== 'All') out.push('Family: ' + activePathoGroup);
+  if (typeof activeInvestigatorGroup !== 'undefined' && activeInvestigatorGroup !== 'All') out.push('Group: ' + activeInvestigatorGroup);
+  if (activeSpecies !== 'humans') out.push('Host: ' + activeSpecies);
+  if (activeRegion !== 'All regions') out.push('Region: ' + activeRegion);
+  if (locationQuery) out.push('Search: \u201c' + locationQuery + '\u201d');
+  if (!isAll()) out.push('Pathogen: ' + (PATHOGEN_LABELS[selectedPathogen] || selectedPathogen));
+  if (reportFilter) out.push('Subnational: ' + reportFilter.country);
+  else if (highlightedCountry) out.push('Country: ' + highlightedCountry);
+  return out;
+}
+function syncMapResetBtn() {
+  const b = document.getElementById('mapResetBtn'); if (!b) return;
+  const list = activeFilterList();
+  b.hidden = !list.length; b.style.display = list.length ? 'inline-flex' : 'none';   // .btn sets display, which beats [hidden]
+  b.title = list.length ? 'Clear all filters:\n' + list.join('\n') : '';
+  const l = document.getElementById('mapResetLabel'); if (l) l.textContent = 'Reset filters' + (list.length > 1 ? ' \u00b7 ' + list.length : '');
+  // Visible summary so users know what's narrowing the view (they may have set it elsewhere on the page).
+  const sum = document.getElementById('mapFilterSummary');
+  if (sum) {
+    sum.style.display = list.length ? 'flex' : 'none';
+    sum.innerHTML = list.length ? '<span>Filtered by</span>' + list.map(f => { const i = f.indexOf(': '); const k = i > 0 ? f.slice(0, i) : '', v = i > 0 ? f.slice(i + 2) : f;
+      return `<span class="tag tag-accent" style="font-size:13px;white-space:nowrap">${k ? `<span style="color:var(--ink-3);margin-right:4px">${esc(k)}</span>` : ''}${esc(v)}</span>`; }).join('') : '';
+  }
+}
+function resetAllFilters() {
+  if (typeof activePathoGroup !== 'undefined') activePathoGroup = 'All';
+  if (typeof activeInvestigatorGroup !== 'undefined') activeInvestigatorGroup = 'All';
+  activeSpecies = 'humans'; activeRegion = 'All regions'; locationQuery = '';
+  const setV = (id, v) => { const el = document.getElementById(id); if (el && [...(el.options || [])].some(o => o.value === v || o.text === v)) el.value = v; else if (el && el.tagName === 'INPUT') el.value = v; };
+  setV('pathoGroup', 'All'); setV('investigatorGroup', 'All'); setV('species', 'humans'); setV('region', 'All regions'); setV('search', '');
+  if (typeof resetDrilldowns === 'function') resetDrilldowns();
+  refreshPathogenSelector();
+  resetFilters();
+  if (typeof applyEmptyQueryState === 'function') applyEmptyQueryState();
+  const tlw = document.getElementById('timelineWrap'); if (tlw && tlw.style.display !== 'none') renderTimeline();
+  syncMapResetBtn();
+}
+document.getElementById('mapResetBtn')?.addEventListener('click', resetAllFilters);
 function resetFilters() {
   reportFilter = null;
   highlightedCountry = null;
@@ -6052,9 +6241,10 @@ function resetFilters() {
   selectedPathogen = ALL;
   const sel = document.getElementById('disease');
   if (sel && [...sel.options].some(o => o.value === ALL)) sel.value = ALL;
-  renderStats(); renderTable(); renderTrendSection(); renderMap();
+  // One render pass: selectEvent (or the scheduler directly) redraws map/brief/stats/trend/table.
   const vis = visibleReports();
-  if (vis.length) { if (!vis.some(({i}) => i === selectedIdx)) selectEvent(vis[0].i); else { renderEventList(); renderBrief(); } }
+  if (vis.length && !vis.some(({i}) => i === selectedIdx)) selectEvent(vis[0].i);
+  else { renderEventList(); scheduleSelectRender(); }
   flyToFilteredMarkers();
 }
 function renderEventList() {
@@ -6334,26 +6524,37 @@ function peerVettings(pathogen, kind, exceptCountry) {
     return dl ? dl.sources : null;
   }).filter(v => v != null);
 }
-function peerVettingsGlobal(kind) {
+const _peerMemo = { key: null, map: new Map() };
+function peerMemo(name, args, fn) {
+  const k = _vrKey() + '|' + screenState + '|' + records.length;
+  if (_peerMemo.key !== k) { _peerMemo.key = k; _peerMemo.map.clear(); }
+  const kk = name + '|' + args.join('|');
+  if (!_peerMemo.map.has(kk)) _peerMemo.map.set(kk, fn());
+  return _peerMemo.map.get(kk);
+}
+function peerVettingsGlobal(kind) { return peerMemo('pvg', [kind], () => _peerVettingsGlobal(kind)); }
+function peerRawScoresGlobal(kind, rec) { return peerMemo('prg', [kind, rec], () => _peerRawScoresGlobal(kind, rec)); }
+function peerRawScores(pathogen, kind, rec) { return peerMemo('pr', [pathogen, kind, rec], () => _peerRawScores(pathogen, kind, rec)); }
+function _peerVettingsGlobal(kind) {
   return records.filter(r => !isFlu(r.pathogenRaw)).map(rec => {
     if (kind === 'cases') return rec.cases != null ? rowsVettings(rec.rowsAt || []) : null;
-    const dl = latestOf(viewRows().filter(r2 => r2.pathogen === rec.pathogenRaw && geoCountry(r2.location) === rec.country && r2.measure === 'confirmed_deaths' && r2.outlier === 'False'));
+    const dl = latestOf(vrRowsPC(rec.pathogenRaw, rec.country).filter(r2 => r2.measure === 'confirmed_deaths' && r2.outlier === 'False'));
     return dl ? dl.sources : null;
   }).filter(v => v != null);
 }
 // Peer median raw-corpus scores (vetting/proximity) across same-pathogen events, giving the
 // evidence strips a frame of reference for article quality — mirrors peerVettings.
-function peerRawScores(pathogen, kind, rec) {
+function _peerRawScores(pathogen, kind, rec) {
   return records.filter(r => r.pathogenRaw === pathogen).map(r => {
     if (kind === 'cases') return r.rowsAt ? medianRawScores(r.rowsAt)[rec] : null;
-    const dl = latestOf(viewRows().filter(r2 => r2.pathogen === pathogen && geoCountry(r2.location) === r.country && r2.measure === 'confirmed_deaths' && r2.outlier === 'False'));
+    const dl = latestOf(vrRowsPC(pathogen, r.country).filter(r2 => r2.measure === 'confirmed_deaths' && r2.outlier === 'False'));
     return dl ? medianRawScores(dl.rowsAt)[rec] : null;
   }).filter(v => v != null && isFinite(v));
 }
-function peerRawScoresGlobal(kind, rec) {
+function _peerRawScoresGlobal(kind, rec) {
   return records.filter(r => !isFlu(r.pathogenRaw)).map(r => {
     if (kind === 'cases') return r.rowsAt ? medianRawScores(r.rowsAt)[rec] : null;
-    const dl = latestOf(viewRows().filter(r2 => r2.pathogen === r.pathogenRaw && geoCountry(r2.location) === r.country && r2.measure === 'confirmed_deaths' && r2.outlier === 'False'));
+    const dl = latestOf(vrRowsPC(r.pathogenRaw, r.country).filter(r2 => r2.measure === 'confirmed_deaths' && r2.outlier === 'False'));
     return dl ? medianRawScores(dl.rowsAt)[rec] : null;
   }).filter(v => v != null && isFinite(v));
 }
@@ -6604,7 +6805,6 @@ function selectEvent(idx) {
     reportFilter = { country: r.geoCountry, pathogen: r.pathogen };
     selectedPathogen = r.pathogen;
     const sel2 = document.getElementById('disease'); if (sel2 && [...sel2.options].some(o=>o.value===r.pathogen)) sel2.value=r.pathogen;
-    renderStats(); renderTable();
     if (!isNational(r.place)) {
       highlightSubLoc = r.place;
       showSubnational = true;
@@ -6618,19 +6818,30 @@ function selectEvent(idx) {
       if (!showSubnational) { trendMode = { mode:'national' }; granPref = 'national'; }
       else { trendMode = { mode:'subnational', country: r.geoCountry, pathogen: r.pathogen }; granPref = 'subnational'; }
     }
-    renderTrendSection();
   } else {
     highlightSubLoc = null;
     trendMode = { mode:'national' }; granPref = 'national';
-    renderStats(); renderTrendSection(); renderTable();
   }
-  renderEventList(); renderBrief(); renderMap();
+  renderEventList(); scheduleSelectRender();
   // Scroll the selected report into view. The scroll container is `.events-col` (overflow-y:auto);
   // #eventList itself never scrolls, so measure the item against the container, not #eventList.
   const li = eventListEl.querySelector('[data-idx="' + idx + '"]');
   const scroller = eventListEl.closest('.events-col') || eventListEl;
   if (li && scroller) scroller.scrollTop += li.getBoundingClientRect().top - scroller.getBoundingClientRect().top - 8;
   if (r.lonlat) flyToLonlat(r.lonlat);
+}
+// A click (and focusEvent's possible redirect to the visible twin report) used to re-render
+// every panel synchronously, twice. Now selection state updates immediately and the panels
+// render once: map + brief on the next frame, then stats / trend / table.
+let _selRaf = 0, _selT = 0;
+function scheduleSelectRender() {
+  if (_selRaf) return;
+  _selRaf = requestAnimationFrame(() => {
+    _selRaf = 0;
+    renderMap(); renderBrief();
+    clearTimeout(_selT);
+    _selT = setTimeout(() => { renderStats(); renderTrendSection(); renderTable(); }, 0);
+  });
 }
 function drillNational(country, pathogen) {
   const rec = records.find(x=>x.country===country && x.pathogenRaw===pathogen);

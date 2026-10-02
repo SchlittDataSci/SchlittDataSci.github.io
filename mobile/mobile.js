@@ -384,7 +384,7 @@
   var nudged = false, fsOwned = false;
   /* Inline plots: one finger scrolls the page, two fingers pan / pinch-zoom (full screen: one finger too).
      Only single-finger touchmoves are held back — d3.zoom needs every touchstart/touchend to track fingers,
-     and its touchstart doesn't cancel scrolling. The globe does the same via MapLibre's cooperativeGestures. */
+     and its touchstart doesn't cancel scrolling. The globe is exempt: one finger spins it, two pan / zoom. */
   var multi = false;
   function lock(e) {
     if (!isTouch()) return;
@@ -462,7 +462,6 @@
       b.setAttribute('aria-label', on ? 'Exit full screen' : 'Open full screen to pan and zoom');
     }
     root.classList.toggle('m-full-open', !!d.querySelector('.m-full'));
-    try { if (typeof globe !== 'undefined' && globe && globe.cooperativeGestures) globe.cooperativeGestures[on ? 'disable' : 'enable'](); } catch (e) {}
     root.classList.remove('m-rotate-dismissed');
     clearTimeout(setFull.t); if (on) setFull.t = setTimeout(function () { root.classList.add('m-rotate-dismissed'); }, 4000);
     if (on) tryLandscape(); else releaseLandscape();
