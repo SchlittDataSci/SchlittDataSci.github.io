@@ -218,3 +218,6 @@ html.m-touch .m-rotate .btn-icon { width: 36px; height: 36px; }
 html.m-touch .m-rotate .btn-icon svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
 @keyframes m-rotate-hint { 0%, 30% { transform: rotate(0deg); } 55%, 80% { transform: rotate(-90deg); } 100% { transform: rotate(0deg); } }
 @media (prefers-reduced-motion: reduce) { html.m-touch .m-rotate > svg { animation: none; } }
+
+/* Compact in-card buttons keep a thumb-sized target on touch. */
+html.m-touch .btn-sm { min-height: 40px; }
