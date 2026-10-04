@@ -592,6 +592,7 @@
      light glancing across a moving mirror sphere. Bands live inside .dr-sheen (clipped there, so the
      button's own hover glow is never clipped); the label rides above on .dr-label. */
   #dataReportBtn { position: relative; margin-right: calc(var(--space-4) + 1px); }
+  #tlViewBtn { position: relative; }
   .dr-label { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: var(--space-2); }
   .dr-sheen { position: absolute; inset: 0; z-index: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
   .dr-sheen i { position: absolute; top: -30%; bottom: -30%; left: 0; display: block; width: 16px; opacity: 0; transform: translateX(-70px) skewX(-18deg); filter: blur(0.6px); }
@@ -867,7 +868,7 @@
         <div class="seg" role="tablist" aria-label="Map view" id="mapViewSeg">
           <button type="button" class="seg-opt" aria-selected="true" data-view="flat">Flat</button>
           <button type="button" class="seg-opt" data-view="globe">Globe</button>
-          <button type="button" class="seg-opt" data-view="timeline">Timeline</button>
+          <button type="button" class="seg-opt" data-view="timeline" id="tlViewBtn"><span class="dr-sheen" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="dr-label">Timeline</span></button>
         </div>
         <button type="button" class="uv-switch" id="uvSwitch" role="switch" aria-checked="true" title="Unvetted extractions: single-source signals not yet collected into any vetted report (hollow triangles) on the flat map, globe and timeline"><span class="uv-track" aria-hidden="true"><span class="uv-thumb"></span></span><span>Unvetted</span></button>
         <div id="mapFilterSummary" aria-live="polite" style="display:none;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px;color:var(--ink-3);min-width:0"></div>
@@ -936,7 +937,6 @@
       <div class="plot-block plot-block-grow">
         <p class="plot-subtitle" id="trendSubtitle">Confirmed cases &amp; deaths</p>
         <div class="chart-wrap" id="chartWrap"><svg id="trendSvg" width="100%" height="190"></svg></div>
-        <div id="barEvidenceLegend" class="bar-key" hidden>Solid · corroborated　／ · unvetted　╳ · suspected bleed / scope unresolved</div>
       </div>
       <div class="plot-block">
         <p class="plot-subtitle" id="sourceSubtitle">Sources per day</p>
@@ -5158,16 +5158,16 @@ function timeTicksArg(scale) {
   const days = Math.abs(b - a) / 86400000;
   const steps = [[3, d3.timeDay.every(3)], [7, d3.timeWeek.every(1)], [14, d3.timeWeek.every(2)], [30, d3.timeMonth.every(1)], [61, d3.timeMonth.every(2)], [91, d3.timeMonth.every(3)]];
   let i = days <= 21 ? 0 : days <= 75 ? 1 : days <= 160 ? 2 : 3;
-  // Phones: widen the cadence until each label gets ~64px, so '%-d %b' labels never overlap.
-  if (typeof tlMobile === 'function' && tlMobile()) {
-    const r = scale.range(), px = Math.abs(r[1] - r[0]), maxN = Math.max(2, Math.floor(px / 64));
+  // Every device: widen the cadence until each '%-d %b' label gets ~84 units of axis, so the 13px
+  // labels ("30 Aug" ≈ 45 units) always keep a clear gap and never collide.
+  {
+    const r = scale.range(), px = Math.abs(r[1] - r[0]), maxN = Math.max(2, Math.floor(px / 84));
     while (i < steps.length - 1 && days / steps[i][0] > maxN) i++;
   }
   return steps[i][1];
 }
 
 function renderTrendSection() {
-  const key = document.getElementById('barEvidenceLegend'); if (key) key.hidden = true;
   if (!dataLoaded) {
     document.getElementById('trendTitle').textContent = 'Loading live data…';
     document.getElementById('trendMeta').textContent = '';
@@ -5347,7 +5347,6 @@ function haversineKm(a, b) {
 // the same-measure figures of the nearest same-granularity locations, with ghost glyphs for
 // the target's other observations and a note explaining why bars were chosen.
 function renderComparisonBars(effectiveTp, series) {
-  document.getElementById('barEvidenceLegend').hidden = false;
   const isSubnationalBars = !!(trendMode && trendMode.barsSubnational && trendMode.country);
   let targetLoc = series.loc;
   const casesMeasure = reportType + '_cases';
@@ -5804,6 +5803,13 @@ function srcBarWidth(bins, x) {
   if (!isFinite(g)) g = 14;
   return Math.max(2.5, Math.min(14, g - 2));
 }
+// Histogram geometry: each bar spans its bin's real time width (1 day, or 7 when binned), left edge on
+// the bin start, so adjacent days touch and only genuine no-report days read as gaps.
+function srcBinRect(x, date, spanDays) {
+  const t0 = new Date(date), t1 = new Date(+t0 + spanDays * 86400000);
+  const x0 = x(t0), w = Math.max(1, x(t1) - x0);
+  return { x: x0, w: w > 4 ? w - 1 : w };
+}
 function vettingsAndArticles(rows) {
   let vet = 0; const urls = new Set(); const doms = new Set();
   (rows || []).forEach(r => {
@@ -5836,13 +5842,13 @@ function renderSourceChart(series) {
   // Domain = the span that actually contributed data. Sharing the trend chart's forecast-extended
   // axis crushed these bars; the plots read as aligned without sharing x-extents.
   const dom = d3.extent(dates, d=>new Date(d));
-  const x = d3.scaleUtc().domain(dom).range([shMargin.left, shTw-shMargin.right]);
   // Bin daily bars into 7-day buckets when they would fall under ~7px — the crush that made
   // glyphs overlap at longer histories. Buckets sum vettings and pool their article sets.
   const shown = series.filter(d => d.cases != null || d.deaths != null);
   const step = (shTw-shMargin.left-shMargin.right) / Math.max(1, shown.length);
   let bins;
-  if (step < 7 && shown.length > 1) {
+  const span = (step < 3 && shown.length > 1) ? 7 : 1;
+  if (span === 7) {
     bins = [];
     let cur = null;
     shown.forEach(d => {
@@ -5855,6 +5861,7 @@ function renderSourceChart(series) {
   } else {
     bins = shown.map(d => ({ date: d.date, vet: d.sources || 0, rej: (d.rejectedRows||[]).length, rows: [...(d.caseRows || []), ...(d.deathRows || [])], rejRows: d.rejectedRows || [] }));
   }
+  const x = d3.scaleUtc().domain([dom[0], new Date(+dom[1] + span * 86400000)]).range([shMargin.left, shTw-shMargin.right]);
   const maxS = Math.max(1, ...bins.map(b => b.vet + b.rej));
   const y = d3.scaleLinear().domain([0, maxS*1.15]).range([shTh-shMargin.bottom, shMargin.top]);
   // Plot area box + y-axis with ticks, and x-axis
@@ -5869,13 +5876,13 @@ function renderSourceChart(series) {
   shsvg.append('text').attr('x',shMargin.left-28).attr('y',shMargin.top+(shTh-shMargin.top-shMargin.bottom)/2).attr('text-anchor','middle').attr('transform',`rotate(-90,${shMargin.left-28},${shMargin.top+(shTh-shMargin.top-shMargin.bottom)/2})`).attr('font-size','13px').attr('fill',col('--color-neutral-400')).text('Sources');
   shsvg.append('defs').append('clipPath').attr('id','sourceClip').append('rect').attr('x',shMargin.left-8).attr('y',shMargin.top-8).attr('width',shTw-shMargin.left-shMargin.right+16).attr('height',shTh-shMargin.top-shMargin.bottom+16);
   const plotGS = shsvg.append('g').attr('clip-path','url(#sourceClip)');
-  const bw = srcBarWidth(bins, x);
   bins.forEach(b => {
     const { art, dom } = vettingsAndArticles(b.rows);
+    const br = srcBinRect(x, b.date, span);
     plotGS.append('rect')
-      .attr('x', Math.min(Math.max(shMargin.left, x(new Date(b.date)) - bw/2), shTw - shMargin.right - bw)).attr('width', bw)
+      .attr('x', br.x).attr('width', br.w)
       .attr('y', y(b.vet)).attr('height', (shTh-shMargin.bottom) - y(b.vet))
-      .attr('fill', SRC_HIST.fill()).attr('rx', 1)
+      .attr('fill', SRC_HIST.fill())
       .style('cursor','pointer').classed('glyph-hit',true)
       .on('mousemove', ev => showChartTip(ev, srcHistTip(b.date, b.vet, art, dom)))
       .on('mouseleave', hideChartTip)
@@ -5883,9 +5890,9 @@ function renderSourceChart(series) {
     if (b.rej) {
       const { art: rArt, dom: rDom } = vettingsAndArticles(b.rejRows);
       plotGS.append('rect')
-        .attr('x', Math.min(Math.max(shMargin.left, x(new Date(b.date)) - bw/2), shTw - shMargin.right - bw)).attr('width', bw)
+        .attr('x', br.x).attr('width', br.w)
         .attr('y', y(b.vet+b.rej)).attr('height', y(b.vet) - y(b.vet+b.rej))
-        .attr('fill', col('--color-neutral-500')).attr('fill-opacity',0.5).attr('rx', 1)
+        .attr('fill', col('--color-neutral-500')).attr('fill-opacity',0.5)
         .style('cursor','pointer').classed('glyph-hit',true)
         .on('mousemove', ev => showChartTip(ev,
           `<p class="t-title">${new Date(b.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p>` +
@@ -6080,7 +6087,8 @@ function renderSubSourceChart(perLoc, style) {
   // Weekly binning under ~7px per bar — the shared anti-crush rule.
   const step = (shTw-shMargin.left-shMargin.right)/Math.max(1,dates.length);
   let binned = dates.map(d => ({ date: d, cells: dateMap.get(d) }));
-  if (step < 7 && binned.length > 1) {
+  const span = (step < 3 && binned.length > 1) ? 7 : 1;
+  if (span === 7) {
     const bins = [];
     let cur = null;
     binned.forEach(b => {
@@ -6095,7 +6103,8 @@ function renderSubSourceChart(perLoc, style) {
   }
   const totals = binned.map(b => Object.values(b.cells).reduce((a,c)=>a+c.vet+(c.rej||0),0));
   const maxT = Math.max(...totals,1);
-  const x = d3.scaleUtc().domain(d3.extent(binned,b=>new Date(b.date))).range([shMargin.left, shTw-shMargin.right]);
+  const xd = d3.extent(binned,b=>new Date(b.date));
+  const x = d3.scaleUtc().domain([xd[0], new Date(+xd[1] + span * 86400000)]).range([shMargin.left, shTw-shMargin.right]);
   const y = d3.scaleLinear().domain([0, maxT*1.15]).range([shTh-shMargin.bottom, shMargin.top]);
   shsvg.append('rect').attr('x',shMargin.left).attr('y',shMargin.top).attr('width',shTw-shMargin.left-shMargin.right).attr('height',shTh-shMargin.top-shMargin.bottom).attr('fill',col('--color-neutral-800')).attr('fill-opacity',0.35).attr('stroke',col('--color-divider')).attr('stroke-width',1);
   const sy2 = shsvg.append('g').attr('transform',`translate(${shMargin.left},0)`).call(d3.axisLeft(y).ticks(2).tickSize(-(shTw-shMargin.left-shMargin.right)).tickPadding(6).tickFormat(d=>d));
@@ -6110,9 +6119,8 @@ function renderSubSourceChart(perLoc, style) {
   const plotGS2 = shsvg.append('g').attr('clip-path','url(#subSourceClip)');
   const usableH = (shTh-shMargin.bottom)-shMargin.top;
   const pxPer = usableH/(maxT*1.15);
-  const bw = srcBarWidth(binned, x);
   binned.forEach(b => {
-    const cx = x(new Date(b.date)); let yb = shTh-shMargin.bottom;
+    const br = srcBinRect(x, b.date, span); let yb = shTh-shMargin.bottom;
     const dayTot = totals[binned.indexOf(b)];
     const dayRows = [];
     perLoc.forEach(s => { const c=(b.cells[s.loc]); if(!c || (!c.vet && !c.rej)) return;
@@ -6120,7 +6128,7 @@ function renderSubSourceChart(perLoc, style) {
       if(c.vet){
         const h=c.vet*pxPer; yb-=h; dayRows.push(...c.rows);
         const va = vettingsAndArticles(c.rows);
-        plotGS2.append('rect').attr('x',Math.min(Math.max(shMargin.left,cx-bw/2), shTw-shMargin.right-bw)).attr('width',bw).attr('y',yb).attr('height',h).attr('rx',1).attr('fill',style[s.loc].color).attr('opacity',0.85).style('cursor','pointer').classed('glyph-hit',true)
+        plotGS2.append('rect').attr('x',br.x).attr('width',br.w).attr('y',yb).attr('height',h).attr('rx',1).attr('fill',style[s.loc].color).attr('opacity',0.85).style('cursor','pointer').classed('glyph-hit',true)
           .on('mouseover', function(){ d3.select(this).attr('opacity',1); })
           .on('mouseout', function(){ d3.select(this).attr('opacity',0.85); })
           .on('mousemove',(ev)=>showChartTip(ev,
@@ -6136,7 +6144,7 @@ function renderSubSourceChart(perLoc, style) {
         const rh=c.rej*pxPer; yb-=rh;
         const rva = vettingsAndArticles(c.rejRows);
         const hRej = Math.max(2, rh);
-        plotGS2.append('rect').attr('x',Math.min(Math.max(shMargin.left,cx-bw/2), shTw-shMargin.right-bw)).attr('width',bw).attr('y',yb).attr('height',hRej).attr('rx',1).attr('fill', col('--color-neutral-500')).attr('fill-opacity',0.55).style('cursor','pointer').classed('glyph-hit',true)
+        plotGS2.append('rect').attr('x',br.x).attr('width',br.w).attr('y',yb).attr('height',hRej).attr('rx',1).attr('fill', col('--color-neutral-500')).attr('fill-opacity',0.55).style('cursor','pointer').classed('glyph-hit',true)
           .on('mousemove', ev=>showChartTip(ev,
             `<p class="t-title">${new Date(b.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'})} · excluded</p>`+
             `<div class="t-row"><span>${c.rej} screened out</span><span>${rva.art} article${rva.art!==1?'s':''} · ${rva.dom} domain${rva.dom!==1?'s':''}</span></div>`+
@@ -6505,55 +6513,62 @@ function drawDevelopmentMarkers(svg, x, pathogen, country, place = '', granulari
     if (!place && !matchesGranularity(d)) return false;
     const t = +new Date(toISODate(d.report_date)+'T00:00:00Z'); return t >= domain[0] && t <= domain[1];
   });
-  // Aggregate by (date × event type): one chip per group, labelled with a count (e.g. "3 Sci") and a
-  // tooltip that lists every development in it. Collapses same-day same-category clusters that
-  // otherwise stacked into an unreadable pile. Items arrive newest-first, so first-seen groups are the
-  // most recent; cap at 20 groups.
-  const groups = [], byKey = new Map();
+  // Same aggregation + glyph as the timeline: one chip per day (the series is already one place).
+  // Single type: "Sci" / "3 Org" in that type's colour + outline. Several types: "Multi" / "5 Multi"
+  // with one bar per type, coloured to match the single-type outlines (which act as the legend).
+  // Items arrive newest-first; cap at 20 days.
+  const groups = [], byDay = new Map();
   items.forEach(d => {
-    const cat = devCategory(d.category);
     const day = toISODate(d.report_date);
-    const key = day + '||' + cat.abbr;
-    if (!byKey.has(key)) { const g = { day, cat, items: [] }; byKey.set(key, g); groups.push(g); }
-    byKey.get(key).items.push(d);
+    let g = byDay.get(day);
+    if (!g) { g = { day, cats: new Map(), items: [] }; byDay.set(day, g); groups.push(g); }
+    const c = devCategory(d.category), e = g.cats.get(c.abbr);
+    if (e) e.n++; else g.cats.set(c.abbr, { cat: c, n: 1 });
+    g.items.push(d);
   });
   const capped = groups.slice(0, 20);
   const layer = svg.append('g').attr('class','development-markers');
   const plotTop = margin.top, plotH = Math.max(1, (th - margin.bottom) - plotTop);
-  const ch = 15, startY = plotTop + 16, gap = 28;        // lane pitch: chip height + ~one line of space
+  const ch = 18, startY = plotTop + 16, gap = 26;
   const maxLanes = Math.max(1, Math.floor((0.85 * plotH - 16) / gap) + 1);
+  const fam = col('--font-body') || 'sans-serif';
+  const tW = (t) => (typeof tlMeasure === 'function') ? tlMeasure(t, '700 13px ' + fam) : t.length * 7.4;
   capped.forEach(g => {
-    g.label = g.items.length > 1 ? `${g.items.length} ${g.cat.abbr}` : g.cat.abbr;
-    g.cw = Math.max(26, Math.round(13 + g.label.length * 6.3));
+    g._cats = [...g.cats.values()].sort((p, q) => q.n - p.n).map(e => e.cat);
+    g.multi = g._cats.length > 1;
+    g.cat = g.multi ? { abbr:'Multi', full: g._cats.map(c => c.full).join(' · '), color: col('--ink-2') } : g._cats[0];
+    g.label = (g.items.length > 1 ? g.items.length + ' ' : '') + (g.multi ? 'Multi' : g.cat.abbr);
+    g.cw = Math.round(4 + g._cats.length * 5 + 4 + tW(g.label) + 6);
     g.px = x(new Date(g.day + 'T00:00:00Z'));
   });
   // Mobile (tlMobile): chips whose box would cross the plot frame on pan/zoom are culled, like the
   // clipped series glyphs, rather than overhanging the axes. Desktop keeps every in-domain chip.
   const shown = (typeof tlMobile === 'function' && tlMobile())
     ? capped.filter(g => g.px - g.cw / 2 >= margin.left && g.px + g.cw / 2 <= tw - margin.right) : capped;
-  // Lane packing: place each chip at its real date (px); drop it to the first vertical lane clear of the
-  // previous chip in that lane. Lanes wrap once the plot's 85% depth is used.
   const laneRight = [];
-  shown.forEach(g => {
+  [...shown].sort((p, q) => p.px - q.px).forEach(g => {
     const left = g.px - g.cw / 2;
-    let lane = laneRight.findIndex(r => left - r >= 4);
+    let lane = laneRight.findIndex(r => left - r >= 5);
     if (lane === -1) lane = laneRight.length < maxLanes ? laneRight.length : (laneRight.length % maxLanes);
     laneRight[lane] = g.px + g.cw / 2;
     g.py = startY + lane * gap;
   });
   shown.forEach(g => {
-    const { cat, px, py, cw, label, items: gi } = g;
-    const summary = gi.length > 1 ? `${gi.length} ${cat.full} developments` : gi[0].headline;
+    const { px, py, cw, label, items: gi } = g;
+    const summary = gi.length > 1 ? `${gi.length} developments` : gi[0].headline;
     const mark = layer.append('g').attr('tabindex',0).attr('role','img')
       .attr('aria-label',`${g.day} · ${summary}`)
       .style('cursor','pointer').classed('glyph-hit',true);
     mark.append('line').attr('x1',px).attr('x2',px).attr('y1',py+ch/2).attr('y2',th-margin.bottom)
-      .attr('stroke',cat.color).attr('stroke-dasharray','2 4').attr('opacity',0.42);
-    mark.append('rect').attr('x',px-cw/2).attr('y',py-ch/2).attr('width',cw).attr('height',ch).attr('rx',4)
-      .attr('fill',col('--color-neutral-900')).attr('stroke',cat.color).attr('stroke-width',1);
-    mark.append('text').attr('x',px).attr('y',py+3.3).attr('text-anchor','middle')
-      .attr('font-size',13).attr('font-weight',600).attr('letter-spacing',0.2).attr('fill',cat.color).text(label);
-    mark.on('mousemove', ev => showChartTip(ev, developmentGroupTipHTML(gi, cat, g.day, pathogen)))
+      .attr('stroke', g.multi ? col('--ink-3') : g.cat.color).attr('stroke-dasharray','2 4').attr('opacity',0.65);
+    mark.append('rect').attr('x',px-cw/2).attr('y',py-ch/2).attr('width',cw).attr('height',ch).attr('rx',5)
+      .attr('fill',col('--color-neutral-900')).attr('fill-opacity',0.96)
+      .attr('stroke', g.multi ? col('--color-neutral-500') : g.cat.color).attr('stroke-width',1.2);
+    g._cats.forEach((c,k) => mark.append('rect').attr('x',px-cw/2+4+k*5).attr('y',py-ch/2+3)
+      .attr('width',3).attr('height',ch-6).attr('rx',1.5).attr('fill',c.color));
+    mark.append('text').attr('x',px-cw/2+4+g._cats.length*5+3).attr('y',py+4.5)
+      .attr('font-size',13).attr('font-weight',700).attr('fill', g.multi ? col('--ink-2') : g.cat.color).text(label);
+    mark.on('mousemove', ev => showChartTip(ev, developmentGroupTipHTML(gi, g.cat, g.day, pathogen)))
       .on('mouseleave', hideChartTip);
   });
 }
@@ -8181,12 +8196,12 @@ document.getElementById('dataReportBtn').addEventListener('click', openDataRepor
 // apart. Each shine fans a set of varied-width bands across the button at DIFFERENT speeds (varied
 // durations), so they separate as they travel — light glancing across a moving mirror sphere.
 (function(){
-  const btn = document.getElementById('dataReportBtn'); if (!btn) return;
+  // Same rake on the Data report CTA and the map's Timeline view button.
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const bands = [...btn.querySelectorAll('.dr-sheen i')];
+  const bands = [...document.querySelectorAll('#dataReportBtn .dr-sheen i, #tlViewBtn .dr-sheen i')];
   if (!bands.length || typeof bands[0].animate !== 'function') return;
   const DUR = [980, 1240, 1080, 1400], DELAY = [0, 45, 90, 25]; // slower, tighter spread
-  const shine = (color) => bands.forEach((el, i) => {
+  const shine = (color) => bands.forEach((el, j) => { const i = j % 4;
     el.style.background = 'linear-gradient(105deg, transparent, ' + color + ' 50%, transparent)';
     el.animate(
       [ { transform: 'translateX(-70px) skewX(-18deg)', opacity: 0 },
