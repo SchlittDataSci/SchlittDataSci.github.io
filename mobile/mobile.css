@@ -99,13 +99,17 @@ html.m-compact footer.note .footer-badge { min-height: 36px; padding-inline: 12p
 html.m-compact .m-view-link, html.m-forced-desktop .m-view-link { display: inline-flex; min-height: 40px; align-items: center; font-size: var(--fs-2); color: var(--color-accent-300); }
 
 /* dialogs → bottom sheets / full screen */
-html.m-compact .dialog-backdrop { padding: 0 !important; align-items: flex-end !important; }
-html.m-compact .dialog-backdrop .dialog { width: 100% !important; max-width: none !important; max-height: 92dvh; overflow-y: auto; box-sizing: border-box;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom)); }
-html.m-compact .dialog-actions .btn { min-height: 44px; }
+/* Inset from every edge (and the notch / rounded corners) so nothing — incl. the right-aligned action — is clipped. */
+html.m-compact .dialog-backdrop { align-items: flex-end !important;
+  padding: 0 max(8px, env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left)) !important; }
+html.m-compact .dialog-backdrop .dialog { width: 100% !important; max-width: 100% !important; min-width: 0 !important; max-height: calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
+  overflow-x: hidden; overflow-y: auto; box-sizing: border-box; border-radius: var(--radius-lg); margin: 0 !important; }
+html.m-compact .dialog-backdrop .dialog-body { min-width: 0; overflow-wrap: anywhere; }
+html.m-compact .dialog-actions { flex-wrap: wrap; }
+html.m-compact .dialog-actions .btn { min-height: 44px; flex: 1 1 auto; justify-content: center; }
 html.m-compact .brief-modal-backdrop { padding: 0 !important; }
 html.m-compact .brief-modal { width: 100% !important; max-width: none !important; height: 100dvh !important; max-height: none !important; border-radius: 0 !important;
-  padding-top: env(safe-area-inset-top); }
+  padding-top: env(safe-area-inset-top); padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); box-sizing: border-box; }
 html.m-compact .brief-modal-head { flex-wrap: wrap; }
 
 /* tab bar */
@@ -182,8 +186,15 @@ html.m-full-open { overflow: hidden; }
 html.m-touch .m-full { position: fixed !important; inset: 0; z-index: 55; margin: 0; border-radius: 0; height: auto !important; max-height: none !important; min-height: 0 !important;
   overflow-y: auto; box-sizing: border-box; padding: calc(var(--space-3) + env(safe-area-inset-top)) var(--space-3) calc(var(--space-3) + env(safe-area-inset-bottom)); background: var(--color-bg); }
 html.m-touch .m-full .m-expand { top: calc(8px + env(safe-area-inset-top)); }
-html.m-touch .map-card.m-full { display: flex; flex-direction: column; }
-html.m-touch .map-card.m-full .map-wrap { flex: 1 1 0; height: auto !important; min-height: 240px; }
+/* Expanded map / globe / timeline: edge-to-edge plot only. Title, view toggles, filter tags, legend and
+   hint stay on the page — exit to change them. One round Close button floats over the corner. */
+html.m-touch .map-card.m-full { display: flex; flex-direction: column; gap: 0; width: 100vw; height: 100vh; height: 100dvh !important;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left) !important; overflow: hidden; }
+html.m-touch .map-card.m-full > .card-title, html.m-touch .map-card.m-full .map-head, html.m-touch .map-card.m-full .map-hint { display: none !important; }
+html.m-touch .map-card.m-full .map-wrap { flex: 1 1 0; height: auto !important; min-height: 0; border-radius: 0; }
+html.m-touch .map-card.m-full .m-expand { top: calc(6px + env(safe-area-inset-top)); right: calc(6px + env(safe-area-inset-right)); width: 40px; height: 40px; min-height: 40px; padding: 0; border-radius: 999px;
+  background: color-mix(in srgb, var(--color-neutral-900) 82%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+html.m-touch .map-card.m-full .m-expand-lbl { display: none; }
 html.m-touch .plots-card.m-full .chart-wrap { height: 48dvh; }
 html.m-touch .plots-card.m-full .source-chart-wrap { height: 22dvh; }
 html.m-touch .m-full :is(#mapWrap, #chartWrap, #sourceChartWrap) :is(svg, canvas) { touch-action: none; }

@@ -21,12 +21,16 @@ On a mouse-driven desktop neither class is ever set, so no mobile rule or behavi
   - **Help text on tap:** title-only help (`?` buttons, non-interactive titled text, SVG `<title>`) shows in the same sheet.
   - **No page yanking:** on desktop, an in-plot action (open brief, list articles, drill a cluster) scrolls to its destination. On phones, actions that start inside `.map-card` or `.plots-card` stay put. Instead, the destination tab pulses and gets a dot, and a toast ("Brief opened · View Reports ↓") offers the jump. This is done by wrapping `selectEvent` (map and plot selections don't scroll even on desktop), `smoothScrollTo` and object-form `window.scrollTo`; nothing else is intercepted.
   - **Scrolling over plots:** inline, a one-finger drag over the map or plots scrolls the page. Taps still reach the marks and the +/−/⊙ buttons still work.
+  - **Expanded map card:** edge-to-edge plot only — title, view/metric toggles, filter tags, legend and hint are hidden; a round ✕ floats top-right. Exit to change toggles. iOS Safari can't hide its own toolbars (no Fullscreen API on iPhone); Add to Home Screen removes them.
   - **Landscape:** the map, plots and figures table each carry a "Landscape" button. It opens a full-screen overlay (pinch and pan enabled) and, where supported (Android), fullscreen + `screen.orientation.lock('landscape')`. Elsewhere (iOS), a rotate prompt shows while the phone is portrait. Android back exits fullscreen, which also closes the overlay. In landscape the map title and legend are hidden to give the chart room.
 - **Timeline (in index.html, gated by `tlMobile()`):**
   - Once panned or zoomed, glyphs, situational-development chips and "+N more" labels are culled instead of being clamped to the edge. This covers a date outside the frame, a chip box that would cross the frame edge, and a lane scrolled above or below the frame.
   - The same chip culling applies to the development chips on the Trends time series (`drawDevelopmentMarkers`).
   - The per-date glyph cap drops from 22 to 8, and development chips from 10 to 6.
   - Zoom ticks are coalesced to one render per animation frame.
+  - Inline overview draws ridges only (`tlBare`); glyphs and chips appear once the card is expanded or a lane is focused.
+  - Portrait drops the rotated y-axis label (left margin 36→12px); date ticks drop to one per ~90px; the focus gutter shows ISO3 codes (`tlIso3`, right margin 92→52px).
+  - `timeTicksArg` (trend + sources plots) widens its cadence on phones so each date label gets ~64px.
   - `tlMobile()` is false on mouse desktops, so desktop output is identical. To use culling on desktop too, drop the `tlMobile()` term from `tlCull`.
 - **Figures table:**
   - explicit `overflow-x:auto` and `touch-action: pan-x pan-y`

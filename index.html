@@ -36,7 +36,7 @@
     --ink-4: color-mix(in srgb, var(--color-text) 52%, transparent);
     --ink-label: color-mix(in srgb, var(--color-text) 70%, transparent);
     --sev-lo: #6b7789; --sev-mid: #9a7d86; --sev-hi: #b45c64;
-    --warn: #c9a24a; --warn-ink: #e0c37e; --danger-ink: #d98d92;
+    --warn: #c9a24a; --warn-ink: #e0c37e; --danger-ink: #d98d92; --dev-sit: oklch(0.8 0.07 195);
     --panel-h: 620px;
     --row2-h: 720px;
   }
@@ -253,6 +253,17 @@
   .map-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-3); gap: var(--space-3); flex-wrap: wrap; }
   .map-legend { display: flex; align-items: center; gap: 14px; font-size: 13px; color: var(--ink-3); flex-wrap: wrap; }
   .legend-swatch { display: inline-flex; align-items: center; gap: 6px; }
+  .uv-switch { display: inline-flex; align-items: center; gap: 8px; min-height: 32px; padding: 0 4px; background: none; border: 0; border-radius: var(--radius-md); font: 500 13px/1 var(--font-body); color: var(--ink-3); cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .uv-switch:hover { color: var(--color-text); }
+  .uv-switch:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+  .uv-track { position: relative; flex: none; width: 30px; height: 18px; box-sizing: border-box; border-radius: 999px; background: var(--color-neutral-800); border: 1px solid var(--color-divider); transition: background .15s, border-color .15s; }
+  .uv-thumb { position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 999px; background: var(--color-neutral-400); transition: transform .15s ease, background .15s; }
+  .uv-switch[aria-checked="true"] { color: var(--ink-2); }
+  .uv-switch[aria-checked="true"] .uv-track { background: var(--color-accent-900); border-color: var(--color-accent); }
+  .uv-switch[aria-checked="true"] .uv-thumb { transform: translateX(12px); background: var(--color-accent-200); }
+  .uv-switch:active .uv-thumb { background: var(--color-accent-400); }
+  @media (prefers-reduced-motion: reduce) { .uv-track, .uv-thumb { transition: none; } }
+  @media print { .uv-switch { display: none; } }
   .legend-chip { width: 11px; height: 11px; border-radius: var(--radius-sm); display: inline-block; }
   .map-wrap { position: relative; width: 100%; flex: 1 1 auto; height: var(--panel-h); border-radius: var(--radius-md); overflow: hidden; background:
       radial-gradient(900px 500px at 15% -10%, color-mix(in srgb, var(--color-accent-900) 45%, transparent), transparent 60%),
@@ -858,17 +869,14 @@
           <button type="button" class="seg-opt" data-view="globe">Globe</button>
           <button type="button" class="seg-opt" data-view="timeline">Timeline</button>
         </div>
-        <div class="seg" role="tablist" aria-label="Unvetted extractions" id="uvSeg">
-          <button type="button" class="seg-opt" aria-selected="true" data-uv="show" title="Show single-source extractions not yet collected into any vetted report (hollow triangles)">All signals</button>
-          <button type="button" class="seg-opt" data-uv="hide" title="Hide unvetted extractions on the flat map, globe and timeline">Vetted only</button>
-        </div>
+        <button type="button" class="uv-switch" id="uvSwitch" role="switch" aria-checked="true" title="Unvetted extractions: single-source signals not yet collected into any vetted report (hollow triangles) on the flat map, globe and timeline"><span class="uv-track" aria-hidden="true"><span class="uv-thumb"></span></span><span>Unvetted</span></button>
         <div id="mapFilterSummary" aria-live="polite" style="display:none;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px;color:var(--ink-3);min-width:0"></div>
         <button type="button" class="btn btn-secondary btn-sm" id="mapResetBtn" hidden style="display:none"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path></svg><span id="mapResetLabel">Reset filters</span></button>
         <div class="map-legend">
           <span class="legend-swatch">Risk<span style="display:inline-block;width:92px;height:9px;border-radius:var(--radius-sm);margin:0 7px;background:linear-gradient(90deg,var(--sev-lo),var(--sev-mid),var(--sev-hi))"></span>1 → 9</span>
           <span class="legend-swatch" title="Vetted event report — filled circle sized by risk/case load"><svg width="46" height="16" style="overflow:visible"><circle cx="7" cy="8" r="3" fill="#b45c64" fill-opacity="0.7" stroke="var(--color-neutral-100)"></circle><circle cx="30" cy="8" r="7" fill="#b45c64" fill-opacity="0.7" stroke="var(--color-neutral-100)"></circle></svg><span id="mapSizeLabel">size ∝ score</span></span>
           <span class="legend-swatch" title="Gold ring — this vetted report carries situational developments; they are listed in its tooltip"><svg width="18" height="16" style="overflow:visible"><circle cx="9" cy="8" r="4" fill="#b45c64" fill-opacity="0.7"></circle><circle cx="9" cy="8" r="7" fill="none" stroke="var(--warn)" stroke-width="1.4"></circle></svg>Developments</span>
-          <span class="legend-swatch" id="rawGlyphLegend" title="Unvetted extractions — hollow downward triangle at country centroid; click a glyph to open its source article data" style="cursor:pointer;user-select:none"><svg width="16" height="14" style="overflow:visible"><path d="M2 4 L14 4 L8 12 Z" fill="none" stroke="var(--color-accent-300)" stroke-width="1.4" opacity="0.85"></path></svg><span id="rawGlyphLabel">Unvetted extractions</span></span>
+          <span class="legend-swatch" id="rawGlyphLegend" title="Unvetted extractions — hollow downward triangle at country centroid; gold-tinted = newest article from the last day of data. Click a glyph to open its source article data" style="cursor:pointer;user-select:none"><svg width="30" height="14" style="overflow:visible"><path d="M2 4 L14 4 L8 12 Z" fill="none" stroke="var(--color-accent-300)" stroke-width="1.4" opacity="0.85"></path><path d="M16 4 L28 4 L22 12 Z" fill="none" style="stroke:color-mix(in oklab, var(--warn) 85%, var(--color-neutral-100))" stroke-width="1.4" opacity="0.9"></path></svg><span id="rawGlyphLabel">Unvetted extractions</span></span>
           <span class="legend-swatch" id="mapCount"></span>
         </div>
       </div>
@@ -2650,11 +2658,19 @@ function buildUnvettedClusters() {
     if (!cl) { cl = { country: c, pathogen: r.pathogen, count: 0, domains: new Set(), minDate: '', maxDate: '', rows: [] }; clusters.set(key, cl); }
     cl.count++; cl.rows.push(r);
     if (r.domain) cl.domains.add(r.domain);
-    const d = r.published || r.report_date || '';
+    const d = uvDay(r.published || r.report_date) || r.published || r.report_date || '';
     if (d) { if (!cl.minDate || d < cl.minDate) cl.minDate = d; if (!cl.maxDate || d > cl.maxDate) cl.maxDate = d; }
   });
   return [...clusters.values()].map(cl => ({ ...cl, lonlat: GEO[cl.country].lonlat, id: 'uv-' + cl.country + '-' + cl.pathogen, domains: [...cl.domains] }));
 }
+// Unvetted glyphs whose newest article falls on the last day of raw data get a slight gold tint.
+const UV_FRESH_STROKE='color-mix(in oklab, var(--warn) 85%, var(--color-neutral-100))';
+// Raw rows mix ISO ('2026-09-25T23:46Z') and compact ('20260913T0') stamps; fold both to YYYY-MM-DD.
+function uvDay(s){ const m=String(s==null?'':s).match(/(\d{4})-?(\d{2})-?(\d{2})/); return m?m[1]+'-'+m[2]+'-'+m[3]:''; }
+let _uvLatest={src:null,day:''};
+function uvLatestDay(){ if(!Array.isArray(rawArticles)) return ''; if(_uvLatest.src!==rawArticles){ let m=''; rawArticles.forEach(r=>{ const s=uvDay(r.published||r.report_date); if(s>m) m=s; }); _uvLatest={src:rawArticles,day:m}; } return _uvLatest.day; }
+function uvIsFresh(d){ const L=uvLatestDay(); return !!L&&!!d&&uvDay(d.maxDate)===L; }
+function uvStroke(d){ return uvIsFresh(d)?UV_FRESH_STROKE:'var(--color-accent-300)'; }
 // Visual radius of an unvetted triangle in screen px (path area -> half-width + stroke).
 function uvTriR(d) { return Math.sqrt(Math.max(28, Math.min(120, 28 + (d.count || 0) * 6))) + 1.5; }
 function renderUnvettedLayer(projection) {
@@ -2674,14 +2690,16 @@ function renderUnvettedLayer(projection) {
   const triSize = d => { const r = uvTriR(d) - 1.5; return r * r; };
   unvettedRawGroup.selectAll('path.uv-glyph').data(clusters, d => d.id).join(
     enter => enter.append('path').attr('class', 'uv-glyph')
-      .attr('fill', 'none').attr('stroke', col('--color-accent-300')).attr('stroke-width', 1.3).attr('opacity', 0.85)
+      .attr('fill', 'none').attr('stroke-width', 1.3).attr('opacity', 0.85)
       .style('cursor', 'pointer').classed('glyph-hit', true)
+      .style('stroke', uvStroke)
       .attr('d', d => triD(triSize(d)))
       .attr('transform', d => uvGlyphTransform(d, currentK))
       .on('mousemove', (ev, d) => showTooltip(ev, unvettedTooltipHTML(d)))
       .on('mouseleave', hideTooltip)
       .on('click', (ev, d) => { hideTooltip(); openUnvettedCluster(d); }),
     update => update
+      .style('stroke', uvStroke)
       .attr('d', d => triD(triSize(d)))
       .attr('transform', d => uvGlyphTransform(d, currentK)),
     exit => exit.remove()
@@ -2700,14 +2718,14 @@ function unvettedTooltipHTML(d) {
   if (d.count === 1) {
     const r = d.rows[0] || {};
     const pub = r.published ? String(r.published).slice(0, 10) : '';
-    return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:13px;margin:0 0 4px">Unvetted extractions</p>`
+    return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:13px;margin:0 0 4px">Unvetted extractions${uvIsFresh(d)?' · <span style="color:var(--warn)">latest day</span>':''}</p>`
       + `<p class="t-title" style="margin:0 0 6px">${label} · ${d.country}</p>`
       + (r.domain ? `<div class="t-row"><span>Source</span><span>${esc(r.domain)}</span></div>` : '')
       + (pub ? `<div class="t-row"><span>Published</span><span>${pub}</span></div>` : '')
       + unvettedFactsHTML([r], 1)
       + `<div class="t-row" style="margin-top:6px;color:var(--color-accent-300)"><span>Click to open source article data</span><span></span></div>`;
   }
-  return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:13px;margin:0 0 4px">Unvetted extractions</p>`
+  return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:13px;margin:0 0 4px">Unvetted extractions${uvIsFresh(d)?' · <span style="color:var(--warn)">latest day</span>':''}</p>`
     + `<p class="t-title" style="margin:0 0 6px">${label} · ${d.country}</p>`
     + `<div class="t-row"><span>Source articles</span><span>${d.count}</span></div>`
     + `<div class="t-row"><span>Independent domains</span><span>${d.domains.length}</span></div>`
@@ -2772,7 +2790,7 @@ function syncUnvettedBanner() {
 function setShowUnvetted(on) {
   showUnvettedRaw = !!on;
   try { localStorage.setItem('osint.showUnvetted', on ? '1' : '0'); } catch (e) {}
-  document.querySelectorAll('#uvSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String((b.dataset.uv === 'show') === showUnvettedRaw)));
+  document.getElementById('uvSwitch')?.setAttribute('aria-checked', String(showUnvettedRaw));
   if (showUnvettedRaw && rawArticlesState === 'idle' && typeof ensureRawArticles === 'function') ensureRawArticles();
   renderMap();
   if (typeof syncGlobeIfActive === 'function') syncGlobeIfActive();
@@ -2780,8 +2798,8 @@ function setShowUnvetted(on) {
   if (tlw && tlw.style.display !== 'none') renderTimeline();
 }
 document.getElementById('rawGlyphLegend')?.addEventListener('click', () => setShowUnvetted(!showUnvettedRaw));
-document.getElementById('uvSeg')?.addEventListener('click', e => { const b = e.target.closest('.seg-opt'); if (b) setShowUnvetted(b.dataset.uv === 'show'); });
-document.querySelectorAll('#uvSeg .seg-opt').forEach(b => b.setAttribute('aria-selected', String((b.dataset.uv === 'show') === showUnvettedRaw)));
+document.getElementById('uvSwitch')?.addEventListener('click', () => setShowUnvetted(!showUnvettedRaw));
+document.getElementById('uvSwitch')?.setAttribute('aria-checked', String(showUnvettedRaw));
 document.addEventListener('rawarticles', () => { if (mapGroup) renderMap(); });
 let mapMode = 'risk';
 // Cases/deaths weighting is deprecated on the timeline (two weeks move cumulative totals too
@@ -3053,7 +3071,7 @@ function addGlobeMarkers() {
     const el = document.createElement('div');
     el.style.cssText = `width:0;height:0;overflow:visible;z-index:1`;
     // Transparent (not none) fill + pointer-events:all so the whole triangle is the hit area, not just its outline.
-    el.innerHTML = `<div style="width:${size}px;height:${size}px;cursor:pointer;pointer-events:auto;transform:translate(calc(-50% + ${o[0].toFixed(1)}px),calc(-50% + ${o[1].toFixed(1)}px))"><svg viewBox="0 0 20 20" width="${size}" height="${size}" style="overflow:visible;display:block;pointer-events:all"><path d="M2 5 L18 5 L10 17 Z" fill="transparent" pointer-events="all" stroke="var(--color-accent-300)" stroke-width="1.5" opacity="0.9"></path></svg></div>`;
+    el.innerHTML = `<div style="width:${size}px;height:${size}px;cursor:pointer;pointer-events:auto;transform:translate(calc(-50% + ${o[0].toFixed(1)}px),calc(-50% + ${o[1].toFixed(1)}px))"><svg viewBox="0 0 20 20" width="${size}" height="${size}" style="overflow:visible;display:block;pointer-events:all"><path d="M2 5 L18 5 L10 17 Z" fill="transparent" pointer-events="all" style="stroke:${uvStroke(d)}" stroke-width="1.5" opacity="0.9"></path></svg></div>`;
     const popup = new maplibregl.Popup({ offset:10, closeButton:false, className:'globe-pop', maxWidth:'280px' }).setHTML(unvettedTooltipHTML(d));
     const mk = new maplibregl.Marker({ element:el }).setLngLat(d.lonlat).setPopup(popup).addTo(globe);
     bindGlobeTip(el, mk, popup, () => unvettedTooltipHTML(d));
@@ -3372,7 +3390,7 @@ function tlEventTipHTML(r, reportIdx, lanePathogen){
 }
 function tlUnvettedTipHTML(row, country, lanePathogen, factHTML){
   const label = PATHOGEN_LABELS[lanePathogen] || lanePathogen || '';
-  return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:13px;margin:0 0 4px">Unvetted extractions</p>`
+  return `<p class="t-kicker" style="color:var(--color-accent-300);text-transform:uppercase;letter-spacing:.08em;font-size:13px;margin:0 0 4px">Unvetted extractions${uvIsFresh(d)?' · <span style="color:var(--warn)">latest day</span>':''}</p>`
     + `<p class="t-title" style="margin:0 0 6px">${esc(label)} · ${esc(country || '')}</p>`
     + (() => { let t = ''; try { t = row.title || articleTitles.get(normUrl(row.url)) || slugTitle(row.url) || ''; } catch (e) {} return t ? `<p class="t-sub" style="white-space:normal">“${esc(t)}”</p>` : ''; })()
     + `<div class="t-row"><span>Pathogen</span><span>${esc(label)}</span></div>`
@@ -3422,6 +3440,9 @@ function tlRawOnly(pathogen, startMs, endMs, dayOf, metric){
 // is always false, so every tlMobile() branch below leaves the desktop timeline exactly as it was.
 function rerenderTimelineIfShown(){ const tlw=document.getElementById('timelineWrap'); if(tlw&&tlw.style.display!=='none') renderTimeline(); }
 function tlMobile(){ const c=document.documentElement.classList; return c.contains('m-touch')||c.contains('m-compact'); }
+// ISO 3166-1 alpha-3 codes for the narrow mobile gutter; unknown names fall back to their first three letters.
+const TL_ISO3={'Democratic Republic of the Congo':'COD','Republic of the Congo':'COG','Congo':'COG','Uganda':'UGA','Nigeria':'NGA','Angola':'AGO','Guinea':'GIN','Guinea-Bissau':'GNB','Liberia':'LBR','Sierra Leone':'SLE','Ghana':'GHA','Cape Verde':'CPV','Malawi':'MWI','Morocco':'MAR','Zimbabwe':'ZWE','Brazil':'BRA','Chile':'CHL','Bolivia':'BOL','United States':'USA','United States of America':'USA','Canada':'CAN','Argentina':'ARG','Indonesia':'IDN','India':'IND','Pakistan':'PAK','Sri Lanka':'LKA','Cambodia':'KHM','Malaysia':'MYS','Taiwan':'TWN','Israel':'ISR','Spain':'ESP','Greece':'GRC','Cyprus':'CYP','Albania':'ALB','Bulgaria':'BGR','Austria':'AUT','Turkey':'TUR','North Macedonia':'MKD','France':'FRA','Italy':'ITA','Germany':'DEU','Romania':'ROU','Netherlands':'NLD','Serbia':'SRB','Kosovo':'XKX','United Kingdom':'GBR','Australia':'AUS','New Zealand':'NZL','Bangladesh':'BGD','Rwanda':'RWA','Zambia':'ZMB','Central African Republic':'CAF','United Arab Emirates':'ARE','Bosnia and Herzegovina':'BIH','Papua New Guinea':'PNG','South Sudan':'SSD','Sudan':'SDN','Kenya':'KEN','Tanzania':'TZA','Ethiopia':'ETH','South Africa':'ZAF','Mali':'MLI','Senegal':'SEN','Cameroon':'CMR','Gabon':'GAB','Burundi':'BDI','Mozambique':'MOZ','Madagascar':'MDG','Egypt':'EGY','Iran':'IRN','Iraq':'IRQ','Afghanistan':'AFG','China':'CHN','Japan':'JPN','South Korea':'KOR','Vietnam':'VNM','Thailand':'THA','Philippines':'PHL','Peru':'PER','Colombia':'COL','Mexico':'MEX','Venezuela':'VEN','Ecuador':'ECU','Paraguay':'PRY','Russia':'RUS','Ukraine':'UKR','Poland':'POL','Portugal':'PRT','Belgium':'BEL','Switzerland':'CHE','Sweden':'SWE','Norway':'NOR','Denmark':'DNK','Hungary':'HUN','Georgia':'GEO','Kazakhstan':'KAZ','Saudi Arabia':'SAU','Oman':'OMN','Mauritania':'MRT','Niger':'NER','Chad':'TCD','Burkina Faso':'BFA','Togo':'TGO','Benin':'BEN',"Côte d'Ivoire":'CIV','Ivory Coast':'CIV'};
+function tlIso3(n){ return TL_ISO3[n]||String(n||'').replace(/[^A-Za-z]/g,'').slice(0,3).toUpperCase(); }
 // Canvas text metrics for layout decisions (no DOM layout pass); memoised per font + string.
 const tlMeasure=(()=>{ let ctx=null; const memo=new Map(); return (txt,font)=>{ const k=font+'\u0001'+txt; let w=memo.get(k); if(w==null){ if(!ctx) ctx=document.createElement('canvas').getContext('2d'); ctx.font=font; w=ctx.measureText(txt).width; if(memo.size>800) memo.clear(); memo.set(k,w); } return w; }; })();
 // Phones inline keep one-finger drags for page scroll (mobile layer); swipe-to-browse needs full screen.
@@ -3463,14 +3484,14 @@ function tlLaneStatic(d, A){
       if(!sc.region(gc)) return;
       if(activeSpecies!==ALL_SPECIES&&!cleanText(dd.species).toLowerCase().includes(String(activeSpecies).toLowerCase())) return;
       if(!sc.text([dd.location,ctry,dp].join(' '))) return;
-      devs.push(dd);
+      devs.push(Object.assign({},dd,{_ctry:gc||'Other'}));
     });
     dots.forEach(({r})=>{ if(!hasDevelopments(r)) return;
-      (r.developments||[]).forEach(dv=>devs.push({report_date:r.date,location:r.place,country:r.geoCountry,category:dv.label,headline:dv.headline||dv.text,detail:dv.text,sources:(r.urls||[]).join('; ')})); });
+      (r.developments||[]).forEach(dv=>devs.push({_ctry:r.geoCountry||'Other',report_date:r.date,location:r.place,country:r.geoCountry,category:dv.label,headline:dv.headline||dv.text,detail:dv.text,sources:(r.urls||[]).join('; ')})); });
     const byKey=new Map(), groups=[];
     devs.forEach(dd=>{
-      const cat=devCategory(dd.category), day=toISODate(dd.report_date), key=day+'||'+cat.abbr;
-      if(!byKey.has(key)){ const gg={day,cat,items:[]}; byKey.set(key,gg); groups.push(gg); }
+      const cat=devCategory(dd.category), day=toISODate(dd.report_date), ctry=dd._ctry||'Other', key=day+'||'+ctry+'||'+cat.abbr;
+      if(!byKey.has(key)){ const gg={day,ctry,cat,items:[]}; byKey.set(key,gg); groups.push(gg); }
       byKey.get(key).items.push(dd);
     });
     // Recent-first before capping: the feed lists developments oldest-first.
@@ -3490,7 +3511,7 @@ function tlLaneStatic(d, A){
       if(!cl){ cl={country:u.country,pathogen:d.p,day:u.day,count:0,domains:[],minDate:'',maxDate:'',rows:[]}; clusters.set(key,cl); }
       cl.count++; cl.rows.push(u.row);
       const dm=u.row.domain; if(dm&&!cl.domains.includes(dm)) cl.domains.push(dm);
-      const ds=u.dateStr||''; if(ds){ if(!cl.minDate||ds<cl.minDate) cl.minDate=ds; if(!cl.maxDate||ds>cl.maxDate) cl.maxDate=ds; }
+      const ds=uvDay(u.dateStr)||u.dateStr||''; if(ds){ if(!cl.minDate||ds<cl.minDate) cl.minDate=ds; if(!cl.maxDate||ds>cl.maxDate) cl.maxDate=ds; }
     });
     clusters.forEach(cl=>{ let hf=false; try{ hf=cl.rows.some(rw=>!!(rawFactOf(rw).label)); }catch(e){} cl._hasFact=hf; });
     return clusters;
@@ -3629,7 +3650,12 @@ function tlRender(o){
   const flowPos=focusP?(tlFlowPos!=null?tlFlowPos:focusIdx):0;
   // Focus mode reserves a right gutter for direct country labels (outside the plot, so they can
   // never sit on glyphs); the overview keeps a slim margin for its scroll rail.
-  const m={t:52,r:focusP?(tlMobile()?92:128):26,b:28,l:36}, hdrR=tw-26;
+  // Phones: portrait drops the rotated y label (m.l 36→12); the gutter carries ISO3 codes (m.r 52);
+  // inline overview draws ridges only (tlBare) — glyphs appear once expanded or a lane is focused.
+  const tlFull=!!wrap.closest('.m-full');
+  const tlPort=tlMobile()&&window.matchMedia('(orientation: portrait)').matches;
+  const tlBare=tlMobile()&&!focusP&&!tlFull;
+  const m={t:52,r:focusP?(tlMobile()?52:128):26,b:28,l:tlPort?12:36}, hdrR=tw-(tlFull?60:26);
   const plotH=th-m.t-m.b;
   // Overview = a scrollable five-row window over the FULL ranking; only rows in (or sliding
   // through) the window are built.
@@ -3705,13 +3731,13 @@ function tlRender(o){
     if(!isAll()&&selectedPathogen&&!ranked.some(d=>d.p===selectedPathogen)) hintAt((PATHOGEN_LABELS[selectedPathogen]||selectedPathogen)+': no articles in the last '+TL_WINDOW_DAYS+' days');
     else if(top.length>1){
       const more=ranked.length>nVis?' \u00b7 '+(!tlMobile()?'scroll \u2195':(tlSwipeOK()?'swipe \u2195':'tap the rail'))+' for all '+ranked.length:'';
-      hintAt((tlMobile()?'Tap':'Click')+' a name to focus & filter'+more);
+      hintAt(tlBare?'Tap a name or Expand to see events'+more:(tlMobile()?'Tap':'Click')+' a name to focus & filter'+more);
     }
   } else if(ranked.length>1){
     const k=Math.round(Math.max(0,Math.min(ranked.length-1,flowPos)))+1;
     hintAt(k+' of '+ranked.length+' \u00b7 '+(!tlMobile()?'drag \u2195 or \u2191\u2193 to browse':(tlSwipeOK()?'swipe \u2195 to browse':'tap a strip to switch')));
   }
-  svg.append('text').attr('x',12).attr('y',m.t+plotH/2).attr('text-anchor','middle')
+  if(!tlPort) svg.append('text').attr('x',12).attr('y',m.t+plotH/2).attr('text-anchor','middle')
     .attr('transform',`rotate(-90,12,${m.t+plotH/2})`).attr('font-size','12px').attr('fill',col('--ink-4'))
     .text(metric==='risk'?'thickness = summed risk · shape = share of daily volume':'share of daily article volume');
   const rowsG=svg.append('g').attr('class','tl-rows');
@@ -3719,9 +3745,10 @@ function tlRender(o){
     .attr('x',m.l-8).attr('y',m.t-64)
     .attr('width',Math.max(0,tw-m.r-m.l)+16).attr('height',plotH+64+(focusP?34:2));
   rowsG.attr('clip-path','url(#tlClip)');
-  // Every lane's glyphs, chips and leader lines paint in ONE layer above every ridge, so no lane's
-  // fill (ridges overlap the row above) can cover another lane's signals.
+  // Every lane's glyphs paint above every ridge, in global tiers (unvetted < events < development
+  // leaders < chips), so no lane's fill or glyphs can cover another lane's development lines.
   const glyphRoot=svg.append('g').attr('class','tl-glyphs').attr('clip-path','url(#tlClip)');
+  const glyphUvL=glyphRoot.append('g').attr('class','tl-uv'), glyphEvL=glyphRoot.append('g').attr('class','tl-ev'), glyphLeadL=glyphRoot.append('g').attr('class','tl-lead').style('pointer-events','none'), glyphDevL=glyphRoot.append('g').attr('class','tl-dev');
   const gutterG=svg.append('g').attr('class','tl-gutter').style('pointer-events','none');
   // Pathogen names + counts paint in a dedicated overlay appended after every ridge.
   const labelInfos=[];
@@ -3797,7 +3824,7 @@ function tlRender(o){
     // Hover 1s brings this pathogen to the front; a name click focuses + filters (labelInfos).
     let hoverT=null;
     let gG=null;
-    const bringFront=()=>{ timelineFront=d.p; try{ g.node().parentNode.appendChild(g.node()); if(gG) gG.node().parentNode.appendChild(gG.node()); }catch(e){} };
+    const bringFront=()=>{ timelineFront=d.p; try{ g.node().parentNode.appendChild(g.node()); if(gG) gG.each(function(){ this.parentNode.appendChild(this); }); }catch(e){} };
     labelInfos.push({p:d.p,y0,selHi,wLabel,collapsed,a,r:sl.r,focused:focusP===d.p,
       onHoverStart:()=>{ if(!focusP) hoverT=setTimeout(bringFront,1000); },
       onHoverEnd:()=>{ if(hoverT){clearTimeout(hoverT);hoverT=null;} },
@@ -3812,14 +3839,16 @@ function tlRender(o){
       return;
     }
     let chipSpots=[];
-    if(!lite){
-    gG=glyphRoot.append('g').attr('data-p',d.p);
+    if(!lite&&!tlBare){
+    // One group per lane in EACH global tier, so every lane's development chips + leaders paint above
+    // every lane's event dots and unvetted triangles (ridges stack, so lanes' glyphs interleave).
+    const gUv=glyphUvL.append('g').attr('data-p',d.p), gEv=glyphEvL.append('g').attr('data-p',d.p), gLead=glyphLeadL.append('g').attr('data-p',d.p), gDev=glyphDevL.append('g').attr('data-p',d.p);
+    gG=d3.selectAll([gUv.node(),gEv.node(),gLead.node(),gDev.node()]);
     if(laneA<0.999) gG.attr('opacity',laneA.toFixed(3));
     if(!noSlide&&orderChanged&&timelinePrevY.has(d.p)){ const dy=timelinePrevY.get(d.p)-baseY.get(d.p);
       if(Math.abs(dy)>1) gG.attr('transform',`translate(0,${dy})`).transition().duration(750).ease(d3.easeCubicOut).attr('transform','translate(0,0)'); }
     else if(metricChanged) gG.attr('opacity',0).transition().duration(450).attr('opacity',laneA);
     // Paint + placement priority lock the glyph hierarchy — developments > events > unvetted.
-    const gUv=gG.append('g').attr('class','tl-uv'), gEv=gG.append('g').attr('class','tl-ev'), gDev=gG.append('g').attr('class','tl-dev');
     const gd=d._gd||(d._gd=tlLaneStatic(d,tlA));
     // Event + unvetted glyphs anchor to the vertical MIDDLE of their own country's band, clamped
     // inside the lane, and fan across full-circle rings about their date.
@@ -3829,9 +3858,18 @@ function tlRender(o){
     // Development chips place FIRST (highest priority) so dot/triangle packing routes around them.
     let devGroups=[];
     try {
-      const groups=gd.devAll;
-      devGroups=(tlCull?groups.filter(gg=>tlInX(dayOf(Date.parse(gg.day)))):groups).slice(0,tlMobile()?6:10).map(gg=>({day:gg.day,cat:gg.cat,items:gg.items}));
+      // One chip per day × COUNTRY, pinned to that country's band at that date (like the event dots),
+      // never a lane-wide dropline. Several categories on one day/country fold into "N Dev"; the
+      // tooltip lists every development, so nothing is dropped.
+      const byDC=new Map();
+      gd.devAll.forEach(gg=>{ const k=gg.day+'||'+gg.ctry; let e=byDC.get(k); if(!e){ e={day:gg.day,ctry:gg.ctry,cats:new Map(),items:[]}; byDC.set(k,e); } const c=e.cats.get(gg.cat.abbr); if(c) c.n+=gg.items.length; else e.cats.set(gg.cat.abbr,{cat:gg.cat,n:gg.items.length}); e.items.push(...gg.items); });
+      // Mixed days keep their categories in the chip ("2 Org · Sci"), largest first.
+      devGroups=[...byDC.values()].map(e=>{ const cs=[...e.cats.values()].sort((a,b)=>b.n-a.n);
+        if(cs.length===1) return {day:e.day,ctry:e.ctry,items:e.items,_cats:[cs[0].cat],cat:cs[0].cat};
+        return {day:e.day,ctry:e.ctry,items:e.items,_cats:cs.map(c=>c.cat),cat:{abbr:'Dev',full:cs.map(c=>c.cat.full).join(' · '),color:cs[0].cat.color}}; });
       if(tlCull&&(y0<m.t||y0-6>m.t+plotH)) devGroups=[];   // lane baseline scrolled out of frame
+      // Original chip layout: chips stack ABOVE the ridge at their true date (lane-packed, dodging the
+      // lane labels); a dotted vertical leader drops to the chip's own country band.
       const packDev=()=>{
         const laneRight=[];
         [...devGroups].sort((a,b)=>a._px-b._px).forEach(gg=>{
@@ -3843,11 +3881,15 @@ function tlRender(o){
         });
       };
       devGroups.forEach(gg=>{
-        const label=gg.items.length>1?gg.items.length+' '+gg.cat.abbr:gg.cat.abbr;
-        gg._label=label;
-        gg._cw=Math.max(34,Math.round(16+label.length*7.2));
-        gg._dateX=Math.max(m.l+4,Math.min(tw-m.r-2,x(dayOf(Date.parse(gg.day)))));
+        const dx=dayOf(Date.parse(gg.day)), xi=xiOf(dx);
+        // Single type: "Sci" / "3 Org" in that type's colour + outline. Several types: "Multi" / "5 Multi"
+        // with one bar per type, coloured to match the single-type outlines (which act as the legend).
+        const multi=gg._cats.length>1;
+        gg._label=(gg.items.length>1?gg.items.length+' ':'')+(multi?'Multi':gg.cat.abbr);
+        gg._cw=Math.round(4+gg._cats.length*5+4+tW(gg._label,13,700)+6);
+        gg._dateX=Math.max(m.l+4,Math.min(tw-m.r-2,x(dx)));
         gg._px=Math.max(m.l+gg._cw/2,Math.min(tw-m.r-gg._cw/2,gg._dateX));
+        gg._ay=laneClamp(bandMid(bandOf(gg.ctry==='Other'?null:gg.ctry),xi),xi);
       });
       if(tlCull) devGroups=devGroups.filter(gg=>{ const sx=x(dayOf(Date.parse(gg.day))); return sx-gg._cw/2>=m.l&&sx+gg._cw/2<=tw-m.r; });
       packDev();
@@ -3863,6 +3905,11 @@ function tlRender(o){
         while(tlChipHitsLabel(gg._px,py,gg._cw,18)&&bump++<6) py=Math.max(chipMin,py-24);
         gg._py=py;
       });
+      // Final pass: no two chips may overlap after the label-dodge moves — lift (then drop) a clash to a free row.
+      { const done=[]; const clash=(g,py)=>done.some(o=>Math.abs(g._px-o._px)<(g._cw+o._cw)/2+4&&Math.abs(py-o._py)<21);
+        [...devGroups].sort((a,b)=>b._py-a._py||a._px-b._px).forEach(gg=>{ if(clash(gg,gg._py)){ let py=null;
+          for(let k=1;k<=8&&py==null;k++){ const up=gg._py-24*k, dn=gg._py+24*k; if(up>=chipMin&&!clash(gg,up)) py=up; else if(dn<=y0-12&&!clash(gg,dn)) py=dn; }
+          if(py!=null) gg._py=py; } done.push(gg); }); }
       if(tlCull) devGroups=devGroups.filter(gg=>{ const xi=xiOf(dayOf(Date.parse(gg.day))); const top=(y0-d.total[xi]*S)-16-gg._lane*24;
         return top>=m.t-24&&gg._py>=m.t-24&&gg._py<=m.t+plotH&&gg._px-gg._cw/2>=m.l&&gg._px+gg._cw/2<=tw-m.r; });
     } catch(e){ devGroups=[]; }
@@ -3899,7 +3946,7 @@ function tlRender(o){
       // Factless clusters (no figure, non-human species or exposure path) draw fainter.
       const rr=tr-1.5;
       gUv.append('path').attr('transform',`translate(${px},${py})`).attr('d',`M${-rr},${-rr*0.55} L${rr},${-rr*0.55} L0,${rr*0.9} Z`)
-        .attr('fill','none').attr('stroke',col('--color-accent-300')).attr('stroke-width',1.4).attr('opacity',p._hasFact?0.9:0.5)
+        .attr('fill','none').style('stroke',uvStroke(p)).attr('stroke-width',1.4).attr('opacity',p._hasFact?0.9:0.5)
         .style('cursor','pointer').style('pointer-events','all').classed('glyph-hit',true)
         .on('mousemove',ev=>showChartTip(ev,unvettedTooltipHTML(p))).on('mouseleave',hideChartTip)
         .on('click',()=>{ hideChartTip(); if(typeof openUnvettedCluster==='function') openUnvettedCluster(p); });
@@ -3908,28 +3955,27 @@ function tlRender(o){
     // Situational developments, time-series chip style (Sci/Pth/Org/Pol), grouped by day × type.
     try {
       devGroups.forEach(gg=>{
-        const px=gg._px, dateX=gg._dateX, py=gg._py;
-        const xi=xiOf(dayOf(Date.parse(gg.day)));
-        const ridgeTop=y0-d.total[xi]*S;
+        const px=gg._px, dateX=gg._dateX, py=gg._py, ay=gg._ay;
         const label=gg._label;
         const cw=gg._cw;
         const ch=18;
         const pname=PATHOGEN_LABELS[d.p]||d.p;
         const mk=gDev.append('g').style('cursor','pointer').classed('glyph-hit',true)
           .attr('role','img')
-          .attr('aria-label',`${pname} — ${gg.cat.full} development · ${gg.day}${gg.items.length>1?' · '+gg.items.length:''}`)
+          .attr('aria-label',`${pname} — ${gg.ctry} · ${gg.cat.full} development · ${gg.day}${gg.items.length>1?' · '+gg.items.length:''}`)
           .on('mousemove',ev=>showChartTip(ev, developmentGroupTipHTML(gg.items,gg.cat,gg.day,d.p)))
           .on('mouseleave',hideChartTip);
-        // Leader drops to the ridge SURFACE; a pushed chip gets a left tail back to its true date.
+        // Dotted leader drops to the chip's country band at its true date; a pushed chip gets a left tail back.
         if(Math.abs(px-dateX)>2){
-          mk.append('path').attr('d',`M${(px-cw/2).toFixed(1)},${py.toFixed(1)}H${dateX.toFixed(1)}V${ridgeTop.toFixed(1)}`)
-            .attr('fill','none').attr('stroke',gg.cat.color).attr('stroke-dasharray','2 4').attr('opacity',0.65);
+          gLead.append('path').attr('d',`M${(px-cw/2).toFixed(1)},${py.toFixed(1)}H${dateX.toFixed(1)}V${ay.toFixed(1)}`)
+            .attr('fill','none').attr('stroke',gg._cats.length>1?col('--ink-3'):gg.cat.color).attr('stroke-dasharray','2 4').attr('opacity',0.65);
         } else {
-          mk.append('line').attr('x1',px).attr('x2',px).attr('y1',py+ch/2).attr('y2',ridgeTop).attr('stroke',gg.cat.color).attr('stroke-dasharray','2 4').attr('opacity',0.65);
+          gLead.append('line').attr('x1',px).attr('x2',px).attr('y1',py+ch/2).attr('y2',ay).attr('stroke',gg._cats.length>1?col('--ink-3'):gg.cat.color).attr('stroke-dasharray','2 4').attr('opacity',0.65);
         }
-        mk.append('rect').attr('x',px-cw/2).attr('y',py-ch/2).attr('width',cw).attr('height',ch).attr('rx',5).attr('fill',col('--color-neutral-900')).attr('fill-opacity',0.96).attr('stroke',gg.cat.color).attr('stroke-width',1.2);
-        mk.append('rect').attr('x',px-cw/2+1.5).attr('y',py-ch/2+3).attr('width',3).attr('height',ch-6).attr('rx',1.5).attr('fill',base).attr('opacity',0.95);
-        mk.append('text').attr('x',px+1.5).attr('y',py+4).attr('text-anchor','middle').attr('font-size',13).attr('font-weight',700).attr('fill',gg.cat.color).text(label);
+        const multi=gg._cats.length>1, ink=multi?col('--ink-2'):gg.cat.color;
+        mk.append('rect').attr('x',px-cw/2).attr('y',py-ch/2).attr('width',cw).attr('height',ch).attr('rx',5).attr('fill',col('--color-neutral-900')).attr('fill-opacity',0.96).attr('stroke',multi?col('--color-neutral-500'):gg.cat.color).attr('stroke-width',1.2);
+        gg._cats.forEach((c,k)=>mk.append('rect').attr('x',px-cw/2+4+k*5).attr('y',py-ch/2+3).attr('width',3).attr('height',ch-6).attr('rx',1.5).attr('fill',c.color));
+        mk.append('text').attr('x',px-cw/2+4+gg._cats.length*5+3).attr('y',py+4.5).attr('font-size',13).attr('font-weight',700).attr('fill',ink).text(label);
       });
     } catch(e){}
     }
@@ -3950,7 +3996,7 @@ function tlRender(o){
         const last=items[items.length-1];
         if(last&&last.y<lo){ last.y=lo; for(let k=items.length-2;k>=0;k--) items[k].y=Math.max(items[k].y,items[k+1].y+pitch); }
         items.forEach(it=>{
-          const full=it.b.kind==='other'?'Other':it.b.name; let name=SHORT[full]||full;
+          const full=it.b.kind==='other'?'Other':it.b.name; let name=tlMobile()?(it.b.kind==='other'?'Oth':tlIso3(full)):(SHORT[full]||full);
           if(tW(name,fs,500)>gw){ while(name.length>3&&tW(name+'\u2026',fs,500)>gw) name=name.slice(0,-1); name=name.trimEnd()+'\u2026'; }
           const lg=gutterG.append('g');
           lg.append('path').attr('d',`M${(xE+1).toFixed(1)},${it.yc.toFixed(1)}L${(xE+6).toFixed(1)},${it.y.toFixed(1)}H${(gx-3).toFixed(1)}`)
@@ -4004,7 +4050,8 @@ function tlRender(o){
   // Keyboard focus lives on the wrap (an HTML element): focused SVG groups don't survive frames.
   if(hadFocus&&!wrap.contains(document.activeElement)) try{ wrap.focus({preventScroll:true}); }catch(e){}
   const axis=svg.append('g').attr('class','tl-axis').attr('transform',`translate(0,${m.t+plotH})`);
-  const ticks=6;
+  // Phones: one date label per ~90px of plot so labels never collide.
+  const ticks=tlMobile()?Math.max(2,Math.min(6,Math.floor((tw-m.r-m.l)*sxs/90))):6;
   // Ticks are placed evenly in screen space and inverted through the zoomed scale.
   for(let i=0;i<=ticks;i++){ const sx=m.l+(tw-m.r-m.l)*i/ticks; const dv=x.invert(sx); if(!isFinite(dv)) continue; const dt=new Date(startMs+dv*864e5);
     axis.append('line').attr('x1',sx).attr('x2',sx).attr('y1',0).attr('y2',5).attr('stroke',col('--color-divider'));
@@ -5109,10 +5156,14 @@ window.addEventListener('resize', () => { clearTimeout(_chartResizeT); _chartRes
 function timeTicksArg(scale) {
   const [a, b] = scale.domain();
   const days = Math.abs(b - a) / 86400000;
-  if (days <= 21) return d3.timeDay.every(3);
-  if (days <= 75) return d3.timeWeek.every(1);
-  if (days <= 160) return d3.timeWeek.every(2);
-  return d3.timeMonth.every(1);
+  const steps = [[3, d3.timeDay.every(3)], [7, d3.timeWeek.every(1)], [14, d3.timeWeek.every(2)], [30, d3.timeMonth.every(1)], [61, d3.timeMonth.every(2)], [91, d3.timeMonth.every(3)]];
+  let i = days <= 21 ? 0 : days <= 75 ? 1 : days <= 160 ? 2 : 3;
+  // Phones: widen the cadence until each label gets ~64px, so '%-d %b' labels never overlap.
+  if (typeof tlMobile === 'function' && tlMobile()) {
+    const r = scale.range(), px = Math.abs(r[1] - r[0]), maxN = Math.max(2, Math.floor(px / 64));
+    while (i < steps.length - 1 && days / steps[i][0] > maxN) i++;
+  }
+  return steps[i][1];
 }
 
 function renderTrendSection() {
@@ -6415,6 +6466,7 @@ const DEV_CATEGORIES = {
   pathological:   { abbr:'Pth', full:'Pathological',   color:'--danger-ink' },
   organizational: { abbr:'Org', full:'Organizational', color:'--warn-ink' },
   political:      { abbr:'Pol', full:'Political',       color:'--ink-3' },
+  situational:    { abbr:'Sit', full:'Situational',     color:'--dev-sit' },
 };
 function devCategory(raw) {
   const hit = DEV_CATEGORIES[String(raw||'').trim().toLowerCase()];
@@ -6426,8 +6478,11 @@ function devCategory(raw) {
 function developmentGroupTipHTML(items, cat, day, pathogen) {
   const date = new Date(day+'T00:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
   const pfx = pathogen ? `${esc(PATHOGEN_LABELS[pathogen]||pathogen)} · ` : '';
-  const head = `<p class="t-title">${pfx}${esc(cat.full)} · ${esc(date)}${items.length>1?` · ${items.length}`:''}</p>`;
+  const cats = [...new Set(items.map(d => devCategory(d.category).full))];
+  const head = `<p class="t-title">${pfx}${esc(cats.length > 1 ? 'Developments' : cat.full)} · ${esc(date)}${items.length>1?` · ${items.length}`:''}</p>`;
   const rows = items.map((d, i) => {
+    const dc = devCategory(d.category);
+    const tag = `<span style="display:inline-flex;align-items:center;gap:5px;margin-right:6px;font-weight:600;color:${dc.color}"><span style="width:3px;height:11px;border-radius:1.5px;background:${dc.color}"></span>${esc(dc.full)}</span>`;
     const text = (d.headline && d.detail) ? (d.detail.length >= d.headline.length ? d.detail : d.headline) : (d.headline || d.detail || '');
     const geo = d.location || d.country || '';
     const loc = geo ? `<span style="color:var(--ink-4)">${esc(geo)} — </span>` : '';
@@ -6435,7 +6490,7 @@ function developmentGroupTipHTML(items, cat, day, pathogen) {
     const style = i > 0
       ? 'margin:9px 0 0;padding-top:9px;border-top:1px solid color-mix(in srgb,var(--color-text) 15%,transparent)'
       : 'margin:4px 0 0';
-    return `<p style="${style};max-width:300px;white-space:normal;line-height:1.4;color:var(--color-text)">${loc}${esc(text)}</p>`;
+    return `<p style="${style};max-width:300px;white-space:normal;line-height:1.4;color:var(--color-text)">${tag}${loc}${esc(text)}</p>`;
   }).join('');
   return head + rows;
 }
