@@ -976,7 +976,7 @@
       <p class="card-title" style="margin:0" id="tableTitle">Latest figures by location — national events</p>
       <button type="button" class="btn btn-secondary btn-sm" id="tableBack" style="display:none">← Back to national</button>
       <span style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-        <div class="seg" role="tablist" aria-label="Statistical screening" id="screenSeg" title="Each figure is screened for statistical consistency (trend outliers and cumulative monotonicity). This is separate from vetting, which requires independent-source corroboration.">
+        <div class="seg" role="tablist" aria-label="Statistical screening" id="screenSeg" title="Each figure is screened for statistical consistency (trend outliers and cumulative monotonicity). This is separate from row vetting, which uses current stored article-vetting links.">
           <button type="button" class="seg-opt" aria-selected="true" data-screen="accepted">Screened in</button>
           <button type="button" class="seg-opt" data-screen="rejected">Screened out</button>
         </div>
@@ -990,7 +990,7 @@
       </span>
     </div>
      <p id="tableIntro" style="font-size:13px;color:color-mix(in srgb, var(--color-text) 68%, transparent);margin:-6px 0 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span id="tableIntroLead"></span>
-       <button type="button" id="tableHelpBtn" class="section-help" aria-label="About this table" title="How to read this table&#10;&#10;Range = spread across sources for that date.&#10;Status = reporting recency (≤4d Reporting · ≤14d Slowing · Quiet).&#10;Documentation = event-history (all dates/measures; Well documented = long + many vettings).&#10;Sources / Article screening = latest figure only — unvetted = 1 source (paler); N sources = vetted (N−1 vettings). Click to list articles.&#10;CFR = deaths ÷ cases for the row; * = small sample (n<30, interpret cautiously); n/a = deaths and cases drawn from different articles (not a true rate).&#10;Amber dot = suspected bleed-through (a sub-location may carry its parent location's total; flagged upstream, shown uncorrected).&#10;Range = spread · click sources to list articles." style="margin-left:0;flex:none">?</button>
+       <button type="button" id="tableHelpBtn" class="section-help" aria-label="About this table" title="How to read this table&#10;&#10;Range = spread across sources for that date.&#10;Status = reporting recency (≤4d Reporting · ≤14d Slowing · Quiet).&#10;Documentation = event-history (all dates/measures; Well documented = long + many vettings).&#10;Row vetting = current stored article-vetting links. Publisher counts separately describe support for the exact latest figure. Click to inspect both.&#10;CFR = deaths ÷ cases for the row; * = small sample (n<30, interpret cautiously); n/a = deaths and cases drawn from different articles (not a true rate).&#10;Amber dot = suspected bleed-through (a sub-location may carry its parent location's total; flagged upstream, shown uncorrected).&#10;Range = spread · click sources to list articles." style="margin-left:0;flex:none">?</button>
      </p>
     <div class="table-scroll">
     <table class="table">
@@ -999,8 +999,8 @@
           <th class="sortable" data-key="country" id="thFirst">Country<span class="sort-arrow"></span></th>
           <th class="sortable" data-key="disease">Pathogen<span class="sort-arrow"></span></th>
           <th>Host species</th>
-          <th class="sortable" data-key="doc" title="Event-history metric (all dates/measures for this outbreak, includes unvetted rows): total vettings = sum n_sources across history + span of reporting days — differentiates long, well-vetted outbreaks from small, uncertain events">Outbreak documentation<span class="sort-arrow"></span></th>
-          <th class="sortable" data-key="sources" style="min-width:160px" title="Latest figure only: statistical screening + corroboration for this row's figure — vetted = 2+ independent source domains (N−1 vettings), unvetted = 1 domain (muted). Click sources/unvetted to list all supporting articles; sort by N sources">Article screening<span class="sort-arrow"></span></th>
+          <th class="sortable" data-key="doc" title="Event-history metric (all dates/measures for this outbreak, includes unvetted rows): total vettings = stored article-vetting link contributions across history + span of reporting days — differentiates long, well-vetted outbreaks from small, uncertain events">Outbreak documentation<span class="sort-arrow"></span></th>
+          <th class="sortable" data-key="sources" style="min-width:160px" title="Latest figure only: statistical screening + corroboration for this row's figure — vetted = 2+ independent source domains (N−1 vettings), 1 publisher = latest-day single-publisher support (muted). Click sources/unvetted to list all supporting articles; sort by N sources">Article screening<span class="sort-arrow"></span></th>
           <th class="sortable" data-key="cases">Confirmed cases<span class="sort-arrow"></span></th>
           <th class="sortable" data-key="deaths" id="thDeaths">Confirmed deaths<span class="sort-arrow"></span></th>
           <th class="sortable" data-key="cfr">CFR<span class="sort-arrow"></span></th>
@@ -1083,48 +1083,88 @@ const rawBleedIndex = new Set();
 // renderAll() pass, long before the fetch orchestration below is defined.
 let dataLoaded = false, sheetRetries = 0;
 // --- Data quarantine (censoring bad reads) ---
-// A published sheet lists pathogen × country × date windows flagged as bad reads at report
+// A published sheet lists pathogen × location × method × date windows flagged as bad reads at report
 // generation (misclassified pathogen, historical article misread as current, impossible
 // figures). The dashboard applies the SAME quarantine on load so nothing the pipeline already
 // rejected resurfaces here. Fail-open: if the list is unreachable, all data is shown and a
 // visible warning is raised — a quarantine-list outage must never blank the dashboard.
 const GSHEET_CENSOR_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQYokxQmIi1W5-dpxCFDoow_jRgLFcqR0A11Hz2S93Zj9XJNRb5tm5m0VEjBGpgz21xlyoorPRHEZmc/pub?gid=2086665852&single=true&output=csv";
-let censorRules = [];        // enabled rules: [{pathogen, country, dmin, dmax, reason, label}]
+let censorRules = [];        // enabled rules: [{pathogen, location, matching_method, dmin, dmax, reason, label}]
 let censorState = 'idle';    // 'idle' | 'live' | 'unavailable'
 const censorStats = { figures: 0, reports: 0, raw: 0 };
-function censorKey(s) { return String(s == null ? '' : s).trim().toLowerCase().replace(/^the\s+/, ''); }
+function censorKey(s) {
+  return String(s == null ? '' : s).normalize('NFKC').toLowerCase().trim()
+    .replace(/[_\-/]+/g, ' ').replace(/[^\p{L}\p{N}_\s]/gu, '').replace(/\s+/g, ' ').trim();
+}
 function toISODate(s) {
   s = String(s == null ? '' : s).trim();
   let m = s.match(/(\d{4})-(\d{2})-(\d{2})/); if (m) return m[1] + '-' + m[2] + '-' + m[3];
   m = s.match(/(?:report_)?(\d{2})-(\d{2})-(\d{2})/i); if (m) return '20' + m[1] + '-' + m[2] + '-' + m[3];
   const d = new Date(s); return isNaN(d) ? '' : d.toISOString().slice(0, 10);
 }
-// True when (pathogen, country, date) falls inside an enabled quarantine window. Pathogen is
-// folded to match the figures feed; a missing/unparseable date never matches (we don't
-// over-censor when a row carries no usable date).
-function isCensored(pathogen, country, dateStr, trackerPathogen) {
+function censorLocationKey(value) {
+  let text = String(value == null ? '' : value).normalize('NFKC').toLowerCase().trim();
+  if (/^(nan|none|null|n\/a|undefined|-)$/i.test(text)) return '';
+  return text.replace(/\s+/g, ' ').replace(/\s*,\s*/g, ', ');
+}
+function censorMatchingMethod(value) {
+  const key = String(value == null ? '' : value).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
+  return ({strict:'strict match',strict_match:'strict match',inclusive:'inclusive match',inclusive_match:'inclusive match'})[key] || '';
+}
+function censorLocationMatches(candidate, location, matchingMethod) {
+  const c = censorLocationKey(candidate), l = censorLocationKey(location), m = censorMatchingMethod(matchingMethod);
+  return !!(c && l && m && (c === l || (m === 'inclusive match' && c.endsWith(', ' + l))));
+}
+function censorLocationKeys(location, country) {
+  const l = censorLocationKey(location) || censorLocationKey(country), c = censorLocationKey(country);
+  const keys = l ? [l] : [];
+  if (l && c && l !== c && !l.endsWith(', ' + c)) keys.push(l + ', ' + c);
+  return keys;
+}
+function censorDate(value) {
+  const day = toISODate(value);
+  if (!day) return '';
+  const parsed = new Date(day + 'T00:00:00Z');
+  return Number.isFinite(parsed.getTime()) && parsed.toISOString().slice(0,10) === day ? day : '';
+}
+function parseCensorRules(rows) {
+  const columns = rows.columns || (rows.length ? Object.keys(rows[0]) : []);
+  const legacy = !columns.includes('location') && columns.includes('country');
+  const required = ['pathogen','date_min','date_max',...(legacy ? ['country'] : ['location','matching_method'])];
+  if (required.some(c => !columns.includes(c))) throw new Error('Censored sheet requires pathogen, location, matching_method, date_min and date_max');
+  if (legacy) console.warn('[censor] legacy country rules retain inclusive matching; migrate location/matching_method');
+  const rules = [];
+  rows.forEach((row, index) => {
+    if (['0','false','no','n','disabled','off'].includes(censorKey(row.enabled))) return;
+    const pathogen = censorKey(foldPathogen(row.pathogen || ''));
+    const location = censorLocationKey(row[legacy ? 'country' : 'location']);
+    const dmin = censorDate(row.date_min), dmax = censorDate(row.date_max);
+    if (!pathogen && !location && !dmin && !dmax) return;
+    const matching_method = legacy ? 'inclusive match' : censorMatchingMethod(row.matching_method);
+    if (!pathogen || !location || !dmin || !dmax || dmin > dmax || !matching_method)
+      throw new Error('Invalid Censored rule at row ' + (index + 2));
+    rules.push({pathogen,location,matching_method,dmin,dmax,reason:String(row.reason || '').trim(),
+      label:String(row.pathogen || '').trim() + ' · ' + String(row[legacy ? 'country' : 'location'] || '').trim() + ' · ' + matching_method});
+  });
+  return rules;
+}
+// Match the complete location or a comma-delimited descendant, plus a report-date interval.
+// Country context can complete a raw extraction's omitted suffix; it never supplies a bare
+// country alternative for a subnational row. Strict country rules therefore stay national.
+function isCensored(pathogen, location, dateStr, trackerPathogen, dateEnd, countryContext) {
   if (!censorRules.length) return false;
-  const p = censorKey(foldPathogen(pathogen || ''));
-  const tracker = censorKey(foldPathogen(trackerPathogen || ''));
-  const c = censorKey(country || '');
-  if (!p || !c) return false;
-  const d = toISODate(dateStr);
-  if (!d) return false;
-  return censorRules.some(r => (r.pathogen === p || (tracker && r.pathogen === tracker)) && r.country === c && d >= r.dmin && d <= r.dmax);
+  const p = censorKey(foldPathogen(pathogen || '')), tracker = censorKey(foldPathogen(trackerPathogen || ''));
+  const keys = censorLocationKeys(location, countryContext);
+  let dmin = censorDate(dateStr), dmax = censorDate(dateEnd || dateStr);
+  if (!dmin) dmin = dmax; if (!dmax) dmax = dmin;
+  if ((!p && !tracker) || !keys.length || !dmin || !dmax) return false;
+  if (dmin > dmax) [dmin,dmax] = [dmax,dmin];
+  return censorRules.some(r => (r.pathogen === p || (tracker && r.pathogen === tracker)) &&
+    keys.some(k => censorLocationMatches(k,r.location,r.matching_method)) && dmin <= r.dmax && dmax >= r.dmin);
 }
 function fetchCensor() {
   return withTimeout(d3.csv(GSHEET_CENSOR_URL), 15000, 'quarantine list').then(rows => {
-    censorRules = (rows || [])
-      .filter(r => !['no', 'false', '0', 'off', 'disabled'].includes(String(r.enabled || '').trim().toLowerCase()))
-      .map(r => ({
-        pathogen: censorKey(foldPathogen((r.pathogen || '').trim())),
-        country: censorKey(r.country),
-        dmin: toISODate(r.date_min),
-        dmax: toISODate(r.date_max),
-        reason: (r.reason || '').trim(),
-        label: (r.pathogen || '').trim() + ' · ' + (r.country || '').trim()
-      }))
-      .filter(r => r.pathogen && r.country && r.dmin && r.dmax);
+    censorRules = parseCensorRules(rows || []);
     censorState = 'live';
     if (typeof rawArticlesSource !== 'undefined' && rawArticlesSource) reapplyRawCensor();
   }).catch(err => {
@@ -1171,7 +1211,7 @@ function updateCensorTag() {
 // and unvetted signals, with the distinction explicit so early single-source warnings
 // remain investigable instead of being hidden.
 function vettingsOf(n) { return Math.max(0, (+n || 1) - 1); }
-function isVetted(r) { return vettingsOf(r.n_sources) >= 1; }
+function isVetted(r) { return measurementVettingLinks(r).length > 0; }
 function vettingLabel(n) { // source-count label: verbose tooltip form "2 sources · 1 vetting"
   const src = (+n || 1);
   const v = vettingsOf(src);
@@ -1492,7 +1532,7 @@ function renderStats() {
   const scopedAll = displayRecords().filter(r => !isFlu(r.pathogenRaw)).filter(r => all || r.pathogenRaw === selectedPathogen);
   const vettedScoped = scopedAll.filter(isVettedOutbreak);
   const vettedCaseScoped = scopedAll.filter(isRecordVetted);
-  const vettedDeathScoped = scopedAll.filter(r => vettingsOf(r.deathSources) >= 1);
+  const vettedDeathScoped = scopedAll.filter(deathIsVetted);
   // Event reports are vetted by corroboration (2+ independent domains) even when they carry no
   // case/death figures (e.g. ASF culling reports). Count those outbreaks too, so the scorecard
   // agrees with the map; case/death TOTALS stay figure-only.
@@ -1697,10 +1737,10 @@ function refineRecord(r) {
   if (!c) return null;
   const d = latestOfAll(rowsForFigure(p, country, 'confirmed_deaths', loc, strictLoc));
   return Object.assign({}, r, { cases: c.value, casesRange: [c.min, c.max], date: c.date,
-    sources: c.sources, articles: c.articles, rowsAt: c.rowsAt, sourceUrl: c.url,
-    deaths: d ? d.value : null, deathSources: d ? d.sources : 0 });
+    sources: c.sources, articles: c.articles, rowsAt: c.rowsAt, figureSpecies: c.figureSpecies, sourceUrl: c.url,
+    deaths: d ? d.value : null, deathSources: d ? d.sources : 0, deathRows: d ? d.rowsAt : [] });
 }
-function isRecordVetted(r) { return vettingsOf(r.sources) >= 1; }
+function isRecordVetted(r) { return recordVettingLinks(r).length > 0; }
 // Corroboration counts DISTINCT INDEPENDENT DOMAINS backing a fact, across the confirmed+suspected
 // pair at one location & date. A fact split across measures by different publishers (one files
 // 'confirmed', a repost files 'suspected') previously left a single-measure figure looking
@@ -1715,12 +1755,121 @@ function familyRowsFor(rowsArr, locKeys, dateStr, measure, pathogen){
 function domainsOf(rowsArr){ const d=new Set(); (rowsArr||[]).forEach(r => extractUrls(r.sources).forEach(u => { const h=urlHost(u); if(h) d.add(h); })); return d.size; }
 function famDomainsAt(rowsArr, locKeys, dateStr, measure, pathogen){ return domainsOf(familyRowsFor(rowsArr, locKeys, dateStr, measure||'confirmed_cases', pathogen)); }
 function recordFamilyRows(r){
-  const at = r.rowsAt || []; const measure = at[0] ? at[0].measure : 'confirmed_cases';
-  const locs = new Set(at.map(x => (x.location||'').trim().toLowerCase()));
-  if (!locs.size && r.figureLoc) locs.add(String(r.figureLoc).trim().toLowerCase());
-  return familyRowsFor(typeof allRows!=='undefined'?allRows:[], locs, r.date, measure, r.pathogenRaw || r.pathogen || (at[0] && at[0].pathogen));
+  const at = r.rowsAt || [];
+  const matches = at.filter(x => +x.value === +r.cases && (!r.figureSpecies || cleanText(x.species) === r.figureSpecies));
+  const pick = chooseFigureRow(matches);
+  return sameFigureRows(at, pick);
 }
 function recordFamilyDomains(r){ return domainsOf(recordFamilyRows(r)); }
+// Stored article-vetting contributors are the primary row-vetting signal.
+// They are not relabelled as independent confirmations of an exact number.
+let _vetRawRef = null, _vetRawDay = '', _vetRawIndex = new Map();
+function vettingLocationKey(loc) { return cleanText(loc).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
+function measurementVettingLinks(row) {
+  const now = new Date().toISOString().slice(0,10);
+  if (_vetRawRef !== rawArticles || _vetRawDay !== now) {
+    _vetRawRef = rawArticles; _vetRawDay = now; _vetRawIndex = new Map();
+    const cutoff = new Date(now + 'T00:00:00Z'); cutoff.setUTCDate(cutoff.getUTCDate() - 14);
+    const minDay = cutoff.toISOString().slice(0,10);
+    (rawArticles || []).forEach(r => {
+      const day = toISODate(r.report_date || r.date || r.published);
+      if (!day || day < minDay || day > now) return;
+      const key = [r.pathogen, normUrl(r.url || ''), cleanText(r.host_species)].join('|');
+      if (!_vetRawIndex.has(key)) _vetRawIndex.set(key, []); _vetRawIndex.get(key).push(r);
+    });
+  }
+  let aliases = []; try { aliases = JSON.parse(row.location_aliases || '[]'); } catch (e) {}
+  const keys = new Set([row.location, ...(Array.isArray(aliases) ? aliases : [])].map(vettingLocationKey));
+  const links = new Set();
+  extractUrls(row.sources || '').forEach(u => {
+    const raw = _vetRawIndex.get([row.pathogen, normUrl(u), cleanText(row.species)].join('|')) || [];
+    raw.forEach(r => {
+      const loc = cleanText(r.event_location || r.location), country = cleanText(r.extract_country || r.country);
+      if (!keys.has(vettingLocationKey(loc)) && !keys.has(vettingLocationKey(country ? loc + ', ' + country : loc))) return;
+      let stored = []; try { stored = JSON.parse(r.vetting_contributors || '[]'); } catch (e) { stored = extractUrls(r.vetting_contributors || ''); }
+      if (!Array.isArray(stored)) return;
+      stored.forEach(link => { if (typeof link === 'string' && /^https?:\/\//i.test(link) && normUrl(link) !== normUrl(u)) links.add(link); });
+    });
+  });
+  return [...links].sort();
+}
+function recordVettingLinks(record) {
+  return [...new Set(recordFamilyRows(record).flatMap(measurementVettingLinks))];
+}
+function refreshSubVettingCounts() {
+  const rows = viewRows();
+  records.forEach(record => {
+    let vetted = 0, unvetted = 0;
+    (record.subLocs || []).forEach(loc => {
+      const latest = latestOfAll(rows.filter(r => r.pathogen === record.pathogenRaw &&
+        r.location === loc && r.measure === 'confirmed_cases' && r.outlier === 'False'));
+      if (!latest) return;
+      if (isRecordVetted({ cases: latest.value, rowsAt: latest.rowsAt, figureSpecies: latest.figureSpecies })) vetted++;
+      else unvetted++;
+    });
+    record.subVetted = vetted; record.subUnvetted = unvetted;
+  });
+}
+function deathIsVetted(record) {
+  const at = record.deathRows || [], pick = chooseFigureRow(at.filter(r => +r.value === +record.deaths));
+  const backing = sameFigureRows(at, pick);
+  return backing.some(r => measurementVettingLinks(r).length > 0);
+}
+// One evidence rule for a displayed fact; never pool hosts, definitions or values.
+function figureSources(rows) {
+  const pubs = new Set();
+  (rows || []).forEach(r => extractUrls(r.sources || '').forEach(u => { const h = urlHost(u); if (h) pubs.add(h); }));
+  return pubs.size;
+}
+function chooseFigureRow(rows) {
+  if (!rows.length) return null;
+  // Human counts take precedence in an unfiltered mixed-host view. Animal
+  // figures remain accessible through the host selector and their own rows.
+  const human = rows.filter(r => isHumanHost(cleanText(r.species)));
+  const hostPool = human.length ? human : rows;
+  const canonical = hostPool.filter(r => r.is_canonical === 'True');
+  return (canonical.length ? canonical : hostPool).slice().sort((a,b) =>
+    figureSources([b]) - figureSources([a]) || (+b.value) - (+a.value) ||
+    String(a.species || '').localeCompare(String(b.species || '')) ||
+    String(a.sources || '').localeCompare(String(b.sources || '')))[0];
+}
+function sameFigureRows(rows, pick) {
+  return pick ? (rows || []).filter(r => r.pathogen === pick.pathogen &&
+    r.location === pick.location && cleanText(r.species) === cleanText(pick.species) &&
+    r.measure === pick.measure && r.report_date === pick.report_date && +r.value === +pick.value) : [];
+}
+function priorFigureEvidence(record) {
+  const current = recordFamilyRows(record), pick = current[0];
+  if (!pick) return { rows: [], domains: 0, dates: [] };
+  const cutoff = new Date(pick.report_date + 'T00:00:00Z'); cutoff.setUTCDate(cutoff.getUTCDate() - 15);
+  const minDay = cutoff.toISOString().slice(0,10);
+  const previous = viewRows().filter(r => r.pathogen === pick.pathogen && r.location === pick.location &&
+    cleanText(r.species) === cleanText(pick.species) && r.measure === pick.measure &&
+    +r.value === +pick.value && r.outlier !== 'True' &&
+    r.report_date >= minDay && r.report_date < pick.report_date);
+  return { rows: previous, domains: figureSources(previous), dates: [...new Set(previous.map(r => r.report_date))].sort() };
+}
+let _reportFigCacheKey = '', _reportFigCache = new Map();
+function reportFigure(report, measure) {
+  const epoch = dataEpoch() + '|' + activeSpecies;
+  if (_reportFigCacheKey !== epoch) { _reportFigCacheKey = epoch; _reportFigCache.clear(); }
+  const cacheKey = [report.pathogen, report.place, report.date, report.locationAliases, measure].join('|');
+  if (_reportFigCache.has(cacheKey)) return _reportFigCache.get(cacheKey);
+  // Match the report's own place (or an explicitly published alias), never a
+  // different location in its country. No national fallback for local briefs.
+  const key = String(report.place || '').trim().toLowerCase();
+  if (!key) return null;
+  let aliases = []; try { aliases = JSON.parse(report.locationAliases || '[]'); } catch (e) {}
+  const keys = new Set([key, ...(Array.isArray(aliases) ? aliases : []).map(x => String(x).trim().toLowerCase())]);
+  const pool = viewRows().filter(r => r.pathogen === report.pathogen && r.measure === measure && r.outlier === 'False' &&
+    (!report.date || r.report_date <= report.date) && (() => {
+      const loc = String(r.location || '').trim().toLowerCase();
+      if (keys.has(loc)) return true;
+      let raw = []; try { raw = JSON.parse(r.location_aliases || '[]'); } catch (e) {}
+      return Array.isArray(raw) && raw.some(x => keys.has(String(x).trim().toLowerCase()));
+    })());
+  const result = latestOfAll(pool); _reportFigCache.set(cacheKey, result); return result;
+}
 // Suspected "bleed-through": a sub-location figure that inherited its parent location's total,
 // detected & labelled upstream after several US West Nile virus sub-locations carried the
 // state/national count. The value is kept as delivered (the upstream correction may not be
@@ -1798,13 +1947,7 @@ function figureAcceptance(r) {
   const label = flag === 'chi-sq' ? 'Failed chi-square' : flag === 'monotonicity' ? 'Breaks monotonicity' : 'Screened out';
   return `<span class="doc-badge doc-less" title="Screened out of the canonical series">${label}</span>`;
 }
-function hostFor(r) {
-  const p = r.pathogenRaw || r.pathogen, loc = r.figureLoc || r.country;
-  // Scoped to the species view so the column reflects the filtered subset, not every host ever recorded.
-  const sp = [...new Set(viewRows().filter(x => x.pathogen === p && x.location === loc)
-    .map(x => cleanText(x.species)).filter(Boolean))];
-  return sp.join(' / ');
-}
+function hostFor(r) { return r.figureSpecies || (recordFamilyRows(r)[0] && cleanText(recordFamilyRows(r)[0].species)) || ''; }
 // Clears every subnational/filtered scope so a new selection starts from the national view.
 function resetDrilldowns() {
   trendMode = { mode: 'national' }; granPref='national'; chartPref='auto';
@@ -1836,7 +1979,7 @@ function populateSpeciesSelect() {
 }
 function exportTableCsv() {
   const cols = [['country','Location'],['disease','Pathogen'],['host','Host species'],['cases','Confirmed cases'],
-    ['deaths', (activeSpecies !== ALL_SPECIES && !isHumanHost(activeSpecies)) ? 'Animals culled / died' : 'Confirmed deaths'],['cfr','CFR %'],['date','Last updated'],['sources','Sources (independent domains)'],['vettings','Vettings (sources-1)'],['vetStatus','Vetted?'],['articles','Distinct source URLs'],
+    ['deaths', (activeSpecies !== ALL_SPECIES && !isHumanHost(activeSpecies)) ? 'Animals culled / died' : 'Confirmed deaths'],['cfr','CFR %'],['date','Last updated'],['sources','Sources (independent domains)'],['vettings','Stored article-vetting links'],['vetStatus','Vetted?'],['articles','Distinct source URLs'],
     ['status','Status'],['figureLoc','Figure location string'],
     ['sourceUrl','Figure source URL'],['sourceUrls','All source article URLs']];
   const q = v => { const s = v == null ? '' : String(v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
@@ -1844,7 +1987,7 @@ function exportTableCsv() {
     if (k === 'cfr') return (r.deaths != null && r.cases && r.deaths <= r.cases) ? ((r.deaths / r.cases) * 100).toFixed(1) : '';
     if (k === 'host') return hostFor(r);
     if (k === 'sourceUrl') return r.sourceUrl || '';
-    if (k === 'vettings') return vettingsOf(r.sources);
+    if (k === 'vettings') return recordVettingLinks(r).length;
     if (k === 'vetStatus') return isRecordVetted(r) ? 'vetted' : 'unvetted';
     // Audit trail: every article URL behind this row's figure on its last-updated date.
     if (k === 'sourceUrls') return (r.rowsAt || []).flatMap(x => extractUrls(x.sources)).join('; ');
@@ -1894,8 +2037,12 @@ function openFigureSourcePopup(rowId) {
   const famRows = recordFamilyRows(row);
   const rows = famRows.length ? famRows : (row.rowsAt || []);
   const ev = vettingsAndArticles(rows);
+  const prior = priorFigureEvidence(row);
+  const vettingLinks = recordVettingLinks(row);
+  const vettingHtml = vettingLinks.length ? `<details class="art-row"><summary>Article vettings · ${vettingLinks.length} links</summary>${vettingLinks.map(u => `<p><a href="${esc(u)}" target="_blank" rel="noopener">${esc(urlHost(u) || u)} ↗</a></p>`).join('')}</details>` : '';
+  const priorHtml = prior.rows.length ? `<details class="art-row"><summary>Prior matching reports · ${prior.domains} publisher${prior.domains===1?'':'s'}</summary><p>Same location, host, measure and value on ${prior.dates.map(formatUKDate).join(', ')}. Counted separately from the latest reporting day.</p>${[...new Set(prior.rows.flatMap(r => extractUrls(r.sources || '')))].map(u => `<p><a href="${esc(u)}" target="_blank" rel="noopener">${esc(urlHost(u) || u)} ↗</a></p>`).join('')}</details>` : '';
   const arts = rows.map(r => {
-    const nn = +r.n_sources || 1;
+    const nn = figureSources([r]);
     return { value:+r.value, measure:(r.measure||'').replace('confirmed_','').replace('suspected_',''),
       location:r.location, species:r.species, canonical:r.is_canonical==='True', reason:r.canonical_reason,
       quality:r.quality_flag, n:nn, score:factQuality(nn, r.quality_flag),
@@ -1903,8 +2050,8 @@ function openFigureSourcePopup(rowId) {
   }).sort((a,b) => (b.canonical?1:0)-(a.canonical?1:0) || b.n-a.n || b.value-a.value);
   document.getElementById('drillTitle').textContent = `${row.country} · ${row.disease} — evidence for ${formatUKDate(row.date)}`;
   document.getElementById('drillBody').innerHTML = arts.length ? (
-    `<p style="font-size:13px;color:var(--ink-3);margin:0 0 12px;line-height:1.5" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${arts.length} distinct figure${arts.length>1?'s':''} reported for <strong>${esc(row.figureLoc||row.country)}</strong> on this date, backed by <strong>${ev.dom<=1 ? 'a single independent domain — unvetted' : `${ev.dom} independent domains — vetted`}</strong> across <strong>${ev.art}</strong> distinct article${ev.art!==1?'s':''} from <strong>${ev.dom}</strong> independent domain${ev.dom!==1?'s':''}. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the one shown in the table.</p>` +
-    arts.map(a => {
+    `<p style="font-size:13px;color:var(--ink-3);margin:0 0 12px;line-height:1.5" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${arts.length} matching figure row${arts.length>1?'s':''} reported for <strong>${esc(row.figureLoc||row.country)}</strong> on this date, backed by <strong>${ev.dom<=1 ? 'one publisher for this exact figure on this reporting day' : `${ev.dom} publishers for this exact figure on this reporting day`}</strong> across <strong>${ev.art}</strong> distinct article${ev.art!==1?'s':''} from <strong>${ev.dom}</strong> independent domain${ev.dom!==1?'s':''}. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the one shown in the table.</p>` +
+    vettingHtml + priorHtml + arts.map(a => {
       const q = qualityBand(a.score);
       // Noncanonical observations say WHAT displaced them: the canonical figure for the same measure.
       const sup = a.canonical ? null : arts.find(x => x.canonical && x.measure === a.measure);
@@ -1934,11 +2081,11 @@ function subnationalRowsFor(rec) {
     // total (every backing row flagged bleed-through) with no independent corroboration. These are the
     // dozens of phantom rows all carrying the identical national number — hide them from the drill.
     const figRows = (c.rowsAt && c.rowsAt.length) ? c.rowsAt : caseRows;
-    if (figRows.length && figRows.every(isBleedRow) && domainsOf(figRows) <= 1) { suppressed++; return null; }
+    // Flagged measurements remain visible for review; warnings never hide a location.
     const d = latestOfAll(allRows.filter(r=>r.pathogen===rec.pathogenRaw && r.location===loc && r.measure==='confirmed_deaths' && r.outlier==='False'));
     return { id:'sub|'+loc, country: loc, disease: rec.disease, pathogen: rec.pathogenRaw, scope:'subnational', subCount:0,
-      cases:c.value, casesRange:[c.min,c.max], sourceUrl:c.url, deaths:d?d.value:null, date:c.date, sources:c.sources,
-      figureLoc:loc, articles:c.articles, rowsAt:c.rowsAt,
+      cases:c.value, casesRange:[c.min,c.max], sourceUrl:c.url, deaths:d?d.value:null, deathRows:d?d.rowsAt:[], date:c.date, sources:c.sources,
+      figureLoc:loc, articles:c.articles, rowsAt:c.rowsAt, figureSpecies:c.figureSpecies,
       status: statusOf(c.date), statusNote:'' };
   }).filter(Boolean);
   subnationalRowsFor._suppressed = suppressed;
@@ -2034,8 +2181,11 @@ function renderTable() {
     // popup lists), never the summed n_sources — summing double-counted repeats and inflated the badge
     // to e.g. "5 sources" when only two links exist.
     const src = recordFamilyDomains(r) || (r.sources || 1);
-    const vetted = vettingsOf(src) >= 1;
-    const srcHtml = `<button type="button" class="src-cell ${vetted ? '' : 'vet-unvetted'}" data-src="${r.id.replace(/"/g,'&quot;')}" title="${vettingLabel(src)} — click to list articles">${vetted ? `${src} sources` : 'unvetted'}</button>`;
+    const links = recordVettingLinks(r);
+    const vetted = links.length > 0;
+    const prior = priorFigureEvidence(r);
+    const srcTip = `${links.length} stored article-vetting links; ${src} publisher${src===1?'':'s'} for this exact figure on ${r.date}${prior.domains ? `; ${prior.domains} publisher${prior.domains===1?'':'s'} reported the same value on prior dates (shown separately)` : ''}`;
+    const srcHtml = `<button type="button" class="src-cell ${vetted ? '' : 'vet-unvetted'}" data-src="${r.id.replace(/"/g,'&quot;')}" title="${esc(srcTip)} — click to list articles">${links.length ? `${links.length} vettings` : `${src} publisher${src===1?'':'s'}`}</button>`;
     const hostHtml = hostFor(r) || '<span class="src-vet">—</span>';
     const screenHtml = figureAcceptance(r);
     const doc = subnational ? locDocumentation(r.pathogen, r.country) : eventDocumentation(r.pathogenRaw, r.country);
@@ -2052,7 +2202,7 @@ function renderTable() {
         const vt = r.subVetted ?? 0, uv = r.subUnvetted ?? 0;
         const tot = r.subCount;
         // Put subtitle on next line to avoid clipping at cell edge; keep original count for sorting parity but surface vetted/unvetted split
-        const splitTip = `${tot} subnational figure${tot!==1?'s':''} — ${vt} vetted · ${uv} unvetted${uv? ' — unvetted = single source, lower reliability' : ''}`;
+        const splitTip = `${tot} subnational figure${tot!==1?'s':''} — ${vt} vetted · ${uv} unvetted${uv? ' — unvetted = no current stored article-vetting links' : ''}`;
         nameExtra = `<span class="cell-range" style="margin-top:3px"><span class="drill-hint" title="${splitTip}">▸ ${tot} subnational — ${vt} vetted${uv ? ` · ${uv} unvetted` : ''}</span></span>`;
       }
     }
@@ -2069,7 +2219,7 @@ function renderTable() {
       <td><span class="geo-name">${r.country}</span>${nameExtra}</td>
       <td>${r.disease}</td>
       <td>${hostHtml}</td>
-      <td title="Event-history: sum n_sources across all dates/measures for this outbreak (includes unvetted)"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="cell-range">${doc.vettings} vettings · ${doc.days}d · history</span></td>
+      <td title="Event-history: stored article-vetting link contributions across all dates/measures for this outbreak (includes unvetted)"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="cell-range">${doc.vettings} vettings · ${doc.days}d · history</span></td>
       <td title="Latest figure only: Screened in/out = statistical consistency; unvetted/vetted = independent-source corroboration for this row" style="min-width:160px">${screenHtml}<span class="cell-range">${srcHtml}</span></td>
       <td>${r.cases!=null ? r.cases.toLocaleString() : '—'}${rangeHtml}${bleedNote(r.rowsAt)}</td>
       <td>${r.deaths!=null ? r.deaths.toLocaleString() : '—'}${(r.deaths!=null && (animalView || isAnimalRow(r))) ? '<span class="cell-range">animals culled / died</span>' : ''}</td>
@@ -2412,7 +2562,7 @@ function _geoCountry(loc) {
   return GEO[c] ? c : null;
 }
 function latestMeasure(rows, measure) {
-  // Vetting-driven selection (map data element): keep the corroboration gate (vetted, n_sources>=2)
+  // Vetting-driven selection (map data element): use current stored article-vetting links
   // but take the latest figure among ALL vetted rows. is_canonical is the PLOTS' strict-match dedup
   // and must NOT choose the date here — keying on it hid newer vetted figures whose canonical row
   // lagged behind, suppressing live map data.
@@ -2486,13 +2636,12 @@ function markerR(m) { return mapMode === 'cases' ? radiusScale(m.cases||1) : map
 const sevColor = d3.scaleLinear().domain([1,5,9]).range([col('--sev-lo'),col('--sev-mid'),col('--sev-hi')]).interpolate(d3.interpolateHcl).clamp(true);
 const eventRadius = d3.scaleSqrt().domain([1,9]).range([5,20]).clamp(true);
 let eventMarkers = [];
-// Quarantine test for an event report. The sheet's windows are report-generation dates, so a report
-// is out when EITHER its generation date or its latest-report date falls inside a window (the load
-// filter, the timeline lanes and the timeline dots all use this one test).
+// Quarantine an event report by its location and evidence-date interval, as in the backend.
+// A later generation timestamp does not turn old evidence into a new observation.
 function reportIsCensored(r) {
   if (!censorRules.length || !r) return false;
-  const c = r.geoCountry || r.country;
-  return isCensored(r.pathogen, c, r.date) || (!!r.generated && r.generated !== r.date && isCensored(r.pathogen, c, r.generated));
+  return isCensored(r.pathogen, r.place, r.earliest || r.date,
+    r.tracker_pathogen, r.date || r.earliest, r.country || r.geoCountry);
 }
 // One scope rule for every map view — flat, globe and timeline: region · host · location search
 // (family/group via inPathoGroup; the pathogen pick is applied per view). Host follows the marker
@@ -2522,7 +2671,7 @@ function tlReportInScope(r, sc) {
   return sc.region(c) && (!c || sc.host(c, r.pathogen)) && sc.text(r.country, r.place, r.title, r.disease);
 }
 function visibleEventMarkers() {
-  if (records.length) eventMarkers.forEach(m => { if (m.cases==null) { const rec = records.find(x => x.country===m.country && x.pathogenRaw===m.pathogen); if (rec) { const ref = refineRecord(rec); if (ref) { m.cases = ref.cases; m.deaths = ref.deaths; } } } });
+  eventMarkers.forEach(m => { const r = reports[m.reportIdx]; if (r) { m.cases = reportFigure(r, 'confirmed_cases')?.value ?? null; m.deaths = reportFigure(r, 'confirmed_deaths')?.value ?? null; } });
   const _sc = scopeCtx(), speciesCombos = _sc.sp, figuredCombos = _sc.fig;   // memoised per filter state
   return eventMarkers.filter(m => {
     const key = m.country + '||' + m.pathogen;
@@ -3158,8 +3307,7 @@ function tlFigureCensored(r){
   // Fail-open like everywhere else — no rules, no filtering.
   try {
     if(typeof isCensored!=='function'||!censorRules.length) return false;
-    const ctry=(typeof geoCountry==='function'?geoCountry(r.location):null)||(r.location||'').split(',').pop().trim();
-    return isCensored(r.pathogen, ctry, r.report_date, r.tracker_pathogen);
+    return isCensored(r.pathogen, r.location, r.report_date, r.tracker_pathogen);
   } catch(e){ return false; }
 }
 // Median report severity — the timeline's risk weight. Robust to a single extreme report in a
@@ -3479,7 +3627,7 @@ function tlLaneStatic(d, A){
       const day=toISODate(dd.report_date); if(!day) return;
       const t=Date.parse(day); if(isNaN(t)||t<startMs||t>endMs) return;
       const gc=geoCountry(dd.location)||geoCountry(dd.country)||null, ctry=gc||dd.country||'';
-      if(isCensored(dp,ctry,day,dd.tracker_pathogen)) return;
+      if(isCensored(dp,dd.location,day,dd.tracker_pathogen,day,dd.country)) return;
       // Same scope as the map and the brief's development list (scopedDevelopments).
       if(!sc.region(gc)) return;
       if(activeSpecies!==ALL_SPECIES&&!cleanText(dd.species).toLowerCase().includes(String(activeSpecies).toLowerCase())) return;
@@ -4602,19 +4750,20 @@ function primaryNationalLocation(rows, pathogen) {
 // Canonical value per date for one location+measure. Where no canonical figure exists that day
 // the value is null (a genuine gap / NaN) — the plotted line breaks rather than inventing a point.
 function canonicalByDate(rows, pathogen, loc, measure) {
-  const lk = (loc||'').trim().toLowerCase();
-  const rs = rows.filter(r => r.pathogen===pathogen && (r.location||'').trim().toLowerCase()===lk && r.measure===measure && r.outlier==='False');
-  const byDate = new Map();
-  rs.forEach(r => {
-    const d = r.report_date;
-    if (!byDate.has(d)) byDate.set(d, { date:d, value:null, vetted:false, url:null, reason:null, sources:0, rows:[] });
-    const e = byDate.get(d); e.rows.push(r); e.sources += (+r.n_sources||1);
-    // The canonical figure ALWAYS becomes the date's plotted value. Vetting is orthogonal:
-    // single-source canonical facts remain visible (lower-confidence styling), while `vetted`
-    // records corroboration for labels/opacity. Canonicality never manufactures corroboration.
-    if (r.is_canonical === 'True') { e.value = +r.value; e.vetted = isVetted(r); e.url = (r.sources||'').split(';')[0].trim(); e.reason = r.canonical_reason; }
+  const lk = (loc || '').trim().toLowerCase(), groups = new Map(), out = new Map();
+  rows.filter(r => r.pathogen === pathogen && (r.location || '').trim().toLowerCase() === lk &&
+    r.measure === measure && r.outlier === 'False').forEach(r => {
+      if (!groups.has(r.report_date)) groups.set(r.report_date, []); groups.get(r.report_date).push(r);
+    });
+  groups.forEach((at, date) => {
+    const pick = chooseFigureRow(at), own = at.filter(r => cleanText(r.species) === cleanText(pick.species));
+    const canonical = pick && pick.is_canonical === 'True';
+    const backing = canonical ? sameFigureRows(own, pick) : [];
+    out.set(date, { date, value: canonical ? +pick.value : null, vetted: backing.some(isVetted),
+      url: canonical ? (extractUrls(pick.sources || '')[0] || '') : null,
+      reason: pick ? pick.canonical_reason : null, sources: figureSources(backing), rows: own });
   });
-  return byDate;
+  return out;
 }
 // Rows the pipeline EXCLUDED from the plotted series (outlier='True'), grouped by report_date.
 // quality_flag says why: 'chi-sq' = failed the chi-square outlier screen, 'monotonicity' =
@@ -4787,29 +4936,18 @@ function projectionFor(pathogen, loc, measure, lastObserved) {
 // remain visible and explicitly labelled. Plots do not use this vetting gate: they use
 // canonicalByDate(), where canonicality is representation rather than truth certification.
 function latestOf(subset, requireVetted = true) {
-  if (!subset.length) return null;
-  const vetFilter = requireVetted ? (r => isVetted(r)) : (() => true);
-  // Vetting-driven selection: the map, figures table and scorecard pick the LATEST corroborated
-  // (fuzzily-matched, vetted) figure. is_canonical is the PLOTS' strict-match dedup and must not
-  // gate these surfaces — keying on it here picked an older canonical figure and suppressed a newer
-  // vetted one. The canonical row is still preferred for the reason/source label at the chosen
-  // date, never for which date/figure is shown.
-  const pool = subset.filter(r => vetFilter(r) && !isNaN(+r.value));
+  const pool = (subset || []).filter(r => (!requireVetted || isVetted(r)) && cleanText(r.value) !== '' && Number.isFinite(+r.value));
   if (!pool.length) return null;
-  const maxDate = pool.reduce((m,r)=>r.report_date>m?r.report_date:m,'');
-  const at = pool.filter(r=>r.report_date===maxDate);
-  const vals = at.map(r=>+r.value).filter(v=>!isNaN(v));
-  if (!vals.length) return null;
-  const value = Math.max(...vals);
-  const valPick = at.find(r=>+r.value===value) || at[0];
-  // Label metadata (reason/source URL) comes from the canonical row when one exists on this date.
-  const meta = at.find(r=>r.is_canonical==='True') || valPick;
-  // "Articles" counts DISTINCT source URLs behind the figure — a single canonical row often
-  // carries several vetting article links in its `sources` cell, all backing the same figure.
-  const urlSet = new Set(at.flatMap(r => extractUrls(r.sources)));
-  return { value, min: Math.min(...vals), max: Math.max(...vals),
-    date: maxDate, sources: at.reduce((s,r)=>s+(+r.n_sources||1),0), articles: urlSet.size || at.length, rowsAt: at, url: (meta.sources||'').split(';')[0].trim(),
-    reason: meta.canonical_reason, loc: valPick.location };
+  const maxDate = pool.reduce((m,r) => r.report_date > m ? r.report_date : m, '');
+  const at = pool.filter(r => r.report_date === maxDate);
+  const pick = chooseFigureRow(at);
+  const own = at.filter(r => cleanText(r.species) === cleanText(pick.species) && r.location === pick.location);
+  const backing = sameFigureRows(own, pick);
+  const vals = own.map(r => +r.value);
+  const urlSet = new Set(backing.flatMap(r => extractUrls(r.sources || '')));
+  return { value: +pick.value, min: Math.min(...vals), max: Math.max(...vals), date: maxDate,
+    sources: figureSources(backing), articles: urlSet.size, rowsAt: own, figureSpecies: cleanText(pick.species),
+    url: extractUrls(pick.sources || '')[0] || '', reason: pick.canonical_reason, loc: pick.location };
 }
 function latestOfAll(subset) { return latestOf(subset, false); }
 // Peak canonical figure for a location+measure: the HIGHEST value across the whole canonical
@@ -4859,7 +4997,7 @@ function statusNoteOf(dateStr) { const days = Math.round((new Date(DATASET_MAX||
 // A fact's quality blends corroboration (independent proximal sources) with the screening flag.
 function factQuality(nSources, flag) { const f = flag==='good'?1 : flag==='chi-sq'?0.55 : 0.45; const corr = Math.min(1,(nSources||1)/6); return 0.5*f + 0.5*corr; }
 function qualityBand(score) { return score>=0.66 ? {label:'High',cls:'q-high'} : score>=0.4 ? {label:'Moderate',cls:'q-mod'} : {label:'Low',cls:'q-low'}; }
-function rowsVettings(rows) { return (rows||[]).reduce((s,r)=>s+(+r.n_sources||1),0); }
+function rowsVettings(rows) { return (rows || []).reduce((n,r) => n + measurementVettingLinks(r).length, 0); }
 function dateQuality(rows) {
   if (!rows || !rows.length) return null;
   const canon = rows.find(r=>r.is_canonical==='True') || rows[0];
@@ -5811,20 +5949,21 @@ function srcBinRect(x, date, spanDays) {
   return { x: x0, w: w > 4 ? w - 1 : w };
 }
 function vettingsAndArticles(rows) {
-  let vet = 0; const urls = new Set(); const doms = new Set();
+  const urls = new Set(), doms = new Set(), facts = new Map();
   (rows || []).forEach(r => {
-    vet += (+r.n_sources || 1);
-    extractUrls(r.sources).forEach(u => { urls.add(normUrl(u)); const h = urlHost(u); if (h) doms.add(h); });
+    const key = measureFactKey(r); if (!facts.has(key)) facts.set(key, new Set());
+    extractUrls(r.sources || '').forEach(u => {
+      urls.add(normUrl(u)); const h = urlHost(u); if (h) { doms.add(h); facts.get(key).add(h); }
+    });
   });
-  // sources = vet (sum n_sources); vettings = sources - #facts (each fact's first source is not a vetting)
-  const facts = (rows || []).length;
-  const vettings = Math.max(0, vet - facts);
-  return { vet, vettings, art: urls.size, dom: doms.size, sources: vet, facts };
+  const vet = [...facts.values()].reduce((n,d) => n + d.size, 0);
+  const vettings = [...facts.values()].reduce((n,d) => n + Math.max(0,d.size - 1), 0);
+  return { vet, vettings, art: urls.size, dom: doms.size, sources: vet, facts: facts.size };
 }
 function srcHistTip(dateStr, vet, art, dom) {
   // vet here is actually sources (sum n_sources) — show sources · vettings for clarity
   // vettings = sources - facts, but facts not passed here; derive tip with sources and vetted state
-  const label = vet === 1 ? 'unvetted — single source' : `${vet} sources · ${Math.max(0, vet - 1)} vetting${vet-1>1?'s':''} (per fact)`;
+  const label = `${vet} publisher contributions across measurement facts; stored article-vetting links are shown separately`; 
   return `<p class="t-title">${new Date(dateStr).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'})}</p>` +
     `<div class="t-row"><span>Sources</span><span title="${label}">${vet}</span></div>` +
     `<div class="t-row"><span>Distinct articles</span><span>${art}</span></div>` +
@@ -6163,9 +6302,9 @@ function renderLead(){
   if(typeof visibleReports==='function'){ const vis=visibleReports(); if(vis&&vis.length) idx=vis[0].i; }
   if(idx<0) idx=0;
   const r=reports[idx]; if(!r){ el.style.display='none'; return; }
-  const rec=records.find(x=>x.country===r.geoCountry && x.pathogenRaw===r.pathogen);
-  const cases=rec&&rec.cases!=null?rec.cases:(r.cases!=null?r.cases:null);
-  const deaths=rec&&rec.deaths!=null?rec.deaths:(r.deaths!=null?r.deaths:null);
+  const localCases=reportFigure(r, 'confirmed_cases'), localDeaths=reportFigure(r, 'confirmed_deaths');
+  const cases=localCases ? localCases.value : null;
+  const deaths=localDeaths ? localDeaths.value : null;
   const fmt=n=>n==null?'\u2014':Number(n).toLocaleString('en-GB');
   document.getElementById('leadPathogen').textContent=r.disease||r.pathogen||'\u2014';
   document.getElementById('leadLoc').textContent=r.place?('\u00b7 '+r.place):(r.geoCountry?('\u00b7 '+r.geoCountry):'');
@@ -6217,11 +6356,11 @@ function fetchSheet() {
   rows = rows.filter(r => !isFlu(r.pathogen));
   // QUARANTINE: drop bad reads (misclassified pathogen, misdated historical article, impossible
   // figures) per the published censor sheet BEFORE aggregation — so records, scorecard, maps,
-  // plots and the figures table all inherit the removal. Country is derived exactly as the combos
-  // loop derives it below (geoCountry, else the raw location tail).
+  // plots and the figures table all inherit the removal. Match the full location label
+  // rather than collapsing it to the country used by the aggregate display.
   if (censorRules.length) {
     const before = rows.length;
-    rows = rows.filter(r => !isCensored(r.pathogen, geoCountry(r.location) || (r.location || '').split(',').pop().trim(), r.report_date, r.tracker_pathogen));
+    rows = rows.filter(r => !isCensored(r.pathogen, r.location, r.report_date, r.tracker_pathogen));
     censorStats.figures = before - rows.length;
   } else { censorStats.figures = 0; }
   const datasetMaxDate = rows.reduce((m,r)=>r.report_date>m?r.report_date:m, '');
@@ -6264,17 +6403,17 @@ function fetchSheet() {
     subLocs.forEach(loc => {
       const s = latestOfAll(rows.filter(r=>r.pathogen===pathogen && r.location===loc && r.measure==='confirmed_cases' && r.outlier==='False'));
       if (!s) return;
-      const sFam = Math.max(famDomainsAt(rows, loc, s.date, 'confirmed_cases', pathogen), s.sources || 1);
-      if (vettingsOf(sFam) > 0) subVetted++; else subUnvetted++;
+      const sFam = s.sources;
+      if (isRecordVetted({ cases: s.value, rowsAt: s.rowsAt, figureSpecies: s.figureSpecies })) subVetted++; else subUnvetted++;
     });
     return { id: country + '||' + pathogen, country, pathogenRaw: pathogen,
       disease: PATHOGEN_LABELS[pathogen] || pathogen, speciesLabel: speciesForCombo(rows, country, pathogen),
       status, statusNote: note, lonlat: geo.lonlat, scope, proxyLoc: scope==='national' ? null : cases.loc,
       subLocs, subCount: subLocs.length, subVetted, subUnvetted,
       cases: cases.value, casesRange: [cases.min, cases.max], sourceUrl: cases.url, canonicalReason: cases.reason,
-      figureLoc: cases.loc, articles: cases.articles, rowsAt: cases.rowsAt,
+      figureLoc: cases.loc, articles: cases.articles, rowsAt: cases.rowsAt, figureSpecies: cases.figureSpecies,
       deaths: deaths ? deaths.value : null, date: cases.date, sources: cases.sources,
-      deathSources: deaths ? deaths.sources : 0 };
+      deathSources: deaths ? deaths.sources : 0, deathRows: deaths ? deaths.rowsAt : [] };
   }).filter(Boolean).sort((a,b) => b.cases - a.cases);
 
   if (liveRecords.length) {
@@ -6388,7 +6527,7 @@ function scopedDevelopments(pathogen, country, place = '') {
     if (!day || p !== pathogen || c !== country || !inPathoGroup(p)) return false;
     if (place && cleanText(d.location).toLowerCase() !== cleanText(place).toLowerCase()) return false;
     if (activeSpecies !== ALL_SPECIES && !(cleanText(d.species).toLowerCase().includes(activeSpecies.toLowerCase()))) return false;
-    if (isCensored(p, c, day, d.tracker_pathogen)) return false;
+    if (isCensored(p, d.location, day, d.tracker_pathogen, day, d.country)) return false;
     if (locationQuery && ![d.location,c,p].join(' ').toLowerCase().includes(locationQuery)) return false;
     const age = (Date.now() - new Date(day+'T00:00:00Z')) / 86400000;
     if (age > 90 || age < -1) return false;
@@ -7428,7 +7567,8 @@ function fetchReports() {
       title: (r['Event Title'] || '').trim() || [PATHOGEN_LABELS[r['Pathogen']] || r['Pathogen'], (r['Outbreak Location'] || r['Outbreak Country'] || '').trim()].filter(Boolean).join(' — '),
       risk: +r['Risk Severity Score'] || 0,
       riskRationale: r['Risk Rationale'] || '',
-      date: r['Latest Report'],
+      date: toISODate(r['Latest Report']),
+      earliest: toISODate(r['Earliest Report'] || r['Latest Report']),
       country: r['Outbreak Country'] || r['Outbreak Location'] || '',
       geoCountry: gc,
       pathogen: configuredPathogen,
@@ -7452,7 +7592,7 @@ function fetchReports() {
   });
   // Capture the pathogen universe upstream of every drop below, so a report that lacks a
   // coordinate or a Status Report still shows in the data report and the pathogen selector.
-  // QUARANTINE reports the same way, keyed on the event's country + Latest Report date, BEFORE the
+  // QUARANTINE reports the same way, keyed on its location and report interval, BEFORE the
   // pathogen universe / markers / risk index are built from them.
   const _keptReports = censorRules.length
     ? _mappedReports.filter(r => !reportIsCensored(r))
@@ -7478,7 +7618,7 @@ function fetchReports() {
     return { id:'ev'+i, reportIdx:i, title:r.title, risk:r.risk, country:r.geoCountry, region:geo.region||'',
       pathogen:r.pathogen, disease:r.disease, place:r.place, date:r.date, articles:(r.urls||[]).length, lonlat:r.lonlat.slice(),
       scope: isNational(r.place) ? 'national' : 'subnational',
-      cases: rec?rec.cases:null, deaths: rec?rec.deaths:null };
+      cases: reportFigure(r, 'confirmed_cases')?.value ?? null, deaths: reportFigure(r, 'confirmed_deaths')?.value ?? null };
   }).filter(Boolean);
   eventMarkers.forEach(m => {
     const key = m.lonlat.map(v=>v.toFixed(2)).join(',');
@@ -7587,7 +7727,7 @@ function urlHost(u) { try { return new URL(u).hostname.replace(/^www\./,'').toLo
 // A measurement `sources` cell ("; "-delimited) -> set of normalized article URLs.
 function measureUrlSet(cell) { const out = new Set(); extractUrls(String(cell||'')).forEach(u => out.add(normUrl(u))); return out; }
 // One discrete observed fact within the measurements feed (internal key — location verbatim).
-function measureFactKey(r) { return (r.pathogen||'')+'|'+(r.location||'')+'|'+(r.measure||'')+'|'+String(r.value)+'|'+(r.report_date||''); }
+function measureFactKey(r) { return [r.pathogen, r.location, cleanText(r.species), r.measure, String(r.value), r.report_date].join('|'); }
 
 // Extracted pathogen/strain labels are evidence metadata only. They are
 // deliberately parsed from the raw CDEN output here and never used as the
@@ -7776,11 +7916,11 @@ function citeCard(u, rel) {
 }
 
 function rawRowIsCensored(r) {
-  const location = r.location || r.event_location || r.extract_country || '';
-  const country = geoCountry(location) || geoCountry(r.extract_country || '') ||
-    cleanText(r.extract_country) || String(location).split(',').pop().trim();
-  const reportDate = r.report_date || r.date || r.published || r['Report Generated'] || '';
-  return isCensored(r.tracker_pathogen || r.pathogen, country, reportDate, r.tracker_pathogen);
+  const location = cleanText(r.event_location) || cleanText(r.location) || cleanText(r.location_raw);
+  const country = cleanText(r.extract_country) || cleanText(r.country) || cleanText(r['Outbreak Country']);
+  const start = r['Earliest Report'] || r.earliest_report || r.date_min || r.report_date || r['Report Date'] || r.date || r.published || r['Report Generated'] || '';
+  const end = r['Latest Report'] || r.latest_report || r.date_max || r.report_date || r['Report Date'] || r.date || r.published || r['Report Generated'] || '';
+  return isCensored(r.pathogen || r.tracker_pathogen, location, start, r.tracker_pathogen, end, country);
 }
 function reapplyRawCensor() {
   if (!rawArticlesSource) return;
@@ -8007,7 +8147,8 @@ document.addEventListener('rawarticles', () => {
   // The evidence index gains its raw side once this lands — refresh every citation-derived
   // surface that may already be on screen, not just the raw table swap.
   rebuildEvidenceIndex();
-  renderTable();
+  refreshSubVettingCounts();
+  renderStats(); renderTable();
   if (dataLoaded) renderTrendSection();
   if (reports.length) { renderEventList(); renderBrief(); }
   // Raw-extraction-only pathogens (e.g. CCHF) can now enter the pathogen selector, and the
