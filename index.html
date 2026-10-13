@@ -307,6 +307,14 @@
   .stat-grid .stat-cell { min-width: 0; background: color-mix(in srgb, var(--color-neutral-800) 40%, transparent); border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: var(--space-3); }
   .stat-grid .stat-num { font-family: var(--font-mono); font-weight: 500; font-size: 30px; line-height: 1.05; margin: 0; letter-spacing: -0.015em; }
   .stat-grid .stat-label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); margin: 8px 0 0; }
+  .stat-grid .article-funnel-card { display:flex; flex-direction:column; justify-content:center; }
+  .article-funnel-card .stat-label { margin:0 0 10px; display:flex; align-items:center; gap:4px; }
+  .article-funnel { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr); align-items:start; gap:6px; }
+  .article-funnel-stage { min-width:0; }
+  .article-funnel-stage strong { display:block; font:500 clamp(18px,1.35vw,22px)/1.15 var(--font-mono); color:var(--ink-1); white-space:nowrap; }
+  .article-funnel-stage span { display:block; margin-top:5px; font-size:12px; line-height:1.25; color:var(--ink-3); }
+  .article-funnel-arrow { padding-top:4px; font-size:16px; color:var(--ink-4); }
+  .article-funnel-stage:last-child strong { color:var(--color-accent-200); }
   .forecast-box { margin-top: 0; flex: 1 1 auto; display: flex; flex-direction: column;
     justify-content: flex-start; padding-top: 18px; border-top: 1px solid var(--color-divider); font-size: 13px; color: var(--ink-2); line-height: 1.5; }
   .forecast-box .fc-title { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-label); margin: 0 0 12px; }
@@ -706,8 +714,8 @@
 </style>
 <!-- Mobile layer (additive; inert on mouse desktops) — see MOBILE.md -->
 <!-- ?v= forces phones to fetch the new files after a deploy; bump it whenever mobile/ changes -->
-<link rel="stylesheet" href="mobile/mobile.css?v=20260930b">
-<script src="mobile/mobile.js?v=20260930b"></script>
+<link rel="stylesheet" href="mobile/mobile.css?v=20261013a">
+<script src="mobile/mobile.js?v=20261013a"></script>
 </head>
 <body class="preload">
 <!-- Terms gate: must be accepted before the dashboard is usable. Bump TERMS_VERSION when the text changes so everyone re-accepts. -->
@@ -903,7 +911,7 @@
         <div class="stat-grid">
           <div class="stat-cell" id="statActiveCell"><p class="stat-num" id="statActive">–</p><p class="stat-label">Vetted outbreaks</p><p class="cell-range" id="statActiveBreakdown" style="margin:4px 0 0;font-size:13px"></p></div>
           <div class="stat-cell"><p class="stat-num" id="statCountries">–</p><p class="stat-label">Countries with vetted evidence</p><p class="cell-range" id="statVetLine" style="margin:4px 0 0;font-size:13px"></p></div>
-          <div class="stat-cell"><p class="stat-num" id="statLevel">–</p><p class="stat-label">Source reports</p><p class="cell-range" id="statLevelSub" style="margin:4px 0 0;font-size:13px"></p></div>
+          <div class="stat-cell article-funnel-card"><p class="stat-label">Article funnel<button type="button" class="section-help" aria-label="About the article funnel" title="Distinct article URLs in the current published extraction corpus, under the pathogen, family, group, host, region and search filters. Total → with extracted facts → used in event reports. Report use comes from the published fuzzy-vetted source membership; citations alone do not establish it. Report sources outside this corpus are excluded so all three stages share one denominator.">?</button></p><div class="article-funnel" id="articleFunnel" aria-live="polite"><div class="article-funnel-stage"><strong id="statArticlesTotal">–</strong><span>Total</span></div><span class="article-funnel-arrow" aria-hidden="true">→</span><div class="article-funnel-stage"><strong id="statArticlesFacts">–</strong><span>With facts</span></div><span class="article-funnel-arrow" aria-hidden="true">→</span><div class="article-funnel-stage"><strong id="statArticlesReports">–</strong><span>In reports</span></div></div><p class="cell-range" id="statArticleStatus" style="margin:7px 0 0;font-size:12px"></p></div>
         </div>
       </div>
       <div class="forecast-box" id="forecastBox"></div>
@@ -1499,6 +1507,7 @@ function displayRecords() {
 // The forecast model fits human outcome series only — never overlay it on animal-host views.
 function forecastAllowed() { return activeSpecies === ALL_SPECIES || isHumanHost(activeSpecies); }
 function renderStats() {
+  requestAnimationFrame(renderArticleFunnel);
   if (!dataLoaded) return;
   const all = isAll();
   const scope = document.getElementById('statScope');
@@ -1559,10 +1568,6 @@ function renderStats() {
   const sumCases = vettedCaseScoped.reduce((s,r) => s + (r.cases || 0), 0);
   const sumDeaths = vettedDeathScoped.reduce((s,r) => s + (r.deaths || 0), 0);
   const unvettedSignals = scopedAll.length - vettedScoped.length;
-  // National vs subnational reports in scope — speaks to the nature of the evidence (global, pathogen-scoped).
-  const scopeReports = (typeof reports !== 'undefined' ? reports : []).filter(r => !isFlu(r.pathogen)).filter(r => all || r.pathogen === selectedPathogen);
-  const natReports = scopeReports.filter(r => isNational(r.place)).length;
-  const subReports = scopeReports.length - natReports;
   const aggEl = document.getElementById('statAggLine');
   if (aggEl) {
     aggEl.innerHTML = vettedScoped.length
@@ -1579,9 +1584,6 @@ function renderStats() {
   _setTxt('statCountries', nCountries);
   const vetLineEl = document.getElementById('statVetLine');
   if (vetLineEl) vetLineEl.textContent = nCountries ? (nUnvetOnlyCountries ? `${nUnvetOnlyCountries} more with single-source signals only` : 'every reporting country corroborated') : '';
-  _setTxt('statLevel', scopeReports.length ? scopeReports.length.toLocaleString() : '—');
-  const levelSub = document.getElementById('statLevelSub');
-  if (levelSub) levelSub.textContent = scopeReports.length ? `${natReports} national · ${subReports} subnational` : '';
   // Forecast: follow the SAME country the trend plot resolves to (selected event or highlighted
   // country) so the scorecard projection matches the plot, instead of snapping to the dominant
   // outbreak every time (was leaving the panel stuck on the hardest-hit country, e.g. Italy for WNV).
@@ -2346,12 +2348,49 @@ function smoothScrollTo(y, dur) {
   })(t0);
 }
 function scrollToBrief() {
+  if (window.mobileNavigateSection && window.mobileNavigateSection('reports')) return;
   const el = document.querySelector('.briefs-card') || document.querySelector('.brief-col');
   if (!el) return;
   requestAnimationFrame(() => {
     const y = el.getBoundingClientRect().top + window.pageYOffset - 12;
     smoothScrollTo(y, 460);
   });
+}
+// Explicit marker actions reveal the panel they open, including when a map is expanded.
+function navigateToSection(id) {
+  if (window.mobileNavigateSection && window.mobileNavigateSection(id)) return;
+  const selector = { reports:'.briefs-card', figures:'.table-card', trends:'.plots-card', map:'.map-card' }[id];
+  const el = selector && document.querySelector(selector);
+  if (!el) return;
+  requestAnimationFrame(() => {
+    const nav = document.querySelector('.nav');
+    const offset = nav && /sticky|fixed/.test(getComputedStyle(nav).position) ? nav.offsetHeight + 12 : 12;
+    smoothScrollTo(el.getBoundingClientRect().top + window.scrollY - offset,
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 1 : 460);
+  });
+}
+function eventAction(idx) {
+  const r = reports[idx];
+  if (r && isNational(r.place)) {
+    const rec = records.find(x => x.country === r.geoCountry && x.pathogenRaw === r.pathogen);
+    if (rec && rec.subCount > 0) return { label:'Subnational detail', section:'figures', record:rec, idx };
+    const sub = reports.findIndex(x => x.geoCountry === r.geoCountry && x.pathogen === r.pathogen && !isNational(x.place));
+    if (sub >= 0) return { label:'Subnational detail', section:'reports', idx:sub };
+  }
+  return { label:'Open brief', section:'reports', idx };
+}
+function activateEvent(idx) {
+  if (!reports[idx]) return;
+  const action = eventAction(idx);
+  selectEvent(action.idx);
+  if (action.record) {
+    const btn = document.querySelector('#tableModeSeg [data-mode="figures"]');
+    if (tableMode !== 'figures' && btn) btn.click();
+    unvettedScope = null; tablePage = 0;
+    tableView = { mode:'subnational', id:action.record.id };
+    renderTable();
+  }
+  navigateToSection(action.section);
 }
 document.getElementById('reportRows').addEventListener('click', (e) => {
   const srcBtn = e.target.closest('.src-cell');
@@ -2914,8 +2953,7 @@ function openUnvettedCluster(d) {
   rawPage = 0;
   const btn = [...document.querySelectorAll('#tableModeSeg .seg-opt')].find(x => x.dataset.mode === 'raw');
   if (btn && tableMode !== 'raw') btn.click(); else renderTable();
-  const el = document.querySelector('.table-card');
-  if (el) requestAnimationFrame(() => window.scrollTo({ top: window.scrollY + el.getBoundingClientRect().top - 70, behavior: 'smooth' }));
+  navigateToSection('figures');
 }
 function clearUnvettedScope() { if (!unvettedScope) return; unvettedScope = null; rawPage = 0; tablePage = 0; renderTable(); }
 function syncUnvettedBanner() {
@@ -3490,7 +3528,7 @@ function tlEventTipHTML(r, reportIdx, lanePathogen){
     const scopeKey = (typeof isNational === 'function' && isNational(place)) ? 'national' : 'subnational';
     const scope = scopeKey === 'national' ? 'National report' : 'Subnational report';
     let doc = null;
-    try { if (typeof eventDocumentation === 'function' && allRows.length) doc = eventDocumentation(pathogen, country); } catch(e){}
+    try { doc = reportVettingSummary(r); } catch(e){}
     const fill = sevColor(r.risk || 1);
     // Cases / deaths behind this event — same record lookup the map markers use.
     let cases = null, deaths = null;
@@ -3515,7 +3553,7 @@ function tlEventTipHTML(r, reportIdx, lanePathogen){
       const evRight = evd.strength ? String(evd.strength.label || '').replace(/ evidence$/i, '') : (evd.vet === 1 ? 'unvetted' : `${evd.vet} sources`);
       evHtml = `<div class="t-cols" style="text-align:left;margin-top:6px">Evidence</div>`
         + `<div class="t-row"><span>${evArt} article${evArt !== 1 ? 's' : ''} · ${evDom || '—'} domain${evDom !== 1 ? 's' : ''}</span><span>${esc(evRight)}</span></div>`
-        + `<div class="t-row"><span>Corroborated facts</span><span>${evd.facts}</span></div>`;
+        + `<div class="t-row"><span>Linked figure facts</span><span>${evd.facts}</span></div>`;
     }
     let dev = false;
     try { dev = (typeof hasDevelopments === 'function' && hasDevelopments(r)); } catch(e){}
@@ -3529,7 +3567,7 @@ function tlEventTipHTML(r, reportIdx, lanePathogen){
       + cd
       + evHtml
       + (dev ? '<div class="t-row"><span>New developments</span><span>yes</span></div>' : '')
-      + `<div class="t-foot">${scopeKey === 'national' ? 'Click to drill into subnational detail' : 'Click to open the full brief →'}</div>`;
+      + `<div class="t-foot">Click to ${eventAction(reportIdx).label.toLowerCase()} →</div>`;
   } catch(e){
     // Never let a tooltip throw during mousemove — fall back to the previous minimal portrait tip.
     try { return `<p class="t-title">${esc(r.title || r.country)}</p><div class="t-sub">${esc(PATHOGEN_LABELS[lanePathogen] || lanePathogen)}${(r.place || r.country) ? ' · ' + esc(r.place || r.country) : ''}</div><div class="t-row"><span>Risk severity</span><span>${esc(String(r.risk))} / 9</span></div><div class="t-row"><span>Latest report</span><span>${esc(r.date || '—')}</span></div><div class="t-foot">Click to open the full brief →</div>`; }
@@ -4069,18 +4107,27 @@ function tlRender(o){
       const xi=xiOf(p.dx), band=bandOf(p.cn==='Other'?null:p.cn);
       const ay=bandMid(band,xi);
       const dev=(typeof hasDevelopments==='function' && hasDevelopments(r));
-      const vrr=dev?10.5:8;
+      const vrr=dev?(isNational(r.place)?12.5:10.5):8;
       const desX=x(p.dx)+p.ox, desY=laneClamp(ay+p.oy,xi);
       if(tlCull&&(!tlInX(p.dx)||ay+p.oy<m.t-8||ay+p.oy>m.t+plotH+4)) return;
       const vfp=tlPackGlyph(desX,desY,vrr,chipSpots,lanePlaced,lb);
       const px=vfp[0], py=vfp[1];
       lanePlaced.push({x:px,y:py,r:vrr});
-      // Gold ring = this vetted report carries situational developments (listed in its tooltip).
-      if(dev) gEv.append('circle').attr('cx',px).attr('cy',py).attr('r',8).attr('fill','none').attr('stroke',col('--warn')).attr('stroke-width',1.4).attr('opacity',0.95).style('pointer-events','none');
-      gEv.append('circle').attr('class','tl-dot').attr('cx',px).attr('cy',py).attr('r',5).attr('fill',sevColor(r.risk||1)).attr('stroke',col('--color-bg')).attr('stroke-width',1.5)
+      const national = isNational(r.place);
+      // The development halo preserves the event's scope shape too.
+      if(dev) {
+        const halo = national
+          ? gEv.append('rect').attr('x',px-8).attr('y',py-8).attr('width',16).attr('height',16).attr('rx',4).attr('ry',4)
+          : gEv.append('circle').attr('cx',px).attr('cy',py).attr('r',8);
+        halo.attr('fill','none').attr('stroke',col('--warn')).attr('stroke-width',1.4).attr('opacity',0.95).style('pointer-events','none');
+      }
+      const dot = national
+        ? gEv.append('rect').attr('x',px-5).attr('y',py-5).attr('width',10).attr('height',10).attr('rx',2.5).attr('ry',2.5)
+        : gEv.append('circle').attr('cx',px).attr('cy',py).attr('r',5);
+      dot.attr('class','tl-dot').attr('data-scope',national?'national':'subnational').attr('fill',sevColor(r.risk||1)).attr('stroke',col('--color-bg')).attr('stroke-width',1.5)
         .on('mousemove',ev=>showChartTip(ev, withDevs(tlEventTipHTML(r, i, d.p), r)))
         .on('mouseleave',hideChartTip)
-        .on('click',()=>{ hideChartTip(); bringFront(); if(typeof selectEvent==='function') selectEvent(i); });
+        .on('click',()=>{ forceHideChartTip(); bringFront(); activateEvent(i); });
     };
     const drawUnvetted=p=>{
       const xi=xiOf(p.day), band=bandOf(p.country);
@@ -4401,12 +4448,10 @@ function withDevs(html, rep) {
 function tooltipHTMLBase(m) {
   const fill = sevColor(m.risk||1);
   const scope = m.scope==='national' ? 'National report' : 'Subnational report';
-  const doc = (typeof eventDocumentation==='function' && allRows.length) ? eventDocumentation(m.pathogen, m.country) : null;
+  const doc = reports[m.reportIdx] ? reportVettingSummary(reports[m.reportIdx]) : null;
   const cd = (m.cases!=null || m.deaths!=null) ? `<div class="t-row"><span>Cases / deaths</span><span>${m.cases!=null?m.cases.toLocaleString():'\u2014'} / ${m.deaths!=null?m.deaths.toLocaleString():'\u2014'}</span></div>` : '';
-  // Evidence behind THIS event report — sourced from the report's own citations (same source as
-  // the affiliated brief) so the counts always agree. A mapped event is vetted, so ≥2 articles;
-  // the old (country,pathogen) rollup could under-report a subnational event as "1 article ·
-  // unvetted" because it keyed off the national figure's backing rows, not this report's sources.
+  // Report vetting comes from the upstream fuzzy fact network. Citations and figure inputs
+  // describe its evidence separately; neither recreates the report-generation gate.
   const rep = (typeof reports !== 'undefined' && m.reportIdx != null) ? reports[m.reportIdx] : null;
   const evd = (rep && typeof reportEvidence === 'function') ? reportEvidence(rep)
             : (allRows.length && typeof comboEvidence === 'function') ? comboEvidence(m.pathogen, m.country) : null;
@@ -4415,7 +4460,7 @@ function tooltipHTMLBase(m) {
   const evRight = evd ? (evd.strength ? evd.strength.label.replace(/ evidence$/i, '') : (evd.vet === 1 ? 'unvetted' : `${evd.vet} sources`)) : '';
   const evHtml = evd ? `<div class="t-cols" style="text-align:left;margin-top:6px">Evidence</div>
     <div class="t-row"><span>${evArt} article${evArt!==1?'s':''} · ${evDom||'\u2014'} domain${evDom!==1?'s':''}</span><span>${evRight}</span></div>
-    <div class="t-row"><span>Corroborated facts</span><span>${evd.facts}</span></div>` : '';
+    <div class="t-row"><span>Linked figure facts</span><span>${evd.facts}</span></div>` : '';
   return `<p class="t-title">${m.title||m.country}</p>
     <div class="t-sub">${m.disease||''}${m.place?' \u00b7 '+m.place:''}</div>
     <div class="t-sub" style="margin-top:-3px">${scope}${doc?' \u00b7 '+doc.label:''}</div>
@@ -4423,7 +4468,7 @@ function tooltipHTMLBase(m) {
     <div class="t-row"><span>Latest report</span><span>${m.date||'\u2014'}</span></div>
     ${cd}
     ${evHtml}
-    <div class="t-foot">${m.scope==='national'?'Click to drill into subnational detail':'Click to open the full brief'}</div>`;
+    <div class="t-foot">Click to ${eventAction(m.reportIdx).label.toLowerCase()} →</div>`;
 }
 function openMarkerDetail(m) {
   document.getElementById('drillTitle').textContent = m.country + ' — reported activity';
@@ -6316,7 +6361,7 @@ function renderLead(){
     `<div class="lead-metric"><p class="lm-num">${fmt(cases)}</p><p class="lm-lbl">Confirmed cases</p></div>`+
     `<div class="lead-metric"><p class="lm-num">${fmt(deaths)}</p><p class="lm-lbl">Confirmed deaths</p></div>`;
   const cta=document.getElementById('leadCta');
-  cta.onclick=()=>{ selectEvent(idx); const b=document.querySelector('.briefs-card'); if(b) window.scrollTo({top:window.scrollY+b.getBoundingClientRect().top-70,behavior:'smooth'}); };
+  cta.onclick=()=>{ selectEvent(idx); navigateToSection('reports'); };
   el.style.display='';
 }
 // Keep the lead strip in sync with every state change without touching dozens of call sites.
@@ -6942,7 +6987,8 @@ function renderEventList() {
   }
   eventListEl.setAttribute('aria-busy','false');
   eventListEl.innerHTML = header + (vis.length ? vis.map(({r,i}) => {
-    const doc = eventDocumentation(r.pathogen, r.geoCountry);
+    const vet = reportVettingSummary(r);
+    const citationCount = (r.urls || []).length;
     const scope = isNational(r.place) ? 'National' : 'Subnational';
     const placeStr = r.place ? esc(r.place) : '';
     const locLine = placeStr ? `<p class="event-loc" title="${placeStr}"><svg viewBox="0 0 256 256" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M128 16a88.1 88.1 0 0 0-88 88c0 75.3 80 132.17 83.41 134.55a8 8 0 0 0 9.18 0C136 236.17 216 179.3 216 104a88.1 88.1 0 0 0-88-88Zm0 56a32 32 0 1 1-32 32 32 32 0 0 1 32-32Z"/></svg><span class="el-txt">${placeStr}</span></p>` : '';
@@ -6950,7 +6996,7 @@ function renderEventList() {
       <p class="event-title">${highlightEventTitle(r, false)}</p>
       ${locLine}
       <div class="event-meta"><span>${r.date} · ${scope}${r.crossover?' · zoonotic':''}</span><span class="tag ${riskTagClass(r.risk)}" title="${r.riskRationale||''}">Risk ${r.risk}</span></div>
-      <div class="event-doc"><span class="doc-badge ${DOC_CLASS[doc.tier]}">${doc.label}</span><span class="doc-meta">${doc.vettings} vettings · ${doc.days}d reporting</span>${eventFlagsHtml(r)}</div>
+      <div class="event-doc"><span class="doc-badge ${vet.cls}" title="${esc(REPORT_VETTING_TIP)}">${vet.label}</span><span class="doc-meta">${vet.count == null ? 'Vetting details unavailable' : `${vet.count} vetted article${vet.count===1?'':'s'}`} · ${citationCount} citation${citationCount===1?'':'s'}</span>${eventFlagsHtml(r)}</div>
     </div>`;
   }).join('') : '<p style="font-size:13px;color:var(--color-neutral-400);padding:8px 4px">No reports match the current pathogen / region / filter.</p>');
   const rfBtn = document.getElementById('resetFilters'); if (rfBtn) rfBtn.addEventListener('click', resetFilters);
@@ -6976,12 +7022,12 @@ function renderBrief() {
     '<span style="font-size:15px;font-weight:600;color:var(--color-text)"> · ' + r.country + '</span>' +
     '<span style="font-size:15px;font-weight:400;color:var(--ink-3)"> · ' + r.date + '</span>';
   const scope = isNational(r.place) ? 'National report' : 'Subnational report';
-  // Citation-derived evidence profile replaces the measurement-derived documentation badge here:
-  // this banner describes the REPORTING the brief was built from; figure-level corroboration
-  // stays in the event list rows and figures table where it belongs to figures.
+  // Report membership comes from the fuzzy fact network; figure corroboration stays in Figures.
+  // Citation relationships below describe evidence coverage, separately from that admission gate.
   const ev = reportEvidence(r);
-  const banner = `<div class="brief-quality"><span class="doc-badge ${ev.strength.cls}">${ev.strength.label}</span>${eventFlagsHtml(r)}` +
-    `<span class="bq-meta" title="${REL_SUMMARY}">${scope} · ${ev.articles} article${ev.articles!==1?'s':''} · ${ev.domains} domain${ev.domains!==1?'s':''} · ${ev.facts} corroborated fact${ev.facts!==1?'s':''}${ev.articles?` · ${ev.coverage}% contributed figures`:''}</span>` +
+  const vet = reportVettingSummary(r);
+  const banner = `<div class="brief-quality"><span class="doc-badge ${vet.cls}" title="${esc(REPORT_VETTING_TIP)}">${vet.label}</span>${eventFlagsHtml(r)}` +
+    `<span class="bq-meta" title="${REL_SUMMARY}">${scope} · ${vet.count == null ? 'vetting details unavailable' : `${vet.count} vetted article${vet.count===1?'':'s'}`} · ${ev.articles} citation${ev.articles!==1?'s':''} · ${ev.domains} domain${ev.domains!==1?'s':''} · ${ev.facts} linked figure fact${ev.facts!==1?'s':''}${ev.articles?` · ${ev.coverage}% contributed figures`:''}</span>` +
     `<button type="button" class="btn btn-secondary btn-sm" id="evToggle" aria-expanded="${evidenceExpanded?'true':'false'}" style="margin-left:auto">Evidence ${evidenceExpanded?'▴':'▾'}</button></div>` +
     `<div id="reportEvidence"${evidenceExpanded?'':' hidden'}>${reportEvidenceHtml(r, ev)}</div>`;
   // Newspaper-style headline: the report's own title leads the article body, pathogen mention
@@ -7532,18 +7578,7 @@ function drillNational(country, pathogen) {
   renderTrendSection();
 }
 function focusEvent(idx) {
-  selectEvent(idx);
-  // A marker can point at a report the event list de-dupes away — e.g. one of several national
-  // reports for a country×pathogen, where the list surfaces a single row. selectEvent has already
-  // switched to this pathogen and re-rendered, so if the clicked report isn't in the list, redirect
-  // to the visible report for the same country×pathogen (prefer national) so the click lands on a
-  // row the user can see and scroll to, instead of selecting an invisible one.
-  const rep = reports[idx];
-  if (rep && eventListEl && !eventListEl.querySelector('[data-idx="' + idx + '"]')) {
-    const cand = visibleReports().filter(({ r }) => r.geoCountry === rep.geoCountry && r.pathogen === rep.pathogen);
-    const pick = cand.find(({ r }) => isNational(r.place)) || cand[0];
-    if (pick && pick.i !== idx) selectEvent(pick.i);
-  }
+  activateEvent(idx);
 }
 
 function fetchReports() {
@@ -7587,6 +7622,10 @@ function fetchReports() {
       devCount: devs.length,
       devHtml: devHtml,
       urls: extractUrls((r['Urls']||'') + ' ' + (r['Reference List']||'')),
+      // Report membership is published after fuzzy fact corroboration. Never reconstruct it
+      // from outcome measurements or assume citations alone prove independent corroboration.
+      vettedUrls: extractUrls(r['Vetted Urls'] || ''),
+      vettedUrlCount: cleanText(r['Vetted Url Count']),
       reportFile: cleanText(r['Report File'] || ''),
     };
   });
@@ -7829,6 +7868,60 @@ function evidenceEntryForUrl(u) { return EVIDENCE.byUrl.get(normUrl(u)) || null;
 // selected (quality balanced against recency) from a pool broader than the rolling raw corpus,
 // so absence here means the article is archived or outside the records window — NOT that it
 // doesn't exist. It simply cannot be tied to any figure on the dashboard.
+const REPORT_VETTING_TIP = 'Event reports are formed from a network of facts corroborated by fuzzy matching across source domains. Vetted articles are the report members published by that process. Citation count and exact case/death figure vettings are separate measures; neither establishes event-report vetting.';
+function reportVettingSummary(rep) {
+  const urls = new Set((rep.vettedUrls || []).map(normUrl).filter(Boolean));
+  const rawCount = cleanText(rep.vettedUrlCount);
+  const publishedCount = rawCount === '' ? null : Number(rawCount);
+  const count = urls.size || (Number.isInteger(publishedCount) && publishedCount >= 0 ? publishedCount : null);
+  return {
+    count,
+    label:count > 0 ? 'Vetted fact network' : 'Vetting provenance unavailable',
+    cls:count > 0 ? 'doc-less' : 'doc-sparse'
+  };
+}
+// All stages count unique URLs in ONE scoped corpus. A fuzzy-vetted report member is
+// already known to carry a matched fact even when the raw feed omits that fact's column.
+function articleFunnelCounts(rows, scopedReports) {
+  const admitted = new Set();
+  scopedReports.forEach(r => (r.vettedUrls || []).forEach(u => admitted.add(r.pathogen + '|' + normUrl(u))));
+  const total = new Set(), facts = new Set(), used = new Set();
+  rows.forEach(r => {
+    const u = normUrl(r.url || ''); if (!u) return;
+    total.add(u);
+    const inReport = admitted.has(r.pathogen + '|' + u);
+    if (inReport || rawFactOf(r).label) facts.add(u);
+    if (inReport) used.add(u);
+  });
+  return { total:total.size, facts:facts.size, used:used.size };
+}
+function renderArticleFunnel() {
+  const box = document.getElementById('articleFunnel'); if (!box) return;
+  const status = document.getElementById('statArticleStatus');
+  if (rawArticlesState !== 'ready') {
+    ['statArticlesTotal','statArticlesFacts','statArticlesReports'].forEach(id => { document.getElementById(id).textContent = '—'; });
+    box.setAttribute('aria-label', rawArticlesState === 'unavailable' ? 'Article data unavailable' : 'Article data loading');
+    if (status) status.textContent = rawArticlesState === 'unavailable' ? 'Article data unavailable' : 'Loading articles…';
+    return;
+  }
+  const q = (locationQuery || '').toLowerCase();
+  const rows = (rawArticles || []).filter(r => {
+    if (isFlu(r.pathogen) || !inPathoGroup(r.pathogen) || (!isAll() && r.pathogen !== selectedPathogen)) return false;
+    if (activeSpecies !== ALL_SPECIES && cleanText(r.host_species) !== activeSpecies) return false;
+    const country = geoCountry(r.location) || geoCountry(r.extract_country || r.country || '');
+    if (activeRegion !== 'All regions' && REGION_BY_COUNTRY[country] !== activeRegion) return false;
+    return !q || ((r.title||'')+' '+(r.title_translated||'')+' '+(r.location||'')+' '+(r.pathogen||'')+' '+(r.domain||'')).toLowerCase().includes(q);
+  });
+  const c = articleFunnelCounts(rows, reports || []);
+  document.getElementById('statArticlesTotal').textContent = c.total.toLocaleString();
+  document.getElementById('statArticlesFacts').textContent = c.facts.toLocaleString();
+  const provenanceReady = (reports || []).every(r => reportVettingSummary(r).count != null && (r.vettedUrls || []).length > 0);
+  // A failed reports feed is missing evidence, not a zero at the last funnel stage.
+  const reportsReady = eventListEl.getAttribute('aria-busy') === 'false' && reports.length > 0;
+  document.getElementById('statArticlesReports').textContent = reportsReady && provenanceReady ? c.used.toLocaleString() : '—';
+  box.setAttribute('aria-label', `${c.total.toLocaleString()} total articles; ${c.facts.toLocaleString()} with extracted facts; ${reportsReady && provenanceReady ? c.used.toLocaleString() + ' used in event reports' : 'report membership unavailable'}`);
+  if (status) status.textContent = reportsReady && provenanceReady ? 'Distinct articles · current corpus' : 'Report membership unavailable';
+}
 function reportEvidence(rep) {
   const urls = [...new Set((rep.urls || []).map(u => String(u || '').trim()).filter(Boolean))];
   const combo = EVIDENCE.comboUrls.get((rep.pathogen || '') + '||' + (rep.geoCountry || ''));
@@ -7851,8 +7944,8 @@ function reportEvidence(rep) {
   });
   const domains = new Set(cites.map(c => c.domain).filter(Boolean));
   const directs = cites.filter(c => c.rel === 'direct');
-  // Corroborated facts: distinct measurement observations (pathogen+place+measure+value+date)
-  // whose source list includes at least one DIRECT citation of this report's event.
+  // Linked figure facts are measurement observations tied to citations, not the fuzzy fact
+  // network that admitted the report (which also includes non-case/death facts).
   const factKeys = new Set();
   if (directs.length) viewRows().forEach(r => {
     if (r.pathogen !== rep.pathogen || geoCountry(r.location) !== rep.geoCountry) return;
@@ -7873,7 +7966,7 @@ function reportEvidence(rep) {
     facts: factKeys.size,
     coverage: cites.length ? Math.round(directs.length / cites.length * 100) : 0,
     medianProx: proxVals.length ? proxVals[Math.floor(proxVals.length/2)] : null,
-    strength: evidenceStrength(cites.length, domains.size, directs.length > 0),
+    strength: (() => { const v = reportVettingSummary(rep); return {label:v.label, cls:v.cls}; })(),
   };
 }
 // Transparent thresholds with a visible breakdown — deliberately NOT a composite score.

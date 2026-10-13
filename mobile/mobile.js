@@ -54,7 +54,7 @@
   ];
   var LOCKED = '#mapWrap, #chartWrap, #sourceChartWrap';     // inline: one-finger drag scrolls the page
   var OWN_TAP = '#timelineWrap';                              // index.html already runs inspect→open here
-  var IMPLICIT = '.map-card, .plots-card';                    // taps here don't yank the page; tabs pulse instead
+  var IMPLICIT = '.map-card, .plots-card';                    // identifies plot-originated panel updates
   var HELP = '.section-help, #tableHelpBtn';
   var INTERACTIVE = 'a, button, select, input, textarea, label, summary, [role="button"], [tabindex], th.sortable, .seg-opt';
 
@@ -98,12 +98,28 @@
     return off;
   }
   function secEl(s) { return $(s.sel); }
-  function goTo(s) {
-    var t = secEl(s); if (!t) return;
+  function goTo(s, target) {
+    var t = target || secEl(s); if (!t) return;
+    exitFull(); closeSheet(); dismissTips(); hideToast();
+    tapImplicit = false;
     var y = s.id === 'overview' ? 0 : t.getBoundingClientRect().top + W.scrollY - navOffset();
-    ownScroll = true; try { W.scrollTo({ top: Math.max(0, y), behavior: 'smooth' }); } finally { ownScroll = false; }
+    ownScroll = true; try { W.scrollTo({ top: Math.max(0, y), behavior: W.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } finally { ownScroll = false; }
     clearPulse(s.id);
   }
+  // Explicit Open / Detail actions always reveal their destination. Index state stays in index.html.
+  W.mobileNavigateSection = function (id) {
+    if (!active()) return false;
+    var s = SECTIONS.filter(function (x) { return x.id === id; })[0];
+    if (!s || !secEl(s)) return false;
+    exitFull(); closeSheet(); dismissTips(); hideToast(); tapImplicit = false;
+    tabs.forEach(function (t) { clearPulse(t.s.id); });
+    requestAnimationFrame(function () {
+      goTo(s, id === 'reports' ? $('.brief-col') : null);
+      // Highlight the destination even when it is reached automatically.
+      pulse(s);
+    });
+    return true;
+  };
   function buildTabbar() {
     var bar = el('nav', 'm-tabbar');
     bar.setAttribute('aria-label', 'Dashboard sections');
@@ -125,6 +141,8 @@
     spy();
   }
   function currentSection() {
+    var expanded = $('.m-full');
+    if (expanded) return sectionOfNode(expanded) || SECTIONS[0];
     var line = W.innerHeight * 0.35, cur = SECTIONS[0];
     SECTIONS.forEach(function (s) { var n = secEl(s); if (n && n.getBoundingClientRect().top <= line) cur = s; });
     if (W.innerHeight + W.scrollY >= root.scrollHeight - 4) cur = SECTIONS[SECTIONS.length - 1];
@@ -142,12 +160,14 @@
   function spy() {
     var cur = currentSection();
     tabs.forEach(function (t) { t.b.setAttribute('aria-current', t.s === cur ? 'true' : 'false'); });
-    clearPulse(cur.id);
+    clearPulse(cur.id, true);
     updateSummary();
   }
   function pulse(s, msg) {
     var t = tabs.filter(function (x) { return x.s === s; })[0]; if (!t) return;
     t.b.classList.remove('m-pulse'); void t.b.offsetWidth; t.b.classList.add('m-pulse', 'm-news');
+    clearTimeout(t.b.__pulseTimer);
+    t.b.__pulseTimer = setTimeout(function () { t.b.classList.remove('m-pulse'); }, 3100);
     if (msg) {
       toast.dataset.sec = s.id;
       toast.innerHTML = '<span>' + esc(msg) + '</span><span class="m-toast-go">View ' + esc(s.label) + ' ↓</span>';
@@ -155,12 +175,11 @@
       toast.__t = setTimeout(hideToast, 5000);
     }
   }
-  function clearPulse(id) { tabs.forEach(function (t) { if (t.s.id === id) t.b.classList.remove('m-pulse', 'm-news'); }); }
+  function clearPulse(id, keepAnimation) { tabs.forEach(function (t) { if (t.s.id === id) { t.b.classList.remove('m-news'); if (!keepAnimation) t.b.classList.remove('m-pulse'); } }); }
   function hideToast() { if (toast) toast.classList.remove('show'); }
 
-  /* The desktop scrolls to the destination section after an in-plot action (open brief, list
-     articles, drill a cluster). On a phone that yanks the user off the plot they were exploring,
-     so actions that start inside the map/plots cards stay put and the destination tab pulses. */
+  /* Passive panel updates can pulse a tab; explicit Open / Detail actions use goTo and
+     always reveal their destination, including from an expanded plot. */
   var tapFrom = null, tapImplicit = false, lastTapAt = 0;
   function noteTap(n) { tapImplicit = !!(n && n.closest && n.closest(IMPLICIT)); tapFrom = tapImplicit ? sectionOfNode(n) : null; lastTapAt = Date.now(); }
   var TOAST_MSG = { reports: 'Brief opened', figures: 'Table updated', trends: 'Plot updated', map: 'Map updated', overview: 'Updated' };
@@ -249,6 +268,7 @@
       var t = armedNode; if (!t || !t.isConnected) return dismissTips();
       noteTap(t);
       bypass = true;
+      if (t.closest('#timelineWrap')) t.dispatchEvent(new PointerEvent('pointerdown', { bubbles:true, pointerType:'mouse' }));
       try { t.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: W })); } finally { bypass = false; }
       dismissTips();
     });
@@ -462,6 +482,7 @@
       b.setAttribute('aria-label', on ? 'Exit full screen' : 'Open full screen to pan and zoom');
     }
     root.classList.toggle('m-full-open', !!d.querySelector('.m-full'));
+    spy();
     root.classList.remove('m-rotate-dismissed');
     clearTimeout(setFull.t); if (on) setFull.t = setTimeout(function () { root.classList.add('m-rotate-dismissed'); }, 4000);
     if (on) tryLandscape(); else releaseLandscape();

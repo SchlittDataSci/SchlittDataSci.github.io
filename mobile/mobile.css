@@ -65,6 +65,10 @@ html.m-compact .summary-card { min-height: 0; }
 html.m-compact .stat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); }
 html.m-compact .stat-grid .stat-num { font-size: var(--fs-5); }
 html.m-compact .stat-grid .stat-label { font-size: var(--fs-1); }
+/* The three-stage article funnel needs the full phone row, not a third-width cell. */
+html.m-compact .stat-grid .article-funnel-card { grid-column:1 / -1; }
+html.m-compact .article-funnel { gap:12px; }
+html.m-compact .article-funnel-stage strong { font-size:24px; }
 
 html.m-compact .briefs-card { min-height: 0; }
 html.m-compact .events-col { max-height: 52dvh; }
@@ -124,7 +128,9 @@ html.m-compact .m-tab[aria-current="true"] { color: var(--color-accent-200); fon
 html.m-compact .m-tab[aria-current="true"]::before { content: ""; position: absolute; top: 0; left: 30%; right: 30%; height: 2px; border-radius: 0 0 2px 2px; background: var(--color-accent); }
 html.m-compact .m-tab:active { color: var(--color-accent-100); }
 html.m-compact .m-tab:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -4px; border-radius: var(--radius-md); }
-html.m-compact.m-full-open .m-tabbar, html.m-compact.m-sheet-open .m-tabbar { display: none; }
+html.m-compact.m-full-open .m-tabbar { z-index: 58; }
+html.m-compact.m-sheet-open .m-tabbar { display: none; }
+html.m-compact.m-full-open .m-toast { z-index: 59; }
 html.m-compact .m-tab-ic { position: relative; display: inline-flex; border-radius: 999px; padding: 2px 10px; }
 html.m-compact .m-tab.m-news .m-tab-ic::after { content: ""; position: absolute; top: 0; right: 6px; width: 7px; height: 7px; border-radius: 999px;
   background: var(--color-accent-300); box-shadow: 0 0 0 2px var(--color-bg); }
@@ -153,7 +159,6 @@ html.m-touch .m-peek { display: flex; align-items: flex-start; gap: var(--space-
   background: var(--color-neutral-800); border: 1px solid var(--color-divider); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
   transform: translateY(calc(100% + 32px)); visibility: hidden; transition: transform .2s ease, visibility 0s linear .2s; }
 html.m-compact .m-peek { bottom: calc(var(--m-tab-h) + 8px + env(safe-area-inset-bottom)); }
-html.m-compact.m-full-open .m-peek { bottom: calc(8px + env(safe-area-inset-bottom)); }
 html.m-touch .m-peek.show { transform: none; visibility: visible; transition: transform .2s ease; }
 html.m-touch .m-peek-body { position: static !important; transform: none !important; opacity: 1 !important; pointer-events: auto !important; flex: 1 1 0; min-width: 0;
   max-width: none !important; margin: 0; padding: 0 !important; border: 0 !important; background: none !important; box-shadow: none !important; font-size: var(--fs-2); }
@@ -185,11 +190,13 @@ html.m-touch .m-expand.m-nudge { box-shadow: 0 0 0 3px color-mix(in srgb, var(--
 html.m-full-open { overflow: hidden; }
 html.m-touch .m-full { position: fixed !important; inset: 0; z-index: 55; margin: 0; border-radius: 0; height: auto !important; max-height: none !important; min-height: 0 !important;
   overflow-y: auto; box-sizing: border-box; padding: calc(var(--space-3) + env(safe-area-inset-top)) var(--space-3) calc(var(--space-3) + env(safe-area-inset-bottom)); background: var(--color-bg); }
+html.m-compact.m-touch .m-full { bottom: calc(var(--m-tab-h) + env(safe-area-inset-bottom)); }
 html.m-touch .m-full .m-expand { top: calc(8px + env(safe-area-inset-top)); }
 /* Expanded map / globe / timeline: edge-to-edge plot only. Title, view toggles, filter tags, legend and
    hint stay on the page — exit to change them. One round Close button floats over the corner. */
 html.m-touch .map-card.m-full { display: flex; flex-direction: column; gap: 0; width: 100vw; height: 100vh; height: 100dvh !important;
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left) !important; overflow: hidden; }
+html.m-compact.m-touch .map-card.m-full { height: calc(100dvh - var(--m-tab-h) - env(safe-area-inset-bottom)) !important; padding-bottom: 0 !important; }
 html.m-touch .map-card.m-full > .card-title, html.m-touch .map-card.m-full .map-head, html.m-touch .map-card.m-full .map-hint { display: none !important; }
 html.m-touch .map-card.m-full .map-wrap { flex: 1 1 0; height: auto !important; min-height: 0; border-radius: 0; }
 html.m-touch .map-card.m-full .m-expand { top: calc(6px + env(safe-area-inset-top)); right: calc(6px + env(safe-area-inset-right)); width: 40px; height: 40px; min-height: 40px; padding: 0; border-radius: 999px;
@@ -224,6 +231,7 @@ html.m-touch .table-card.m-pseudo-land #tableIntro, html.m-touch .table-card.m-p
 html.m-touch .m-rotate { align-items: center; gap: 10px; position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 56;
   width: max-content; max-width: calc(100vw - 24px); box-sizing: border-box; padding: 8px 8px 8px 14px; font-size: var(--fs-2); color: var(--color-text);
   background: var(--color-neutral-800); border: 1px solid var(--color-accent-700); border-radius: 999px; box-shadow: var(--shadow-md); }
+html.m-compact.m-touch .m-rotate { bottom:calc(var(--m-tab-h) + 16px + env(safe-area-inset-bottom)); }
 html.m-touch .m-rotate > svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--color-accent-300); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; animation: m-rotate-hint 2.4s ease-in-out infinite; }
 html.m-touch .m-rotate .btn-icon { width: 36px; height: 36px; }
 html.m-touch .m-rotate .btn-icon svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
