@@ -65,10 +65,6 @@ html.m-compact .summary-card { min-height: 0; }
 html.m-compact .stat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); }
 html.m-compact .stat-grid .stat-num { font-size: var(--fs-5); }
 html.m-compact .stat-grid .stat-label { font-size: var(--fs-1); }
-/* The three-stage article funnel needs the full phone row, not a third-width cell. */
-html.m-compact .stat-grid .article-funnel-card { grid-column:1 / -1; }
-html.m-compact .article-funnel { gap:12px; }
-html.m-compact .article-funnel-stage strong { font-size:24px; }
 
 html.m-compact .briefs-card { min-height: 0; }
 html.m-compact .events-col { max-height: 52dvh; }

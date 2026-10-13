@@ -307,14 +307,6 @@
   .stat-grid .stat-cell { min-width: 0; background: color-mix(in srgb, var(--color-neutral-800) 40%, transparent); border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: var(--space-3); }
   .stat-grid .stat-num { font-family: var(--font-mono); font-weight: 500; font-size: 30px; line-height: 1.05; margin: 0; letter-spacing: -0.015em; }
   .stat-grid .stat-label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-label); margin: 8px 0 0; }
-  .stat-grid .article-funnel-card { display:flex; flex-direction:column; justify-content:center; }
-  .article-funnel-card .stat-label { margin:0 0 10px; display:flex; align-items:center; gap:4px; }
-  .article-funnel { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr); align-items:start; gap:6px; }
-  .article-funnel-stage { min-width:0; }
-  .article-funnel-stage strong { display:block; font:500 clamp(18px,1.35vw,22px)/1.15 var(--font-mono); color:var(--ink-1); white-space:nowrap; }
-  .article-funnel-stage span { display:block; margin-top:5px; font-size:12px; line-height:1.25; color:var(--ink-3); }
-  .article-funnel-arrow { padding-top:4px; font-size:16px; color:var(--ink-4); }
-  .article-funnel-stage:last-child strong { color:var(--color-accent-200); }
   .forecast-box { margin-top: 0; flex: 1 1 auto; display: flex; flex-direction: column;
     justify-content: flex-start; padding-top: 18px; border-top: 1px solid var(--color-divider); font-size: 13px; color: var(--ink-2); line-height: 1.5; }
   .forecast-box .fc-title { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-label); margin: 0 0 12px; }
@@ -714,8 +706,8 @@
 </style>
 <!-- Mobile layer (additive; inert on mouse desktops) — see MOBILE.md -->
 <!-- ?v= forces phones to fetch the new files after a deploy; bump it whenever mobile/ changes -->
-<link rel="stylesheet" href="mobile/mobile.css?v=20261013a">
-<script src="mobile/mobile.js?v=20261013a"></script>
+<link rel="stylesheet" href="mobile/mobile.css?v=20261013b">
+<script src="mobile/mobile.js?v=20261013b"></script>
 </head>
 <body class="preload">
 <!-- Terms gate: must be accepted before the dashboard is usable. Bump TERMS_VERSION when the text changes so everyone re-accepts. -->
@@ -911,7 +903,7 @@
         <div class="stat-grid">
           <div class="stat-cell" id="statActiveCell"><p class="stat-num" id="statActive">–</p><p class="stat-label">Vetted outbreaks</p><p class="cell-range" id="statActiveBreakdown" style="margin:4px 0 0;font-size:13px"></p></div>
           <div class="stat-cell"><p class="stat-num" id="statCountries">–</p><p class="stat-label">Countries with vetted evidence</p><p class="cell-range" id="statVetLine" style="margin:4px 0 0;font-size:13px"></p></div>
-          <div class="stat-cell article-funnel-card"><p class="stat-label">Article funnel<button type="button" class="section-help" aria-label="About the article funnel" title="Distinct article URLs in the current published extraction corpus, under the pathogen, family, group, host, region and search filters. Total → with extracted facts → used in event reports. Report use comes from the published fuzzy-vetted source membership; citations alone do not establish it. Report sources outside this corpus are excluded so all three stages share one denominator.">?</button></p><div class="article-funnel" id="articleFunnel" aria-live="polite"><div class="article-funnel-stage"><strong id="statArticlesTotal">–</strong><span>Total</span></div><span class="article-funnel-arrow" aria-hidden="true">→</span><div class="article-funnel-stage"><strong id="statArticlesFacts">–</strong><span>With facts</span></div><span class="article-funnel-arrow" aria-hidden="true">→</span><div class="article-funnel-stage"><strong id="statArticlesReports">–</strong><span>In reports</span></div></div><p class="cell-range" id="statArticleStatus" style="margin:7px 0 0;font-size:12px"></p></div>
+          <div class="stat-cell" id="articleFunnel" aria-live="polite"><p class="stat-num" id="statArticlesTotal">–</p><p class="stat-label">Source articles</p><p class="cell-range" style="margin:4px 0 0;font-size:13px"><span id="statArticlesFacts">–</span> with facts · <span id="statArticlesReports">–</span> in reports</p></div>
         </div>
       </div>
       <div class="forecast-box" id="forecastBox"></div>
@@ -1446,14 +1438,22 @@ function applyEmptyQueryState() {
   }
 }
 
+function recordInPriorityScope(r) {
+  if (!r.pathogenRaw || isFlu(r.pathogenRaw) || !inPathoGroup(r.pathogenRaw)) return false;
+  if (activeRegion !== 'All regions' && REGION_BY_COUNTRY[r.country] !== activeRegion) return false;
+  const q = (locationQuery || '').toLowerCase();
+  return !q || [r.country,r.disease,r.pathogenRaw].some(v => String(v || '').toLowerCase().includes(q));
+}
 function worstCombo() {
-  const candidates = displayRecords().filter(r => r.pathogenRaw && !isFlu(r.pathogenRaw) && isRecordVetted(r));
+  const candidates = displayRecords().filter(recordInPriorityScope).filter(isRecordVetted);
   if (!candidates.length) return null;
-  // Feature the pathogen with the most forecasted deaths (near-tie keeps surveillance
-  // priority — see dataDepthPathogen), then its hardest-hit cluster by case load × risk³.
+  // Surveillance priority comes first; case load and forecast depth cannot promote Mpox
+  // ahead of an available Ebola or West Nile outbreak.
+  const tier = Math.max(...candidates.map(r => priorityTier(r.pathogenRaw)));
+  const eligible = candidates.filter(r => priorityTier(r.pathogenRaw) === tier);
   const featured = dataDepthPathogen();
-  const pool = featured ? candidates.filter(r => r.pathogenRaw === featured) : [];
-  const scope = pool.length ? pool : candidates;
+  const pool = featured ? eligible.filter(r => r.pathogenRaw === featured) : [];
+  const scope = pool.length ? pool : eligible;
   let best=null, bestScore=-1;
   scope.forEach(r => {
     const risk = riskByCombo.get(r.country+'||'+r.pathogenRaw) || 1;
@@ -4587,7 +4587,7 @@ function trendPathogen() { return activePathogen(); }
 function isFlu(pathogen) { return /influenza/i.test(pathogen || ''); }
 function pathogenScoreMap() {
   const scores = new Map();
-  records.forEach(r => {
+  displayRecords().filter(recordInPriorityScope).forEach(r => {
     if (!isRecordVetted(r)) return;
     let p = r.pathogenRaw;
     if (!p) {
@@ -4596,14 +4596,14 @@ function pathogenScoreMap() {
     }
     if (!p) return;
     const risk = riskByCombo.get(r.country + '||' + p) || 1;
-    scores.set(p, (scores.get(p) || 0) + priorityTier(p) * 1e7 + (r.cases || 0) * Math.pow(risk, 3));
+    scores.set(p, (scores.get(p) || 0) + (r.cases || 0) * Math.pow(risk, 3));
   });
   return scores;
 }
 function computeDefaultPathogen() {
   const scores = pathogenScoreMap();
   if (!scores.size) return null;
-  return [...scores.entries()].sort((a,b) => b[1] - a[1])[0][0];
+  return [...scores.entries()].sort((a,b) => priorityTier(b[0]) - priorityTier(a[0]) || b[1] - a[1])[0][0];
 }
 // Projected death load: the highest final-horizon median of any confirmed-deaths forecast
 // series for a pathogen. Max, not sum — subnational series overlap their national series.
@@ -4619,9 +4619,9 @@ function forecastDeathLoad(pathogen) {
 }
 function dataDepthPathogen() {
   if (!allRows.length) return null;
-  const present = new Set(records.map(r => r.pathogenRaw).filter(Boolean));
+  const present = new Set(displayRecords().filter(recordInPriorityScope).map(r => r.pathogenRaw));
   const sumVettings = new Map();
-  allRows.forEach(r => {
+  viewRows().forEach(r => {
     if (r.outlier !== 'False' || !r.pathogen || isFlu(r.pathogen)) return;
     const p = r.pathogen;
     if (!present.has(p)) return;
@@ -4634,7 +4634,7 @@ function dataDepthPathogen() {
     cands.push({ p, load, sum, score });
   });
   if (!cands.length) return null;
-  cands.sort((a,b) => b.score - a.score || b.load - a.load || b.sum - a.sum);
+  cands.sort((a,b) => priorityTier(b.p) - priorityTier(a.p) || b.score - a.score || b.load - a.load || b.sum - a.sum);
   return cands[0].p;
 }
 function refreshDefaultPathogen() {
@@ -7897,11 +7897,9 @@ function articleFunnelCounts(rows, scopedReports) {
 }
 function renderArticleFunnel() {
   const box = document.getElementById('articleFunnel'); if (!box) return;
-  const status = document.getElementById('statArticleStatus');
   if (rawArticlesState !== 'ready') {
     ['statArticlesTotal','statArticlesFacts','statArticlesReports'].forEach(id => { document.getElementById(id).textContent = '—'; });
     box.setAttribute('aria-label', rawArticlesState === 'unavailable' ? 'Article data unavailable' : 'Article data loading');
-    if (status) status.textContent = rawArticlesState === 'unavailable' ? 'Article data unavailable' : 'Loading articles…';
     return;
   }
   const q = (locationQuery || '').toLowerCase();
@@ -7920,7 +7918,6 @@ function renderArticleFunnel() {
   const reportsReady = eventListEl.getAttribute('aria-busy') === 'false' && reports.length > 0;
   document.getElementById('statArticlesReports').textContent = reportsReady && provenanceReady ? c.used.toLocaleString() : '—';
   box.setAttribute('aria-label', `${c.total.toLocaleString()} total articles; ${c.facts.toLocaleString()} with extracted facts; ${reportsReady && provenanceReady ? c.used.toLocaleString() + ' used in event reports' : 'report membership unavailable'}`);
-  if (status) status.textContent = reportsReady && provenanceReady ? 'Distinct articles · current corpus' : 'Report membership unavailable';
 }
 function reportEvidence(rep) {
   const urls = [...new Set((rep.urls || []).map(u => String(u || '').trim()).filter(Boolean))];
