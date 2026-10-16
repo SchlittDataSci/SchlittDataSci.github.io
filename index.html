@@ -1202,8 +1202,8 @@ function updateCensorTag() {
 }
 // --- Corroboration gate ("vetting") ---
 // A figure's reliability is tied to INDEPENDENT CORROBORATION. n_sources counts
-// independent proximal sources (distinct domains) backing a row.
-//  1 source  => UNVETTED (no corroboration, lower reliability)
+// distinct source articles backing the same measurement, plus stored fuzzy-vetting links.
+//  1 source without recorded contributors => UNVETTED (no corroboration)
 //  2 sources => vetted (1 vetting), 3 sources => 2 vettings, etc. (vettings = n-1).
 // VETTED is an epistemic status: map/scorecard/event synthesis require corroboration.
 // CANONICAL is a representation status used by plots to choose one screened value per
@@ -1212,6 +1212,17 @@ function updateCensorTag() {
 // remain investigable instead of being hidden.
 function vettingsOf(n) { return Math.max(0, (+n || 1) - 1); }
 function isVetted(r) { return measurementVettingLinks(r).length > 0; }
+// Live geographic views use the published 15-day window (today plus 14 prior dates).
+// The clock, rather than the newest historical observation, defines an active event.
+function activeWindowBounds() {
+  const today = new Date().toISOString().slice(0,10), endMs = Date.parse(today + 'T00:00:00Z');
+  const startMs = endMs - 14 * 864e5;
+  return { today, minDay:new Date(startMs).toISOString().slice(0,10), startMs, endMs };
+}
+function isActiveDate(value, window = activeWindowBounds()) {
+  const day = uvDay(value) || toISODate(value);
+  return !!day && day >= window.minDay && day <= window.today;
+}
 function vettingLabel(n) { // source-count label: verbose tooltip form "2 sources · 1 vetting"
   const src = (+n || 1);
   const v = vettingsOf(src);
@@ -1763,26 +1774,24 @@ function recordFamilyRows(r){
   return sameFigureRows(at, pick);
 }
 function recordFamilyDomains(r){ return domainsOf(recordFamilyRows(r)); }
-// Stored article-vetting contributors are the primary row-vetting signal.
-// They are not relabelled as independent confirmations of an exact number.
-let _vetRawRef = null, _vetRawDay = '', _vetRawIndex = new Map();
+// Historical source URLs belong to the measurement, independently of raw-feed expiry.
+// Live fuzzy-vetting links can enrich that evidence, but their absence cannot erase it.
+let _vetRawRef = null, _vetRawIndex = new Map();
 function vettingLocationKey(loc) { return cleanText(loc).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
 function measurementVettingLinks(row) {
-  const now = new Date().toISOString().slice(0,10);
-  if (_vetRawRef !== rawArticles || _vetRawDay !== now) {
-    _vetRawRef = rawArticles; _vetRawDay = now; _vetRawIndex = new Map();
-    const cutoff = new Date(now + 'T00:00:00Z'); cutoff.setUTCDate(cutoff.getUTCDate() - 14);
-    const minDay = cutoff.toISOString().slice(0,10);
+  if (_vetRawRef !== rawArticles) {
+    _vetRawRef = rawArticles; _vetRawIndex = new Map();
     (rawArticles || []).forEach(r => {
-      const day = toISODate(r.report_date || r.date || r.published);
-      if (!day || day < minDay || day > now) return;
       const key = [r.pathogen, normUrl(r.url || ''), cleanText(r.host_species)].join('|');
       if (!_vetRawIndex.has(key)) _vetRawIndex.set(key, []); _vetRawIndex.get(key).push(r);
     });
   }
   let aliases = []; try { aliases = JSON.parse(row.location_aliases || '[]'); } catch (e) {}
   const keys = new Set([row.location, ...(Array.isArray(aliases) ? aliases : [])].map(vettingLocationKey));
-  const links = new Set();
+  const sources = [...new Map(extractUrls(row.sources || '').map(u => [normUrl(u), u])).values()];
+  // Each measurement row already groups one pathogen/location/host/measure/day/value.
+  // One article is the originating observation; additional distinct articles are vettings.
+  const links = new Map(sources.slice(1).map(u => [normUrl(u), u]));
   extractUrls(row.sources || '').forEach(u => {
     const raw = _vetRawIndex.get([row.pathogen, normUrl(u), cleanText(row.species)].join('|')) || [];
     raw.forEach(r => {
@@ -1790,10 +1799,11 @@ function measurementVettingLinks(row) {
       if (!keys.has(vettingLocationKey(loc)) && !keys.has(vettingLocationKey(country ? loc + ', ' + country : loc))) return;
       let stored = []; try { stored = JSON.parse(r.vetting_contributors || '[]'); } catch (e) { stored = extractUrls(r.vetting_contributors || ''); }
       if (!Array.isArray(stored)) return;
-      stored.forEach(link => { if (typeof link === 'string' && /^https?:\/\//i.test(link) && normUrl(link) !== normUrl(u)) links.add(link); });
+      stored.forEach(link => { if (typeof link === 'string' && /^https?:\/\//i.test(link) && normUrl(link) !== normUrl(u)) links.set(normUrl(link), link); });
     });
   });
-  return [...links].sort();
+  if (sources.length) links.delete(normUrl(sources[0]));
+  return [...links.values()].sort();
 }
 function recordVettingLinks(record) {
   return [...new Set(recordFamilyRows(record).flatMap(measurementVettingLinks))];
@@ -1872,6 +1882,10 @@ function reportFigure(report, measure) {
     })());
   const result = latestOfAll(pool); _reportFigCache.set(cacheKey, result); return result;
 }
+function activeReportFigure(report, measure) {
+  const figure = reportFigure(report, measure);
+  return figure && isActiveDate(figure.date) ? figure : null;
+}
 // Suspected "bleed-through": a sub-location figure that inherited its parent location's total,
 // detected & labelled upstream after several US West Nile virus sub-locations carried the
 // state/national count. The value is kept as delivered (the upstream correction may not be
@@ -1891,7 +1905,8 @@ function isBleedRow(r) {
     extractUrls(r.sources || '').some(url => rawBleedIndex.has(bleedKey(r.pathogen, r.location, r.species, url, r.report_date)));
 }
 function barEvidenceStatus(data) {
-  const rows = (data && data.rowsAt || []).filter(r => +r.value === +data.value);
+  const matching = (data && data.rowsAt || []).filter(r => +r.value === +data.value);
+  const rows = sameFigureRows(matching, chooseFigureRow(matching));
   if (rows.some(isBleedRow)) return 'bleed';
   if (rows.some(r => /unresolved/.test(r.canonical_reason || ''))) return 'unresolved';
   return rows.some(isVetted) ? 'vetted' : 'unvetted';
@@ -1899,12 +1914,10 @@ function barEvidenceStatus(data) {
 function barEvidenceLabel(data) {
   return {bleed:'Suspected geographic bleed', unresolved:'Geographic scope unresolved', vetted:'Corroborated extraction', unvetted:'Unvetted extraction'}[barEvidenceStatus(data)];
 }
-// Tooltip meta: source-count word + evidence label, without repeating "unvetted" twice.
-// A single-source bar already reads "unvetted", so the 'Unvetted extraction' label is dropped;
-// the richer labels (corroborated / bleed / unresolved) still add information and stay.
+// Publisher counts describe provenance; the evidence status uses recorded fact vettings.
 function barMetaText(data) {
-  const src = data && data.sources === 1 ? 'unvetted' : `${data ? data.sources : 0} sources`;
-  return barEvidenceStatus(data) === 'unvetted' ? src : `${src} · ${barEvidenceLabel(data)}`;
+  const n = data ? data.sources : 0;
+  return `${n} publisher${n===1?'':'s'} · ${barEvidenceLabel(data)}`;
 }
 function installEvidencePatterns(svg) {
   const defs = svg.append('defs');
@@ -2047,7 +2060,7 @@ function openFigureSourcePopup(rowId) {
     const nn = figureSources([r]);
     return { value:+r.value, measure:(r.measure||'').replace('confirmed_','').replace('suspected_',''),
       location:r.location, species:r.species, canonical:r.is_canonical==='True', reason:r.canonical_reason,
-      quality:r.quality_flag, n:nn, score:factQuality(nn, r.quality_flag),
+      quality:r.quality_flag, n:nn, vetted:isVetted(r), score:factQuality(nn, r.quality_flag),
       urls: extractUrls(r.sources || '') };
   }).sort((a,b) => (b.canonical?1:0)-(a.canonical?1:0) || b.n-a.n || b.value-a.value);
   document.getElementById('drillTitle').textContent = `${row.country} · ${row.disease} — evidence for ${formatUKDate(row.date)}`;
@@ -2063,7 +2076,7 @@ function openFigureSourcePopup(rowId) {
       <div class="art-extract"><span><strong>${a.value.toLocaleString()}</strong> ${a.measure} · ${esc(a.location)}${a.species?' · '+esc(a.species):''}</span><span class="qbadge ${q.cls}">${q.label} quality</span></div>
       <div class="art-meta">${a.canonical
         ? `<span class="tag tag-accent" style="font-size:13px">canonical · ${canonReasonLabel(a.reason)}</span>`
-        : `<span class="tag tag-neutral" style="font-size:13px">not canonical</span>${qlTag}`}<span title="${VETTING_TIP.replace(/"/g,'&quot;')}"> · ${a.n===1 ? 'unvetted' : `${a.n} sources`}</span></div>
+        : `<span class="tag tag-neutral" style="font-size:13px">not canonical</span>${qlTag}`}<span title="${VETTING_TIP.replace(/"/g,'&quot;')}"> · ${a.vetted ? 'vetted' : 'unvetted'} · ${a.urls.length} article${a.urls.length===1?'':'s'}</span></div>
       ${sup?`<div class="ev-note">Superseded by the canonical figure: <strong>${sup.value.toLocaleString()}</strong> ${sup.measure}</div>`:''}
       ${a.urls.length?`<div class="ev-cards">${a.urls.map(u => citeCard(u)).join('')}</div>`:'<div class="art-meta">No article link recorded.</div>'}
     </div>`;
@@ -2620,6 +2633,7 @@ function choroplethDomain() {
   return (isAll() ? displayRecords() : displayRecords().filter(r => r.pathogenRaw === selectedPathogen))
     .filter(r => !isFlu(r.pathogenRaw))
     .filter(r => inPathoGroup(r.pathogenRaw))
+    .filter(r => isActiveDate(r.date))
     .filter(r => activeRegion === 'All regions' || REGION_BY_COUNTRY[r.country] === activeRegion)
     .reduce((m, r) => Math.max(m, r.cases || 0), 0);
 }
@@ -2710,9 +2724,11 @@ function tlReportInScope(r, sc) {
   return sc.region(c) && (!c || sc.host(c, r.pathogen)) && sc.text(r.country, r.place, r.title, r.disease);
 }
 function visibleEventMarkers() {
-  eventMarkers.forEach(m => { const r = reports[m.reportIdx]; if (r) { m.cases = reportFigure(r, 'confirmed_cases')?.value ?? null; m.deaths = reportFigure(r, 'confirmed_deaths')?.value ?? null; } });
+  const window = activeWindowBounds();
+  eventMarkers.forEach(m => { const r = reports[m.reportIdx]; if (r) { m.cases = activeReportFigure(r, 'confirmed_cases')?.value ?? null; m.deaths = activeReportFigure(r, 'confirmed_deaths')?.value ?? null; } });
   const _sc = scopeCtx(), speciesCombos = _sc.sp, figuredCombos = _sc.fig;   // memoised per filter state
   return eventMarkers.filter(m => {
+    if (!isActiveDate(m.date, window)) return false;
     const key = m.country + '||' + m.pathogen;
     const pathOk = isAll() || !selectedPathogen || m.pathogen === selectedPathogen;
     const regionOk = activeRegion === 'All regions' || m.region === activeRegion;
@@ -2794,7 +2810,7 @@ function uvGlyphTransform(d, k) {
 // Article-level aggregation gate: the normalized URLs of every article cited by any
 // event report (reports[].urls — Urls + Reference List columns, the same URL space as
 // the raw feed's url column; the join reportEvidence() already relies on). An
-// "unvetted extraction" is EXCLUSIVELY a raw article absent from this set — never a
+// An unvetted extraction must lack recorded corroboration and membership in this set — never a
 // country- or combo-level proxy. Cached against the reports array identity (reports
 // are assigned wholesale on load, once).
 let _aggUrls = null, _aggUrlsRef = null;
@@ -2803,22 +2819,28 @@ function aggKey(u) {
   return normUrl(u).replace(/^(m|amp|mobile)\./, '').replace(/(\/amp|\.amp|\/index\.html?)$/, '');
 }
 // An article counts as collected into vetted reporting when ANY of these cite it: an event
-// report (Urls / Reference List), a vetted figure row (2+ independent domains), or a
+// report (Urls / Reference List), a corroborated figure row, or a
 // situational development. Rebuilt when any of those feeds change.
 function aggregatedUrlSet() {
-  const sig = (reports || []).length + '|' + (typeof allRows !== 'undefined' ? allRows.length : 0) + '|' + (typeof developmentRows !== 'undefined' ? (developmentRows || []).length : 0);
-  if (_aggUrls && _aggUrlsRef === reports && _aggUrls._sig === sig) return _aggUrls;
+  const window = activeWindowBounds();
+  const sig = window.today + '|' + (reports || []).length + '|' + (typeof allRows !== 'undefined' ? allRows.length : 0) + '|' + (typeof developmentRows !== 'undefined' ? (developmentRows || []).length : 0) + '|' + rawArticlesState;
+  if (_aggUrls && _aggUrlsRef === reports && _aggUrls._sig === sig && _aggUrls._figures === allRows && _aggUrls._developments === developmentRows && _aggUrls._raw === rawArticles) return _aggUrls;
   const s = new Set();
   const addU = u => { const t = String(u || '').trim(); if (t) s.add(aggKey(t)); };
-  (reports || []).forEach(r => (r.urls || []).forEach(addU));
-  try { (allRows || []).forEach(r => { if (isVetted(r)) extractUrls(r.sources || '').forEach(addU); }); } catch (e) {}
-  try { (developmentRows || []).forEach(d => extractUrls(d.sources || '').forEach(addU)); } catch (e) {}
-  s._sig = sig; _aggUrls = s; _aggUrlsRef = reports;
+  (reports || []).filter(r => isActiveDate(r.date, window)).forEach(r => (r.urls || []).forEach(addU));
+  try { (allRows || []).forEach(r => { if (isActiveDate(r.report_date, window) && isVetted(r)) extractUrls(r.sources || '').forEach(addU); }); } catch (e) {}
+  try { (developmentRows || []).filter(d => isActiveDate(d.report_date, window)).forEach(d => extractUrls(d.sources || '').forEach(addU)); } catch (e) {}
+  s._sig = sig; s._figures = allRows; s._developments = developmentRows; s._raw = rawArticles;
+  _aggUrls = s; _aggUrlsRef = reports;
   return s;
 }
 function rawRowIsAggregated(r) {
   const u = String((r && r.url) || '').trim();
   return !!u && aggregatedUrlSet().has(aggKey(u));
+}
+function rawRowHasVetting(r) {
+  let links = []; try { links = JSON.parse(r.vetting_contributors || '[]'); } catch (e) { links = extractUrls(r.vetting_contributors || ''); }
+  return Array.isArray(links) && links.some(u => typeof u === 'string' && /^https?:\/\//i.test(u) && normUrl(u) !== normUrl(r.url || ''));
 }
 // Fold the raw-article feed into per-(country, pathogen) clusters at country centroid,
 // EXCLUDING articles aggregated into an event report (those live behind the filled
@@ -2828,7 +2850,9 @@ function buildUnvettedClusters() {
   if (!Array.isArray(rawArticles) || rawArticlesState !== 'ready') return [];
   const q = (locationQuery||'').toLowerCase();
   const clusters = new Map();
+  const window = activeWindowBounds();
   rawArticles.forEach(r => {
+    if (!isActiveDate(r.published || r.report_date || r.date, window)) return;
     if (!r.pathogen || isFlu(r.pathogen)) return;
     if (!inPathoGroup(r.pathogen)) return;
     if (!isAll() && selectedPathogen && r.pathogen !== selectedPathogen) return;
@@ -2837,7 +2861,7 @@ function buildUnvettedClusters() {
     // country or pathogen. Glyphs for still-unaggregated articles may now share a
     // centroid with vetted markers; the unvetted layer paints first so filled event
     // circles keep visual priority, and both fan out from the shared point.
-    if (rawRowIsAggregated(r)) return;
+    if (rawRowIsAggregated(r) || rawRowHasVetting(r)) return;
     const c = geoCountry(r.location); if (!c || !GEO[c]) return;
     if (activeRegion !== 'All regions' && REGION_BY_COUNTRY[c] !== activeRegion) return;
     if (q && !(r.location||'').toLowerCase().includes(q) && !c.toLowerCase().includes(q) && !(r.pathogen||'').toLowerCase().includes(q)) return;
@@ -3030,6 +3054,7 @@ function renderMap() {
     const casesByAtlas = new Map();
     (isAll() ? displayRecords() : displayRecords().filter(r => r.pathogenRaw === selectedPathogen))
       .filter(r => !isFlu(r.pathogenRaw))
+      .filter(r => isActiveDate(r.date))
       .filter(r => inPathoGroup(r.pathogenRaw))
       .filter(r => activeRegion === 'All regions' || REGION_BY_COUNTRY[r.country] === activeRegion)
       .forEach(r => {
@@ -3497,8 +3522,8 @@ function tlSyncToFilter(){
 function tlSelectPathogen(p){ tlCancelPending(); tlApplyFilter(p); tlSyncToFilter(); }
 function tlSelectCombo(p, country){
   let idx=-1;
-  if(country){ idx=reports.findIndex(r=>r.geoCountry===country && r.pathogen===p && isNational(r.place)); if(idx<0) idx=reports.findIndex(r=>r.geoCountry===country && r.pathogen===p); }
-  if(idx<0) idx=reports.findIndex(r=>r.pathogen===p);
+  if(country){ idx=reports.findIndex(r=>isActiveDate(r.date) && r.geoCountry===country && r.pathogen===p && isNational(r.place)); if(idx<0) idx=reports.findIndex(r=>isActiveDate(r.date) && r.geoCountry===country && r.pathogen===p); }
+  if(idx<0) idx=reports.findIndex(r=>isActiveDate(r.date) && r.pathogen===p);
   if(idx>=0 && typeof selectEvent==='function') selectEvent(idx); else tlSelectPathogen(p);
 }
 // Fact snippet for timeline unvetted glyphs: the raw measure cells can carry pipeline
@@ -3533,12 +3558,8 @@ function tlEventTipHTML(r, reportIdx, lanePathogen){
     // Cases / deaths behind this event — same record lookup the map markers use.
     let cases = null, deaths = null;
     try {
-      const mk = (typeof eventMarkers !== 'undefined' ? eventMarkers : []).find(m => m.reportIdx === reportIdx);
-      if (mk) { cases = mk.cases; deaths = mk.deaths; }
-      if ((cases == null && deaths == null) && typeof records !== 'undefined') {
-        const rec = records.find(x => x.country === country && x.pathogenRaw === pathogen);
-        if (rec) { cases = rec.cases; deaths = rec.deaths; }
-      }
+      cases = activeReportFigure(r, 'confirmed_cases')?.value ?? null;
+      deaths = activeReportFigure(r, 'confirmed_deaths')?.value ?? null;
     } catch(e){}
     const cd = (cases != null || deaths != null) ? `<div class="t-row"><span>Cases / deaths</span><span>${cases != null ? cases.toLocaleString() : '—'} / ${deaths != null ? deaths.toLocaleString() : '—'}</span></div>` : '';
     let evd = null;
@@ -3550,7 +3571,7 @@ function tlEventTipHTML(r, reportIdx, lanePathogen){
     if (evd) {
       const evArt = evd.articles != null ? evd.articles : evd.art;
       const evDom = evd.domains != null ? evd.domains : evd.dom;
-      const evRight = evd.strength ? String(evd.strength.label || '').replace(/ evidence$/i, '') : (evd.vet === 1 ? 'unvetted' : `${evd.vet} sources`);
+      const evRight = evd.strength ? String(evd.strength.label || '').replace(/ evidence$/i, '') : `${evd.vet} publisher contributions`;
       evHtml = `<div class="t-cols" style="text-align:left;margin-top:6px">Evidence</div>`
         + `<div class="t-row"><span>${evArt} article${evArt !== 1 ? 's' : ''} · ${evDom || '—'} domain${evDom !== 1 ? 's' : ''}</span><span>${esc(evRight)}</span></div>`
         + `<div class="t-row"><span>Linked figure facts</span><span>${evd.facts}</span></div>`;
@@ -3596,7 +3617,7 @@ function tlCacheKey(metric){
   // cached lanes, never serve pre-quarantine geometry.
   let censorSig='';
   try{ censorSig=(typeof censorState!=='undefined'?censorState:'')+':'+((censorRules||[]).length)+':'+(censorRules||[]).map(r=>r.pathogen+'|'+r.country+'|'+r.dmin+'|'+r.dmax).join(';'); }catch(e){}
-  return [metric,DATASET_MAX||'',allRows.length,reports.length,
+  return [metric,activeWindowBounds().today,DATASET_MAX||'',allRows.length,reports.length,
     rawArticlesState,Array.isArray(rawArticles)?rawArticles.length:0,
     (typeof activeSpecies!=='undefined'?activeSpecies:''),(typeof activeRegion!=='undefined'?activeRegion:'',
     '')].join('|')+'|'+(typeof locationQuery!=='undefined'?locationQuery:'')+'|'+developmentRows.length+'|'+censorSig+'|'+(typeof activePathoGroup!=='undefined'?activePathoGroup:'')+'|'+(typeof activeInvestigatorGroup!=='undefined'?activeInvestigatorGroup:'');
@@ -3609,12 +3630,12 @@ function tlRawOnly(pathogen, startMs, endMs, dayOf, metric){
   const q=(typeof locationQuery!=='undefined'?locationQuery:'').toLowerCase();
   rawArticles.forEach(r=>{
     if(r.pathogen!==pathogen) return;
-    const t=Date.parse(r.published||r.report_date||''); if(isNaN(t)||t<startMs||t>endMs) return;
+    const t=Date.parse(uvDay(r.published) || toISODate(r.report_date || r.date)); if(isNaN(t)||t<startMs||t>endMs) return;
     const loc=r.location||r.event_location||'';
     const c=geoCountry(loc); if(!c) return;
     // Article-level gate (same rule as the flat/globe layer): aggregated into an
     // event report => not unvetted, even when its country+pathogen has no report.
-    if(rawRowIsAggregated(r)) return;
+    if(rawRowIsAggregated(r) || rawRowHasVetting(r)) return;
     if(typeof activeSpecies!=='undefined'&&activeSpecies!==ALL_SPECIES&&cleanText(r.host_species)!==activeSpecies) return;
     if(typeof activeRegion!=='undefined'&&activeRegion!=='All regions'&&(typeof REGION_BY_COUNTRY==='undefined'||REGION_BY_COUNTRY[c]!==activeRegion)) return;
     if(q&&!(r.location||'').toLowerCase().includes(q)&&!c.toLowerCase().includes(q)&&!(r.pathogen||'').toLowerCase().includes(q)) return;
@@ -3753,9 +3774,7 @@ function tlRender(o){
   let tlA=tlCache.data&&tlCache.key===ck&&tlCache.rows===allRows&&tlCache.reps===reports&&tlCache.raw===rawArticles?tlCache.data:null;
   if(!tlA){
   const sc=scopeCtx();
-  let maxDay=0; allRows.forEach(r=>{ const t=Date.parse(r.report_date); if(t>maxDay) maxDay=t; }); reports.forEach(r=>{ const t=Date.parse(r.date); if(t>maxDay) maxDay=t; });
-  if(!maxDay) maxDay=Date.now();
-  const endMs=maxDay, startMs=endMs - TL_WINDOW_DAYS*864e5;
+  const {endMs, startMs} = activeWindowBounds();
   const dayOf=t=>(t-startMs)/864e5;
   const byP=new Map();
   // Every in-window article across ALL tracked pathogens (no view filters) — the daily-volume
@@ -3769,7 +3788,7 @@ function tlRender(o){
     const inS=sc.region(c)&&(activeSpecies===ALL_SPECIES||cleanText(r.species)===activeSpecies)&&sc.text(r.location,c,r.pathogen,PATHOGEN_LABELS[r.pathogen]);
     extractUrls(r.sources).forEach(u=>add(r.pathogen,c,u,t,rk,isNational(r.location),inS)); });
   reports.forEach(r=>{ const t=Date.parse(r.date); if(isNaN(t)) return; if(reportIsCensored(r)) return; const rk=r.risk||tlRiskOf(r.pathogen,r.geoCountry||''); const inS=tlReportInScope(r,sc); (r.urls||[]).forEach(u=>add(r.pathogen,r.geoCountry,u,t,rk,isNational(r.place),inS)); });
-  if(Array.isArray(rawArticles)) rawArticles.forEach(r=>{ const t=Date.parse(r.published||r.report_date||''); if(isNaN(t)) return; try{ if(typeof rawRowIsCensored==='function'&&rawRowIsCensored(r)) return; }catch(e){} const loc=r.location||r.event_location; const c=geoCountry(loc);
+  if(Array.isArray(rawArticles)) rawArticles.forEach(r=>{ const t=Date.parse(uvDay(r.published) || toISODate(r.report_date || r.date)); if(isNaN(t)) return; try{ if(typeof rawRowIsCensored==='function'&&rawRowIsCensored(r)) return; }catch(e){} const loc=r.location||r.event_location; const c=geoCountry(loc);
     const inS=sc.region(c)&&(activeSpecies===ALL_SPECIES||cleanText(r.host_species)===activeSpecies)&&sc.text(loc,c,r.pathogen);
     add(r.pathogen,c,r.url,t,tlRiskOf(r.pathogen,c||''),isNational(loc),inS); });
   // Lane weight = sum of country median risks (risk mode) or unique-article count; risk lanes
@@ -4457,7 +4476,7 @@ function tooltipHTMLBase(m) {
             : (allRows.length && typeof comboEvidence === 'function') ? comboEvidence(m.pathogen, m.country) : null;
   const evArt = evd ? (evd.articles != null ? evd.articles : evd.art) : 0;
   const evDom = evd ? (evd.domains != null ? evd.domains : evd.dom) : 0;
-  const evRight = evd ? (evd.strength ? evd.strength.label.replace(/ evidence$/i, '') : (evd.vet === 1 ? 'unvetted' : `${evd.vet} sources`)) : '';
+  const evRight = evd ? (evd.strength ? evd.strength.label.replace(/ evidence$/i, '') : `${evd.vet} publisher contributions`) : '';
   const evHtml = evd ? `<div class="t-cols" style="text-align:left;margin-top:6px">Evidence</div>
     <div class="t-row"><span>${evArt} article${evArt!==1?'s':''} · ${evDom||'\u2014'} domain${evDom!==1?'s':''}</span><span>${evRight}</span></div>
     <div class="t-row"><span>Linked figure facts</span><span>${evd.facts}</span></div>` : '';
@@ -4539,23 +4558,23 @@ function openArticlePopup(dateStr, caseRows) {
   hideChartTip(); hideTooltip();
   const articles = [];
   (caseRows||[]).forEach(r => {
-    const nn = +r.n_sources || 1;
+    const nn = figureSources([r]);
     articles.push({ value:+r.value, measure:(r.measure||'').replace('confirmed_','').replace('suspected_',''),
-      location:r.location, species:r.species, canonical:r.is_canonical==='True', reason:r.canonical_reason, quality:r.quality_flag, n:nn, score:factQuality(nn, r.quality_flag) });
+      location:r.location, species:r.species, canonical:r.is_canonical==='True', reason:r.canonical_reason, quality:r.quality_flag, n:nn, vetted:isVetted(r), vettings:measurementVettingLinks(r), score:factQuality(nn, r.quality_flag) });
   });
   articles.sort((a,b) => (b.canonical?1:0)-(a.canonical?1:0) || b.n-a.n || b.value-a.value);
   const label = selectedPathogen === ALL ? 'All pathogens' : (PATHOGEN_LABELS[selectedPathogen] || selectedPathogen);
-  const totalVet = articles.reduce((s,a)=>s+a.n,0);
+  const vettedFigures = articles.filter(a => a.vetted).length;
   // EXACTLY the articles behind this date's figures — distinct URLs from these rows, not the
   // combo-wide pool, so the count here matches the sources-per-day bar and its tooltip.
-  const dateUrls = [...new Set((caseRows||[]).flatMap(r => extractUrls(r.sources)))];
+  const dateUrls = [...new Map((caseRows||[]).flatMap(r => [...extractUrls(r.sources), ...measurementVettingLinks(r)]).map(u => [normUrl(u), u])).values()];
   const _host = (u) => { try { return new URL(u).hostname.replace(/^www\./,''); } catch(e){ return u; } };
   document.getElementById('drillTitle').textContent = `${label} — source quality for ${new Date(dateStr).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`;
   document.getElementById('drillBody').innerHTML = articles.length ? (
-    `<p style="font-size:13px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${articles.length} distinct figure${articles.length>1?'s':''} reported this date, backed by <strong>${totalVet===1 ? 'unvetted (1 source)' : `${totalVet} sources · ${Math.max(0,totalVet - articles.length)} vetting${Math.max(0,totalVet - articles.length)!==1?'s':''}`}</strong> across ${dateUrls.length} distinct article${dateUrls.length===1?'':'s'} — admitted articles from independent domains matching one discrete fact. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the plotted point.</p>` +
+    `<p style="font-size:13px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${articles.length} figure row${articles.length>1?'s':''} reported this date: <strong>${vettedFigures} corroborated · ${articles.length-vettedFigures} unvetted</strong>, with ${dateUrls.length} distinct evidence article${dateUrls.length===1?'':'s'}. Corroboration is assessed separately for each fact. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the plotted point.</p>` +
     articles.map(a => { const q=qualityBand(a.score); return `<div class="art-row">
       <div class="art-extract"><span><strong>${a.value.toLocaleString()}</strong> ${a.measure} · ${a.location} · ${a.species}</span><span class="qbadge ${q.cls}">${q.label} quality</span></div>
-      <div class="art-meta">${a.canonical?`<span class="tag tag-accent" style="font-size:13px">canonical · ${canonReasonLabel(a.reason)}</span> `:''}<span>${a.n===1 ? 'unvetted' : `${a.n} sources`}</span>${a.quality&&a.quality!=='good'?` · <span title="statistical screening flag">${a.quality} flag</span>`:''}</div>
+      <div class="art-meta">${a.canonical?`<span class="tag tag-accent" style="font-size:13px">canonical · ${canonReasonLabel(a.reason)}</span> `:''}<span>${a.vetted ? `${a.vettings.length} vetting${a.vettings.length===1?'':'s'} · corroborated` : 'unvetted'}</span>${a.quality&&a.quality!=='good'?` · <span title="statistical screening flag">${a.quality} flag</span>`:''}</div>
     </div>`; }).join('')
   ) : '<p style="font-size:13px">No source detail recorded for this date.</p>';
   if (dateUrls.length) {
@@ -5718,7 +5737,7 @@ function renderComparisonBars(effectiveTp, series) {
       const baseX = x0(e.loc);
       ctsCases.slice(0,-1).forEach(p => {
         const gx = baseX + x1('cases') + x1.bandwidth()/2, gy = y(p.value);
-        const tipC = () => `<p class="t-title">${new Date(p.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p><div class="t-row"><span>Earlier observation — cases</span><span>${p.value.toLocaleString()}</span></div><div class="t-row"><span>${p.sources===1 ? 'unvetted' : `${p.sources} sources`}</span><span>click for detail</span></div>`;
+        const tipC = () => `<p class="t-title">${new Date(p.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p><div class="t-row"><span>Earlier observation — cases</span><span>${p.value.toLocaleString()}</span></div><div class="t-row"><span>${p.sources} publisher${p.sources===1?'':'s'} · ${p.vetted ? 'corroborated' : 'unvetted'}</span><span>click for detail</span></div>`;
         addHollowHit(plotG, gx, gy, tipC, () => openArticlePopup(p.date, p.rows||[]));
         plotG.append('path').attr('transform',`translate(${gx},${gy})`)
           .attr('d', d3.symbol().type(d3.symbolCircle).size(40)())
@@ -5730,7 +5749,7 @@ function renderComparisonBars(effectiveTp, series) {
       });
       ctsDeaths.slice(0,-1).forEach(p => {
         const gx = baseX + x1('deaths') + x1.bandwidth()/2, gy = y(p.value);
-        const tipD = () => `<p class="t-title">${new Date(p.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p><div class="t-row"><span>Earlier observation — deaths</span><span>${p.value.toLocaleString()}</span></div><div class="t-row"><span>${p.sources===1 ? 'unvetted' : `${p.sources} sources`}</span><span>click for detail</span></div>`;
+        const tipD = () => `<p class="t-title">${new Date(p.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p><div class="t-row"><span>Earlier observation — deaths</span><span>${p.value.toLocaleString()}</span></div><div class="t-row"><span>${p.sources} publisher${p.sources===1?'':'s'} · ${p.vetted ? 'corroborated' : 'unvetted'}</span><span>click for detail</span></div>`;
         addHollowHit(plotG, gx, gy, tipD, () => openArticlePopup(p.date, p.rows||[]));
         plotG.append('path').attr('transform',`translate(${gx},${gy})`)
           .attr('d', d3.symbol().type(d3.symbolDiamond).size(40)())
@@ -5893,7 +5912,7 @@ function renderChart(series, effectiveTp) {
         const jx = cx0 + (i - (alts.length - 1) / 2) * 3.6;
         const vy = y(+r.value);
         if (!isFinite(vy)) return;
-        const tipRej = () => `<p class="t-title">${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · not canonical</p><div class="t-row"><span>${label}</span><span>${(+r.value).toLocaleString()}</span></div><div class="t-row"><span>${r.location}</span><span>${(+r.n_sources||1)===1 ? 'unvetted' : `${+r.n_sources||1} sources`}</span></div>` + ((rowsKey==='caseRows'&&d.cases!=null)||(rowsKey==='deathRows'&&d.deaths!=null) ? `<div class="t-row"><span>Canonical figure</span><span>${(rowsKey==='caseRows'?d.cases:d.deaths).toLocaleString()}</span></div>` : '') + `<div class="t-foot">${r.canonical_reason?canonReasonLabel(r.canonical_reason)+' — ':''}Reported alternative · click for detail</div>`;
+        const tipRej = () => `<p class="t-title">${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · not canonical</p><div class="t-row"><span>${label}</span><span>${(+r.value).toLocaleString()}</span></div><div class="t-row"><span>${r.location}</span><span>${isVetted(r) ? `${measurementVettingLinks(r).length} vettings · corroborated` : 'unvetted'}</span></div>` + ((rowsKey==='caseRows'&&d.cases!=null)||(rowsKey==='deathRows'&&d.deaths!=null) ? `<div class="t-row"><span>Canonical figure</span><span>${(rowsKey==='caseRows'?d.cases:d.deaths).toLocaleString()}</span></div>` : '') + `<div class="t-foot">${r.canonical_reason?canonReasonLabel(r.canonical_reason)+' — ':''}Reported alternative · click for detail</div>`;
         addHollowHit(dotsG, jx, vy, tipRej, () => { hideChartTip(); openArticlePopup(d.date, d[rowsKey] || []); });
         dotsG.append('circle').attr('cx', jx).attr('cy', vy).attr('r', 2.9)
           .attr('fill', 'none').attr('stroke', baseColor).attr('stroke-width', 1.1).attr('opacity', 0.65)
@@ -5908,9 +5927,11 @@ function renderChart(series, effectiveTp) {
     series.forEach(d => {
       if (d[valueKey] == null) return;
       const cx = x(new Date(d.date)), cy = y(d[valueKey]);
-      const q = dateQuality(d[rowsKey]);
-      const va = vettingsAndArticles(d[rowsKey]);
-      const mr = medianRawScores(d[rowsKey]);
+      const matching = (d[rowsKey] || []).filter(r => +r.value === +d[valueKey]);
+      const backing = sameFigureRows(matching, chooseFigureRow(matching));
+      const q = dateQuality(backing);
+      const va = vettingsAndArticles(backing);
+      const mr = medianRawScores(backing);
       const vetted = !!d[valueKey+'Vetted']; // unvetted canonical (single source) draws hollow
       const dot = shape==='diamond'
         ? dotsG.append('path').attr('transform',`translate(${cx},${cy})`).attr('d', d3.symbol().type(d3.symbolDiamond).size(64)())
@@ -5922,9 +5943,9 @@ function renderChart(series, effectiveTp) {
           `<p class="t-title">${new Date(d.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</p>` +
           `<div class="t-row"><span>${reportType} cases</span><span>${d.cases!=null?d.cases.toLocaleString():'—'}</span></div>` +
           `<div class="t-row"><span>${reportType} deaths</span><span>${d.deaths!=null?d.deaths.toLocaleString():'—'}</span></div>` +
-          (q ? `<div class="t-row"><span>Sources</span><span>${q.vettings===1 ? 'unvetted' : q.vettings + ' sources'} · ${va.art} article${va.art!==1?'s':''} · ${va.dom} domain${va.dom!==1?'s':''}</span></div>` : '') +
+          (q ? `<div class="t-row"><span>Sources</span><span>${va.art} article${va.art!==1?'s':''} · ${va.dom} domain${va.dom!==1?'s':''} · ${q.vettings} vetting${q.vettings===1?'':'s'}</span></div>` : '') +
           (mr.prox!=null || mr.vetting!=null ? `<div class="t-row"><span>Median article scores</span><span>${mr.prox!=null?('proximity '+mr.prox.toFixed(2)):''}${mr.prox!=null&&mr.vetting!=null?' · ':''}${mr.vetting!=null?('vetting '+Math.round(mr.vetting)):''}</span></div>` : '') +
-          (q ? `<div class="t-foot">${vetted?'Canonical':'Single source — unvetted'}${q.reason?' — '+canonReasonLabel(q.reason):''} · click for detail</div>` : '')))
+          (q ? `<div class="t-foot">${vetted?'Canonical · corroborated':'Single source — unvetted'}${q.reason?' — '+canonReasonLabel(q.reason):''} · click for detail</div>` : '')))
         .on('mouseleave', hideChartTip);
       dot.on('click', () => { hideChartTip(); openArticlePopup(d.date, (d[rowsKey]&&d[rowsKey].length)?d[rowsKey]:[]); });
     });
@@ -5946,7 +5967,7 @@ function renderChart(series, effectiveTp) {
         const jx = cx0 + (i - (rs.length - 1) / 2) * 3.6;
         const vy = y(v); if (!isFinite(vy)) return;
          const chi = r.quality_flag === 'chi-sq';
-          const tipEx2 = () => `<p class="t-title">${new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · excluded</p><div class="t-row"><span>${measureName}</span><span>${v.toLocaleString()}</span></div><div class="t-row"><span>${r.location}</span><span>${(+r.n_sources||1)===1 ? 'unvetted' : `${+r.n_sources||1} sources`}</span></div><div class="t-foot">${chi ? 'Failed the chi-square screen' : 'Breaks cumulative monotonicity'} · click for detail</div>`;
+          const tipEx2 = () => `<p class="t-title">${new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} · excluded</p><div class="t-row"><span>${measureName}</span><span>${v.toLocaleString()}</span></div><div class="t-row"><span>${r.location}</span><span>${isVetted(r) ? `${measurementVettingLinks(r).length} vettings · corroborated` : 'unvetted'}</span></div><div class="t-foot">${chi ? 'Failed the chi-square screen' : 'Breaks cumulative monotonicity'} · click for detail</div>`;
         addHollowHit(dotsG, jx, vy, tipEx2, () => { hideChartTip(); openArticlePopup(date, rs); });
         dotsG.append('path')
           .attr('transform', `translate(${jx},${vy})${chi ? '' : ' rotate(180)'}`)
@@ -6267,7 +6288,7 @@ function renderSubSourceChart(perLoc, style) {
     cell.rej += rej; cell.rejRows.push(...rejRows);
   }));
   const dates = [...dateMap.keys()].sort();
-  if (!dates.length) { shsvg.append('text').attr('x',shTw/2).attr('y',shTh/2).attr('text-anchor','middle').attr('font-size','13px').attr('fill',col('--color-neutral-400')).text('No vetted sources within this observation window'); return; }
+  if (!dates.length) { shsvg.append('text').attr('x',shTw/2).attr('y',shTh/2).attr('text-anchor','middle').attr('font-size','13px').attr('fill',col('--color-neutral-400')).text('No source articles within this observation window'); return; }
   // Weekly binning under ~7px per bar — the shared anti-crush rule.
   const step = (shTw-shMargin.left-shMargin.right)/Math.max(1,dates.length);
   let binned = dates.map(d => ({ date: d, cells: dateMap.get(d) }));
@@ -6317,10 +6338,10 @@ function renderSubSourceChart(perLoc, style) {
           .on('mouseout', function(){ d3.select(this).attr('opacity',0.85); })
           .on('mousemove',(ev)=>showChartTip(ev,
             `<p class="t-title">${new Date(b.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'})}</p>` +
-            `<div class="t-row"><span>${s.loc.split(',')[0]}</span><span>${va.vet===1 ? 'unvetted' : `${va.vet} sources`}</span></div>` +
+            `<div class="t-row"><span>${s.loc.split(',')[0]}</span><span>${rowsVettings(c.rows)} vettings across ${va.facts} fact${va.facts===1?'':'s'}</span></div>` +
             `<div class="t-row"><span>Distinct articles</span><span>${va.art}</span></div>` +
             `<div class="t-row"><span>Independent domains</span><span>${va.dom||'\u2014'}</span></div>` +
-            `<div class="t-foot">Day total: ${dayTot===1 ? 'unvetted' : `${dayTot} sources`} · click for detail</div>`))
+            `<div class="t-foot">Day total: ${dayTot} source contributions · click for detail</div>`))
           .on('mouseleave',hideChartTip)
           .on('click', () => { hideChartTip(); openArticlePopup(b.date, c.rows || []); });
       }
@@ -7472,8 +7493,9 @@ function reportEvidenceHtml(rep, ev) {
   if (rec && rec.cases != null) {
     const rows2 = viewRows().filter(r => r.pathogen === rec.pathogenRaw && geoCountry(r.location) === rec.country && r.measure === 'confirmed_deaths' && r.outlier === 'False');
     const dl = latestOf(rows2);
-    const entries = [['reported cases', rec.cases, rowsVettings(rec.rowsAt||[]), 'cases', rec.rowsAt]];
-    if (dl) entries.push(['reported deaths', dl.value, dl.sources, 'deaths', rows2.filter(r=>r.report_date===dl.date)]);
+    const caseEvidence = recordFamilyRows(rec);
+    const entries = [['reported cases', rec.cases, rowsVettings(caseEvidence), 'cases', caseEvidence]];
+    if (dl) { const at = rows2.filter(r=>r.report_date===dl.date && +r.value===+dl.value); const backing = sameFigureRows(at, chooseFigureRow(at)); entries.push(['reported deaths', dl.value, rowsVettings(backing), 'deaths', backing]); }
     bars = `<div style="margin:6px 0 2px">` + entries.map(([label, v, vet, kind, rowsAt]) => {
       const peers = peerVettings(rep.pathogen, kind, rec.country);
       const gPeers = peerVettingsGlobal(kind);
@@ -7489,7 +7511,7 @@ function reportEvidenceHtml(rep, ev) {
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
           <span style="font-size:13px;font-weight:600;flex:0 0 124px;min-width:124px">${v.toLocaleString()} ${label}</span>
           <span style="flex:1 1 90px;min-width:80px;display:flex">${d.html}</span>
-          <span style="font-size:13px;color:var(--ink-3);flex:0 1 auto;white-space:nowrap;text-align:right" title="${d.tip.replace(/"/g,'&quot;')}">${vet===1 ? 'unvetted' : `${vet} sources`} · ${vetPeerNote}</span>
+          <span style="font-size:13px;color:var(--ink-3);flex:0 1 auto;white-space:nowrap;text-align:right" title="${d.tip.replace(/"/g,'&quot;')}">${vet===0 ? 'unvetted' : `${vet} vetting${vet===1?'':'s'}`} · ${vetPeerNote}</span>
         </div>
         ${proxStrip ? `<div style="display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap">
           <span style="font-size:13px;color:var(--ink-4);flex:0 0 124px;min-width:124px">Functional proximity</span>
@@ -7657,7 +7679,7 @@ function fetchReports() {
     return { id:'ev'+i, reportIdx:i, title:r.title, risk:r.risk, country:r.geoCountry, region:geo.region||'',
       pathogen:r.pathogen, disease:r.disease, place:r.place, date:r.date, articles:(r.urls||[]).length, lonlat:r.lonlat.slice(),
       scope: isNational(r.place) ? 'national' : 'subnational',
-      cases: reportFigure(r, 'confirmed_cases')?.value ?? null, deaths: reportFigure(r, 'confirmed_deaths')?.value ?? null };
+      cases: activeReportFigure(r, 'confirmed_cases')?.value ?? null, deaths: activeReportFigure(r, 'confirmed_deaths')?.value ?? null };
   }).filter(Boolean);
   eventMarkers.forEach(m => {
     const key = m.lonlat.map(v=>v.toFixed(2)).join(',');
@@ -7667,7 +7689,7 @@ function fetchReports() {
   if (typeof renderMap === 'function') renderMap();
 
   riskByCombo.clear();
-  reports.forEach(r => { if (!r.geoCountry) return; const k = r.geoCountry + '||' + r.pathogen; riskByCombo.set(k, Math.max(riskByCombo.get(k)||0, r.risk)); });
+  reports.forEach(r => { if (!r.geoCountry || !isActiveDate(r.date)) return; const k = r.geoCountry + '||' + r.pathogen; riskByCombo.set(k, Math.max(riskByCombo.get(k)||0, r.risk)); });
   // riskByCombo is what makes worstCombo() risk-weighted rather than raw-case-ranked, so the
   // trend section must re-resolve too — otherwise the plots keep the pre-reports pick (highest
   // raw case count) while the scorecards show the risk-weighted one, and the two disagree.
@@ -7737,7 +7759,7 @@ function openDialog(title, html) { hideChartTip(); dialogOpener = document.activ
 const GSHEET_RAW_URL = "https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8/export?format=csv&gid=361501048";
 let rawArticles = null, rawArticlesSource = null, rawArticlesState = 'idle', rawPage = 0;
 const articleTitles = new Map(); // normalized URL -> original-language title
-const VETTING_TIP = "Sources = independent publisher domains reporting the same fact. Unvetted = 1 independent domain (no corroboration, lower reliability). Vetted = 2+ independent domains; vettings = sources − 1 (e.g. 3 domains = 2 vettings). Article URLs are retained separately for audit and do not by themselves create source independence.";
+const VETTING_TIP = "Corroborated figures have distinct source articles grouped for the same pathogen, place, host, measure, reporting day and value, or recorded fuzzy-vetting contributors. Additional articles are vettings; publisher counts are shown separately. Retained evidence does not expire when articles leave the active feed. Canonical selection and statistical screening do not establish corroboration.";
 function normUrl(u) {
   let s = String(u || '').trim().toLowerCase();
   s = s.replace(/^https?:\/\//, '').replace(/^www\./, '');
