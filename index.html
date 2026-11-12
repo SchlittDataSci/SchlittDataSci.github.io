@@ -794,7 +794,6 @@
   <a href="#" id="navSources">Data sources</a>
   <a href="#" id="navReports">Reports</a>
   <a href="#" id="navAlerts">Alerts</a>
-  <a href="https://datastudio.google.com/u/1/reporting/3bee84bd-27c1-4f86-89f5-9a1bdb7ec2dd/page/RFLmF" id="navFlu" target="_blank" rel="noopener" title="OSINfluenza — companion influenza surveillance dashboard">Influenza tracker ↗</a>
   <span id="syncTag" class="tag tag-outline sync-tag"><span class="sync-dot"></span>Loading live sheet…</span>
   <button type="button" class="btn btn-secondary" id="syncBtn">
     <svg class="icon" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.3-6.4M21 12a9 9 0 0 1-15.3 6.4M17 3v5h-5M7 21v-5h5"/></svg>
@@ -1088,7 +1087,8 @@ let dataLoaded = false, sheetRetries = 0;
 // figures). The dashboard applies the SAME quarantine on load so nothing the pipeline already
 // rejected resurfaces here. Fail-open: if the list is unreachable, all data is shown and a
 // visible warning is raised — a quarantine-list outage must never blank the dashboard.
-const GSHEET_CENSOR_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQYokxQmIi1W5-dpxCFDoow_jRgLFcqR0A11Hz2S93Zj9XJNRb5tm5m0VEjBGpgz21xlyoorPRHEZmc/pub?gid=2086665852&single=true&output=csv";
+// Censored lives in the output workbook alongside the published surveillance feeds.
+const GSHEET_CENSOR_URL = GSHEET_CSV_URL.split('/export')[0] + '/export?format=csv&gid=1260102873';
 let censorRules = [];        // enabled rules: [{pathogen, location, matching_method, dmin, dmax, reason, label}]
 let censorState = 'idle';    // 'idle' | 'live' | 'unavailable'
 const censorStats = { figures: 0, reports: 0, raw: 0 };
@@ -1369,14 +1369,15 @@ function inInvestigatorGroup(p) {
   return !!(keys && p && keys.has(foldPathogen(p).toLowerCase()));
 }
 function pathogenFamily(p) { return pathogenFamilyByName.get(foldPathogen(p)) || 'Other'; }
+// All configured trackers, including influenza, use the same live-data path.
 function dataBearingPathogens() {
   const found = new Set();
-  (allRows||[]).forEach(r => { if (r.pathogen && !isFlu(r.pathogen)) found.add(r.pathogen); });
-  (reports||[]).forEach(r => { if (r.pathogen && !isFlu(r.pathogen)) found.add(r.pathogen); });
-  (reportPathoLocs||[]).forEach(r => { if (r.pathogen && !isFlu(r.pathogen)) found.add(r.pathogen); });
-  (rawArticles||[]).forEach(r => { if (r.pathogen && !isFlu(r.pathogen)) found.add(r.pathogen); });
+  (allRows||[]).forEach(r => { if (r.pathogen) found.add(r.pathogen); });
+  (reports||[]).forEach(r => { if (r.pathogen) found.add(r.pathogen); });
+  (reportPathoLocs||[]).forEach(r => { if (r.pathogen) found.add(r.pathogen); });
+  (rawArticles||[]).forEach(r => { if (r.pathogen) found.add(r.pathogen); });
   if (typeof forecastIndex !== 'undefined') forecastIndex.forEach((_, key) => {
-    const p = String(key||'').split('||')[0]; if (p && !isFlu(p)) found.add(p);
+    const p = String(key||'').split('||')[0]; if (p) found.add(p);
   });
   return [...found];
 }
@@ -1450,7 +1451,7 @@ function applyEmptyQueryState() {
 }
 
 function recordInPriorityScope(r) {
-  if (!r.pathogenRaw || isFlu(r.pathogenRaw) || !inPathoGroup(r.pathogenRaw)) return false;
+  if (!r.pathogenRaw || !inPathoGroup(r.pathogenRaw)) return false;
   if (activeRegion !== 'All regions' && REGION_BY_COUNTRY[r.country] !== activeRegion) return false;
   const q = (locationQuery || '').toLowerCase();
   return !q || [r.country,r.disease,r.pathogenRaw].some(v => String(v || '').toLowerCase().includes(q));
@@ -1549,7 +1550,7 @@ function renderStats() {
   // Single-source signals remain fully visible in the figures/audit views.
   const _setTxt = (id,v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
   const isVettedOutbreak = r => isRecordVetted(r) || (r.subVetted || 0) > 0;
-  const scopedAll = displayRecords().filter(r => !isFlu(r.pathogenRaw)).filter(r => all || r.pathogenRaw === selectedPathogen);
+  const scopedAll = displayRecords().filter(recordInPriorityScope).filter(r => all || r.pathogenRaw === selectedPathogen);
   const vettedScoped = scopedAll.filter(isVettedOutbreak);
   const vettedCaseScoped = scopedAll.filter(isRecordVetted);
   const vettedDeathScoped = scopedAll.filter(deathIsVetted);
@@ -1560,7 +1561,7 @@ function renderStats() {
   const evOnly = [], evSeen = new Set();
   try {
     (typeof visibleEventMarkers === 'function' ? visibleEventMarkers() : eventMarkers).forEach(m => {
-      if (!m || isFlu(m.pathogen) || !(all || m.pathogen === selectedPathogen)) return;
+      if (!m || !(all || m.pathogen === selectedPathogen)) return;
       const k = m.country + '||' + m.pathogen;
       if (figKeys.has(k) || evSeen.has(k)) return;
       evSeen.add(k); evOnly.push({ country: m.country, date: m.date });
@@ -2631,7 +2632,6 @@ function latestMeasure(rows, measure) {
 // two always share the same colormap and the same min/max normalisation for the selection.
 function choroplethDomain() {
   return (isAll() ? displayRecords() : displayRecords().filter(r => r.pathogenRaw === selectedPathogen))
-    .filter(r => !isFlu(r.pathogenRaw))
     .filter(r => inPathoGroup(r.pathogenRaw))
     .filter(r => isActiveDate(r.date))
     .filter(r => activeRegion === 'All regions' || REGION_BY_COUNTRY[r.country] === activeRegion)
@@ -2853,7 +2853,7 @@ function buildUnvettedClusters() {
   const window = activeWindowBounds();
   rawArticles.forEach(r => {
     if (!isActiveDate(r.published || r.report_date || r.date, window)) return;
-    if (!r.pathogen || isFlu(r.pathogen)) return;
+    if (!r.pathogen) return;
     if (!inPathoGroup(r.pathogen)) return;
     if (!isAll() && selectedPathogen && r.pathogen !== selectedPathogen) return;
     if (activeSpecies !== ALL_SPECIES && cleanText(r.host_species) !== activeSpecies) return;
@@ -3053,7 +3053,6 @@ function renderMap() {
     // (All pathogens respects African filter when activeRegion !== 'All regions')
     const casesByAtlas = new Map();
     (isAll() ? displayRecords() : displayRecords().filter(r => r.pathogenRaw === selectedPathogen))
-      .filter(r => !isFlu(r.pathogenRaw))
       .filter(r => isActiveDate(r.date))
       .filter(r => inPathoGroup(r.pathogenRaw))
       .filter(r => activeRegion === 'All regions' || REGION_BY_COUNTRY[r.country] === activeRegion)
@@ -3783,7 +3782,7 @@ function tlRender(o){
   const getP=p=>{ let e=byP.get(p); if(!e){ e={urlMeta:new Map(), byC:new Map()}; byP.set(p,e); } return e; };
   // inS: the row passes the shared view scope (region · host · location) that the flat and globe
   // views apply. Out-of-scope rows still count toward the denominator.
-  const add=(p,c,u,t,risk,isNat,inS)=>{ if(!p||isFlu(p)||!u) return; if(t<startMs||t>endMs) return; if(!allU.has(u)) allU.set(u,dayOf(t)); if(!inS||!inPathoGroup(p)) return; const e=getP(p); if(!e.urlMeta.has(u)) e.urlMeta.set(u,{day:dayOf(t),country:c||null,risk:risk||1,isNat:!!isNat}); if(c){ let ce=e.byC.get(c); if(!ce){ ce={urlMeta:new Map()}; e.byC.set(c,ce); } if(!ce.urlMeta.has(u)) ce.urlMeta.set(u,{day:dayOf(t),risk:risk||1,isNat:!!isNat}); } };
+  const add=(p,c,u,t,risk,isNat,inS)=>{ if(!p||!u) return; if(t<startMs||t>endMs) return; if(!allU.has(u)) allU.set(u,dayOf(t)); if(!inS||!inPathoGroup(p)) return; const e=getP(p); if(!e.urlMeta.has(u)) e.urlMeta.set(u,{day:dayOf(t),country:c||null,risk:risk||1,isNat:!!isNat}); if(c){ let ce=e.byC.get(c); if(!ce){ ce={urlMeta:new Map()}; e.byC.set(c,ce); } if(!ce.urlMeta.has(u)) ce.urlMeta.set(u,{day:dayOf(t),risk:risk||1,isNat:!!isNat}); } };
   allRows.forEach(r=>{ const t=Date.parse(r.report_date); if(isNaN(t)) return; if(tlFigureCensored(r)) return; const c=geoCountry(r.location); const rk=tlRiskOf(r.pathogen,c||'');
     const inS=sc.region(c)&&(activeSpecies===ALL_SPECIES||cleanText(r.species)===activeSpecies)&&sc.text(r.location,c,r.pathogen,PATHOGEN_LABELS[r.pathogen]);
     extractUrls(r.sources).forEach(u=>add(r.pathogen,c,u,t,rk,isNational(r.location),inS)); });
@@ -4603,7 +4602,6 @@ function activePathogen() {
   return (w && w.pathogenRaw) || defaultPathogen || selectedPathogen;
 }
 function trendPathogen() { return activePathogen(); }
-function isFlu(pathogen) { return /influenza/i.test(pathogen || ''); }
 function pathogenScoreMap() {
   const scores = new Map();
   displayRecords().filter(recordInPriorityScope).forEach(r => {
@@ -4641,7 +4639,7 @@ function dataDepthPathogen() {
   const present = new Set(displayRecords().filter(recordInPriorityScope).map(r => r.pathogenRaw));
   const sumVettings = new Map();
   viewRows().forEach(r => {
-    if (r.outlier !== 'False' || !r.pathogen || isFlu(r.pathogen)) return;
+    if (r.outlier !== 'False' || !r.pathogen) return;
     const p = r.pathogen;
     if (!present.has(p)) return;
     sumVettings.set(p, (sumVettings.get(p) || 0) + (+r.n_sources || 1));
@@ -5190,14 +5188,14 @@ function availablePathogenRaws() {
   const regionOk = r => activeRegion === 'All regions' || REGION_BY_COUNTRY[r.country] === activeRegion;
   const locOk = r => !locationQuery || r.country.toLowerCase().includes(locationQuery) || (r.disease||'').toLowerCase().includes(locationQuery);
   const base = records.map(refineRecord).filter(Boolean)
-    .filter(r => regionOk(r) && locOk(r) && !isFlu(r.pathogenRaw) && inPathoGroup(r.pathogenRaw));
+    .filter(r => regionOk(r) && locOk(r) && inPathoGroup(r.pathogenRaw));
   const set = new Set(base.map(r => r.pathogenRaw).filter(Boolean));
   // Also surface pathogens that have figure ROWS but no clean confirmed-cases record (e.g. Machupo,
   // Yellow Fever, and CCHF once it lands) — otherwise a pathogen with real data is hidden from the
   // selector entirely. Selecting one at least filters the raw table, event reports and data report.
   const rLocOk = loc => !locationQuery || (loc||'').toLowerCase().includes(locationQuery);
   const rSpeciesOk = r => activeSpecies === ALL_SPECIES || cleanText(r.species) === activeSpecies;
-  (allRows||[]).forEach(r => { if(!r.pathogen || isFlu(r.pathogen) || !inPathoGroup(r.pathogen)) return; const c=geoCountry(r.location);
+  (allRows||[]).forEach(r => { if(!r.pathogen || !inPathoGroup(r.pathogen)) return; const c=geoCountry(r.location);
     const rRegionOk = activeRegion==='All regions' || !c || REGION_BY_COUNTRY[c]===activeRegion;
     if(rRegionOk && rLocOk(r.location) && rSpeciesOk(r)) set.add(r.pathogen); });
   // And surface REPORT-ONLY pathogens from the raw report rows, captured UPSTREAM of the map's
@@ -5210,7 +5208,7 @@ function availablePathogenRaws() {
   // like "Illness of Unknown Etiology" into the pathogen selector. Only expand this fallback
   // when the species view is unscoped or human — the two contexts where reports apply.
   const reportsScopeOk = activeSpecies === ALL_SPECIES || isHumanHost(activeSpecies);
-  (reportsScopeOk ? (reportPathoLocs||[]) : []).forEach(m => { if(!m.pathogen || isFlu(m.pathogen) || !inPathoGroup(m.pathogen)) return;
+  (reportsScopeOk ? (reportPathoLocs||[]) : []).forEach(m => { if(!m.pathogen || !inPathoGroup(m.pathogen)) return;
     const evRegionOk = activeRegion==='All regions' || !m.country || REGION_BY_COUNTRY[m.country]===activeRegion;
     const evLocOk = !locationQuery || (m.country||'').toLowerCase().includes(locationQuery) || (m.place||'').toLowerCase().includes(locationQuery);
     if(evRegionOk && evLocOk) set.add(m.pathogen); });
@@ -5219,7 +5217,7 @@ function availablePathogenRaws() {
   // that nonetheless has real raw rows + articles is hidden from the selector entirely. Selecting one
   // filters the raw table (and data report) to it; the other panels show an honest empty state. The raw
   // feed loads lazily, so this only takes effect after the 'rawarticles' refresh below re-runs it.
-  (rawArticles||[]).forEach(r => { if(!r.pathogen || isFlu(r.pathogen) || set.has(r.pathogen) || !inPathoGroup(r.pathogen)) return;
+  (rawArticles||[]).forEach(r => { if(!r.pathogen || set.has(r.pathogen) || !inPathoGroup(r.pathogen)) return;
     if (activeSpecies !== ALL_SPECIES && cleanText(r.host_species) !== activeSpecies) return;
     const c = geoCountry(r.location);
     const rawRegionOk = activeRegion==='All regions' || !c || REGION_BY_COUNTRY[c]===activeRegion;
@@ -5229,7 +5227,7 @@ function availablePathogenRaws() {
   // when their historical measurement rows are temporarily unavailable.
   if (reportsScopeOk && typeof forecastIndex !== 'undefined') forecastIndex.forEach((_, key) => {
     const [p, loc] = String(key||'').split('||');
-    if (!p || isFlu(p) || !inPathoGroup(p)) return;
+    if (!p || !inPathoGroup(p)) return;
     const c = geoCountry(loc);
     const fcRegionOk = activeRegion==='All regions' || !c || REGION_BY_COUNTRY[c]===activeRegion;
     const fcLocOk = !locationQuery || String(loc||'').toLowerCase().includes(locationQuery);
@@ -6419,7 +6417,6 @@ function fetchSheet() {
     r.pathogen = rememberPathogenFamily(
       r.tracker_pathogen || r.pathogen, r.pathogen_family);
   });
-  rows = rows.filter(r => !isFlu(r.pathogen));
   // QUARANTINE: drop bad reads (misclassified pathogen, misdated historical article, impossible
   // figures) per the published censor sheet BEFORE aggregation — so records, scorecard, maps,
   // plots and the figures table all inherit the removal. Match the full location label
@@ -7278,7 +7275,7 @@ function peerVettingsGlobal(kind) { return peerMemo('pvg', [kind], () => _peerVe
 function peerRawScoresGlobal(kind, rec) { return peerMemo('prg', [kind, rec], () => _peerRawScoresGlobal(kind, rec)); }
 function peerRawScores(pathogen, kind, rec) { return peerMemo('pr', [pathogen, kind, rec], () => _peerRawScores(pathogen, kind, rec)); }
 function _peerVettingsGlobal(kind) {
-  return records.filter(r => !isFlu(r.pathogenRaw)).map(rec => {
+  return records.map(rec => {
     if (kind === 'cases') return rec.cases != null ? rowsVettings(rec.rowsAt || []) : null;
     const dl = latestOf(vrRowsPC(rec.pathogenRaw, rec.country).filter(r2 => r2.measure === 'confirmed_deaths' && r2.outlier === 'False'));
     return dl ? dl.sources : null;
@@ -7294,7 +7291,7 @@ function _peerRawScores(pathogen, kind, rec) {
   }).filter(v => v != null && isFinite(v));
 }
 function _peerRawScoresGlobal(kind, rec) {
-  return records.filter(r => !isFlu(r.pathogenRaw)).map(r => {
+  return records.map(r => {
     if (kind === 'cases') return r.rowsAt ? medianRawScores(r.rowsAt)[rec] : null;
     const dl = latestOf(vrRowsPC(r.pathogenRaw, r.country).filter(r2 => r2.measure === 'confirmed_deaths' && r2.outlier === 'False'));
     return dl ? medianRawScores(dl.rowsAt)[rec] : null;
@@ -7727,7 +7724,7 @@ function loadLiveData(manual) {
       document.body.classList.remove('preload', 'fallback', 'dataerror');
       setSync('<span class="sync-dot"></span>Live from Google Sheets · loaded ' + new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) + censorSyncSuffix());
       // Raw table is large — fetch it lazily once the primary views have painted.
-      setTimeout(ensureRawArticles, 2500);
+      setTimeout(() => ensureRawArticles(!!manual), 2500);
     } else if (sheetRetries < 2) {
       sheetRetries++;
       setSync('<span class="sync-dot"></span>Refreshing live data… (retry ' + sheetRetries + '/2)');
@@ -7926,7 +7923,7 @@ function renderArticleFunnel() {
   }
   const q = (locationQuery || '').toLowerCase();
   const rows = (rawArticles || []).filter(r => {
-    if (isFlu(r.pathogen) || !inPathoGroup(r.pathogen) || (!isAll() && r.pathogen !== selectedPathogen)) return false;
+    if (!inPathoGroup(r.pathogen) || (!isAll() && r.pathogen !== selectedPathogen)) return false;
     if (activeSpecies !== ALL_SPECIES && cleanText(r.host_species) !== activeSpecies) return false;
     const country = geoCountry(r.location) || geoCountry(r.extract_country || r.country || '');
     if (activeRegion !== 'All regions' && REGION_BY_COUNTRY[country] !== activeRegion) return false;
@@ -8053,10 +8050,11 @@ function reapplyRawCensor() {
   updateCensorTag();
   if (rawArticlesState === 'ready') document.dispatchEvent(new CustomEvent('rawarticles'));
 }
-function ensureRawArticles() {
-  if (rawArticlesState !== 'idle') return;
+function ensureRawArticles(force = false) {
+  // Manual sync must refresh source evidence too, including retrying an earlier failure.
+  if (rawArticlesState === 'loading' || (!force && rawArticlesState !== 'idle')) return;
   rawArticlesState = 'loading';
-  withTimeout(d3.csv(GSHEET_RAW_URL), 45000, 'source articles').then(rows => {
+  return withTimeout(d3.csv(GSHEET_RAW_URL), 45000, 'source articles').then(rows => {
     rawArticlesSource = rows || [];
     rawArticlesSource.forEach(r => {
       r.pathogen = rememberPathogenFamily(
@@ -8067,7 +8065,12 @@ function ensureRawArticles() {
     document.dispatchEvent(new CustomEvent('rawarticles'));
   }).catch(err => {
     console.warn('[data] source article table unreachable:', err && (err.message || err));
+    // A failed refresh cannot leave old source evidence attached to newly loaded figures.
+    rawArticlesSource = rawArticles = null;
+    articleTitles.clear(); factVettings.clear(); rawMaxVettingScore = 0;
+    censorStats.raw = 0;
     rawArticlesState = 'unavailable';
+    updateCensorTag();
     document.dispatchEvent(new CustomEvent('rawarticles'));
   });
 }
@@ -8075,13 +8078,13 @@ function ensureRawArticles() {
 // sub-locations, and repeats fact-less rows per host — so one article can spawn a dozen near-identical
 // rows (a single anthrax story became 15). Collapse rows sharing the same article URL, host and
 // extracted fact to one representative, preferring a national-scope location. Distinct facts, distinct
-// hosts and independent articles are all preserved — this removes only genuine duplicate re-reports.
+// hosts, configured pathogens and independent articles are all preserved — this removes only genuine duplicate re-reports.
 function rawFactSig(r){ const f = rawNumericFact(r); return f ? (f.label + '=' + (f.num!=null ? f.num : f.text)) : ''; }
 function rawDedupe(rows){
   const groups = new Map();
   (rows||[]).forEach((r,i) => {
     const u = (typeof normUrl==='function' ? normUrl(r.url||'') : (r.url||''));
-    const key = u ? (u + '\u00a6' + (cleanText(r.host_species)||'') + '\u00a6' + rawFactSig(r)) : ('\u00a6uniq' + i);
+    const key = u ? ([r.pathogen || '', u, cleanText(r.host_species)||'', rawFactSig(r)].join('\u00a6')) : ('\u00a6uniq' + i);
     const prev = groups.get(key);
     if (!prev) { groups.set(key, r); return; }
     const isNat = x => { const c = geoCountry(x.location); return c && cleanText(x.location) === c; };
@@ -8097,7 +8100,7 @@ function rawDedupe(rows){
 // source-articles mode or dismisses.
 let unvettedScope = null;
 function rawFiltered() {
-  let rows = rawArticles || [];
+  let rows = (rawArticles || []).filter(r => inPathoGroup(r.pathogen));
   if (unvettedScope) {
     const gc = window.geoCountry || (typeof geoCountry === 'function' ? geoCountry : null);
     rows = rows.filter(r => r.pathogen === unvettedScope.pathogen && gc && gc(r.location) === unvettedScope.country && !rawRowIsAggregated(r));
@@ -8362,7 +8365,7 @@ function renderDataReportBody(){
   const body=document.getElementById('dataReportBody'); if(!body) return;
   // Universe now includes raw-extraction-only pathogens (e.g. CCHF), so a pathogen that exists only in
   // the raw corpus still gets a row here with a clickable Raw-rows count into its articles.
-  const uni=[...new Set([...(allRows||[]).map(r=>r.pathogen), ...(reports||[]).map(r=>r.pathogen), ...(reportPathoLocs||[]).map(r=>r.pathogen), ...(rawArticles||[]).map(r=>r.pathogen)])].filter(p=>p && !isFlu(p) && inPathoGroup(p));
+  const uni=[...new Set([...(allRows||[]).map(r=>r.pathogen), ...(reports||[]).map(r=>r.pathogen), ...(reportPathoLocs||[]).map(r=>r.pathogen), ...(rawArticles||[]).map(r=>r.pathogen)])].filter(p=>p && inPathoGroup(p));
   // Reflect the active pathogen-group filter in the dialog title so it's clear the table is scoped.
   const titleEl=document.getElementById('dataReportTitle');
   const scopes = [activePathoGroup, activeInvestigatorGroup].filter(x => x && x !== 'All');
