@@ -838,7 +838,7 @@
     </div>
     <div class="field-inline">
       <label for="species" title="Scopes every data element — summary stats, map, plots and the figures table">Host</label>
-      <select id="species" class="input" style="min-width:150px"><option>All species</option></select>
+      <select id="species" class="input" style="min-width:150px"><option value="humans" selected>Humans</option><option>All species</option></select>
     </div>
     <button type="button" class="btn btn-primary" id="dataReportBtn" title="Per-pathogen data availability — mapped events, event reports, plot days, sources, figures and raw rows"><span class="dr-sheen" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="dr-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M9.5 20V4M15 20v-7M20.5 20V8"></path></svg>Data report</span></button>
   </div>
@@ -1143,7 +1143,16 @@ function parseCensorRules(rows) {
     const matching_method = legacy ? 'inclusive match' : censorMatchingMethod(row.matching_method);
     if (!pathogen || !location || !dmin || !dmax || dmin > dmax || !matching_method)
       throw new Error('Invalid Censored rule at row ' + (index + 2));
-    rules.push({pathogen,location,matching_method,dmin,dmax,reason:String(row.reason || '').trim(),
+    const measure = String(row.measure ?? '').trim().toLowerCase();
+    const value = String(row.value ?? '').trim();
+    const species = censorLocationKey(row.species || '');
+    const source_url = String(row.source_url ?? '').trim();
+    if ((measure || value || species || source_url) &&
+        (!['confirmed_cases','suspected_cases','confirmed_deaths','suspected_deaths'].includes(measure) || !/^\d+(?:\.0+)?$/.test(value))) {
+      console.warn('Skipping incomplete figure rule at Censored row ' + (index + 2));
+      return;
+    }
+    rules.push({pathogen,location,matching_method,dmin,dmax,measure,value:Number(value),species,source_url,reason:String(row.reason || '').trim(),
       label:String(row.pathogen || '').trim() + ' · ' + String(row[legacy ? 'country' : 'location'] || '').trim() + ' · ' + matching_method});
   });
   return rules;
@@ -1151,7 +1160,7 @@ function parseCensorRules(rows) {
 // Match the complete location or a comma-delimited descendant, plus a report-date interval.
 // Country context can complete a raw extraction's omitted suffix; it never supplies a bare
 // country alternative for a subnational row. Strict country rules therefore stay national.
-function isCensored(pathogen, location, dateStr, trackerPathogen, dateEnd, countryContext) {
+function isCensored(pathogen, location, dateStr, trackerPathogen, dateEnd, countryContext, fact) {
   if (!censorRules.length) return false;
   const p = censorKey(foldPathogen(pathogen || '')), tracker = censorKey(foldPathogen(trackerPathogen || ''));
   const keys = censorLocationKeys(location, countryContext);
@@ -1159,7 +1168,10 @@ function isCensored(pathogen, location, dateStr, trackerPathogen, dateEnd, count
   if (!dmin) dmin = dmax; if (!dmax) dmax = dmin;
   if ((!p && !tracker) || !keys.length || !dmin || !dmax) return false;
   if (dmin > dmax) [dmin,dmax] = [dmax,dmin];
-  return censorRules.some(r => (r.pathogen === p || (tracker && r.pathogen === tracker)) &&
+  return censorRules.some(r => (!r.measure || (fact && r.measure === fact.measure &&
+    /^\d+(?:\.0+)?$/.test(String(fact.value ?? '').trim()) && r.value === Number(fact.value) &&
+    (!r.species || r.species === censorLocationKey(fact.species)) &&
+    (!r.source_url || r.source_url === fact.url))) && (r.pathogen === p || (tracker && r.pathogen === tracker)) &&
     keys.some(k => censorLocationMatches(k,r.location,r.matching_method)) && dmin <= r.dmax && dmax >= r.dmin);
 }
 function fetchCensor() {
@@ -1704,7 +1716,7 @@ let tableView = { mode:'national', id:null };
 let tablePrevPathogen = null;
 const TABLE_MAX = 40;
 let lastTableRows = [];
-let activeSpecies = 'All species';   // = ALL_SPECIES (declared below): every host by default
+let activeSpecies = 'humans';
 // Statistical screening state for the figures table: 'accepted' (default) shows only figures
 // that passed the chi-square/monotonicity screens; 'all' shows both; 'rejected' only the
 // rejected ones. "Vetting" language is deliberately NOT used here — vetting means
@@ -1833,6 +1845,9 @@ function figureSources(rows) {
   const pubs = new Set();
   (rows || []).forEach(r => extractUrls(r.sources || '').forEach(u => { const h = urlHost(u); if (h) pubs.add(h); }));
   return pubs.size;
+}
+function figureSourceLabel(articles, domains) {
+  return `${articles} article${articles === 1 ? '' : 's'} · ${domains} publisher domain${domains === 1 ? '' : 's'}`;
 }
 function chooseFigureRow(rows) {
   if (!rows.length) return null;
@@ -1981,10 +1996,9 @@ function populateSpeciesSelect() {
   const hits = {};
   allRows.forEach(r => { const s = cleanText(r.species); if (!s) return; hits[s] = (hits[s]||0) + 1; });
   let sp = Object.keys(hits);
-  // A stale/invalid species falls back to the default: every host.
-  if (activeSpecies !== ALL_SPECIES && !sp.includes(activeSpecies)) activeSpecies = ALL_SPECIES;
   sp.sort((a,b) => a.localeCompare(b));
   const humanKey = sp.find(s => /^humans?$/i.test(s));
+  if (activeSpecies !== ALL_SPECIES && !sp.includes(activeSpecies)) activeSpecies = humanKey || ALL_SPECIES;
   const rest = humanKey ? sp.filter(s => s !== humanKey) : sp;
   const opt = (v, label) => `<option value="${v}"${v === activeSpecies ? ' selected' : ''}>${label}</option>`;
   let html = '';
@@ -2077,7 +2091,7 @@ function openFigureSourcePopup(rowId) {
       <div class="art-extract"><span><strong>${a.value.toLocaleString()}</strong> ${a.measure} · ${esc(a.location)}${a.species?' · '+esc(a.species):''}</span><span class="qbadge ${q.cls}">${q.label} quality</span></div>
       <div class="art-meta">${a.canonical
         ? `<span class="tag tag-accent" style="font-size:13px">canonical · ${canonReasonLabel(a.reason)}</span>`
-        : `<span class="tag tag-neutral" style="font-size:13px">not canonical</span>${qlTag}`}<span title="${VETTING_TIP.replace(/"/g,'&quot;')}"> · ${a.vetted ? 'vetted' : 'unvetted'} · ${a.urls.length} article${a.urls.length===1?'':'s'}</span></div>
+        : `<span class="tag tag-neutral" style="font-size:13px">not canonical</span>${qlTag}`}<span title="${VETTING_TIP.replace(/"/g,'&quot;')}"> · ${a.vetted ? 'vetted' : 'unvetted'} · ${figureSourceLabel(a.urls.length, a.n)}</span></div>
       ${sup?`<div class="ev-note">Superseded by the canonical figure: <strong>${sup.value.toLocaleString()}</strong> ${sup.measure}</div>`:''}
       ${a.urls.length?`<div class="ev-cards">${a.urls.map(u => citeCard(u)).join('')}</div>`:'<div class="art-meta">No article link recorded.</div>'}
     </div>`;
@@ -4559,7 +4573,7 @@ function openArticlePopup(dateStr, caseRows) {
   (caseRows||[]).forEach(r => {
     const nn = figureSources([r]);
     articles.push({ value:+r.value, measure:(r.measure||'').replace('confirmed_','').replace('suspected_',''),
-      location:r.location, species:r.species, canonical:r.is_canonical==='True', reason:r.canonical_reason, quality:r.quality_flag, n:nn, vetted:isVetted(r), vettings:measurementVettingLinks(r), score:factQuality(nn, r.quality_flag) });
+      location:r.location, species:r.species, canonical:r.is_canonical==='True', reason:r.canonical_reason, quality:r.quality_flag, n:nn, articleCount:extractUrls(r.sources).length, vetted:isVetted(r), vettings:measurementVettingLinks(r), score:factQuality(nn, r.quality_flag) });
   });
   articles.sort((a,b) => (b.canonical?1:0)-(a.canonical?1:0) || b.n-a.n || b.value-a.value);
   const label = selectedPathogen === ALL ? 'All pathogens' : (PATHOGEN_LABELS[selectedPathogen] || selectedPathogen);
@@ -4573,7 +4587,7 @@ function openArticlePopup(dateStr, caseRows) {
     `<p style="font-size:13px;color:color-mix(in srgb, var(--color-text) 62%, transparent);margin:0 0 12px;line-height:1.5" title="${VETTING_TIP.replace(/"/g,'&quot;')}">${articles.length} figure row${articles.length>1?'s':''} reported this date: <strong>${vettedFigures} corroborated · ${articles.length-vettedFigures} unvetted</strong>, with ${dateUrls.length} distinct evidence article${dateUrls.length===1?'':'s'}. Corroboration is assessed separately for each fact. The <strong style="color:var(--color-accent-300)">canonical</strong> figure is the plotted point.</p>` +
     articles.map(a => { const q=qualityBand(a.score); return `<div class="art-row">
       <div class="art-extract"><span><strong>${a.value.toLocaleString()}</strong> ${a.measure} · ${a.location} · ${a.species}</span><span class="qbadge ${q.cls}">${q.label} quality</span></div>
-      <div class="art-meta">${a.canonical?`<span class="tag tag-accent" style="font-size:13px">canonical · ${canonReasonLabel(a.reason)}</span> `:''}<span>${a.vetted ? `${a.vettings.length} vetting${a.vettings.length===1?'':'s'} · corroborated` : 'unvetted'}</span>${a.quality&&a.quality!=='good'?` · <span title="statistical screening flag">${a.quality} flag</span>`:''}</div>
+      <div class="art-meta">${a.canonical?`<span class="tag tag-accent" style="font-size:13px">canonical · ${canonReasonLabel(a.reason)}</span> `:''}<span>${a.vetted ? `${a.vettings.length} vetting${a.vettings.length===1?'':'s'} · corroborated` : 'unvetted'} · ${figureSourceLabel(a.articleCount, a.n)}</span>${a.quality&&a.quality!=='good'?` · <span title="statistical screening flag">${a.quality} flag</span>`:''}</div>
     </div>`; }).join('')
   ) : '<p style="font-size:13px">No source detail recorded for this date.</p>';
   if (dateUrls.length) {
@@ -6411,21 +6425,31 @@ function latestFor(rows, country, pathogens, measure) {
   return { value: Math.max(...vals), min: Math.min(...vals), max: Math.max(...vals), date: maxDate, sources: atMax.reduce((s,r)=>s+(+r.n_sources||1),0), url };
 }
 
+function censorMeasurement(row) {
+  const match = fact => isCensored(row.pathogen, row.location, row.report_date, row.tracker_pathogen,
+                                    undefined, undefined, fact);
+  if (match()) return null;
+  if (!censorRules.some(r => r.measure === row.measure)) return row;
+  const urls = String(row.sources || '').split(';').map(u => u.trim()).filter(Boolean);
+  const rejected = url => match({measure:row.measure,value:row.value,species:row.species,url});
+  const kept = urls.filter(url => !rejected(url));
+  if (!urls.length) return rejected('') ? null : row;
+  if (!kept.length) return null;
+  if (kept.length === urls.length) return row;
+  return {...row,sources:kept.join('; '),n_articles:String(kept.length),
+          n_sources:String(new Set(kept.map(urlHost).filter(Boolean)).size)};
+}
 function fetchSheet() {
   return withTimeout(d3.csv(GSHEET_CSV_URL), 20000, 'figures sheet').then(rows => {
+  if (censorRules.length) {
+    const before = rows.length;
+    rows = rows.map(censorMeasurement).filter(Boolean);
+    censorStats.figures = before - rows.length;
+  } else { censorStats.figures = 0; }
   rows.forEach(r => {
     r.pathogen = rememberPathogenFamily(
       r.tracker_pathogen || r.pathogen, r.pathogen_family);
   });
-  // QUARANTINE: drop bad reads (misclassified pathogen, misdated historical article, impossible
-  // figures) per the published censor sheet BEFORE aggregation — so records, scorecard, maps,
-  // plots and the figures table all inherit the removal. Match the full location label
-  // rather than collapsing it to the country used by the aggregate display.
-  if (censorRules.length) {
-    const before = rows.length;
-    rows = rows.filter(r => !isCensored(r.pathogen, r.location, r.report_date, r.tracker_pathogen));
-    censorStats.figures = before - rows.length;
-  } else { censorStats.figures = 0; }
   const datasetMaxDate = rows.reduce((m,r)=>r.report_date>m?r.report_date:m, '');
   DATASET_MAX = datasetMaxDate;
   function deriveStatus(dateStr) {
@@ -8033,7 +8057,19 @@ function rawRowIsCensored(r) {
 }
 function reapplyRawCensor() {
   if (!rawArticlesSource) return;
-  rawArticles = censorRules.length ? rawArticlesSource.filter(r => !rawRowIsCensored(r)) : [...rawArticlesSource];
+  const measures = [...new Set(censorRules.map(r => r.measure).filter(Boolean))];
+  rawArticles = rawArticlesSource.filter(r => !rawRowIsCensored(r)).map(r => {
+    let copy = r;
+    for (const measure of measures) {
+      const fact = {measure,value:r[measure],species:r.host_species,url:r.url};
+      if (isCensored(r.pathogen, r.event_location || r.location || r.location_raw, r.report_date || r.date,
+                     r.tracker_pathogen, undefined, r.extract_country || r.country, fact)) {
+        if (copy === r) copy = {...r};
+        copy[measure] = '';
+      }
+    }
+    return copy;
+  });
   censorStats.raw = rawArticlesSource.length - rawArticles.length;
   articleTitles.clear(); factVettings.clear(); rawMaxVettingScore = 0;
   rawArticles.forEach(r => {
