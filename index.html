@@ -1223,7 +1223,29 @@ function updateCensorTag() {
 // and unvetted signals, with the distinction explicit so early single-source warnings
 // remain investigable instead of being hidden.
 function vettingsOf(n) { return Math.max(0, (+n || 1) - 1); }
-function isVetted(r) { return measurementVettingLinks(r).length > 0; }
+// Vetted is decided by the backend: a figure is vetted when a source article behind it has
+// at least min_vetting_sources distinct corroborating publishers (vetting_source_count, counted
+// by reports.annotateVettingSources with the Public Suffix List). The dashboard never counts
+// publishers itself. Both values arrive on every raw-feed row.
+const DEFAULT_MIN_VETTING_SOURCES = 2;
+let _minVetRef = null, _minVet = DEFAULT_MIN_VETTING_SOURCES;
+function minVettingSources() {
+  let rows = [];
+  try { rows = rawArticles || []; } catch (e) { rows = []; }
+  if (rows !== _minVetRef) {
+    _minVetRef = rows; _minVet = DEFAULT_MIN_VETTING_SOURCES;
+    for (const r of rows) { const n = parseInt(r && r.min_vetting_sources, 10); if (n >= 1) { _minVet = n; break; } }
+  }
+  return _minVet;
+}
+function rawPublisherCount(r) { const n = parseInt(r && r.vetting_source_count, 10); return Number.isFinite(n) ? n : 0; }
+// Two backend counts, whichever is larger: the corroboration count of the articles behind the
+// figure (raw feed, last 15 days) and the figure's own publisher count (n_sources, outcomes.py),
+// which keeps older figures vetted after their articles leave the raw feed.
+function isVetted(r) {
+  const own = parseInt(r && r.n_sources, 10);
+  return Math.max(backendPublishers(r), Number.isFinite(own) ? own : 0) >= minVettingSources();
+}
 // Live geographic views use the published 15-day window (today plus 14 prior dates).
 // The clock, rather than the newest historical observation, defines an active event.
 function activeWindowBounds() {
@@ -1342,6 +1364,9 @@ const REGION_BY_COUNTRY = {
   "Democratic Republic of the Congo": "Africa", "Nigeria": "Africa", "Uganda": "Africa",
   "Brazil": "Americas", "Chile": "Americas", "Indonesia": "Asia", "Spain": "Europe",
 };
+for (const country of ['Andorra','Belarus','Belgium','Bosnia and Herzegovina','Croatia','Czechia','Czech Republic','Denmark','Estonia','Finland','Hungary','Iceland','Ireland','Latvia','Liechtenstein','Lithuania','Luxembourg','Malta','Moldova','Monaco','Montenegro','Norway','Poland','Portugal','Russia','Russian Federation','San Marino','Slovakia','Slovenia','Sweden','Switzerland','Ukraine','Vatican City']) {
+  REGION_BY_COUNTRY[country] = 'Europe';
+}
 let activeRegion = 'All regions';
 let locationQuery = '';
 function visibleRecords() {
@@ -1766,7 +1791,7 @@ function refineRecord(r) {
     sources: c.sources, articles: c.articles, rowsAt: c.rowsAt, figureSpecies: c.figureSpecies, sourceUrl: c.url,
     deaths: d ? d.value : null, deathSources: d ? d.sources : 0, deathRows: d ? d.rowsAt : [] });
 }
-function isRecordVetted(r) { return recordVettingLinks(r).length > 0; }
+function isRecordVetted(r) { return recordFamilyRows(r).some(isVetted); }
 // Corroboration counts DISTINCT INDEPENDENT DOMAINS backing a fact, across the confirmed+suspected
 // pair at one location & date. A fact split across measures by different publishers (one files
 // 'confirmed', a repost files 'suspected') previously left a single-measure figure looking
@@ -1818,6 +1843,22 @@ function measurementVettingLinks(row) {
   if (sources.length) links.delete(normUrl(sources[0]));
   return [...links.values()].sort();
 }
+// Largest backend publisher count among the raw rows behind this figure (same pathogen, article,
+// host and place match as measurementVettingLinks).
+function backendPublishers(row) {
+  if (_vetRawRef !== rawArticles) measurementVettingLinks(row);   // builds the shared raw index
+  let aliases = []; try { aliases = JSON.parse(row.location_aliases || '[]'); } catch (e) {}
+  const keys = new Set([row.location, ...(Array.isArray(aliases) ? aliases : [])].map(vettingLocationKey));
+  let best = 0;
+  extractUrls(row.sources || '').forEach(u => {
+    (_vetRawIndex.get([row.pathogen, normUrl(u), cleanText(row.species)].join('|')) || []).forEach(r => {
+      const loc = cleanText(r.event_location || r.location), country = cleanText(r.extract_country || r.country);
+      if (!keys.has(vettingLocationKey(loc)) && !keys.has(vettingLocationKey(country ? loc + ', ' + country : loc))) return;
+      best = Math.max(best, rawPublisherCount(r));
+    });
+  });
+  return best;
+}
 function recordVettingLinks(record) {
   return [...new Set(recordFamilyRows(record).flatMap(measurementVettingLinks))];
 }
@@ -1838,7 +1879,7 @@ function refreshSubVettingCounts() {
 function deathIsVetted(record) {
   const at = record.deathRows || [], pick = chooseFigureRow(at.filter(r => +r.value === +record.deaths));
   const backing = sameFigureRows(at, pick);
-  return backing.some(r => measurementVettingLinks(r).length > 0);
+  return backing.some(isVetted);
 }
 // One evidence rule for a displayed fact; never pool hosts, definitions or values.
 function figureSources(rows) {
@@ -2212,9 +2253,9 @@ function renderTable() {
     // to e.g. "5 sources" when only two links exist.
     const src = recordFamilyDomains(r) || (r.sources || 1);
     const links = recordVettingLinks(r);
-    const vetted = links.length > 0;
+    const vetted = isRecordVetted(r);
     const prior = priorFigureEvidence(r);
-    const srcTip = `${links.length} stored article-vetting links; ${src} publisher${src===1?'':'s'} for this exact figure on ${r.date}${prior.domains ? `; ${prior.domains} publisher${prior.domains===1?'':'s'} reported the same value on prior dates (shown separately)` : ''}`;
+    const srcTip = `${links.length} stored article-vetting links (vetted needs ${minVettingSources()}+ distinct publishers, counted by the backend); ${src} publisher${src===1?'':'s'} for this exact figure on ${r.date}${prior.domains ? `; ${prior.domains} publisher${prior.domains===1?'':'s'} reported the same value on prior dates (shown separately)` : ''}`;
     const srcHtml = `<button type="button" class="src-cell ${vetted ? '' : 'vet-unvetted'}" data-src="${r.id.replace(/"/g,'&quot;')}" title="${esc(srcTip)} — click to list articles">${links.length ? `${links.length} vettings` : `${src} publisher${src===1?'':'s'}`}</button>`;
     const hostHtml = hostFor(r) || '<span class="src-vet">—</span>';
     const screenHtml = figureAcceptance(r);
@@ -2854,7 +2895,7 @@ function rawRowIsAggregated(r) {
 }
 function rawRowHasVetting(r) {
   let links = []; try { links = JSON.parse(r.vetting_contributors || '[]'); } catch (e) { links = extractUrls(r.vetting_contributors || ''); }
-  return Array.isArray(links) && links.some(u => typeof u === 'string' && /^https?:\/\//i.test(u) && normUrl(u) !== normUrl(r.url || ''));
+  return rawPublisherCount(r) >= minVettingSources();
 }
 // Fold the raw-article feed into per-(country, pathogen) clusters at country centroid,
 // EXCLUDING articles aggregated into an event report (those live behind the filled
@@ -7697,7 +7738,7 @@ function fetchReports() {
     if (!r.lonlat || !r.geoCountry) return null;
     const geo = GEO[r.geoCountry] || {};
     const rec = records.find(x => x.country===r.geoCountry && x.pathogenRaw===r.pathogen);
-    return { id:'ev'+i, reportIdx:i, title:r.title, risk:r.risk, country:r.geoCountry, region:geo.region||'',
+    return { id:'ev'+i, reportIdx:i, title:r.title, risk:r.risk, country:r.geoCountry, region:geo.region||REGION_BY_COUNTRY[r.geoCountry]||'',
       pathogen:r.pathogen, disease:r.disease, place:r.place, date:r.date, articles:(r.urls||[]).length, lonlat:r.lonlat.slice(),
       scope: isNational(r.place) ? 'national' : 'subnational',
       cases: activeReportFigure(r, 'confirmed_cases')?.value ?? null, deaths: activeReportFigure(r, 'confirmed_deaths')?.value ?? null };
@@ -7780,7 +7821,7 @@ function openDialog(title, html) { hideChartTip(); dialogOpener = document.activ
 const GSHEET_RAW_URL = "https://docs.google.com/spreadsheets/d/1dWcBrV_qZGPkrfDXW2CKtgM_0UHouuuVf-e8BE9jeQ8/export?format=csv&gid=361501048";
 let rawArticles = null, rawArticlesSource = null, rawArticlesState = 'idle', rawPage = 0;
 const articleTitles = new Map(); // normalized URL -> original-language title
-const VETTING_TIP = "Corroborated figures have distinct source articles grouped for the same pathogen, place, host, measure, reporting day and value, or recorded fuzzy-vetting contributors. Additional articles are vettings; publisher counts are shown separately. Retained evidence does not expire when articles leave the active feed. Canonical selection and statistical screening do not establish corroboration.";
+const VETTING_TIP = "Vetted figures are corroborated by the backend: a source article behind the figure has at least the configured minimum of distinct publishers (min_vetting_sources, 2 by default), counted once per publisher. Corroboration links come from distinct source articles grouped for the same pathogen, place, host, measure, reporting day and value, or recorded fuzzy-vetting contributors. Additional articles are vettings; publisher counts are shown separately. Retained evidence does not expire when articles leave the active feed. Canonical selection and statistical screening do not establish corroboration.";
 function normUrl(u) {
   let s = String(u || '').trim().toLowerCase();
   s = s.replace(/^https?:\/\//, '').replace(/^www\./, '');
